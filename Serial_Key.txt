@@ -1,0 +1,37 @@
+ABC-6581-7492-3841 - Fabiano Fregnani da Silva
+EC9-G80W-SPRH-ELM5 - Julio Cesar Lemos  
+WBY-NAD4-1N13-10FB
+CC3-IV4V-WP5C-9GYI
+PAN-T4S9-ZEOR-1R1D
+633-8BZZ-G274-BUU6
+Z0T-K8JV-45NM-W7O8
+YKV-GXVF-2TFK-WTUK
+X7U-U9O2-ZVKO-JLT3
+GBB-NOQA-7IED-6R9X
+PLB-T8F5-AS6V-EGF9
+
+Baixe o sistema Gestão Lite no link abaixo:
+https://fglsoftwaresolutions.netlify.app/
+
+Após o download, descompacte o arquivo. Dentro da pasta gestaoLite, localize e execute o instalador com o ícone GL e o nome Gestão Lite Setup 2.0.0.
+
+Durante a instalação, será solicitado que você informe as credenciais do cliente e a chave serial. Copie e cole individualmente cada uma nos campos indicados, ou digite exatamente como estão descritas neste e-mail.
+
+Em seguida, leia e aceite os termos de uso, e clique no botão "Ativar produto".
+
+Pronto! O sistema estará ativado.
+
+✅ Credenciais para ativação:
+Cliente: Julio Cesar Lemos
+
+Chave Serial: EC9-G80W-SPRH-ELM5
+
+🔐 Acesso inicial ao sistema:
+Usuário: adm
+
+Senha: adm
+Você poderá alterar esses dados posteriormente nas configurações do sistema.
+
+❓ Dúvidas ou suporte:
+Entre em contato pelo chat do vendedor no Mercado Livre ou envie um e-mail para:
+📧 suportefglsoftwaresolutions@gmail.com

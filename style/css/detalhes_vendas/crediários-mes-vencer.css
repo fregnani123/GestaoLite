@@ -1,0 +1,142 @@
+#crediários-mes-vencer,#crediarios-vencidos {
+    position: absolute;
+    top: 1%;
+    width:100%;
+    height: 75.5vh;
+    background-color:white;
+    z-index: 999;
+    border-radius: 5px;
+    display: none;
+   justify-content: center;
+   left: 0%;
+   box-sizing: border-box;
+   
+}
+.container-cmv,.container-cv{
+  position: relative;
+  width: 98%;
+  background-color: white;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  height: 55vh;
+  margin-top: 10%;
+}
+.tableCred th {
+  background-color: rgb(0, 38, 87);
+  color: white;
+}
+
+/* button desativado */
+
+.close-btn, #close-btn-vencidos{
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 2rem;
+    height: 2rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: none;
+  }
+  
+  
+  .close-btn:hover,  #close-btn-vencidos:hover {
+    background-color: #ea3748;
+    color: white;
+  }
+  
+
+  .tableCred th, .tableCred td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 8px; 
+    vertical-align: middle;
+  }
+  
+   /* Estilo da tabela */
+
+  #tableCred table {
+  width: 100%;
+  border-collapse: collapse; /* Garante que as bordas da tabela não se sobreponham */
+  background: #fff;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  
+}
+
+#tableCred thead {
+  background-color: var(--primary-color);
+  color: white;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+/* Largura específica para cada coluna */
+.tableCred th:nth-child(1), .tableCred td:nth-child(1) { width: 11.875%; }
+.tableCred th:nth-child(2), .tableCred td:nth-child(2) { width: 10.875%; }
+.tableCred th:nth-child(3), .tableCred td:nth-child(3) { width: 5.875%; }
+.tableCred th:nth-child(4), .tableCred td:nth-child(4) { width: 11.875%; }
+.tableCred th:nth-child(5), .tableCred td:nth-child(5) { width: 11.875%; }
+.tableCred th:nth-child(6), .tableCred td:nth-child(6) { width: 11.875%; }
+.tableCred th:nth-child(7), .tableCred td:nth-child(7) { width: 11.875%; }
+.tableCred th:nth-child(8), .tableCred td:nth-child(8) { width: 8.875%; }
+
+
+.container-detalhes-vendas{
+  position: relative;
+}
+
+.info-cmv {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  display: grid; /* Ativa o Grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colunas flexíveis */
+  gap: 10px; /* Espaço entre os itens */
+  background-color:white;
+
+  width: 97%;
+  padding: .2rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+}
+.info-cmv p {
+  display: contents; /* Faz os spans ficarem diretamente no grid */
+}
+
+.info-cmv {
+  display: flex;
+  justify-content: space-between; 
+  border-radius: 5px;
+  font-weight: bold;
+  align-items: center; 
+}
+.img-crediario-info{
+  width: 130px;
+}
+
+.p-info span {
+  border: 1px solid gray;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+p .parcelasTotal,
+p .parcelasAReceber,
+p .parcelasPagas,
+p .mesAvencer {
+  border: none;
+}
+
+p .total-atrasado{
+  border: 1px solid gray;
+  padding: 0.5rem;
+  width: 100%;
+}

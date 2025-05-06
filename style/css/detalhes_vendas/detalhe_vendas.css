@@ -1,0 +1,259 @@
+
+.filtros-data {
+  display: flex;
+  text-align: center;
+  width: 101%;
+  box-sizing: border-box;
+}
+.div-data {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 1%;
+  height: 10vh;
+}
+.filtros-div {
+  margin-top: 1%;
+  display: flex;
+  width: 100%;
+  height: 58vh;
+  gap: 1%;
+  position: relative;
+}
+.filtros, .vendas-filtradas {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  justify-content: center;
+}
+.vendas-filtradas {
+display: none;
+position: absolute;
+background-color:white;
+right: 0%;
+width: 55%;
+height: 57.5vh;
+border: 1px solid black;
+}
+.grafico {
+  display: none;
+  width: 60%;
+  height: 70vh;
+  background-color:white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1%;
+}
+.filtros{
+  height: 70vh;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.comprovantes-vendas {
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+  padding-bottom: 1%;
+}
+.comprovantes-div {
+  padding-top: 1.5%;
+  overflow-x: none;
+  overflow-y: scroll;
+}
+.sale-card {
+  margin-top: 2%;
+  border-top: 1px dotted black;
+  border-bottom: 1px dotted black;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: rgb(252, 248, 232);
+}
+.titulo-relatorio {
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+  margin-bottom: 2%;
+}
+.titulo-vendas {
+  width: 100%;
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 7%;
+}
+#barra-container {
+margin-top: 0%;
+}
+.barra-container {
+  display: flex;
+  align-items: center;
+  margin: .5% 0;
+}
+.nome {
+  width: 150px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.total-filtradas {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.barra {
+  height: 3rem;
+  margin-bottom: .5;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  min-width: 40px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.sale-total {
+  background-color:white;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.426);
+  padding-bottom: 2%;
+  box-sizing: border-box;
+  position: relative;
+}
+.cores {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.p-total {
+  margin-left: 3rem;
+}
+.h3-total {
+  margin-left: 3rem;
+}
+.h3-total-2 {
+  margin-left: 1.5rem;
+}
+.total-relatorio {
+  position: relative;
+  background-color: rgba(238, 237, 237, 0.558);
+  padding: 4%;
+  margin-top: 2%;
+}
+.totalDiv {
+  position: absolute;
+  height: 4.3rem;
+  width: 1rem;
+  background-color: #295530;
+  left: 1.5%;
+  top: 0;
+}
+.pix { background: #6a74c2; min-width: 4rem; } 
+.credito { background: #2c3e6c; min-width: 4rem; } 
+.debito { background: #3f5481; min-width: 4rem; } 
+.dinheiro { background: #5a6e96; min-width: 4rem; } 
+.crediario { background: #334c74; min-width: 4rem; } 
+.total { margin-top: 2%; background: #295530; width: 100%; min-width: 2rem; } 
+table {
+  width: 99%;
+  background: #fff;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  margin-left: -1%;
+}
+thead {
+  background-color: var(--primary-color);
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+}
+tr {
+  border: 1px solid black;
+  color: black;
+}
+th:nth-child(1), td:nth-child(1) { 
+  width: 17%;  
+}
+th:nth-child(2), td:nth-child(2) { 
+  width: 15%;  
+}
+th:nth-child(3), td:nth-child(3) { 
+  width: 10%;  
+}
+th:nth-child(4), td:nth-child(4) { 
+  width: 20%;  
+}
+th:nth-child(5), td:nth-child(5) { 
+  width: 20%;  
+}
+.table td {
+  padding: 1%;
+  border: none;
+}
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+th {
+  position: sticky;
+  top: 0;
+  color: rgb(0, 0, 0);
+  padding: .2rem;
+  z-index: 10;
+}
+.card-historico {
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+.card-historico .card-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  font-weight: bold;
+}
+.card-historico .card-body {
+  padding: 10px;
+}
+.card-historico-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  display: none;
+  z-index: 100;
+}
+.close-btn, .btnCloseHist {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 2rem;
+  height: 2rem;    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.close-btn:hover, .btnCloseHist:hover {
+  background-color: #ea3748;
+  color: white;
+}
+

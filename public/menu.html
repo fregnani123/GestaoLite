@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <title>Gestão Lite</title>
+    <link rel="stylesheet" href="../style/css/login_menu/menu.css">
+    <link rel="stylesheet" href="../style/css/login_menu/backup.css">
+    <link rel="stylesheet" href="../style/css/css_global/chat.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="logo">Gestão Lite<img class="logoImg" src="../style/img/menu-aberto.png"></h1>
+    </header>
+    <div class="div-menuPainel">
+        <div class="div-backup">
+            <div class="backup">
+                <span class="exit">X</span>
+                <h2>Backup do Banco de Dados</h2>
+                <p>Clique no botão abaixo para criar um backup do banco de dados:</p>
+                <button id="backupBtn">Criar Backup</button>
+                <p id="status"></p>
+            </div>
+        </div>
+        <ul id="menu-painel1">
+        </ul>
+        <ul id="menu-painel2">
+        </ul>
+        <ul id="menu-painel3">
+        </ul>
+    </div>
+    <div class="chat-suporte" style="display: none;">
+        <div class="chat-header">
+            <span>Suporte</span>
+            <button id="btn-fechar-chat" class="btn-fechar-chat">&times;</button>
+        </div>
+        <div class="chat-messages">
+            <input id="userID" type="hidden" />
+        </div>
+        <div class="chat-input">
+            <input id='inputChat' type="text" placeholder="Digite sua mensagem..." />
+            <button id="btnEnviarMsg">Enviar</button>
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    &copy; Todos os direitos reservados 2025 - FGL - v. 2.0
+</footer>
+<script src="../Renderer/Menu/renderer_menuPainel.js"></script>
+<script src="../Renderer/Menu/backup.js"></script>
+<script src="../config//suporte.js"></script>
+
+</html>

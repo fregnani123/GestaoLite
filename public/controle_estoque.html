@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+        <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+        <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+        <link rel="stylesheet" href="../style/css/css_global/btn.css">
+        <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+        <link rel="stylesheet" href="../style/css/css_global/info.css">
+        <style>
+            #cadastro-fornecedor a {
+            background: var(--hover-color);
+            color: black;
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+        .form-group{
+            display: flex;
+        }
+        </style>
+        <title>Controle de Estoque</title>
+    </head>
+<body>
+    <header>
+        <nav style="background-color: rgb(0, 38, 87);">
+            <ul id="ul-Menu"></ul>
+        </nav>
+        <nav class="nav-menu-2">
+            <ul class="menu-secundario">
+                <li id="cadastro-fornecedor">
+                    <a id="btn-flex">Controle Manual de Estoque - Entrada/Saída</a>
+                </li>
+                <!-- <li id="li-xml">
+                    <a id="btn-flex">Importar XML</a>
+                </li> -->
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+          <div class="container-register"></div>
+          <div class="div-form" role="form">
+              <div class="div-form-display">
+                <section class="div-form-img">
+                    <p class="titulo-img">Controle Estoque</p>
+                      <img class="img-produto" src="../style/img/caixa-de-entrada.png" alt="Produto sem imagem.">
+                  </section>
+                  <section class="div-form__body">
+                    <div class="form-group">
+                        <div id="div-estoque" class="div-codigoEanFind">
+                            <label for="cnpj">Filtrar Cód. (EAN):</label>
+                            <input type="text" id="CodigoEanBuscar">
+                        </div>
+                        <div id="div-estoque" class="div-produtoEncontrado">
+                            <label for="">Descrição Produto:</label>
+                            <input type="text" id="produtoEncontrado" readonly>
+                        </div>
+                      
+                        <div id="div-estoque" class="div-atual">
+                            <label class="" for="">Estoque Atual:</label>
+                            <input style="background-color: #007bff00;" id="estoqueAtual" type="text" readonly
+                                type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-estoque" class="div-precoCompra">
+                            <label for="alterarPreco">Alterar valores:</label>
+                            <select id="alterarPreco">
+                                <option value="1">Não</option>
+                                <option value="2">Sim</option>
+                            </select>
+                        </div>
+                        <div id="div-estoque" class="div-precoCompra">
+                            <label for="inputPrecoCompra">Preço de Compra:</label>
+                            <input style="background-color: #007bff00;" id="inputPrecoCompra" type="text" readonly>
+                        </div>
+                        <div id="div-estoque" class="div-precoCompra">
+                            <label class="" for="">Markup %:</label>
+                            <input style="background-color: #007bff00;" id="MarkupEstoque" type="text" readonly>
+                        </div>
+                        <div id="div-estoque" class="div-precoCompra">
+                            <label class="" for="">Preço de Venda:</label>
+                            <input style="background-color: #007bff00;" id="precoVendaEstoque" type="text" readonly
+                                type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-estoque" class="div-qtdeMovimentacao">
+                            <label class="" for="">Qtde a ser Movimentada:</label>
+                            <input id="qtdeMovimentacao">
+                        </div>
+                        <div id="div-estoque" class="selectSituacao">
+                            <label class="labelFornecedor" for="razaoSocial">Situação do Movimento:</label>
+                            <select name="" id="situacao">
+                                <option value="">Selecione</option>
+                                <option value="1">Entrada</option>
+                                <option value="2">Saída</option>
+                            </select>
+                        </div>
+                        <div id="div-estoque" class="selectSituacao">
+                            <label class="" for="">Motivo da Movimentação:</label>
+                            <select name="" id="movimento">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div  class="form-group">
+                        <div id="div-estoque" class="selectSituacao">
+                            <label class="" for="">Núm. da venda a ser vinculado</label>
+                            <input style="background-color: #007bff00;" id="venda_id" readonly>
+                        </div>
+                        <div id="div-estoque"  class="selectSituacao">
+                            <label class="" for="">Chave de Identificação da Compra</label>
+                            <input style="background-color: #007bff00;" id="inputqtChaveCompra" readonly>
+                        </div>
+                        <div id="div-estoque" class="dataMovimentacao">
+                            <label class="" for="">Data da Movimentação</label>
+                            <input id="dateEstoque" type="date" readonly>
+                        </div>
+                    </div>
+                  </section>
+    
+              </div>
+              <footer class="div-form__footer">
+                  <p class="informativo">⚠️ <strong> Atenção: Ao alterar os dados do produto, as informações antigas serão
+                      substituídas. Caso necessário, revise antes de aplicar a alteração.</strong></p>
+                      <button id="btn-estoque"><img class="img-disquete" src="../style//img/disquete.png">Alterar</button>
+                    <button id="limparButton"><img class="img-excluir"
+                        src="../style//img/excluir.png" alt="">Limpar</button>
+              </footer>
+          </div>
+  </body>
+  <script src="../Renderer/services/alertMsg.js"></script>
+  <script src="../Renderer/services/converte_moeda.js"></script>
+  <script src="../Renderer/Menu/renderer_menu.js"></script>
+  <script src="../Renderer/services/formatters.js"></script>
+  <script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
+  <script src="../Renderer/controle_estoque/controle_estoque.js"></script>
+  </html> 
+  
+  
+

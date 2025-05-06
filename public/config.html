@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/login_menu/config.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/venda/cupon.css">
+    <link rel="stylesheet" href="../style/css/config/config.css">
+    <title>Configurações</title>
+
+<body>
+    <header>
+        <nav class="nav-config">
+            <ul id="ul-Menu">
+                <img class="img-config" src="../style/img/configuracoes.png" alt="">
+                <li class="menu-item-11"><a class="list-a11" href="./config.html">Configurações</a></li>
+            </ul>
+        </nav>
+        <nav class="nav-menu-2">
+            <ul class="menu-secundario">
+                <li id="cadastro-usuario">
+                    <a href="" id="btn-flex">Configurações do usuário / Impressão</a>
+                </li>
+                <li>
+                    <a id="alterar-user-senha">Alterar usuário e senha de acesso</a>
+                </li>
+                <li>
+                    <a id="altererar-senha-venda">Selecione a senha para sair da tela de vendas</a>
+                </li>
+                <li id="">
+                    <a id="juros">Configurar Multa e Juros</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="div-acesso">
+            <div id="div-form">
+                <span id="btn-exit">x</span>
+                <p class="titulo-senha"><strong>Alterar Usuário e
+                        Senha</strong></p>
+                <label class="label-acess" for="usuario">Usuário:</label>
+                <div style="display: flex; width: 100%">
+                    <img class="img-cadeado" style="position:absolute; margin-top: 2%; margin-left: 2%;"
+                        src="../style/img/user.png" alt="">
+                    <input type="text" id="novoUsuario" name="usuario">
+                </div>
+                <label class="label-acess" for="nova-senha">Nova Senha:</label>
+                <div style="display: flex; width: 100%">
+                    <img class="img-cadeado" style="position:absolute; margin-top: 2%; margin-left: 2%;"
+                        src="../style/img/cadeado.png" alt="">
+                    <input type="password" id="nova-senha" name="nova-senha">
+                </div>
+                <label class="label-acess" for="repetir-senha">Repita a Nova Senha:</label>
+                <div style="display: flex; width: 100%">
+                    <img class="img-cadeado" style="position:absolute; margin-top: 2%; margin-left: 2%;"
+                        src="../style/img/cadeado.png" alt="">
+                    <input type="password" id="repetir-senha" name="repetir-senha">
+                </div>
+                <div class="div-btn">
+                    <button id="btn-senha"><img class="img-disquete" src="../style//img/troca.png">Atualizar</button>
+                    <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                            alt="">Limpar</button>
+                </div>
+            </div>
+            <footer class="footer-senha">
+                <p class="informativo">
+                    <strong>⚠️ Atenção: Antes de alterar, confira cuidadosamente o nome de usuário e a senha. A
+                        alteração é irreversível. Anote as credenciais para evitar problemas no acesso.</strong>
+                </p>
+            </footer>
+        </div>
+        <div id="div-sair-vendas">
+            <div id="div-form-venda">
+                <span id="btn-exit-venda">x</span>
+                <p class="titulo-senha"><strong>Selecione a senha para sair da Tela de Vendas</strong></p>
+                <div class="password-options">
+                    <div class="div-senha">
+                        <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                        <input type="radio" id="senha1" name="senha" value="adm">
+                        <label for="senha1">adm</label>
+                    </div>
+
+                    <div class="div-senha">
+                        <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                        <input type="radio" id="senha2" name="senha" value="adm1">
+                        <label for="senha2">adm1</label>
+                    </div>
+
+                    <div class="div-senha">
+                        <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                        <input type="radio" id="senha3" name="senha" value="adm123">
+                        <label for="senha3">adm123</label>
+                    </div>
+
+                    <div class="div-senha">
+                        <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                        <input type="radio" id="senha4" name="senha" value="admloja">
+                        <label for="senha4">admloja</label>
+                    </div>
+
+                    <div class="div-senha">
+                        <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                        <input type="radio" id="senha5" name="senha" value="admvenda">
+                        <label for="senha5">admvenda</label>
+                    </div>
+                </div>
+                <div class="">
+                    <button id="btn-senha-venda"><img class="img-disquete"
+                            src="../style//img/troca.png">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div id="div-juros">
+            <div id="div-form-venda">
+                <input type="hidden" id="idTaxas" value="0,00" readonly >
+                <span id="btn-exit-juros">x</span>
+                <p class="titulo-senha"><strong>Alterar Taxas Crediário</strong></p>
+                <label class="label-juros" for="">Aplicar juros na venda Crediário:</label>
+                <select name="" id="numero-max-parcela">
+                    <option value="0">Acima de 0x</option>
+                    <option value="1">Acima de 1x</option>
+                    <option value="2">Acima de 2x</option>
+                    <option value="3">Acima de 3x</option>
+                    <option value="4">Acima de 4x</option>
+                    <option value="5">Acima de 5x</option>
+                    <option value="6">Acima de 6x</option>
+                    <option value="7">Acima de 7x</option>
+                    <option value="8">Acima de 8x</option>
+                    <option value="9">Acima de 9x</option>
+                    <option value="10">Acima de 10x</option>
+                    <option value="11">Acima de 11x</option>
+                    <option value="12">Acima de 12x</option>
+                    <option value="13">Acima de 13x</option>
+                    <option value="14">Acima de 14x</option>
+                    <option value="15">Acima de 15x</option>
+                    <option value="16">Acima de 16x</option>
+                    <option value="17">Acima de 17x</option>
+                    <option value="18">Acima de 18x</option>
+                    <option value="19">Acima de 19x</option>
+                    <option value="20">Acima de 20x</option>
+                    <option value="21">Acima de 21x</option>
+                    <option value="22">Acima de 22x</option>
+                    <option value="23">Acima de 23x</option>
+                    <option value="24">Acima de 24x</option>
+                </select>
+
+                <label class="label-juros" for="usuario">Juros aplicados sobre a venda:</label>
+                <select name="" id="taxa-juros">
+                    <option value="0">Taxa de juros 0.0%</option>
+                    <option value="0.5">Taxa de juros 0.5%</option>
+                    <option value="1">Taxa de juros 1.0%</option>
+                    <option value="1.5">Taxa de juros 1.5%</option>
+                    <option value="1.6">Taxa de juros 1.6%</option>
+                    <option value="1.7">Taxa de juros 1.7%</option>
+                    <option value="1.8">Taxa de juros 1.8%</option>
+                    <option value="1.9">Taxa de juros 1.9%</option>
+                    <option value="2">Taxa de juros 2.0%</option>
+                </select>
+
+                <label class="label-juros" for="nova-senha">Multa por Atraso (R$):</label>
+                <input type="" id="multaParcela" value="0,00">
+
+
+                <label class="label-juros" for="">Juros de Mora:</label>
+                <select name="" id="taxaJurosAtraso">
+                    <option value="0">Taxa de juros 0.0%</option>
+                    <option value="0.5">Taxa de juros 0.5%</option>
+                    <option value="1">Taxa de juros 1.0%</option>
+                    <option value="1.5">Taxa de juros 1.5%</option>
+                    <option value="1.6">Taxa de juros 1.6%</option>
+                    <option value="1.7">Taxa de juros 1.7%</option>
+                    <option value="1.8">Taxa de juros 1.8%</option>
+                    <option value="1.9">Taxa de juros 1.9%</option>
+                    <option value="2">Taxa de juros 2.0%</option>
+                </select>
+                <div class="">
+                    <button id="atualizar-juros"><img class="img-disquete"
+                            src="../style//img/troca.png">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-register"></div>
+        <div class="div-form" role="form">
+            <div class="div-form-display">
+                <section class="div-form-img">
+                    <p class="titulo-img">usuário / Impressão</p>
+                    <img class="img-produto" src="../style/img/impressora.png" alt="Produto sem imagem.">
+                </section>
+                <section class="div-form__body">
+                    <div class="form-group">
+                        <div id="div-ativo">
+                            <label for="ativo">Ativo:</label>
+                            <input id="ativo" value="1">
+                            </input>
+                            <input type="hidden" name="" id="id">
+                        </div>
+                        <div id="div-tipo_usuario">
+                            <label class="labelFornecedor" for="tipoPessoa">Pessoa</label>
+                            <select name="tipoPessoa" id="tipoPessoa">
+                                <option value="">Selecione</option>
+                                <option value="juridica">Jurídica</option>
+                                <option value="fisica">Física</option>
+                            </select>
+                        </div>
+                        <div id="div-cnpj">
+                            <label id="label_cnpj_cpf">CNPJ / CPF</label>
+                            <input type="text" id="cnpjCpf" name="" readonly>
+                        </div>
+
+                        <div id="div-razoSocial">
+                            <label id="label_razao">Razão Social / Nome</label>
+                            <input type="text" id="razao_social" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-ie">
+                            <label class="labelFornecedor" for="inscricaoEstadual">Inscrição Estadual:</label>
+                            <select id="inscricaoEstadual" disabled>
+                                <option value="">Selecione</option>
+                                <option value="contribuinte">Contribuinte</option>
+                                <option value="isento">Isento</option>
+                            </select>
+                        </div>
+                        <div id="div-ie">
+                            <label for="inscricao_estadual">Numero IE::</label>
+                            <input type="text" id="inscricao_estadual" name="inscricao_estadual" readonly>
+                        </div>
+                        <div id="div-fantasia">
+                            <label id="labelNomeFantasia">Nome Fantasia / Titulo Cupom:</label>
+                            <input type="text" id="nome_fantasia" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-cep">
+                            <label class="labelFornecedor" for="endereco">Cep</label>
+                            <input type="text" id="cep">
+                        </div>
+                        <div id="div-logradouro">
+                            <label for="endereco">
+                                Endereço:</label>
+                            <input type="text" id="endereco" name="endereco">
+                        </div>
+
+                        <div id="div-numero">
+                            <label for="numero">
+                                Número:</label>
+                            <input type="text" id="numero" name="numero">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-bairro">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" name="bairro">
+                        </div>
+                        <div id="div-uf">
+                            <label for="estado">
+                                Estado:</label>
+                            <select type="text" id="uf" name="estado"></select>
+                        </div>
+                        <div id="div-cidade">
+                            <label for="cidade">
+                                Cidade:</label>
+                            <select type="text" id="cidade" name="cidade"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-email">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div id="div-tel">
+                            <label for="contato">
+                                Contato:</label>
+                            <input type="text" id="contato" name="contato">
+                        </div>
+                        <div id="div-atividade">
+                            <label for="">Ramos de
+                                atividade:</label>
+                            <select name="" id="atividade">
+
+                            </select>
+                        </div>
+                        <div class="div-site">
+                            <label for="site">Site:</label>
+                            <input type="url" id="site" name="site">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="div-slogan">
+                            <label for="slogan">
+                                Slogan - Frase curta que representa a empresa:</label>
+                            <input type="text" id="slogan" name="slogan">
+                        </div>
+                        <div id="div-usuario">
+                            <label>Usuário:</label>
+                            <input type="text" id="usuario" name="usuario" value="adm">
+                        </div>
+                        <div id="div-senha">
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="senha" name="senha" value="adm">
+                        </div>
+                        <div id="div-qr_code_img">
+                            <label style="font-size: .9rem;">Compartilhe seu @usuario rede
+                                social:</label>
+                            <input type="text" id="qr_code_img" name="qr_code_img">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer class="div-form__footer">
+                <p class="informativo" id="info">
+                    <strong>⚠️ Atenção: Antes de cadastrar, verifique todas as informações cuidadosamente. Elas
+                        serão
+                        gravadas no sistema e impressas no cupom não fiscal.</strong>
+                </p>
+                <button id="btn-atualizar-user"><img class="img-disquete"
+                        src="../style//img/troca.png">Atualizar</button>
+                <button id="btn-user" style="display: none;"><img class="img-disquete"
+                        src="../style//img/disquete.png">Gravar</button>
+                <button id="limparInputs"><img class="img-excluir" src="../style//img/excluir.png"
+                        alt="">Limpar</button>
+            </footer>
+        </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/services/ramos_atividades.js"></script>
+<script src="../Renderer/services/cidadesPorEstados.js"></script>
+<script src="../config/config.js"></script>
+<script src="../config/apiUser.js"></script>
+</html>
+

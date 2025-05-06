@@ -1,0 +1,445 @@
+:root {
+    --primary-color: #eaeaea;
+    --confirm-color: #28a745;
+    --reagendar-color: #ffc107;
+    --cancel-color: #dc3545;
+}
+
+
+.container-agenda{
+    width: 100%;
+    height: 46vw;
+    margin-top: 0%;
+    padding: 1%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.divForm {
+    max-width: 100%; 
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* border: 2px solid black; */
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0%;
+    height: auto; /* Ajusta a altura conforme o conteúdo */
+    overflow-y: auto; /* Adiciona scroll se necessário */
+    flex-direction: column;
+    height: 100%;
+}
+#div-container-form{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Estilo da tabela */
+table {
+    position: absolute;
+    width: 100%;
+    border-collapse: collapse; /* Garante que as bordas da tabela não se sobreponham */
+    background: #fff;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    margin-left: -1%;
+}
+
+/* Cabeçalho da tabela */
+thead {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid rgb(255, 255, 255);
+}
+tr {
+    border: 1px solid black;
+    color: black;
+}
+
+/* Define a largura específica para as colunas */
+th:nth-child(1), td:nth-child(1) { /* Coluna 1: CPF */
+    width: 10%;  /* Ajuste conforme necessário */
+    font-size: .9rem;
+}
+
+th:nth-child(2), td:nth-child(2) { /* Coluna 2: Nome */
+    width: 24%;  /* Ajuste conforme necessário */
+}
+
+th:nth-child(3), td:nth-child(3) { /* Coluna 3: Data */
+    width: 8%;  /* Ajuste conforme necessário */
+}
+
+th:nth-child(4), td:nth-child(4) { /* Coluna 4: Hora */
+    width: 7%;  /* Ajuste conforme necessário */
+}
+
+th:nth-child(5), td:nth-child(5) { /* Coluna 5: Motivo */
+    width: 24%;  /* Ajuste conforme necessário */
+}
+
+th:nth-child(6), td:nth-child(6) { /* Coluna 6: Status */
+    width: 6%;  /* Ajuste conforme necessário */
+}
+th:nth-child(7), td:nth-child(7) { /* Coluna 7: Ações */
+    width: 32%;  /* Ajuste conforme necessário */
+}
+.table-container {
+    max-height: 400px; /* Defina a altura máxima do contêiner da tabela */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    border: 1px solid #ccc; /* Opcional: borda para separar a tabela */
+}
+table {
+    margin-left: -1%;
+    width: 99%;
+    border-collapse: collapse;
+}
+th {
+    position: sticky;
+    top: 0; /* Fixa o cabeçalho no topo */
+    background: #333; /* Cor de fundo para destacar */
+    color: white;
+    padding: .2rem;
+    z-index: 10; /* Garante que fique acima do conteúdo rolável */
+    border: 1px solid white;
+}
+td {
+    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+button{
+    cursor: pointer;
+}
+/* Estilo dos botões */
+/* Estilo atualizado dos botões */
+.btn-confirm,
+.btn-reagendar,
+.btn-cancel {
+    color: #fff;
+    font-size: .8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    margin: 1.3%;
+    padding: 3% 4%; /* Mantendo o padding existente */
+}
+/* Cores individuais */
+.btn-confirm {
+    background-color: var(--confirm-color);
+}
+
+.btn-reagendar {
+    background-color: var(--reagendar-color);
+    color: black;
+}
+.btn-cancel {
+    background-color: var(--cancel-color);
+}
+/* Efeito hover */
+.btn-confirm:hover,
+.btn-reagendar:hover,
+.btn-cancel:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+    font-size: .8rem;
+}
+.div-agendar {
+    display: none; 
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: #f4f4f4da;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    width: 95%; 
+    height: 80vh; 
+    background-color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+}
+.agendar-border {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    padding: .8%;
+    width: 100%; 
+    height: 100vh; 
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Courier New', Courier, monospace; /* Fonte com estilo retro */
+    align-items: center;
+}
+.agendar-titulo {
+    margin-top: 1%;
+    display: flex;
+    height: 2rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px; /* Espessura da linha */
+    text-decoration-color: black; /* Cor da linha */
+    text-underline-offset: 4px; /* Distância da linha ao texto */
+}
+.agendar{
+    margin-top: 4%;
+    margin-left: .2%;
+    width:99%;
+    border-collapse: collapse; /* Para evitar bordas duplas */
+}
+.agendar td {
+    border: none; /* Remove a borda das células */
+    padding: .5%;  
+}
+.div-btn{
+    gap: 1%;
+    padding: .5%;
+    width: 10%;
+}
+  .divBtn{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   
+.close-btn, .btnCloseHist {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 1.875rem; /* 30px convertido para rem (considerando 16px como 1rem) */
+    height: 1.875rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.close-btn:hover, .btnCloseHist:hover {
+    background-color: #ea3748;
+    color: white;
+}
+/* modal para reagendamento */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    margin: 100px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.close:hover {
+    color: red;
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+}
+#btnSalvarReagendamento {
+    background-color: var(--reagendar-color);
+    color: black;
+    padding: 3% 7%;
+    margin: 1%;
+    margin-top: 3%;
+}
+
+#nova-data, #nova-hora{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 3%;
+}
+
+h2{
+    margin-bottom: 4%;
+}
+
+.informativo {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+}
+
+/* css histórico agendamentos */
+
+.div-historico { 
+    display: none; 
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: #f4f4f4da;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    width: 95%; 
+    height: 80vh; 
+    background-color: white;
+    border-radius: 10px; /* Bordas arredondadas */
+}
+.filtros {
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    box-sizing: border-box;
+    height: 15vh;
+    gap: 10px; /* Espaçamento entre elementos */
+  }
+
+  #status{
+    font-size: .9rem;
+  }
+
+  #div-table-historico{
+    position:absolute;
+    top: 30%;
+    left: .5%;
+    width: 99%;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    border: 1px solid black;
+  }
+
+
+ /* Estilo da tabela */
+.table-historico {
+    position: absolute;
+    width: 99%;
+    border-collapse: collapse; /* Garante que as bordas da tabela não se sobreponham */
+    background: #fff;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    margin-left: -1%;
+}
+
+/* Cabeçalho da tabela */
+.table-historico thead {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+/* Define as bordas das linhas */
+.table-historico tr {
+    border: 1px solid black;
+    color: black;
+}
+
+/* Define a largura específica para as colunas */
+.table-historico th:nth-child(1),
+.table-historico td:nth-child(1) { 
+    width: 10%;  /* Ajuste conforme necessário */
+}
+
+.table-historico th:nth-child(2),
+.table-historico td:nth-child(2) { 
+    width: 24%;  
+}
+
+.table-historico th:nth-child(3),
+.table-historico td:nth-child(3) { 
+    width: 8%;  
+}
+
+.table-historico th:nth-child(4),
+.table-historico td:nth-child(4) { 
+    width: 6%;  
+}
+
+.table-historico th:nth-child(5),
+.table-historico td:nth-child(5) { 
+    width:24%;  
+}
+
+.table-historico th:nth-child(6),
+.table-historico td:nth-child(6) { 
+    width:7%;  
+}
+
+.table-historico th:nth-child(7),
+.table-historico td:nth-child(7) { 
+    width: 30%;  
+}
+
+/* Contêiner da tabela com rolagem */
+.table-container {
+    max-height: 400px; /* Altura máxima */
+    overflow-y: auto; /* Rolagem vertical */
+    border: 1px solid #ccc; /* Borda opcional */
+}
+
+/* Fixa o cabeçalho no topo */
+.table-historico th {
+    position: sticky;
+    top: 0; 
+    background: #333; 
+    color: white;
+    padding: .2rem;
+    z-index: 10; 
+    border: 1px solid white;
+}
+
+/* Ajuste do espaçamento nas células */
+.table-historico td {
+    border: 1px solid black;
+    padding: 0.2rem; /* Define um padding para os dados */
+    text-align: center; /* Centraliza o conteúdo */
+}

@@ -1,0 +1,142 @@
+
+.container{
+    background-color: rgba(255, 255, 255, 0.464);
+}
+#div-ativo,.div-site,#div-usuario,#div-senha{
+    display: none;
+}
+.cupom{
+    margin-top: 14%;
+    display: block;
+    width: 100%;
+}
+
+.titulo-img{
+    margin-top: 5%;
+
+}
+
+#btn-atualizar-user,#btn-user,#limparInputs{
+ display: none;
+}
+
+#div-acesso{
+    position: absolute;
+    /* background-color: rgba(0, 38, 87, 0.432); */
+    background-color: rgb(249, 249, 249);
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    top: 17%;
+    padding: 3%;
+    padding-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+.footer-senha {
+    position: absolute;
+    top: 70%;
+    left: 15%;
+    width: 100%;
+}
+#div-form{
+    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 3rem 1rem; /* 20px em rem */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    border-radius: 0.5rem; /* 8px em rem */
+    background-color:  rgb(255, 255, 255);
+    flex-direction: column;
+    font-size: 1.2rem;
+}
+#div-juros{
+    position: absolute;
+    /* background-color: rgba(0, 38, 87, 0.432); */
+    background-color: rgb(249, 249, 249);
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    top: 17%;
+    padding: 5%;
+    padding-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+.label-acess  {
+    margin-top: 5%;
+    font-weight: normal;
+    width: 100%;
+    justify-content: left;
+    margin-left: 50%;
+    color: black;
+}
+.label-juros {
+    margin-top: 5%;
+    font-weight: normal;
+    width: 100%;
+    justify-content: left;
+    color: black;
+    justify-content: center;
+}
+
+.titulo-senha{
+    border-bottom: 2px solid gray;
+    padding:2%;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-reveal {
+    display: block;
+}
+
+#div-sair-vendas{
+    position: absolute;
+    /* background-color: rgba(0, 38, 87, 0.432); */
+    background-color: rgb(249, 249, 249);
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    top: 17%;
+    padding: 5%;
+    padding-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+#div-form-venda{
+    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 2rem 1rem; /* 20px em rem */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    border-radius: 0.5rem; /* 8px em rem */
+    background-color:  rgb(255, 255, 255);
+    flex-direction: column;
+    font-size: 1.2rem;
+    width: 20%;
+}
+.password-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+   margin-top:5%;
+   padding-bottom: 5dvh;
+}
+.div-senha{
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    align-items: center;
+    background-color: rgb(234, 234, 234);
+}
+
+.div-senha label{
+ margin-top: 3%;
+}

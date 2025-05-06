@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/detalhes_vendas/crediario.css">
+    <link rel="stylesheet" href="../style/css/detalhes_vendas/crediários-mes-vencer.css">
+    <title>Crediário</title>
+</head>
+
+<body>
+    <header>
+        <nav style="background-color: rgb(0, 38, 87);">
+            <ul id="ul-Menu"></ul>
+        </nav>
+        <nav class="nav-menu-2">
+            <ul class="menu-secundario" id="menu-secundario-detalhes">
+                <li id="li-crediario">
+                    <a id="btn-flex">Cobrar Crediário</a>
+                </li>
+                <li id="">
+                    <a id="btnCredVencer">Relatório de Crediários do Mês Vigente</a>
+                </li>
+                <li id="item-atraso">
+                    <a id="btn-atraso" href="#">Relatório de Crediários em Atraso</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="div-form" role="form">
+            <div class="div-form-display">
+                <section class="div-form__body">
+                    <div id="crediários-mes-vencer">
+                        <button class="close-btn">X</button>
+                        <div class="info-cmv">
+                            <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
+                            <p class="p-info"><span>Crediários do Mês: <span class="mesAvencer"></span></span>
+                                <span>Valor total: <span class="parcelasTotal"></span></span>
+                                <span> Parcelas Pagas: <span class="parcelasPagas"></span></span>
+                                <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
+                            </p>
+                        </div>
+                        <div class="container-cmv">
+                            <!-- aqui é criada a table -->
+                        </div>
+                    </div>
+                    <div id="crediarios-vencidos">
+                        <button id="close-btn-vencidos">X</button>
+                        <div class="info-cmv">
+                            <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
+                            <p><span class="total-atrasado">Valor total das parcelas vencidas com status pendente: <span
+                                        class="parcelasVencidas"></span></span> </p>
+                            </p>
+                        </div>
+                        <div class="container-cv">
+                            <!-- aqui é criada a table -->
+                        </div>
+                    </div>
+                    <!-- --------------------------------------------------------------------------------------------->
+                    <div class="filter-table">
+                        <table>
+                            <tr>
+                                <th id="filtrar">🔍 Filtrar CPF:</th>
+                                <th>Cliente:</th>
+                                <th>Crédito Liberado:</th>
+                                <th>Crédito Utilizado:</th>
+                                <th>Ações</th>
+                            </tr>
+                            <tr>
+                                <td><input type="input" id="cpfFiltrar" type="text" /></td>
+                                <td><input type="input" id="nomeClienteFiltrado" readonly /></td>
+                                <td> <input type="input" id="credito" readonly /></td>
+                                <td> <input type="input" id="credito-utilizado" readonly /></td>
+                                <td>
+                                    <div class="divBtn-horizontal">
+                                        <button id="filterButtonCrediario"><img class="img-excluir"
+                                                src="../style//img/procurar.png" alt="">Buscar</button>
+                                        <button id="limparButton"><img class="img-excluir"
+                                                src="../style//img/excluir.png" alt="">Limpar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="div-filtrados">
+                    </div>
+            </div>
+            </section>
+            <footer class="div-form__footer">
+                <p class="info-cred-baixa">
+                    <strong>⚠️ Atenção:</strong> Antes de baixar as parcelas, verifique os dados do cliente. A ação é irreversível. Parcelas em atraso têm multa fixa de <strong>R$<span id="multaSpan"></span></strong> e juros ao mês de <strong><span id="moraSpan"></span>%</strong>, conforme definido nas configurações do sistema.
+                </p>
+                
+            </footer>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/crediario/api_crediario.js"></script>
+<script src="../Renderer/crediario/crediario_vencer.js"></script>
+<script src="../Renderer/crediario/crediario_vencidos.js"></script>
+
+</html>

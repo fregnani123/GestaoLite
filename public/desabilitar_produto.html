@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/registrar_produto/desabilitar_produto.css">
+    <style>
+        #desabilitar-Produtos a {
+            background: var(--hover-color);
+            color: black;
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Desabilitar Produto</title>
+</head>
+
+<body>
+    <header>
+        <nav style="background-color: rgb(0, 38, 87);">
+            <ul id="ul-Menu"></ul>
+        </nav>
+        <nav class="nav-menu-2">
+            <ul class="menu-secundario">
+                <li class="li-menu2">
+                    <a href="./registrar_produto.html" class="a2">Cadastrar novo Produto</a>
+                </li>
+                <li class="li-menu2">
+                    <a class="a2" href="./alterar_produto.html">Cadastro do Produto / Alterar</a>
+                </li>
+                <li class="li-menu2" id="desabilitar-Produtos">
+                    <a class="a2" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                </li>
+                <li id="Informações-Produtos" class="li-menu2">
+                    <a class="a2" href="./informacoes_produtos.html">Estoque / Informações Gerais dos Produtos</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="container-register"></div>
+        <div class="div-form" role="form">
+            <div class="div-form-display">
+                <section class="div-form__body">
+                    <div class="filtros">
+                        <table class="filter-table">
+                            <tr>
+                                <th>Código EAN:</th>
+                                <th>Ações</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="codigoEAN">
+                                </td>
+                                <td style=" display: flex; width: 100%;">
+                                    <div class='divBtn-horizontal'>
+                                        <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                            src="../style//img/procurar.png" alt="">Buscar</button>
+                                        <button id="filterButtonLimpar"><img class="img-excluir"
+                                            src="../style//img/excluir.png" alt="">Limpar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <ul id="ul-filtros-2">
+                        <li class="header-li">
+                            <span>Código EAN</span><span>Descrição Produto</span><span>Preço Compra</span><span>Preço
+                                Venda</span><span>Qtd Vendida</span><span>Estoque Atual</span>
+                            <span>Desabilitar</span>
+                        </li>
+                    </ul>
+                    <ul id="ul-filtros">
+                    </ul>
+                    <p class="informativo">⚠️ <strong>Atenção: Ao desabilitar o produto, ele não poderá ser encontrado em buscas
+                        futuras e o estoque será automaticamente zerado. </br> Esta operação é irreversível após
+                            a confirmação!</strong></p>
+                </section>
+        </div>
+
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/Produto/desabilitar_produto.js"></script>
+</html>

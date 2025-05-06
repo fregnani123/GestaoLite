@@ -1,0 +1,192 @@
+:root {
+    --primary-color: #1f3b57;  /* Azul escuro clássico */
+    --secondary-color: #2c4d6e; /* Tom levemente mais claro */
+    --hover-color: #ffcc00;  /* Destaque amarelo */
+    --text-color: #ffffff; /* Texto branco */
+    --border-color: #a0a0a0; /* Bordas cinza */
+    --submenu-bg: #f4f4f4;  /* Fundo do submenu */
+    --submenu-border: #8c8c8c;  /* Borda do submenu */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    cursor: pointer;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+header {
+    background: var(--primary-color);
+    padding: 5px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-height: 4vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+
+/* 🔹 Menu Principal */
+#ul-Menu {
+    list-style: none;
+    display: flex;
+    gap: 0;
+    border: 2px solid var(--border-color);
+    background: var(--secondary-color);
+    padding: 5px;
+    border-radius: 4px;
+    max-height: 3.5vw; /* Altura fixa */
+    display: flex;
+    align-items: center;
+}
+
+#ul-Menu li {
+    position: relative;
+    border-right: 2px solid var(--border-color);
+    height: 40px; /* Mantém altura fixa */
+    line-height: 40px; /* Alinha o texto verticalmente */
+}
+
+#ul-Menu li:last-child {
+    border-right: none;
+}
+
+#ul-Menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px; /* Mantém espaçamento lateral */
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+    text-shadow: 1px 1px 1px black;
+}
+
+#ul-Menu > li > a:hover {
+    background: var(--hover-color);
+    color: black;
+    text-shadow: none;
+    border-bottom: 2px solid black;
+}
+
+/* 🔹 Submenu */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--submenu-bg);
+    min-width: 200px;
+    border: 2px solid var(--submenu-border);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 5px 0;
+}
+
+.submenu li {
+    display: block;
+    border-bottom: 1px solid var(--submenu-border);
+    height: 35px; /* Altura fixa no submenu */
+    line-height: 35px;
+}
+
+.submenu li:last-child {
+    border-bottom: none;
+}
+
+.submenu a {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: black;
+    background: var(--submenu-bg);
+    font-weight: normal;
+    display: block;
+    height: 100%;
+}
+
+.submenu a:hover {
+    background: var(--hover-color);
+    color: black;
+}
+
+/* 🔹 Submenu de segundo nível */
+.submenu li {
+    position: relative;
+}
+
+.submenu li:hover .submenu {
+    display: block;
+    top: 0;
+    left: 100%;
+}
+
+/* 🔹 Mostrar submenu ao passar o mouse */
+#ul-Menu li:hover > .submenu {
+    display: block;
+}
+
+/* 🔹 Menu Secundário */
+.menu-secundario {
+    list-style: none;
+    display: flex;
+    gap: 0;
+    border: 2px solid var(--border-color);
+    background: var(--secondary-color);
+    padding: 5px;
+    border-radius: 4px;
+    max-height: 3.5vw; /* Altura fixa */
+    display: flex;
+    align-items: center;
+    margin-top: 1.5%;
+}
+
+.menu-secundario li {
+    position: relative;
+    border-right: 2px solid var(--border-color);
+    height: 40px;
+    line-height: 40px;
+}
+
+.menu-secundario li:last-child {
+    border-right: none;
+}
+
+.menu-secundario a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+    text-shadow: 1px 1px 1px black;
+}
+
+.menu-secundario a:hover {
+    background: var(--hover-color);
+    color: black;
+    text-shadow: none;
+    border-bottom: 2px solid black;
+}
+

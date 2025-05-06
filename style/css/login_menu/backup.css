@@ -1,0 +1,82 @@
+body{
+    position: relative;
+}
+.div-backup {
+    left: 0;
+    top: 0; /* Certifique-se de incluir isso para garantir o posicionamento correto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; /* Faz a div ocupar toda a altura do viewport */
+    width: 100%;
+    position: fixed; /* Use fixed para garantir que cubra a tela inteira */
+    z-index: 9999;
+    background-color: rgba(225, 225, 225, 0.516);
+    display: none; /* Inicialmente oculta */
+}
+
+.backup {
+    position: relative;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 20%;
+    margin-top: 20%;
+    margin-left: 40%;
+}
+
+.backup h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+.backup p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+.backup button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.backup button:hover {
+    background-color: #0056b3;
+}
+#status {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #007bff;
+}
+
+.exit {
+    color: black;
+    font-size: 1.2rem; 
+    font-weight: bold;
+    width: 1.875rem; 
+    height: 1.875rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.exit:hover {
+    background-color: #ea3748;
+    color: white;
+}
+   

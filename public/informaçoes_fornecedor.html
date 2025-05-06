@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+        <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+        <link rel="stylesheet" href="../style/css/css_global/btn.css">
+        <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+        <link rel="stylesheet" href="../style/css/css_global/info.css">
+        <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
+        <style>
+            #Informacoes-fornecedor a {
+                background: var(--hover-color);
+                color: black;
+                text-shadow: none;
+                border-bottom: 2px solid black;
+                cursor: pointer;
+            }
+        </style>
+        <title>Informações Fornecedor</title>
+    </head>
+<body>
+    <header>
+        <nav style="background-color: rgb(0, 38, 87);">
+            <ul id="ul-Menu"></ul>
+        </nav>
+        <nav class="nav-menu-2">
+            <ul class="menu-secundario" id="menu-secundario-fornecedor">
+                <li id="cadastro-fornecedor">
+                    <a href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
+                </li>
+                <li id="alterar-fornecedor">
+                    <a href="./alterar_Fornecedor.html">Informações Cadastrais do Fornecedor / Alterar</a>
+                </li>
+                <li class="li-menu2" id="Informacoes-fornecedor">
+                    <a class="a2"href="./informaçoes_fornecedor.html">Produtos vinculados ao Fornecedor</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+          <div class="container-register"></div>
+          <div class="div-form" role="form">
+              <div class="div-form-display">
+                  <section class="div-form__body">
+                    <table class="filter-table">
+                        <tr>
+                            <th>🔍 Filtrar CNPJ:</th>
+                            <th>Razão Social:</th>
+                            <th>Nome Fantasia:</th>
+                            <th>Ações</th>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <input type="text" id="cnpjInfo">
+                                <input type="hidden" type="text" id="fornecedorId" >
+                            </td>
+                            <td style="width: 40%;"> 
+                                <input type="text" id="razaoSocial" readonly style="background-color: rgb(239, 239, 239);color: black;">
+                            </td>
+                            <td style="width: 40%;"> 
+                            <input  type="text" id="nomeFantasia" readonly style="background-color: rgb(239, 239, 239);color: black;">
+                            </td>
+                            <td style=" display: flex; width: 100%;">
+                                <div class='divBtn-horizontal'>
+                                <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                    src="../style//img/procurar.png" alt="">Buscar</button>
+                                <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
+                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="div-form-container-info">
+                        <div class="filtrados">
+                            <ul id="ul-filtros">
+                            </ul>
+                        </div>
+                    </div>
+                  </section>
+              </div>
+          </div>
+  </body>
+  <script src="../Renderer/Menu/renderer_menu.js"></script>
+  <script src="../Renderer/services/alertMsg.js"></script>
+  <script src="../Renderer/services/formatters.js"></script>
+  <script src="../Renderer/Fornecedor//info_fornecedor.js"></script>
+  </html> 
+  
