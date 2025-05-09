@@ -214,18 +214,16 @@ function renderizarTabela() {
         const hoje = new Date();
     
         if (dataVencimento < hoje) {
-            multa = parseFloat(multaParcela); // Multa fixa (aplicada uma vez)
+            multa = parseFloat(multaParcela); // Multa fixa
     
             // Cálculo de meses completos de atraso
             let mesesAtraso = (hoje.getFullYear() - dataVencimento.getFullYear()) * 12 +
                               (hoje.getMonth() - dataVencimento.getMonth());
     
-            // Se o dia do mês atual for menor que o do vencimento, considera que ainda não fechou o mês
             if (hoje.getDate() < dataVencimento.getDate()) {
                 mesesAtraso--;
             }
     
-            // Garante que o número de meses não fique negativo
             mesesAtraso = Math.max(0, mesesAtraso);
     
             juros = p.valor_parcela * (taxaJurosAtraso / 100) * mesesAtraso;
@@ -254,8 +252,12 @@ function renderizarTabela() {
         if (dataVencimento < hoje && p.status !== 'Paga') {
             tr.style.background = 'red';
             tr.style.color = 'white';
+        } else if (p.status === 'Paga') {
+            tr.style.background = 'green';
+            tr.style.color = 'white';
         }
     });
+    
     
 
     table.appendChild(tbody);

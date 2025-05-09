@@ -39,7 +39,7 @@ async function getProdutoEstoque(codigoDeBarras) {
 
         produtoID = produto.produto_id;    
         preco_compra_anterior = produto.preco_compra;    
-        markup_anterior = produto.preco_compra;   
+        markup_anterior = produto.markup;   
         preco_venda_anterior = produto.preco_venda;    
            
         inputprodutoEncontrado.value = produto.nome_produto;

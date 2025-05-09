@@ -11,9 +11,10 @@ async function getTaxas() {
     try {
         const response = await fetch('http://localhost:3000/getTaxas', {
             method: 'GET',
-            headers: { 
+            headers: {
                 'x-api-key': 'segredo123',
-                'Content-Type': 'application/json' }
+                'Content-Type': 'application/json'
+            }
         });
 
         const data = await response.json();
@@ -21,7 +22,7 @@ async function getTaxas() {
         jurosParcelaAcima = Number(data[0].juros_parcela_acima);
         inputMaxParcelas.value = jurosParcelaAcima;
         spanMaxParcelas.innerText = inputMaxParcelas.value;
-       
+
         console.log('Taxas Crediário: ', data)
 
     } catch (error) {
@@ -38,9 +39,10 @@ async function findCliente(cpf, nomeElemento) {
     try {
         const response = await fetch(findOneClient, {
             method: 'GET',
-            headers: { 
+            headers: {
                 'x-api-key': 'segredo123',
-                'Content-Type': 'application/json' }
+                'Content-Type': 'application/json'
+            }
         });
 
         if (!response.ok) {
@@ -225,3 +227,108 @@ async function updateCrediario(dadosClienteId) {
         console.log('Erro durante a atualização do crédito:', error);
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputBusca = document.getElementById("buscaCliente");
+
+    if (!inputBusca) {
+        console.error("Erro: Elemento 'buscaCliente' não encontrado no DOM.");
+        return;
+    }
+
+    inputBusca.addEventListener("input", async function () {
+        const nome = inputBusca.value;
+
+        if (nome.length < 2) return;
+
+        try {
+            console.log("Buscando cliente:", nome);
+
+            const response = await fetch(`http://localhost:3000/getClienteNome/${nome}`, {
+                method: 'GET',
+                headers: {
+                    'x-api-key': 'segredo123',
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            console.log("Resposta da API:", response.status);
+
+            const data = await response.json();
+            console.log("Dados recebidos:", data);
+
+            const lista = document.getElementById("listaClientes");
+            lista.innerHTML = "";
+
+            if (data.message) {
+                lista.innerHTML = `<li>${data.message}</li>`;
+                return;
+            }
+
+            // Função para remover máscara do CPF
+            function removerMascaraCPF(cpf) {
+                return cpf.replace(/\D/g, '');
+            }
+
+            data.forEach(cliente => {
+                const li = document.createElement('li');
+                li.style.textAlign = 'right';
+                li.style.padding = '4px 8px';
+                li.style.background = '#f9f9f9';
+                li.style.borderRadius = '4px';
+
+
+                // O CPF já está formatado, então você só pega o valor direto
+                const cpfFormatado = decode(cliente.cpf);
+
+                li.innerHTML = `
+                    CPF ${cpfFormatado} - ${cliente.nome}
+                 <button style="margin-left: 8px; padding: 2px 6px; font-size: 12px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;" data-cpf="${cpfFormatado}">
+                 Selecionar
+                </button>
+
+                `;
+                lista.appendChild(li);
+            });
+
+            // Evento nos botões de seleção
+            lista.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cpfFormatado = btn.getAttribute('data-cpf'); // Obtém CPF com a máscara
+
+                    const cpfCliente = document.getElementById("Crediario-cliente");
+                    if (cpfCliente) {
+                        cpfCliente.value = cpfFormatado; // Coloca o CPF com máscara diretamente no input
+                        cpfCliente.dispatchEvent(new Event('input')); // Dispara evento para chamar findCliente()
+                        cpfCliente.focus();
+                    }
+
+                    const divNomes = document.querySelector('.divNomes');
+                    if (divNomes) divNomes.style.display = 'none';
+                });
+            });
+
+
+        } catch (error) {
+            console.error("Erro ao buscar clientes:", error);
+        }
+    });
+});
+
+
+// Botão que abre/fecha a busca
+const btnBuscarNome = document.getElementById('btnBuscarNome');
+const divNomes = document.querySelector('.divNomes');
+const inputBusca = document.getElementById("buscaCliente");
+
+btnBuscarNome.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (divNomes.style.display === 'none' || divNomes.style.display === '') {
+        divNomes.style.display = 'flex';
+        inputBusca.focus();
+    } else {
+        divNomes.style.display = 'none';
+        cpfCliente.focus(); // Certifique-se que 'cpfCliente' existe
+    }
+});

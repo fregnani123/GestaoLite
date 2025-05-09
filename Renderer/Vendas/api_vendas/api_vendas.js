@@ -1,4 +1,4 @@
-// My Methods.
+
 const apiEndpoints = {
     findOneProduct: 'http://localhost:3000/produto', // URL base
     getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',

@@ -60,6 +60,29 @@ async function getClientePorCPF(cpfEnviado) {
         throw error;
     }
 }
+async function getClientePorNome(nomeEnviado) {
+    await ensureDBInitialized();  // Garante que o banco de dados foi inicializado
+    try {
+        // A consulta SQL usa LIKE para buscar o nome, insensível a maiúsculas/minúsculas
+        const query = `SELECT * FROM cliente WHERE nome LIKE ? COLLATE NOCASE`;
+        const likeTerm = `%${nomeEnviado}%`;  // Permitindo que o nome contenha o texto fornecido
+
+        console.log("Consulta SQL com:", likeTerm);  // Para verificar se o likeTerm está correto
+
+        const stmt = db.prepare(query);
+        const rows = stmt.all(likeTerm);  // Executa a consulta e retorna as linhas correspondentes
+        
+        if (!rows || rows.length === 0) {
+            return []; // Retorna array vazio para evitar erro no controller
+        }
+
+        return rows;  // Retorna as linhas encontradas
+    } catch (error) {
+        console.error('Erro ao buscar cliente por nome:', error.message);
+        throw new Error("Erro ao acessar o banco de dados.");  // Mensagem mais clara
+    }
+}
+
 
 async function postNewCliente(cliente) {
     await ensureDBInitialized;
@@ -214,5 +237,6 @@ module.exports = {
     postNewCliente,
     getClientePorCPF,
     updateCliente,
-    updateCreditoCliente
+    updateCreditoCliente,  
+    getClientePorNome
 };

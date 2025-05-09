@@ -1,6 +1,8 @@
 const usernameCod = document.getElementById('username');
 const passwordCod = document.getElementById('password');
 
+usernameCod.focus()
+
 // Função para inverter a string
 function reverseString(str) {
     return str.split('').reverse().join('');
@@ -103,47 +105,47 @@ document.getElementById('formLogin').addEventListener('click', (e) => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const checkbox = document.getElementById('termos');
-    const botaoAtivar = document.getElementById('ativar-btn');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const checkbox = document.getElementById('termos');
+//     const botaoAtivar = document.getElementById('ativar-btn');
     
-    checkbox.addEventListener('change', () => {
-        botaoAtivar.disabled = !checkbox.checked;
-    });
-});
+//     checkbox.addEventListener('change', () => {
+//         botaoAtivar.disabled = !checkbox.checked;
+//     });
+// });
 
-const abrirTermos = document.getElementById('abrir-termos');
-const termosBox = document.getElementById('termos-box');
-const fecharTermos = document.getElementById('btn-exit');
+// const abrirTermos = document.getElementById('abrir-termos');
+// const termosBox = document.getElementById('termos-box');
+// const fecharTermos = document.getElementById('btn-exit');
 
-abrirTermos.addEventListener('click', (e) => {
-  e.preventDefault();
-  termosBox.style.display = 'flex';
-});
+// abrirTermos.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   termosBox.style.display = 'flex';
+// });
 
-fecharTermos.addEventListener('click', () => {
-  termosBox.style.display = 'none';
-});
-
-
-const botaoAtivar = document.getElementById('ativar-btn');
-
-botaoAtivar.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const inputClient = document.getElementById('cliente').value
-    const inputSerial = document.getElementById('serial-key').value
-
-    if (!inputClient || !inputSerial) {
-        alert('inputs vazios');
-        return;
-    }
-    verificaDadosSerial(inputClient, inputSerial);
-});
+// fecharTermos.addEventListener('click', () => {
+//   termosBox.style.display = 'none';
+// });
 
 
-verificaValidadeDate();
-verificaAtivacaoMysql();
+// const botaoAtivar = document.getElementById('ativar-btn');
+
+// botaoAtivar.addEventListener('click', (e) => {
+//     e.preventDefault();
+
+//     const inputClient = document.getElementById('cliente').value
+//     const inputSerial = document.getElementById('serial-key').value
+
+//     if (!inputClient || !inputSerial) {
+//         alert('inputs vazios');
+//         return;
+//     }
+//     verificaDadosSerial(inputClient, inputSerial);
+// });
+
+
+// verificaValidadeDate();
+// verificaAtivacaoMysql();
 getUser();
 
 

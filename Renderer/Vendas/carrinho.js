@@ -70,7 +70,7 @@ async function alteraEstoqueEVendido(carrinho) {
 let desconto = parseFloat(inputdescontoPorcentagem.value.replace(',', '.')) || 0;
 
 function calCarrinho(carrinho, converteMoeda, inputTotalLiquido, textSelecionarQtd, inputdescontoPorcentagem) {
-    if (textSelecionarQtd) textSelecionarQtd.innerHTML = ''; // Atualiza o texto, se fornecido
+    if (textSelecionarQtd) textSelecionarQtd.innerHTML = '1x'; // Atualiza o texto, se fornecido
 
     const total = carrinho.reduce((acc, item) => {
         const precoFormatado = parseFloat(

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/css/venda/cupon.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
     <title>Tela de Vendas</title>
 </head>
 
@@ -59,7 +60,7 @@
             <span class="text-assinatura">ASSINATURA DO CLIENTE</span>
         </div>
         <div class="rodape">
-         
+
             <span class="redeSocial"></span>
             <span class="text-acesse">Acesse nossas redes sociais.</span>
             <span class="text-slogan"></span>
@@ -81,6 +82,7 @@
             <div class="campo">
                 <label for="nomeClienteAlter">Cliente:</label>
                 <input type="text" id="nomeClienteAlter" readonly>
+
             </div>
             <p class="">⚠️ O cliente precisa estar cadastrado para alteração no cupom. </p>
             <br>
@@ -93,14 +95,14 @@
             <p class="titulo">Alterar Quantidade</p>
             <div class="campo">
                 <label for="input-qtd">Informe a quantidade:</label>
-                <input type="text" id="input-qtd">
+                <input type="text" id="input-qtd" value="1">
                 <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Enter</strong> para confirmar.
                 </p>
             </div>
         </div>
 
         <div class="confirmation-clear" style="display: none;">
-            <p class="titulo">Confirmar início de nova venda?</p>
+          <p class="titulo">Confirmar início de um novo pedido? Digite a senha do administrador.</p>
             <div class="campo">
                 <input id="limpar-tela-key" type="password">
                 <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Enter</strong> para confirmar.
@@ -118,9 +120,9 @@
             </div>
         </div>
         <div class="remove-item" style="display: none;">
-            <p class="titulo"> Remove item do Carrinho</p>
+            <p class="titulo"> Remova o item adicionado</p>
             <div class="campo">
-                <label>Digite o número do <strong>item</strong> para remover.</label>
+              <label>Digite o número do item para remover.</label>
                 <input id="numero-Item" type="number">
                 <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Delete</strong> para confirmar.
                 </p>
@@ -168,20 +170,34 @@
                             <!--Configurações - Crediario-loja -->
                             <div class="pagamento-default-1" id="div-Crediario">
                                 <div class="inputs-container">
-
                                     <div style="display: flex; flex-direction: row; gap: 1%; margin-top: 2%;">
-                                        <div style="width: 50%">
-                                            <label for="Crediario" style="width: 100%; margin-bottom: -1%;">CPF
-                                                Cliente: </label>
+                                        <div style="width: 30%">
+                                            <label for="Crediario" style="width: 100%; margin-bottom: -1%; ">🔍 Filtrar
+                                                CPF: </label>
                                             <div style="max-width: 100%;">
                                                 <input id="Crediario-cliente" type="text" value="">
                                             </div>
                                         </div>
                                         <div>
                                             <label for="" style="width: 100%;  margin-bottom: -1%;">Cliente:</label>
-                                            <div style="max-width: 100%;"><input id="nomeCliente" type="text"
-                                                    type="text" value="" readonly>
+                                            <div style="max-width: 100%; margin-top: 5px;">
+                                                <div style="display: flex; width: 100%;flex-direction: row;">
+                                                    <input id="nomeCliente" type="text"
+                                                        style="flex: 1; margin-right: 2px;" value="" readonly>
+                                                    <button id="btnBuscarNome" style="white-space: nowrap;">🔍
+                                                        Filtrar</button>
                                                 </div>
+
+                                                <div class="divNomes"
+                                                    style="display: none; box-sizing: border-box; max-height: 300px; ">
+                                                    <p>Digite o nome do Cliente</p>
+                                                    <input type="text" id="buscaCliente">
+                                                    <ul id="listaClientes"
+                                                        style="box-sizing: border-box; margin: 0; padding: 0; list-style: none; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style="display: flex; flex-direction: row; gap: 1%; margin-top: 2%;">
@@ -240,7 +256,10 @@
                             </div>
                         </div>
                         <div class="info-cred" id="info-cred">
-                            <p><strong>Atenção:</strong> Parcelamentos no crediário acima de <strong><span id="spanMaxParcelas"></span>X</strong> parcelas terão uma taxa de X% de juros, definida pelo setor financeiro nas configurações do sistema.<input id="numeroParcela" type="hidden" type="number" value="12" readonly >
+                            <p><strong>Atenção:</strong> Parcelamentos no crediário acima de <strong><span
+                                        id="spanMaxParcelas"></span>X</strong> parcelas terão uma taxa de X% de juros,
+                                definida pelo setor financeiro nas configurações do sistema.<input id="numeroParcela"
+                                    type="hidden" type="number" value="12" readonly>
                             </p>
                         </div>
                         <p class="info-pag" id="info-pag">
@@ -257,114 +276,148 @@
         <input type="hidden" id="valor-unitario" readonly>
         <!-------------------------------------------------------------------------------------------->
         <!-- Caixa Aberto -->
-        <header class="header">
-            <div class="info-item-data" style="display: none;">
-                <label class="info-container-label" for="data-venda">Data da Venda:</label>
-                <input type="text" id="data-venda" readonly>
-            </div>
-            <div class="div-nomeProduto">
-                <h1 class="nomeProduto"></h1>
-            </div>
-            <div class="info-item-nome-cliente" style="display: none;">
-                <label class="info-container-label" for="nome-cliente">Cliente:</label>
-                <input id="nome-cliente" type="text" readonly value="Consumidor Final">
+        <header style="display: flex; justify-content: center;">
+            <nav style="background-color: rgb(0, 38, 87);">
+                <ul id="ul-Menu"></ul>
+            </nav>
 
-                <!-- <input id="id-cliente" type="hidden" value="1">
-                <input id="creditoLimite" >
-                <input id="creditoUtilizado" >  -->
-
-            </div>
-            <div class="info-item-time">
-                <p class="caixa-aberto">CAIXA ABERTO</p>
-                <p class="square-time"><span class="squere-hide">.</span></p>
-                <p class="square-day">Obrigado pela preferência!</p>
-            </div>
         </header>
         <!-- Dados do produto -->
-        <section class="product-section">
-            <div class="product-info">
-                <div class="div-img">
-                    <img class="img-produto" src="../style/img/carrinho-de-compras.png" alt="Produto">
-                </div>
-                <div class="product-codigo">
-                    <label for="codigo">Código Barras (EAN)</label>
-                    <input type="text" id="codigo">
-                    <div class="product-quantity">
-                        <p>Quantidade <span>(F9)</span></p>
-                        <p class="qtd-selecionada"></p>
-                    </div>
-                </div>
-                <div class="carrinho">
-                    <div style="overflow: hidden;">
-                        <ul class="ul-carrinho">
-                            <li class="li-titulo-carrino">
-                                <label style="border-bottom: 1px solid black;" for="numero-pedido">Nº Pedido:</label>
-                                <input type="text" id="numero-pedido" readonly> <span
-                                    style="border-bottom: 1px solid black;">Itens adicionados ao carrinho </span>
-                            </li>
-                        </ul>
-                        <ul class="ul-descricao-produto">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Totais -->
-        <section class="totals-section">
-            <div class="atalhos">
-                <H3 style="position:absolute; top: 3%; left:3%;">Selecione o Pagamento</H3>
-                <div class="pagamento">
-                    <p class="atalhos-p">F1 = Pagamento Dinheiro</p>
-                    <p class="atalhos-p">F2 = Pagamento PIX</p>
-                    <p class="atalhos-p">F3 = Pgto Cartão Crédito </p>
-                    <p class="atalhos-p">F4 = Pgto Cartão Débito</p>
-                </div>
-                <div class="pagamento">
-                    <p class="atalhos-p">F6 = Cancelar Item</p>
-                    <p class="atalhos-p">F7 = Crediário Loja</p>
-                    <p class="atalhos-p">F8 = Alterar Cliente Cupom</p>
-                    <p class="atalhos-p">F9 = Alterar Qtd</p>
-                </div>
-                <div class="pagamento">
-                    <p class="atalhos-p">F10 = Desconto Venda</p>
-                    <p class="atalhos-p">F12 = Reiniciar Venda</p>
-                    <p class="atalhos-p">Enter = Finalizar Venda</p>
-                    <p class="atalhos-p">ESC = Sair (Menu)</p>
-                    <!-- <p class="atalhos-p" style="color: transparent;">.</p> -->
-                </div>
-            </div>
+        <div class="div-vendas">
 
-            <div class="payment-summary">
-                <div class="div-total-liquido">
-                    <div class="valores">
 
-                        <div class=" val-div">
-                            <label class="label">Desconto (%) :</label>
-                            <input id="mostrarDesconto" type="text" value="0%" readonly>
+            <!-- <section class="product-section">
+        </section> -->
+            <!-- Totais -->
+            <section class="totals-section">
+                <div class="atalhos-1">
+
+                    <div class="atalhos" style="display: flex;">
+                        <H3>Selecione uma ação — você pode usar o atalho ou clicar no botão abaixo.</H3>
+                        <div class="pagamento">
+                            <button class="atalhos-btn" id="btn-pgto-dinheiro">F1 = Pagamento dinheiro</button>
+                            <button class="atalhos-btn" id="btn-pgto-pix">F2 = Pagamento PIX</button>
+                            <button class="atalhos-btn" id="btn-pgto-credito">F3 = Pagamento cartão crédito</button>
+                            <button class="atalhos-btn" id="btn-pgto-debito">F4 = Pagamento cartão débito</button>
                         </div>
-
-                        <div class=" val-div">
-                            <label class="label">Desc. em (R$) :</label>
-                            <input id="mostrarDescontoReal" type="text" value="0,00" readonly>
+                        <div class="pagamento">
+                            <button class="atalhos-btn" id="btn-cancelar-item">F6 = Cancelar item do Pedido</button>
+                            <button class="atalhos-btn" id="btn-crediario-loja">F7 = Crediário loja</button>
+                            <button class="atalhos-btn" id="btn-alterar-cliente">F8 = Alterar cliente cupom</button>
+                            <button class="atalhos-btn" id="btn-alterar-qtd">F9 = Alterar quantidade</button>
                         </div>
-
-                        <div class=" val-div">
-                            <label class="label">Valores Pagos:</label>
-                            <input id="total-pago" value="0,00" type="text" readonly>
-                        </div>
-                        <div class=" val-div">
-                            <label class="label">Troco:</label>
-                            <input id="troco" value="0,00" type="text" readonly>
+                        <div class="pagamento" style="margin-bottom: 1%;">
+                            <button class="atalhos-btn" id="btn-desconto-venda">F10 = Desconto no pedido</button>
+                            <button class="atalhos-btn" id="btn-reiniciar-venda">F12 = Reiniciar pedido</button>
+                            <button class="atalhos-btn" id="btn-finalizar-venda">Enter = Finalizar pedido</button>
+                            <button class="atalhos-btn" id="btn-esc">ESC = Fechar sub-telas abertas</button>
                         </div>
 
                     </div>
-                    <div class="div-liquido">
-                        <label class="label-total-liquido">Subtotal</label>
-                        <input id="total-liquido" type="text" value="0,00" readonly>
+                </div>
+                <div class="info-item-nome-cliente" style="display: none;">
+                    <label class="info-container-label" for="nome-cliente">Cliente:</label>
+                    <input id="nome-cliente" type="text" readonly value="Consumidor Final">
+
+                    <!-- <input id="id-cliente" type="hidden" value="1">
+                <input id="creditoLimite" >
+                <input id="creditoUtilizado" >  -->
+                </div>
+
+                <div style="width: 80%;height: 100%; gap: 2%;">
+                    <div class="div-info">
+                        <div class="info-item-data" style="display: none;">
+                            <label class="info-container-label" for="data-venda">Data da Venda:</label>
+                            <input type="text" id="data-venda" readonly>
+                        </div>
+                        <div class="div-nomeProduto">
+                            <p class="p-nome-produto">Produto:<span class="nomeProduto"></span> </p>
+                        </div>
+
+                        <div class="div-time">
+                            <!-- <p class="caixa-aberto">CAIXA ABERTO</p> -->
+                            <p class="square-time"><span class="squere-hide">.</span></p>
+                            <p class="square-day">Obrigado pela preferência!</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; width: 100%;">
+                        <div style="height: 400px; border: 1px solid gray;">
+                            <div class="product-codigo">
+                                <div class="div-img">
+                                    <img class="img-produto" src="../style/img/carrinho-de-compras.png">
+                                </div>
+                                <label for="codigo" style="margin-top: 3%;">Código Barras (EAN)</label>
+                                <input type="text" id="codigo">
+                                <div class="product-quantity">
+                                    <p>Quantidade:  <span class="qtd-selecionada">1x</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div-carrinho">
+                            <div class="carrinho">
+                                <div style="overflow: hidden;">
+                                    <ul class="ul-carrinho">
+                                        <li class="li-titulo-carrino">
+                                            <label style="border-bottom: 1px solid black; margin-top: 10px;"
+                                                for="numero-pedido">Nº Pedido:</label>
+                                            <input type="text" id="numero-pedido" readonly> <span
+                                                style="border-bottom: 1px solid black;">Itens adicionados</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="ul-descricao-produto">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-summary">
+                        <div class="div-total-liquido">
+                            <div class="valores">
+                                <div class=" val-div">
+                                    <label class="label">Desconto (%) :</label>
+                                    <input id="mostrarDesconto" type="text" value="0%" readonly>
+                                </div>
+
+                                <div class=" val-div">
+                                    <label class="label">Desc. em (R$) :</label>
+                                    <input id="mostrarDescontoReal" type="text" value="0,00" readonly>
+                                </div>
+
+                                <div class=" val-div">
+                                    <label class="label">Valores Pagos:</label>
+                                    <input id="total-pago" value="0,00" type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="valores">
+                                <div class="val-div">
+                                    <label class="label">Troco:</label>
+                                    <input id="troco" value="0,00" type="text" readonly>
+                                </div>
+                                <div class="val-div">
+                                    <label class="label">Subtotal:</label>
+                                    <input id="total-liquido" type="text" value="0,00" readonly>
+                                </div>
+                                <div class="val-div" style="border: 1px solid transparent">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <footer class="footer-venda">
+                <p style="margin-top: 0.2%; font-size: 1rem;">
+                    <strong><span style="display: inline-block; margin-bottom: 3px;">⚠️</span> Atenção:</strong> Tela
+                    destinada ao <strong>controle de saída de estoque</strong> e
+                    <strong>registro de pedidos</strong>, organizadas por período e forma de pagto. A emissão gerada é
+                    apenas um <strong>cupom sem validade fiscal</strong>, <strong>exclusivo para fins de controle
+                        interno</strong>.
+                    Seu objetivo é permitir a geração de <strong>relatórios sobre o destino dos produtos no
+                        estoque</strong>.
+                    <strong>Este sistema não gerencia a parte fiscal e burocrática do usuário.</strong>
+                </p>
+            </footer>
+        </div>
     </div>
     <script src="../Renderer/Vendas/renderer_vendas.js"></script>
     <script src="../Renderer/services/converte_moeda.js"></script>
@@ -378,6 +431,7 @@
     <script src="../Renderer/Vendas/api_vendas/api_crediario.js"></script>
     <script src="../config/apiUser.js"></script>
     <script src="../Renderer/imprimir/cupom.js"></script>
+    <script src="../Renderer/Menu/renderer_menu.js"></script>
 </body>
 
 </html>

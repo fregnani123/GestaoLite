@@ -61,6 +61,49 @@ const infoPagCred = document.getElementById('info-cred');
 const inputMaxParcelas = document.getElementById('numeroParcela');
 const spanMaxParcelas= document.getElementById('spanMaxParcelas');
 
+// Mapeamento dos botões para as teclas de atalho desejadas
+const atalhos = {
+  'btn-pgto-dinheiro': 'F1',
+  'btn-pgto-pix': 'F2',
+  'btn-pgto-credito': 'F3',
+  'btn-pgto-debito': 'F4',
+  'btn-cancelar-item': 'F6',
+  'btn-crediario-loja': 'F7',
+  'btn-alterar-cliente': 'F8',
+  'btn-alterar-qtd': 'F9',
+  'btn-desconto-venda': 'F10',
+  'btn-reiniciar-venda': 'F12',
+  'btn-finalizar-venda': 'Enter',
+  'btn-esc':'Escape'
+};
+
+// Faz o loop automático
+for (const [btnId, tecla] of Object.entries(atalhos)) {
+  const btn = document.getElementById(btnId);
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const event = new KeyboardEvent('keydown', { key: tecla });
+      document.dispatchEvent(event);
+    });
+  }
+}
+
+
+  
+
+document.addEventListener('DOMContentLoaded', () => {
+    const linkID_2 = document.querySelector('.list-a2');
+    if (linkID_2) {
+      estilizarLinkAtivo(linkID_2);
+    }
+  });
+
+  function estilizarLinkAtivo(linkID) {
+    linkID.style.background = '#ffcc00'; // Cor de fundo
+    linkID.style.textShadow = 'none';
+    linkID.style.color = 'black';
+    linkID.style.borderBottom = '2px solid black';
+  }
 // Estado do carrinho
 let carrinho = [];
 
@@ -199,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'F6': // Remover item
+            if(carrinho.length === 0){
+              alertMsg('Não há itens para remover no pedido', 'info', 3000);
+            }
                 if (visibleDivs.length === 0) {
                     alertRemoverItem.style.display = 'block';
                     inputExcluiItem.focus();
@@ -256,16 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'Escape': // Fechar janelas
                 inputExcluiItem.value = '';
-                inputExitVenda.value = '';
-                if (visibleDivs.length === 0) {
-                    alertExit.style.display = alertExit.style.display === 'block' ? 'none' : 'block';
-                    if (alertExit.style.display === 'block') {
-                        inputExitVenda.focus();
-                    }
-                } else {
-                    visibleDivs.forEach(div => div.style.display = 'none');
+                // inputExitVenda.value = '';
+                if (visibleDivs.length !== 0) {
+                  visibleDivs.forEach(div => div.style.display = 'none');
                     codigoEan.focus();
-                }
+                    }else{
+                       alertMsg('Todas as sub-telas foram fechadas.', 'info', 3000);
+                    }
+                
                 break;
 
             case 'Enter': // Confirmar quantidade ou exclusão
@@ -322,23 +366,23 @@ inputQtd.addEventListener('input', function (e) {
     div_qtd.style.backgroundColor = 'yellow';
 });
 
-const handleInputExit = (e) => {
-    if (e.key === 'Enter') {
-        // Define a senha padrão caso senhaVendaUser esteja vazia
-        const senhaCorreta = senhaVendaUser.trim() === '' ? 'adm' : senhaVendaUser;
+// const handleInputExit = (e) => {
+//     if (e.key === 'Enter') {
+//         // Define a senha padrão caso senhaVendaUser esteja vazia
+//         const senhaCorreta = senhaVendaUser.trim() === '' ? 'adm' : senhaVendaUser;
 
-        if (inputExitVenda.value === senhaCorreta) {
-            window.location.href = '../public/menu.html';
-        } else {
-            alertMsg('Senha incorreta, tente novamente.', 'error', 3000);
-            inputExitVenda.value = '';
+//         if (inputExitVenda.value === senhaCorreta) {
+//             window.location.href = '../public/menu.html';
+//         } else {
+//             alertMsg('Senha incorreta, tente novamente.', 'error', 3000);
+//             inputExitVenda.value = '';
 
-            setTimeout(() => {
-                inputExitVenda.focus();
-            }, 4000);
-        }
-    }
-};
+//             setTimeout(() => {
+//                 inputExitVenda.focus();
+//             }, 4000);
+//         }
+//     }
+// };
 
 const limparTelakey = (e) => {
     if (e.key === 'Enter') {
@@ -356,7 +400,7 @@ const limparTelakey = (e) => {
 };
 
 // Adiciona o evento keydown ao campo de entrada
-inputExitVenda.addEventListener('keydown', handleInputExit);
+// inputExitVenda.addEventListener('keydown', handleInputExit);
 inputlimparTelakey.addEventListener('keydown', limparTelakey);
 
 

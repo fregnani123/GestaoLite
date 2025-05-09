@@ -31,7 +31,7 @@ serverApp.use(Routes);
 // Inicialização do servidor
 const startServer = async () => {
     try {
-        await conectarMongoDB();
+        
         await getAllProdutos();
         console.log('Servidor Sqlite-Better conectado com sucesso!');
 

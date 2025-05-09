@@ -161,8 +161,8 @@
                         </div>
 
                         <div class="input-wrapper">
-                            <label for="markup">Markup % : </label>
-                            <input value="0" id="inputMarkup">
+                            <!-- <label for="markup">Markup % : </label> -->
+                            <input type="hidden" value="0" id="inputMarkup">
                         </div>
 
                         <div class="select-wrapper">
@@ -209,10 +209,15 @@
                 </section>
             </div>
             <footer class="div-form__footer">
-                <p class="informativo observacoes">⚠️ <strong>Atenção: O markup é calculado automaticamente assim:
+                <p class="informativo observacoes">⚠️<strong>
+                    Atenção: O lucro bruto é calculado automaticamente assim:
+                    (Preço de Venda − Preço de Compra)
+                    Este valor é apenas demonstrativo e não é salvo no sistema.
+                  </strong>
+                    <!-- <strong>Atenção: O markup é calculado automaticamente assim:
                         (Preço de Venda - Preço de Compra) ÷ Preço de Compra x 100%
                         Você também pode inserir diretamente o preço de compra e o preço de venda sem precisar definir
-                        um markup</strong>
+                        um markup</strong> -->
                 </p>
                 <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
                         src="../style//img/disquete.png" alt="">Gravar</button>

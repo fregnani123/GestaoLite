@@ -12,7 +12,6 @@ const controllersCliente = require('../Controller/cliente');
 const controllersDesativar = require('../Controller/desativarProdutoSistema');
 const controllersCrediario = require('../Controller/crediario');
 const controllersAgenda = require('../Controller/agendamento');
-const dbMongo = require('../../db/mongoDB');
 const controllersUsuario = require('../Controller/usuario');
 
 // Definições de rotas
@@ -33,6 +32,7 @@ Router.get('/getVenda', controllersVenda.getVenda);
 Router.get('/getAgenda', controllersAgenda.getAgendamento);
 Router.get('/getAtivacaoMysql', controllersAtivacao.getAtivacaoMysql);
 Router.get('/getCliente/:cpf', controllersCliente.getCliente);
+Router.get('/getClienteNome/:nome', controllersCliente.getClienteNome); 
 Router.get('/getHistoricoVendas', controllersVenda.getHistoricoDeVenda);
 Router.get('/getCrediario/:cpf', controllersCrediario.getCrediario);
 Router.get('/getCrediarioVenda/:venda_id', controllersCrediario.getCrediarioNumeroPedido);
@@ -68,11 +68,5 @@ Router.patch('/updateCredito', controllersCliente.updateCreditoCliente);
 Router.patch('/UpdateUsuario', controllersUsuario.updateUsuario);
 Router.patch('/updateTaxas', controllersCrediario.updateTaxas);
 
-// Rota para obter licença
-Router.get('/getLicenca/:userID/:serialKey', dbMongo.getLicenca);
-Router.get('/getLicenca/:remetente', dbMongo.getMensagensPorRemetente);
-Router.get('/getSuporte/:cliente', dbMongo.getMensagensPorSuporte);
-Router.post('/postmensagem', dbMongo.postMensagem);
-Router.post('/postmensagemChat', dbMongo.postMensagemChat);
 
 module.exports = Router;

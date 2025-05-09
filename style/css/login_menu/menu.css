@@ -106,6 +106,21 @@ li img {
     right: 20px;
 }
 
+.menu-item-1 a,
+.menu-item-2 a,
+.menu-item-3 a,
+.menu-item-4 a,
+.menu-item-5 a,
+.menu-item-6 a,
+.menu-item-7 a,
+.menu-item-8 a,
+.menu-item-9 a,
+.menu-item-10 a,
+.menu-item-11 a,
+.menu-item-12 a,
+.menu-item-13 a {
+    font-size: 1.3rem;
+}
 
 .logo {
     display: flex;

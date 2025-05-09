@@ -121,7 +121,7 @@ async function getUser() {
         cepUser = data[0].cep;
         senhaVendaUser = data[0].senha_venda;
 
-        console.log('Usuário obtido com sucesso:', data);
+        // console.log('Usuário obtido com sucesso:', data);
 
         // Retorne o usuário com o CNPJ/CPF decodificado, se disponível
         return { ...data, cnpj_cpf: cnpjCpfDecoded };
@@ -335,3 +335,4 @@ async function updateTaxas(taxas) {
     }
 };
 
+document.getElementById('current-year').textContent = new Date().getFullYear();

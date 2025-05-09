@@ -3,7 +3,8 @@ const {
     postNewCliente,
     getClientePorCPF,
     updateCliente,
-    updateCreditoCliente 
+    updateCreditoCliente,
+    getClientePorNome
 } = require(path.join(__dirname, '../../db/model/modelCLiente'));
 
 
@@ -38,6 +39,25 @@ const controllersCliente = {
     
             const cliente = await getClientePorCPF(cpf);
             // console.log("Resultado da consulta:", cliente);
+    
+            if (!cliente.length) {
+                return res.status(404).json({ message: "Cliente não encontrado" });
+            }
+    
+            return res.json(cliente);
+        } catch (error) {
+            console.error("Erro ao buscar cliente:", error);
+            res.status(500).json({ error: "Erro interno do servidor." });
+        }
+    },
+
+    getClienteNome: async (req, res) => {
+        try {
+            let { nome } = req.params;
+            console.log("Nome recebido no parâmetro:", nome);  // Verifique o parâmetro recebido
+    
+            const cliente = await getClientePorNome(nome);  // Chama a função para buscar o cliente
+            console.log("Resultado da consulta:", cliente);  // Verifique o resultado da consulta
     
             if (!cliente.length) {
                 return res.status(404).json({ message: "Cliente não encontrado" });

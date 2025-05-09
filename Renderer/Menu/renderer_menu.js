@@ -1,10 +1,10 @@
 const menuPainel1 = [
     { id: '1', texto: 'Painel de controle', to: '../public/menu.html' },
-    { id: '2', texto: 'Realizar venda', to: '../public/tela_vendas.html' },
+    { id: '2', texto: 'Baixa no Estoque por Pedido', to: '../public/tela_vendas.html' },
     // { id: '2', texto: 'Realizar venda', to: '../public/padrao.html' },
-    { id: '3', texto: 'Detalhes de venda', to: '../public/detalhe_vendas.html'},
+    { id: '3', texto: 'Relatórios de pedidos lançados', to: '../public/detalhe_vendas.html'},
     { id: '4', texto: 'Produto', to: '../public/registrar_produto.html' },
-    { id: '5', texto: 'Crediário', to: '../public/crediario.html' },
+    { id: '5', texto: 'Sistema de Crediário Próprio', to: '../public/crediario.html' },
     { id: '7', texto: 'Cliente', to: '../public/registrar_cliente.html' },
     { id: '8', texto: 'Fornecedor', to: '../public/fornecedor.html' },
     { id: '9', texto: 'Controle de Estoque ', to: '../public/controle_estoque.html' },

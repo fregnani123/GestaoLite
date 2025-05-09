@@ -21,7 +21,7 @@ function atualizarRelogio() {
     relogioElement.appendChild(spanSeg);
 
     // Formatar e atualizar data
-    const opcoesData = { weekday: 'long', day: 'numeric', month: 'short' };
+    const opcoesData = { weekday: 'long', day: 'numeric', month: 'long' };
     const dataFormatada = dataAtual.toLocaleDateString('pt-BR', opcoesData)
         .replace('.', ''); // Remover o ponto do mês
 

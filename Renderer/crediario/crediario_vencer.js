@@ -119,7 +119,6 @@ async function getCrediariosMesVigente() {
 }
 
 function renderizarTabelaAVencer() {
-
     const divAVencer = document.querySelector('.container-cmv');
     divAVencer.innerHTML = '';
 
@@ -185,21 +184,20 @@ function renderizarTabelaAVencer() {
     totalParcelas.innerHTML = converteMoeda(aReceber);
     parcelasTotalPagas.innerHTML = converteMoeda(totalPagas);
     parcelasAReceber.innerHTML = converteMoeda(totalAReceberMes);
-
     parcelas.forEach((p) => {
         GlobalClienteID = p.cliente_id;
         const tr = document.createElement('tr');
         let multaComJuros = 0;
         const dataVencimento = new Date(p.data_vencimento);
         const hoje = new Date();
-
+    
         if (dataVencimento < hoje) {
             const mesesDeAtraso = Math.floor((hoje - dataVencimento) / (1000 * 60 * 60 * 24 * 30));
             const juros = p.valor_parcela * (0.01 * mesesDeAtraso);
             const multaFixa = 2.0;
             multaComJuros = (juros + multaFixa).toFixed(2);
         }
-
+    
         tr.innerHTML = `
             <td>${decode(p.cpf)}</td>
             <td>${p.nome}</td>
@@ -212,14 +210,21 @@ function renderizarTabelaAVencer() {
             <td>${p.data_pagamento ? validarDataVenda(p.data_pagamento) : '-'}</td>
             <td>${p.status}</td>
         `;
-
+    
         tbody.appendChild(tr);
-
+    
+        // Se está atrasada e não paga
         if (dataVencimento < hoje && p.status !== 'Paga') {
             tr.style.background = 'red';
             tr.style.color = 'white';
+        } 
+        // Se está paga
+        else if (p.status === 'Paga') {
+            tr.style.background = 'green';
+            tr.style.color = 'white';
         }
     });
+    
 
     table.appendChild(tbody);
     divAVencer.appendChild(table);

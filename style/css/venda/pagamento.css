@@ -183,24 +183,73 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding: 2%;
+    padding: 0%;
+    width: 90%;
+    max-height: 90%;
 }
-.atalhos-p {
+
+.atalhos-btn {
     color: white;
-    text-align: left;
-    font-size: 1.1rem;
-    margin-bottom: 1.9%;
-    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+    text-shadow: 1px 1px 1px black;
+    padding: 8px;
+    margin-top: 5px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+    transition: background-color 0.2s ease;
+    cursor: pointer;;
 }
+
+.atalhos-btn:hover {
+    background:  #157347;
+    color: rgb(0, 0, 0);
+    text-shadow: none;
+    border-bottom: 2px solid black;
+    color: white;
+}
+
 p{
    margin-bottom: 1%;
 }
 
 h3 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: normal;
+    font-size: 1.2rem;
+    padding: .5%;
     margin-bottom: 3%;
-    font-size: 1.3rem;
-    border-bottom: 1px solid white;
 }
-
+.atalhos{
+width:100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: rgba(255, 0, 0, 0);
+}
+.atalhos-1{
+    width: 25%;  
+    height: 100%;
+    background-color:  #1f3b5700;
+    border: 1px solid rgba(128, 128, 128, 0.599);
+    margin-top: 0%;
+    margin-right: 1%;
+}
+.atalho-btns{
+    align-items: center;
+    margin-top: 1%;
+    max-height: 100%;
+    gap: 1%;
+    padding: 0%;
+    flex-shrink: 0;  
+    background-color:  #1f3b57;
+    margin-top: 0%;
+    margin-right: 1%;
+    padding: .5%;
+}

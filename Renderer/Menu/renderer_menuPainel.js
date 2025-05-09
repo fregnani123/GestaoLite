@@ -1,25 +1,24 @@
 const menuPainel1 = [
     { id: '1', texto: 'Painel de controle', src: '../style/img/painel-de-controle (1).png', to: '' },
-    { id: '9', texto: 'Agenda', src: '../style/img/agenda.png', to: '../public/agenda.html' },
-    { id: '12', texto: 'Backup GL', src: '../style/img/pendrive.png', to: '' },
-    { id: '7', texto: 'Cliente', src: '../style/img/cadastroCliente.png', to: '../public/registrar_cliente.html' },
-    { id: '11', texto: 'Configurações Gerais', src: '../style/img/configuracoes.png', to: '../public/config.html' },
+   { id: '9', texto: 'Agenda inteligente', src: '../style/img/agenda.png', to: '../public/agenda.html' },
+    { id: '12', texto: 'Cópia de segurança', src: '../style/img/pendrive.png', to: '' },
+    { id: '7', texto: 'Gerenciar cliente', src: '../style/img/cadastroCliente.png', to: '../public/registrar_cliente.html' },
+    { id: '11', texto: 'Configurações gerais', src: '../style/img/configuracoes.png', to: '../public/config.html' },
 ];
+
 const menuPainel2 = [
-    /* Menu id:6 oculto, disponível para futuras novas do painel opções */
     { id: '6', texto: '', src: '', to: '' },
-    { id: '10', texto: 'Crediário',  src: '../style/img/crediario.png', to: '../public/crediario.html' },
-    { id: '3', texto: 'Detalhes de venda', src: '../style/img/detalhes vendas.png', to: '../public/detalhe_vendas.html' },
-    { id: '8', texto: 'Estoque ', src: '../style/img/caixa-de-entrada.png', to: '../public/controle_estoque.html' },
-    { id: '5', texto: 'Fornecedor', src: '../style/img/fornecedor.png', to: '../public/fornecedor.html' },  
+    { id: '10', texto: 'Sistema de crediário próprio', src: '../style/img/crediario.png', to: '../public/crediario.html' },
+    { id: '3', texto: 'Relatórios de pedidos lançados', src: '../style/img/detalhes vendas.png', to: '../public/detalhe_vendas.html' },
+    { id: '8', texto: 'Entrada/saída estoque', src: '../style/img/caixa-de-entrada.png', to: '../public/controle_estoque.html' },
+    { id: '5', texto: 'Gerenciar fornecedor', src: '../style/img/fornecedor.png', to: '../public/fornecedor.html' },  
 ];
 
 const menuPainel3 = [
-    /* Menu id:6 oculto, disponível para futuras novas do painel opções */
     { id: '6', texto: '', src: '', to: '' },
-    { id: '4', texto: 'Produto', src: '../style/img/codigo-de-barras.png', to: '../public/registrar_produto.html' },
-    { id: '2', texto: 'Realizar venda', src: '../style/img/carrinho-de-compras-icon.png', to: '../public/tela_vendas.html' },
-    { id: '13', texto: 'Suporte', src: '../style/img/suporte.png', to: '' },
+  { id: '4', texto: 'Gerenciar produto', src: '../style/img/codigo-de-barras.png', to: '../public/registrar_produto.html' },
+    { id: '2', texto: 'Baixa no estoque por pedido', src: '../style/img/carrinho-de-compras-icon.png', to: '../public/tela_vendas.html' },
+    { id: '13', texto: 'Informações estoque', src: '../style/img/caixa.png', to: '../public/informacoes_produtos.html' },
     { id: '14', texto: 'Sair', src: '../style/img/sair.png', to: '../public/index.html' },
 ];
 

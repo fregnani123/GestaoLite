@@ -17,117 +17,11 @@
 
 <body>
     <div class="container">
-        <!-- ativar-produto inicialmente começa display none, enquanto verifica a ativação do produto. -->
+
         <div class="ativar-produto">
-            <img src="../style/img/logoLogin.png" alt="Logo">
-            <h2>Obrigado por adquirir nosso Gerenciador de Estoque! Por favor, insira os dados de ativação do produto.
-            </h2>
-            <label for="cliente">Cliente</label>
-            <input type="text" id="cliente">
-            <label for="serial-key">Chave Serial</label>
-            <input type="text" id="serial-key">
-
-            <!-- Link com ID para ativar a exibição dos termos -->
-            <div style="display: flex; align-items: center;">
-                <input style="margin-bottom: 1rem;" type="checkbox" id="termos">
-                <label for="termos" style="margin-left: .5rem; margin-bottom: 1rem;">
-                    Eu aceito os <a href="#" id="abrir-termos">termos de uso</a>.
-                </label>
-            </div>
-            <div class="termos-uso" id="termos-box">
-                <button id="btn-exit">X</button>
-                <div class="termo-conteudo">
-                    <h2><strong>Termos de Uso - Gestão Lite</strong></h2>
-                    <p>Última atualização:</strong> 30/04/2025</p>
-
-                    <p>Ao instalar e utilizar o software Gestão Lite, você declara estar ciente e de acordo com os
-                        termos descritos abaixo.</p>
-                        <ol>
-                            <li>
-                                <h3>1. Sobre o Sistema</h3>
-                                <p>
-                                    O <strong>Gestão Lite</strong> é um software de gerenciamento de <strong>estoque, vendas
-                                        e agendamentos</strong>, desenvolvido com <strong>Electron JS</strong> e
-                                    armazenamento local por meio do banco de dados <strong>SQLite</strong>. É uma aplicação
-                                    destinada ao uso local, instalada diretamente no computador do usuário, sem dependência
-                                    de conexão com servidores externos.
-                                </p>
-                                <p>
-                                    Importante: o sistema <strong>não gera cupom fiscal</strong>. Apenas <strong>cupom não fiscal</strong>, com finalidade de controle interno e registro de vendas.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>2. Responsabilidade pelo Uso</h3>
-                                <p>
-                                    O uso do Gestão Lite é de responsabilidade exclusiva do usuário. O sistema é fornecido
-                                    “no estado em que se encontra”, sem garantias expressas ou implícitas quanto à
-                                    continuidade do funcionamento, precisão dos dados, compatibilidade com sistemas
-                                    operacionais específicos ou adequação a finalidades particulares.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>3. Responsabilidade sobre Dados e Backups</h3>
-                                <p>
-                                    A integridade e segurança das informações inseridas no sistema são de responsabilidade
-                                    total do usuário. O <strong>Gestão Lite</strong> não realiza backups automáticos.
-                                </p>
-                                <p>
-                                    Recomenda-se fortemente que o usuário realize <strong>cópias de segurança
-                                        (backups)</strong> periódicas do banco de dados armazenado localmente, a fim de
-                                    evitar perdas irreversíveis.
-                                </p>
-                                <p>
-                                    O desenvolvedor <strong>não se responsabiliza</strong> por perdas de dados decorrentes
-                                    de falhas de hardware, exclusões acidentais, corrupção de arquivos, ou quaisquer outros
-                                    eventos que comprometam as informações armazenadas.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>4. Limitação de Responsabilidade</h3>
-                                <p>
-                                    Em nenhuma circunstância o desenvolvedor será responsabilizado por quaisquer danos
-                                    diretos, indiretos, incidentais, especiais ou consequentes, incluindo, mas não se
-                                    limitando a, perda de lucros, interrupção de atividades comerciais ou perda de dados,
-                                    decorrentes do uso ou da impossibilidade de uso do sistema.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>5. Atualizações e Melhorias</h3>
-                                <p>
-                                    O sistema poderá receber atualizações pontuais com melhorias ou correções. É de
-                                    responsabilidade do usuário <strong>efetuar backup completo</strong> antes de aplicar
-                                    qualquer atualização, evitando riscos de perda de dados.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>6. Licença de Uso</h3>
-                                <p>
-                                    Este software é licenciado para uso individual. É expressamente proibida a
-                                    redistribuição, revenda, engenharia reversa, descompilação ou modificação do
-                                    código-fonte sem autorização prévia e por escrito do desenvolvedor.
-                                </p>
-                            </li>
-                        
-                            <li>
-                                <h3>7. Suporte Técnico</h3>
-                                <p>
-                                    O suporte técnico é opcional e será prestado conforme a disponibilidade do
-                                    desenvolvedor. Não há garantia de suporte contínuo ou atendimento imediato.
-                                </p>
-                            </li>
-                        </ol>                        
-                </div>
-            </div>
-
-            <!-- Botão desabilitado inicialmente -->
             <button id="ativar-btn" disabled>Ativar Produto</button>
         </div>
-        <img class="img-logo" src="../style/img/logoLogin.png" alt="GestãoLite">
+        <p></p><img class="img-logo" src="../style/img/ChatGPT Image 7 de mai. de 2025, 09_54_46.png" alt="GestãoLite">
         <div class="login-container">
             <h1>Login</h1>
             <form>
@@ -148,12 +42,12 @@
         </div>
     </div>
     <footer class="footer">
-        &copy; Todos os direitos reservados 2025 - FGL - v. 2.0
+        &copy; <span id="current-year"></span> FGL Software Solutions – Todos os direitos reservados
+        Versão 2.0.1
     </footer>
     <script src="../config/ApiLicenca.js"></script>
     <script src="../config/loginUsers.js"></script>
     <script src="../Renderer/services/alertMsg.js"></script>
     <script src="../config/apiUser.js"></script>
 </body>
-
 </html>

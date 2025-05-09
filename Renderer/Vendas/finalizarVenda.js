@@ -287,10 +287,23 @@ function limparCampos() {
     }, 6000);
 }
 
+
+let podeFinalizarVenda = false;
+
+function mostrarDivPagamento() {
+    divPagamento.style.display = 'block';
+    podeFinalizarVenda = true;
+}
+
+function esconderDivPagamento() {
+    divPagamento.style.display = 'none';
+    podeFinalizarVenda = false;
+}
+
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && divPagamento.style.display === 'block') {
+    if (e.key === 'Enter' && podeFinalizarVenda) {
         FinalizarVenda();
-        divPagamento.style.display = 'none';
+        esconderDivPagamento();
         codigoEan.focus();
     }
 });

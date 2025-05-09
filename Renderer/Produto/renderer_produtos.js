@@ -115,46 +115,6 @@ function calcularLucro() {
   inputLucro.value = lucro < 0 ? '0,00' : lucro.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-// Função para calcular o percentual de markup
-function calcularMarkup(precoCompra, precoVenda) {
-    const precoCompraNum = parseFloat(precoCompra.replace(',', '.').replace('.', '').trim());
-    const precoVendaNum = parseFloat(precoVenda.replace(',', '.').replace('.', '').trim());
-  
-    if (!isNaN(precoCompraNum) && !isNaN(precoVendaNum) && precoCompraNum > 0 && precoVendaNum > 0) {
-      // Calcula o markup
-      const markupPercentual = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
-  
-      // Atualiza o campo de markup com o valor calculado
-      inputMarkup.value = markupPercentual < 0 ? 0.00 : markupPercentual.toFixed(2);
-    }
-    calcularLucro();
-  }
-  
-
-function calcularPrecoVenda(preco_compra, markup, preco_venda) {
-    // Converte os valores de entrada (strings) para números
-    const precoCompraNum = parseFloat(preco_compra);
-    const markupNum = parseFloat(markup);
-    const precoVendaNum = parseFloat(preco_venda);
-
-    if (isNaN(precoCompraNum) || precoCompraNum < 0) {
-      throw new Error("Preço de compra deve ser um número válido e positivo.");
-    }
-  
-    let valorFinalVenda;
-  
-    if (!isNaN(markupNum) && markupNum >= 0) {
-      // Cálculo do preço de venda com base no markup
-      valorFinalVenda = precoCompraNum + (precoCompraNum * (markupNum / 100));
-      preco_venda.value = formatarMoeda(valorFinalVenda);
-    } else if (!isNaN(precoVendaNum) && precoVendaNum > 0) {
-      // Se o preço de venda for fornecido, calcula o percentual de markup
-      const calculoMarkup = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
-      markup.value = calculoMarkup.toFixed(2); // Atualiza o campo de markup com 2 casas decimais
-    }
-    calcularLucro();
-  }
-  
   // Função para formatar os valores como moeda brasileira
   function formatarMoeda(valor) {
     return valor.toFixed(2)
@@ -163,6 +123,7 @@ function calcularPrecoVenda(preco_compra, markup, preco_venda) {
   }
 
   inputPrecoCompra.addEventListener('input', () => {
+    calcularLucro(); // chama o cálculo do lucro
     try {
       // Remove todos os caracteres que não sejam dígitos
       let value = inputPrecoCompra.value.replace(/\D/g, '');
@@ -176,9 +137,9 @@ function calcularPrecoVenda(preco_compra, markup, preco_venda) {
   
       // Atualiza o valor do campo formatado
       inputPrecoCompra.value = value;
-  
       // Chama a função de cálculo usando o valor numérico original
-      calcularPrecoVenda(parseFloat(value.replace(/\./g, '').replace(',', '.')) || 0, inputMarkup.value, inputprecoVenda);
+      // calcularPrecoVenda(parseFloat(value.replace(/\./g, '').replace(',', '.')) || 0, inputMarkup.value, inputprecoVenda);
+      
     } catch (error) {
       console.error(error.message);
     }
@@ -205,7 +166,7 @@ function calcularPrecoVenda(preco_compra, markup, preco_venda) {
   
       // Atualiza o campo de entrada com o valor limpo e com no máximo 2 casas decimais
       inputMarkup.value = value;
-  
+      calcularLucro(); // chama o cálculo do lucro
       // Chama a função de cálculo com os valores
       calcularPrecoVenda(parseFloat(inputPrecoCompra.value.replace(',', '.')) || 0, parseFloat(value) || 0, inputprecoVenda);
     } catch (error) {
@@ -216,6 +177,7 @@ function calcularPrecoVenda(preco_compra, markup, preco_venda) {
 
 // Evento para calcular o markup quando o preço de venda é alterado
 inputprecoVenda.addEventListener('input', (e) => {
+  calcularLucro(); // chama o cálculo do lucro
   // Remove qualquer coisa que não seja número
   let value = e.target.value.replace(/\D/g, '');
 
@@ -231,6 +193,7 @@ inputprecoVenda.addEventListener('input', (e) => {
 
   // Chama a função para calcular o markup
   calcularMarkup(inputPrecoCompra.value, e.target.value);
+  
 });
 
 
@@ -396,3 +359,45 @@ const filterButtonLimparAlterar = document.getElementById('limparButton');
 filterButtonLimparAlterar.addEventListener('click',()=>{
     location.reload();
   })
+
+  
+// Função para calcular o percentual de markup
+// function calcularMarkup(precoCompra, precoVenda) {
+//     const precoCompraNum = parseFloat(precoCompra.replace(',', '.').replace('.', '').trim());
+//     const precoVendaNum = parseFloat(precoVenda.replace(',', '.').replace('.', '').trim());
+  
+//     if (!isNaN(precoCompraNum) && !isNaN(precoVendaNum) && precoCompraNum > 0 && precoVendaNum > 0) {
+//       // Calcula o markup
+//       const markupPercentual = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
+  
+//       // Atualiza o campo de markup com o valor calculado
+//       inputMarkup.value = markupPercentual < 0 ? 0.00 : markupPercentual.toFixed(2);
+//     }
+//     calcularLucro();
+//   }
+  
+
+// function calcularPrecoVenda(preco_compra, markup, preco_venda) {
+//     // Converte os valores de entrada (strings) para números
+//     const precoCompraNum = parseFloat(preco_compra);
+//     const markupNum = parseFloat(markup);
+//     const precoVendaNum = parseFloat(preco_venda);
+
+//     if (isNaN(precoCompraNum) || precoCompraNum < 0) {
+//       throw new Error("Preço de compra deve ser um número válido e positivo.");
+//     }
+  
+//     let valorFinalVenda;
+  
+//     if (!isNaN(markupNum) && markupNum >= 0) {
+//       // Cálculo do preço de venda com base no markup
+//       valorFinalVenda = precoCompraNum + (precoCompraNum * (markupNum / 100));
+//       preco_venda.value = formatarMoeda(valorFinalVenda);
+//     } else if (!isNaN(precoVendaNum) && precoVendaNum > 0) {
+//       // Se o preço de venda for fornecido, calcula o percentual de markup
+//       const calculoMarkup = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
+//       markup.value = calculoMarkup.toFixed(2); // Atualiza o campo de markup com 2 casas decimais
+//     }
+//     calcularLucro();
+//   }
+  

@@ -31,28 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function calcularPrecoVenda(preco_compra, markup, preco_venda) {
-  // Converte os valores de entrada (strings) para números
-  const precoCompraNum = parseFloat(preco_compra);
-  const markupNum = parseFloat(markup);
-  const precoVendaNum = parseFloat(preco_venda);
+// function calcularPrecoVenda(preco_compra, markup, preco_venda) {
+//   // Converte os valores de entrada (strings) para números
+//   const precoCompraNum = parseFloat(preco_compra);
+//   const markupNum = parseFloat(markup);
+//   const precoVendaNum = parseFloat(preco_venda);
 
-  if (isNaN(precoCompraNum) || precoCompraNum < 0) {
-    throw new Error("Preço de compra deve ser um número válido e positivo.");
-  }
+//   if (isNaN(precoCompraNum) || precoCompraNum < 0) {
+//     throw new Error("Preço de compra deve ser um número válido e positivo.");
+//   }
 
-  let valorFinalVenda;
+//   let valorFinalVenda;
 
-  if (!isNaN(markupNum) && markupNum >= 0) {
-    // Cálculo do preço de venda com base no markup
-    valorFinalVenda = precoCompraNum + (precoCompraNum * (markupNum / 100));
-    preco_venda.value = formatarMoeda(valorFinalVenda);
-  } else if (!isNaN(precoVendaNum) && precoVendaNum > 0) {
-    // Se o preço de venda for fornecido, calcula o percentual de markup
-    const calculoMarkup = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
-    markup.value = calculoMarkup.toFixed(2); // Atualiza o campo de markup com 2 casas decimais
-  }
-}
+//   if (!isNaN(markupNum) && markupNum >= 0) {
+//     // Cálculo do preço de venda com base no markup
+//     valorFinalVenda = precoCompraNum + (precoCompraNum * (markupNum / 100));
+//     preco_venda.value = formatarMoeda(valorFinalVenda);
+//   } else if (!isNaN(precoVendaNum) && precoVendaNum > 0) {
+//     // Se o preço de venda for fornecido, calcula o percentual de markup
+//     const calculoMarkup = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
+//     markup.value = calculoMarkup.toFixed(2); // Atualiza o campo de markup com 2 casas decimais
+//   }
+// }
 
 // Função para formatar os valores como moeda brasileira
 function formatarMoeda(valor) {
@@ -60,7 +60,6 @@ function formatarMoeda(valor) {
     .replace('.', ',') // Troca o ponto decimal por vírgula
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona pontos como separador de milhar
 }
-
 
 inputPrecoCompra.addEventListener('input', () => {
   try {
@@ -190,7 +189,6 @@ function alteraEstoque(produto, operacao) {
   updateEstoque(estoqueAtualizado);
 }
 
-
 async function alterarEstoque(e) {
   e.preventDefault();
 
@@ -231,7 +229,7 @@ async function alterarEstoque(e) {
   };
 
   const alterarValores = {
-    preco_compra: inputprecoVenda.value.replace(',', '.'),
+    preco_compra: inputPrecoCompra.value.replace(',', '.'),
     markup: inputMarkupEstoque.value,
     preco_venda: inputprecoVenda.value.replace(',', '.'),
     codigo_ean: codigoEanGlobal,
