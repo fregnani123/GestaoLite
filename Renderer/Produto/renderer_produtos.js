@@ -285,7 +285,7 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
   e.preventDefault();
   
   if (inputCodigoEANProduto.value.length !== 13) {
-    alertMsg('O código do produto deve conter exatamente 13 números. Por favor, revise se está correto.','info', 4000);
+    alertMsg('O código do produto deve conter exatamente 13 números. Por favor, revise se está correto.','info');
     return;
   }
   
@@ -336,7 +336,7 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
 
   // Se algum campo obrigatório estiver faltando
   if (camposFaltando.length > 0) {
-      alertMsg(`Todos os campos obrigatórios devem ser preenchidos. Faltando: ${camposFaltando.join(", ")}`, 'info', 5000);
+      alertMsg(`Todos os campos obrigatórios devem ser preenchidos. Faltando: ${camposFaltando.join(", ")}`, 'info');
       return;
   }
 

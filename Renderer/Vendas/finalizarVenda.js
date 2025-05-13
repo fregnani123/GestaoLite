@@ -2,7 +2,7 @@ async function findClienteAlterar(cpf) {
    
     // Verifica se o CPF tem o formato correto (14 dígitos)
     if (cpf.length !== 14) {
-        alertMsg("CPF inválido. Digite um CPF válido.", "error", 3000);
+        alertMsg("CPF inválido. Digite um CPF válido.", "error");
         document.getElementById("nomeClienteAlter").value = "";
         clienteId.value = "";
         return;
@@ -39,7 +39,7 @@ async function findClienteAlterar(cpf) {
 
         // Bloqueia o consumidor final
         if (cliente.cpf === "000.000.000-00" || cliente.cliente_id === 1) {
-            alertMsg("Consumidor final já é inserido por padrão", "info", 3000);
+            alertMsg("Consumidor final já é inserido por padrão", "info");
             clienteId.value = "";
             return;
         }
@@ -91,12 +91,12 @@ function parseCurrency(value) {
 async function FinalizarVenda(){
     imgProduto.src = ''
     if (carrinho.length === 0) {
-        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'warning', 4000);
+        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'warning');
         return;
     }
 
     if(divCrediario.style.display === 'block' && CrediarioCliente.value === ''){
-        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda','info',6000)
+        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda','info')
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
@@ -105,7 +105,7 @@ async function FinalizarVenda(){
     }
 
     if(divCrediario.style.display === 'block' && parcela.value === ''){
-        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda','info',5000);
+        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda','info');
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
@@ -122,14 +122,14 @@ inputTotalLiquido.value = converteMoeda(totalComJuros || parseCurrency(inputTota
 
      
     if (valorPago < totalLiquido) {
-        alertMsg('O valor pago está menor que o valor da compra.', 'warning', 3000);
+        alertMsg('O valor pago está menor que o valor da compra.', 'warning');
         return;
     }
     const debito = parseCurrency(CartaoDebito.value);
     const credito = parseCurrency(CartaoCredito.value);
 
     if (debito > totalLiquido || credito > totalLiquido) {
-        alertMsg('O valor pago no cartão não pode ser maior que o valor da compra.', 'warning', 3000);
+        alertMsg('O valor pago no cartão não pode ser maior que o valor da compra.', 'warning');
         inputTotalPago.value = '0,00';
         inputTroco.value = '0,00';
         return;
@@ -183,8 +183,7 @@ if (divCrediario.style.display === 'block' && excedente > 0) {
             style: 'currency',
             currency: 'BRL'
         })}`,
-        "warning",
-        10000
+        "warning"
     );
 
     // Restaurar o valor original antes dos juros
@@ -205,8 +204,8 @@ if (divCrediario.style.display === 'block' && excedente > 0) {
 }
 
     // Continua o processo normalmente se não houver bloqueio
-    console.log('Acrescentar valor no credito utilizado: ', credCli)
-    console.log( 'o que foi enviado crediario',dataCrediario);
+    // console.log('Acrescentar valor no credito utilizado: ', credCli)
+    // console.log( 'o que foi enviado crediario',dataCrediario);
 
     try {
         // Registra a venda no banco
@@ -220,11 +219,11 @@ if (divCrediario.style.display === 'block' && excedente > 0) {
         }
     
 
-        alertMsg('Venda realizada com sucesso, obrigado!', 'success', 6000);
+        alertMsg('Pedido finalizado com sucesso, obrigado!', 'success');
         
         // Altera o estoque e o vendido
         await alteraEstoqueEVendido(carrinho);
-        console.log('Estoque atualizado com sucesso!', 'success', 6000);
+        console.log('Estoque atualizado com sucesso!', 'success');
 
         // Busca os dados do pedido registrado e imprime
         await imprimirVenda(numeroPedido.value);
@@ -233,7 +232,7 @@ if (divCrediario.style.display === 'block' && excedente > 0) {
 
     } catch (error) {
         console.error('Erro ao processar a venda ou atualizar estoque:', error);
-        alertMsg('Erro ao registrar a venda ou atualizar o estoque. Tente novamente.', 'error', 4000);
+        alertMsg('Erro ao registrar a venda ou atualizar o estoque. Tente novamente.', 'error');
     }
 };
 
@@ -268,8 +267,6 @@ async function imprimirVenda(numeroPedido) {
 
             // Restaura o título da página
             document.title = 'Tela de Vendas'; // Coloque o título original de volta, se necessário
-
-            // Limpa os campos após a impressão
           
         }, 2000);  // 500ms de atraso para garantir que a div foi preenchida
         limparCampos();
@@ -277,7 +274,6 @@ async function imprimirVenda(numeroPedido) {
         console.error('Erro ao buscar o último pedido para impressão:', error);
     }
 }
-
 
 function limparCampos() {
     // Limpa o carrinho imediatamente
@@ -287,24 +283,31 @@ function limparCampos() {
     }, 6000);
 }
 
+const btnFinalizarVenda = document.getElementById('btn-finalizar-venda');
 
-let podeFinalizarVenda = false;
 
-function mostrarDivPagamento() {
-    divPagamento.style.display = 'block';
-    podeFinalizarVenda = true;
-}
-
-function esconderDivPagamento() {
-    divPagamento.style.display = 'none';
-    podeFinalizarVenda = false;
-}
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && podeFinalizarVenda) {
+btnFinalizarVenda.addEventListener('click', (e) => {
+    const estilo = getComputedStyle(divPagamento); // pega o estilo computado real
+    if (estilo.display !== 'none') {
         FinalizarVenda();
-        esconderDivPagamento();
-        codigoEan.focus();
+        console.log('Venda finalizada');
+    } else {
+        alertMsg('Selecione uma forma de pagamento','info');
     }
 });
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const estilo = getComputedStyle(divPagamento);
+        if (estilo.display === 'block') {
+            FinalizarVenda();
+            console.log('Venda finalizada pelo Enter');
+        } else {
+            // Ignora ou não faz nada, pois a div está escondida
+        }
+    }
+});
+
+
+
 

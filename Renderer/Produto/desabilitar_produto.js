@@ -40,7 +40,7 @@ function formatarMoedaBR(valor) {
 btnFiltrar.addEventListener('click', () => {
     // Se o campo de código EAN estiver vazio, mostrar mensagem de erro e sair
     if (!codigoEAN.value.trim()) {
-       alertMsg('Por favor, informe um código EAN para filtrar.','info',3000);
+       alertMsg('Por favor, informe um código EAN para filtrar.','info');
        codigoEAN.focus();
         return;
     }
@@ -186,7 +186,7 @@ function applyFilters() {
         produtoSelecionado = null;
 
         if (filteredProducts.length === 0) {
-           alertMsg('Nenhum produto encontrado,verifique o código digitado.','info',3000);
+           alertMsg('Nenhum produto encontrado,verifique o código digitado.','info');
            codigoEAN.value= ''
            codigoEAN.focus();
            return;
@@ -205,7 +205,7 @@ ulFiltros.addEventListener('click', (event) => {
     
     if (event.target && event.target.id === 'btnDesativar') {
         desativarProduto(produtoDesativar)
-        alertMsg('Produto desativado no sistema.', 'sucess', 4000);
+        alertMsg('Produto desativado no sistema.', 'sucess');
         ulFiltros.innerHTML =  '';
         codigoEAN.focus();
     }

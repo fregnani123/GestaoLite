@@ -155,6 +155,24 @@ function inputMaxCaracteres(input, maxLength) {
         }
     });
 }
+function validarDescontoPorcentagem(input) {
+    input.addEventListener('input', () => {
+        let valor = input.value.replace(',', '.');
+
+        // Permite apenas números e um ponto decimal
+        if (!/^\d*\.?\d{0,2}$/.test(valor)) {
+            valor = valor.slice(0, -1);
+        }
+
+        // Limita valor máximo a 99.99
+        if (parseFloat(valor) > 99.99) {
+            valor = '99.99';
+        }
+
+        input.value = valor;
+    });
+}
+
 
 // Função para formatar o CNPJ (ex: XX.XXX.XXX/XXXX-XX)
 function formatarCNPJ(input) {

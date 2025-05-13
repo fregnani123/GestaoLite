@@ -113,7 +113,7 @@ function filterProdutoEan(codigoEan) {
         console.log('Produto Filtrado EAN:', produtoEncontrado)
         preencherInputs(produtoEncontrado);
     } else {
-        alertMsg('Produto não encontrado, verifique se o código EAN está correto.', 'info', 3000);
+        alertMsg('Produto não encontrado, verifique se o código EAN está correto.', 'info');
     }
 }
 
@@ -286,23 +286,23 @@ function alterarProduto(e) {
 
     // Verificar se campos obrigatórios estão preenchidos
     if (!inputCodigoEANProduto.value.trim()) {
-        alertMsg("O código de barras é obrigatório!", 'info', 3000);
+        alertMsg("O código de barras é obrigatório!", 'info');
         return;
     }
     if (!inputNomeProduto.value.trim()) {
-        alertMsg("O nome do produto é obrigatório!", 'info', 3000);
+        alertMsg("O nome do produto é obrigatório!", 'info');
         return;
     }
     if (!inputPrecoCompra.value.trim() || isNaN(parseFloat(inputPrecoCompra.value.replace(',', '.')))) {
-        alertMsg("O preço de compra é obrigatório e deve ser um número válido!", 'info', 3000);
+        alertMsg("O preço de compra é obrigatório e deve ser um número válido!", 'info');
         return;
     }
     if (!inputMarkup.value.trim() || isNaN(parseFloat(inputMarkup.value.replace(',', '.')))) {
-        alertMsg("O markup é obrigatório e deve ser um número válido!", 'info', 3000);
+        alertMsg("O markup é obrigatório e deve ser um número válido!", 'info');
         return;
     }
     if (!inputprecoVenda.value.trim() || isNaN(parseFloat(inputprecoVenda.value.replace(',', '.')))) {
-        alertMsg("O preço de venda é obrigatório e deve ser um número válido!", 'info', 3000);
+        alertMsg("O preço de venda é obrigatório e deve ser um número válido!", 'info');
         return;
     }
 
@@ -340,10 +340,10 @@ function alterarProduto(e) {
 
         console.log('Dados a serem enviados:', coletarDadosAtualizados);
         limpar();
-        alertMsg("Produto atualizado com sucesso!", 'success', 3000);
+        alertMsg("Produto atualizado com sucesso!", 'success');
     } catch (error) {
         console.error("Erro ao atualizar o produto:", error.message);
-        alertMsg(`Erro ao atualizar o produto: ${error.message}`, 'error', 3000);
+        alertMsg(`Erro ao atualizar o produto: ${error.message}`, 'error');
     }
 }
 
@@ -357,7 +357,7 @@ function limpar() {
     setTimeout(() => {
         // Recarregar a página 
         location.reload();
-    }, 1000);
+    }, 2000);
 }
 
 const filterButtonAlterar = document.getElementById('limparButton');

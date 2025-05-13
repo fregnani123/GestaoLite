@@ -11,16 +11,15 @@
     <link rel="stylesheet" href="../style/css/venda/tela_vendas.css">
     <link rel="stylesheet" href="../style/css/venda/cupon.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
     <title>Tela de Vendas</title>
 </head>
-
-<body>
+<body">
     <div class="cupom">
         <div class="cabecalho">
             <div class="div-titulo">
-                <!-- <img class="imgLogo" alt="Logo da Loja"> -->
                 <h3>
                     <span class="titulo-cupom" id=""></span>
                 </h3>
@@ -73,71 +72,194 @@
     </div>
     <div class="container-sales">
         <!-- Divs com display inicial none -->
-        <div class="alterarCliente">
-            <p class="titulo">Alterar Cliente do Cupom</p>
-            <div class="campo">
-                <label for="alterCliente">Filtrar Cliente por CPF 🔍</label>
-                <input type="text" id="alterClienteCPF">
-            </div>
-            <div class="campo">
-                <label for="nomeClienteAlter">Cliente:</label>
-                <input type="text" id="nomeClienteAlter" readonly>
 
-            </div>
-            <p class="">⚠️ O cliente precisa estar cadastrado para alteração no cupom. </p>
-            <br>
-            <p>Para voltar ou confirmar, pressione <strong>ESC</strong>. </p>
-        </div>
-
+        <!-- Div que renderiza a impressão -->
         <div id="impressaoCupom"></div>
 
-        <div class="div-qtd" style="display: none;">
-            <p class="titulo">Alterar Quantidade</p>
-            <div class="campo">
-                <label for="input-qtd">Informe a quantidade:</label>
-                <input type="text" id="input-qtd" value="1">
-                <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Enter</strong> para confirmar.
-                </p>
-            </div>
-        </div>
+        <!-- Div que renderiza a alterção da Qtd -->
+        <div class="div-qtd">
+            <div class="div-qtd-container">
+                <div class="campo">
+                    <button id="btn-exit-qtd">x</button>
+                    <p id="titulo">Alterar Quantidade</p>
+                    <div class="box-filtro">
+                        <p> <span class="span-text">Informe a quantidade</span>
+                        </p>
+                        <input type="text" id="input-qtd" value="1">
+                    </div>
+                    <div class="botoes-box">
+                        <div class="botoes">
+                            <button class="btn-alterar-produto">
+                                <img class="img-disquete" src="../style/img/troca.png" alt="">Alterar
+                            </button>
+                        </div>
+                        <p class="p-info">Pressione <strong>ESC</strong> para voltar ou <strong>Enter</strong> para
+                            confirmar.</p>
+                    </div>
 
-        <div class="confirmation-clear" style="display: none;">
-          <p class="titulo">Confirmar início de um novo pedido? Digite a senha do administrador.</p>
-            <div class="campo">
-                <input id="limpar-tela-key" type="password">
-                <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Enter</strong> para confirmar.
-                </p>
-            </div>
-        </div>
+                    <p class="msg-alterar">⚠️ Ao confirmar a alteração, o campo mudará de cor com a nova quantidade. Por
+                        padrão, o sistema insere 1x caso nenhuma quantidade seja selecionada</p>
 
-        <div class="exit-venda" style="display: none;">
-            <p class="titulo">Voltar para o paínel de Controle</p>
-            <div class="campo">
-                <label for="exit-key">Digite a senha para voltar ao menu principal:</label>
-                <input id="exit-key" type="password">
-                <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Enter</strong> para confirmar.
-                </p>
-            </div>
-        </div>
-        <div class="remove-item" style="display: none;">
-            <p class="titulo"> Remova o item adicionado</p>
-            <div class="campo">
-              <label>Digite o número do item para remover.</label>
-                <input id="numero-Item" type="number">
-                <p class="p-info">Pressione <strong>Esc</strong> para voltar ou <strong>Delete</strong> para confirmar.
-                </p>
-            </div>
-
-        </div>
-        <div class="desconto-venda">
-            <p class="titulo"> Adicionar Desconto na Venda</p>
-            <div class="campo">
-                <label for="desconto">Informe o desconto (%) na venda:</label>
-                <div style="width: 100%;"><input id="desconto" type="text"><span style="margin-left: -10%;">%</span>
                 </div>
-                <p class="p-info">Pressione <strong>Esc</strong> para voltar ou para confirmar.</p>
             </div>
         </div>
+
+        <!-- Div que renderiza a alterção do Cliente no Pedido -->
+        <div class="alterarCliente">
+            <div class="div-container">
+                <div class="campo">
+                    <button id="btn-exit">x</button>
+                    <p id="titulo">Alterar Cliente Pedido</p>
+
+                    <div class="box-filtro">
+                        <div class="filtros">
+                            <div class="filtro-cpf">
+                                <p><span>Filtrar por CPF</span></p>
+                                <input type="text" id="alterClienteCPF">
+                            </div>
+                            <div class="filtro-nome">
+                                <p><span>Filtrar por nome</span></p>
+                                <div class="icone-buscar">
+                                    <img src="../style/img/mecanismo-de-busca.png" alt="Buscar">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cliente-selecionado-box">
+                            <p><span>Cliente selecionado</span></p>
+                            <div class="val-div">
+                                <input type="text" id="nomeClienteAlter" readonly
+                                    placeholder="Cliente não cadastrado no pedido">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="botoes-box">
+                        <div class="botoes">
+                            <button class="btn-alterar-produto">
+                                <img class="img-disquete" src="../style/img/troca.png" alt="">Alterar
+                            </button>
+                            <button id="limparButton">
+                                <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
+                            </button>
+                        </div>
+                        <p class="p-info">Pressione <strong>ESC</strong> para voltar ou <strong>Enter</strong> para
+                            confirmar.</p>
+
+                    </div>
+
+                    <p class="msg-alterar">⚠️ O cliente precisa estar previamente cadastrado no sistema para que a
+                        alteração no pedido seja possível.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="desconto-venda">
+            <div class="div-container">
+                <div class="campo">
+                    <button id="btn-exit-desconto">x</button>
+                    <p id="titulo">Desconto no Pedido</p>
+
+                    <div class="box-filtro">
+                        <div style="display: flex;">
+                            <div>
+                                <p><span class="span-text">Desconto em (%)</span></p>
+                                <input id="desconto" type="text"><span class="span-porcent">%</span>
+                            </div>
+                            <div>
+                                <p><span class="span-text">Desconto em valor (R$)</span></p>
+                                <input id="desconto-valor" type="text">
+                            </div>
+                        </div>
+                        <div class="des-subtotal">
+                            <div style="display: flex;width: 100%; padding: 2%;">
+                                <label class="label">Subtotal pedido:</label>
+                                <span class="span-subtotal"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="botoes-box">
+                        <div class="botoes">
+                            <button id="salvar-cliente"><img class="img-disquete" src="../style/img/disquete.png"
+                                    alt="">Confirmar</button>
+                            <button id="limparButton">
+                                <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
+                            </button>
+                        </div>
+                        <p class="p-info">Pressione <strong>ESC</strong> para voltar ou <strong>Enter</strong> para
+                            confirmar.</p>
+                    </div>
+                    <p class="msg-alterar">⚠️ Verifique se o valor do desconto está correto antes de confirmar ou
+                        finalizar o pedido. O subtotal será ajustado automaticamente com base no desconto informado.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="confirmation-clear">
+            <div class="div-container">
+                <div class="campo-clear">
+                    <button id="btn-exit-limpar">x</button>
+                    <p id="titulo">Reiniciar Pedido</p>
+                    <div class="box-filtro">
+                        <p class="titulo"><span class="span-text">Digite a senha do administrador para iniciar um novo
+                                pedido.</span></p>
+                        <div style="display: flex; margin-top: 2%;">
+                            <input id="limpar-tela-key" type="password">
+                        </div>
+                    </div>
+
+                    <div class="botoes-box">
+                        <div class="botoes">
+                            <button id="salvar-cliente"><img class="img-disquete" src="../style/img/disquete.png"
+                                    alt="">Confirmar</button>
+                        </div>
+                        <p class="p-info">Pressione <strong>ESC</strong> para voltar ou <strong>Enter</strong> para
+                            confirmar.</p>
+                    </div>
+                    <p class="msg-alterar">⚠️ Ao confirmar o início de um novo pedido, todos os dados atuais serão
+                        perdidos.</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="remove-item">
+            <div class="div-container">
+                <div class="campo-remover">
+                    <button id="btn-exit-remover">x</button>
+                    <p id="titulo">Remova o produto adicionado ao pedido</p>
+                    <div class="box-filtro">
+                        <p><span class="span-text">Digite o número do item para remover.</span></p>
+                        <input id="numero-Item" type="number" style="margin-top: 2%; width: 30%;">
+                    </div>
+
+                    <div class="botoes-box">
+                        <div class="botoes">
+                            <button id="salvar-cliente">
+                                <img class="img-disquete" src="../style/img/disquete.png" alt="">Confirmar
+                            </button>
+                        </div>
+
+                        <p class="p-info">
+                            Pressione <strong>Esc</strong> para voltar ou <strong>Delete</strong> para confirmar.
+                        </p>
+                    </div>
+
+                    <p class="msg-alterar">
+                        ⚠️ Ao remover um produto do pedido, a ação não poderá ser desfeita.O valor do pedido
+                        será recalculado, atualizando o total de itens e o subtotal.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
         <div class="payment-form-section"><strong>
                 <div class="div-pagamento">
                     <p class="titulo-choose-item-2"><strong>Finalize a venda pressionando Enter.</strong></p>
@@ -284,8 +406,6 @@
         </header>
         <!-- Dados do produto -->
         <div class="div-vendas">
-
-
             <!-- <section class="product-section">
         </section> -->
             <!-- Totais -->
@@ -293,26 +413,28 @@
                 <div class="atalhos-1">
 
                     <div class="atalhos" style="display: flex;">
-                        <H3>Selecione uma ação — você pode usar o atalho ou clicar no botão abaixo.</H3>
-                        <div class="pagamento">
-                            <button class="atalhos-btn" id="btn-pgto-dinheiro">F1 = Pagamento dinheiro</button>
-                            <button class="atalhos-btn" id="btn-pgto-pix">F2 = Pagamento PIX</button>
-                            <button class="atalhos-btn" id="btn-pgto-credito">F3 = Pagamento cartão crédito</button>
-                            <button class="atalhos-btn" id="btn-pgto-debito">F4 = Pagamento cartão débito</button>
+                        <p><strong>Selecione uma ação — você pode usar o atalho ou clicar no botão abaixo.</strong></p>
+                        <div class="menu-secundario">
+                            <div class="pagamento">
+                                <button class="atalhos-btn" id="btn-pgto-dinheiro">F1 = Pagamento dinheiro</button>
+                                <button class="atalhos-btn" id="btn-pgto-pix">F2 = Pagamento PIX</button>
+                                <button class="atalhos-btn" id="btn-pgto-credito">F3 = Pagamento cartão crédito</button>
+                                <button class="atalhos-btn" id="btn-pgto-debito">F4 = Pagamento cartão débito</button>
+                            </div>
+                            <div class="pagamento">
+                                <button class="atalhos-btn" id="btn-cancelar-item">F6 = Cancelar item do Pedido</button>
+                                <button class="atalhos-btn" id="btn-crediario-loja">F7 = Crediário loja</button>
+                                <button class="atalhos-btn" id="btn-alterar-cliente">F8 = Alterar cliente
+                                    Pedido</button>
+                                <button class="atalhos-btn" id="btn-alterar-qtd">F9 = Alterar quantidade</button>
+                            </div>
+                            <div class="pagamento" style="margin-bottom: 1%;">
+                                <button class="atalhos-btn" id="btn-desconto-venda">F10 = Desconto no pedido</button>
+                                <button class="atalhos-btn" id="btn-reiniciar-venda">F12 = Reiniciar pedido</button>
+                                <button class="atalhos-btn" id="btn-finalizar-venda">Enter = Finalizar pedido</button>
+                                <button class="atalhos-btn" id="btn-esc">ESC = Fechar sub-telas abertas</button>
+                            </div>
                         </div>
-                        <div class="pagamento">
-                            <button class="atalhos-btn" id="btn-cancelar-item">F6 = Cancelar item do Pedido</button>
-                            <button class="atalhos-btn" id="btn-crediario-loja">F7 = Crediário loja</button>
-                            <button class="atalhos-btn" id="btn-alterar-cliente">F8 = Alterar cliente cupom</button>
-                            <button class="atalhos-btn" id="btn-alterar-qtd">F9 = Alterar quantidade</button>
-                        </div>
-                        <div class="pagamento" style="margin-bottom: 1%;">
-                            <button class="atalhos-btn" id="btn-desconto-venda">F10 = Desconto no pedido</button>
-                            <button class="atalhos-btn" id="btn-reiniciar-venda">F12 = Reiniciar pedido</button>
-                            <button class="atalhos-btn" id="btn-finalizar-venda">Enter = Finalizar pedido</button>
-                            <button class="atalhos-btn" id="btn-esc">ESC = Fechar sub-telas abertas</button>
-                        </div>
-
                     </div>
                 </div>
                 <div class="info-item-nome-cliente" style="display: none;">
@@ -350,7 +472,7 @@
                                 <label for="codigo" style="margin-top: 3%;">Código Barras (EAN)</label>
                                 <input type="text" id="codigo">
                                 <div class="product-quantity">
-                                    <p>Quantidade:  <span class="qtd-selecionada">1x</span></p>
+                                    <p>Quantidade: <span class="qtd-selecionada">1x</span></p>
                                 </div>
                             </div>
                         </div>
@@ -395,10 +517,12 @@
                                     <input id="troco" value="0,00" type="text" readonly>
                                 </div>
                                 <div class="val-div">
-                                    <label class="label">Subtotal:</label>
+                                    <label class="label">Subtotal Pedido:</label>
                                     <input id="total-liquido" type="text" value="0,00" readonly>
                                 </div>
-                                <div class="val-div" style="border: 1px solid transparent">
+                                <div class="val-div">
+                                    <input type="text" id="clienteNome" value="Cliente não cadastrado no pedido"
+                                        readonly>
                                 </div>
                             </div>
                         </div>
@@ -419,6 +543,7 @@
             </footer>
         </div>
     </div>
+    <script src="../Renderer/modal-pedido/modal_tela_pedido.js"></script>
     <script src="../Renderer/Vendas/renderer_vendas.js"></script>
     <script src="../Renderer/services/converte_moeda.js"></script>
     <script src="../Renderer/services/formatters.js"></script>
@@ -432,6 +557,7 @@
     <script src="../config/apiUser.js"></script>
     <script src="../Renderer/imprimir/cupom.js"></script>
     <script src="../Renderer/Menu/renderer_menu.js"></script>
-</body>
+
+    </body>
 
 </html>

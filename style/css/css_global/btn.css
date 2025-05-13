@@ -98,7 +98,7 @@ margin-right: 10px;
 margin-left: 1%;
 }
 
-#btn-exit,#btn-exit-venda,#btn-exit-juros{
+#btn-exit,#btn-exit-venda,#btn-exit-juros,#btn-exit-qtd,#btn-exit-desconto,#btn-exit-limpar,#btn-exit-remover{
 color: black;
 font-size: 1.2rem;
 font-weight: bold;
@@ -116,7 +116,7 @@ cursor: pointer;
 transition: background 0.2s ease-in-out;
 border-radius: 5px;
 }
-#btn-exit:hover,#btn-exit-venda:hover,#btn-exit-juros:hover{
+#btn-exit:hover,#btn-exit-venda:hover,#btn-exit-juros:hover,#btn-exit-qtd:hover,#btn-exit-desconto:hover,#btn-exit-limpar:hover,#btn-exit-remover:hover{
 background-color: #ea3748;
 color: white;
 }

@@ -190,6 +190,7 @@ function atualizarTroco() {
   
       mostrarDesconto.value = `${inputdescontoPorcentagem.value}%`
       mostrarDescontoReal.value = converteMoeda(valorDesconto);
+      
 
       console.log('Valor original:', valorTotalOriginal.toFixed(2));
       console.log('Desconto aplicado (%):', descontoPorcentagem);
@@ -197,7 +198,8 @@ function atualizarTroco() {
       console.log('Novo total líquido com desconto:', novoTotalLiquido.toFixed(2));
   
       atualizarTroco();
-
+  // Atualiza o subtotal renderizado
+    showSubtotal.innerHTML = inputTotalLiquido.value;
   });
   
   // Quando você apagar o desconto (campo vazio), reseta o valor original

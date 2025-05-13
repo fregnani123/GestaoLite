@@ -6,7 +6,7 @@ function rendererCarrinho(carrinho, ulDescricaoProduto, createSpan) {
         produto.classList.add('li-produto');
 
         // Criação dos elementos usando a função createSpan
-        const indexProduto = createSpan('spanIndex',`Item ${index + 1}`);
+        const indexProduto = createSpan('spanIndex', `Item ${index + 1}`);
         const codigoSpan = createSpan('spanEan', `Cod. ${item.codigoEan}`);
         const descricaoSpan = createSpan(
             'spanDescricao',
@@ -18,13 +18,13 @@ function rendererCarrinho(carrinho, ulDescricaoProduto, createSpan) {
 
         // Adiciona o produto à lista
         ulDescricaoProduto.appendChild(produto);
-        
+
     });
 
     carrinho.forEach((item) => {
         nomeProduto.innerHTML = `${item.codigoEan} - ${item.descricao}`;
     });
-    
+
 }
 
 async function alteraEstoqueEVendido(carrinho) {
@@ -69,7 +69,7 @@ async function alteraEstoqueEVendido(carrinho) {
 
 let desconto = parseFloat(inputdescontoPorcentagem.value.replace(',', '.')) || 0;
 
-function calCarrinho(carrinho, converteMoeda, inputTotalLiquido, textSelecionarQtd, inputdescontoPorcentagem) {
+function calCarrinho(carrinho, converteMoeda, inputTotalLiquido, textSelecionarQtd) {
     if (textSelecionarQtd) textSelecionarQtd.innerHTML = '1x'; // Atualiza o texto, se fornecido
 
     const total = carrinho.reduce((acc, item) => {
@@ -146,8 +146,11 @@ function pushProdutoCarrinho({
         converteMoeda,
         inputTotalLiquido,
         textSelecionarQtd,
-        inputdescontoPorcentagem
+        inputdescontoPorcentagem,
     );
+
+    // Atualiza o subtotal renderizado
+    showSubtotal.innerHTML = inputTotalLiquido.value;
 
     // Obtém os dados da venda
     getVenda(numeroPedido);

@@ -1,7 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 const controllersProduto = require('../Controller/produtos');
-const controllersAtivacao = require('../Controller/ativacaoProduto');
+
 const controllersGruposProduto = require('../Controller/grupo_subGrupo');
 const controllersFornecedor = require('../Controller/fornecedor');
 const controllersEstoque = require('../Controller/estoque');
@@ -30,7 +30,7 @@ Router.get('/corProduto', controllersUnidadeMedida.getCorProduto);
 Router.get('/produto/:codigoDeBarras', controllersProduto.findOneProduct);
 Router.get('/getVenda', controllersVenda.getVenda);
 Router.get('/getAgenda', controllersAgenda.getAgendamento);
-Router.get('/getAtivacaoMysql', controllersAtivacao.getAtivacaoMysql);
+
 Router.get('/getCliente/:cpf', controllersCliente.getCliente);
 Router.get('/getClienteNome/:nome', controllersCliente.getClienteNome); 
 Router.get('/getHistoricoVendas', controllersVenda.getHistoricoDeVenda);
@@ -52,10 +52,12 @@ Router.post('/postNewCrediario', controllersCrediario.postNewCrediario);
 Router.post('/postNewAgendamento', controllersAgenda.postNewAgendamento);
 Router.post('/upload-imagem', controllersProduto.UploadImagem);
 Router.post('/postNewCliente', controllersCliente.postNewCliente);
-Router.post('/insertAtivacao', controllersAtivacao.postAtivacao);
+
+
 Router.post('/postNewUsuario', controllersUsuario.postNewUsuario);
 
-Router.patch('/UpdateAtivacao', controllersAtivacao.UpdateAtivacao);
+
+
 Router.patch('/UpdateEstoque', controllersEstoque.UpdateEstoque);
 Router.patch('/UpdateValores', controllersAlterValores.UpdateValores);
 Router.patch('/UpdateProduto', controllersProduto.UpdateProdutoAlterar);

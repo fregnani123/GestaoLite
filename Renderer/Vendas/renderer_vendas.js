@@ -22,7 +22,6 @@ const unidadeEstoqueRender = document.querySelector('#medidaEstoque');
 const divSelecionarQtd = document.querySelector('.div-qtd');
 const textSelecionarQtd = document.querySelector('.qtd-selecionada');
 const alertLimparVenda = document.querySelector('.confirmation-clear');
-const alertExit = document.querySelector('.exit-venda');
 const alertRemoverItem = document.querySelector('.remove-item');
 const formaPagamento = document.querySelector('.square-2-2-2-4');
 const inputExitVenda = document.querySelector('#exit-key');
@@ -59,51 +58,56 @@ const nomeProduto = document.querySelector('.nomeProduto');
 const infoPag = document.getElementById('info-pag');
 const infoPagCred = document.getElementById('info-cred');
 const inputMaxParcelas = document.getElementById('numeroParcela');
-const spanMaxParcelas= document.getElementById('spanMaxParcelas');
+const spanMaxParcelas = document.getElementById('spanMaxParcelas');
+const showSubtotal = document.querySelector('.span-subtotal')
+const carrinhoShowRemover = document.querySelector(".div-carrinho");
 
 // Mapeamento dos botões para as teclas de atalho desejadas
 const atalhos = {
-  'btn-pgto-dinheiro': 'F1',
-  'btn-pgto-pix': 'F2',
-  'btn-pgto-credito': 'F3',
-  'btn-pgto-debito': 'F4',
-  'btn-cancelar-item': 'F6',
-  'btn-crediario-loja': 'F7',
-  'btn-alterar-cliente': 'F8',
-  'btn-alterar-qtd': 'F9',
-  'btn-desconto-venda': 'F10',
-  'btn-reiniciar-venda': 'F12',
-  'btn-finalizar-venda': 'Enter',
-  'btn-esc':'Escape'
+    'btn-pgto-dinheiro': 'F1',
+    'btn-pgto-pix': 'F2',
+    'btn-pgto-credito': 'F3',
+    'btn-pgto-debito': 'F4',
+    'btn-cancelar-item': 'F6',
+    'btn-crediario-loja': 'F7',
+    'btn-alterar-cliente': 'F8',
+    'btn-alterar-qtd': 'F9',
+    'btn-desconto-venda': 'F10',
+    'btn-reiniciar-venda': 'F12',
+    'btn-finalizar-venda': 'Enter',
+    'btn-esc': 'Escape',
+    "btn-exit": 'Escape',
+    "btn-exit-qtd": 'Escape',
+    "btn-exit-desconto": 'Escape',
+    "btn-exit-limpar": 'Escape',
+    "btn-exit-remover": 'Escape',
 };
 
 // Faz o loop automático
 for (const [btnId, tecla] of Object.entries(atalhos)) {
-  const btn = document.getElementById(btnId);
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const event = new KeyboardEvent('keydown', { key: tecla });
-      document.dispatchEvent(event);
-    });
-  }
+    const btn = document.getElementById(btnId);
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const event = new KeyboardEvent('keydown', { key: tecla });
+            document.dispatchEvent(event);
+        });
+    }
 }
 
-
-  
 
 document.addEventListener('DOMContentLoaded', () => {
     const linkID_2 = document.querySelector('.list-a2');
     if (linkID_2) {
-      estilizarLinkAtivo(linkID_2);
+        estilizarLinkAtivo(linkID_2);
     }
-  });
+});
 
-  function estilizarLinkAtivo(linkID) {
+function estilizarLinkAtivo(linkID) {
     linkID.style.background = '#ffcc00'; // Cor de fundo
     linkID.style.textShadow = 'none';
     linkID.style.color = 'black';
     linkID.style.borderBottom = '2px solid black';
-  }
+}
 // Estado do carrinho
 let carrinho = [];
 
@@ -111,13 +115,16 @@ let carrinho = [];
 codigoEan.focus();
 
 document.addEventListener('DOMContentLoaded', () => {
-    inputMaxCaracteres(CrediarioParcela,2)
+
+    validarDescontoPorcentagem(inputdescontoPorcentagem);
+    inputMaxCaracteres(CrediarioParcela, 2);
+
+
     const numeroPedido = document.querySelector('#numero-pedido');
     getVenda(numeroPedido);
     const codigoEan = document.querySelector('#codigo');
     const inputQtd = document.querySelector('#input-qtd');
     const alertLimparVenda = document.querySelector('.confirmation-clear');
-    const alertExit = document.querySelector('.exit-venda');
     const alertRemoverItem = document.querySelector('.remove-item');
     const divSelecionarQtd = document.querySelector('.div-qtd');
     const divPagamento = document.querySelector('.payment-form-section');
@@ -136,12 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             limparInputsPagamento();
+            carrinhoShowRemover.classList.remove('zindex-alto');
+
         }
     });
 
     document.addEventListener('keydown', (event) => {
         // Selecionar as divs principais
-        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divSelecionarQtd, alertExit, divDesconto, divAlterarCliente].filter(div => div.style.display === 'block');
+        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divSelecionarQtd, divDesconto, divAlterarCliente].filter(div => div.style.display === 'block');
         const visibleDivsPag = [divValorDinheiro, divPIX, divCartaoDebito, divCartaoCredito, divCrediario];
 
         // Função para gerenciar visibilidade de formas de pagamento
@@ -156,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (event.key) {
             case 'F1': // Forma pagamento Dinheiro
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento com o subtotal da venda igual a R$ 0,00.', 'info', 6000);
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divValorDinheiro);
@@ -168,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F2': // Forma pagamento PIX
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento com o subtotal da venda igual a R$ 0,00.', 'info', 6000);
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divPIX);
@@ -181,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F3': // Forma pagamento Cartão Crédito
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento com o subtotal da venda igual a R$ 0,00.', 'info', 6000);
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoCredito);
@@ -194,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F4': // Forma pagamento Cartão Débito
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento com o subtotal da venda igual a R$ 0,00.', 'info', 6000);
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoDebito);
@@ -214,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F7': // Forma pagamento 
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento com o subtotal da venda igual a R$ 0,00.', 'info', 6000);
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCrediario);
@@ -242,25 +252,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'F6': // Remover item
-            if(carrinho.length === 0){
-              alertMsg('Não há itens para remover no pedido', 'info', 3000);
-            }
+                if (carrinho.length === 0) {
+                    alertRemoverItem.style.display = 'none';
+                    alertMsg('Não há itens para remover no pedido', 'info');
+                    return;
+                }
                 if (visibleDivs.length === 0) {
                     alertRemoverItem.style.display = 'block';
                     inputExcluiItem.focus();
+                    carrinhoShowRemover.classList.add('zindex-alto');
                 }
+
                 inputExcluiItem.focus();
                 break;
             case 'F9': // Alterar quantidade de produtos
                 if (visibleDivs.length === 0) {
                     divSelecionarQtd.style.display = 'block';
+                    inputQtd.value = ''
                     inputQtd.focus();
                 }
                 break;
 
             case 'F10': // Aplicar desconto na venda
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar desconto com o subtotal da venda igual a R$ 0,00.', 'info', 5000);
+                    alertMsg('Não é possível adicionar desconto sem itens no pedido.', 'info');
                 } else if (visibleDivs.length === 0) {
                     divDesconto.style.display = 'block';
                     inputdescontoPorcentagem.focus();
@@ -304,12 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputExcluiItem.value = '';
                 // inputExitVenda.value = '';
                 if (visibleDivs.length !== 0) {
-                  visibleDivs.forEach(div => div.style.display = 'none');
+                    visibleDivs.forEach(div => div.style.display = 'none');
                     codigoEan.focus();
-                    }else{
-                       alertMsg('Todas as sub-telas foram fechadas.', 'info', 3000);
-                    }
-                
+                } else {
+                    alertMsg('Todas as sub-telas foram fechadas.', 'info', 3000);
+                }
+
                 break;
 
             case 'Enter': // Confirmar quantidade ou exclusão
@@ -344,6 +359,7 @@ codigoEan.addEventListener('input', (e) => {
     } else if (e.target.value.length === 0) resetInputs();
     getVenda(numeroPedido.value);
 });
+
 inputQtd.addEventListener('input', function (e) {
     let value = e.target.value;
     if (parseInt(inputQtd.value) === 0) {
@@ -362,27 +378,10 @@ inputQtd.addEventListener('input', function (e) {
     }
     // Atualiza o valor do input com o valor formatado
     e.target.value = value;
-    textSelecionarQtd.innerHTML = e.target.value;
+    textSelecionarQtd.innerHTML = `${e.target.value}x`
     div_qtd.style.backgroundColor = 'yellow';
 });
 
-// const handleInputExit = (e) => {
-//     if (e.key === 'Enter') {
-//         // Define a senha padrão caso senhaVendaUser esteja vazia
-//         const senhaCorreta = senhaVendaUser.trim() === '' ? 'adm' : senhaVendaUser;
-
-//         if (inputExitVenda.value === senhaCorreta) {
-//             window.location.href = '../public/menu.html';
-//         } else {
-//             alertMsg('Senha incorreta, tente novamente.', 'error', 3000);
-//             inputExitVenda.value = '';
-
-//             setTimeout(() => {
-//                 inputExitVenda.focus();
-//             }, 4000);
-//         }
-//     }
-// };
 
 const limparTelakey = (e) => {
     if (e.key === 'Enter') {
@@ -399,9 +398,9 @@ const limparTelakey = (e) => {
     }
 };
 
-// Adiciona o evento keydown ao campo de entrada
-// inputExitVenda.addEventListener('keydown', handleInputExit);
+
 inputlimparTelakey.addEventListener('keydown', limparTelakey);
+
 
 
 

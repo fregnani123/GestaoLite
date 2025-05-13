@@ -136,7 +136,7 @@ function renderizarInputsGrupo() {
             };
 
             if (!inputNewGrupo.value.trim()) {
-                alertMsg('O campo de grupo não pode estar vazio!','orange',4000);
+                alertMsg('O campo de grupo não pode estar vazio!','orange');
                 inputNewGrupo.focus();
                 return;
             }
@@ -168,7 +168,7 @@ function renderizarInputsSubGrupo() {
             };
 
             if (!inputNewSubGrupo.value.trim()) {
-                alertMsg('O campo de sub-grupo não pode estar vazio!','orange',4000);
+                alertMsg('O campo de sub-grupo não pode estar vazio!','orange');
                 inputNewSubGrupo.focus();
                 return;
             }
@@ -199,7 +199,7 @@ function renderizarInputsColor() {
             };
 
             if (!inputNewCor.value.trim()) {
-                alertMsg('O campo nome da cor não pode estar vazio!','orange',4000);
+                alertMsg('O campo nome da cor não pode estar vazio!','orange');
                 inputNewCor.focus();
                 return;
             }

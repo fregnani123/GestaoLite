@@ -1,178 +1,360 @@
-/* Estilo geral para os modais */
-.div-qtd,
-.confirmation-clear,
-.exit-venda,
-.desconto-venda,
-.remove-item,
+
 .payment-section
 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40%; /* Usando % para tornar o modal responsivo */
-    max-width: 500px; /* Define um tamanho máximo */
-    padding: 1.25rem; /* 20px em rem */
+    width: 40%; 
+    max-width: 500px;
+    padding: 1.25rem; 
     background-color: #f9f9f9;
     border: 1px solid #ccc;
-    border-radius: 0.3125rem; /* 5px em rem */
-    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* 2px x 5px */
-    display: none; /* Mantém oculto por padrão */
+    border-radius: 0.3125rem; 
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); 
+    display: none; 
     z-index: 10;
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 1rem; /* 16px em rem */
-}
+    font-size: 1rem; 
+} 
 
-.alterarCliente {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    max-width: 700px;
-    padding: 2rem;
-    background: linear-gradient(to bottom, #fff, #f9f9f9);
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: none;
-}
 
-.titulo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    padding: 10px;
-    border-bottom: 2px solid #ccc;
-    background-color: #f0f0f0;
-}
-
-.campo {
+/* Estilo básico para o texto */
+.campo p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1%;
+    display: flex;
     width: 100%;
-    margin: 15px 0;
+    justify-content: center;
+    gap: 1%;
+}
+#input-qtd{
+    width: 30%;
+}
+
+   .div-qtd {
+    display: none; 
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+.div-qtd-container,.div-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-qtd-container .campo {
+    background-color: #f5f5f5;
+    border: 2px solid #7D7D7D;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    width: 500px;
+     height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.campo p {
-    margin-top: 5%;
-}
-.campo label {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 0px;
-    color: #444;
-}
-.campo-cpf {
- width: 50%;
- margin-left: 25%;
-}
-.assinatura {
-    margin-top: 20px;
-    font-size: 1rem;
-    text-align: right;
-    font-style: italic;
-    color: #666;
-}
-
-.desconto-venda{
+    gap: 16px;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 50hv;
-    gap: 2%;
-}
-.div-liquido{
-   padding: .5%;
-    width: 50%;
+    position: relative;
 }
 
-/* Estilo para quando as divs estão visíveis */
-.div-qtd.active,
-.desconto-venda.active,
-.confirmation-clear.active,
-.exit-venda.active,
-.remove-item.active,
-.payment-section.active {
-    display: block; /* Mostra a div */
-}
-
-/* Estilo básico para o texto */
-p {
-    font-size: 1.2rem; /* 14px em rem */
+.div-qtd label {
+    font-size: 16px;
     color: #333;
-    margin-bottom: 0; /* 10px em rem */
 }
 
-/* Estilo para os inputs */
-input[type="text"],
-input[type="number"] {
+.div-qtd input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
     width: 100%;
-    padding: 0.5rem; /* 8px em rem */
-    margin: 0.625rem 0; /* 10px em rem */
     border: 1px solid #ccc;
-    border-radius: 0.1875rem; /* 3px em rem */
-    font-size: 1.1rem; /* 14px em rem */
+    border-radius: 5px;
+}
+
+.div-qtd .p-info {
+    font-size:1rem;
     text-align: center;
+    color: #555;
+    display: flex;
+    justify-content: center;
+}
+.botoes-box .p-info {
+    font-size:1rem;
+    text-align: center;
+    color: #555;
+    display: flex;
+    justify-content: center;
 }
 
-/* Botões de confirmação */
-.payment-options p,
-.confirmation-clear span {
-    display: inline-block;
-    font-size: 0.875rem; /* 14px em rem */
-    color: #007bff;
-    cursor: pointer;
-    margin: 0.3125rem; /* 5px em rem */
+  /* Estilo div Alterar nome do Cliente_____________________________________________________________________ */
+
+#alterClienteCPF{
+    margin-top: 2%;
 }
 
-/* Botão ativo (hover) */
-.payment-options p:hover,
-.confirmation-clear span:hover {
-    color: #0056b3;
+.alterarCliente {
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
 }
 
-/* Estilo para o fundo escurecido */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+.campo {
+  background-color: #f5f5f5;
+  border: 2px solid #7D7D7D;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  padding-top:2rem;
+  width: 500px;
+  height:520px ;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  justify-content: center;
+}
+
+#titulo {
+  border: 1px solid gray;
+  width: 100%;
+  padding: 2%;
+  background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+  color: white;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.box-filtro {
+  border: 1px solid gray;
+  padding: 2%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filtros {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-left: 8%;
+}
+
+.filtro-cpf, .filtro-nome {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+  font-size: 1.1rem;
+  color: rgb(107, 107, 107);
+}
+
+.filtro-cpf span,
+.filtro-nome span,
+.cliente-selecionado-box span {
+  border-bottom: 2px solid black;
+}
+.cliente-selecionado-box{
+     width: 450px;
+}
+
+.filtro-nome .icone-buscar {
+  cursor: pointer;
+  margin-left: 27%;
+  margin-top: 1%;
+  
+}
+
+.icone-buscar img {
+  width: 100px;
+}
+
+.cliente-selecionado-box {
+  margin-top: 3%;
+}
+
+.val-div {
+  background-color: white;
+}
+
+#nomeClienteAlter {
+  background-color: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  outline: none;
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.botoes-box {
+  border: 1px solid gray;
+  width: 100%;
+  padding: 2% 0;
+}
+
+.botoes {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 2%;
+  gap: 2%;
+}
+
+.btn-alterar-produto,
+#limparButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.img-disquete,
+.img-excluir {
+  height: 20px;
+}
+
+
+/* desconto-venda _________________________________________________________________________________________ */
+.span-porcent{
+    margin-left: -10%;
+}
+#desconto{
+    margin-left: 30%;
+}
+.span-text{
+    border-bottom: 2px solid black;
+    margin-bottom: 2%;
+}
+#desconto-valor{
+    width: 80%;
+    margin-left: 10%;
+}
+.des-subtotal{
+    display: flex;
+    margin-top: 3%;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 9;
-    display: none; /* Invisível por padrão */
+    justify-content: center;
+    border: 1px solid gray;
+}
+.desconto-venda {
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
 }
 
-/* Mostra o fundo escurecido quando ativo */
-.overlay.active {
-    display: block;
+.desconto-venda .campo {
+  background-color: #f5f5f5;
+  border: 2px solid #7D7D7D;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  padding-top:2rem;
+  width: 500px;
+  height:450px ;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  justify-content: center;
 }
 
-/* Remove as setas dos navegadores mais comuns */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+
+.confirmation-clear{
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield; /* Para Firefox */
+.campo-clear {
+  background-color: #f5f5f5;
+  border: 2px solid #7D7D7D;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  padding-top:2rem;
+  width: 500px;
+  height:380px ;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  justify-content: center;
 }
 
 
-/* Animação de entrada */
-@keyframes popIn {
-    0% {
-        transform: translate(-50%, -50%) scale(0.9);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
+/* deletar item do pedido */
+
+.remove-item{
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  right: 0;
 }
 
+.campo-remover{
+  background-color: #f5f5f5;
+  border: 2px solid #7D7D7D;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  padding-top:2rem;
+  width: 500px;
+  height:370px ;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  justify-content: center;
+  margin-left: -38%;
+  margin-top: -10%;
+}
+
+.zindex-alto {
+  position: fixed;
+  z-index: 100000000000;
+  background-color: white;
+  max-width: 760px;
+  right: 2%;
+}

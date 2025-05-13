@@ -218,7 +218,7 @@ async function updateCrediario(dadosClienteId) {
             alertMsg('Erro ao atualizar Crédito', 'info', 3000);
         }
         else {
-            alertMsg('Crédito atualizado com sucesso', 'success', 3000);
+            // alertMsg('Crédito atualizado com sucesso', 'success');
             setTimeout(() => {
                 location.reload();
             }, 3000);

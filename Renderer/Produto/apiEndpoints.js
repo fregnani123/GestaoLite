@@ -358,14 +358,14 @@ async function postNewProdutoWithImage(produtoData, selectedFile) {
         console.log('Produto e imagem adicionados com sucesso:', data);
 
         // Exibe a mensagem de sucesso
-        alertMsg('Produto adicionados com sucesso!', 'success', 4000);
+        alertMsg('Produto adicionados com sucesso!', 'success' );
 
         limparCampos();
 
     } catch (error) {
 
         console.error('Erro ao adicionar produto:', error);
-        alertMsg(`${error}`, 'error', 4000);
+        alertMsg(`${error}`, 'error');
 
         // Retorna imediatamente para evitar limpar os campos e exibir a imagem de sucesso
         return;

@@ -44,7 +44,7 @@ async function getProduto(descricaoElement, codigoEan, precoVendaElement) {
             });
 
         if (!response.ok) {
-            alertMsg('Produto não encontrado. Por favor, verifique se o item está cadastrado corretamente.', 'orange', 4000);
+            alertMsg('Produto não encontrado. Por favor, verifique se o item está cadastrado corretamente.', 'info');
             const codigoEan = document.getElementById('codigo')
             setTimeout(() => {
                 codigoEan.value = ''; // Limpa o campo do código

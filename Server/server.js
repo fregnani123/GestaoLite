@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const Routes = require(path.join(__dirname, '../Server/Router/routes'));
-const { conectarMongoDB } = require(path.join(__dirname, '../db/mongoDB'));
 const cors = require('cors');
 const { getAllProdutos } = require(path.join(__dirname, '../db/model/modelProduto'));
 require('dotenv').config({ path: path.join(__dirname, '../config/.env') });
