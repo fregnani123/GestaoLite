@@ -27,39 +27,41 @@
 
 <body>
     <header>
-        <nav style="background-color: rgb(0, 38, 87);">
+        <nav>
             <ul id="ul-Menu"></ul>
         </nav>
-    
     </header>
-    <div class="container">
-        <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
-        <div class="container-register">
+    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+    <div class="container-register">
+    </div>
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou botão.</strong></span>
+                </p>
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="cadastro-produto" href="#">Cadastrar novo Produto</a>
+                        <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
+                        <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                            Informações e Estoque de Produtos</a>
+                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                            Controle de Estoque — Entradas e Saídas</a>
+                    </div>
+                    <div class="" style="width: 100%;height: 63%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;">
+                       <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">    
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="div-form" role="form">
-            <div class="div-form-display">
+        <div style="display: flex; flex-direction: column; width: 100%;">
+            <div style="display: flex; width: 100%; height: 100%;">
                 <section class="div-form-img">
-                        <nav class="nav-menu-2" >
-            <ul class="menu-secundario">
-                <li id="cadastro-produto" class="li-menu2">
-                    <a class="a2">Cadastrar novo Produto</a>
-                </li>
-                <li class="li-menu2">
-                    <a class="a2" href="./alterar_produto.html">Cadastro do Produto / Alterar</a>
-                </li>
-                <li class="li-menu2">
-                    <a class="a2" href="./desabilitar_produto.html">Desabilitar Produto</a>
-                </li>
-                <li class="li-menu2">
-                    <a class="a2" href="./informacoes_produtos.html">Estoque / Informações Gerais dos Produtos</a>
-                </li>
-            </ul>
-        </nav>
-                    <!-- <p class="titulo-img">Foto Produto</p>
+                    <p class="titulo-img">Foto Produto</p>
                     <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras.png"
                             alt="imagem produto"></div>
-                    <div><input type="file" id="produto-imagem" accept="image/*"></div> -->
+                    <div style="width: 100%;"><input type="file" id="produto-imagem" accept="image/*"></div>
                 </section>
                 <section class="div-form__body">
                     <div class="form-group">
@@ -182,7 +184,7 @@
                         <textarea style="display: none;" id="observacoes" name="observacoes"
                             autocomplete="off"></textarea>
                         <div id="div-cnpj" class="select-wrapper">
-                            <label for="fornecedor">Filtrar CNPJ:</label>
+                            <label for="fornecedor">🔍 Filtrar por CNPJ:</label>
                             <div class="input-select-wrapper">
                                 <input id="cnpjFilter" name="fornecedor">
                             </div>
@@ -210,22 +212,22 @@
                     </div>
                 </section>
             </div>
-            <footer class="div-form__footer">
-                <p class="informativo observacoes">⚠️<strong>
-                    Atenção: O lucro bruto é calculado automaticamente assim:
-                    (Preço de Venda − Preço de Compra)
-                    Este valor é apenas demonstrativo e não é salvo no sistema.
-                  </strong>
-                    <!-- <strong>Atenção: O markup é calculado automaticamente assim:
-                        (Preço de Venda - Preço de Compra) ÷ Preço de Compra x 100%
-                        Você também pode inserir diretamente o preço de compra e o preço de venda sem precisar definir
-                        um markup</strong> -->
-                </p>
-                <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
-                        src="../style//img/disquete.png" alt="">Gravar</button>
-                <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                        alt="">Limpar</button>
-            </footer>
+            <div style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin-top: .5%;">
+                <footer class="div-form__footer" style="width: 100% ">
+                    <p style="font-size: 0.95rem;">
+                        ⚠️ <strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente como:
+                        (<strong>Preço de Venda</strong> − <strong>Preço de Compra</strong>).
+                        Este valor é apenas <strong>demonstrativo</strong> e <strong>não é salvo</strong> no sistema.
+                        <strong>Verifique os valores com atenção antes de gravar os dados.</strong>
+                    </p>
+                </footer>
+                <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                    <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
+                            src="../style//img/disquete.png" alt="">Gravar</button>
+                    <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                            alt="">Limpar</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

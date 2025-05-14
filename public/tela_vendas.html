@@ -16,61 +16,64 @@
     <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
     <title>Tela de Vendas</title>
 </head>
-<body">
-    <div class="cupom">
-        <div class="cabecalho">
-            <div class="div-titulo">
-                <h3>
-                    <span class="titulo-cupom" id=""></span>
-                </h3>
+<body"
+    style=" 
+     background-color: rgba(0, 38, 87, 0.432); width:100% ;height:100%; display: flex;align-items: center;flex-direction: column;align-items: center;overflow: hidden;">
+    <div style="height: 100hv; width: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="cupom">
+            <div class="cabecalho">
+                <div class="div-titulo">
+                    <h3>
+                        <span class="titulo-cupom" id=""></span>
+                    </h3>
+                </div>
+                <span id="razaoSocial"></span>
+                <span id="cep"></span>
+                <span id="endereco"></span>
+                <span id="contato"></span>
+                <span id="cnpj"></span>
             </div>
-            <span id="razaoSocial"></span>
-            <span id="cep"></span>
-            <span id="endereco"></span>
-            <span id="contato"></span>
-            <span id="cnpj"></span>
-        </div>
-        <div class="dados">
-            <span><strong>Cliente:</strong> <span id="cliente"></span></span>
-            <span><strong>CPF:</strong> <span id="CPFCli"></span> </span>
-            <span><strong>Data e Hora:</strong> <span id="dataVenda"></span></span>
-            <span><strong>Pedido Nº:</strong> <span id="numeroVenda"></span></span>
-            <span><strong>Doc. auxiliar de venda :</strong> <span id="naoFiscal"></span></span>
-        </div>
-        <div class="itens-venda">
-            <div style="display: flex; justify-content: space-between;">
-                <strong>CÓDIGO</strong>
-                <strong>DESCRIÇÃO</strong>
-                <strong>VALOR R$</strong>
+            <div class="dados">
+                <span><strong>Cliente:</strong> <span id="cliente"></span></span>
+                <span><strong>CPF:</strong> <span id="CPFCli"></span> </span>
+                <span><strong>Data e Hora:</strong> <span id="dataVenda"></span></span>
+                <span><strong>Pedido Nº:</strong> <span id="numeroVenda"></span></span>
+                <span><strong>Doc. auxiliar de venda :</strong> <span id="naoFiscal"></span></span>
             </div>
-            <div id="listaItens">
-            </div> <!-- Aqui vamos adicionar os itens -->
-        </div>
-        <div class="total">
-            <span class="total-span"><span>Desconto Aplicado:</span><span id="cuponDesconto"></span></span>
-            <span class="total-span"><span>Total da Nota:</span><span id="totalNota"></span></span>
-            <span class="total-span"><span>Valor Recebido:</span> <span id="valorRecebidoCupom"></span></span>
-            <span class="total-span"><span>Troco:</span> <span id="trocoCupom"></span></span>
-            <span class="total-span"><span>Forma de Pagamento:</span> <span id="formaPgto"></span></span>
-        </div>
-        <div class="assinatura">
-            <span class="text-recebi">Recebi os produto(s) conforme descrito(s) acima.</span>
-            <hr>
-            <span class="text-assinatura">ASSINATURA DO CLIENTE</span>
-        </div>
-        <div class="rodape">
+            <div class="itens-venda">
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>CÓDIGO</strong>
+                    <strong>DESCRIÇÃO</strong>
+                    <strong>VALOR R$</strong>
+                </div>
+                <div id="listaItens">
+                </div> <!-- Aqui vamos adicionar os itens -->
+            </div>
+            <div class="total">
+                <span class="total-span"><span>Desconto Aplicado:</span><span id="cuponDesconto"></span></span>
+                <span class="total-span"><span>Total da Nota:</span><span id="totalNota"></span></span>
+                <span class="total-span"><span>Valor Recebido:</span> <span id="valorRecebidoCupom"></span></span>
+                <span class="total-span"><span>Troco:</span> <span id="trocoCupom"></span></span>
+                <span class="total-span"><span>Forma de Pagamento:</span> <span id="formaPgto"></span></span>
+            </div>
+            <div class="assinatura">
+                <span class="text-recebi">Recebi os produto(s) conforme descrito(s) acima.</span>
+                <hr>
+                <span class="text-assinatura">ASSINATURA DO CLIENTE</span>
+            </div>
+            <div class="rodape">
 
-            <span class="redeSocial"></span>
-            <span class="text-acesse">Acesse nossas redes sociais.</span>
-            <span class="text-slogan"></span>
+                <span class="redeSocial"></span>
+                <span class="text-acesse">Acesse nossas redes sociais.</span>
+                <span class="text-slogan"></span>
+            </div>
+
+            <div class="carne-cred">
+                <span id='tituloCred'></span>
+                <!-- Aqui é criado o Crediario loja - impressao cupom. -->
+            </div>
         </div>
 
-        <div class="carne-cred">
-            <span id='tituloCred'></span>
-            <!-- Aqui é criado o Crediario loja - impressao cupom. -->
-        </div>
-    </div>
-    <div class="container-sales">
         <!-- Divs com display inicial none -->
 
         <!-- Div que renderiza a impressão -->
@@ -154,9 +157,6 @@
             </div>
         </div>
 
-
-
-
         <div class="desconto-venda">
             <div class="div-container">
                 <div class="campo">
@@ -198,8 +198,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="confirmation-clear">
             <div class="div-container">
@@ -397,6 +395,8 @@
         <!-- valor unitario produto -->
         <input type="hidden" id="valor-unitario" readonly>
         <!-------------------------------------------------------------------------------------------->
+
+
         <!-- Caixa Aberto -->
         <header style="display: flex; justify-content: center;">
             <nav style="background-color: rgb(0, 38, 87);">
@@ -404,17 +404,18 @@
             </nav>
 
         </header>
+
         <!-- Dados do produto -->
         <div class="div-vendas">
             <!-- <section class="product-section">
-        </section> -->
+         </section> -->
             <!-- Totais -->
             <section class="totals-section">
-                <div class="atalhos-1">
-
-                    <div class="atalhos" style="display: flex;">
-                        <p><strong>Selecione uma ação — você pode usar o atalho ou clicar no botão abaixo.</strong></p>
-                        <div class="menu-secundario">
+                <div class="atalhos-1 ">
+                    <div class="atalhos">
+                        <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou
+                                    botão.</strong></span></p>
+                        <div class="menu-secundario" style="">
                             <div class="pagamento">
                                 <button class="atalhos-btn" id="btn-pgto-dinheiro">F1 = Pagamento dinheiro</button>
                                 <button class="atalhos-btn" id="btn-pgto-pix">F2 = Pagamento PIX</button>
@@ -434,6 +435,7 @@
                                 <button class="atalhos-btn" id="btn-finalizar-venda">Enter = Finalizar pedido</button>
                                 <button class="atalhos-btn" id="btn-esc">ESC = Fechar sub-telas abertas</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -526,23 +528,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="border: 1px solid rgba(128, 128, 128, 0.755);
+                        padding-bottom: .7%; padding-left: .7%; padding-right: .7%;"> 
+                            <footer class="footer-venda">
+                                <p style=" font-size: 1rem;">
+                                    <strong><span style="display: inline-block; margin-bottom: 3px;">⚠️</span>
+                                        Atenção:</strong> Esta tela é destinada ao
+                                    <strong>controle de saída de estoque</strong> e
+                                    <strong>registro de pedidos</strong>, organizados por período e forma de pagamento.
+                                    A
+                                    emissão gerada é apenas um
+                                    <strong>cupom sem validade fiscal</strong>, utilizado <strong>exclusivamente para
+                                        fins
+                                        de controle interno</strong>.
+                                    O objetivo é permitir a geração de <strong>relatórios personalizados sobre o destino
+                                        dos
+                                        produtos no estoque</strong>.
+                                    <strong>Este sistema não realiza gestão fiscal ou burocrática.</strong>
+                                </p>
+                            </footer>
+                        </div>
+
                     </div>
                 </div>
             </section>
-            <footer class="footer-venda">
-                <p style="margin-top: 0.2%; font-size: 1rem;">
-                    <strong><span style="display: inline-block; margin-bottom: 3px;">⚠️</span> Atenção:</strong> Tela
-                    destinada ao <strong>controle de saída de estoque</strong> e
-                    <strong>registro de pedidos</strong>, organizadas por período e forma de pagto. A emissão gerada é
-                    apenas um <strong>cupom sem validade fiscal</strong>, <strong>exclusivo para fins de controle
-                        interno</strong>.
-                    Seu objetivo é permitir a geração de <strong>relatórios sobre o destino dos produtos no
-                        estoque</strong>.
-                    <strong>Este sistema não gerencia a parte fiscal e burocrática do usuário.</strong>
-                </p>
-            </footer>
+
         </div>
     </div>
+    </body>
     <script src="../Renderer/modal-pedido/modal_tela_pedido.js"></script>
     <script src="../Renderer/Vendas/renderer_vendas.js"></script>
     <script src="../Renderer/services/converte_moeda.js"></script>
@@ -557,7 +570,5 @@
     <script src="../config/apiUser.js"></script>
     <script src="../Renderer/imprimir/cupom.js"></script>
     <script src="../Renderer/Menu/renderer_menu.js"></script>
-
-    </body>
 
 </html>

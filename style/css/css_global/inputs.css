@@ -60,6 +60,7 @@ input:focus {
     text-align: center;
     border: none;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0); 
+    margin-left:5%;
 }
 #desconto{
     width: 40%;
@@ -75,13 +76,16 @@ input:focus {
 }
 
 .div-nomeProduto{
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
-
+#nomeProduto{
+    margin-bottom: 1%;
+}
 #divColor{
     width: 30%;
     display: flex;
@@ -93,7 +97,7 @@ input:focus {
     width: 100%;
 }
 #divFornecedor{
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -146,7 +150,7 @@ background-color:var(--input-readonly);}
 #div-bairro{width: 30%;}
 #div-uf{width: 15%;}
 #div-cidade{width: 35%;}
-.div-codigoDeBarras{width: 28%;}
+.div-codigoDeBarras{width: 30%;}
 #div-ie{width: 25%;}
 #div-pessoa,#div-alterar{width: 20%;}
 #div-ativo{width: 25%;}
@@ -163,4 +167,7 @@ input[type="radio"] {
     margin-right: 2%;
     width: 10%;
     height: 1rem;
+}
+#codigo{
+    width: 70%;
 }

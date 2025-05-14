@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = '#ffcc00'; // Cor de fundo
-    linkID.style.textShadow = 'none';
-    linkID.style.color = 'black';
-    linkID.style.borderBottom = '2px solid black';
+ linkID.style.background = '#157347'; // Cor de fundo atualizada para verde
+  linkID.style.textShadow = 'none'; // Sem sombra de texto
+  linkID.style.color = 'white'; // Cor do texto
+  linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 // Estado do carrinho
 let carrinho = [];
