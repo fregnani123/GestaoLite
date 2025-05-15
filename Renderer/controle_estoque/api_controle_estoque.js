@@ -1,9 +1,9 @@
 const linkID_9 = document.querySelector('.list-a9');
 
 function estilizarLinkAtivo(linkID) {
-  linkID.style.background = '#ffcc00'; // Cor de fundo
+ linkID.style.background = '#5f8ac1'; 
   linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'black'; // Cor do texto
+  linkID.style.color = 'white'; // Cor do texto
   linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 

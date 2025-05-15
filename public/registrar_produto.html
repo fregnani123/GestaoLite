@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <style>
-        #cadastro-produto a {
+        #cadastro-produto {
             background: var(--hover-color);
-            color: black;
+            color: rgb(255, 255, 255);
             text-shadow: none;
             border-bottom: 2px solid black;
             cursor: pointer;
@@ -32,8 +32,7 @@
         </nav>
     </header>
     <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
-    <div class="container-register">
-    </div>
+    <div class="container-register"></div>
     <div class="div-form">
         <div class="atalhos-1">
             <div class="atalhos">
@@ -41,7 +40,7 @@
                 </p>
                 <div class="menu-secundario">
                     <div class="pagamento">
-                        <a class="atalhos-btn" id="cadastro-produto" href="#">Cadastrar novo Produto</a>
+                        <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo Produto</a>
                         <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
                         <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">
@@ -49,13 +48,14 @@
                         <a class="atalhos-btn" href="./informacoes_produtos.html">
                             Controle de Estoque — Entradas e Saídas</a>
                     </div>
-                    <div class="" style="width: 100%;height: 63%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;">
-                       <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">    
+                    <div class=""
+                        style="width: 100%;height: 61%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        <div style="display: flex; flex-direction: column; width: 100%;">
+        <div style="display: flex; flex-direction: column; width: 100%; ">
             <div style="display: flex; width: 100%; height: 100%;">
                 <section class="div-form-img">
                     <p class="titulo-img">Foto Produto</p>
@@ -212,7 +212,7 @@
                     </div>
                 </section>
             </div>
-            <div style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin-top: .5%;">
+            <div style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer" style="width: 100% ">
                     <p style="font-size: 0.95rem;">
                         ⚠️ <strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente como:
@@ -220,13 +220,13 @@
                         Este valor é apenas <strong>demonstrativo</strong> e <strong>não é salvo</strong> no sistema.
                         <strong>Verifique os valores com atenção antes de gravar os dados.</strong>
                     </p>
-                </footer>
-                <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                      <div style="background: white; padding: .5%; display: flex; gap: 2%;">
                     <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
                             src="../style//img/disquete.png" alt="">Gravar</button>
                     <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
                             alt="">Limpar</button>
                 </div>
+                </footer>
             </div>
         </div>
     </div>

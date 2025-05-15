@@ -103,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#157347'; // Cor de fundo atualizada para verde
+ linkID.style.background = '#5f8ac1'; 
+
   linkID.style.textShadow = 'none'; // Sem sombra de texto
   linkID.style.color = 'white'; // Cor do texto
   linkID.style.borderBottom = '2px solid black'; // Borda inferior

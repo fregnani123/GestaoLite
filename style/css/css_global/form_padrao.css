@@ -59,9 +59,9 @@ body {
     /* background-color: rgb(85, 5, 5); */
     margin-bottom: .5%;
     padding: 1%;
-    border: 1px solid rgb(111, 111, 111);
-    border-left: none;
-    height: 100%;
+    border: 1px solid rgba(111, 111, 111, 0.64);
+    height: 98%;
+    margin: .5%;
 }
 .div-form__body label {
     font-size: 1rem;
@@ -75,8 +75,9 @@ body {
     justify-content: top;
     flex-direction: column;
     border: 1px solid rgb(190, 190, 190);
-    border-right: none;
     padding-top: 7%;
+    margin: .5%;
+ 
 }
 
 
@@ -157,7 +158,7 @@ body {
 }
 
 .atalhos-1 {
-    width: 40%;
+    width: 37.5%;
 }
 
 .p-titulo{
@@ -166,7 +167,7 @@ body {
     align-items: center;
     font-size: 1rem;
 }
-.footer-venda,.msg-alterar,.div-form__footer{
+.footer-venda,.msg-alterar{
     display: flex;
     background-color: rgba(248, 255, 53, 0.142);
     text-align: center;
@@ -174,14 +175,151 @@ body {
     justify-content: center;
     font-size: 1rem;
     padding: .5%;
+
+  } 
+  .div-form__footer{
+    display: flex;
+    background-color: rgba(248, 255, 53, 0.142);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    padding: .5%;
+
   } 
 
-/* .risco {
-  display: block;
-  width: 95%;
-  height: 8px;
-  border-bottom: 5px solid rgba(128, 128, 128, 0.093);
-  margin: 1.1rem 0;
-  margin-left: 3%;
-} */
+/* abaixo css tela deletar produto*/
 
+
+
+
+.logo-container {
+    width: 100%;
+    height: 61%;
+    border: 1px solid rgba(128, 128, 128, 0.549);
+    margin-top: 2%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-img {
+    width: 250px;
+}
+
+.secao-principal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid gray;
+    align-items:start;
+}
+
+.secao-conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+}
+
+.secao-acao {
+    width: 99%;
+    display: flex;
+    height: 80%;
+    padding: .5rem;
+    align-items: center;
+    background: rgb(219, 219, 219);
+    margin: .5%;
+}
+
+.foto-produto-container {
+    margin-left: 1%;
+    text-align: center;
+}
+
+.titulo-img {
+    margin-bottom: .5%;
+    width: 100%;
+    text-align: center;
+}
+
+.filtros-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 0%;
+    gap: 2%;
+    padding: 1%;
+}
+
+.filtro-ean {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtro-label {
+    font-weight: 600;
+    margin-bottom: 4%;
+}
+
+.botoes-acao {
+    display: flex;
+    height: 2.7rem;
+    margin-left: 13%;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.lista-produtos {
+    margin-left: .5%;
+    width: 99%;
+    border: 1px solid gray;
+}
+
+.ul-header {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    background-color: #f4f4f4;
+    font-weight: bold;
+    border-bottom: 2px solid #aaa;
+}
+
+.ul-filtros {
+    width: 100%;
+    height: 3.1rem;
+    background-color: white;
+}
+
+.tabela-dinamica {
+    width: 100%;
+    height: 50%;
+    padding: .5%;
+}
+
+.div-form-display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(128, 128, 128, 0.474);
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+}
+
+.footer-aviso {
+    font-size: 0.95rem;
+}
+
+.container-footer{
+    border: 1px solid rgba(128, 128, 128, 0.516);padding: 1%; margin: .5%; margin-top: 0;
+}

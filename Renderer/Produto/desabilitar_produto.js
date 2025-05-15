@@ -20,9 +20,9 @@ const btnDesativar = document.getElementById('btnDesativar');
 const linkID_4 = document.querySelector('.list-a4')
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#157347'; // Cor de fundo atualizada para verde
+ linkID.style.background = '#5f8ac1'; 
   linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'black'; // Cor do texto
+  linkID.style.color = 'white'; // Cor do texto
   linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_4);
@@ -37,18 +37,16 @@ function formatarMoedaBR(valor) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
 }
 
-btnFiltrar.addEventListener('click', () => {
-    // Se o campo de código EAN estiver vazio, mostrar mensagem de erro e sair
-    if (!codigoEAN.value.trim()) {
-       alertMsg('Por favor, informe um código EAN para filtrar.','info');
-       codigoEAN.focus();
-        return;
-    }
+codigoEAN.addEventListener('input', () => {
+    const ean = codigoEAN.value.trim();
 
-    fetchAllProdutos(() => {
-        applyFilters(); // Aplica os filtros após carregar os produtos
-        codigoEAN.value='';
-    });
+    // Se tiver exatamente 13 dígitos, aplica o filtro
+    if (ean.length === 13) {
+        fetchAllProdutos(() => {
+            applyFilters(); // Aplica os filtros após carregar os produtos
+            codigoEAN.value = ''; // Limpa o campo após o filtro
+        });
+    }
 });
 
 // Ajuste em `fetchAllProdutos`
@@ -101,6 +99,7 @@ function renderProdutos(renderer, produtos) {
     produtos.forEach(produto => {
         const li = document.createElement('li');
         li.classList.add('li-list');
+        const divBtns = document.getElementById('div-btns');
 
         const spanCodigo = document.createElement('span');
         spanCodigo.textContent = produto.codigo_ean || 'Sem código';
@@ -156,7 +155,7 @@ function renderProdutos(renderer, produtos) {
         li.appendChild(spanPrecoVenda);
         li.appendChild(spanVendido);
         li.appendChild(spanEstoqueAtual);
-        li.appendChild(btnDesativar);
+        divBtns.appendChild(btnDesativar);
 
         renderer.appendChild(li);
     });

@@ -87,7 +87,7 @@ input:focus {
     margin-bottom: 1%;
 }
 #divColor{
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -96,6 +96,12 @@ input:focus {
 .input-select-wrapper{
     width: 100%;
 }
+label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #divFornecedor{
     width: 70%;
     display: flex;
@@ -125,7 +131,7 @@ input:focus {
     align-items: center;
 }
 #divGrupo, #divSubGrupo{
-    width: 40%;
+    width: 50%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -136,7 +142,7 @@ input:focus {
 #fornecedor,.estoqueReadonly,.precoCusto{
 background-color:var(--input-readonly);}
 #estoqueDiv{width: 40%;}
-#divCnpj,#div-ie{ width:20%;}
+#divCnpj,#div-ie{ width:30%;}
 #div-cpf{width: 25%;}
 #div-nome{width: 50%;}
 #div-tel{width: 30%;}

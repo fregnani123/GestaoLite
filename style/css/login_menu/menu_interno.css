@@ -1,7 +1,7 @@
 :root {
     --primary-color: #1f3b57;  /* Azul escuro clássico */
     --secondary-color: #2c4d6e; /* Tom levemente mais claro */
-    --hover-color:  #157347;  /* Destaque amarelo */
+    --hover-color:#5f8ac1; /* Destaque amarelo */
     --text-color: #ffffff; /* Texto branco */
     --border-color: #a0a0a0; /* Bordas cinza */
     --submenu-bg: #f4f4f4;  /* Fundo do submenu */
@@ -204,7 +204,7 @@ padding: 2%;
     height: 100%;
     max-height: 100%;
     max-width: 100%;
-    padding: .7rem;
+    padding: .8rem;
     margin-top: 5px;
     
     color: white;
@@ -226,7 +226,7 @@ padding: 2%;
 
 
 .atalhos-btn:hover {
-    background: #157347;
+    background: #5f8ac1;
     color: white;
     text-shadow: none;
     border-bottom: 2px solid rgba(0, 0, 0, 0.57);
