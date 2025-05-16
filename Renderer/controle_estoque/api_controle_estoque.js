@@ -1,4 +1,4 @@
-const linkID_9 = document.querySelector('.list-a9');
+const linkID_4 = document.querySelector('.list-a4')
 
 function estilizarLinkAtivo(linkID) {
  linkID.style.background = '#5f8ac1'; 
@@ -7,7 +7,7 @@ function estilizarLinkAtivo(linkID) {
   linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 
-estilizarLinkAtivo(linkID_9);
+estilizarLinkAtivo(linkID_4);
 
 async function getProdutoEstoque(codigoDeBarras) {
     try {

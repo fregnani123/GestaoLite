@@ -27,146 +27,167 @@
         <nav style="background-color: rgb(0, 38, 87);">
             <ul id="ul-Menu"></ul>
         </nav>
-        <nav class="nav-menu-2">
-            <ul class="menu-secundario" id="menu-secundario-fornecedor">
-                <li id="cadastro-fornecedor">
-                    <a href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
-                </li>
-                <li id="alterar-fornecedor">
-                    <a href="./alterar_Fornecedor.html">Informações Cadastrais do Fornecedor / Alterar</a>
-                </li>
-                <li id="">
-                    <a href="./informaçoes_fornecedor.html">Produtos vinculados ao Fornecedor</a>
-                </li>
-            </ul>
-        </nav>
+
     </header>
-    <div class="container">
-        <div class="div-form" role="form">
-            <div class="div-form-display">
-                <section class="div-form-img">
-                    <p class="titulo-img">Cadastro Fornecedor</p>
-                    <img class="img-produto" src="../style/img/fornecedor.png" alt="Produto sem imagem.">
-                </section>
-                <section class="div-form__body">
-                    <div class="form-group">
-                        <div id="div-pessoa">
-                            <label class="labelFornecedor" for="tipoPessoa">Pessoa</label>
-                            <select name="tipoPessoa" id="tipoPessoa">
-                                <option value="">Selecione</option>
-                                <option value="juridica">Jurídica</option>
-                                <option value="fisica">Física</option>
-                            </select>
-                        </div>
-                        <div id="div-cnpj">
-                            <label class="labelFornecedor" id="label_cnpj_cpf" for="cnpj">CNPJ / CPF</label>
-                            <input type="text" id="cnpj" readonly>
-                        </div>
+    <div class="div-form" role="form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou
+                            botão.</strong></span>
+                </p>
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
+                        <a class="atalhos-btn" href="./alterar_Fornecedor.html">Informações Cadastrais do Fornecedor /
+                            Alterar</a>
+                        <a class="atalhos-btn" href="./informaçoes_fornecedor.html">Produtos vinculados ao
+                            Fornecedor</a>
+                        <a class="atalhos-btn" style="height: 2.8rem;"></a>
+                        <a class="atalhos-btn" style="height: 2.8rem;"></a>
+                    </div>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs" >
+            <div class="div-form-display"style="border:none">
+                <div style=" width: 100%; height: 100%;;display: flex;">
+                    <section class="div-form-img">
+                        <p class="titulo-img">Cadastro Fornecedor</p>
+                        <img class="img-produto" src="../style/img/fornecedor.png" alt="Produto sem imagem.">
+                    </section>
+                    <section class="div-form__body">
+                        <div class="form-group">
+                            <div id="div-pessoa">
+                                <label class="labelFornecedor" for="tipoPessoa">Pessoa</label>
+                                <select name="tipoPessoa" id="tipoPessoa">
+                                    <option value="">Selecione</option>
+                                    <option value="juridica">Jurídica</option>
+                                    <option value="fisica">Física</option>
+                                </select>
+                            </div>
+                            <div id="div-cnpj">
+                                <label class="labelFornecedor" id="label_cnpj_cpf" for="cnpj">CNPJ / CPF</label>
+                                <input type="text" id="cnpj" readonly>
+                            </div>
 
-                        <div id="div-razoSocial">
-                            <label class="labelFornecedor" id="label_razao" for="razaoSocial">Razão Social /
-                                Nome</label>
-                            <input type="text" id="razaoSocial" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-ie">
-                            <label class="labelFornecedor" for="inscricaoEstadual">Inscrição Estadual:</label>
-                            <select name="inscricaoEstadual" id="inscricaoEstadual" disabled>
-                                <option value="">Selecione</option>
-                                <option value="contribuinte">Contribuinte</option>
-                                <option value="isento">Isento</option>
-                            </select>
-                        </div>
-                        <div id="div-ie">
-                            <label class="labelFornecedor" for="ie">numero IE:</label>
-                            <input type="text" id="ie" readonly>
-                        </div>
-                        <div id="div-fantasia">
-                            <label class="labelFornecedor" for="nomeFantasia">Nome Fantasia:</label>
-                            <input type="text" id="nomeFantasia" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-logradouro">
-                            <label class="labelFornecedor" for="endereco">Logradouro:</label>
-                            <input type="text" id="endereco">
-                        </div>
-                        <div id="div-numero">
-                            <label class="labelFornecedor" for="cep">Numero:</label>
-                            <input type="text" id="numero">
-                        </div>
-                        <div id="div-bairro">
-                            <label class="labelFornecedor" for="bairro">Bairro:</label>
-                            <input type="text" id="bairro">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-cep">
-                            <label class="labelFornecedor" for="cep">Cep:</label>
-                            <input type="text" id="cep">
-                        </div>
-                        <div id="div-uf">
-                            <label class="labelFornecedor" for="uf">UF:</label>
-                            <select id="uf">
-                            </select>
-                        </div>
-                        <div id="div-cidade">
-                            <label class="labelFornecedor" for="cidade">Cidade:</label>
-                            <select id="cidade">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-email">
-                            <label class="labelFornecedor" for="email">Email:</label>
-                            <input type="email" id="email">
-                        </div>
-
-                        <div id="div-tel">
-                            <label class="labelFornecedor" for="email">Contato:</label>
-                            <input type="email" id="telefone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-atividade">
-                            <label for="">Ramos de atividade:</label>
-                            <select name="" id="atividade">
-
-                            </select>
-                        </div>
-                        <div id="div-atividade">
-                            <label for="">Forma de Pgto:</label>
-                            <select name="" id="formaPgto">
-                            </select>
-                        </div>
-                        <div id="div-atividade">
-                            <label for="">Condições Pgto:</label>
-                            <select name="" id="condicoesPgto">
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group" style="display: none;">
-                        <div id="text-area">
-                            <div><label class="label" for="observacoes">Observações:</label>
-                                <textarea rows="3" cols="37" id="observacoes" name="observacoes"
-                                    placeholder="Informações adicionais Fornecedor"></textarea>
+                            <div id="div-razoSocial">
+                                <label class="labelFornecedor" id="label_razao" for="razaoSocial">Razão Social /
+                                    Nome</label>
+                                <input type="text" id="razaoSocial" readonly>
                             </div>
                         </div>
-                    </div>
-                </section>
+                        <div class="form-group">
+                            <div id="div-ie">
+                                <label class="labelFornecedor" for="inscricaoEstadual">Inscrição Estadual:</label>
+                                <select name="inscricaoEstadual" id="inscricaoEstadual" disabled>
+                                    <option value="">Selecione</option>
+                                    <option value="contribuinte">Contribuinte</option>
+                                    <option value="isento">Isento</option>
+                                </select>
+                            </div>
+                            <div id="div-ie">
+                                <label class="labelFornecedor" for="ie">numero IE:</label>
+                                <input type="text" id="ie" readonly>
+                            </div>
+                            <div id="div-fantasia">
+                                <label class="labelFornecedor" for="nomeFantasia">Nome Fantasia:</label>
+                                <input type="text" id="nomeFantasia" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="div-logradouro">
+                                <label class="labelFornecedor" for="endereco">Logradouro:</label>
+                                <input type="text" id="endereco">
+                            </div>
+                            <div id="div-numero">
+                                <label class="labelFornecedor" for="cep">Numero:</label>
+                                <input type="text" id="numero">
+                            </div>
+                            <div id="div-bairro">
+                                <label class="labelFornecedor" for="bairro">Bairro:</label>
+                                <input type="text" id="bairro">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="div-cep">
+                                <label class="labelFornecedor" for="cep">Cep:</label>
+                                <input type="text" id="cep">
+                            </div>
+                            <div id="div-uf">
+                                <label class="labelFornecedor" for="uf">UF:</label>
+                                <select id="uf">
+                                </select>
+                            </div>
+                            <div id="div-cidade">
+                                <label class="labelFornecedor" for="cidade">Cidade:</label>
+                                <select id="cidade">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="div-email">
+                                <label class="labelFornecedor" for="email">Email:</label>
+                                <input type="email" id="email">
+                            </div>
+
+                            <div id="div-tel">
+                                <label class="labelFornecedor" for="email">Contato:</label>
+                                <input type="email" id="telefone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="div-atividade">
+                                <label for="">Ramos de atividade:</label>
+                                <select name="" id="atividade">
+
+                                </select>
+                            </div>
+                            <div id="div-atividade">
+                                <label for="">Forma de Pgto:</label>
+                                <select name="" id="formaPgto">
+                                </select>
+                            </div>
+                            <div id="div-atividade">
+                                <label for="">Condições Pgto:</label>
+                                <select name="" id="condicoesPgto">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <div id="text-area">
+                                <div><label class="label" for="observacoes">Observações:</label>
+                                    <textarea rows="3" cols="37" id="observacoes" name="observacoes"
+                                        placeholder="Informações adicionais Fornecedor"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div
+                    style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
+                    <footer class="div-form__footer" style="width: 100%;">
+                    <p style="font-size: 0.95rem;">
+  <img src="../style/img/atencao.png" alt="Atenção" style="width: 1.3rem; margin-right: 0.5rem; vertical-align: middle;">
+  <strong>Atenção:</strong> Antes de concluir o cadastro, certifique-se de que todas as informações do fornecedor estão corretas.
+</p>
+
+                         <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                            <button id="btn-cad-fornecedor"><img class="img-disquete"
+                                    src="../style//img/disquete.png">Gravar</button>
+                            <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                    alt="">Limpar</button>
+                        </div>
+                    </footer>
+                   
+                </div>
             </div>
-            <footer class="div-form__footer">
-                <p class="informativo observacoes"> <strong>⚠️ Atenção: Antes de cadastrar, verifique se todos os dados
-                        do fornecedor estão corretos.</strong>
-                </p>
-                <button id="btn-cad-fornecedor"><img class="img-disquete"
-                        src="../style//img/disquete.png">Gravar</button>
-                <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                        alt="">Limpar</button>
-            </footer>
         </div>
+    </div>
     </div>
 </body>
 <script src="../Renderer/Menu/renderer_menu.js"></script>

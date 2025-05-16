@@ -40,25 +40,25 @@
                 </p>
                 <div class="menu-secundario">
                     <div class="pagamento">
-                        <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo Produto</a>
+                        <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo
+                            Produto</a>
                         <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
                         <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">
                             Informações e Estoque de Produtos</a>
-                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                        <a class="atalhos-btn" href="./controle_estoque.html">
                             Controle de Estoque — Entradas e Saídas</a>
                     </div>
-                    <div class=""
-                        style="width: 100%;height: 61%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;">
+                    <div class="img-fgl">
                         <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        <div style="display: flex; flex-direction: column; width: 100%; ">
+        <div class="container-inputs">
             <div style="display: flex; width: 100%; height: 100%;">
                 <section class="div-form-img">
-                    <p class="titulo-img">Foto Produto</p>
+                     <p class="titulo-img">Imagem do Produto</p>
                     <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras.png"
                             alt="imagem produto"></div>
                     <div style="width: 100%;"><input type="file" id="produto-imagem" accept="image/*"></div>
@@ -66,17 +66,17 @@
                 <section class="div-form__body">
                     <div class="form-group">
                         <div class="div-codigoDeBarras">
-                            <label for="codigoDeBarras">Código / Cód. Barras:</label>
+                            <label>Código / Cód. Barras</label>
                             <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off">
                         </div>
-                        <div class="div-nomeProduto">
-                            <label for="nomeProduto">Nome / Descrição:</label>
+                        <div class="div-nomeProduto"> 
+                            <label  style="width: 100%;">Nome / Descrição</label>
                             <input type="text" id="nomeProduto" name="nome" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
                         <div id="divGrupo" class="select-wrapper">
-                            <label for="categoria-produto">Grupo:</label>
+                            <label style="width: 100%;" for="categoria-produto">Grupo</label>
                             <div class="input-select-wrapper">
                                 <select id="grupo" name="grupo">
                                     <option value="">Selecione</option>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div id="divSubGrupo" class="select-wrapper">
-                            <label for="grupo">Sub-Grupo:</label>
+                            <label style="width: 100%;" for="grupo">Sub-Grupo:</label>
                             <div class="input-select-wrapper">
                                 <select id="sub-grupo" name="grupo">
                                     <option value="">Selecione</option>
@@ -96,7 +96,7 @@
                     </div>
                     <div id="form-group-choose" class="form-group">
                         <div id="divColor" class="select-wrapper">
-                            <label for="cor">Cor do Produto:</label>
+                            <label style="width: 100%;" for="cor">Cor do Produto</label>
                             <div class="input-select-wrapper">
                                 <select id="corProduto" name="corProduto">
                                     <option value="">Selecione</option>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="escolhaUnDiv">
-                            <label for="escolhaUM">Caracteristica do Produto:</label>
+                            <label for="escolhaUM">Caracteristica do Produto</label>
                             <div class="input-select-wrapper">
                                 <select id="escolhaUM">
                                     <option value="">Selecione</option>
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div id="volumeDiv">
-                            <label for="volumeNumero">Medida de Volume:</label>
+                            <label for="volumeNumero">Medida de Volume</label>
                             <div class="input-select-wrapper">
                                 <input id="volumeNumero" type="number" value="">
                                 <select id="medidaVolume" name="medidaVolume">
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div id="comprimentoDiv">
-                            <label for="unidadeComprimento">Unidade Comprimento:</label>
+                            <label for="unidadeComprimento">Unidade Comprimento</label>
                             <div class="input-select-wrapper">
                                 <input id="comprimento" type="number" value="">
                                 <select id="unidadeComprimento" name="unidadeComprimento">
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div id="massaDiv">
-                            <label for="massaNumero">Unidade de Massa:</label>
+                            <label for="massaNumero">Unidade de Massa</label>
                             <div class="input-select-wrapper">
                                 <input id="massaNumero" type="number" value="">
                                 <select id="unidadeDeMassa" name="unidadeMassa">
@@ -145,13 +145,13 @@
                             </div>
                         </div>
                         <div id="divTamanho">
-                            <label for="tamanho">Tamanho - P/GG:</label>
+                            <label for="tamanho">Tamanho - P/GG</label>
                             <select id="tamanhoLetras" name="tamanhoLetras">
                                 <option value="">Selecione</option>
                             </select>
                         </div>
                         <div id="divTamanhoNUm">
-                            <label for="tamanhoNumeros">Tamanho - Numeração:</label>
+                            <label for="tamanhoNumeros">Tamanho - Numeração</label>
                             <select id="tamanhoNumeros" name="tamanho">
                                 <option value="">Selecione</option>
                             </select>
@@ -160,7 +160,7 @@
 
                     <div id="precoCustoDiv" class="form-group">
                         <div class="input-wrapper">
-                            <label for="precoCusto">Preço de Compra:</label>
+                            <label for="precoCusto">Preço de Compra</label>
                             <input value="0,00" id="precoCusto" name="preco" autocomplete="off">
                         </div>
 
@@ -170,12 +170,12 @@
                         </div>
 
                         <div class="select-wrapper">
-                            <label for="lucro">Lucro Bruto (R$):</label>
+                            <label for="lucro">Lucro Bruto (R$)</label>
                             <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
                         </div>
 
                         <div class="select-wrapper">
-                            <label for="precoVenda">Preço de Venda:</label>
+                            <label for="precoVenda">Preço de Venda</label>
                             <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
                         </div>
                     </div>
@@ -184,13 +184,13 @@
                         <textarea style="display: none;" id="observacoes" name="observacoes"
                             autocomplete="off"></textarea>
                         <div id="div-cnpj" class="select-wrapper">
-                            <label for="fornecedor">🔍 Filtrar por CNPJ:</label>
+                            <label for="fornecedor">🔍 Filtrar por CNPJ</label>
                             <div class="input-select-wrapper">
                                 <input id="cnpjFilter" name="fornecedor">
                             </div>
                         </div>
                         <div id="divFornecedor" class="select-wrapper">
-                            <label for="fornecedor">Nome Fantasia:</label>
+                            <label style="width: 100%;" for="fornecedor">Nome Fantasia:</label>
                             <div class="input-select-wrapper">
                                 <select id="fornecedor" name="fornecedor" disabled>
                                     <option value="1">Fornecedor não Cadastrado</option>
@@ -200,7 +200,7 @@
                     </div>
                     <div class="form-group">
                         <div id="estoqueDiv" class="select-wrapper">
-                            <label for="estoqueQtd">Estoque Inicial:</label>
+                            <label for="estoqueQtd">Estoque Inicial</label>
                             <div class="input-select-wrapper">
                                 <input value="" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
                                 <select id="unidadeEstoque" name="unidadeEstoque">
@@ -212,20 +212,23 @@
                     </div>
                 </section>
             </div>
-            <div style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
-                <footer class="div-form__footer" style="width: 100% ">
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                <footer class="div-form__footer">
                     <p style="font-size: 0.95rem;">
-                        ⚠️ <strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente como:
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                            alt=""><strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente
+                        como:
                         (<strong>Preço de Venda</strong> − <strong>Preço de Compra</strong>).
                         Este valor é apenas <strong>demonstrativo</strong> e <strong>não é salvo</strong> no sistema.
                         <strong>Verifique os valores com atenção antes de gravar os dados.</strong>
                     </p>
-                      <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                    <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
-                            src="../style//img/disquete.png" alt="">Gravar</button>
-                    <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                            alt="">Limpar</button>
-                </div>
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
+                                src="../style//img/disquete.png" alt="">Gravar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
                 </footer>
             </div>
         </div>

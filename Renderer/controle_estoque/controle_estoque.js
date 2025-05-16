@@ -31,29 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// function calcularPrecoVenda(preco_compra, markup, preco_venda) {
-//   // Converte os valores de entrada (strings) para números
-//   const precoCompraNum = parseFloat(preco_compra);
-//   const markupNum = parseFloat(markup);
-//   const precoVendaNum = parseFloat(preco_venda);
-
-//   if (isNaN(precoCompraNum) || precoCompraNum < 0) {
-//     throw new Error("Preço de compra deve ser um número válido e positivo.");
-//   }
-
-//   let valorFinalVenda;
-
-//   if (!isNaN(markupNum) && markupNum >= 0) {
-//     // Cálculo do preço de venda com base no markup
-//     valorFinalVenda = precoCompraNum + (precoCompraNum * (markupNum / 100));
-//     preco_venda.value = formatarMoeda(valorFinalVenda);
-//   } else if (!isNaN(precoVendaNum) && precoVendaNum > 0) {
-//     // Se o preço de venda for fornecido, calcula o percentual de markup
-//     const calculoMarkup = ((precoVendaNum - precoCompraNum) / precoCompraNum) * 100;
-//     markup.value = calculoMarkup.toFixed(2); // Atualiza o campo de markup com 2 casas decimais
-//   }
-// }
-
 // Função para formatar os valores como moeda brasileira
 function formatarMoeda(valor) {
   return valor.toFixed(2)

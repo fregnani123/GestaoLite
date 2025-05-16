@@ -1,182 +1,234 @@
-
 #ul-filtros {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    border-collapse: collapse;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-collapse: collapse;
+  padding: .5%;
 }
 
 /* Estilo unificado para cabeçalho e linhas */
 #ul-filtros li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
+  border-bottom: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
 }
 
 /* Estilo para o cabeçalho */
 .header-li {
-    font-weight: bold;
-    background-color: #f4f4f4;
-    border-bottom: 2px solid #aaa;
+  width: 100%;
+  margin-top: 1%;
+  list-style: none;
+  display: flex;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  border: 1px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  height: 2rem;
+  align-items: center;
 }
 
 /* Estilo alternado para as linhas */
 .li-list:nth-child(even) {
-    background-color: #f9f9f9;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+  background-color: #f9f9f9;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .li-list:nth-child(odd) {
-    background-color: #ffffff;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+  background-color: #ffffff;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 /* Efeito hover para as linhas */
 .li-list:hover {
-    background-color: #e6f7ff;
+  background-color: #e6f7ff;
 }
 
 /* Estilo unificado para spans no cabeçalho e nas linhas */
 #ul-filtros li span {
-    flex: 1; /* Define largura igual para todas as colunas */
-    text-align: center;
-    padding: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  flex: 1;
+  /* Define largura igual para todas as colunas */
+  text-align: center;
+  padding: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Ajuste especial para a segunda coluna (nome do produto) */
 #ul-filtros li span:nth-child(2) {
-    flex: 4; /* Aloca mais espaço para o nome */
-    text-align: left; /* Nome alinhado à esquerda */
+  flex: 3;
+  /* Aloca mais espaço para o nome */
+  text-align: left;
+  /* Nome alinhado à esquerda */
 }
 
 /* Espaçamento entre spans */
 span {
-    margin-left: 2%;
+  margin-left: 10px;
 }
 
 /* Contêiner do formulário */
 .div-form-container-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 90%;
-    background-color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  height: 80%;
+  background-color: white;
 }
 
 .filtros {
-  height: 15vh;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  }
+}
 
 /* Resultado filtrado */
 .filtrados {
-    height: 75%;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: relative;
-    margin-top: 7%;
-}
-.info-row{
-    position: fixed;
-    width: 91.3%;
-    background-color: rgba(136, 255, 0, 0.196);
-    margin-top: -6.5%;
-    height: 7%;
-    font-weight: 700;
-}
-.header-row{
-    position: fixed;
-    width: 90.3%;
-    background-color: rgb(0, 38, 87);
-    margin-top: -2%;
-    height: 4%;
-    border: 1px solid rgb(0, 38, 87);
-    font-weight: 700;
-    color: white;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.titulo-filtrar{
-    background-color: #198754;
-    color: #fff;
-    padding: 10px 16px;
-    width: 8rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+.info-row {
+  width: 91.3%;
+  background-color: rgba(136, 255, 0, 0.196);
+  font-weight: 700;
+}
+
+.header-row {
+  position: fixed;
+  background-color: rgb(0, 38, 87);
+  margin-top: -2%;
+  height: 4%;
+  border: 1px solid rgb(0, 38, 87);
+  font-weight: 700;
+  color: white;
+}
+
+.titulo-filtrar {
+  background-color: #198754;
+  color: #fff;
+  padding: 10px 16px;
+  width: 8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .titulo-filtrar:hover {
-    background-color: #157347;
-    transform: scale(1.05);
-    font-size: 1.1rem;
-  }
+  background-color: #157347;
+  transform: scale(1.05);
+  font-size: 1.1rem;
+}
 
 
-  .divBtn-horizontal{
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3%;
-  }
-  /* Estilo da tabela */
+.divBtn-horizontal {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3%;
+}
+
+/* Estilo da tabela */
 table {
-    width: 99%;
-    background: #fff;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-    margin-top: 4%;
-  }
+  width: 99%;
+  background: #fff;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  margin-top: 4%;
+}
 
-  .filter-table th{
-    color: rgb(9, 9, 9);
-    border:rgb(0, 0, 0)solid rgb(255, 255, 255);
-    padding: .3rem;
-    font-size: 1rem;
-    margin: 1%;
-  }
+.filter-table th {
+  color: rgb(9, 9, 9);
+  border: rgb(0, 0, 0)solid rgb(255, 255, 255);
+  padding: .3rem;
+  font-size: 1rem;
+  margin: 1%;
+}
 
 .filter-table tr {
-    color: black;
-  }
-  /* Largura específica para colunas */
-   th:nth-child(1), td:nth-child(1) { /* Coluna 1: CPF */
-    width: 15%;  
-  }
- th:nth-child(2), td:nth-child(2) { /* Coluna 2: Nome */
-    width: 32%;  
-  }
-th:nth-child(3), td:nth-child(3) { /* Coluna 3: Data */
-    width: 15%;  
-  }
- th:nth-child(4), td:nth-child(4) { /* Coluna 4: Hora */
-    width: 15%;  
-  }
-th:nth-child(5), td:nth-child(5) { /* Coluna 5: Motivo */
-    width: 20%;  
-  }
- td {
-    padding-top: 1%;
-    border: none;
-  }
+  color: black;
+}
+
+/* Largura específica para colunas */
+th:nth-child(1),
+td:nth-child(1) {
+  /* Coluna 1: CPF */
+  width: 15%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  /* Coluna 2: Nome */
+  width: 32%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  /* Coluna 3: Data */
+  width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  /* Coluna 4: Hora */
+  width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  /* Coluna 5: Motivo */
+  width: 20%;
+}
+
+td {
+  padding-top: 1%;
+  border: none;
+}
 
 td {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding: 8px; 
+  padding: 8px;
   vertical-align: middle;
+}
+
+  .div-info-row{
+  height: 2.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
+  margin-top: 1%;
+  list-style: none;
+  display: flex;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  border-bottom: 2px solid #aaa;
+}
+
+.header-li span {
+  flex: 1;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Ajuste especial para a segunda coluna do cabeçalho (nome do produto) */
+.header-li span:nth-child(2) {
+  flex: 3;
+  text-align: left;
 }

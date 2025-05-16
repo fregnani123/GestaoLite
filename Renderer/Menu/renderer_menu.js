@@ -2,13 +2,13 @@ const menuPainel1 = [
     { id: '1', texto: 'Painel de controle', to: '../public/menu.html' },
     { id: '2', texto: 'Baixa no Estoque por Pedido', to: '../public/tela_vendas.html' },
     // { id: '2', texto: 'Realizar venda', to: '../public/padrao.html' },
-    { id: '3', texto: 'Relatórios de pedidos lançados', to: '../public/detalhe_vendas.html'},
+    // { id: '3', texto: 'Relatórios de pedidos lançados', to: '../public/detalhe_vendas.html'},
     { id: '4', texto: 'Gerenciar produto', to: '../public/registrar_produto.html' },
-    { id: '5', texto: 'Sistema de Crediário Próprio', to: '../public/crediario.html' },
+    // { id: '5', texto: 'Sistema de Crediário Próprio', to: '../public/crediario.html' },
     { id: '7', texto: 'Gerenciar Cliente', to: '../public/registrar_cliente.html' },
     { id: '8', texto: 'Gerenciar Fornecedor', to: '../public/fornecedor.html' },
     // { id: '9', texto: 'Controle de Estoque ', to: '../public/controle_estoque.html' },
-    { id: '10', texto: 'Agenda ', to: '../public/agenda.html' },
+    // { id: '10', texto: 'Agenda ', to: '../public/agenda.html' },
     // { id: '11', texto: 'Configurações ', to: '../public/config.html'},
 ]
 

@@ -339,6 +339,7 @@ input[readonly] {
     justify-content: right;
     height: 2.7rem;
     padding: 1%;
+     border-bottom: 2px solid black
 }
 
 .spanDescricao {

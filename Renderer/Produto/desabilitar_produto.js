@@ -5,7 +5,7 @@ const apiEndpoints = {
     updateDesativarProduto: 'http://localhost:3000/UpdateDesativar',
 };
 
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
     codigoEAN.focus();
 })
 
@@ -20,10 +20,10 @@ const btnDesativar = document.getElementById('btnDesativar');
 const linkID_4 = document.querySelector('.list-a4')
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#5f8ac1'; 
-  linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'white'; // Cor do texto
-  linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    linkID.style.background = '#5f8ac1';
+    linkID.style.textShadow = 'none'; // Sem sombra de texto
+    linkID.style.color = 'white'; // Cor do texto
+    linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_4);
 
@@ -68,32 +68,34 @@ function fetchAllProdutos(callback) {
 
 
 async function desativarProduto(produto) {
- try {
-     const patchResponse = await fetch(apiEndpoints.updateDesativarProduto , {
-         method: 'PATCH',
-         headers: {
-             'x-api-key': 'segredo123',
-             'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(produto), // Apenas serialize aqui
-     });
+    try {
+        const patchResponse = await fetch(apiEndpoints.updateDesativarProduto, {
+            method: 'PATCH',
+            headers: {
+                'x-api-key': 'segredo123',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(produto), // Apenas serialize aqui
+        });
 
-     if (!patchResponse.ok) {
-         console.log('Erro ao desativar estoque do produto');
-     } else {
-         console.log('produto desativado com sucesso');
-     }
- } catch (error) {
-     console.log('Erro durante a desativação do produto:', error);
- }
+        if (!patchResponse.ok) {
+            console.log('Erro ao desativar estoque do produto');
+        } else {
+            console.log('produto desativado com sucesso');
+        }
+    } catch (error) {
+        console.log('Erro durante a desativação do produto:', error);
+    }
 };
 
 
 // Função para renderizar os produtos
 function renderProdutos(renderer, produtos) {
     renderer.innerHTML = ''; // Limpa a lista antes de renderizar
-
+    const divBtns = document.getElementById('div-btns');
+    divBtns.innerHTML = ''; // <- Limpa os botões antigos
     // Dados dos produtos
+    
     let unidades = ['un', 'cx', 'rolo', 'pc'];
 
     produtos.forEach(produto => {
@@ -106,11 +108,11 @@ function renderProdutos(renderer, produtos) {
 
         const spanNome = document.createElement('span');
         let texto = produto.nome_produto;
-        
+
         if (produto.nome_cor_produto?.trim()) {
             texto += ` ${produto.nome_cor_produto}`;
         }
-        
+
         if (produto.tamanho_letras?.trim()) {
             texto += ` ${produto.tamanho_letras}`;
         }
@@ -118,11 +120,11 @@ function renderProdutos(renderer, produtos) {
         if (produto.tamanho_numero?.trim()) {
             texto += ` tam.${produto.tamanho_numero}`;
         }
-        
+
         if (produto.medida_volume?.trim()) {
             texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
         }
-        
+
         if (produto.unidade_massa?.trim()) {
             texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
         }
@@ -131,7 +133,7 @@ function renderProdutos(renderer, produtos) {
         }
 
         spanNome.textContent = texto || 'Produto desconhecido';
-        
+
 
         const spanPrecoCompra = document.createElement('span');
         spanPrecoCompra.textContent = `${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}`;
@@ -147,7 +149,7 @@ function renderProdutos(renderer, produtos) {
         const btnDesativar = document.createElement('button');
         btnDesativar.textContent = 'Desabilitar';
         btnDesativar.id = 'btnDesativar'; // Adiciona um id ao botão
-        
+
 
         li.appendChild(spanCodigo);
         li.appendChild(spanNome);
@@ -170,7 +172,7 @@ function applyFilters() {
     // Filtra os produtos com base no código EAN
     const filteredProducts = allProducts.filter(produto => {
         const produtoEAN = produto.codigo_ean ? String(produto.codigo_ean) : '';
- return Number(produto.produto_ativado) === 1 &&  codigoEANValue && produtoEAN.includes(codigoEANValue);
+        return Number(produto.produto_ativado) === 1 && codigoEANValue && produtoEAN.includes(codigoEANValue);
     });
     // Number(produto.produto_ativado) === 1 && 
     if (filteredProducts.length === 1) {
@@ -185,10 +187,10 @@ function applyFilters() {
         produtoSelecionado = null;
 
         if (filteredProducts.length === 0) {
-           alertMsg('Nenhum produto encontrado,verifique o código digitado.','info');
-           codigoEAN.value= ''
-           codigoEAN.focus();
-           return;
+            alertMsg('Nenhum produto encontrado,verifique o código digitado.', 'info');
+            codigoEAN.value = ''
+            codigoEAN.focus();
+            return;
         } else {
             ulFiltros.innerHTML = '<li class="info-row">Mais de um produto encontrado. Refine a busca.</li>';
         }
@@ -201,11 +203,11 @@ ulFiltros.addEventListener('click', (event) => {
         quantidade_estoque: 0,
         produto_ativado: 0
     };
-    
+
     if (event.target && event.target.id === 'btnDesativar') {
         desativarProduto(produtoDesativar)
         alertMsg('Produto desativado no sistema.', 'sucess');
-        ulFiltros.innerHTML =  '';
+        ulFiltros.innerHTML = '';
         codigoEAN.focus();
     }
 });
@@ -220,6 +222,6 @@ function clearInputs() {
 
 const filterButtonLimpar = document.getElementById('filterButtonLimpar');
 
-filterButtonLimpar.addEventListener('click',()=>{
+filterButtonLimpar.addEventListener('click', () => {
     location.reload();
-  })
+})

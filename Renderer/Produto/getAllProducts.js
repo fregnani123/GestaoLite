@@ -15,9 +15,9 @@ const filtrarProdutosButton = document.getElementById('filtrarProdutos');
 const linkID_4 = document.querySelector('.list-a4')
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#157347'; // Cor de fundo atualizada para verde
+ linkID.style.background = '#5f8ac1'; 
   linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'black'; // Cor do texto
+  linkID.style.color = 'white'; // Cor do texto
   linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_4);
@@ -96,9 +96,12 @@ function fetchAllProdutos(renderer) {
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
 
+const divInfo = document.querySelector('div-info-row')
+
 // Função para renderizar os produtos
 function renderProdutos(renderer, produtos) {
     renderer.innerHTML = '';
+    const divInfo = document.querySelector('.div-info-row')
 
     // Informações agregadas no topo
     const totalItens = produtos.length;
@@ -106,24 +109,11 @@ function renderProdutos(renderer, produtos) {
         return acc + (parseFloat(produto.preco_compra || 0) * parseInt(produto.quantidade_estoque || 0));
     }, 0);
 
-    const infoRow = document.createElement('li');
+    const infoRow = document.createElement('p');
     infoRow.classList.add('info-row');
-    infoRow.textContent = `Total de itens: ${totalItens} | Valor total em estoque (baseado no preço de compra): ${formatarMoedaBR(valorEstoque)}`;
+     divInfo.textContent = `Total de itens filtrados: ${totalItens} | Valor total em estoque (baseado no preço de compra): ${formatarMoedaBR(valorEstoque)}`;
     renderer.appendChild(infoRow);
 
-    // Cabeçalho das colunas
-    const headerRow = document.createElement('li');
-    headerRow.classList.add('header-row');
-    headerRow.innerHTML = `
-        <span>Código de Barras</span>
-        <span id="spanDescricaoProduto">Nome do Produto / Características</span>
-        <span>Estoque Atual</span>
-        <span>Preço Compra</span>
-        <span>Preço Venda</span>
-        <span>Qtd Vendida</span>
-      
-    `;
-    renderer.appendChild(headerRow);
 
     // Dados dos produtos
     let unidades = ['un', 'cx', 'Rolo', 'pc'];
@@ -172,7 +162,7 @@ function renderProdutos(renderer, produtos) {
         spanPrecoVenda.textContent = `${formatarMoedaBR(parseFloat(produto.preco_venda || 0))}`;
 
         const spanVendido = document.createElement('span');
-        spanVendido.textContent = produto.quantidade_vendido || 0;
+        spanVendido.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || 0;
 
         const spanEstoqueAtual = document.createElement('span');
         spanEstoqueAtual.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || 0;

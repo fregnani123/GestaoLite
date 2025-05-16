@@ -1,111 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-        <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-        <link rel="stylesheet" href="../style/css/css_global/btn.css">
-        <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-        <link rel="stylesheet" href="../style/css/css_global/info.css">
-        <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
-        <style>
-            #Informacoes-Produtos a {
-                background: var(--hover-color);
-                color: black;
-                text-shadow: none;
-                border-bottom: 2px solid black;
-                cursor: pointer;
-            }
-        </style>
-        <title>Informações de Produto</title>
-    </head>
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
+    <style>
+        #Informacoes-Produtos {
+            background: var(--hover-color);
+            color: rgb(255, 255, 255);
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Informações de Produto</title>
+</head>
+
 <body>
-    <header>
-        <nav style="background-color: rgb(0, 38, 87);">
-            <ul id="ul-Menu"></ul>
-        </nav>
-        <nav class="nav-menu-2">
-            <ul class="menu-secundario">
-                <li class="li-menu2">
-                    <a href="./registrar_produto.html" class="a2">Cadastrar novo Produto</a>
-                </li>
-                <li class="li-menu2">
-                    <a class="a2" href="./alterar_produto.html">Cadastro do Produto / Alterar</a>
-                </li>
-                <li class="li-menu2">
-                    <a class="a2" href="./desabilitar_produto.html">Desabilitar Produto</a>
-                </li>
-                <li id="Informacoes-Produtos" class="li-menu2">
-                    <a class="a2" href="">Estoque / Informações Gerais dos Produtos</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-          <div class="container-register"></div>
-          <div class="div-form" role="form">
-              <div class="div-form-display">
-                  <section class="div-form__body">
-                        <table class="filter-table">
-                            <tr>
-                                <th>Filtrar Cód. EAN:</th>
-                                <th>Filtrar Produto (Nome):</th>
-                                <th>Grupo:</th>
-                                <th>Sub-Grupo:</th>
-                                <th>Ações:</th>
-                            </tr>
-                            <tr>
-                                <td> 
-                                    <input type="text" id="codigoEAN">
-                                </td>
-                                <td> 
-                                    <input type="text" id="produtoNome">
-                                </td>
-                                <td> 
-                                    <select id="grupo">
-                                        <option value="">Selecione</option>
-                                     
-                                    </select>
-                                </td>
-                                <td> 
-                                    <select id="subgrupo">
-                                        <option value="">Selecione</option>
-                                        
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class='divBtn-horizontal'>
-                                    <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
-                                        src="../style//img/procurar.png" alt="">Buscar</button>
-                                    <button id="limparButton-info"><img class="img-excluir"
-                                        src="../style//img/excluir.png" alt=""><img class="img-excluir"
-                                        src="../style//img/procurar.png" alt="">Buscar</button>
-                                </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="div-form-container-info">
-                            <div class="filtrados">
-                                <ul id="ul-filtros">
-                                    <li class="header-li">
-                                        <span>Código EAN</span><span>Descrição Produto</span><span>Preço Compra</span><span>Preço
-                                            Venda</span><span>Qtd Vendida</span><span>Estoque Atual</span>
-                                    </li>
-                                </ul>
-                            </div>
+
+    <body>
+        <header>
+            <nav>
+                <ul id="ul-Menu"></ul>
+            </nav>
+        </header>
+
+        <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+        <div class="container-register"></div>
+        <div class="div-form">
+            <div class="atalhos-1">
+                <div class="atalhos">
+                    <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou
+                                botão.</strong></span>
+                    </p>
+                    <div class="menu-secundario">
+                        <div class="pagamento">
+                            <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
+                            <a class="atalhos-btn" id="alterar-produto" href="./alterar_produto.html">Edição de Produto
+                                e Informações</a>
+                            <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                            <a class="atalhos-btn" id="Informacoes-Produtos" class="a2" href="">Informações e Estoque de Produtos</a>
+                            <a class="atalhos-btn" href="./controle_estoque.html">
+                                Controle de Estoque — Entradas e Saídas</a>
                         </div>
-                  </section>
-              </div>
-          </div>
-  </body>
-  <script src="../Renderer/Menu/renderer_menu.js"></script>
-  <script src="../Renderer/services/alertMsg.js"></script>
-  <script src="../Renderer/services/formatters.js"></script>
-  <script src="../Renderer/Produto/getAllProducts.js"></script>
-  </html> 
-  
-  
+                        <div class="img-fgl">
+                            <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-inputs">
+                <div style="display: flex; width: 100%; height: 100%;background-color: rebeccapurple;">
+                    <div class="div-form-display" style=" border:none">
+                        <section class="div-form__body-info">
+
+                            <div style="height: 25%;">
+                                <div style="display: flex; height: 100%;  display: flex; align-items: center; gap: 1%;">
+
+                                    <div style="width: 20%;">
+                                        <label>Filtrar Cód. EAN</label>
+                                        <input type="text" id="codigoEAN">
+                                    </div>
+                                    <div style="width: 50%;">
+
+                                        <label> Filtrar Produto (Nome)</label>
+                                        <input type="text" id="produtoNome">
+                                    </div>
+                                    <div style="width: 20%;">
+                                        <label> Filtrar Grupo</label>
+                                        <select id="grupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </div>
+                                    <div style="width: 20%;">
+                                        <label> Filtrar Sub-Grupo</label>
+                                        <select id="subgrupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="div-form-container-info">
+
+                                <div class="filtrados">
+                                    <li class="div-info-row">
+                                        Total de itens filtrados: 0 | Valor total em estoque (baseado no preço de
+                                        compra): R$ 0,00
+                                    </li>
+                                    <ul style="list-style: none; padding: 0; margin: 0; width: 100%;">
+                                        <li class="header-li">
+                                            <span>Código EAN</span>
+                                            <span>Descrição Produto</span>
+                                            <span>Estoque Atual</span>
+                                            <span>Preço Compra</span>
+                                            <span>Preço Venda</span>
+                                            <span>Qtd Vendida</span>
+                                          
+                                        </li>
+                                    </ul>
+
+                                    <div style="max-height: 400px; overflow-y: auto;">
+                                        <ul id="ul-filtros" style="margin-bottom: 5%;">
+                                            <!-- Seus <li class="li-list"> serão adicionados aqui dinamicamente -->
+                                        </ul>
+                                    </div>
+
+                                    <div style="max-height: 400px; overflow-y: auto;">
+                                        <ul id="ul-filtros" style="margin-bottom: 5%;">
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <div
+                            style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%; margin-top: -1%;">
+                            <footer class="div-form__footer" style="background-color: rgba(204, 221, 254, 0.266);">
+                                <p style="font-size: 1rem;justify-content: center;text-align: center;">
+                                    <img style="width: 1.3rem; margin-right: 1%;" src="../style/img/informacoes.png"
+                                        alt=""><strong>Informação:</strong> Por padrão, esta tela exibe todos os produtos com seus dados e níveis de estoque. Para relatórios específicos, utilize os filtros acima e pressione Buscar.
+                                </p>
+                                <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                                    <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                            src="../style//img/procurar.png" alt="">Buscar</button>
+                                    <button id="limparButton-info"><img class="img-excluir"
+                                            src="../style//img/excluir.png" alt=""><img class="img-excluir"
+                                            src="../style//img/procurar.png" alt="">Limpar</button>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </body>
+    <script src="../Renderer/Menu/renderer_menu.js"></script>
+    <script src="../Renderer/services/alertMsg.js"></script>
+    <script src="../Renderer/services/formatters.js"></script>
+    <script src="../Renderer/Produto/getAllProducts.js"></script>
+
+</html>

@@ -45,20 +45,19 @@
                         <a class="atalhos-btn"  id="alterar-produto" href="./alterar_produto.html">Edição de Produto e Informações</a>
                         <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">Informações e Estoque de Produtos</a>
-                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                        <a class="atalhos-btn" href="./controle_estoque.html">
                             Controle de Estoque — Entradas e Saídas</a>
                     </div>
-                    <div class=""
-                        style="width: 100%;height: 61%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;">
+                    <div class="img-fgl">
                         <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        <div style="display: flex; flex-direction: column; width: 100%;">
+        <div class="container-inputs">
             <div style="display: flex; width: 100%; height: 100%;">
                 <section class="div-form-img">
-                    <p class="titulo-img">Foto Produto</p>
+                   <p class="titulo-img">Imagem do Produto</p>
                     <div class="quadro-img"><img class="img-produto" src="../style/img/alterar.png"
                             alt="Produto sem imagem."></div>
                     <div style="width: 100%;"><input type="file" class="produto-imagem" id="produto-imagem"
@@ -73,14 +72,14 @@
                                 autocomplete="off">
                         </div>
                         <div class="div-nomeProduto">
-                            <label for="nomeProduto">Nome / Descrição:</label>
+                            <label style="width: 100%;" for="nomeProduto">Nome / Descrição</label>
                             <input style="margin-bottom: 2%;" type="text" class="nomeProduto" id="nomeProduto"
                                 name="nome" autocomplete="off" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <div id="divGrupo" class="select-wrapper">
-                            <label for="categoria-produto">Grupo:</label>
+                            <label style="width: 100%;" for="categoria-produto">Grupo:</label>
                             <div class="input-select-wrapper">
                                 <select id="grupo" name="grupo">
                                     <option value="">Selecione</option>
@@ -89,7 +88,7 @@
                             </div>
                         </div>
                         <div id="divSubGrupo" class="select-wrapper">
-                            <label for="grupo">Sub-Grupo:</label>
+                            <label  style="width: 100%;" for="grupo">Sub-Grupo:</label>
                             <div class="input-select-wrapper">
                                 <select id="sub-grupo" name="grupo">
                                     <option value="">Selecione</option>
@@ -100,7 +99,7 @@
                     </div>
                     <div id="form-group-choose" class="form-group">
                         <div id="divColor" class="select-wrapper">
-                            <label for="cor">Cor do Produto:</label>
+                            <label style="width: 100%;" for="cor">Cor do Produto</label>
                             <div class="input-select-wrapper">
                                 <select id="corProduto" name="corProduto">
                                     <option value="">Selecione</option>
@@ -109,7 +108,7 @@
                             </div>
                         </div>
                         <div class="escolhaUnDiv" style="width: 40%;">
-                            <label for="escolhaUM"><strong>Alterar Unidade de Medida:</strong></label>
+                            <label for="escolhaUM">Caracteristica do Produto</label>
                             <div class="input-select-wrapper">
                                 <select id="escolhaUM">
                                     <option value="">Selecione</option>
@@ -122,7 +121,7 @@
                             </div>
                         </div>
                         <div id="volumeDiv">
-                            <label for="volumeNumero">Medida de Volume:</label>
+                            <label for="volumeNumero">Medida de Volume</label>
                             <div class="input-select-wrapper">
                                 <input id="volumeNumero" type="number" value="">
                                 <select id="medidaVolume" name="medidaVolume">
@@ -131,7 +130,7 @@
                             </div>
                         </div>
                         <div id="comprimentoDiv">
-                            <label for="unidadeComprimento">Unidade Comprimento:</label>
+                            <label for="unidadeComprimento">Unidade Comprimento</label>
                             <div class="input-select-wrapper">
                                 <input id="comprimento" type="number" value="">
                                 <select id="unidadeComprimento" name="unidadeComprimento">
@@ -140,7 +139,7 @@
                             </div>
                         </div>
                         <div id="massaDiv">
-                            <label for="massaNumero">Unidade de Massa:</label>
+                            <label for="massaNumero">Unidade de Massa</label>
                             <div class="input-select-wrapper">
                                 <input id="massaNumero" type="number" value="">
                                 <select id="unidadeDeMassa" name="unidadeMassa">
@@ -149,13 +148,13 @@
                             </div>
                         </div>
                         <div id="divTamanho" style="width: 20%;">
-                            <label for="tamanho">Tamanho - P/GG:</label>
+                            <label for="tamanho">Tamanho - P/GG</label>
                             <select id="tamanhoLetras" name="tamanhoLetras">
                                 <option value="">Selecione</option>
                             </select>
                         </div>
                         <div id="divTamanhoNUm" style="width: 20%;">
-                            <label for="tamanhoNumeros">Tam. Numeração:</label>
+                            <label for="tamanhoNumeros">Tam. Numeração</label>
                             <select id="tamanhoNumeros" name="tamanho">
                                 <option value="">Selecione</option>
                             </select>
@@ -163,7 +162,7 @@
                     </div>
                     <div id="precoCustoDiv" class="form-group">
                         <div class="input-wrapper">
-                            <label for="precoCusto">Preço de Compra:</label>
+                            <label for="precoCusto">Preço de Compra</label>
                             <input value="0,00" id="precoCusto" class="precoCusto" name="preco" autocomplete="off"
                                 readonly>
                         </div>
@@ -172,7 +171,7 @@
                             <input type="hidden" value="0" id="inputMarkup">
                         </div>
                         <div class="select-wrapper">
-                            <label for="precoVenda">Preço de Venda:</label>
+                            <label for="precoVenda">Preço de Venda</label>
                             <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
                         </div>
                     </div>
@@ -180,13 +179,13 @@
                         <textarea style="display: none;" id="observacoes" name="observacoes"
                             autocomplete="off"></textarea>
                         <div id="divCnpj" class="select-wrapper">
-                            <label for="fornecedor">Filtrar CNPJ:</label>
+                            <label for="fornecedor">Filtrar CNPJ</label>
                             <div class="input-select-wrapper">
                                 <input style="width: 100%;" id="cnpjFilter" name="fornecedor">
                             </div>
                         </div>
                         <div id="divFornecedor" class="select-wrapper">
-                            <label for="fornecedor">Nome Fantasia:</label>
+                            <label style="width: 100%;" for="fornecedor">Nome Fantasia</label>
                             <div class="input-select-wrapper">
                                 <select style="margin-bottom: 2%; width: 100%;" id="fornecedor" name="fornecedor"
                                     disabled>
@@ -200,7 +199,7 @@
                     </div>
                     <div class="form-group">
                         <div id="estoqueDiv" class="select-wrapper">
-                            <label for="estoqueQtd">Estoque Inicial:</label>
+                            <label for="estoqueQtd">Estoque Inicial</label>
                             <div class="input-select-wrapper">
                                 <input value="" type="number" id="estoqueQtd" class="estoqueReadonly" name="estoqueQtd"
                                     autocomplete="off" readonly>
@@ -217,7 +216,7 @@
                 style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer">
                     <p style="font-size: 0.95rem;">
-                        ⚠️ <strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores serão
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png" alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores serão
                         <strong>substituídas</strong>.
                         Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
                         Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o

@@ -22,7 +22,8 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    border-bottom: 1px solid black;
+    font-weight: 600;
 }
 #filtrar{
     margin-top: -1%;
@@ -36,7 +37,7 @@ select {
     padding: .5%; /* Ajusta o preenchimento */
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     height: 2.25rem; 
     box-sizing: border-box; 
     align-items: center;
@@ -46,6 +47,7 @@ select {
 
 select{
     margin-left: 1%;
+    font-size: 1rem;
 }
 
 input:focus {
@@ -60,7 +62,7 @@ input:focus {
     text-align: center;
     border: none;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0); 
-    margin-left:5%;
+    margin-left:.3%;
 }
 #desconto{
     width: 40%;
@@ -96,11 +98,7 @@ input:focus {
 .input-select-wrapper{
     width: 100%;
 }
-label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 
 #divFornecedor{
     width: 70%;
@@ -144,16 +142,17 @@ background-color:var(--input-readonly);}
 #estoqueDiv{width: 40%;}
 #divCnpj,#div-ie{ width:30%;}
 #div-cpf{width: 25%;}
-#div-nome{width: 50%;}
+#div-nome{width: 75%;margin-bottom: 1%;}
 #div-tel{width: 30%;}
-#div-email{width: 50%;}
-.div-produtoEncontrado{width: 50%;}
-.div-precoCompra{width: 20%;}
-.div-qtdeMovimentacao{width: 25%;}
+#div-email{width: 80%;}
+.div-produtoEncontrado{width: 75%;margin-bottom: 1%;}
+.div-atual{width: 25%;}
+.div-precoCompra{width: 25%;}
+.div-qtdeMovimentacao{width: 30%;}
 .selectSituacao{width: 35%;}
 .dataMovimentacao{width: 25%;}
-#div-logradouro{width: 55%;}
-#div-bairro{width: 30%;}
+#div-logradouro{width: 70%;margin-bottom: 1%;}
+#div-bairro{width: 50%;margin-bottom: .5%;}
 #div-uf{width: 15%;}
 #div-cidade{width: 35%;}
 .div-codigoDeBarras{width: 30%;}
@@ -165,7 +164,6 @@ background-color:var(--input-readonly);}
 #div-atividade{width: 40%;}
 #div-fantasia{width: 55%;}
 #div-ocupação{width: 30%;}
-
 #cnpjInfo{font-size: 1rem;}
 
 input[type="radio"] {

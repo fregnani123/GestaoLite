@@ -1,144 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-        <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-        <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-        <link rel="stylesheet" href="../style/css/css_global/btn.css">
-        <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-        <link rel="stylesheet" href="../style/css/css_global/info.css">
-        <style>
-            #cadastro-fornecedor a {
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
+    <style>
+        #estoque-entrada-saida {
             background: var(--hover-color);
-            color: black;
+            color: rgb(255, 255, 255);
             text-shadow: none;
             border-bottom: 2px solid black;
             cursor: pointer;
         }
-        .form-group{
+
+        .form-group {
             display: flex;
         }
-        </style>
-        <title>Controle de Estoque</title>
-    </head>
+    </style>
+    <title>Controle de Estoque</title>
+</head>
+
 <body>
     <header>
         <nav style="background-color: rgb(0, 38, 87);">
             <ul id="ul-Menu"></ul>
         </nav>
-        <nav class="nav-menu-2">
-            <ul class="menu-secundario">
-                <li id="cadastro-fornecedor">
-                    <a id="btn-flex">Controle Manual de Estoque - Entrada/Saída</a>
-                </li>
-                <!-- <li id="li-xml">
-                    <a id="btn-flex">Importar XML</a>
-                </li> -->
-            </ul>
-        </nav>
     </header>
-    <div class="container">
-          <div class="container-register"></div>
-          <div class="div-form" role="form">
-              <div class="div-form-display">
-                <section class="div-form-img">
-                    <p class="titulo-img">Controle Estoque</p>
-                      <img class="img-produto" src="../style/img/caixa-de-entrada.png" alt="Produto sem imagem.">
-                  </section>
-                  <section class="div-form__body">
-                    <div class="form-group">
-                        <div id="div-estoque" class="div-codigoEanFind">
-                            <label for="cnpj">Filtrar Cód. (EAN):</label>
-                            <input type="text" id="CodigoEanBuscar">
-                        </div>
-                        <div id="div-estoque" class="div-produtoEncontrado">
-                            <label for="">Descrição Produto:</label>
-                            <input type="text" id="produtoEncontrado" readonly>
-                        </div>
-                      
-                        <div id="div-estoque" class="div-atual">
-                            <label class="" for="">Estoque Atual:</label>
-                            <input style="background-color: #007bff00;" id="estoqueAtual" type="text" readonly
-                                type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-estoque" class="div-precoCompra">
-                            <label for="alterarPreco">Alterar valores:</label>
-                            <select id="alterarPreco">
-                                <option value="1">Não</option>
-                                <option value="2">Sim</option>
-                            </select>
-                        </div>
-                        <div id="div-estoque" class="div-precoCompra">
-                            <label for="inputPrecoCompra">Preço de Compra:</label>
-                            <input style="background-color:rgb(232, 232, 232);" id="inputPrecoCompra" type="text" readonly>
-                        </div>
-                        <!-- <div id="div-estoque" class="div-precoCompra"> -->
-                            <!-- <label class="" for="">Markup %:</label> -->
-                            <input type="hidden" style="background-color:rgb(232, 232, 232)" id="MarkupEstoque" type="text" readonly>
-                        <!-- </div> -->
-                        <div id="div-estoque" class="div-precoCompra">
-                            <label class="" for="">Preço de Venda:</label>
-                            <input style="background-color:rgb(232, 232, 232);" id="precoVendaEstoque" type="text" readonly
-                                type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="div-estoque" class="div-qtdeMovimentacao">
-                            <label class="" for="">Qtde a ser Movimentada:</label>
-                            <input id="qtdeMovimentacao">
-                        </div>
-                        <div id="div-estoque" class="selectSituacao">
-                            <label class="labelFornecedor" for="razaoSocial">Situação do Movimento:</label>
-                            <select name="" id="situacao">
-                                <option value="">Selecione</option>
-                                <option value="1">Entrada</option>
-                                <option value="2">Saída</option>
-                            </select>
-                        </div>
-                        <div id="div-estoque" class="selectSituacao">
-                            <label class="" for="">Motivo da Movimentação:</label>
-                            <select name="" id="movimento">
-                                <option value="">Selecione</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <!-- <div id="div-estoque" class="selectSituacao">
-                            <label class="" for="">Núm. da venda a ser vinculado</label> -->
-                            <input type="hidden" style="background-color: #007bff00;" id="venda_id" readonly>
-                        <!-- </div>
-                        <div id="div-estoque"  class="selectSituacao"> -->
-                            <!-- <label class="" for="">Chave de Identificação da Compra</label> -->
-                            <input type="hidden" style="background-color: #007bff00;" id="inputqtChaveCompra" readonly>
-                        <!-- </div> -->
-                        <div id="div-estoque" class="dataMovimentacao">
-                            <label class="" for="">Data da Movimentação</label>
-                            <input id="dateEstoque" type="date" readonly>
-                        </div>
-                    </div>
-                  </section>
-    
-              </div>
-              <footer class="div-form__footer">
-                  <p class="informativo">⚠️ <strong> Atenção: Ao alterar os dados do produto, as informações antigas serão
-                      substituídas. Caso necessário, revise antes de aplicar a alteração.</strong></p>
-                      <button id="btn-estoque"><img class="img-disquete" src="../style//img/disquete.png">Alterar</button>
-                    <button id="limparButton"><img class="img-excluir"
-                        src="../style//img/excluir.png" alt="">Limpar</button>
-              </footer>
-          </div>
-  </body>
-  <script src="../Renderer/services/alertMsg.js"></script>
-  <script src="../Renderer/services/converte_moeda.js"></script>
-  <script src="../Renderer/Menu/renderer_menu.js"></script>
-  <script src="../Renderer/services/formatters.js"></script>
-  <script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
-  <script src="../Renderer/controle_estoque/controle_estoque.js"></script>
-  </html> 
-  
-  
 
+    <body>
+        <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+        <div class="container-register"></div>
+        <div class="div-form">
+            <div class="atalhos-1">
+                <div class="atalhos">
+                    <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou
+                                botão.</strong></span>
+                    </p>
+                    <div class="menu-secundario">
+                        <div class="pagamento">
+                            <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
+                            <a class="atalhos-btn" id="alterar-produto" href="./alterar_produto.html">Edição de Produto
+                                e Informações</a>
+                            <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                            <a class="atalhos-btn" id="Informacoes-Produtos" class="a2"
+                                href="./informacoes_produtos.html">Informações e Estoque de
+                                Produtos</a>
+                            <a id="estoque-entrada-saida" class="atalhos-btn" href="./controle_estoque.html">
+                                Controle de Estoque — Entradas e Saídas</a>
+                        </div>
+                        <div class="img-fgl">
+                            <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-inputs">
+                <div class="div-form-display">
+                    <div style="display: flex; width: 100%; height: 100%;">
+                        <section class="div-form-img">
+                            <p class="titulo-img" style="margin-right: 1.5%;"><span>Controle de Estoque — Entradas e
+                                    Saídas</span></p>
+                            <div class="quadro-img"><img style="width: 250px;height: auto;" class="img-produto"
+                                    src="../style/img/em-estoque.png" alt="">
+                        </section>
+                        <section class="div-form__body">
+                            <div class="form-group">
+                                <div style="margin-left: 20%;">
+                                    <p class="titulo-img"><span>Imagem do Produto</span></p>
+                                    <div class="quadro-img"><img class="img-produto" src="../style/img/alterar.png"
+                                            alt="Produto sem imagem."></div>
+                                </div>
+                                <div id="div-estoque" class="div-codigoEanFind">
+                                    <label for="cnpj">🔍 Filtrar Cód. (EAN):</label>
+                                    <input type="text" id="CodigoEanBuscar">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div id="div-estoque" class="div-produtoEncontrado">
+                                    <label for="">Descrição Produto:</label>
+                                    <input type="text" id="produtoEncontrado" readonly>
+                                </div>
+                                <div id="div-estoque" class="div-atual">
+                                    <label class="" for="">Estoque Atual:</label>
+                                    <input id="estoqueAtual" type="text" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+
+                                </div>
+                                <div id="div-estoque" class="div-precoCompra">
+                                    <label for="alterarPreco">Alterar valores:</label>
+                                    <select id="alterarPreco">
+                                        <option value="1">Não</option>
+                                        <option value="2">Sim</option>
+                                    </select>
+                                </div>
+                                <div id="div-estoque" class="div-precoCompra">
+                                    <label for="inputPrecoCompra">Preço de Compra:</label>
+                                    <input style="background-color:rgb(232, 232, 232);" id="inputPrecoCompra"
+                                        type="text" readonly>
+                                </div>
+                                <!-- <div id="div-estoque" class="div-precoCompra"> -->
+                                <!-- <label class="" for="">Markup %:</label> -->
+                                <input type="hidden" style="background-color:rgb(232, 232, 232)" id="MarkupEstoque"
+                                    type="text" readonly>
+                                <!-- </div> -->
+                                <div id="div-estoque" class="div-precoCompra">
+                                    <label class="" for="">Preço de Venda:</label>
+                                    <input style="background-color:rgb(232, 232, 232);" id="precoVendaEstoque"
+                                        type="text" readonly type="text">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+
+                                <div id="div-estoque" class="selectSituacao">
+                                    <label class="labelFornecedor" for="razaoSocial">Situação do Movimento:</label>
+                                    <select name="" id="situacao">
+                                        <option value="">Selecione</option>
+                                        <option value="1">Entrada</option>
+                                        <option value="2">Saída</option>
+                                    </select>
+                                </div>
+                                <div id="div-estoque" class="selectSituacao">
+                                    <label class="" for="">Motivo da Movimentação:</label>
+                                    <select name="" id="movimento">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="div-qtdeMovimentacao">
+                                    <label class="" for="">Qtde a ser Movimentada:</label>
+                                    <input id="qtdeMovimentacao">
+                                </div>
+                                <!-- <div id="div-estoque" class="selectSituacao">
+                            <label class="" for="">Núm. da venda a ser vinculado</label> -->
+                                <input type="hidden" style="background-color: #007bff00;" id="venda_id" readonly>
+                                <!-- </div>
+                        <div id="div-estoque"  class="selectSituacao"> -->
+                                <!-- <label class="" for="">Chave de Identificação da Compra</label> -->
+                                <input type="hidden" style="background-color: #007bff00;" id="inputqtChaveCompra"
+                                    readonly>
+                                <!-- </div> -->
+                                <div >
+                                    <label style="width: 100%" for="">Data da Movimentação</label>
+                                    <input id="dateEstoque" type="date" readonly>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%; margin-top: -1%;">
+                        <footer class="div-form__footer">
+                            <p style="font-size: 1rem;justify-content: center;text-align: center;">
+                                <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                                    alt=""><strong>Atenção:</strong> Ao <strong>alterar</strong> os dados do produto, as
+                                informações antigas serão <strong>substituídas</strong>. Caso necessário,
+                                <strong>revise</strong> antes de aplicar a alteração.
+                                O produto precisa estar <strong>previamente cadastrado</strong> no sistema para que
+                                possa ser alterado.
+
+                            </p>
+                            <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                                <button id="btn-estoque"><img class="img-disquete"
+                                        src="../style//img/disquete.png">Alterar</button>
+                                <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                        alt="">Limpar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../Renderer/services/alertMsg.js"></script>
+    <script src="../Renderer/services/converte_moeda.js"></script>
+    <script src="../Renderer/Menu/renderer_menu.js"></script>
+    <script src="../Renderer/services/formatters.js"></script>
+    <script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
+    <script src="../Renderer/controle_estoque/controle_estoque.js"></script>
+
+</html>

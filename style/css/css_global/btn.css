@@ -91,7 +91,15 @@ width: 20px;
 height: 20px;
 margin-right: 10px;
 }
-.img-cadeado,.img-user {
+.img-cadeado{
+width: 20px;
+height: 20px;
+margin-right: 10px;
+margin-left: 1%;
+margin-top: .7%;
+}
+
+.img-user {
 width: 20px;
 height: 20px;
 margin-right: 10px;
