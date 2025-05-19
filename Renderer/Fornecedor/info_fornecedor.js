@@ -3,15 +3,14 @@ const ulFiltros = document.getElementById('ul-filtros');
 const cnpjInfo = document.getElementById('cnpjInfo');
 const fornecedorId = document.getElementById('fornecedorId');
 const razaoSocial = document.getElementById('razaoSocial');
-const filtrarProdutosButton = document.getElementById('filtrarProdutos');
 const linkID_8 = document.querySelector('.list-a8');
 const filterButtonLimpar = document.querySelector('.limparButton-info');
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#5f8ac1'; 
-  linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'white'; // Cor do texto
-  linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    linkID.style.background = '#5f8ac1';
+    linkID.style.textShadow = 'none'; // Sem sombra de texto
+    linkID.style.color = 'white'; // Cor do texto
+    linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_8);
 
@@ -34,15 +33,21 @@ function getFornecedor(cnpj) {
             'Content-Type': 'application/json',
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            const fornecedor = data.find(f => f.cnpj === cnpj) || {};
-            razaoSocial.value = fornecedor.razao_social || "";
-            nomeFantasia.value = fornecedor.nome_fantasia || "";
-            fornecedorId.value = fornecedor.fornecedor_id || "";
-        })
-        .catch(error => console.error('Erro ao buscar dados:', error));
+    .then(response => response.json())
+    .then(data => {
+        const fornecedor = data.find(f => f.cnpj === cnpj) || {};
+        razaoSocial.value = fornecedor.razao_social || "";
+        nomeFantasia.value = fornecedor.nome_fantasia || "";
+        fornecedorId.value = fornecedor.fornecedor_id || "";
+
+        // Se encontrou fornecedor, aplica os filtros automaticamente
+        if (fornecedorId.value) {
+            applyFilters();
+        }
+    })
+    .catch(error => console.error('Erro ao buscar dados:', error));
 }
+
 
 formatarCNPJ(cnpjInfo);
 inputMaxCaracteres(cnpjInfo, 18);
@@ -68,7 +73,7 @@ async function fetchAllProdutos() {
                 'x-api-key': 'segredo123',
                 'Content-Type': 'application/json',
             }
-        }    
+        }
         );
         const data = await response.json();
         allProducts = data; // Agora a variável tem os produtos carregados
@@ -79,9 +84,9 @@ async function fetchAllProdutos() {
 }
 
 
-function produtoSemFornecedor(){
-    const allProductsSF = allProducts.filter(produtosSF => produtosSF.fornecedor_id === 1 || produtosSF.fornecedor_id === null )
-     renderProdutos(ulFiltros, allProductsSF)
+function produtoSemFornecedor() {
+    const allProductsSF = allProducts.filter(produtosSF => produtosSF.fornecedor_id === 1 || produtosSF.fornecedor_id === null)
+    renderProdutos(ulFiltros, allProductsSF)
 }
 
 function renderProdutos(renderer, produtos) {
@@ -90,35 +95,21 @@ function renderProdutos(renderer, produtos) {
     const totalItens = produtos.length;
     const valorEstoque = produtos.reduce((acc, produto) => acc + (parseFloat(produto.preco_compra || 0) * parseInt(produto.quantidade_estoque || 0)), 0);
 
-    const infoRow = document.createElement('li');
-    infoRow.classList.add('info-row');
-
+    const semVinculo = document.querySelector('.div-info-row')
     // Verifica se os produtos exibidos são aqueles sem fornecedor vinculado (fornecedor_id === 1 ou null)
     const produtosSemFornecedor = produtos.every(produto => produto.fornecedor_id === 1 || produto.fornecedor_id === null);
 
     if (produtosSemFornecedor) {
-        infoRow.textContent = `⚠️ Total de produtos sem vínculo com fornecedor: ${totalItens} | Valor total em estoque não vinculado: ${formatarMoedaBR(valorEstoque)}`;
-        infoRow.style.background = 'rgb(255, 255, 192)';
-        infoRow.style.fontSize = '1.2';
-    } else {
-        infoRow.textContent = `Total de itens vinculados a este fornecedor: ${totalItens} | Valor total em estoque: ${formatarMoedaBR(valorEstoque)}`;
-         infoRow.style.background = '#295530';
-         infoRow.style.color = 'white'
-      
+        semVinculo.textContent = `⚠️ Total de produtos sem vínculo com fornecedor: ${totalItens} | Valor total em estoque (baseado no preço de compra): ${formatarMoedaBR(valorEstoque)}`;
+        semVinculo.style.background = 'rgb(255, 255, 192)';
+        semVinculo.style.fontSize = '1.2';
     }
 
-    renderer.appendChild(infoRow);
+
 
     const headerRow = document.createElement('li');
     headerRow.classList.add('header-row');
-    headerRow.innerHTML = `
-        <span>Código de Barras</span>
-        <span>Nome do Produto</span>
-        <span>Categoria</span>
-        <span>Preço de Compra</span>
-        <span>Qtd Vendida</span>
-        <span>Estoque Atual</span>`;
-    renderer.appendChild(headerRow);
+
 
     let unidades = ['un', 'cx', 'Rolo', 'pc'];
     produtos.forEach(produto => {
@@ -127,7 +118,6 @@ function renderProdutos(renderer, produtos) {
         li.innerHTML = `
             <span>${produto.codigo_ean || 'Sem código'}</span>
             <span>${produto.nome_produto || 'Produto desconhecido'}</span>
-            <span>${produto.grupo_id || 'Produto desconhecido'}</span>
             <span>${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}</span>
             <span>${produto.quantidade_vendido || 0}</span>
             <span>${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1] || ''}</span>`;
@@ -138,7 +128,7 @@ function renderProdutos(renderer, produtos) {
 
 function applyFilters() {
     if (!fornecedorId.value) {
-        alertMsg('Por favor, preencha o CNPJ corretamente antes de filtrar os produtos.','info',4000);
+        alertMsg('Por favor, preencha o CNPJ corretamente antes de filtrar os produtos.', 'info', 4000);
         return;
     }
 
@@ -155,6 +145,6 @@ function clearInputs() {
     document.getElementById('selectSubGrupo').value = '';
 }
 
-filtrarProdutosButton.addEventListener('click', applyFilters);
+
 
 produtoSemFornecedor()

@@ -1,40 +1,36 @@
-
-// Evento de input no campo CPF
 inputCPF.addEventListener("input", (e) => {
     const cpf = e.target.value
-    if (cpf.length === 14) { // Aguarda CPF completo antes de buscar
+    if (cpf.length === 14) {
         findCliente(cpf);
     } else {
-        clienteNome.value = ""; // Limpa o campo nome se CPF for apagado ou incompleto
+        clienteNome.value = "";
     }
 });
 
 cpfFilter.addEventListener("input", (e) => {
     const cpf = e.target.value
-    if (cpf.length === 14) { // Aguarda CPF completo antes de buscar
+    if (cpf.length === 14) {
         findCliente(cpf);
     } else {
-        clienteNome.value = ""; // Limpa o campo nome se CPF for apagado ou incompleto
+        clienteNome.value = "";
     }
 });
 
 // Função para renderizar os agendamentos na tabela
 function renderizarAgendamentos(agendamentos) {
     const containerForm = document.getElementById('div-container-form');
-    console.log("Agendamentos recebidos:", agendamentos); // Verifique se os dados estão chegando corretamente~
 
+    console.log("Agendamentos recebidos:", agendamentos);
     if (!containerForm) {
         console.error('Elemento de contêiner de formulário não encontrado!');
         return;
     }
 
-    // Criação da tabela
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
-    tbody.id = 'agenda-list'; // A lista de agendamentos será inserida aqui
+    tbody.id = 'agenda-list';
 
-    // Cabeçalho da tabela
     thead.innerHTML = `
         <tr>
             <th>CPF</th>
@@ -46,15 +42,9 @@ function renderizarAgendamentos(agendamentos) {
             <th>Ações</th>
         </tr>
     `;
-
-    // Adicionando o cabeçalho e o corpo da tabela
     table.appendChild(thead);
     table.appendChild(tbody);
-
-    // Inserir a tabela na div-container-form
     containerForm.appendChild(table);
-
-    // Limpa o conteúdo da tabela antes de adicionar novos dados
     tbody.innerHTML = '';
 
     if (agendamentos.length === 0) {
@@ -63,7 +53,6 @@ function renderizarAgendamentos(agendamentos) {
         tbody.appendChild(noDataMessage);
         return;
     }
-
     // Ordena os agendamentos por data (mais próxima primeiro)
     agendamentos.sort((a, b) => {
         const dataA = new Date(a.data.split('/').reverse().join('-'));
@@ -85,11 +74,9 @@ function renderizarAgendamentos(agendamentos) {
         return data;
     }
 
-    // Data de hoje sem horário
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
-    // Ajustando hoje +1 dia e -1 dia para comparação
     const hojeMais1 = new Date(hoje);
     hojeMais1.setDate(hoje.getDate() + 1);
 
@@ -269,7 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 const filtrarHistorico = document.getElementById('filtrarHistorico');
 const divHistorico = document.getElementById('div-table-historico');
 let clienteId = document.getElementById('clienteID');
@@ -304,12 +290,8 @@ filtrarHistorico.addEventListener('click', async (e) => {
     }
 });
 
-
 async function renderizarHistoricoAgendamento(agendamentosAPI, clienteId) {
-
     const agendamentos = await agendamentosAPI.filter(clienteFilter => clienteFilter.cliente_id === clienteId);
-
-
     const containerForm = document.getElementById('div-table-historico');
     console.log("Agendamentos filtrados:", agendamentos); // Verifique se os dados estão chegando corretamente~
     console.log("Agendamentos callback:", agendamentosAPI); // Verifique se os dados estão chegando corretamente~
@@ -505,7 +487,7 @@ async function renderizarHistoricoAgendamento(agendamentosAPI, clienteId) {
                 });
             });
             tdAcoes.appendChild(btnReagendar);
-            
+
             // Botão Cancelar
             const btnCancel = document.createElement('button');
             btnCancel.className = 'btn btn-cancel';
@@ -526,8 +508,7 @@ async function renderizarHistoricoAgendamento(agendamentosAPI, clienteId) {
         tbody.appendChild(tr);
     });
 }
-// Chama a função para carregar os dados assim que a página for carregada
-buscarAgendamentos();
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -556,6 +537,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 btnCadastrar.addEventListener('click', async (e) => {
     e.preventDefault();
+    const containerForm = document.getElementById('div-container-form');
 
     // Obtém a data e a hora atuais no fuso local
     const agora = new Date();
@@ -598,9 +580,10 @@ btnCadastrar.addEventListener('click', async (e) => {
     // Chama a função para cadastrar
     const response = await postNewAgendamento(produtoData);
 
+
     if (response) { // Se o cadastro foi bem-sucedido
         alertMsg('Novo agendamento cadastrado com sucesso!', 'success', 4000);
-
+        containerForm.innerHTML = ''
         setTimeout(() => {
             inputCPF.value = '';
             clienteNome.value = '';

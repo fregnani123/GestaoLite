@@ -3,9 +3,13 @@
     --background-venda: #1f3b57;
 }
 
-* {
-    font-family: Arial, sans-serif;
+*{
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
+strong{
+    font-weight: 600;
+}
+
 
 
 ul {

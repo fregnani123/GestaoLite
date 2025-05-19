@@ -1,19 +1,25 @@
 :root {
-    --secondary-bg-color: rgb(0, 38, 87);
-    /* Corrigido para "secondary" */
-    --title-text-color: rgb(0, 38, 87);
-    --border-color: #ddd;
-    --text-color: rgb(28, 28, 28);
-    --inactive-text-color: rgb(255, 255, 255);
-    /* Ainda não utilizado, mas mantido */
-    --menu-item-hover-bg: #dddddd00;
+    --primary-color: #1f3b57;
+    /* Azul escuro clássico */
+    --secondary-color: #2c4d6e;
+    /* Tom levemente mais claro */
+    --hover-color: #5f8ac1;
+    /* Destaque amarelo */
+    --text-color: #ffffff;
+    /* Texto branco */
+    --border-color: #a0a0a0;
+    /* Bordas cinza */
+    --submenu-bg: #f4f4f4;
+    /* Fundo do submenu */
+    --submenu-border: #8c8c8c;
+    /* Borda do submenu */
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,38 +27,47 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+.img-painel{
+    width: 600px;
+    margin-left: 5%;
+}
 
 header {
-    background-color: var(--secondary-bg-color);
     position: fixed;
     width: 100%;
     height: 100px;
     top: 0;
     display: flex;
+    background: var(--secondary-color);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 1rem;
 }
 
 .div-menuPainel {
+    margin-top: 17.5%;
     display: flex;
-    flex-direction: row; /* Alinha os <ul> lado a lado */
-    justify-content: space-between; /* Adiciona espaço entre as colunas */
-    align-items: flex-start; /* Alinha as listas ao topo */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     border-radius: 5px;
-    padding: 30px;
+    padding: 2.5rem;
     background-color: rgb(254, 254, 254);
     overflow: hidden;
-    width: 90%; /* Garante que use a largura total */
+    width: 93%;
 }
 
 
 ul {
-    flex: 1; /* Permite que os <ul> se expandam proporcionalmente */
+    flex: 1;
     list-style: none;
     padding: 0;
     margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; /* Adiciona espaço entre os itens da lista */
+    gap: 10px;
 }
 
 
@@ -138,7 +153,7 @@ li img {
 
 /* Estilização do rodapé */
 .footer {
-    background-color: var(--secondary-bg-color);
+    background-color: var(--secondary-color);
     color: white;
     text-align: center;
     padding: 20px 10px;
@@ -160,13 +175,13 @@ li img {
 }
 
 /* Menu oculto, disponível para futuras novas do painel opções */
-.menu-item-6{
+.menu-item-6 {
     z-index: -10;
 }
 
-.img-1{
+.img-1 {
     width: 20%;
-    
+
 }
 
 .menu-item-1 {

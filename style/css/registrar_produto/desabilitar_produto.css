@@ -1,4 +1,7 @@
-.div-form-display{
+*{
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+-display{
     position: relative;
 }
 .div-form__body{
@@ -25,7 +28,7 @@
     width: 100%;
     height: 10%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif; 
+  
 }
 
 

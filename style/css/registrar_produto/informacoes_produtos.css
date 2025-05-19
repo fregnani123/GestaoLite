@@ -1,3 +1,9 @@
+*{
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+strong{
+    font-weight: 600;
+}
 #ul-filtros {
   list-style: none;
   padding: 0;
@@ -25,7 +31,7 @@
   list-style: none;
   display: flex;
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
   border: 1px solid #aaa;
   border-bottom: 2px solid #aaa;
   height: 2rem;
@@ -214,7 +220,7 @@ td {
   list-style: none;
   display: flex;
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
   border-bottom: 2px solid #aaa;
 }
 

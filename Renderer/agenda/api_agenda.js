@@ -99,7 +99,6 @@ formatarEVerificarCPF(inputCPF);
 inputMaxCaracteres(inputCPF, 14)
 formatarEVerificarCPF(cpfFilter);
 inputMaxCaracteres(cpfFilter, 14)
-
 async function buscarAgendamentos() {
     const urlAgendamentos = 'http://localhost:3000/getAgenda';
 
@@ -114,17 +113,14 @@ async function buscarAgendamentos() {
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
-
         const agendamentos = await response.json();
         msgAgenda.innerHTML = ''
         renderizarAgendamentos(agendamentos); 
-
 
     } catch (error) {
         console.error('Erro ao buscar os agendamentos:', error);
     }
 };
-
 async function findCliente(cpf) {
     if (!cpf.trim()) return; // Evita buscar se o CPF estiver vazio
 
@@ -150,9 +146,7 @@ async function findCliente(cpf) {
 
         const data = await response.json();
         console.log("Dados recebidos:", data); // Log para depuração
-       
-       
-
+    
         if (Array.isArray(data) && data.length > 0) {
             // Se for um array e tiver elementos, pega o primeiro
             clienteNome.value = data[0].nome;

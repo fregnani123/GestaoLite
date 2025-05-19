@@ -8,7 +8,7 @@ const menuPainel1 = [
     { id: '7', texto: 'Gerenciar Cliente', to: '../public/registrar_cliente.html' },
     { id: '8', texto: 'Gerenciar Fornecedor', to: '../public/fornecedor.html' },
     // { id: '9', texto: 'Controle de Estoque ', to: '../public/controle_estoque.html' },
-    // { id: '10', texto: 'Agenda ', to: '../public/agenda.html' },
+    { id: '10', texto: 'Agenda inteligente', to: '../public/agenda.html' },
     // { id: '11', texto: 'Configurações ', to: '../public/config.html'},
 ]
 

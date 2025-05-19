@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
     <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
@@ -16,11 +15,12 @@
     <style>
         #agendamentos {
             background: var(--hover-color);
-            color: black;
+            color: rgb(255, 255, 255);
             text-shadow: none;
             border-bottom: 2px solid black;
         }
-        #filtrarHistorico{
+
+        #filtrarHistorico {
             margin-right: 2%;
         }
     </style>
@@ -28,128 +28,126 @@
 </head>
 
 <body>
-    <header style="background-color: rgb(0, 38, 87);">
-        <nav style="background-color: rgb(0, 38, 87);">
+    <header class="header-menu">
+        <nav>
             <ul id="ul-Menu"></ul>
         </nav>
-        <nav class="nav-menu-2">
-            <ul class="menu-secundario">
-                <li id="li-agendamentos">
-                    <a id="agendamentos" href="./agenda.html">Lista de Agendamentos</a>
-                </li>
-                <li id="cadastro-agenda">
-                    <a id="li-cadastro-agenda" href="">Agendar</a>
-                </li>
-                <li id="historico-agenda">
-                    <a id="li-historico" href="">Histórico de Agendamentos do Cliente</a>
-                </li>
-            </ul>
-        </nav>
     </header>
-    <div class="container">
-        <div class="container-register"></div>
-        <div class="div-form" role="form">
-            <div class="div-form-display">
-                <section class="div-form__body">
-                    <div class="div-agendar">
-                        <div class="agendar-border">
-                            <button class="close-btn">X</button>
-                            <p class="agendar-titulo">Cadastrar novo Agendamento</p>
-                            <table class="agendar">
-                                <tr>
-                                    <th>CPF do Cliente</th>
-                                    <th>Nome do Cliente</th>
-                                    <th>Data</th>
-                                    <th>Horário</th>
-                                    <th>Motivo do Compromisso</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" id="input-cpf" class="input-cpf"></td>
-                                    <td>
-                                        <input id="cliente-nome" autocomplete="off" readonly
-                                            style="background-color: rgb(228, 228, 228);">
-                                        <input id="cliente-id" type="hidden">
-                                    </td>
-                                    <td><input type="date" id="input-data" class="input-data"></td>
-                                    <td><input type="time" id="input-hora" class="input-hora"></td>
-                                    <td><input type="text" id="input-motivo" class="input-motivo" style="width: 100%;">
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <button class="btn-cadastrar" id="btn-cadastrar"><img class="img-disquete" src="../style//img/agendar.png">Agendar</button>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <p class="informativo">⚠️ <strong>Atenção: Para realizar um agendamento, o cliente deve estar
-                                cadastrado previamente
-                                no sistema. Caso utilize o CPF 000.000.000-00, será necessário informar
-                                o nome no campo
-                                de motivo para identificação. No entanto, agendamentos feitos com esses CPFs não
-                                    permitirão
-                                    visualizar o histórico do cliente. O correto é cadastrar o cliente para um
-                                melhor controle.</strong>
-                            </p>
-                        </div>
+    <div class="div-form" role="form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="agendamentos" href="./agenda.html">Lista de Agendamentos</a>
+                        <a class="atalhos-btn" id="li-cadastro-agenda" href="">Agendar</a>
+                        <a class="atalhos-btn" id="li-historico" href="">Histórico de Agendamentos</a>
+                        <a class="atalhos-btn" style="height: 2.8rem;"></a>
+                        <a class="atalhos-btn" style="height: 2.8rem;"></a>
                     </div>
-                    <div class="div-historico">
-                        <div class="agendar-border">
-                            <p class="agendar-titulo">Histórico de Agendamentos</p>
-                            <button class="btnCloseHist">X</button>
-                            <table class="agendar" style="width: 70%;">
-                                <tr>
-                                    <th>Filtrar por CPF</th>
-                                    <th>Nome do Cliente</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" id="cpfFilter"></td>
-                                    <td>
-                                        <input id="cliente-historico" autocomplete="off" readonly
-                                            style="background-color: rgb(228, 228, 228);">
-                                        <input id="clienteID" type="hidden">
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <div class='divBtn'>
-                                            <button class="btn-cadastrar" id="filtrarHistorico"><img class="img-excluir"
-                                                src="../style//img/procurar.png" alt="">Buscar</button>
-                                            <button id="limparButton"><img class="img-excluir"
-                                                src="../style//img/excluir.png" alt="">Limpar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div id="div-table-historico"></div>
-                        </div>
-                    </div>
-            </div>
-            <div class="container-agenda">
-                <div class="divForm">
-                    <div id="modal-reagendar" class="modal">
-                        <div class="modal-content">
-                            <span id="btnFecharModal" class="close">&times;</span>
-                            <h2>Reagendar</h2>
-                            <label for="nova-data">Nova Data:</label>
-                            <input type="date" id="nova-data">
-                            <label for="nova-hora">Nova Hora:</label>
-                            <input type="time" id="nova-hora">
-                            <button id="btnSalvarReagendamento" class="btn btn-save">Salvar</button>
-                        </div>
-                    </div>
-                    <!-- aqui fica a table criada no js -->
-                    <div id="div-container-form">
-                        <h3 class="msgAgenda">Sem agendamentos disponíveis no momento.</h3>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        </section>
-    </div>
-    </div>
+        <div class="container-inputs" style="position: relative;">
+
+                <div class="div-agendar">
+                <button class="close-btn">x</button>
+                <label class="agendar-titulo" style="background-color: #f4f4f4; padding: 1%;">Cadastrar novo
+                    Agendamento</label>
+                <div class="agendar">
+                    <div style="display: flex;">
+                        <div><label>CPF do Cliente </label> <input type="text" id="input-cpf" class="input-cpf"></div>
+                        <div><label>Nome do Cliente</label>
+                            <input id="cliente-nome" autocomplete="off" readonly
+                                    style="background-color: rgb(228, 228, 228);">
+                                <input id="cliente-id" type="hidden">
+                        </div>
+                        <div><label>Data</label><input type="date" id="input-data" class="input-data"></div>
+                        <div><label>Horário</label><input type="time" id="input-hora" class="input-hora"></div>
+                    </div>
+                    <div style="display: flex;">
+                        <div><label>Motivo do Compromisso</label> <input type="text" id="input-motivo" class="input-motivo"></div>
+                        <div><label>Ações  </label>      <button class="btn-cadastrar" id="btn-cadastrar">
+                                <img class="img-disquete" src="../style/img/agendar.png"> Agendar
+                            </button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="div-historico" style="display: none;">
+                <div class="agendar-border">
+                    <p class="agendar-titulo">Histórico de Agendamentos</p>
+                    <button class="btnCloseHist">X</button>
+                    <table class="agendar" style="width: 70%;">
+                        <tr>
+                            <th>Filtrar por CPF</th>
+                            <th>Nome do Cliente</th>
+                            <th>Ações</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="cpfFilter"></td>
+                            <td>
+                                <input id="cliente-historico" autocomplete="off" readonly
+                                    style="background-color: rgb(228, 228, 228);">
+                                <input id="clienteID" type="hidden">
+                            </td>
+                            <td style="text-align: center;">
+                                <div class='divBtn'>
+                                    <button class="btn-cadastrar" id="filtrarHistorico"><img class="img-excluir"
+                                            src="../style//img/procurar.png" alt="">Buscar</button>
+                                    <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                            alt="">Limpar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="div-table-historico"></div>
+                </div>
+            </div>
+
+            <div class="div-table">
+                <div id="modal-reagendar" class="modal">
+                    <div class="modal-content">
+                        <span id="btnFecharModal" class="close">&times;</span>
+                        <h2>Reagendar</h2>
+                        <label for="nova-data">Nova Data:</label>
+                        <input type="date" id="nova-data">
+                        <label for="nova-hora">Nova Hora:</label>
+                        <input type="time" id="nova-hora">
+                        <button id="btnSalvarReagendamento" class="btn btn-save">Salvar</button>
+                    </div>
+                </div>
+                <!-- aqui fica a table criada no js -->
+                <label  style="background-color: #f4f4f4; padding: 1%;">Lista de Agendamentos</label>
+                <div id="div-container-form">
+                    <h3 class="msgAgenda">Sem agendamentos disponíveis no momento.</h3>
+                </div>
+            </div>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;margin-top: 0;">
+                <footer class="div-form__footer" style="width: 100%;">
+                    <p style="font-size: 0.95rem;">
+                        <img src="../style/img/atencao.png" alt="Atenção"
+                            style="width: 1.3rem; margin-right: 0.5rem; vertical-align: middle;">
+
+                        <strong>Atenção:</strong> para realizar um agendamento, o <strong>cliente deve estar previamente
+                            cadastrado</strong> no sistema.
+                        Caso utilize o CPF <strong>000.000.000-00</strong>, será necessário informar o
+                        <strong>nome</strong> no campo de <strong>motivo</strong> para identificação.
+                        No entanto, agendamentos realizados com esse CPF <strong>não permitirão visualizar o histórico
+                            do cliente</strong>.
+                        O ideal é <strong>cadastrar o cliente corretamente</strong> para garantir um controle mais
+                        eficiente.
+                    </p>
+                </footer>
+            </div>
+        </div>
 </body>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/agenda/api_agenda.js"></script>
 <script src="../Renderer/agenda/agenda_renderer.js"></script>
 <script src="../Renderer/services/alertMsg.js"></script>
+
 </html>

@@ -1,5 +1,5 @@
 const menuPainel1 = [
-    { id: '1', texto: 'Painel de controle', src: '../style/img/painel-de-controle (1).png', to: '' },
+    // { id: '1', texto: 'Painel de controle', src: '../style/img/painel-de-controle (1).png', to: '' },
    { id: '9', texto: 'Agenda inteligente', src: '../style/img/agenda.png', to: '../public/agenda.html' },
     { id: '12', texto: 'Cópia de segurança', src: '../style/img/pendrive.png', to: '' },
     { id: '7', texto: 'Gerenciar cliente', src: '../style/img/cadastroCliente.png', to: '../public/registrar_cliente.html' },
@@ -7,15 +7,15 @@ const menuPainel1 = [
 ];
 
 const menuPainel2 = [
-    { id: '6', texto: '', src: '', to: '' },
-    { id: '10', texto: 'Sistema de crediário próprio', src: '../style/img/crediario.png', to: '../public/crediario.html' },
+    // { id: '6', texto: '', src: '', to: '' },
+    { id: '10', texto: 'Pagamento a Prazo', src: '../style/img/crediario.png', to: '../public/crediario.html' },
     { id: '3', texto: 'Relatórios de pedidos lançados', src: '../style/img/detalhes vendas.png', to: '../public/detalhe_vendas.html' },
     { id: '8', texto: 'Entrada/saída estoque', src: '../style/img/caixa-de-entrada.png', to: '../public/controle_estoque.html' },
     { id: '5', texto: 'Gerenciar fornecedor', src: '../style/img/fornecedor.png', to: '../public/fornecedor.html' },  
 ];
 
 const menuPainel3 = [
-    { id: '6', texto: '', src: '', to: '' },
+    // { id: '6', texto: '', src: '', to: '' },
   { id: '4', texto: 'Gerenciar produto', src: '../style/img/codigo-de-barras.png', to: '../public/registrar_produto.html' },
     { id: '2', texto: 'Baixa no estoque por pedido', src: '../style/img/carrinho-de-compras-icon.png', to: '../public/tela_vendas.html' },
     { id: '13', texto: 'Informações estoque', src: '../style/img/caixa.png', to: '../public/informacoes_produtos.html' },

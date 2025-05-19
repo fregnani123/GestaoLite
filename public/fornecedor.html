@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <style>
-        #cadastro-fornecedor a {
+        #btn-flex{
             background: var(--hover-color);
-            color: black;
+            color: rgb(255, 255, 255);
             text-shadow: none;
             border-bottom: 2px solid black;
         }
@@ -24,7 +24,7 @@
 
 <body>
     <header>
-        <nav style="background-color: rgb(0, 38, 87);">
+        <nav>
             <ul id="ul-Menu"></ul>
         </nav>
 
@@ -32,12 +32,10 @@
     <div class="div-form" role="form">
         <div class="atalhos-1">
             <div class="atalhos">
-                <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou
-                            botão.</strong></span>
-                </p>
+           
                 <div class="menu-secundario">
                     <div class="pagamento">
-                        <a class="atalhos-btn" href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
+                        <a  class="atalhos-btn" href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
                         <a class="atalhos-btn" href="./alterar_Fornecedor.html">Informações Cadastrais do Fornecedor /
                             Alterar</a>
                         <a class="atalhos-btn" href="./informaçoes_fornecedor.html">Produtos vinculados ao
@@ -54,7 +52,7 @@
         <div class="container-inputs" >
             <div class="div-form-display"style="border:none">
                 <div style=" width: 100%; height: 100%;;display: flex;">
-                    <section class="div-form-img">
+                    <section class="div-form-img" style="width: 25%;">
                         <p class="titulo-img">Cadastro Fornecedor</p>
                         <img class="img-produto" src="../style/img/fornecedor.png" alt="Produto sem imagem.">
                     </section>
@@ -68,11 +66,10 @@
                                     <option value="fisica">Física</option>
                                 </select>
                             </div>
-                            <div id="div-cnpj">
-                                <label class="labelFornecedor" id="label_cnpj_cpf" for="cnpj">CNPJ / CPF</label>
+                            <div id="div-cnpj" >
+                                <label style="width: 100%" class="labelFornecedor" id="label_cnpj_cpf" for="cnpj">CNPJ / CPF</label>
                                 <input type="text" id="cnpj" readonly>
                             </div>
-
                             <div id="div-razoSocial">
                                 <label class="labelFornecedor" id="label_razao" for="razaoSocial">Razão Social /
                                     Nome</label>
@@ -89,69 +86,70 @@
                                 </select>
                             </div>
                             <div id="div-ie">
-                                <label class="labelFornecedor" for="ie">numero IE:</label>
+                                <label class="labelFornecedor" for="ie">numero IE</label>
                                 <input type="text" id="ie" readonly>
                             </div>
                             <div id="div-fantasia">
-                                <label class="labelFornecedor" for="nomeFantasia">Nome Fantasia:</label>
+                                <label class="labelFornecedor" for="nomeFantasia">Nome Fantasia</label>
                                 <input type="text" id="nomeFantasia" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <div id="div-logradouro">
-                                <label class="labelFornecedor" for="endereco">Logradouro:</label>
+                                <label class="labelFornecedor" for="endereco">Endereço</label>
                                 <input type="text" id="endereco">
                             </div>
                             <div id="div-numero">
-                                <label class="labelFornecedor" for="cep">Numero:</label>
+                                <label class="labelFornecedor" for="cep">Numero</label>
                                 <input type="text" id="numero">
                             </div>
-                            <div id="div-bairro">
-                                <label class="labelFornecedor" for="bairro">Bairro:</label>
-                                <input type="text" id="bairro">
-                            </div>
+                           
                         </div>
                         <div class="form-group">
+                                <div id="div-bairro"  style="width: 30%;"> 
+                                <label class="labelFornecedor" for="bairro">Bairro</label>
+                                <input type="text" id="bairro">
+                            </div>
                             <div id="div-cep">
-                                <label class="labelFornecedor" for="cep">Cep:</label>
+                                <label class="labelFornecedor" for="cep">Cep</label>
                                 <input type="text" id="cep">
                             </div>
                             <div id="div-uf">
-                                <label class="labelFornecedor" for="uf">UF:</label>
+                                <label class="labelFornecedor" for="uf">UF</label>
                                 <select id="uf">
                                 </select>
                             </div>
                             <div id="div-cidade">
-                                <label class="labelFornecedor" for="cidade">Cidade:</label>
+                                <label class="labelFornecedor" for="cidade">Cidade</label>
                                 <select id="cidade">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div id="div-email">
-                                <label class="labelFornecedor" for="email">Email:</label>
+                                <label class="labelFornecedor" for="email">Email</label>
                                 <input type="email" id="email">
                             </div>
 
                             <div id="div-tel">
-                                <label class="labelFornecedor" for="email">Contato:</label>
+                                <label class="labelFornecedor" for="email">Contato</label>
                                 <input type="email" id="telefone">
                             </div>
                         </div>
                         <div class="form-group">
                             <div id="div-atividade">
-                                <label for="">Ramos de atividade:</label>
+                                <label for="">Ramos de atividade</label>
                                 <select name="" id="atividade">
 
                                 </select>
                             </div>
                             <div id="div-atividade">
-                                <label for="">Forma de Pgto:</label>
+                                <label for="">Forma de Pgto</label>
                                 <select name="" id="formaPgto">
                                 </select>
                             </div>
                             <div id="div-atividade">
-                                <label for="">Condições Pgto:</label>
+                                <label for="">Condições Pgto</label>
                                 <select name="" id="condicoesPgto">
 
                                 </select>

@@ -7,7 +7,6 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000;">
     <link rel="stylesheet" href="../style/css/login_menu/login.css">
-    <link rel="stylesheet" href="../style/css/login_menu/login.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
@@ -17,36 +16,37 @@
 
 <body>
     <div class="container">
-
+<header> <img class="img-logo" src="../style/img/logoFGL.png" alt="GestãoLite"></header>
         <div class="ativar-produto">
             <button id="ativar-btn" disabled>Ativar Produto</button>
         </div>
-        <p></p><img class="img-logo" src="../style/img/ChatGPT Image 7 de mai. de 2025, 09_54_46.png" alt="GestãoLite">
+      
         <div class="login-container">
-            <h1>Login</h1>
+         <p class="welcome-msg"><strong>Bem-vindo!</strong> Faça login para acessar o sistema.</p>
             <form>
                 <div class="form-group">
                     <label style=" border: 1px solid transparent;" class="label-acess" for="username">Usuário:</label>
-                    <img class="img-user" style="position: absolute; margin-top: .7%;" src="../style/img/user.png"
+                    <img class="img-user" style="position: absolute; margin-top: .8%;" src="../style/img/user.png"
                         alt=""> <input type="text" id="username" name="username" required autocomplete="off">
                 </div>
                 <div class="form-group">
                 <label style=" border: 1px solid transparent;" class="label-acess" for="password"> Senha:</label>
-                        <img class="img-cadeado" style="position: absolute;" src="../style/img/cadeado.png"
-                            alt=""><input type="password" id="password" name="password" required autocomplete="off">
-                </div>
-                <button id="formLogin">Login</button>
+                        <img class="img-cadeado" style="position: absolute;margin-top: .2;" src="../style/img/cadeado.png"
+                            alt=""><input type="password" id="password" name="password" required autocomplete="off">     
+                </div>  
+                  <button id="formLogin">Login</button>
             </form>
             <div id="mensagem-licenca"></div>
         </div>
     </div>
-    <footer class="footer" style="font-size: 1rem;">
+    <footer >
         &copy; <span id="current-year"></span> FGL Software Solutions – Todos os direitos reservados
         Versão 2.1.0
     </footer>
-    <script src="../config/ApiLicenca.js"></script>
+   
+</body>
+ <script src="../config/ApiLicenca.js"></script>
     <script src="../config/loginUsers.js"></script>
     <script src="../Renderer/services/alertMsg.js"></script>
     <script src="../config/apiUser.js"></script>
-</body>
 </html>
