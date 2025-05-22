@@ -26,34 +26,17 @@ function renderizarAgendamentos(agendamentos) {
         return;
     }
 
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-    tbody.id = 'agenda-list';
-
-    thead.innerHTML = `
-        <tr>
-            <th>CPF</th>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>Hora</th>
-            <th>Motivo</th>
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-    `;
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    containerForm.appendChild(table);
-    tbody.innerHTML = '';
+    // Limpa o container antes de renderizar
+    containerForm.innerHTML = '';
 
     if (agendamentos.length === 0) {
-        const noDataMessage = document.createElement('tr');
-        noDataMessage.innerHTML = '<td colspan="7">Nenhum agendamento encontrado.</td>';
-        tbody.appendChild(noDataMessage);
+        const noDataMessage = document.createElement('p');
+        noDataMessage.textContent = 'Nenhum agendamento encontrado.';
+        containerForm.appendChild(noDataMessage);
         return;
     }
-    // Ordena os agendamentos por data (mais próxima primeiro)
+
+    // Ordena os agendamentos por data e status
     agendamentos.sort((a, b) => {
         const dataA = new Date(a.data.split('/').reverse().join('-'));
         const dataB = new Date(b.data.split('/').reverse().join('-'));
@@ -77,160 +60,175 @@ function renderizarAgendamentos(agendamentos) {
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
-    const hojeMais1 = new Date(hoje);
-    hojeMais1.setDate(hoje.getDate() + 1);
-
     const hojeMenos1 = new Date(hoje);
     hojeMenos1.setDate(hoje.getDate());
 
-    // Pegando a tabela
-    const tabela = document.querySelector("#tabelaAgendamentos tbody");
-
-    // Criando as linhas da tabela
     agendamentos.forEach(agendamento => {
-        const tr = document.createElement('tr');
+        // Cria a div container para as duas tabelas (com margem embaixo)
+        const agendamentoContainer = document.createElement('div');
+        agendamentoContainer.classList.add('agendamento')
+        agendamentoContainer.style.marginBottom = '20px'; // margem entre cada bloco de agendamento
+
+        // Tabela 1: Informações principais do agendamento
+        const table1 = document.createElement('table');
+        table1.classList.add('table1');
+        table1.style.width = '100%';
+        table1.style.borderCollapse = 'collapse';
+        table1.style.marginBottom = '10px';
+
+        const thead1 = document.createElement('thead');
+        thead1.innerHTML = `
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora</th>
+            </tr>
+        `;
+        table1.appendChild(thead1);
+
+        const tbody1 = document.createElement('tbody');
+        const tr1 = document.createElement('tr');
+
+        tr1.innerHTML = `
+            <td>${decode(agendamento.cpf)}</td>
+            <td>${agendamento.nome}</td>
+            <td>${validarDataVenda(agendamento.data)}</td>
+            <td>${agendamento.hora}</td>
+        `;
+
+        // Estiliza a linha pelo status (mesmo esquema anterior)
         const dataAgendamento = normalizarData(agendamento.data);
 
-        // Comparação ajustada para evitar bugs de fuso horário
         if (agendamento.status === "Cancelado") {
-            tr.style.backgroundColor = "rgba(255, 0, 0, 0.2)"; // Vermelho claro
+            tr1.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
         } else if (agendamento.status === "Confirmado") {
-            tr.style.backgroundColor = "rgba(0, 128, 0, 0.2)"; // Verde claro
+            tr1.style.backgroundColor = "rgba(0, 128, 0, 0.2)";
         } else if (agendamento.status === "Pendente") {
             if (dataAgendamento.getTime() === hoje.getTime()) {
-                tr.style.backgroundColor = "rgba(255, 255, 0, 0.5)"; // Amarelo para hoje
+                tr1.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
             } else if (dataAgendamento.getTime() < hojeMenos1.getTime()) {
-                tr.style.backgroundColor = "rgba(255, 0, 0, 0.5)"; // Vermelho para passado
+                tr1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+                [...tr1.children].forEach(td => td.style.color = 'white');
             }
         }
 
-        // Criando as células (td)
-        const tdCpfCliente = document.createElement('td');
-        tdCpfCliente.textContent = decode(agendamento.cpf);
-        tr.appendChild(tdCpfCliente);
+        tbody1.appendChild(tr1);
+        table1.appendChild(tbody1);
 
-        const tdNomeCliente = document.createElement('td');
-        tdNomeCliente.textContent = agendamento.nome;
-        tr.appendChild(tdNomeCliente);
+        // Tabela 2: Detalhes + Ações
+        const table2 = document.createElement('table');
+        table2.classList.add('table2');
+        table2.style.width = '100%';
+        table2.style.borderCollapse = 'collapse';
 
-        const tdData = document.createElement('td');
-        tdData.textContent = validarDataVenda(agendamento.data);
-        tr.appendChild(tdData);
+        const thead2 = document.createElement('thead');
+        thead2.innerHTML = `
+            <tr>
+                <th>Motivo</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        `;
+        table2.appendChild(thead2);
 
-        const tdHora = document.createElement('td');
-        tdHora.textContent = agendamento.hora;
-        tr.appendChild(tdHora);
+        const tbody2 = document.createElement('tbody');
+        const tr2 = document.createElement('tr');
 
         const tdMotivo = document.createElement('td');
         tdMotivo.textContent = agendamento.motivo;
-        tr.appendChild(tdMotivo);
+        tr2.appendChild(tdMotivo);
 
         const tdStatus = document.createElement('td');
         tdStatus.textContent = agendamento.status;
-        tr.appendChild(tdStatus);
+        tr2.appendChild(tdStatus);
 
-        // Verificando a cor do fundo da linha e aplicando a cor branca ao texto das células
-        if (tr.style.backgroundColor === "rgba(255, 0, 0, 0.5)") {
-            const tds = tr.getElementsByTagName('td');
-            for (let td of tds) {
-                td.style.color = 'white';
-            }
-        }
-
-        // Criando a célula para os botões
         const tdAcoes = document.createElement('td');
 
-        // Se o status for "Pendente", adiciona botões de ação
+        // Botões só se estiver pendente
         if (agendamento.status === "Pendente") {
-            // Botão Confirmar
+            // Confirmar
             const btnConfirm = document.createElement('button');
             btnConfirm.className = 'btn btn-confirm';
             btnConfirm.textContent = 'Confirmar';
             btnConfirm.addEventListener('click', () => {
-                const agendamentoId = {
-                    "data": agendamento.data,
-                    "hora": agendamento.hora,
-                    "status": "Confirmado",
-                    "agendamento_id": agendamento.agendamento_id
-                };
-                updateCliente(agendamentoId);
+                updateCliente({
+                    data: agendamento.data,
+                    hora: agendamento.hora,
+                    status: "Confirmado",
+                    agendamento_id: agendamento.agendamento_id
+                });
                 alertMsg("Confirmar que o cliente compareceu ao agendamento.", 'success', 3000);
             });
             tdAcoes.appendChild(btnConfirm);
 
-            // Botão Reagendar
+            // Reagendar
             const btnReagendar = document.createElement('button');
             btnReagendar.className = 'btn btn-reagendar';
             btnReagendar.textContent = 'Reagendar';
             btnReagendar.addEventListener('click', () => {
-                // Exibe o modal de reagendamento com a data e hora atuais do agendamento
                 const modal = document.getElementById("modal-reagendar");
                 const novaData = document.getElementById("nova-data");
                 const novaHora = document.getElementById("nova-hora");
-
-                // Define a data e hora no modal
-                novaData.value = agendamento.data;  // Assume que 'agendamento.data' está no formato 'YYYY-MM-DD'
-                novaHora.value = agendamento.hora;  // Assume que 'agendamento.hora' está no formato 'HH:MM'
-
-                // Abre o modal
+                novaData.value = agendamento.data;
+                novaHora.value = agendamento.hora;
                 modal.style.display = "block";
 
-                // Fechar o modal
-                const btnFecharModal = document.getElementById("btnFecharModal");
-                btnFecharModal.addEventListener('click', () => {
+                document.getElementById("btnFecharModal").onclick = () => {
                     modal.style.display = "none";
-                });
+                };
 
-                // Salvar o reagendamento
-                const btnSalvarReagendamento = document.getElementById("btnSalvarReagendamento");
-                btnSalvarReagendamento.addEventListener('click', () => {
+                document.getElementById("btnSalvarReagendamento").onclick = () => {
                     const novaDataValor = novaData.value;
                     const novaHoraValor = novaHora.value;
 
                     if (novaDataValor && novaHoraValor) {
-                        const agendamentoId = {
-                            "data": novaDataValor,
-                            "hora": novaHoraValor,
-                            "status": "Pendente",
-                            "agendamento_id": agendamento.agendamento_id
-                        };
-
-                        updateCliente(agendamentoId);
+                        updateCliente({
+                            data: novaDataValor,
+                            hora: novaHoraValor,
+                            status: "Pendente",
+                            agendamento_id: agendamento.agendamento_id
+                        });
                         alertMsg("Agendamento reagendado com sucesso.", 'success', 3000);
-
-                        // Fecha o modal após salvar
                         modal.style.display = "none";
                     } else {
                         alertMsg("Por favor, preencha todos os campos.", 'error', 3000);
                     }
-                });
+                };
             });
             tdAcoes.appendChild(btnReagendar);
 
-            // Botão Cancelar
+            // Cancelar
             const btnCancel = document.createElement('button');
             btnCancel.className = 'btn btn-cancel';
             btnCancel.textContent = 'Cancelar';
             btnCancel.addEventListener('click', () => {
-                const agendamentoId = {
-                    "data": agendamento.data,
-                    "hora": agendamento.hora,
-                    "status": "Cancelado",
-                    "agendamento_id": agendamento.agendamento_id
-                };
-                updateCliente(agendamentoId);
+                updateCliente({
+                    data: agendamento.data,
+                    hora: agendamento.hora,
+                    status: "Cancelado",
+                    agendamento_id: agendamento.agendamento_id
+                });
                 alertMsg("Cliente não compareceu ao agendamento.", 'warning', 3000);
             });
             tdAcoes.appendChild(btnCancel);
+        } else {
+            tdAcoes.textContent = '-';
         }
 
-        // Adiciona a célula de ações
-        tr.appendChild(tdAcoes);
+        tr2.appendChild(tdAcoes);
+        tbody2.appendChild(tr2);
+        table2.appendChild(tbody2);
 
-        // Adiciona a linha ao tbody
-        tbody.appendChild(tr);
+        // Adiciona as duas tabelas dentro da div container
+        agendamentoContainer.appendChild(table1);
+        agendamentoContainer.appendChild(table2);
+
+        // Adiciona o container principal ao container do formulário
+        containerForm.appendChild(agendamentoContainer);
     });
 }
+
 // Chama a função para carregar os dados assim que a página for carregada
 buscarAgendamentos();
 

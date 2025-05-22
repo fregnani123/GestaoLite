@@ -17,6 +17,12 @@ body {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
 
+th {
+  background-color: #ededed;
+  font-weight: 500; /* ou 600 */
+  color: #1c0000;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
 
 .div-form {
     border-radius: 10px;
@@ -38,8 +44,6 @@ body {
 #massaDiv,
 #divTamanho,
 #divTamanhoNUm {
-    flex-direction: column;
-    width: 35%;
     display: none;
     align-items: center;
 }
@@ -59,11 +63,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
     overflow: hidden;
-    /* background-color: rgb(85, 5, 5); */
-    padding: 1%;
-    border: 1px solid rgba(111, 111, 111, 0.64);
+    border: .5px solid rgba(111, 111, 111, 0.225);
     height: 99%;
     margin-right: .5%;
     margin-top: .5%;
@@ -75,7 +76,6 @@ body {
     justify-content: center;
     gap: 0px;
     overflow: hidden;
-    /* background-color: rgb(85, 5, 5); */
     padding: 1%;
     border: 1px solid rgba(111, 111, 111, 0.64);
     height: 100%;
@@ -114,9 +114,14 @@ body {
     gap: 1%;
     width: 100%;
 }
+.span-dois-pontos{
+    position: absolute; margin-top:.4%; font-size: 1.2rem;margin-left: .2%;
+}
 
 .input-select-wrapper {
     display: flex;
+    gap: 1%;
+    width: 100%
 }
 
 #fornecedor {
@@ -170,15 +175,14 @@ body {
     margin: 3%;
 }
 
-.titulo-img span {
-    color: rgb(0, 0, 0);
-    font-weight: 700;
-    font-size: 1rem;
-    border-bottom: 1px solid black;
-}
 .titulo-img {
-padding-bottom: 3%;
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
 }
+
 
 .atalhos-1 {
     width: 37.5%;
@@ -259,11 +263,6 @@ padding-bottom: 3%;
     text-align: center;
 }
 
-.titulo-img {
-    margin-bottom: .5%;
-    width: 100%;
-    text-align: center;
-}
 
 .filtros-container {
     display: flex;

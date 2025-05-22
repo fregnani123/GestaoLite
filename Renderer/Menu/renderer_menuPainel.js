@@ -1,9 +1,9 @@
 const menuPainel1 = [
     // { id: '1', texto: 'Painel de controle', src: '../style/img/painel-de-controle (1).png', to: '' },
+    { id: '11', texto: 'Configurações gerais', src: '../style/img/configuracoes.png', to: '../public/config.html' },
    { id: '9', texto: 'Agenda inteligente', src: '../style/img/agenda.png', to: '../public/agenda.html' },
     { id: '12', texto: 'Cópia de segurança', src: '../style/img/pendrive.png', to: '' },
-    { id: '7', texto: 'Gerenciar cliente', src: '../style/img/cadastroCliente.png', to: '../public/registrar_cliente.html' },
-    { id: '11', texto: 'Configurações gerais', src: '../style/img/configuracoes.png', to: '../public/config.html' },
+    { id: '7', texto: 'Gerenciar cliente', src: '../style/img/cliente.png', to: '../public/registrar_cliente.html' },
 ];
 
 const menuPainel2 = [
@@ -25,14 +25,27 @@ const menuPainel3 = [
 function criaLi(texto, id, src, to) {
     const li = document.createElement('li');
 
+    let a = null;
+
     if (id === '1') {
         const span = document.createElement('span');
         span.textContent = texto;
         li.appendChild(span);
     } else {
-        const a = document.createElement('a');
-        a.textContent = texto;
+        a = document.createElement('a');
+        a.classList.add('aImg');
         a.href = to;
+
+        if (src && typeof src === 'string' && src.trim() !== '') {
+            const img = document.createElement('img');
+            img.src = src;
+            img.classList.add('img-' + id);
+            a.appendChild(img); // Adiciona a imagem DENTRO da tag <a>
+        }
+
+        const spanTexto = document.createElement('span');
+        spanTexto.textContent = texto;
+        a.appendChild(spanTexto); // Texto também dentro da tag <a>
 
         if (to.startsWith('http')) {
             a.target = '_blank';
@@ -41,16 +54,10 @@ function criaLi(texto, id, src, to) {
         li.appendChild(a);
     }
 
-    if (src && typeof src === 'string' && src.trim() !== '') {
-        const img = document.createElement('img');
-        img.src = src;
-        img.classList.add('img-'+ id)
-        li.appendChild(img);
-    }
-
     li.classList.add('menu-item-' + id);
     return li;
 }
+
 
 const listPainel1 = document.querySelector('#menu-painel1');
 const listPainel2 = document.querySelector('#menu-painel2');

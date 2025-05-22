@@ -2,26 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-    <link rel="stylesheet" href="../style/css/css_global/btn.css">
-    <link rel="stylesheet" href="../style/css/css_global/info.css">
-    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-    <link rel="stylesheet" href="../style/css/registrar_produto/desabilitar_produto.css">
-    <style>
-        #desabilitar-Produtos {
-            background: var(--hover-color);
-            color: rgb(255, 255, 255);
-            text-shadow: none;
-            border-bottom: 2px solid black;
-            cursor: pointer;
-        }
-    </style>
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;" />
+    
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css" />
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css" />
+    <link rel="stylesheet" href="../style/css/css_global/btn.css" />
+    <link rel="stylesheet" href="../style/css/css_global/info.css" />
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css" />
+    <link rel="stylesheet" href="../style/css/registrar_produto/desabilitar_produto.css" />
     <title>Desabilitar Produto</title>
 </head>
 
@@ -40,14 +31,12 @@
                     <div class="pagamento">
                         <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
                         <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
-                        <a class="atalhos-btn" id="desabilitar-Produtos" href="./desabilitar_produto.html">Desabilitar
-                            Produto</a>
+                        <a class="atalhos-btn" id="desabilitar-Produtos" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">Informações e Estoque de Produtos</a>
-                        <a class="atalhos-btn" href="./controle_estoque.html">Controle de Estoque — Entradas e
-                            Saídas</a>
+                        <a class="atalhos-btn" href="./controle_estoque.html">Controle de Estoque — Entradas e Saídas</a>
                     </div>
                     <div class="logo-container">
-                        <img class="logo-img" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                        <img class="logo-img" src="../style/img/logoLGL-removebg-preview (1).png" alt="" />
                     </div>
                 </div>
             </div>
@@ -55,40 +44,34 @@
 
         <div class="secao-principal">
             <div class="secao-conteudo">
-                <section class="secao-acao" style="position: relative;">
-                    <div style=" display: flex;;width: 100%;align-items: center;">
+                <section class="secao-acao secao-acao-relative">
+                    <div class="flex-full-align">
                         <div class="foto-produto-container">
                             <p class="titulo-img">Imagem do Produto</p>
                             <div class="quadro-img">
-                                <img class="img-produto" src="../style/img/codigo-de-barras.png" alt="imagem produto">
+                                <img class="img-produto" src="../style/img/codigo-de-barras - interno.png" alt="imagem produto" />
                             </div>
                         </div>
                         <div class="filtros-container">
                             <div class="filtro-ean">
                                 <label>🔍 Filtrar por código EAN</label>
-                                <input type="text" id="codigoEAN">
+                                <input type="text" id="codigoEAN" />
                             </div>
-
                         </div>
-                        <div
-                            style="display: flex; flex-direction: column; align-items: center; position:absolute;padding: 1%;right: 1%;bottom: 2%;">
-                            <label style="width: 100%; text-align: center; margin: 5px;">Desabilitar Produto Filtrado</label>
 
-                            <div
-                                style="padding: .5%;background-color: white;width: 100%;
-        max-width: 500px; /* opcional: limitar largura */ display: flex;gap: 3%;justify-content: center;align-items: center;">
+                        <div class="desabilitar-btn-area">
+                            <label style="width: 100%; text-align: center; margin: 5px;">Desabilitar Produto Filtrado</label>
+                            <div class="desabilitar-btn-container">
                                 <div id="div-btns">
-                                    <button id="btnDesativar"
-                                        style="background-color: gray;cursor: default;">Desabilitar</button>
+                                    <button id="btnDesativar" style="background-color: gray; cursor: default;">Desabilitar</button>
                                 </div>
                                 <div>
                                     <button id="limparButton">
-                                        <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
+                                        <img class="img-excluir" src="../style/img/excluir.png" alt="" />Limpar
                                     </button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
@@ -107,44 +90,38 @@
 
             <div class="tabela-dinamica">
                 <div class="div-form-display">
-                    <p
-                        style="width: 100%;margin-top: 1%; display: flex; text-align: center;justify-content: center;align-items: center;">
-                        <span style="border-bottom: 1px solid black; font-weight: 600;">
-
-                            🚫 Histórico de produtos desabilitados</span>
-                    </p>
+                    <p class="titulo-produto-desabilitado">🚫 Histórico de produtos desabilitados</p>
                     <ul id="ul-header" class="ul-header">
                         <li><span>Código EAN</span></li>
                         <li><span>Descrição Produto</span></li>
                         <li><span>Preço Compra</span></li>
                         <li><span>Preço Venda</span></li>
                         <li><span>Qtd Vendida</span></li>
-                        <!-- <li><span>Estoque Atual</span></li> -->
                     </ul>
                 </div>
             </div>
+
             <div class="footer-container">
                 <div class="container-footer">
                     <footer class="div-form__footer">
                         <p class="footer-aviso">
-                            <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png" alt="">
+                            <img src="../style/img/atencao.png" alt=""/>
                             <strong>Atenção:</strong> Ao <strong>desabilitar</strong> o produto:
                             Ele <strong>não poderá ser encontrado</strong> em buscas futuras;
                             O <strong>estoque será automaticamente zerado</strong>;
-                             A operação é <strong>irreversível</strong> após a confirmação.
-                            O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de
-                                Produtos Desabilitados</strong>.
+                            A operação é <strong>irreversível</strong> após a confirmação.
+                            O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de Produtos Desabilitados</strong>.
                         </p>
-
                     </footer>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="../Renderer/Menu/renderer_menu.js"></script>
+    <script src="../Renderer/services/alertMsg.js"></script>
+    <script src="../Renderer/services/formatters.js"></script>
+    <script src="../Renderer/Produto/desabilitar_produto.js"></script>
 </body>
-<script src="../Renderer/Menu/renderer_menu.js"></script>
-<script src="../Renderer/services/alertMsg.js"></script>
-<script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/Produto/desabilitar_produto.js"></script>
 
 </html>

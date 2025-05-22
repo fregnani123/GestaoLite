@@ -147,68 +147,7 @@ span {
 }
 
 /* Estilo da tabela */
-table {
-  width: 99%;
-  background: #fff;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-  margin-top: 4%;
-}
-
-.filter-table th {
-  color: rgb(9, 9, 9);
-  border: rgb(0, 0, 0)solid rgb(255, 255, 255);
-  padding: .3rem;
-  font-size: 1rem;
-  margin: 1%;
-}
-
-.filter-table tr {
-  color: black;
-}
-
-/* Largura específica para colunas */
-th:nth-child(1),
-td:nth-child(1) {
-  /* Coluna 1: CPF */
-  width: 15%;
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-  /* Coluna 2: Nome */
-  width: 32%;
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-  /* Coluna 3: Data */
-  width: 15%;
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-  /* Coluna 4: Hora */
-  width: 15%;
-}
-
-th:nth-child(5),
-td:nth-child(5) {
-  /* Coluna 5: Motivo */
-  width: 20%;
-}
-
-td {
-  padding-top: 1%;
-  border: none;
-}
-
-td {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding: 8px;
-  vertical-align: middle;
-}
+/*  */
 
   .div-info-row{
   height: 2.5rem;

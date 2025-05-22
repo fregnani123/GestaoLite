@@ -17,7 +17,7 @@ const divHistoricoAgendar = document.querySelector(".div-historico");
 const closeBtn = document.querySelector(".close-btn");
 
 
-inputMaxCaracteres(inputMotivo, 45);
+inputMaxCaracteres(inputMotivo, 80);
 
 function estilizarLinkAtivo(linkID) {
  linkID.style.background = '#5f8ac1'; 

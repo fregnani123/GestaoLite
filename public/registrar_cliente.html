@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <style>
         #li-cadastroCliente {
             background: var(--hover-color);
@@ -21,7 +22,7 @@
             cursor: pointer;
         }
     </style>
-    <title></title>
+    <title>Cadastrar Cliente</title>
 </head>
 
 <body>
@@ -30,11 +31,12 @@
             <ul id="ul-Menu"></ul>
         </nav>
     </header>
-
-    <div class="div-form" role="form">
+    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+    <div class="container-register"></div>
+    <div class="div-form">
         <div class="atalhos-1">
             <div class="atalhos">
-         
+
                 <div class="menu-secundario">
                     <div class="pagamento">
                         <a class="atalhos-btn" id="li-cadastroCliente" href="./registrar_cliente.html">Cadastrar
@@ -42,7 +44,7 @@
                         <a class="atalhos-btn" href="./alterar_cliente.html">Informações Cadastrais do Cliente /
                             Alterar</a>
                         <a class="atalhos-btn" id="btn-flex">Receber Pagamento</a>
-                      <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os Clientes</a>
+                        <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os Clientes</a>
                         <a class="atalhos-btn" id="btn-atraso" href="#">Relatório de parcelas em Atraso</a>
                     </div>
                     <div class="img-fgl">
@@ -52,108 +54,165 @@
             </div>
         </div>
         <div class="container-inputs">
-            <div class="div-form-display" style="border:none">
-                <div style=" width: 100%; height: 100%;;display: flex;">
-                    <section class="div-form-img">
-                        <p class="titulo-img">Cadastro Cliente</p>
-                        <img class="img-produto" src="../style/img/cadastroCliente.png" alt="">
-                    </section>
-                    <section class="div-form__body">
-                        <div class="form-group">
-                            <div id="div-cpf">
-                                <label for="cpf">CPF:</label>
+            <div style="display: flex; width: 100%; height: 100%;">
+                <section class="div-form-img">
+                    <p class="titulo-img">Cadastro Cliente</p>
+                    <img class="img-produto" src="../style/img/cliente - interno.png" alt="">
+                </section>
+                <section class="div-form__body">
+                    <table class="table-1-produto">
+                        <tr>
+                            <th>
+                                CPF
+                            </th>
+                            <th>
+                                Nome Completo
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="text" id="cpf" name="cpf" required>
-                            </div>
-                            <div id="div-nome">
-                                <label for="nome">Nome Completo:</label>
+                            </td>
+                            <td>
                                 <input type="text" id="nome" name="nome" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div id="div-date">
-                                <label for="dataNascimento">Data de Nascimento:</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-2-produto">
+                        <tr>
+                            <th>
+                                Data de Nascimento
+                            </th>
+                            <th>
+                                Ocupação
+                            </th>
+                            <th>
+                                Liberar Crédito
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="date" id="dataNascimento" name="dataNascimento">
-                            </div>
-                            <div id="div-ocupação">
-                                <label for="ocupacao">Ocupação:</label>
+                            </td>
+                            <td>
                                 <select name="ocupacao" id="ocupacao">
-                                </select>
-                            </div>
-                            <div id="div-credito">
-                                <label for="cidade">Liberar Crédito:</label>
+                            </td>
+                            <td>
                                 <input id="creditoLiberar" value="0,00" name="credito" required></input>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div id="div-cep">
-                                <label for="cep">CEP:</label>
-                                <input type="text" id="cep" name="cep" required>
-                            </div>
-                            <div id="div-logradouro">
-                                <label for="logradouro">Logradouro:</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-3-produto">
+                        <tr>
+                            <th>
+                                CEP
+                            </th>
+                            <th>
+                                Logradouro
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                    <input type="text" id="cep" name="cep" required>
+                                </div>
+                            </td>
+                            <td>
                                 <input type="text" id="logradouro" name="logradouro">
-                            </div>
-                           
-                        </div>
-                        <div class="form-group">
-                             <div id="div-numero">
-                                <label for="numero">Número:</label>
+                            </td>
+                    </table>
+                    <table class="table-1-produto">
+                        <tr>
+                            <th>
+                                Número
+                            </th>
+
+                            <th>
+                                Bairro
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="text" id="numero" name="numero">
-                            </div>
-                            <div id="div-bairro">
-                                <label for="bairro">Bairro:</label>
+                            </td>
+
+                            <td>
                                 <input type="text" id="bairro" name="bairro">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                <div id="div-uf">
-                                <label for="estado">Estado:</label>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="table-5-produto">
+                        <tr>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Cidade
+                            </th>
+                            <th>
+                                Contato
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <select id="uf" name="estado" required></select>
-                            </div>
-                            <div id="div-cidade">
-                                <label for="cidade">Cidade:</label>
+                                <div id="div-observacoes" style="display: none;">
+                                    <label for="observacoes">Observações:</label>
+                                    <textarea cols="47" id="observacoes" name="observacoes" rows="4"
+                                        placeholder="Informações adicionais sobre o cliente"></textarea>
+                                </div>
+                            </td>
+                            <td>
                                 <select id="cidade" name="cidade" required></select>
-                            </div>
-                            <div id="div-tel">
-                                <label for="telefone">Contato:</label>
+                            </td>
+                            <td>
                                 <input type="tel" id="telefone" name="telefone" required>
-                            </div>
-                          
-                        </div>
-                        <div class="form-group">
-                              <div id="div-email">
-                                <label for="email">E-mail:</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-6-produto">
+                        <tr>
+                            <th>
+                                E-mail
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="email" id="email" name="email" required>
-                            </div>
-                            <div id="div-observacoes" style="display: none;">
-                                <label for="observacoes">Observações:</label>
-                                <textarea cols="47" id="observacoes" name="observacoes" rows="4"
-                                    placeholder="Informações adicionais sobre o cliente"></textarea>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <div
-                    style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
-                    <footer class="div-form__footer">
-                        <p style="font-size: 0.95rem;"><img style="width: 1.3rem; margin-right: .5%;"
-                                src="../style/img/atencao.png" alt=""> <strong>Atenção:</strong> Antes de
-                            <strong>cadastrar</strong>, verifique se todos os dados do cliente estão
-                            <strong>corretos</strong>. O <strong>crédito</strong> é opcional, mas sem um <strong>valor
-                                liberado</strong>, o cliente não será <strong>aprovado</strong> no
-                            <strong>crediário</strong> da loja.
-                        </p>
-                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                            <button id="salvar-cliente"><img class="img-disquete" src="../style/img/disquete.png"
-                                    alt="">Gravar</button>
-                            <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                                    alt="">Limpar</button>
-                        </div>
-                    </footer>
-                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea style="display: none;" id="observacoes" name="observacoes" autocomplete="off"></textarea>
+                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                </section>
+            </div>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                <footer class="div-form__footer">
+                    <p style="font-size: 0.95rem;">
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                            alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores
+                        serão
+                        <strong>substituídas</strong>.
+                        Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
+                        Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
+                        <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode ser
+                            modificado</strong>.
+                    </p>
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button class="btn-alterar-produto"><img class="img-disquete" src="../style/img/troca.png"
+                                alt="">Alterar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
             </div>
         </div>
-    </div>
     </div>
 </body>
 <script src="../Renderer/Menu/renderer_menu.js"></script>

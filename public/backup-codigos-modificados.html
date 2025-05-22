@@ -1,0 +1,778 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <style>
+        #cadastro-produto {
+            background: var(--hover-color);
+            color: rgb(255, 255, 255);
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Cadastro de Produto</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul id="ul-Menu"></ul>
+        </nav>
+    </header>
+    
+    <div class="container-register"></div>
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+            
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo
+                            Produto</a>
+                        <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
+                        <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                            Informações e Estoque de Produtos</a>
+                        <a class="atalhos-btn" href="./controle_estoque.html">
+                            Controle de Estoque — Entradas e Saídas</a>
+                    </div>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs">
+            <div style="display: flex; width: 100%; height: 100%;">
+                <section class="div-form-img">
+                     <p class="titulo-img">Imagem do Produto</p>
+                    <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras - interno.png"
+                            alt="imagem produto"></div>
+                    <div style="width: 100%;"><input type="file" id="produto-imagem" accept="image/*"></div>
+                </section>
+                <section class="div-form__body">
+                    <div class="form-group">
+                        <div class="div-codigoDeBarras">
+                            <label>Código / Cód. Barras</label>
+                            <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off">
+                        </div>
+                        <div class="div-nomeProduto"> 
+                            <label  style="width: 100%;">Nome / Descrição</label>
+                            <input type="text" id="nomeProduto" name="nome" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="divGrupo" class="select-wrapper">
+                            <label style="width: 100%;" for="categoria-produto">Grupo</label>
+                            <div class="input-select-wrapper">
+                                <select id="grupo" name="grupo">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-grupo" class="add-grupo"><span class="cad">Cad...</span></button>
+                            </div>
+                        </div>
+                        <div id="divSubGrupo" class="select-wrapper">
+                            <label style="width: 100%;" for="grupo">Sub-Grupo:</label>
+                            <div class="input-select-wrapper">
+                                <select id="sub-grupo" name="grupo">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-subGrupo" class="add-subGrupo"><span class="cad">Cad...</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="form-group-choose" class="form-group">
+                        <div id="divColor" class="select-wrapper">
+                            <label style="width: 100%;" for="cor">Cor do Produto</label>
+                            <div class="input-select-wrapper">
+                                <select id="corProduto" name="corProduto">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-cor" class="add-cor"><span class="cad">Cad...</span></button>
+                            </div>
+                        </div>
+                        <div class="escolhaUnDiv">
+                            <label for="escolhaUM">Caracteristica do Produto</label>
+                            <div class="input-select-wrapper">
+                                <select id="escolhaUM">
+                                    <option value="">Selecione</option>
+                                    <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                    <option value="Tamanho - Numeração">Tamanho - Numeração</option>
+                                    <option value="Medida de Volume">Medida de Volume</option>
+                                    <option value="Unidade Comprimento">Unidade Comprimento</option>
+                                    <option value="Unidade de Massa">Unidade de Massa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="volumeDiv">
+                            <label for="volumeNumero">Medida de Volume</label>
+                            <div class="input-select-wrapper">
+                                <input id="volumeNumero" type="number" value="">
+                                <select id="medidaVolume" name="medidaVolume">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="comprimentoDiv">
+                            <label for="unidadeComprimento">Unidade Comprimento</label>
+                            <div class="input-select-wrapper">
+                                <input id="comprimento" type="number" value="">
+                                <select id="unidadeComprimento" name="unidadeComprimento">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="massaDiv">
+                            <label for="massaNumero">Unidade de Massa</label>
+                            <div class="input-select-wrapper">
+                                <input id="massaNumero" type="number" value="">
+                                <select id="unidadeDeMassa" name="unidadeMassa">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="divTamanho">
+                            <label for="tamanho">Tamanho - P/GG</label>
+                            <select id="tamanhoLetras" name="tamanhoLetras">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        <div id="divTamanhoNUm">
+                            <label for="tamanhoNumeros">Tamanho - Numeração</label>
+                            <select id="tamanhoNumeros" name="tamanho">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="precoCustoDiv" class="form-group">
+                        <div class="input-wrapper">
+                            <label for="precoCusto">Preço de Compra</label>
+                            <input value="0,00" id="precoCusto" name="preco" autocomplete="off">
+                        </div>
+
+                        <div class="input-wrapper">
+                           
+                            <input type="hidden" value="0" id="inputMarkup">
+                        </div>
+
+                        <div class="select-wrapper">
+                            <label for="lucro">Lucro Bruto (R$)</label>
+                            <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                        </div>
+
+                        <div class="select-wrapper">
+                            <label for="precoVenda">Preço de Venda</label>
+                            <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                       
+                        <textarea style="display: none;" id="observacoes" name="observacoes"
+                            autocomplete="off"></textarea>
+                        <div id="div-cnpj" class="select-wrapper">
+                            <label for="fornecedor">🔍 Filtrar por CNPJ</label>
+                            <div class="input-select-wrapper">
+                                <input id="cnpjFilter" name="fornecedor">
+                            </div>
+                        </div>
+                        <div id="divFornecedor" class="select-wrapper">
+                            <label style="width: 100%;" for="fornecedor">Nome Fantasia:</label>
+                            <div class="input-select-wrapper">
+                                <select id="fornecedor" name="fornecedor" disabled style="margin-bottom: 1%;">
+                                    <option value="1">Fornecedor não Cadastrado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="estoqueDiv" class="select-wrapper">
+                            <label for="estoqueQtd">Estoque Inicial</label>
+                            <div class="input-select-wrapper" style="gap: 1%;">
+                                <input value="" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                <select id="unidadeEstoque" name="unidadeEstoque">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                <footer class="div-form__footer">
+                    <p style="font-size: 0.95rem;">
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                            alt=""><strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente
+                        como:
+                        (<strong>Preço de Venda</strong> − <strong>Preço de Compra</strong>).
+                        Este valor é apenas <strong>demonstrativo</strong> e <strong>não é salvo</strong> no sistema.
+                        <strong>Verifique os valores com atenção antes de gravar os dados.</strong>
+                    </p>
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
+                                src="../style//img/disquete.png" alt="">Gravar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/Produto/renderizarInputsGrupo.js"></script>
+<script src="../Renderer/Produto/apiEndpoints.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/Produto/renderer_produtos.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <style>
+        #alterar-produto {
+            background: var(--hover-color);
+            color: rgb(255, 255, 255);
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
+    <style>
+        #cadastro-produto {
+            background: var(--hover-color);
+            color: rgb(255, 255, 255);
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Cadastro de Produto</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul id="ul-Menu"></ul>
+        </nav>
+    </header>
+    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+    <div class="container-register"></div>
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo
+                            Produto</a>
+                      <a class="atalhos-btn"  id="alterar-produto" href="./alterar_produto.html">Edição de Produto e Informações</a>
+                        <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
+                        <a class="atalhos-btn" href="./informacoes_produtos.html">
+                            Informações e Estoque de Produtos</a>
+                        <a class="atalhos-btn" href="./controle_estoque.html">
+                            Controle de Estoque — Entradas e Saídas</a>
+                    </div>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs">
+            <div style="display: flex; width: 100%; height: 100%;">
+                <section class="div-form-img">
+                    <p class="titulo-img"><strong>Imagem do Produto</strong></p>
+                    <div class="quadro-img"><img class="img-produto" src="../style/img/alterar.png"
+                            alt="Produto sem imagem."></div>
+                    <div style="width: 100%;">
+                        <input type="file" id="produto-imagem" accept="image/*">
+                    </div>
+                </section>
+
+                <section class="div-form__body">
+
+                    <table class="table-1-produto">
+                        <tr>
+                            <th>
+                            🔍 Filtrar por código EAN
+                            </th>
+                            <th>
+                                Nome / Descrição
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                               <input type="number" class="codigoDeBarras" id="codigoDeBarras" name="codigoDeBarras"
+                                autocomplete="off">
+                            </td>
+                            <td>
+                              <input style="margin-bottom: 2%;" type="text" class="nomeProduto" id="nomeProduto"
+                                name="nome" autocomplete="off" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-2-produto">
+                        <tr>
+                            <th>
+                                Grupo
+                            </th>
+                            <th>
+                                Subgrupo
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                   <select id="grupo" name="grupo">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-grupo" class="add-grupo"><span class="cad">Adicionar</span></button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-com-btn">
+                              <select id="sub-grupo" name="grupo">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-subGrupo" class="add-subGrupo"><span class="cad">Adicionar</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-3-produto">
+                        <tr>
+                            <th>
+                                Cor do Produto
+                            </th>
+                            <th>
+                                Caracteristica do Produto
+                            </th>
+
+                            <th>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                 <select id="corProduto" name="corProduto">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <button id="add-cor" class="add-cor"><span class="cad">Cad...</span></button>
+                                </div>
+                            </td>
+                            <td>
+                                  <select id="escolhaUM">
+                                    <option value="">Selecione</option>
+                                    <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                    <option value="Tamanho - Numeração">Tamanho - Numeração</option>
+                                    <option value="Medida de Volume">Medida de Volume</option>
+                                    <option value="Unidade Comprimento">Unidade Comprimento</option>
+                                    <option value="Unidade de Massa">Unidade de Massa</option>
+                                </select> <span class="span-dois-pontos"><strong>:</strong></span>
+                            </td>
+                            <td id="volumeDiv">
+                                <div class="input-select-wrapper">
+                                    <input id="volumeNumero" type="number" value="">
+                                <select id="medidaVolume" name="medidaVolume">
+                                    <option value="">Selecione</option>
+                                </select>
+                                </div>
+                            </td>
+                            <td id="comprimentoDiv">
+                                <div class="input-select-wrapper">
+                               <input id="comprimento" type="number" value="">
+                                <select id="unidadeComprimento" name="unidadeComprimento">
+                                    <option value="">Selecione</option>
+                                </select>
+                                </div>
+                            </td>
+                            <td id="massaDiv">
+                                <div class="input-select-wrapper">
+                                     <input id="massaNumero" type="number" value="">
+                                <select id="unidadeDeMassa" name="unidadeMassa">
+                                    <option value="">Selecione</option>
+                                </select>
+                                </div>
+                            </td>
+                            <td id="divTamanho">
+                                   <select id="tamanhoLetras" name="tamanhoLetras">
+                                <option value="">Selecione</option>
+                            </select>
+                            </td>
+                            <td id="divTamanhoNUm">
+                                 <select id="tamanhoNumeros" name="tamanho">
+                                <option value="">Selecione</option>
+                            </select>
+                            </td>
+                    </table>
+                    <table class="table-4-produto">
+                        <tr>
+                            <th>
+                                Preço de Compra
+                            </th>
+                          
+                            <th>
+                                Preço de Venda
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                             <label for="precoCusto">Preço de Compra</label>
+                            <input value="0,00" id="precoCusto" class="precoCusto" name="preco" autocomplete="off"
+                                readonly>
+                                     <!-- <label for="markup">Markup % :</label> -->
+                            <input type="hidden" value="0" id="inputMarkup">
+                            </td>
+                        
+                            <td>
+                              <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-5-produto">
+                        <tr>
+                            <th>
+                                🔍 Filtrar por CNPJ
+                            </th>
+                            <th>
+                                Nome fantasia filtrado
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                               <input style="width: 100%;" id="cnpjFilter" name="fornecedor">
+                            </td>
+                            <td>
+                                 <select style="margin-bottom: 1%; width: 100%;" id="fornecedor" name="fornecedor"
+                                    disabled>
+                                    <option value="1">Fornecedor não Cadastrado</option>
+                                </select>
+                                   <button id="btn-cadastrar-produto" class="btn-cadastrar-produto" style="display: none;"><img
+                                class="img-disquete" src="../style//img/disquete.png" alt="">Alterar
+                            Produto</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-6-produto">
+                        <tr>
+                            <th>
+                                Estoque Inicial
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="input-select-wrapper" style="gap: 1%;">
+                                      <input value="" type="number" id="estoqueQtd" class="estoqueReadonly" name="estoqueQtd"
+                                    autocomplete="off" readonly>
+                                <select id="unidadeEstoque" class="estoqueReadonly" name="unidadeEstoque" disabled>
+                                    <option value=""></option>
+                                </select>
+                                <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea style="display: none;" id="observacoes" name="observacoes" autocomplete="off"></textarea>
+                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                </section>
+            </div>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                   <footer class="div-form__footer">
+                    <p style="font-size: 0.95rem;">
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png" alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores serão
+                        <strong>substituídas</strong>.
+                        Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
+                        Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
+                        <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode ser
+                            modificado</strong>.
+                    </p>
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button class="btn-alterar-produto"><img class="img-disquete" src="../style/img/troca.png"
+                                alt="">Alterar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/Produto/renderizarInputsGrupo.js"></script>
+<script src="../Renderer/Produto/apiEndpoints.js"></script>
+<script src="../Renderer/Produto/gettodosAlterar.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/Produto/renderer_produtos.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
+    <style>
+        #li-cadastroCliente {
+            background: var(--hover-color);
+            color: rgb(255, 255, 255);
+            text-shadow: none;
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <title>Cadastrar Cliente</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul id="ul-Menu"></ul>
+        </nav>
+    </header>
+    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+    <div class="container-register"></div>
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="li-cadastroCliente" href="./registrar_cliente.html">Cadastrar
+                            novo Cliente</a>
+                        <a class="atalhos-btn" href="./alterar_cliente.html">Informações Cadastrais do Cliente /
+                            Alterar</a>
+                        <a class="atalhos-btn" id="btn-flex">Receber Pagamento</a>
+                        <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os Clientes</a>
+                        <a class="atalhos-btn" id="btn-atraso" href="#">Relatório de parcelas em Atraso</a>
+                    </div>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs">
+            <div style="display: flex; width: 100%; height: 100%;">
+                <section class="div-form-img">
+                    <p class="titulo-img">Cadastro Cliente</p>
+                    <img class="img-produto" src="../style/img/cliente - interno.png" alt="">
+                </section>
+                <section class="div-form__body">
+                    <table class="table-1-produto">
+                        <tr>
+                            <th>
+                                CPF
+                            </th>
+                            <th>
+                                Nome Completo
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" id="cpf" name="cpf" required>
+                            </td>
+                            <td>
+                                <input type="text" id="nome" name="nome" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-2-produto">
+                        <tr>
+                            <th>
+                                Data de Nascimento
+                            </th>
+                            <th>
+                                Ocupação
+                            </th>
+                            <th>
+                                Liberar Crédito
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="date" id="dataNascimento" name="dataNascimento">
+                            </td>
+                            <td>
+                                <select name="ocupacao" id="ocupacao">
+                            </td>
+                            <td>
+                                <input id="creditoLiberar" value="0,00" name="credito" required></input>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-3-produto">
+                        <tr>
+                            <th>
+                                CEP
+                            </th>
+                            <th>
+                                Logradouro
+                            </th>
+
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                    <input type="text" id="cep" name="cep" required>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" id="logradouro" name="logradouro">
+                            </td>
+                    </table>
+                    <table class="table-4-produto">
+                        <tr>
+                            <th>
+                                Número
+                            </th>
+
+                            <th>
+                                Bairro
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                            <td id="volumeDiv">
+                                <input type="text" id="numero" name="numero">
+                            </td>
+                            </td>
+
+                            <td>
+                                <input type="text" id="bairro" name="bairro">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="table-5-produto">
+                        <tr>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Cidade
+                            </th>
+                            <th>
+                                Contato
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="uf" name="estado" required></select>
+                                <div id="div-observacoes" style="display: none;">
+                                    <label for="observacoes">Observações:</label>
+                                    <textarea cols="47" id="observacoes" name="observacoes" rows="4"
+                                        placeholder="Informações adicionais sobre o cliente"></textarea>
+                                </div>
+                            </td>
+                            <td>
+                                <select id="cidade" name="cidade" required></select>
+                            </td>
+                            <td>
+                                <input type="tel" id="telefone" name="telefone" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-6-produto">
+                        <tr>
+                            <th>
+                                E-mail
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="email" id="email" name="email" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea style="display: none;" id="observacoes" name="observacoes" autocomplete="off"></textarea>
+                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                </section>
+            </div>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                <footer class="div-form__footer">
+                    <p style="font-size: 0.95rem;">
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                            alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores
+                        serão
+                        <strong>substituídas</strong>.
+                        Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
+                        Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
+                        <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode ser
+                            modificado</strong>.
+                    </p>
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button class="btn-alterar-produto"><img class="img-disquete" src="../style/img/troca.png"
+                                alt="">Alterar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/Cliente/api_clientes.js"></script>
+<script src="../Renderer/services/cidadesPorEstados.js"></script>
+<script src="../Renderer/Cliente/register_cliente.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/ocupacao.js"></script>
+
+</html>

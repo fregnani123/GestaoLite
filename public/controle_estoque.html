@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
     <style>
         #estoque-entrada-saida {
@@ -62,100 +63,117 @@
             </div>
             <div class="container-inputs">
                 <div class="div-form-display">
-                    <div style="display: flex; width: 100%; height: 100%;">
-                        <section class="div-form-img">
-                            <p class="titulo-img" style="margin-right: 1.5%;"><span>Controle de Estoque — Entradas e
-                                    Saídas</span></p>
-                            <div class="quadro-img"><img style="width: 250px;height: auto;" class="img-produto"
-                                    src="../style/img/em-estoque.png" alt="">
+                    <div style="display: flex; width: 100%; height: 100%; position: relative;">
+                        <section class="div-form-img" >
+                            <h4 style="position: absolute; top: 2%;left: 3%;">Controle de Estoque - Entrada / Saída</h4>
+                            <p class="titulo-img">Imagem do Produto</p>
+                            <div class="quadro-img" style=" padding: 1rem;border: 3px dashed #999; margin: 10px 0;"><img class="img-produto" src="../style/img/em-estoque.png"
+                                    alt="Produto sem imagem."></div>
                         </section>
                         <section class="div-form__body">
-                            <div class="form-group">
-                                <div style="margin-left: 20%;">
-                                    <p class="titulo-img"><span>Imagem do Produto</span></p>
-                                    <div class="quadro-img"><img class="img-produto" src="../style/img/alterar.png"
-                                            alt="Produto sem imagem."></div>
-                                </div>
-                                <div id="div-estoque" class="div-codigoEanFind">
-                                    <label for="cnpj">🔍 Filtrar Cód. (EAN):</label>
-                                    <input type="text" id="CodigoEanBuscar">
-                                </div>
 
-                            </div>
-                            <div class="form-group">
-                                <div id="div-estoque" class="div-produtoEncontrado">
-                                    <label for="">Descrição Produto:</label>
-                                    <input type="text" id="produtoEncontrado" readonly>
-                                </div>
-                                <div id="div-estoque" class="div-atual">
-                                    <label class="" for="">Estoque Atual:</label>
-                                    <input id="estoqueAtual" type="text" readonly type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div>
+                            <table class="table-1-produto">
+                                <tr>
+                                    <th>
+                                        🔍 Filtrar por código EAN
+                                    </th>
+                                    <th>
+                                        Nome / Descrição
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="CodigoEanBuscar">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="produtoEncontrado" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-1-produto">
+                                <tr>
+                                    <th style="width: 25%;">
+                                        Estoque Atual
+                                    </th>
+                                    <th style="width: 25%;">
+                                        Alterar valores
+                                    </th>
+                                    <th style="width: 25%;">
+                                        Preço de Compra
+                                    </th>
+                                    <th style="width: 25%;">
+                                        Preço de Venda
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input id="estoqueAtual" type="text" readonly type="text">
+                                    </td>
+                                    <td>
+                                        <select id="alterarPreco">
+                                            <option value="1">Não</option>
+                                            <option value="2">Sim</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input style="background-color:rgb(232, 232, 232);" id="inputPrecoCompra"
+                                            type="text" readonly>
+                                    </td>
+                                    <td>
+                                        <input style="background-color:rgb(232, 232, 232);" id="precoVendaEstoque"
+                                            type="text" readonly type="text">
+                                    </td>
+                                </tr>
+                                <table class="table-3-produto">
+                                    <tr>
+                                        <th style="width: 25%;">
+                                            Situação do Movimento
+                                        </th>
+                                        <th style="width: 25%;">
+                                            Motivo da Movimentação
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>
+                                            <select name="" id="situacao">
+                                                <option value="">Selecione</option>
+                                                <option value="1">Entrada</option>
+                                                <option value="2">Saída</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="" id="movimento">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table-3-produto">
+                                    <tr>
+                                        <th>
+                                            Qtde a ser Movimentada
+                                        </th>
+                                        <th>
+                                            Data da Movimentação
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>
+                                            <input id="qtdeMovimentacao">
+                                            <input type="hidden" style="background-color: #007bff00;" id="venda_id"
+                                                readonly>
+                                            <input type="hidden" style="background-color: #007bff00;"
+                                                id="inputqtChaveCompra" readonly>
+                                        </td>
+                                        <td>
+                                            <input id="dateEstoque" type="date" readonly>
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                </div>
-                                <div id="div-estoque" class="div-precoCompra">
-                                    <label for="alterarPreco">Alterar valores:</label>
-                                    <select id="alterarPreco">
-                                        <option value="1">Não</option>
-                                        <option value="2">Sim</option>
-                                    </select>
-                                </div>
-                                <div id="div-estoque" class="div-precoCompra">
-                                    <label for="inputPrecoCompra">Preço de Compra:</label>
-                                    <input style="background-color:rgb(232, 232, 232);" id="inputPrecoCompra"
-                                        type="text" readonly>
-                                </div>
-                                <!-- <div id="div-estoque" class="div-precoCompra"> -->
-                                <!-- <label class="" for="">Markup %:</label> -->
-                                <input type="hidden" style="background-color:rgb(232, 232, 232)" id="MarkupEstoque"
-                                    type="text" readonly>
-                                <!-- </div> -->
-                                <div id="div-estoque" class="div-precoCompra">
-                                    <label class="" for="">Preço de Venda:</label>
-                                    <input style="background-color:rgb(232, 232, 232);" id="precoVendaEstoque"
-                                        type="text" readonly type="text">
-                                </div>
-
-                            </div>
-                            <div class="form-group">
-
-                                <div id="div-estoque" class="selectSituacao">
-                                    <label class="labelFornecedor" for="razaoSocial">Situação do Movimento:</label>
-                                    <select name="" id="situacao">
-                                        <option value="">Selecione</option>
-                                        <option value="1">Entrada</option>
-                                        <option value="2">Saída</option>
-                                    </select>
-                                </div>
-                                <div id="div-estoque" class="selectSituacao">
-                                    <label class="" for="">Motivo da Movimentação:</label>
-                                    <select name="" id="movimento">
-                                        <option value="">Selecione</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="div-qtdeMovimentacao">
-                                    <label class="" for="">Qtde a ser Movimentada:</label>
-                                    <input id="qtdeMovimentacao">
-                                </div>
-                                <!-- <div id="div-estoque" class="selectSituacao">
-                            <label class="" for="">Núm. da venda a ser vinculado</label> -->
-                                <input type="hidden" style="background-color: #007bff00;" id="venda_id" readonly>
-                                <!-- </div>
-                        <div id="div-estoque"  class="selectSituacao"> -->
-                                <!-- <label class="" for="">Chave de Identificação da Compra</label> -->
-                                <input type="hidden" style="background-color: #007bff00;" id="inputqtChaveCompra"
-                                    readonly>
-                                <!-- </div> -->
-                                <div >
-                                    <label style="width: 100%" for="">Data da Movimentação</label>
-                                    <input id="dateEstoque" type="date" readonly>
-                                </div>
-                            </div>
+                            </table>
                         </section>
                     </div>
                     <div

@@ -13,40 +13,44 @@
     <link rel="stylesheet" href="../style/css/css_global/termos.css">
     <title>Gestão Lite - Login</title>
 </head>
-
 <body>
-    <div class="container">
-<header> <img class="img-logo" src="../style/img/logoFGL.png" alt="GestãoLite"></header>
-        <div class="ativar-produto">
-            <button id="ativar-btn" disabled>Ativar Produto</button>
-        </div>
-      
-        <div class="login-container">
-         <p class="welcome-msg"><strong>Bem-vindo!</strong> Faça login para acessar o sistema.</p>
-            <form>
-                <div class="form-group">
-                    <label style=" border: 1px solid transparent;" class="label-acess" for="username">Usuário:</label>
-                    <img class="img-user" style="position: absolute; margin-top: .8%;" src="../style/img/user.png"
-                        alt=""> <input type="text" id="username" name="username" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                <label style=" border: 1px solid transparent;" class="label-acess" for="password"> Senha:</label>
-                        <img class="img-cadeado" style="position: absolute;margin-top: .2;" src="../style/img/cadeado.png"
-                            alt=""><input type="password" id="password" name="password" required autocomplete="off">     
-                </div>  
-                  <button id="formLogin">Login</button>
-            </form>
-            <div id="mensagem-licenca"></div>
-        </div>
+    <header>
+        <img class="img-logo" src="../style/img/logoFGL.png" alt="GestãoLite">
+    </header>
+
+    <div class="ativar-produto">
+        <button id="ativar-btn" disabled>Ativar Produto</button>
     </div>
-    <footer >
+
+    <div class="login-container">
+        <p class="welcome-msg"><strong class="strong-bem-vindo">Bem-vindo!</strong> Autentique-se para acessar o sistema.</p>
+        <form>
+            <div class="form-group">
+                <label class="label-acess" for="username"><strong>Usuário</strong></label>
+                <img class="img-user" src="../style/img/user.png" alt="">
+                <input type="text" id="username" name="username" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label class="label-acess" for="password"><strong>Senha</strong></label>
+                <img class="img-cadeado" src="../style/img/cadeado.png" alt="">
+                <input type="password" id="password" name="password" required autocomplete="off">
+            </div>
+
+            <button id="formLogin">Entrar</button>
+        </form>
+        <div id="mensagem-licenca"></div>
+    </div>
+
+    <footer>
         &copy; <span id="current-year"></span> FGL Software Solutions – Todos os direitos reservados
         Versão 2.1.0
     </footer>
-   
+
 </body>
- <script src="../config/ApiLicenca.js"></script>
-    <script src="../config/loginUsers.js"></script>
-    <script src="../Renderer/services/alertMsg.js"></script>
-    <script src="../config/apiUser.js"></script>
+<script src="../config/ApiLicenca.js"></script>
+<script src="../config/loginUsers.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../config/apiUser.js"></script>
+
 </html>

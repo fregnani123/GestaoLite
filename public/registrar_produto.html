@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <style>
         #cadastro-produto {
             background: var(--hover-color);
@@ -36,8 +37,6 @@
     <div class="div-form">
         <div class="atalhos-1">
             <div class="atalhos">
-                <!-- <p class="p-titulo"><span class="p-span"><strong>Escolha uma ação via atalho ou botão.</strong></span>
-                </p> -->
                 <div class="menu-secundario">
                     <div class="pagamento">
                         <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo
@@ -58,55 +57,86 @@
         <div class="container-inputs">
             <div style="display: flex; width: 100%; height: 100%;">
                 <section class="div-form-img">
-                     <p class="titulo-img">Imagem do Produto</p>
-                    <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras.png"
+                    <p class="titulo-img"><strong>Imagem do Produto</strong></p>
+                    <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras - interno.png"
                             alt="imagem produto"></div>
-                    <div style="width: 100%;"><input type="file" id="produto-imagem" accept="image/*"></div>
+                    <div style="width: 100%;">
+                        <input type="file" id="produto-imagem" accept="image/*">
+                    </div>
                 </section>
+
                 <section class="div-form__body">
-                    <div class="form-group">
-                        <div class="div-codigoDeBarras">
-                            <label>Código / Cód. Barras</label>
-                            <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off">
-                        </div>
-                        <div class="div-nomeProduto"> 
-                            <label  style="width: 100%;">Nome / Descrição</label>
-                            <input type="text" id="nomeProduto" name="nome" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="divGrupo" class="select-wrapper">
-                            <label style="width: 100%;" for="categoria-produto">Grupo</label>
-                            <div class="input-select-wrapper">
-                                <select id="grupo" name="grupo">
-                                    <option value="">Selecione</option>
-                                </select>
-                                <button id="add-grupo" class="add-grupo"><span class="cad">Cad...</span></button>
-                            </div>
-                        </div>
-                        <div id="divSubGrupo" class="select-wrapper">
-                            <label style="width: 100%;" for="grupo">Sub-Grupo:</label>
-                            <div class="input-select-wrapper">
-                                <select id="sub-grupo" name="grupo">
-                                    <option value="">Selecione</option>
-                                </select>
-                                <button id="add-subGrupo" class="add-subGrupo"><span class="cad">Cad...</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="form-group-choose" class="form-group">
-                        <div id="divColor" class="select-wrapper">
-                            <label style="width: 100%;" for="cor">Cor do Produto</label>
-                            <div class="input-select-wrapper">
-                                <select id="corProduto" name="corProduto">
-                                    <option value="">Selecione</option>
-                                </select>
-                                <button id="add-cor" class="add-cor"><span class="cad">Cad...</span></button>
-                            </div>
-                        </div>
-                        <div class="escolhaUnDiv">
-                            <label for="escolhaUM">Caracteristica do Produto</label>
-                            <div class="input-select-wrapper">
+
+                    <table class="table-1-produto">
+                        <tr>
+                            <th>
+                                Código / Cód. Barras
+                            </th>
+                            <th>
+                                Nome / Descrição
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off">
+                            </td>
+                            <td>
+                                <input type="text" id="nomeProduto" name="nome" autocomplete="off">
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-2-produto">
+                        <tr>
+                            <th>
+                                Grupo
+                            </th>
+                            <th>
+                                Subgrupo
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                    <select id="grupo" name="grupo">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                    <button id="add-grupo" class="add-grupo"><span class="cad">Adicionar</span></button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="td-com-btn">
+                                    <select id="sub-grupo" name="grupo">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                    <button id="add-subGrupo" class="add-subGrupo"><span
+                                            class="cad">Adicionar</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-3-produto">
+                        <tr>
+                            <th>
+                                Cor do Produto
+                            </th>
+                            <th>
+                                Caracteristica do Produto
+                            </th>
+
+                            <th>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                    <select id="corProduto" name="corProduto">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                    <button id="add-cor" class="add-cor"><span class="cad">Adicionar</span></button>
+                                </div>
+                            </td>
+                            <td>
                                 <select id="escolhaUM">
                                     <option value="">Selecione</option>
                                     <option value="Tamanho - P/GG">Tamanho - P/GG</option>
@@ -114,102 +144,111 @@
                                     <option value="Medida de Volume">Medida de Volume</option>
                                     <option value="Unidade Comprimento">Unidade Comprimento</option>
                                     <option value="Unidade de Massa">Unidade de Massa</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="volumeDiv">
-                            <label for="volumeNumero">Medida de Volume</label>
-                            <div class="input-select-wrapper">
-                                <input id="volumeNumero" type="number" value="">
-                                <select id="medidaVolume" name="medidaVolume">
+                                </select> <span class="span-dois-pontos"><strong>:</strong></span>
+                            </td>
+                            <td id="volumeDiv">
+                                <div class="input-select-wrapper">
+                                    <input id="volumeNumero" type="number" value="">
+                                    <select id="medidaVolume" name="medidaVolume">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td id="comprimentoDiv">
+                                <div class="input-select-wrapper">
+                                    <input id="comprimento" type="number" value="">
+                                    <select id="unidadeComprimento" name="unidadeComprimento">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td id="massaDiv">
+                                <div class="input-select-wrapper">
+                                    <input id="massaNumero" type="number" value="">
+                                    <select id="unidadeDeMassa" name="unidadeMassa">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td id="divTamanho">
+                                <select id="tamanhoLetras" name="tamanhoLetras">
                                     <option value="">Selecione</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div id="comprimentoDiv">
-                            <label for="unidadeComprimento">Unidade Comprimento</label>
-                            <div class="input-select-wrapper">
-                                <input id="comprimento" type="number" value="">
-                                <select id="unidadeComprimento" name="unidadeComprimento">
+                            </td>
+                            <td id="divTamanhoNUm">
+                                <select id="tamanhoNumeros" name="tamanho">
                                     <option value="">Selecione</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div id="massaDiv">
-                            <label for="massaNumero">Unidade de Massa</label>
-                            <div class="input-select-wrapper">
-                                <input id="massaNumero" type="number" value="">
-                                <select id="unidadeDeMassa" name="unidadeMassa">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="divTamanho">
-                            <label for="tamanho">Tamanho - P/GG</label>
-                            <select id="tamanhoLetras" name="tamanhoLetras">
-                                <option value="">Selecione</option>
-                            </select>
-                        </div>
-                        <div id="divTamanhoNUm">
-                            <label for="tamanhoNumeros">Tamanho - Numeração</label>
-                            <select id="tamanhoNumeros" name="tamanho">
-                                <option value="">Selecione</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="precoCustoDiv" class="form-group">
-                        <div class="input-wrapper">
-                            <label for="precoCusto">Preço de Compra</label>
-                            <input value="0,00" id="precoCusto" name="preco" autocomplete="off">
-                        </div>
-
-                        <div class="input-wrapper">
-                            <!-- <label for="markup">Markup % : </label> -->
-                            <input type="hidden" value="0" id="inputMarkup">
-                        </div>
-
-                        <div class="select-wrapper">
-                            <label for="lucro">Lucro Bruto (R$)</label>
-                            <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
-                        </div>
-
-                        <div class="select-wrapper">
-                            <label for="precoVenda">Preço de Venda</label>
-                            <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label class="label-Observacoes" for="Observações">Observações:</label> -->
-                        <textarea style="display: none;" id="observacoes" name="observacoes"
-                            autocomplete="off"></textarea>
-                        <div id="div-cnpj" class="select-wrapper">
-                            <label for="fornecedor">🔍 Filtrar por CNPJ</label>
-                            <div class="input-select-wrapper">
+                            </td>
+                    </table>
+                    <table class="table-4-produto">
+                        <tr>
+                            <th>
+                                Preço de Compra
+                            </th>
+                            <th>
+                                Lucro Bruto (R$)
+                            </th>
+                            <th>
+                                Preço de Venda
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input value="0,00" id="precoCusto" name="preco" autocomplete="off">
+                            </td>
+                            <td>
+                                <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                                <input type="hidden" value="0" id="inputMarkup">
+                            </td>
+                            <td>
+                                <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-5-produto">
+                        <tr>
+                            <th>
+                                🔍 Filtrar por CNPJ
+                            </th>
+                            <th>
+                                Nome fantasia filtrado
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input id="cnpjFilter" name="fornecedor">
-                            </div>
-                        </div>
-                        <div id="divFornecedor" class="select-wrapper">
-                            <label style="width: 100%;" for="fornecedor">Nome Fantasia:</label>
-                            <div class="input-select-wrapper">
+                            </td>
+                            <td>
                                 <select id="fornecedor" name="fornecedor" disabled style="margin-bottom: 1%;">
                                     <option value="1">Fornecedor não Cadastrado</option>
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="estoqueDiv" class="select-wrapper">
-                            <label for="estoqueQtd">Estoque Inicial</label>
-                            <div class="input-select-wrapper" style="gap: 1%;">
-                                <input value="" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
-                                <select id="unidadeEstoque" name="unidadeEstoque">
-                                    <option value="">Selecione</option>
-                                </select>
-                                <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
-                            </div>
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-6-produto">
+                        <tr>
+                            <th>
+                                Estoque Inicial
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="input-select-wrapper" style="gap: 1%;">
+                                    <input value="" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                    <select id="unidadeEstoque" name="unidadeEstoque">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea style="display: none;" id="observacoes" name="observacoes" autocomplete="off"></textarea>
+                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
                 </section>
             </div>
             <div

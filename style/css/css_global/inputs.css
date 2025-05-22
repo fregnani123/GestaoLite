@@ -20,6 +20,10 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+#username,#password{
+    text-align: center;
+}
+
 label {
     font-size: 1.1rem;
     margin-bottom: 10px;
@@ -39,258 +43,40 @@ label {
 #labelFornecedor {
     margin-top: 1%;
 }
-
+.strong-td{
+    margin-left: 1rem;
+}
 input,
 select {
     width: 100%;
-    font-size: 1rem;
-    border: 2px solid #ccc;
-    border-right-color: #fff;
-    border-bottom-color: #fff;
-    border-left-color: #999;
-    border-top-color: #999;
-    box-shadow: inset 1px 1px 2px #ddd;
-    outline: none;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0.4rem 0.6rem;
-    background-color: #f9f9f9;
-    transition: border 0.2s ease;
-    text-align: center;
-    height: 2.2rem;
+    border-radius: 6px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 2.4rem;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Foco com cor azul escuro */
 input:focus,
 select:focus {
-    border-color: gray;
+    border-color: #5f8ac1; /* azul leve */
+    box-shadow: 0 0 0 2px rgba(95, 138, 193, 0.3);
+    outline: none;
 }
 
-
 #produto-imagem {
-    font-size: 1rem;
+    font-size: .9rem;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border: none;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0);
+    background-color: transparent;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
     margin-left: .3%;
 }
 
-#desconto {
-    width: 40%;
-}
 
-.produto-imagem {
-    font-size: .5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: none;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0);
-}
-
-.div-nomeProduto {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#nomeProduto {
-    margin-bottom: 1%;
-}
-
-#divColor {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.input-select-wrapper {
-    width: 100%;
-}
-
-
-#divFornecedor {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-#div-slogan {
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-#div-qr_code_img {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-#div-cnpj {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-#divGrupo,
-#divSubGrupo {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* div-inputs controla a largura */
-#grupos-inputs {
-    width: 50%;
-}
-
-#fornecedor,
-.estoqueReadonly,
-.precoCusto {
-    background-color: var(--input-readonly);
-}
-
-#estoqueDiv {
-    width: 40%;
-}
-
-#divCnpj,
-#div-ie {
-    width: 30%;
-}
-
-#div-cpf {
-    width: 25%;
-}
-
-#div-nome {
-    width: 75%;
-    margin-bottom: 1%;
-}
-
-#div-tel {
-    width: 30%;
-}
-
-#div-email {
-    width: 70%;
-    margin-bottom: 1%;
-}
-
-.div-produtoEncontrado {
-    width: 75%;
-    margin-bottom: 1%;
-}
-
-.div-atual {
-    width: 25%;
-}
-
-.div-precoCompra {
-    width: 25%;
-}
-
-.div-qtdeMovimentacao {
-    width: 30%;
-}
-
-.selectSituacao {
-    width: 35%;
-}
-
-.dataMovimentacao {
-    width: 25%;
-}
-
-#div-logradouro {
-    width: 70%;
-    margin-bottom: 1%;
-}
-
-#div-bairro {
-    width: 50%;
-    margin-bottom: .5%;
-}
-
-#div-uf {
-    width: 15%;
-}
-
-#div-cidade {
-    width: 35%;
-}
-
-.div-codigoDeBarras {
-    width: 30%;
-}
-
-#div-ie {
-    width: 25%;
-}
-
-#div-pessoa,
-#div-alterar {
-    width: 20%;
-}
-
-#div-ativo {
-    width: 25%;
-}
-
-#div-tipo_usuario {
-    width: 20%;
-}
-
-#div-razoSocial {
-    width: 70%;
-    margin-bottom: .5%;
-}
-
-#div-atividade {
-    width: 40%;
-}
-
-#div-fantasia {
-    width: 70%;
-    margin-bottom: .5%;
-}
-
-#div-ocupação {
-    width: 30%;
-}
-
-#cnpjInfo {
-    font-size: 1rem;
-}
-
-input[type="radio"] {
-    transform: scale(0.8);
-    /* Reduz o tamanho em 80% */
-    margin-right: 2%;
-    width: 10%;
-    height: 1rem;
-}
-
-#codigo {
-    width: 70%;
-}

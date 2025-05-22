@@ -23,6 +23,9 @@
         #filtrarHistorico {
             margin-right: 2%;
         }
+        label{
+            font-size: 1rem;
+        }
     </style>
     <title></title>
 </head>
@@ -51,27 +54,34 @@
             </div>
         </div>
         <div class="container-inputs" style="position: relative;">
-
-                <div class="div-agendar">
+                <div class="div-agendar" style="display: none;">
                 <button class="close-btn">x</button>
                 <label class="agendar-titulo" style="background-color: #f4f4f4; padding: 1%;">Cadastrar novo
                     Agendamento</label>
-                <div class="agendar">
-                    <div style="display: flex;">
+                <div class="agendar" >
+                    <div style="display: flex; gap: 1%;padding: .5%;" >
                         <div><label>CPF do Cliente </label> <input type="text" id="input-cpf" class="input-cpf"></div>
-                        <div><label>Nome do Cliente</label>
+                        <div style="width: 50%;"><label>Nome do Cliente</label>
                             <input id="cliente-nome" autocomplete="off" readonly
                                     style="background-color: rgb(228, 228, 228);">
                                 <input id="cliente-id" type="hidden">
                         </div>
-                        <div><label>Data</label><input type="date" id="input-data" class="input-data"></div>
-                        <div><label>Horário</label><input type="time" id="input-hora" class="input-hora"></div>
+                        <div  style="width: 18%;"><label>Data</label>
+                            <input type="date" id="input-data" class="input-data">
+                        </div>
+                        <div style="width: 15%;">
+                            <label>Horário</label><input type="time" id="input-hora" class="input-hora">
+                        </div>
                     </div>
-                    <div style="display: flex;">
-                        <div><label>Motivo do Compromisso</label> <input type="text" id="input-motivo" class="input-motivo"></div>
-                        <div><label>Ações  </label>      <button class="btn-cadastrar" id="btn-cadastrar">
+                    <div  style="display: flex; gap: 1%;padding: .5%;" >
+                        <div style="width: 85%;"><label>Motivo do Compromisso</label> 
+                            <input type="text" id="input-motivo" class="input-motivo">
+                        </div>
+                        <div style="display: flex;align-items: flex-end;">  
+                            <button class="btn-cadastrar" id="btn-cadastrar" >
                                 <img class="img-disquete" src="../style/img/agendar.png"> Agendar
-                            </button></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
