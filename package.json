@@ -53,7 +53,7 @@
       "package.json"
     ],
     "win": {
-      "icon": "./img/icon.ico",
+     "icon": "./img/ico.ico",
       "target": [
         "nsis"
       ]
@@ -63,10 +63,10 @@
       "allowToChangeInstallationDirectory": true
     },
     "mac": {
-      "icon": "./img/icon.ic"
+     "icon": "./img/ico.ico"
     },
     "linux": {
-      "icon": "./img/icon.ic"
+     "icon": "./img/ico.ico"
     }
   }
 }

@@ -18,7 +18,7 @@ const menuPainel3 = [
     // { id: '6', texto: '', src: '', to: '' },
   { id: '4', texto: 'Gerenciar produto', src: '../style/img/codigo-de-barras.png', to: '../public/registrar_produto.html' },
     { id: '2', texto: 'Baixa no estoque por pedido', src: '../style/img/carrinho-de-compras-icon.png', to: '../public/tela_vendas.html' },
-    { id: '13', texto: 'Informações estoque', src: '../style/img/caixa.png', to: '../public/informacoes_produtos.html' },
+    { id: '13', texto: 'Informações estoque', src: '../style/img/info-estoque.png', to: '../public/informacoes_produtos.html' },
     { id: '14', texto: 'Sair', src: '../style/img/sair.png', to: '../public/index.html' },
 ];
 

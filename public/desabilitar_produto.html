@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;" />
-    
+
     <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css" />
     <link rel="stylesheet" href="../style/css/css_global/form_padrao.css" />
     <link rel="stylesheet" href="../style/css/css_global/btn.css" />
     <link rel="stylesheet" href="../style/css/css_global/info.css" />
     <link rel="stylesheet" href="../style/css/css_global/inputs.css" />
+    <link rel="stylesheet" href="../style/css/css_global/table.css" />
     <link rel="stylesheet" href="../style/css/registrar_produto/desabilitar_produto.css" />
     <title>Desabilitar Produto</title>
 </head>
@@ -31,9 +32,11 @@
                     <div class="pagamento">
                         <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
                         <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
-                        <a class="atalhos-btn" id="desabilitar-Produtos" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">Informações e Estoque de Produtos</a>
-                        <a class="atalhos-btn" href="./controle_estoque.html">Controle de Estoque — Entradas e Saídas</a>
+                        <a class="atalhos-btn" href="./controle_estoque.html">Controle de Estoque — Entradas e
+                            Saídas</a>
+                        <a class="atalhos-btn" id="desabilitar-Produtos" href="./desabilitar_produto.html">Desabilitar
+                            Produto</a>
                     </div>
                     <div class="logo-container">
                         <img class="logo-img" src="../style/img/logoLGL-removebg-preview (1).png" alt="" />
@@ -41,35 +44,31 @@
                 </div>
             </div>
         </div>
-
         <div class="secao-principal">
             <div class="secao-conteudo">
                 <section class="secao-acao secao-acao-relative">
+                    <h4 style="position: absolute; top: 2%;left: 3%;">Desabilitar Produto</h4>
                     <div class="flex-full-align">
                         <div class="foto-produto-container">
-                            <p class="titulo-img">Imagem do Produto</p>
+                            <p class="titulo-img"><strong>Imagem do Produto</strong></p>
                             <div class="quadro-img">
-                                <img class="img-produto" src="../style/img/codigo-de-barras - interno.png" alt="imagem produto" />
+                                <img class="img-produto" src="../style/img/desabilitar.png" alt="imagem produto" />
                             </div>
                         </div>
                         <div class="filtros-container">
                             <div class="filtro-ean">
-                                <label>🔍 Filtrar por código EAN</label>
-                                <input type="text" id="codigoEAN" />
-                            </div>
-                        </div>
-
-                        <div class="desabilitar-btn-area">
-                            <label style="width: 100%; text-align: center; margin: 5px;">Desabilitar Produto Filtrado</label>
-                            <div class="desabilitar-btn-container">
-                                <div id="div-btns">
-                                    <button id="btnDesativar" style="background-color: gray; cursor: default;">Desabilitar</button>
-                                </div>
-                                <div>
-                                    <button id="limparButton">
-                                        <img class="img-excluir" src="../style/img/excluir.png" alt="" />Limpar
-                                    </button>
-                                </div>
+                                <table style="background-color: transparent;box-shadow: none;">
+                                    <tr>
+                                        <th>
+                                            🔍 Filtrar por código EAN
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="codigoEAN" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -105,13 +104,22 @@
                 <div class="container-footer">
                     <footer class="div-form__footer">
                         <p class="footer-aviso">
-                            <img src="../style/img/atencao.png" alt=""/>
+                            <img src="../style/img/atencao.png" alt="" />
                             <strong>Atenção:</strong> Ao <strong>desabilitar</strong> o produto:
                             Ele <strong>não poderá ser encontrado</strong> em buscas futuras;
                             O <strong>estoque será automaticamente zerado</strong>;
                             A operação é <strong>irreversível</strong> após a confirmação.
-                            O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de Produtos Desabilitados</strong>.
+                            O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de
+                                Produtos Desabilitados</strong>.
                         </p>
+                        <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                            <button id="btnDesativar"
+                                style="background-color: gray; cursor: default;">Desabilitar</button>
+                            <button id="limparButton">
+                                <img class="img-excluir" src="../style/img/excluir.png" alt="" />Limpar
+                            </button>
+                        </div>
+
                     </footer>
                 </div>
             </div>

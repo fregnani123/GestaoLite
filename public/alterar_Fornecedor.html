@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <style>
         #alterar-fornecedor {
             background: var(--hover-color);
@@ -19,7 +20,8 @@
             text-shadow: none;
             border-bottom: 2px solid black;
         }
-        .form-group{
+
+        .form-group {
             margin-top: 0%;
         }
     </style>
@@ -36,7 +38,7 @@
     <div class="div-form" role="form">
         <div class="atalhos-1">
             <div class="atalhos">
-               
+
                 <div class="menu-secundario">
                     <div class="pagamento">
                         <a class="atalhos-btn" href="./fornecedor.html">Cadastrar
@@ -56,134 +58,172 @@
             </div>
         </div>
         <div class="container-inputs">
-            <div class="div-form-display" style="border:none">
-                <div style=" width: 100%; height: 100%;;display: flex;">
-                    <section class="div-form-img" style="width: 25%;">
-                        <p class="titulo-img">Atualizar Fornecedor</p>
-                        <img class="img-produto" src="../style/img/fornecedor-alt.png" alt="Produto sem imagem.">
+           
+                <div style=" width: 100%; height: 100%;;display: flex; position: relative;">
+                    <h4 style="position: absolute; top: 2%; left: 1%;">
+                        Informações Cadastrais do<br> Fornecedor Alterar
+                    </h4>
+                    <section class="div-form-img" style="width: 27%;">
+                        <p class="titulo-img"><strong>Atualizar Fornecedor</strong></p>
+                        <div class="quadro-img">
+                            <img class="img-produto" src="../style/img/alter-fornecedor.png" alt="Produto sem imagem.">
+                        </div>
+
                     </section>
                     <section class="div-form__body">
-                            <div class="form-group">
-                                <div id="div-alterar">
-                                    <label class="labelFornecedor" for="tipoPessoa">Pessoa</label>
+
+                        <table>
+                            <tr>
+                                <th style="width: 15%;">Pessoa</th>
+                                <th style="width: 25%;">🔍 Filtrar CNPJ / CPF</th>
+                                <th style="width: 60%;">Razão Social / Nome</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <select name="tipoPessoa" id="tipoPessoa">
                                         <option value="">Selecione</option>
                                         <option value="juridica">Jurídica</option>
                                         <option value="fisica">Física</option>
                                     </select>
-                                </div>
-                                <div id="div-cnpj">
-                                    <label class="labelFornecedor" id="filtrar">🔍 Filtrar CNPJ / CPF</label>
+                                </td>
+                                <td>
                                     <input type="text" id="cnpjAlterar" readonly>
-                                </div>
-
-                                <div id="div-razoSocial">
-                                    <label class="labelFornecedor" for="razaoSocial" id="label_razao">Razão Social /
-                                        Nome</label>
+                                </td>
+                                <td>
                                     <input type="text" id="razaoSocial" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div id="div-ie">
-                                    <label class="labelFornecedor" for="inscricaoEstadual">Inscrição Estadual</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th style="width: 15%;">Inscrição Estadual</th>
+                                <th style="width: 25%;">Número IE</th>
+                                <th style="width: 60%;">Nome Fantasia</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <select name="inscricaoEstadual" id="inscricaoEstadual" disabled>
                                         <option value="">Selecione</option>
                                         <option value="contribuinte">Contribuinte</option>
                                         <option value="isento">Isento</option>
                                     </select>
-                                </div>
-                                <div id="div-ie">
-                                    <label class="labelFornecedor" for="ie">Numero IE</label>
+                                </td>
+                                <td>
                                     <input type="text" id="ie" readonly>
-                                </div>
-                                <div id="div-fantasia">
-                                    <label class="labelFornecedor" for="nomeFantasia">Nome Fantasia</label>
+                                </td>
+                                <td>
                                     <input type="text" id="nomeFantasia" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                   <div id="div-logradouro">
-                                    <label class="labelFornecedor" for="endereco">Endereço</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th style="width: 55%;">Endereço</th>
+                                <th style="width: 10%;">Número</th>
+                                <th style="width: 35%;">Bairro</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <input type="text" id="endereco">
-                                </div>
-                                <div id="div-numero">
-                                    <label class="labelFornecedor" for="cep">Numero</label>
+                                </td>
+                                <td>
                                     <input type="text" id="numero">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                  <div id="div-bairro" style="width: 30%;">
-                                    <label class="labelFornecedor" for="bairro">Bairro</label>
+                                </td>
+                                <td>
                                     <input type="text" id="bairro">
-                                </div>
-                                <div id="div-cep" style="width: 22%;">
-                                    <label class="labelFornecedor" for="cep">Cep</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th style="width: 20%;">CEP</th>
+                                <th style="width: 20%;">UF</th>
+                                <th style="width: 60%;">Cidade</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <input type="text" id="cep">
-                                </div>
-                                <div id="div-uf">
-                                    <label class="labelFornecedor" for="uf">UF</label>
+                                </td>
+                                <td>
                                     <select id="uf">
-                                        <!-- Adicionar as opções de UF dinamicamente se necessário -->
+                                        <option value="">Selecione</option>
                                     </select>
-                                </div>
-                                <div id="div-cidade">
-                                    <label class="labelFornecedor" for="cidade">Cidade</label>
+                                </td>
+                                <td>
                                     <select id="cidade">
+                                        <option value="">Selecione</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div id="div-email">
-                                    <label class="labelFornecedor" for="email">Email</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th style="width: 70%;">Email</th>
+                                <th style="width: 30%;">Contato</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <input type="email" id="email">
-                                </div>
-                                <div id="div-contato">
-                                    <label class="labelFornecedor" for="email">Contato</label>
+                                </td>
+                                <td>
                                     <input type="email" id="telefone">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div id="div-atividade">
-                                    <label for="cidade">Ramos de atividade:</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th style="width: 33%;">Ramos de atividade</th>
+                                <th style="width: 33%;">Forma de Pgto</th>
+                                <th style="width: 34%;">Condições Pgto</th>
+                            </tr>
+                            <tr>
+                                <td>
                                     <select name="" id="atividade">
-
+                                        <option value="">Selecione</option>
                                     </select>
-                                </div>
-                                <div id="div-atividade">
-                                    <label for="cidade">Forma de Pgto:</label>
+                                </td>
+                                <td>
                                     <select name="" id="formaPgto">
-
+                                        <option value="">Selecione</option>
                                     </select>
-                                </div>
-                                <div id="div-atividade">
-                                    <label for="cidade">Condições Pgto:</label>
+                                </td>
+                                <td>
                                     <select name="" id="condicoesPgto">
-
+                                        <option value="">Selecione</option>
                                     </select>
-                                </div>
-                                <div id="text-area" style="display:none;">
-                                    <div><label class="label" for="observacoes">Observações:</label>
-                                        <textarea rows="3" cols="37" id="observacoes" name="observacoes"
-                                            placeholder="Informações adicionais Fornecedor"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group" style="margin-top: 10px; display: none;" id="text-area">
+                            <label class="label" for="observacoes">Observações:</label><br>
+                            <textarea rows="3" cols="100" id="observacoes" name="observacoes"
+                                placeholder="Informações adicionais Fornecedor"></textarea>
+                        </div>
+
+                    </section>
+
                 </div>
 
                 <div
                     style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
                     <footer class="div-form__footer" style="width: 100%;">
-                         <p style="font-size: 0.95rem;">
-                        <img src="../style/img/atencao.png" alt="Atenção"
-                            style="width: 1.3rem; margin-right: 0.5rem; vertical-align: middle;">
-                        <strong>Atenção: </strong>Para liberar o input <strong>filtrar</strong>, escolha o tipo de <strong>Pessoa
-                            Jurídica</strong>/<strong>Física</strong>.
-                        Ao alterar os dados do <strong>fornecedor</strong>, as informações <strong>antigas</strong>
-                        serão <strong>substituídas</strong>.
-                        <strong>Revise</strong> antes de confirmar.
+                        <p style="font-size: 0.95rem; margin-right: 1%;">
+                            <img src="../style/img/atencao.png" alt="Atenção"
+                                style="width: 1.3rem; margin-right: .5%; vertical-align: middle;">
+                            <strong>Atenção: </strong>Para liberar o input <strong>filtrar</strong>, escolha o tipo de
+                            <strong>Pessoa
+                                Jurídica</strong>/<strong>Física</strong>.
+                            Ao alterar os dados do <strong>fornecedor</strong>, as informações <strong>antigas</strong>
+                            serão <strong>substituídas</strong>.
+                            <strong>Revise</strong> antes de confirmar.
 
-                    </p>
+                        </p>
 
                         <div style="background: white; padding: .5%; display: flex; gap: 2%;">
                             <button id="btn-cad-fornecedor"><img class="img-disquete"
@@ -194,7 +234,6 @@
                     </footer>
 
                 </div>
-            </div>
         </div>
     </div>
     </div>

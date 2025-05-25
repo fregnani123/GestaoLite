@@ -4,9 +4,9 @@
 #btn-cad-Cor,
 #btn-cad-grupo,
 #btn-cad-subGrupo {
-    background-color: #198754;
-    color: #fff;
-    padding: 10px 16px;
+    background-color: #002558;
+    color: white;
+    padding: 8px 15px;  
     width: 8rem;
     font-size: 1rem;
     border: none;
@@ -21,7 +21,7 @@
 .add-subGrupo:hover,
 .add-cor:hover,
 #btn-cad-Cor:hover {
-    background-color: #4cae4c;
+    background-color: #00397a;
 }
 
 .btn-cadastrar-produto,
@@ -36,9 +36,9 @@
 #filtrarProdutos,
 #btn-user,
 .btn-confirm {
-    background-color: #198754;
-    color: #fff;
-    padding: 10px 16px;
+    background-color: #002558;
+    color: white;
+     padding: 6px 12px;  
     width: 10rem;
     font-size: 1rem;
     border: none;
@@ -64,7 +64,7 @@
 #filtrarHistorico:hover,
 .btn-confirm:hover,
 .btn-reagendar:hover {
-    background-color: #157347;
+     background-color: #00397a;
     transform: scale(1.05);
     font-size: 1rem;
     width: 10rem;
@@ -111,8 +111,8 @@
 #limparButton-info,
 #limparInputs,
 .btn-reagendar {
-    background-color: #f1c40f;
-    color: #333;
+    background-color: #ffc107; 
+    color: #000000;
     padding: 10px 16px;
     width: 10rem;
     font-size: 1rem;
@@ -131,7 +131,8 @@
 #limparButton-info:hover,
 #limparInputs:hover,
 .btn-reagendar:hover {
-    background-color: #e1b80d;
+   background-color: #e0a800; /* tom mais escuro no hover */
+   color: #000000;
     transform: scale(1.05);
     width: 10rem;
     font-size: 1rem;
@@ -235,8 +236,8 @@ button img {
 }
 
 .pagar-btn {
-    background-color: #198754;
-    color: #fff;
+     background-color: #002558;
+  color: white;
     padding: 10px 16px;
     width: 10rem;
     font-size: 1rem;
@@ -252,7 +253,7 @@ button img {
 }
 
 .pagar-btn:hover {
-    background-color: #157347;
+    background-color: #00397a;  
     transform: scale(1.05);
     font-size: 1rem;
     width: 10rem;

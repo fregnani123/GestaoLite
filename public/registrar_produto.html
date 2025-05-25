@@ -21,7 +21,8 @@
             text-shadow: none;
             border-bottom: 2px solid black;
             cursor: pointer;
-        }
+        } 
+    
     </style>
     <title>Cadastro de Produto</title>
 </head>
@@ -42,11 +43,11 @@
                         <a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo
                             Produto</a>
                         <a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a>
-                        <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         <a class="atalhos-btn" href="./informacoes_produtos.html">
                             Informações e Estoque de Produtos</a>
                         <a class="atalhos-btn" href="./controle_estoque.html">
                             Controle de Estoque — Entradas e Saídas</a>
+                        <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                     </div>
                     <div class="img-fgl">
                         <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
@@ -55,7 +56,9 @@
             </div>
         </div>
         <div class="container-inputs">
-            <div style="display: flex; width: 100%; height: 100%;">
+            <div style="display: flex; width: 100%; height: 100%; position: relative;">
+                <h4 style="position: absolute; top: 2%;left:1%;">Cadastrar novo
+                    Produto</h4>
                 <section class="div-form-img">
                     <p class="titulo-img"><strong>Imagem do Produto</strong></p>
                     <div class="quadro-img"> <img class="img-produto" src="../style/img/codigo-de-barras - interno.png"
@@ -69,10 +72,10 @@
 
                     <table class="table-1-produto">
                         <tr>
-                            <th>
+                            <th style="width: 30%;">
                                 Código / Cód. Barras
                             </th>
-                            <th>
+                            <th style="width: 70%;">
                                 Nome / Descrição
                             </th>
                         </tr>
@@ -87,10 +90,10 @@
                     </table>
                     <table class="table-2-produto">
                         <tr>
-                            <th>
+                            <th style="width: 50%;">
                                 Grupo
                             </th>
-                            <th>
+                            <th style="width: 50%;">
                                 Subgrupo
                             </th>
                         </tr>
@@ -121,10 +124,6 @@
                             </th>
                             <th>
                                 Caracteristica do Produto
-                            </th>
-
-                            <th>
-
                             </th>
                         </tr>
                         <tr>
@@ -183,13 +182,13 @@
                     </table>
                     <table class="table-4-produto">
                         <tr>
-                            <th>
+                            <th style="width: 30%;">
                                 Preço de Compra
                             </th>
-                            <th>
+                            <th style="width: 30%;">
                                 Lucro Bruto (R$)
                             </th>
-                            <th>
+                            <th style="width: 30%;">
                                 Preço de Venda
                             </th>
                         </tr>
@@ -208,10 +207,10 @@
                     </table>
                     <table class="table-5-produto">
                         <tr>
-                            <th>
+                            <th style="width: 30%;">
                                 🔍 Filtrar por CNPJ
                             </th>
-                            <th>
+                            <th style="width: 70%;">
                                 Nome fantasia filtrado
                             </th>
                         </tr>
@@ -255,14 +254,14 @@
                 style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer">
                     <p style="font-size: 0.95rem;">
-                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                        <img style="width: 1.3rem; margin-right: 1%;" src="../style/img/atencao.png"
                             alt=""><strong>Atenção:</strong> O <strong>lucro bruto</strong> é calculado automaticamente
                         como:
                         (<strong>Preço de Venda</strong> − <strong>Preço de Compra</strong>).
                         Este valor é apenas <strong>demonstrativo</strong> e <strong>não é salvo</strong> no sistema.
                         <strong>Verifique os valores com atenção antes de gravar os dados.</strong>
                     </p>
-                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%; margin-left: .5%;">
                         <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete"
                                 src="../style//img/disquete.png" alt="">Gravar</button>
                         <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"

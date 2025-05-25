@@ -15,14 +15,14 @@ const filtrarProdutosButton = document.getElementById('filtrarProdutos');
 const linkID_4 = document.querySelector('.list-a4')
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#5f8ac1'; 
-  linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'white'; // Cor do texto
-  linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    linkID.style.background = '#5f8ac1';
+    linkID.style.textShadow = 'none'; // Sem sombra de texto
+    linkID.style.color = 'white'; // Cor do texto
+    linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_4);
 
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
     codigoEAN.focus();
 })
 
@@ -98,10 +98,9 @@ function fetchAllProdutos(renderer) {
 
 const divInfo = document.querySelector('div-info-row')
 
-// Função para renderizar os produtos
 function renderProdutos(renderer, produtos) {
     renderer.innerHTML = '';
-    const divInfo = document.querySelector('.div-info-row')
+    const divInfo = document.querySelector('.div-info-row');
 
     // Informações agregadas no topo
     const totalItens = produtos.length;
@@ -109,75 +108,84 @@ function renderProdutos(renderer, produtos) {
         return acc + (parseFloat(produto.preco_compra || 0) * parseInt(produto.quantidade_estoque || 0));
     }, 0);
 
-    const infoRow = document.createElement('p');
-    infoRow.classList.add('info-row');
-     divInfo.textContent = `Total de itens filtrados: ${totalItens} | Valor total em estoque (baseado no preço de compra): ${formatarMoedaBR(valorEstoque)}`;
-    renderer.appendChild(infoRow);
+    divInfo.innerHTML = `
+   <table>
+                                        <tr>
+                                            <th>
+                                                Total de itens filtrados
+                                            </th>
+                                            <th>
+                                                Valor total em estoque - baseado no preço de compra
+                                            </th>
+                                      <th>
+                                      Imprimir reatório
+                                      </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                              ${totalItens}
+                                            </td>
+                                            <td>
+                                               ${formatarMoedaBR(valorEstoque)}
+                                            </td>
+                                            <td>
+                                              <button style="background-color: transparent; border: none; cursor: pointer;" title="Imprimir">
+                                      <img src="../style/img/impressora.png" alt="Imprimir" style="width: 24px; height: 24px;">
+                                      </button>
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+`;
 
 
-    // Dados dos produtos
     let unidades = ['un', 'cx', 'Rolo', 'pc'];
 
-    produtos.forEach(produto => {
-        const li = document.createElement('li');
-        li.classList.add('li-list');
+produtos.forEach((produto, index) => { // <-- ADICIONADO index aqui
+    const tr = document.createElement('tr');
+    tr.classList.add('table-row');
 
-        const spanCodigo = document.createElement('span');
-        spanCodigo.textContent = produto.codigo_ean || 'Sem código';
+    // ✅ Alterna entre branco e azul
+    tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
 
-        const spanNome = document.createElement('span');
-        let texto = produto.nome_produto;
-        
-        if (produto.nome_cor_produto?.trim()) {
-            texto += ` ${produto.nome_cor_produto}`;
-        }
-        
-        if (produto.tamanho_letras?.trim()) {
-            texto += ` ${produto.tamanho_letras}`;
-        }
+    const tdCodigo = document.createElement('td');
+    tdCodigo.textContent = produto.codigo_ean || 'Sem código';
 
-        if (produto.tamanho_numero?.trim()) {
-            texto += ` tam.${produto.tamanho_numero}`;
-        }
-        
-        if (produto.medida_volume?.trim()) {
-            texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
-        }
-        
-        if (produto.unidade_massa?.trim()) {
-            texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
-        }
-        if (produto.unidade_comprimento?.trim()) {
-            texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
-        }
+    const tdNome = document.createElement('td');
+    let texto = produto.nome_produto;
 
-        spanNome.textContent = texto;
-        
-        spanNome.textContent = texto;
-        
-        const spanPrecoCompra = document.createElement('span');
-        spanPrecoCompra.textContent = `${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}`;
+    if (produto.nome_cor_produto?.trim()) texto += ` ${produto.nome_cor_produto}`;
+    if (produto.tamanho_letras?.trim()) texto += ` ${produto.tamanho_letras}`;
+    if (produto.tamanho_numero?.trim()) texto += ` tam.${produto.tamanho_numero}`;
+    if (produto.medida_volume?.trim()) texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
+    if (produto.unidade_massa?.trim()) texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
+    if (produto.unidade_comprimento?.trim()) texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
+    tdNome.textContent = texto;
 
-        const spanPrecoVenda = document.createElement('span');
-        spanPrecoVenda.textContent = `${formatarMoedaBR(parseFloat(produto.preco_venda || 0))}`;
+    const tdEstoque = document.createElement('td');
+    tdEstoque.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
 
-        const spanVendido = document.createElement('span');
-        spanVendido.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || 0;
+    const tdCompra = document.createElement('td');
+    tdCompra.textContent = formatarMoedaBR(parseFloat(produto.preco_compra || 0));
 
-        const spanEstoqueAtual = document.createElement('span');
-        spanEstoqueAtual.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || 0;
+    const tdVenda = document.createElement('td');
+    tdVenda.textContent = formatarMoedaBR(parseFloat(produto.preco_venda || 0));
 
-        li.appendChild(spanCodigo);
-        li.appendChild(spanNome);
-        li.appendChild(spanEstoqueAtual);
-        li.appendChild(spanPrecoCompra);
-        li.appendChild(spanPrecoVenda);
-        li.appendChild(spanVendido);
-      
+    const tdVendida = document.createElement('td');
+    tdVendida.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
 
-        renderer.appendChild(li);
-    });
+    tr.appendChild(tdCodigo);
+    tr.appendChild(tdNome);
+    tr.appendChild(tdEstoque);
+    tr.appendChild(tdCompra);
+    tr.appendChild(tdVenda);
+    tr.appendChild(tdVendida);
+
+    renderer.appendChild(tr);
+});
+
 }
+
 
 // Função para aplicar os filtros
 function applyFilters() {
@@ -188,7 +196,7 @@ function applyFilters() {
 
     const filteredProducts = allProducts.filter(produto => {
         return (
-             produto.produto_ativado === 1 &&  // Exclui os produtos desativados
+            produto.produto_ativado === 1 &&  // Exclui os produtos desativados
             (!codigoEANValue || produto.codigo_ean.includes(codigoEANValue)) &&
             (!produtoNomeValue || produto.nome_produto.toLowerCase().includes(produtoNomeValue.toLowerCase())) &&
             (!grupoValue || produto.grupo_id == grupoValue) &&
@@ -215,6 +223,6 @@ getSubGrupo(selectSubGrupo);
 fetchAllProdutos(ulFiltros);
 
 const filterButtonInfor = document.getElementById('limparButton-info');
-filterButtonInfor.addEventListener('click',()=>{
+filterButtonInfor.addEventListener('click', () => {
     location.reload();
-  })
+})

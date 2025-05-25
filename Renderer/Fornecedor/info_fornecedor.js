@@ -33,19 +33,19 @@ function getFornecedor(cnpj) {
             'Content-Type': 'application/json',
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        const fornecedor = data.find(f => f.cnpj === cnpj) || {};
-        razaoSocial.value = fornecedor.razao_social || "";
-        nomeFantasia.value = fornecedor.nome_fantasia || "";
-        fornecedorId.value = fornecedor.fornecedor_id || "";
+        .then(response => response.json())
+        .then(data => {
+            const fornecedor = data.find(f => f.cnpj === cnpj) || {};
+            razaoSocial.value = fornecedor.razao_social || "";
+            nomeFantasia.value = fornecedor.nome_fantasia || "";
+            fornecedorId.value = fornecedor.fornecedor_id || "";
 
-        // Se encontrou fornecedor, aplica os filtros automaticamente
-        if (fornecedorId.value) {
-            applyFilters();
-        }
-    })
-    .catch(error => console.error('Erro ao buscar dados:', error));
+            // Se encontrou fornecedor, aplica os filtros automaticamente
+            if (fornecedorId.value) {
+                applyFilters();
+            }
+        })
+        .catch(error => console.error('Erro ao buscar dados:', error));
 }
 
 
@@ -83,46 +83,49 @@ async function fetchAllProdutos() {
     }
 }
 
-
 function produtoSemFornecedor() {
-    const allProductsSF = allProducts.filter(produtosSF => produtosSF.fornecedor_id === 1 || produtosSF.fornecedor_id === null)
-    renderProdutos(ulFiltros, allProductsSF)
+    const allProductsSF = allProducts.filter(produtosSF => produtosSF.fornecedor_id === 1 || produtosSF.fornecedor_id === null);
+    renderProdutos(ulFiltros, allProductsSF);
 }
 
 function renderProdutos(renderer, produtos) {
     renderer.innerHTML = '';
-
     const totalItens = produtos.length;
     const valorEstoque = produtos.reduce((acc, produto) => acc + (parseFloat(produto.preco_compra || 0) * parseInt(produto.quantidade_estoque || 0)), 0);
 
-    const semVinculo = document.querySelector('.div-info-row')
-    // Verifica se os produtos exibidos são aqueles sem fornecedor vinculado (fornecedor_id === 1 ou null)
-    const produtosSemFornecedor = produtos.every(produto => produto.fornecedor_id === 1 || produto.fornecedor_id === null);
-
-    if (produtosSemFornecedor) {
-        semVinculo.textContent = `⚠️ Total de produtos sem vínculo com fornecedor: ${totalItens} | Valor total em estoque (baseado no preço de compra): ${formatarMoedaBR(valorEstoque)}`;
-        semVinculo.style.background = 'rgb(255, 255, 192)';
-        semVinculo.style.fontSize = '1.2';
+    // Atualiza o texto de resumo fora da tabela, ajustando o seletor conforme seu HTML
+    const semVinculo = document.querySelector('.div-info-row table tr:nth-child(2) td:nth-child(1)');
+    if (semVinculo) {
+        semVinculo.textContent = `${totalItens}`;
+        semVinculo.style.color = ''
     }
 
+    const semVinculoValor = document.querySelector('.div-info-row table tr:nth-child(2) td:nth-child(2)');
+    if (semVinculoValor) {
+        semVinculoValor.textContent = `${formatarMoedaBR(valorEstoque)}`;
+    }
+
+     let unidades = ['un', 'cx', 'Rolo', 'pc'];
+    produtos.forEach((produto, index) => {
+        const tr = document.createElement('tr');
+         tr.classList.add('table-row');
+            // ✅ Alterna entre branco e azul
+    tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
+        tr.innerHTML = `
+            <td>${produto.codigo_ean || 'Sem código'}</td>
+            <td>${produto.nome_produto || 'Produto desconhecido'}</td>
+            <td>${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}</td>
+            <td>${produto.quantidade_vendido || 0} ${unidades[produto.unidade_estoque_id - 1] || ''}</td>
+            <td>${produto.quantidade_estoque || 0} ${unidades[produto.unidade_estoque_id - 1] || ''}</td>
+          
+        `;
+        renderer.appendChild(tr);
+    });
 
 
     const headerRow = document.createElement('li');
     headerRow.classList.add('header-row');
 
-
-    let unidades = ['un', 'cx', 'Rolo', 'pc'];
-    produtos.forEach(produto => {
-        const li = document.createElement('li');
-        li.classList.add('li-list');
-        li.innerHTML = `
-            <span>${produto.codigo_ean || 'Sem código'}</span>
-            <span>${produto.nome_produto || 'Produto desconhecido'}</span>
-            <span>${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}</span>
-            <span>${produto.quantidade_vendido || 0}</span>
-            <span>${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1] || ''}</span>`;
-        renderer.appendChild(li);
-    });
 }
 
 

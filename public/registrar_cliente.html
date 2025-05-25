@@ -54,18 +54,21 @@
             </div>
         </div>
         <div class="container-inputs">
-            <div style="display: flex; width: 100%; height: 100%;">
+            <div style="display: flex; width: 100%; height: 100%; position:relative;">
+                <h4 style="position: absolute; top: 2%;left: 1%;">Cadastrar
+                            novo Cliente</h4>
                 <section class="div-form-img">
-                    <p class="titulo-img">Cadastro Cliente</p>
-                    <img class="img-produto" src="../style/img/cliente - interno.png" alt="">
+                    <p class="titulo-img"><strong>Cadastro Cliente</strong></p>
+                    <div class="quadro-img"><img class="img-produto" src="../style/img/cliente - interno.png" alt="">
+                    </div>
                 </section>
                 <section class="div-form__body">
                     <table class="table-1-produto">
                         <tr>
-                            <th>
+                            <th  style="width: 30%;">
                                 CPF
                             </th>
-                            <th>
+                            <th  style="width: 70%;">
                                 Nome Completo
                             </th>
                         </tr>
@@ -80,13 +83,13 @@
                     </table>
                     <table class="table-2-produto">
                         <tr>
-                            <th>
+                            <th  style="width: 40%;">
                                 Data de Nascimento
                             </th>
-                            <th>
+                            <th  style="width: 40%;">
                                 Ocupação
                             </th>
-                            <th>
+                            <th  style="width: 20%;">
                                 Liberar Crédito
                             </th>
                         </tr>
@@ -104,11 +107,11 @@
                     </table>
                     <table class="table-3-produto">
                         <tr>
-                            <th>
+                            <th  style="width: 30%;">
                                 CEP
                             </th>
-                            <th>
-                                Logradouro
+                            <th  style="width: 70%;">
+                               Endereço
                             </th>
                         </tr>
                         <tr>
@@ -123,11 +126,11 @@
                     </table>
                     <table class="table-1-produto">
                         <tr>
-                            <th>
+                            <th  style="width: 30%;">
                                 Número
                             </th>
 
-                            <th>
+                            <th  style="width: 70%;">
                                 Bairro
                             </th>
                         </tr>
@@ -144,13 +147,13 @@
 
                     <table class="table-5-produto">
                         <tr>
-                            <th>
+                            <th  style="width: 20%;">
                                 Estado
                             </th>
-                            <th>
+                            <th  style="width: 40%;">
                                 Cidade
                             </th>
-                            <th>
+                            <th  style="width: 40%;">
                                 Contato
                             </th>
                         </tr>
@@ -173,12 +176,8 @@
                     </table>
                     <table class="table-6-produto">
                         <tr>
-                            <th>
+                            <th style="width: 100%;">
                                 E-mail
-                            </th>
-                            <th>
-                            </th>
-                            <th>
                             </th>
                         </tr>
                         <tr>
@@ -194,15 +193,12 @@
             <div
                 style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer">
-                    <p style="font-size: 0.95rem;">
-                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
-                            alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações anteriores
-                        serão
-                        <strong>substituídas</strong>.
-                        Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
-                        Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
-                        <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode ser
-                            modificado</strong>.
+                    <p style="font-size: 0.95rem; width: 100%;">
+                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"  >
+                        <strong>Atenção:</strong> <strong>Revise todos os dados</strong> com atenção antes de
+                        <strong>gravar as informações do novo cliente</strong>.
+                        Campos incorretos podem <strong>prejudicar o contato com o cliente e a emissão de
+                            relatórios</strong>.
                     </p>
                     <div style="background: white; padding: .5%; display: flex; gap: 2%;">
                         <button class="btn-alterar-produto"><img class="img-disquete" src="../style/img/troca.png"

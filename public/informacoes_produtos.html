@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <link rel="stylesheet" href="../style/css/registrar_produto/informacoes_produtos.css">
     <style>
         #Informacoes-Produtos {
@@ -21,6 +22,7 @@
             border-bottom: 2px solid black;
             cursor: pointer;
         }
+
     </style>
     <title>Informações de Produto</title>
 </head>
@@ -33,20 +35,19 @@
                 <ul id="ul-Menu"></ul>
             </nav>
         </header>
-
         <div class="div-form">
             <div class="atalhos-1">
                 <div class="atalhos">
-
                     <div class="menu-secundario">
                         <div class="pagamento">
                             <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
                             <a class="atalhos-btn" id="alterar-produto" href="./alterar_produto.html">Edição de Produto
                                 e Informações</a>
-                            <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
-                            <a class="atalhos-btn" id="Informacoes-Produtos" class="a2" href="">Informações e Estoque de Produtos</a>
+                            <a class="atalhos-btn" id="Informacoes-Produtos" class="a2" href="">Informações e Estoque de
+                                Produtos</a>
                             <a class="atalhos-btn" href="./controle_estoque.html">
                                 Controle de Estoque — Entradas e Saídas</a>
+                            <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
                         </div>
                         <div class="img-fgl">
                             <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
@@ -55,67 +56,85 @@
                 </div>
             </div>
             <div class="container-inputs">
-                <div style="display: flex; width: 100%; height: 100%;background-color: rebeccapurple;">
+                <div style="display: flex; width: 100%; height: 100%; ">
                     <div class="div-form-display" style=" border:none">
                         <section class="div-form__body-info">
 
-                            <div style="height: 25%;">
-                                <div style="display: flex; height: 100%;  display: flex; align-items: center; gap: 1%;">
-
-                                    <div style="width: 20%;">
-                                        <label>Filtrar Cód. EAN</label>
-                                        <input type="text" id="codigoEAN">
-                                    </div>
-                                    <div style="width: 50%;">
-
-                                        <label> Filtrar Produto (Nome)</label>
-                                        <input type="text" id="produtoNome">
-                                    </div>
-                                    <div style="width: 20%;">
-                                        <label> Filtrar Grupo</label>
-                                        <select id="grupo">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </div>
-                                    <div style="width: 20%;">
-                                        <label> Filtrar Sub-Grupo</label>
-                                        <select id="subgrupo">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div style="height: 15%;margin-top: .5%;">
+                                <table id="filtroTabela" style="border-collapse: collapse; border: none;">
+                                    <tr style="border: none;">
+                                        <th style="width: 15%; border: none; text-align: left">Filtrar Cód. EAN</th>
+                                        <th style="width: 45%; border: none; text-align: left">Filtrar Produto (Nome)
+                                        </th>
+                                        <th style="width: 20%; border: none; text-align: left">Filtrar Grupo</th>
+                                        <th style="width: 20%; border: none; text-align: left">Selecione</th>
+                                    </tr>
+                                    <tr style="border: none;">
+                                        <td style="border: none;"><input type="text" id="codigoEAN"></td>
+                                        <td style="border: none;"><input type="text" id="produtoNome"></td>
+                                        <td style="border: none;">
+                                            <select id="grupo">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </td>
+                                        <td style="border: none;">
+                                            <select id="subgrupo">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="div-form-container-info">
-
                                 <div class="filtrados">
-                                    <li class="div-info-row">
-                                        Total de itens filtrados: 0 | Valor total em estoque (baseado no preço de
-                                        compra): R$ 0,00
-                                    </li>
-                                    <ul style="list-style: none; padding: 0; margin: 0; width: 100%;">
-                                        <li class="header-li">
-                                            <span>Código EAN</span>
-                                            <span>Descrição Produto</span>
-                                            <span>Estoque Atual</span>
-                                            <span>Preço Compra</span>
-                                            <span>Preço Venda</span>
-                                            <span>Qtd Vendida</span>
-                                          
-                                        </li>
-                                    </ul>
-
-                                    <div style="max-height: 400px; overflow-y: auto;">
-                                        <ul id="ul-filtros" style="margin-bottom: 5%;">
-                                            <!-- Seus <li class="li-list"> serão adicionados aqui dinamicamente -->
-                                        </ul>
+                                    <div class="div-info-row">
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    Total de itens filtrados
+                                                </th>
+                                                <th>
+                                                    Valor total em estoque - baseado no preço de compra
+                                                </th>
+                                                <th>
+                                                    Imprimir relatório
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    ${totalItens}
+                                                </td>
+                                                <td>
+                                                    ${formatarMoedaBR(valorEstoque)}
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        style="background-color: transparent; border: none; cursor: pointer;"
+                                                        title="Imprimir">
+                                                        <img src="../style/img/impressora-1.png" alt="Imprimir"
+                                                            style="width: 24px; height: 24px;">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>;
                                     </div>
-
-                                    <div style="max-height: 400px; overflow-y: auto;">
-                                        <ul id="ul-filtros" style="margin-bottom: 5%;">
-
-                                        </ul>
+                                    <div style="max-height:25.3rem; overflow-y: auto;">
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <thead>
+                                                <tr class="header-row">
+                                                    <th>Código EAN</th>
+                                                    <th>Descrição Produto</th>
+                                                    <th>Estoque Atual</th>
+                                                    <th>Preço Compra</th>
+                                                    <th>Preço Venda</th>
+                                                    <th>Qtd Vendida</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ul-filtros">
+                                                <!-- As linhas dos produtos serão inseridas aqui -->
+                                            </tbody>
+                                        </table>
                                     </div>
-
                                 </div>
                             </div>
                         </section>
@@ -124,7 +143,9 @@
                             <footer class="div-form__footer" style="background-color: rgba(204, 221, 254, 0.266);">
                                 <p style="font-size: 1rem;justify-content: center;text-align: center;">
                                     <img style="width: 1.3rem; margin-right: 1%;" src="../style/img/informacoes.png"
-                                        alt=""><strong>Informação:</strong> Por padrão, esta tela exibe todos os produtos com seus dados e níveis de estoque. Para relatórios específicos, utilize os filtros acima e pressione Buscar.
+                                        alt=""><strong>Informação:</strong> Por padrão, esta tela exibe todos os
+                                    produtos com seus dados e níveis de estoque. Para relatórios específicos, utilize os
+                                    filtros acima e pressione Buscar.
                                 </p>
                                 <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
                                     <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"

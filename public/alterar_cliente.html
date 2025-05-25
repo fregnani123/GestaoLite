@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <style>
         #alterar-cliente {
             background: var(--hover-color);
@@ -23,13 +24,13 @@
 
 <body>
     <header>
-        <nav style="background-color: rgb(0, 38, 87);">
+        <nav>
             <ul id="ul-Menu"></ul>
         </nav>
     </header>
-
-    <div class="div-form" role="form">
-
+    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
+    <div class="container-register"></div>
+    <div class="div-form">
         <div class="atalhos-1">
             <div class="atalhos">
                 <div class="menu-secundario">
@@ -40,7 +41,7 @@
                             do Cliente /
                             Alterar</a>
                         <a class="atalhos-btn" id="btn-flex">Receber Pagamento</a>
-                  <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os Clientes</a>
+                        <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os Clientes</a>
                         <a class="atalhos-btn" id="btn-atraso" href="#">Relatório de parcelas em Atraso</a>
                     </div>
                     <div class="img-fgl">
@@ -50,117 +51,169 @@
             </div>
         </div>
         <div class="container-inputs">
-            <div class="div-form-display">
-                <div style=" width: 100%; height: 100%;;display: flex;">
-                    <section class="div-form-img">
-                        <p class="titulo-img">Atualizar Cadastro</p>
-                        <img class="img-produto" src="../style/img/alterar_cliente.png" alt="">
-                    </section>
-
-                    <section class="div-form__body">
-                        <div class="form-group">
-                            <div id="div-cpf">
-                                <label for="cpf" id="filtrar">🔍 Filtrar CPF</label>
+            <div style="display: flex; width: 100%; height: 100%; position:relative;">
+                <h4 style="position: absolute; top: 2%;left: 1%;">Informações Cadastrais
+                    do Cliente /
+                    Alterar</h4>
+                <section class="div-form-img">
+                    <p class="titulo-img"><strong>Informações / Alterar</strong></p>
+                    <div class="quadro-img"><img class="img-produto" src="../style/img/alterar-cliente.png" alt="">
+                    </div>
+                </section>
+                <section class="div-form__body">
+                    <table class="table-1-produto">
+                        <tr>
+                            <th  style="width: 30%;">
+                                🔍 Filtrar CPF
+                            </th>
+                            <th  style="width: 70%;">
+                                Nome Completo
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="text" id="cpf" name="cpf" required>
-                            </div>
-                            <div id="div-nome">
-                                <label for="nome">Nome Completo</label>
-                                <input type="text" id="nome" name="nome" required>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <div id="div-date">
-                                <label for="dataNascimento">Data de Nasc.</label>
+                            </td>
+                            <td>
+                                <input type="text" id="cpf" name="cpf" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-2-produto">
+                        <tr>
+                            <th  style="width: 30%;">
+                                Data de Nascimento
+                            </th>
+                            <th  style="width: 30%;">
+                                Ocupação
+                            </th>
+                            <th  style="width: 20%;">
+                                Alterar Crédito
+                            </th>
+                            <th  style="width: 20%;">
+                                credito utilizado
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="date" id="dataNascimento" name="dataNascimento">
-                            </div>
-
-                            <div id="div-ocupação">
-                                <label for="cidade">Ocupação:</label>
+                            </td>
+                            <td>
                                 <select name="" id="ocupacao">
                                     <option value="">Selecione:</option>
                                 </select>
-                            </div>
-
-                            <div id="div-credito">
-                                <label for="cidade">Alterar Crédito:</label>
+                            </td>
+                            <td>
                                 <input id="alterarCredito" value="" name="credito" required></input>
-
-                            </div>
-                            <div id="div-credito">
-                                <label for="cidade">credito utilizado:</label>
+                            </td>
+                            <td>
                                 <input id="creditoUtilizado" value="" name="creditoUtilizado" required></input>
-
-                            </div>
-
-
-                        </div>
-                        <div class="form-group">
-                            <div id="div-tel">
-                                <label for="telefone">Contato</label>
-                                <input type="tel" id="telefone" name="telefone" required>
-                            </div>
-                            <div id="div-email">
-                                <label for="email">E-mail</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div id="div-cep">
-                                <label for="cep">CEP</label>
-                                <input type="text" id="cep" name="cep" required>
-                            </div>
-                            <div id="div-logradouro">
-                                <label for="logradouro">Logradouro</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-3-produto">
+                        <tr>
+                            <th  style="width: 30%;">
+                                CEP
+                            </th>
+                            <th  style="width: 70%;">
+                               Endereço
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-com-btn">
+                                    <input type="text" id="cep" name="cep" required>
+                                </div>
+                            </td>
+                            <td>
                                 <input type="text" id="logradouro" name="logradouro">
-                            </div>
-                            
-                        </div>
-                        <div class="form-group">
-                            <div id="div-numero">
-                                <label for="numero">Número</label>
+                            </td>
+                    </table>
+                    <table class="table-1-produto">
+                        <tr>
+                            <th  style="width: 30%;">
+                                Número
+                            </th>
+
+                            <th  style="width: 70%;">
+                                Bairro
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <input type="text" id="numero" name="numero">
-                            </div>
-                            <div id="div-bairro">
-                                <label for="bairro">Bairro</label>
+                            </td>
+
+                            <td>
                                 <input type="text" id="bairro" name="bairro">
-                            </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                        </div>
-
-                        <div class="form-group">
-                            <!-- Observação: background red é pq não esta configurado e falta add na table -->
-                            <div id="div-uf">
-                                <label for="estado">Estado</label>
+                    <table class="table-5-produto">
+                        <tr>
+                            <th  style="width: 20%;">
+                                Estado
+                            </th>
+                            <th  style="width: 40%;">
+                                Cidade
+                            </th>
+                            <th  style="width: 40%;">
+                                Contato
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
                                 <select id="uf" name="estado" required></select>
-                            </div>
-                            <div id="div-cidade">
-                                <label for="cidade">Cidade</label>
+                                <div id="div-observacoes" style="display: none;">
+                                    <label for="observacoes">Observações:</label>
+                                    <textarea cols="47" id="observacoes" name="observacoes" rows="4"
+                                        placeholder="Informações adicionais sobre o cliente"></textarea>
+                                </div>
+                            </td>
+                            <td>
                                 <select id="cidade" name="cidade" required></select>
-                            </div>
-                            <div id="div-observacoes" style="display: none;">
-                                <label for="observacoes">Observações:</label>
-                                <textarea cols="47" id="observacoes" name="observacoes" rows="4"
-                                    placeholder="Informações adicionais sobre o cliente"></textarea>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+                            </td>
+                            <td>
+                                <input type="tel" id="telefone" name="telefone" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-6-produto">
+                        <tr>
+                            <th  style="width: 100%;">
+                                E-mail
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="email" id="email" name="email" required>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea style="display: none;" id="observacoes" name="observacoes" autocomplete="off"></textarea>
+                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                </section>
             </div>
             <div
-                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer">
                     <p style="font-size: 0.95rem;"><img style="width: 1.3rem; margin-right: .5%;"
-                            src="../style/img/atencao.png" alt=""><strong>Atenção:</strong> ao <strong>alterar</strong> os dados do cliente, as informações <strong>anteriores</strong> serão <strong>substituídas</strong>. Revise cuidadosamente antes de <strong>confirmar</strong> a alteração, se necessário.</p>
-
-                    <button id="btn_atualizar" class="btn-atualizar"><img class="img-disquete"
-                            src="../style/img/troca.png" alt="">Alterar</button>
-                    <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                            alt="">Limpar</button>
+                            src="../style/img/atencao.png" alt=""> <strong>Atenção:</strong> ao <strong>alterar os dados
+                            do cliente</strong>, as informações <strong>anteriores serão permanentemente
+                            substituídas</strong>.
+                        Revise todas as informações com cuidado antes de <strong>confirmar a alteração</strong>.
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button class="btn-alterar-produto"><img class="img-disquete" src="../style/img/troca.png"
+                                alt="">Alterar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
                 </footer>
             </div>
         </div>
+    </div>
 </body>
 <script src="../Renderer/services/cidadesPorEstados.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>

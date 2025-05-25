@@ -10,20 +10,24 @@ th,
 td {
   padding: .3rem;
   text-align: left;
-  background-color: #fdfdfd;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 th {
-  font-weight: 500; /* ou 600 */
+  font-weight: 500;
+  /* ou 600 */
   color: #1c0000;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
 
-tr:nth-child(even) td {
-  background-color: #ffffff;
+.linha-branca td {
+  background-color: white !important;
+}
+
+.linha-azul td {
+  background-color: #f0f8ff !important;
 }
 
 input[type="text"],
@@ -101,4 +105,8 @@ select {
 
 .table-6-produto th:nth-child(3) {
   width: 20%;
+}
+
+.div-form__body th {
+  background-color: rgb(255, 255, 255);
 }

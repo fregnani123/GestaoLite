@@ -1,179 +1,56 @@
-*{
+* {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
-strong{
+
+strong {
     font-weight: 600;
 }
-#ul-filtros {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  border-collapse: collapse;
-  padding: .5%;
+
+table {
+    border: 1px solid #ccc;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
 }
 
-/* Estilo unificado para cabeçalho e linhas */
-#ul-filtros li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .5rem;
-  border-bottom: 1px solid #ccc;
-  border-left: none;
-  border-right: none;
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
-/* Estilo para o cabeçalho */
-.header-li {
-  width: 100%;
-  margin-top: 1%;
-  list-style: none;
-  display: flex;
-  background-color: #f4f4f4;
-  font-weight: 600;
-  border: 1px solid #aaa;
-  border-bottom: 2px solid #aaa;
-  height: 2rem;
-  align-items: center;
+thead {
+    position: sticky;
+    top: 0;
 }
 
-/* Estilo alternado para as linhas */
-.li-list:nth-child(even) {
-  background-color: #f9f9f9;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+.header-row th {
+    background-color: #f1f1f1;
 }
 
-.li-list:nth-child(odd) {
-  background-color: #ffffff;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+.div-info-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1%;
 }
 
-/* Efeito hover para as linhas */
-.li-list:hover {
-  background-color: #e6f7ff;
+.div-info-row th {
+    background-color: #ffffff;
 }
 
-/* Estilo unificado para spans no cabeçalho e nas linhas */
-#ul-filtros li span {
-  flex: 1;
-  /* Define largura igual para todas as colunas */
-  text-align: center;
-  padding: 0px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.btn-imprimir {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
 }
 
-/* Ajuste especial para a segunda coluna (nome do produto) */
-#ul-filtros li span:nth-child(2) {
-  flex: 3;
-  /* Aloca mais espaço para o nome */
-  text-align: left;
-  /* Nome alinhado à esquerda */
-}
-
-/* Espaçamento entre spans */
-span {
-  margin-left: 10px;
-}
-
-/* Contêiner do formulário */
-.div-form-container-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  height: 80%;
-  background-color: white;
-}
-
-.filtros {
-  justify-content: center;
-  align-items: center;
-}
-
-/* Resultado filtrado */
-.filtrados {
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
-}
-
-.info-row {
-  width: 91.3%;
-  background-color: rgba(136, 255, 0, 0.196);
-  font-weight: 700;
-}
-
-.header-row {
-  position: fixed;
-  background-color: rgb(0, 38, 87);
-  margin-top: -2%;
-  height: 4%;
-  border: 1px solid rgb(0, 38, 87);
-  font-weight: 700;
-  color: white;
-}
-
-.titulo-filtrar {
-  background-color: #198754;
-  color: #fff;
-  padding: 10px 16px;
-  width: 8rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.titulo-filtrar:hover {
-  background-color: #157347;
-  transform: scale(1.05);
-  font-size: 1.1rem;
-}
-
-
-.divBtn-horizontal {
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3%;
-}
-
-/* Estilo da tabela */
-/*  */
-
-  .div-info-row{
-  height: 2.5rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 1%;
-  margin-top: 1%;
-  list-style: none;
-  display: flex;
-  background-color: #f4f4f4;
-  font-weight: 600;
-  border-bottom: 2px solid #aaa;
-}
-
-.header-li span {
-  flex: 1;
-  text-align: center;
-  padding: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Ajuste especial para a segunda coluna do cabeçalho (nome do produto) */
-.header-li span:nth-child(2) {
-  flex: 3;
-  text-align: left;
+.btn-imprimir img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: block;
 }
