@@ -265,3 +265,16 @@ button img {
     width: 100%;
     gap: 2%;
 }
+.div-btn-info {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2%;
+}
+
+.img-configuracao {
+  width: 35px;
+  position: absolute;
+  left: 1%;
+  top: 27%;
+}

@@ -1,259 +1,222 @@
+*{
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+strong{
+    font-weight: 600;
+}
+.pix {
+  background: #6a74c2;
+  min-width: 4rem;
+}
 
-.filtros-data {
-  display: flex;
+.credito {
+  background: #2c3e6c;
+  min-width: 4rem;
+}
+
+.debito {
+  background: #3f5481;
+  min-width: 4rem;
+}
+
+.dinheiro {
+  background: #5a6e96;
+  min-width: 4rem;
+}
+
+.crediario {
+  background: #334c74;
+  min-width: 4rem;
+}
+
+.total {
+  background: #295553;
+  width: 100%;
+  min-width: 2rem;
+}
+
+/* Estilização do contêiner principal */
+div[style*="background-color: white"] {
+  padding: 20px;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* Para responsividade */
+}
+
+/* Estilização das tabelas */
+div[style*="background-color: white"] table {
+  width: 45%;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+/* Cabeçalho das tabelas */
+.linha-titulo th {
+  font-size: 1rem;
+  padding: 10px;
+  background-color: #f0f0f0;
   text-align: center;
-  width: 101%;
-  box-sizing: border-box;
 }
-.div-data {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-left: 1%;
-  height: 10vh;
+
+/* Células */
+table td {
+  padding: 10px;
+  vertical-align: top;
 }
-.filtros-div {
-  margin-top: 1%;
-  display: flex;
-  width: 100%;
-  height: 58vh;
-  gap: 1%;
-  position: relative;
-}
-.filtros, .vendas-filtradas {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  padding: 1%;
-  justify-content: center;
-}
-.vendas-filtradas {
-display: none;
-position: absolute;
-background-color:white;
-right: 0%;
-width: 55%;
-height: 57.5vh;
-border: 1px solid black;
-}
-.grafico {
-  display: none;
-  width: 60%;
-  height: 70vh;
-  background-color:white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1%;
-}
-.filtros{
-  height: 70vh;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.comprovantes-vendas {
-  font-size: 1rem;
-  color: #495057;
-  font-weight: 700;
-  border-bottom: 1px solid black;
-  padding-bottom: 1%;
-}
-.comprovantes-div {
-  padding-top: 1.5%;
-  overflow-x: none;
-  overflow-y: scroll;
-}
-.sale-card {
-  margin-top: 2%;
-  border-top: 1px dotted black;
-  border-bottom: 1px dotted black;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  background-color: rgb(252, 248, 232);
-}
-.titulo-relatorio {
-  color: #495057;
-  font-size: 1rem;
-  font-weight: 700;
-  border-bottom: 1px solid black;
-  margin-bottom: 2%;
-}
-.titulo-vendas {
-  width: 100%;
-  font-size: 1rem;
-  color: #495057;
-  font-weight: 700;
-  border-bottom: 1px solid black;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 7%;
-}
-#barra-container {
-margin-top: 0%;
-}
+
+/* Estilização dos containers de barra */
 .barra-container {
+  margin: 1% 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.029);
   display: flex;
   align-items: center;
-  margin: .5% 0;
 }
-.nome {
-  width: 150px;
-  font-weight: bold;
-  flex-shrink: 0;
+
+/* Nomes das formas de pagamento */
+.barra-container .nome {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 1px;
+  width: 20%;
+   text-align: end;
 }
-.total-filtradas {
-  gap: 1rem;
-  display: flex;
-  flex-direction: column;
-}
+
+/* Barras */
 .barra {
   height: 3rem;
-  margin-bottom: .5;
-  color: white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  min-width: 40px;
-  padding: 0 10px;
-  white-space: nowrap;
-}
-.sale-total {
-  background-color:white;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.426);
-  padding-bottom: 2%;
-  box-sizing: border-box;
-  position: relative;
-}
-.cores {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.p-total {
-  margin-left: 3rem;
-}
-.h3-total {
-  margin-left: 3rem;
-}
-.h3-total-2 {
-  margin-left: 1.5rem;
-}
-.total-relatorio {
-  position: relative;
-  background-color: rgba(238, 237, 237, 0.558);
-  padding: 4%;
-  margin-top: 2%;
-}
-.totalDiv {
-  position: absolute;
-  height: 4.3rem;
-  width: 1rem;
-  background-color: #295530;
-  left: 1.5%;
-  top: 0;
-}
-.pix { background: #6a74c2; min-width: 4rem; } 
-.credito { background: #2c3e6c; min-width: 4rem; } 
-.debito { background: #3f5481; min-width: 4rem; } 
-.dinheiro { background: #5a6e96; min-width: 4rem; } 
-.crediario { background: #334c74; min-width: 4rem; } 
-.total { margin-top: 2%; background: #295530; width: 100%; min-width: 2rem; } 
-table {
-  width: 99%;
-  background: #fff;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-  margin-left: -1%;
-}
-thead {
-  background-color: var(--primary-color);
-  color: white;
-  border: 1px solid rgb(255, 255, 255);
-}
-tr {
-  border: 1px solid black;
-  color: black;
-}
-th:nth-child(1), td:nth-child(1) { 
-  width: 17%;  
-}
-th:nth-child(2), td:nth-child(2) { 
-  width: 15%;  
-}
-th:nth-child(3), td:nth-child(3) { 
-  width: 10%;  
-}
-th:nth-child(4), td:nth-child(4) { 
-  width: 20%;  
-}
-th:nth-child(5), td:nth-child(5) { 
-  width: 20%;  
-}
-.table td {
-  padding: 1%;
-  border: none;
-}
-.table-container {
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-}
-th {
-  position: sticky;
-  top: 0;
-  color: rgb(0, 0, 0);
-  padding: .2rem;
-  z-index: 10;
-}
-.card-historico {
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-  background-color: #fff;
-}
-.card-historico .card-header {
-  background-color: #f0f0f0;
-  padding: 10px;
-  font-weight: bold;
-}
-.card-historico .card-body {
-  padding: 10px;
-}
-.card-historico-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.tooltip {
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
+  margin-bottom: 1%;
   border-radius: 5px;
-  font-size: 0.9rem;
-  display: none;
-  z-index: 100;
-}
-.close-btn, .btnCloseHist {
-  color: #333;
-  font-size: 1.2rem;
-  font-weight: bold;
-  width: 2rem;
-  height: 2rem;    
+  color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: #eee;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  margin-left: 2.5%;
+  padding-left: 10px;
+  font-weight: bold;
+  transition: width 0.3s ease;
 }
-.close-btn:hover, .btnCloseHist:hover {
-  background-color: #ea3748;
+
+.total {
+width: 79%;
+}
+
+.sale-total {
+  margin-bottom: .5%;
+  color: white;
+  padding: .7% 1.5%;
+}
+
+.p-total {
+  padding: .4rem;
+}
+
+.p-1-total {
+  padding: .2rem;
+}
+
+.total-relatorio {
+  border: 1px solid rgb(167, 167, 167);
+  margin-top: 1%;
+  padding: .4rem;
+  border-bottom: 2px solid  rgb(167, 167, 167);
+  background-color: #295553;
   color: white;
 }
 
+.totalDiv{
+ font-weight: 600;
+}
+
+.btn-ativo {
+  background: var(--hover-color);
+  color: white;
+  text-shadow: none;
+  border-bottom: 2px solid black;
+}
+
+.altura-custom-img {
+  height: 77%;
+}
+
+.img-logo-lgl {
+  width: 250px;
+}
+
+.wrapper-flex {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.corpo-form {
+  border: 1px solid gray;
+}
+
+.data-titulo {
+  display: flex;
+  align-items: center;
+}
+
+.data-titulo img {
+  width: 10%;
+  margin-left: 2%;
+}
+
+.tabela-datas {
+  max-width: 40%;
+  border-collapse: collapse;
+}
+
+.container-tabelas {
+  display: flex;
+  width: 100%;
+  max-height: 55.9vh;
+}
+
+.tabela-esquerda {
+  width: 40%;
+  height: 20vh;
+  border-right: 1px solid gray;
+}
+
+.tabela-direita {
+  width: 60%;
+  height: 20vh;
+
+}
+
+.linha-titulo {
+  border-top: 1px solid #ababab;
+  border-bottom: 1px solid #ababab;
+}
+
+.footer-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(128, 128, 128, 0.722);
+  padding: 1%;
+  margin: 0.5%;
+}
+
+.footer-info {
+  font-size: 0.95rem;
+  margin-right: 1%;
+}
+
+.footer-info img {
+  width: 1.3rem;
+  margin-right: 0.5%;
+}
+
+.botoes-footer {
+  background: white;
+  padding: 0.5%;
+  display: flex;
+  gap: 2%;
+}
+
+.estilo-grafico {
+  position: relative;
+  padding-top: 2rem;
+}

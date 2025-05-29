@@ -51,24 +51,6 @@ const taxaJurosAtraso = document.getElementById('taxaJurosAtraso');
 const idTaxas = document.getElementById('idTaxas');
 const btnAtualizarTaxas = document.getElementById('atualizar-juros');
 
-function estilizarLinkAtivo(elemento) {
-    document.querySelectorAll('.btn').forEach(btn => estilizarLinkInativo(btn));
-    elemento.style.cssText = `
-        background: #ffcc00;
-        text-shadow: none;
-        color: black;
-        border-bottom: 2px solid black;
-    `;
-}
-
-function estilizarLinkInativo(elemento) {
-    elemento.style.cssText = `
-        background: ''; 
-        text-shadow: ''; 
-        color: ''; 
-        border-bottom: '' ; 
-    `;
-}
 
 function toggleSection(button, sectionToShow) {
     const sections = [divAlterarSenha, divAlterVenda, divJuros];
@@ -260,11 +242,18 @@ if (linkID_11) {
 }
 
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = '#ffcc00';
+    linkID.style.background = 'rgb(95, 138, 193)';
     linkID.style.textShadow = 'none';
-    linkID.style.color = 'black';
+    linkID.style.color = 'white';
     linkID.style.borderBottom = '2px solid black';
 }
+function estilizarLinkInativo(linkID) {
+    linkID.style.background = '';
+    linkID.style.textShadow = 'none';
+    linkID.style.color = 'white';
+    linkID.style.borderBottom = '2px solid black';
+}
+
 
 btnUser.addEventListener('click', (e) => {
     e.preventDefault();

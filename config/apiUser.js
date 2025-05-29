@@ -158,7 +158,9 @@ async function getUserAtualizar() {
             return [];
         } else {
             btnAtualizarUser.style.display = 'flex';
-            informativo.innerHTML = `<strong>⚠️ Atenção: Antes de alterar os dados do usuário, verifique todas as informações cuidadosamente. Elas serão sobrescritas no sistema e impressas no cupom não fiscal.</strong> `;
+            informativo.innerHTML = ` <img src="../style/img/atencao.png" alt="Atenção"
+                            style="width: 1.3rem; margin-right: .5%;"><strong>Atenção:</strong> Para <strong>alterar os dados do usuário</strong>, basta preencher os campos desejados e clicar no botão <strong>“Atualizar”</strong>.
+Antes de confirmar a alteração, <strong>verifique atentamente todas as informações</strong> inseridas. Os dados serão <strong>sobrescritos</strong> no sistema e <strong>impressos no cupom não fiscal e relatórios</strong>. `;
         }
 
         cnpjCpf.value = data[0] && data[0].cnpj_cpf ? decodeCnpjCpf(data[0].cnpj_cpf) : "";
@@ -284,15 +286,16 @@ async function getTaxasConfig() {
     try {
         const response = await fetch('http://localhost:3000/getTaxas', {
             method: 'GET',
-            headers: { 
+            headers: {
                 'x-api-key': 'segredo123',
-                'Content-Type': 'application/json' }
+                'Content-Type': 'application/json'
+            }
         });
 
         const data = await response.json();
         let valorMoeda = data[0].valor_multa_atraso;
-       
-        numeroMaxParcela.value =  Number(data[0].juros_parcela_acima);
+
+        numeroMaxParcela.value = Number(data[0].juros_parcela_acima);
         taxaJuros.value = data[0].juros_crediario_venda;
         multaParcela.value = converteMoeda(valorMoeda)
         taxaJurosAtraso.value = data[0].juros_crediario_atraso;

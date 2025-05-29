@@ -1,9 +1,8 @@
 .div-form__body{
-  justify-content: flex-start;
   display: flex;
-  align-items: flex-start;
   position: relative;
 }
+
 .container-cred.container-cred{
 position: relative;
 width: 100%;
@@ -33,23 +32,7 @@ margin-left: 1%;
 margin-top: 1%;
 margin-bottom: 1%;
 }
-thead {
-background: #f4f4f4;
-position: sticky;
-top: 0;
-}
-th{
-border: 1px solid rgb(255, 255, 255);
-padding: 3px;
-text-align: center;
-}
-td {
-height: 40px; /* Altura fixa das células */
-vertical-align: middle;
-border: 1px solid black;
-padding: .5rem;
-text-align: center;
-}
+
 /* Estilo da tabela */
 .filter-table{
 width: 99%;
@@ -64,38 +47,13 @@ color: white;
 border: 1px solid rgb(255, 255, 255);
 
 }
-.filter-table tr {
-  color: black;
-}
-/* Largura específica para colunas */
-.filter-table th:nth-child(1), td:nth-child(1) { /* Coluna 1: CPF */
-  width: 15%;  
-}
-.filter-table th:nth-child(2), td:nth-child(2) { /* Coluna 2: Nome */
-  width: 35%;  
-}
-.filter-table th:nth-child(3), td:nth-child(3) { /* Coluna 3: Data */
-  width: 15%;  
-}
-.filter-table th:nth-child(4), td:nth-child(4) { /* Coluna 4: Hora */
-  width: 15%;  
-}
-.filter-table th:nth-child(5), td:nth-child(5) { /* Coluna 5: Motivo */
-  width: 20%;  
-}
-.filter-table td {
-  padding-top: 1%;
-  border: none;
-}
 
 .div-filtrados{
-  height: 57vh;
+  height: 63.5vh;
   border: 1px solid gray;
   box-sizing: border-box;
   overflow-y: scroll;
   width: 100%;
 }
-.div-filtrados td{
- border: 1px solid black;
-}
+
 

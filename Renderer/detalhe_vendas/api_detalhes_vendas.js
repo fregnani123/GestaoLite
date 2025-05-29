@@ -8,7 +8,7 @@ const numeroPedidoFiltro = document.getElementById('numeroPedidoFiltro');
 const cpfFiltro = document.getElementById('clienteFiltro');
 const linkID_3 = document.querySelector('.list-a3');
 const limparButton = document.getElementById('limparButton');
-const btnDiv = document.getElementById('btn-comprovante');
+
 const closeDiv = document.querySelector('.close-btn')
 const vendasFiltradasDiv = document.querySelector('.vendas-filtradas');
 
@@ -17,10 +17,10 @@ inputMaxCaracteres(cpfFiltro, 14);
 
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#5f8ac1'; 
-  linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'white'; // Cor do texto
-  linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    linkID.style.background = '#5f8ac1';
+    linkID.style.textShadow = 'none'; // Sem sombra de texto
+    linkID.style.color = 'white'; // Cor do texto
+    linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
 estilizarLinkAtivo(linkID_3)
 
@@ -68,14 +68,14 @@ let ultimoPedido;
 
 // Após agrupar os pedidos, obtenha o primeiro e o último pedido
 function obterPrimeiroEUltimoPedido(grouped) {
- const pedidos = Object.keys(grouped).sort((a, b) => a - b); // Ordena os números dos pedidos
+    const pedidos = Object.keys(grouped).sort((a, b) => a - b); // Ordena os números dos pedidos
 
- if (pedidos.length > 0) {
-     primeiroPedido = grouped[pedidos[0]];
-     ultimoPedido = grouped[pedidos[pedidos.length - 1]];
+    if (pedidos.length > 0) {
+        primeiroPedido = grouped[pedidos[0]];
+        ultimoPedido = grouped[pedidos[pedidos.length - 1]];
 
-     titulo_relatorio.innerHTML = `Período: De ${formatarDataISOParaBR(primeiroPedido.data_venda)} até ${formatarDataISOParaBR(ultimoPedido.data_venda)}`;
- }
+        titulo_relatorio.innerHTML = `Período Filtrado: De ${formatarDataISOParaBR(primeiroPedido.data_venda)} até ${formatarDataISOParaBR(ultimoPedido.data_venda)}`;
+    }
 }
 
 // Função para filtrar as vendas
@@ -105,10 +105,10 @@ function filterVendas() {
     // Exibe os filtros no console
     console.log('Filtros:', filtros);
 
-  // Verifica se as datas foram informadas
-if (!startDateFormated || !endDateFormated) {
-    titulo_relatorio.innerHTML = `Forma de Pagamento<br>Período: não selecionado`;
-}
+    // Verifica se as datas foram informadas
+    if (!startDateFormated || !endDateFormated) {
+        titulo_relatorio.innerHTML = `Forma de Pagamento<br>Período: não selecionado`;
+    }
 
     // Chama a função para buscar o histórico de vendas com os filtros
     fetchSalesHistory(filtros);
@@ -149,7 +149,7 @@ function groupSalesByOrder(sales) {
 
 function formatarDataISOParaBR(dataISO) {
     const date = new Date(dataISO);
-    
+
     // Ajustar para o fuso horário correto
     const dia = String(date.getUTCDate()).padStart(2, '0');
     const mes = String(date.getUTCMonth() + 1).padStart(2, '0');
@@ -176,31 +176,72 @@ function displaySalesHistory(groupedSales) {
         const saleCard = document.createElement('div');
         saleCard.className = 'sale-card';
 
-        const productDetails = saleGroup.produtos
-            .map(product => `
-                <p>
-                    ${product.codigo_ean ? product.codigo_ean.toString() : 'Sem código'} - 
-                    ${product.produto_nome ? product.produto_nome : 'Produto desconhecido'} - 
-                    ${product.quantidade || 0}${product.unidade_estoque_nome || ''} x 
-                    ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.preco)}
-                </p>
-            `)
-            .join('');
+        const rowsProdutos = saleGroup.produtos.map(product => `
+            <tr class='tr-produto'>
+                <td>${product.codigo_ean || 'Sem código'}</td>
+                <td>${product.produto_nome || 'Produto desconhecido'}</td>
+                <td>${product.quantidade || 0} ${product.unidade_estoque_nome || ''}</td>
+                <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.preco)}</td>
+                <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.preco * product.quantidade)}</td>
+                
+            </tr>
+          
+        `).join('');
 
         saleCard.innerHTML = `
-            <p>
-                <strong>Comprovante de Venda Nº000${saleGroup.numero_pedido}</strong><br>
-                <strong>Data da Venda:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}<br>
-                <strong>Cliente:</strong> ${saleGroup.cliente_nome}
-            </p>
-            ${productDetails}
-            <p>
-                <strong>Forma de Pagamento:</strong> ${saleGroup.tipo_pagamento}<br>
-                <strong>Total Líquido da Venda:</strong> ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}<br>
-                <strong>Valor Recebido:</strong> ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}<br>
-                <strong>Troco:</strong> ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.troco)}<br>
-            </p>
-        `;
+          
+<table class="tabela-comprovante">
+    <tr class='tr-numero'>
+        <th colspan="5">
+            <div class="alinha-centro">DOCUMENTO PARA CONFERÊNCIA DE MERCADORIAS Nº000${saleGroup.numero_pedido}</div>
+        </th>
+    </tr>
+    <tr>
+        <td colspan="5">
+            <div class="alinha-esquerda"><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5">
+            <div class="alinha-esquerda"><strong>Cliente:</strong> ${saleGroup.cliente_nome}</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5">
+            <div class="alinha-esquerda"><strong>Forma de Pagamento: </strong>${saleGroup.tipo_pagamento}</div>
+        </td>
+    </tr>
+    <tr>
+        <th>Total Líquido da Venda </th>
+        <th>Valor Recebido</th>
+        <th colspan="5">Troco </th>
+    </tr>
+    <tr class='tr-troco'>
+        <td> ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}
+        </td>
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}
+        </td>
+        <td colspan="5">${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.troco)}</td>
+    </tr>
+    <tr>
+        <th colspan="5">
+            <div class="alinha-esquerda"><strong>Produtos adicionados</strong></div>
+        </th>
+    </tr>
+    <tr class="tr-produto">
+        <th class="col-codigo">Código</th>
+        <th class="col-produto">Produto</th>
+        <th class="col-quantidade">Quantidade</th>
+        <th class="col-unitario">Valor Unitário</th>
+        <th class="col-total">Total</th>
+    </tr>
+    ${rowsProdutos}
+     <tr class="tr-separador">
+  <td colspan="5"></td>
+</tr>
+
+    
+</table>`;
 
         salesHistory.appendChild(saleCard);
     });
@@ -231,67 +272,63 @@ function displayTotalSales(totalRows) {
     totalRows.forEach(item => {
         const saleTotal = document.createElement('div');
         saleTotal.className = 'sale-total';
-    
+
         // Criar uma div para a cor correspondente
         const colorDiv = document.createElement('div');
         colorDiv.classList.add('cores');
-        colorDiv.style.width = '1rem';
-        colorDiv.style.height = '2.9rem';
-        colorDiv.style.display = 'inline-block';
-        colorDiv.style.marginLeft = '10px';
-        colorDiv.style.verticalAlign = 'middle';
-    
+
+
         // Definir a cor e armazenar o valor no objeto salesData
         switch (item.tipo_pagamento.toLowerCase()) {
-            case 'cartão crédito':
-                colorDiv.style.backgroundColor = '#2c3e6c'; // Azul mais claro
-                salesData.cartao_credito = item.total_vendas;
-                break;
-            case 'cartão débito':
-                colorDiv.style.backgroundColor = '#3f5481'; // Azul intermediário
-                salesData.cartao_debito = item.total_vendas;
-                break;
-            case 'crediário':
-                colorDiv.style.backgroundColor = '#334c74'; // Azul mais escuro
-                salesData.crediario = item.total_vendas;
-                break;
-            case 'dinheiro':
-                colorDiv.style.backgroundColor = '#5a6e96'; // Azul suave
-                salesData.dinheiro = item.total_vendas;
-                break;
-            case 'pix':
-                colorDiv.style.backgroundColor = '#6a74c2'; // Azul claro
-                salesData.pix = item.total_vendas;
-                break;
-        }
-        
+  case 'cartão crédito':
+    saleTotal.style.backgroundColor = '#2c3e6c'; // Azul mais claro
+    salesData.cartao_credito = item.total_vendas;
+    break;
+  case 'cartão débito':
+    saleTotal.style.backgroundColor = '#3f5481'; // Azul intermediário
+    salesData.cartao_debito = item.total_vendas;
+    break;
+  case 'crediário':
+    saleTotal.style.backgroundColor = '#334c74'; // Azul mais escuro
+    salesData.crediario = item.total_vendas;
+    break;
+  case 'dinheiro':
+    saleTotal.style.backgroundColor = '#5a6e96'; // Azul suave
+    salesData.dinheiro = item.total_vendas;
+    break;
+  case 'pix':
+    saleTotal.style.backgroundColor = '#6a74c2'; // Azul claro
+    salesData.pix = item.total_vendas;
+    break;
+}
+
         saleTotal.innerHTML = `
-            <h3 class='h3-total'>${item.tipo_pagamento}</h3>
+            <p class='p-1-total'><strong>${item.tipo_pagamento}</strong></p>
             <p class='p-total'>
-                <strong>Total de Vendas:</strong> 
+             
                 ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.total_vendas)}
             </p>
         `;
-    
+
         // Adicionar a div colorida ao lado do texto dentro de `saleTotal`
         saleTotal.querySelector('p').appendChild(colorDiv);
         filtrosDiv.appendChild(saleTotal);
 
     });
-    
+
     // Calcular o total de vendas filtradas
-    salesData.total_vendas_filtradas = 
+    salesData.total_vendas_filtradas =
         (salesData.cartao_credito || 0) +
         (salesData.cartao_debito || 0) +
         (salesData.crediario || 0) +
         (salesData.dinheiro || 0) +
         (salesData.pix || 0);
-    
+
     console.log("Dados processados para o gráfico:", salesData);
-    
+
     // Chamar a função para atualizar o gráfico
     atualizarGrafico(salesData);
-}    
+}
 
 function displayTotalLiquido(totalLiquido) {
     const filtrosDiv = document.querySelector('.filtros');
@@ -301,7 +338,7 @@ function displayTotalLiquido(totalLiquido) {
     const totalLiquidoDiv = document.createElement('div');
     totalLiquidoDiv.className = 'total-relatorio';
     totalLiquidoDiv.innerHTML = `
-        <h3 class='h3-total-2'><div class='totalDiv'></div>Total de Vendas filtradas: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalLiquido)}</h3>
+        <p class='p-1-total'><div class='totalDiv'></div>Total de valores para o período: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalLiquido)}</p>
     `;
     filtrosDiv.appendChild(totalLiquidoDiv);
 }
@@ -339,7 +376,7 @@ function atualizarGrafico(salesData) {
 
 function toggleVendasFiltradas() {
     const isHidden = getComputedStyle(vendasFiltradasDiv).display === 'none';
-    
+
     vendasFiltradasDiv.style.display = isHidden ? 'flex' : 'none';
 
     // Aplicar ou remover estilos do botão
@@ -352,9 +389,8 @@ function toggleVendasFiltradas() {
 
 // Adicionar evento de clique nos botões
 btnDiv.addEventListener('click', toggleVendasFiltradas);
-closeDiv.addEventListener('click', toggleVendasFiltradas);
 
 
-limparButton.addEventListener('click',()=>{
+limparButton.addEventListener('click', () => {
     location.reload();
 })

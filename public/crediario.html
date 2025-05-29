@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../style/css/css_global/btn.css">
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
     <link rel="stylesheet" href="../style/css/detalhes_vendas/crediario.css">
     <link rel="stylesheet" href="../style/css/detalhes_vendas/crediários-mes-vencer.css">
     <title>Crediário</title>
@@ -18,33 +19,43 @@
 
 <body>
     <header>
+   <img class="img-configuracao" src="../style/img/menu.png">
+
         <nav style="background-color: rgb(0, 38, 87);">
             <ul id="ul-Menu"></ul>
         </nav>
-        <nav class="nav-menu-2">
-            <ul class="menu-secundario" id="menu-secundario-detalhes">
-                <li id="li-crediario">
-                    <a id="btn-flex">Cobrar Crediário</a>
-                </li>
-                <li id="">
-                    <a id="btnCredVencer">Relatório de Crediários do Mês Vigente</a>
-                </li>
-                <li id="item-atraso">
-                    <a id="btn-atraso" href="#">Relatório de Crediários em Atraso</a>
-                </li>
-            </ul>
-        </nav>
     </header>
-    <div class="container">
-        <div class="div-form" role="form">
-            <div class="div-form-display">
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" id="li-cadastroCliente" href="./registrar_cliente.html">Cadastrar
+                            novo Cliente</a>
+                        <a class="atalhos-btn" href="./alterar_cliente.html">Informações Cadastrais do Cliente /
+                            Alterar</a>
+                        <a class="atalhos-btn" href="./crediario.html" id="btn-flex">Receber Pagamento</a>
+                        <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os
+                            Clientes</a>
+                        <a class="atalhos-btn"id="btn-atraso" href="#">Relatório de parcelas em
+                            Atraso</a>
+                    </div>
+                    <div class="img-fgl">
+                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs">
+            <div>
                 <section class="div-form__body">
                     <div id="crediários-mes-vencer">
                         <button class="close-btn">X</button>
                         <div class="info-cmv">
                             <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
                             <p class="p-info"><span>Crediários do Mês: <span class="mesAvencer"></span></span>
-                                <span style="font-size: .9rem;">Total:Paga/pendente : <span class="parcelasTotal"></span></span>
+                                <span style="font-size: .9rem;">Total:Paga/pendente : <span
+                                        class="parcelasTotal"></span></span>
                                 <span> Total Pagas: <span class="parcelasPagas"></span></span>
                                 <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
                             </p>
@@ -66,41 +77,38 @@
                         </div>
                     </div>
                     <!-- --------------------------------------------------------------------------------------------->
-                    <div class="filter-table">
                         <table>
                             <tr>
-                                <th id="filtrar">🔍 Filtrar CPF:</th>
-                                <th>Cliente:</th>
-                                <th>Crédito Liberado:</th>
-                                <th>Crédito Utilizado:</th>
-                                <th>Ações</th>
+                                <th style="width: 20%;">🔍 Filtrar CPF</th>
+                                <th style="width: 50%;">Cliente</th>
+                                <th style="width: 10%;">Crédito Liberado</th>
+                                <th style="width: 10%;">Crédito Utilizado</th>
                             </tr>
                             <tr>
                                 <td><input type="input" id="cpfFiltrar" type="text" /></td>
                                 <td><input type="input" id="nomeClienteFiltrado" readonly /></td>
                                 <td> <input type="input" id="credito" readonly /></td>
                                 <td> <input type="input" id="credito-utilizado" readonly /></td>
-                                <td>
-                                    <div class="divBtn-horizontal">
-                                        <button id="filterButtonCrediario"><img class="img-excluir"
-                                                src="../style//img/procurar.png" alt="">Buscar</button>
-                                        <button id="limparButton"><img class="img-excluir"
-                                                src="../style//img/excluir.png" alt="">Limpar</button>
-                                    </div>
-                                </td>
                             </tr>
                         </table>
-                    </div>
+                   
                     <div class="div-filtrados">
                     </div>
             </div>
             </section>
-            <footer class="div-form__footer">
-                <p class="info-cred-baixa">
-                    <strong>⚠️ Atenção:</strong> Antes de baixar as parcelas, verifique os dados do cliente. A ação é irreversível. Parcelas em atraso têm multa fixa de <strong>R$<span id="multaSpan"></span></strong> e juros ao mês de <strong><span id="moraSpan"></span>%</strong>, conforme definido nas configurações do sistema.
-                </p>
-                
-            </footer>
+            <div
+                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
+                <footer class="div-form__footer">
+                    <p style="font-size: 0.95rem;"><img style="width: 1.3rem; margin-right: .5%;"
+                            src="../style/img/atencao.png" alt=""> <strong>Atenção:</strong> Antes de baixar as parcelas, verifique os dados do cliente. A ação é irreversível. Parcelas em atraso têm multa fixa de <strong>R$<span id="multaSpan"></span></strong> e juros ao mês de <strong><span id="moraSpan"></span></strong>, conforme definido nas configurações do sistema.
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                        <button id="filterButtonCrediario"><img class="img-excluir" src="../style//img/procurar.png"
+                                alt="">Buscar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
+            </div>
         </div>
     </div>
 </body>
@@ -111,5 +119,4 @@
 <script src="../Renderer/crediario/api_crediario.js"></script>
 <script src="../Renderer/crediario/crediario_vencer.js"></script>
 <script src="../Renderer/crediario/crediario_vencidos.js"></script>
-
 </html>

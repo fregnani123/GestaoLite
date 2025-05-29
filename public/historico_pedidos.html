@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    <title>Relatório de pedidos</title>
+
+    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
+    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
+    <link rel="stylesheet" href="../style/css/css_global/btn.css">
+    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
+    <link rel="stylesheet" href="../style/css/css_global/info.css">
+    <link rel="stylesheet" href="../style/css/css_global/table.css">
+    <link rel="stylesheet" href="../style/css/detalhes_vendas/detalhe_vendas.css">
+    <link rel="stylesheet" href="../style/css/detalhes_vendas/pedido_historico.css">
+</head>
+<body>
+    <header>
+        <img class="img-configuracao" src="../style/img/menu.png">
+        <nav>
+            <ul id="ul-Menu"></ul>
+        </nav>
+    </header>
+    <div class="div-form">
+        <div class="atalhos-1">
+            <div class="atalhos">
+                <div class="menu-secundario">
+                    <div class="pagamento">
+                        <a class="atalhos-btn" href="./detalhe_vendas.html">Gráficos por forma de pagamento</a>
+                        <a class="atalhos-btn btn-ativo" id="btn-comprovante" href="./historico_pedidos.html">Histórico
+                            de pedidos por número de
+                            saída</a>
+                        <a class="atalhos-btn" id="btn-comprovante" href="#">Relatório de Metas do Mês</a>
+                    </div>
+                    <div class="img-fgl altura-custom-img">
+                        <img class="img-logo-lgl" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-inputs">
+            <div class="wrapper-flex">
+                <section class="div-form__body corpo-form">
+                    <div class="corpo-interno">
+                        <div class="data-titulo">
+                            <img src="../style/img/calendario.png" alt="">
+                            <table class="tabela-datas-historico">
+                                <tr>
+                                    <th class="col-inicial">Data Inicial:</th>
+                                    <th class="col-final">Data Final:</th>
+                                    <th class="col-pedido">Numero do pedido:</th>
+                                    <th class="col-cpf">CPF:</th>
+                                </tr>
+                                <tr>
+                                    <td class="col-inicial"><input type="date" id="startDate" /></td>
+                                    <td class="col-final"><input type="date" id="endDate" /></td>
+                                    <td class="col-pedido"><input type="number" id="numeroPedidoFiltro" /></td>
+                                    <td class="col-cpf"><input type="text" id="clienteFiltro" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container-tabelas-historico">
+
+                            <table class="comprovantes-pedido-titulo">
+                                <tr>
+                                    <td>Histórico de Pedidos</td>
+                                </tr>
+                            </table>
+                            <div class="comprovantes-div">
+                                <div id="sales-history" class="sales-history"></div>
+                            </div>
+
+                        </div>
+
+                        <table class="tabela-esquerda" style="display: none;">
+                            <tr class="linha-titulo">
+                                <th id="titulo-relatorio"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="filtros">
+                                        <div class="total-filtradas"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="tabela-direita" style="display: none;">
+                            <tr class="linha-titulo">
+                                <th>Gráfico de Vendas por Forma de Pagamento e Período</th>
+                            </tr>
+                            <tr>
+                                <td style="position: relative;">
+                                    <div class="barra-container" id="barra-container">
+                                        <span class="nome">Cartão Crédito:</span>
+                                        <div class="barra credito"><span id="credito">0%</span></div>
+                                    </div>
+                                    <div class="barra-container">
+                                        <span class="nome">Cartão Débito:</span>
+                                        <div class="barra debito"><span id="debito">0%</span></div>
+                                    </div>
+                                    <div class="barra-container">
+                                        <span class="nome">Crediário:</span>
+                                        <div class="barra crediario"><span id="crediario">0%</span></div>
+                                    </div>
+                                    <div class="barra-container">
+                                        <span class="nome">Dinheiro:</span>
+                                        <div class="barra dinheiro"><span id="dinheiro">0%</span></div>
+                                    </div>
+                                    <div class="barra-container">
+                                        <span class="nome">Pix:</span>
+                                        <div class="barra pix"><span id="pix">0%</span></div>
+                                    </div>
+                                    <div class="barra-container">
+                                        <span class="nome" style="margin-top: 1%;">Total:</span>
+                                        <div class="barra total"><span>100%</span></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </section>
+            </div>
+
+            <div class="footer-wrapper">
+                <footer class="div-form__footer">
+                    <p class="footer-info">
+                        <img src="../style/img/informacoes.png" alt="Atenção">
+                        <strong>Informação:</strong> Por <strong>padrão</strong>, a tela de gráfico exibe todo o
+                        <strong>período</strong> desde o <strong>início</strong> da utilização do sistema. Para
+                        <strong>filtrar</strong> por períodos específicos, selecione acima a <strong>data de
+                            início</strong> e a <strong>data de fim</strong>, e clique no botão
+                        <strong>'Buscar'</strong>.
+                    </p>
+                    <div class="botoes-footer">
+                        <button id="filterButton"><img class="img-excluir" src="../style//img/procurar.png"
+                                alt="">Buscar</button>
+                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                alt="">Limpar</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="../Renderer/Menu/renderer_menu.js"></script>
+    <script src="../Renderer/services/converte_moeda.js"></script>
+    <script src="../Renderer/services/formatters.js"></script>
+    <script src="../Renderer/detalhe_vendas/api_detalhes_vendas.js"></script>
+</body>
+
+</html>
+
+
+
+
+

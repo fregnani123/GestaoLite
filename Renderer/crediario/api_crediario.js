@@ -3,7 +3,7 @@ const btnFiltrarCrediario = document.getElementById('filterButtonCrediario');
 const nomeClienteFiltrado = document.getElementById('nomeClienteFiltrado');
 const credito = document.getElementById('credito');
 const creditoUtilizado = document.getElementById('credito-utilizado');
-const linkID_5 = document.querySelector('.list-a5');
+const linkID_7 = document.querySelector('.list-a7');
 const limparButtonFilter = document.getElementById('limparButton');
 const multaSpan = document.getElementById('multaSpan');
 const moraSpan = document.getElementById('moraSpan');
@@ -14,7 +14,7 @@ function estilizarLinkAtivo(linkID) {
   linkID.style.color = 'white'; // Cor do texto
   linkID.style.borderBottom = '2px solid black'; // Borda inferior
 }
-estilizarLinkAtivo(linkID_5);
+estilizarLinkAtivo(linkID_7);
 
 
 let multaParcela = '';
