@@ -34,6 +34,9 @@ header {
 }
 
 /* 🔹 Menu Principal */
+nav {
+    width: 100%
+}
 
 #ul-Menu {
     list-style: none;
@@ -41,9 +44,9 @@ header {
     background: var(--secondary-color);
     padding: 0;
     margin: 0;
-    border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    padding-left: 4%;
 }
 
 /* Itens do menu */
@@ -67,9 +70,12 @@ header {
 
 /* Hover moderno */
 #ul-Menu > li > a:hover {
-    background-color: var(--menu-hover-bg);
-    color: #fff;
+  background: #5f8ac1;
+    color: white;
+    text-shadow: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.57);
 }
+
 
 /* Submenu */
 #ul-Menu li ul {
@@ -184,7 +190,6 @@ header {
     height: 100%
 } 
 
-
 .atalhos{
 width:100%;
 height: 100%;
@@ -249,10 +254,10 @@ padding: 2%;
 
 
 .atalhos-btn:hover {
-    background: #5f8ac1;
-    color: white;
-    text-shadow: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.57);
+  background: linear-gradient(to bottom, #5f8ac1, #4a79a8);
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.57);
 }
 
 

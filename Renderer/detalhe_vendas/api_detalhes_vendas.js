@@ -193,14 +193,18 @@ function displaySalesHistory(groupedSales) {
 <table class="tabela-comprovante">
     <tr class='tr-numero'>
         <th colspan="5">
-            <div class="alinha-centro">DOCUMENTO PARA CONFERÊNCIA DE MERCADORIAS Nº000${saleGroup.numero_pedido}</div>
+            <div class="alinha-centro">DOCUMENTO PARA CONFERÊNCIA DE MERCADORIAS</div>
         </th>
     </tr>
-    <tr>
-        <td colspan="5">
-            <div class="alinha-esquerda"><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</div>
-        </td>
-    </tr>
+ <tr>
+  <th colspan="5">
+    <div class="th-numero-pedido">
+      <span><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</span>
+      <span>Nº000${saleGroup.numero_pedido}</span>
+    </div>
+  </th>
+</tr>
+
     <tr>
         <td colspan="5">
             <div class="alinha-esquerda"><strong>Cliente:</strong> ${saleGroup.cliente_nome}</div>

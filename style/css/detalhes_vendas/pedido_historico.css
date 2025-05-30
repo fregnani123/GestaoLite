@@ -174,3 +174,8 @@ table td {
   padding: 0;
 }
 
+.th-numero-pedido {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

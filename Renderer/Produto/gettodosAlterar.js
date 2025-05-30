@@ -93,7 +93,7 @@ async function preencherInputs(produtoEncontrado) {
     inputVolume.value = produtoEncontrado.medida_volume_qtd || '';
     inputComprimento.value = produtoEncontrado.unidade_comprimento_qtd || '';
     selectFornecedor.value = produtoEncontrado.fornecedor_id;
-    selectCorProduto.value = produtoEncontrado.cor_produto_id;
+    selectCorProduto.value = produtoEncontrado.cor_produto_id || '';
     inputObservacoes.value = produtoEncontrado.observacoes || '';
 
     // Verificar se o caminho da imagem existe e definir a imagem correta
