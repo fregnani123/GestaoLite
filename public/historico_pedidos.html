@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../style/css/detalhes_vendas/detalhe_vendas.css">
     <link rel="stylesheet" href="../style/css/detalhes_vendas/pedido_historico.css">
 </head>
+
 <body>
     <header>
         <img class="img-configuracao" src="../style/img/menu.png">
@@ -46,29 +47,41 @@
                 <section class="div-form__body corpo-form">
                     <div class="corpo-interno">
                         <div class="data-titulo">
-                            <img src="../style/img/calendario.png" alt="">
                             <table class="tabela-datas-historico">
                                 <tr>
-                                    <th class="col-inicial">Data Inicial:</th>
-                                    <th class="col-final">Data Final:</th>
-                                    <th class="col-pedido">Numero do pedido:</th>
-                                    <th class="col-cpf">CPF:</th>
+                                    <th class="col-inicial">Data Inicial</th>
+                                    <th class="col-final">Data Final</th>
+                                    <th class="col-pedido">Filtrar por Nº do Pedido</th>
+                                    <th class="col-cpf">Filtrar pelo CPF</th>
+                                    <th> Ações </th>
                                 </tr>
                                 <tr>
                                     <td class="col-inicial"><input type="date" id="startDate" /></td>
                                     <td class="col-final"><input type="date" id="endDate" /></td>
+
                                     <td class="col-pedido"><input type="number" id="numeroPedidoFiltro" /></td>
                                     <td class="col-cpf"><input type="text" id="clienteFiltro" /></td>
+                                    <td>
+                                        <div class="botoes-footer">
+                                            <button id="filterButton"><img class="img-excluir"
+                                                    src="../style//img/procurar.png" alt="">Filtrar</button>
+                                            <button id="limparButton"><img class="img-excluir"
+                                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                                        </div>
+                                    </td>
                                 </tr>
                             </table>
+                       
                         </div>
-                        <div class="container-tabelas-historico">
-
-                            <table class="comprovantes-pedido-titulo">
-                                <tr>
-                                    <td>Histórico de Pedidos</td>
+                            <table>
+                                  <tr>
+                                    <th class="historico_pedidos" colspan="5">
+                                        Histórico de pedidos Filtrados
+                                    </th>
                                 </tr>
-                            </table>
+                            </table> 
+                        <div class="container-tabelas-historico">
+                         
                             <div class="comprovantes-div">
                                 <div id="sales-history" class="sales-history"></div>
                             </div>
@@ -86,7 +99,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        </table> 
+                        </table>
                     </div>
                 </section>
             </div>
@@ -100,12 +113,6 @@
                             início</strong> e a <strong>data de fim</strong>, e clique no botão
                         <strong>'Buscar'</strong>.
                     </p>
-                    <div class="botoes-footer">
-                        <button id="filterButton"><img class="img-excluir" src="../style//img/procurar.png"
-                                alt="">Buscar</button>
-                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                                alt="">Limpar</button>
-                    </div>
                 </footer>
             </div>
         </div>
@@ -117,8 +124,3 @@
 </body>
 
 </html>
-
-
-
-
-

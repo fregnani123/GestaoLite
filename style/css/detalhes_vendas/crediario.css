@@ -49,11 +49,10 @@ border: 1px solid rgb(255, 255, 255);
 }
 
 .div-filtrados{
-  height: 63.5vh;
+  height: 49vh;
   border: 1px solid gray;
   box-sizing: border-box;
   overflow-y: scroll;
   width: 100%;
 }
-
 

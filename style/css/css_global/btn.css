@@ -106,6 +106,8 @@
     width: 10rem;
 }
 
+
+
 #limparButton,
 #filterButtonLimpar,
 #limparButton-info,
@@ -160,18 +162,19 @@
     width: 10rem;
     font-size: 1rem;
 }
-
-.img-excluir {
-    width: 20px;
-    height: 20px;
+.botoes-footer {
+  background: white;
+  padding: 0.5%;
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+}
+.img-excluir,.img-disquete {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
 }
 
-
-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
 
 .img-cadeado {
     width: 20px;

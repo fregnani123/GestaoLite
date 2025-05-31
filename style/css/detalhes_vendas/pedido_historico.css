@@ -9,14 +9,17 @@ strong {
 .container-tabelas-historico {
     width: 100%;
     max-height: 59vh;
+    
 }
 
 .comprovantes-div {
     height: 100%;
-    overflow: scroll;
-    width: 100%;
+    overflow-y: scroll;
+    width: 99%;
     max-height: 59vh;
     margin-top: -.6rem;
+    margin-left: .5%;
+    overflow-x: hidden;
 }
 
 .comprovantes-pedido-titulo td{
@@ -38,7 +41,7 @@ strong {
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid #bfbebe;
+   border: 1px solid rgba(128, 128, 128, 0.549);
     
 }
 .linha-pontilhada {
@@ -52,7 +55,7 @@ strong {
 
 .tabela-comprovante th,
 .tabela-comprovante td {
-    border: 1px solid #bfbebe;
+    border: 1px solid rgba(128, 128, 128, 0.549);
     padding: 8px 10px;
     text-align: left;
     vertical-align: top;
@@ -87,30 +90,15 @@ strong {
 }
 
 .tabela-datas-historico {
-    width: 100%;
-    border-collapse: collapse;
+    width: 99%;
+    margin-top: 1%;
+    margin-left: .5%;
 }
 
 .tabela-datas-historico th,
 .tabela-datas-historico td {
     padding: 8px;
     text-align: left;
-}
-
-.col-inicial {
-    width: 20%;
-}
-
-.col-final {
-    width: 20%;
-}
-
-.col-pedido {
-    width: 40%;
-}
-
-.col-cpf {
-    width: 20%;
 }
 
 /* Cabeçalhos da tabela */
@@ -139,9 +127,20 @@ strong {
     position: absolute;
 }
 /* Células da tabela (dados) */
-table td {
-  vertical-align: middle;
-  padding: 4px 8px;
+.tabela-datas-historico th,
+.tabela-datas-historico td {
+  padding: 0.3rem;
+  text-align: center; 
+  border: 1px solid rgba(128, 128, 128, 0.549);
+}
+.btn-ativo {
+  background: var(--hover-color);
+  color: white;
+  text-shadow: none;
+  border-bottom: 2px solid black;
+}
+.img-fgl{
+height: 77%;
 }
 .alinha-esquerda {
   text-align: left;
@@ -150,7 +149,8 @@ table td {
   text-align: center;
 }
 .tr-numero th{
-    background: rgb(237, 237, 237);
+    background: rgb(187, 187, 187);
+    padding: .1rem;
 }
 .tr-troco td{
     justify-content: left;
@@ -178,4 +178,46 @@ table td {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.data-titulo img {
+  width: 10%;
+  height: auto;
+  margin-left: 2%;
+}
+ .historico_pedidos{
+    text-align: center;
+    background-color: #f6f6f6 !important;
+    border-top: 1px solid rgba(128, 128, 128, 0.549);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.549);
+ }
+ .alinha-centro {
+    text-align: center;
+}
+
+.alinha-esquerda {
+    text-align: left;
+}
+
+.th-numero-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pedido-numero-botao {
+    display: flex;
+    gap: 10%;
+    align-items: center;
+}
+
+.botao-imprimir {
+    background-color: transparent;
+    border: none;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.icone-impressora {
+    width: 24px;
+    height: 24px;
 }

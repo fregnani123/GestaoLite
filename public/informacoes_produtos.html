@@ -22,7 +22,6 @@
             border-bottom: 2px solid black;
             cursor: pointer;
         }
-
     </style>
     <title>Informações de Produto</title>
 </head>
@@ -31,7 +30,7 @@
 
     <body>
         <header>
-<img class="img-configuracao" src="../style/img/menu.png">
+            <img class="img-configuracao" src="../style/img/menu.png">
 
             <nav>
                 <ul id="ul-Menu"></ul>
@@ -58,110 +57,93 @@
                 </div>
             </div>
             <div class="container-inputs">
-                <div style="display: flex; width: 100%; height: 100%; ">
-                    <div class="div-form-display" style=" border:none">
-                        <section class="div-form__body-info">
+                <section class="div-form__body corpo-form">
+                    <div class="filtros-header"  >
 
-                            <div style="height: 15%;margin-top: .5%;">
-                                <table id="filtroTabela" style="border-collapse: collapse; border: none;">
-                                    <tr style="border: none; ">
-                                        <th style="width: 15%; border: none; text-align: left;background-color: white;">Filtrar Cód. EAN</th>
-                                        <th style="width: 45%; border: none; text-align: left;background-color: white;">Filtrar Produto (Nome)
-                                        </th>
-                                        <th style="width: 20%; border: none; text-align: left;background-color: white;">Filtrar Grupo</th>
-                                        <th style="width: 20%; border: none; text-align: left;background-color: white;">Selecione</th>
-                                    </tr>
-                                    <tr style="border: none;">
-                                        <td style="border: none;"><input type="text" id="codigoEAN"></td>
-                                        <td style="border: none;"><input type="text" id="produtoNome"></td>
-                                        <td style="border: none;">
-                                            <select id="grupo">
-                                                <option value="">Selecione</option>
-                                            </select>
-                                        </td>
-                                        <td style="border: none;">
-                                            <select id="subgrupo">
-                                                <option value="">Selecione</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="div-form-container-info">
-                                <div class="filtrados">
-                                    <div class="div-info-row">
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    Total de itens filtrados
-                                                </th>
-                                                <th>
-                                                    Valor total em estoque - baseado no preço de compra
-                                                </th>
-                                                <th>
-                                                    Imprimir relatório
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    ${totalItens}
-                                                </td>
-                                                <td>
-                                                    ${formatarMoedaBR(valorEstoque)}
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        style="background-color: transparent; border: none; cursor: pointer;"
-                                                        title="Imprimir">
-                                                        <img src="../style/img/impressora-1.png" alt="Imprimir"
-                                                            style="width: 24px; height: 24px;">
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </table>;
+                        <table class="table-filter">
+                            <tr>
+                                <th style="width: 20%;">Filtrar Cód. EAN</th>
+                                <th style="width: 50%;">Filtrar Produto (Nome)</th>
+                                <th style="width: 15%;">Filtrar Grupo</th>
+                                <th style="width: 15%;">Filtrar SubGrupo</th>
+                            </tr>
+
+                            <tr>
+                                <td><input type="text" id="codigoEAN" style="width: 100%;"></td>
+                                <td><input type="text" id="produtoNome" style="width: 100%;"></td>
+                                <td>
+                                    <select id="grupo" style="width: 100%;">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select id="subgrupo" style="width: 100%;">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table-filter-2">
+                            <tr class="info-recebe-th">
+                                <th style="width: 20%;">Total de itens filtrados</th>
+                                <th style="width: 25%;">Valor total em estoque</th>
+                                <th style="width: 20%;">Imprimir relatório</th>
+                                <th style="width: 30%;">Ações</th>
+                            </tr>
+                            <tr class="info-recebe-td">
+                                <td id="td-total-itens"></td>
+                                <td id="td-valor-estoque"></td>
+                                <td>
+                                    <button class="botao-imprimir" title="Imprimir">
+                                        <img src="../style/img/impressora.png" alt="Imprimir" class="icone-impressora">
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="container-btn-footer">
+                                        <button class="titulo-filtrar" id="filtrarProdutos">
+                                            <img class="img-excluir" src="../style/img/procurar.png" alt="">Filtrar
+                                        </button>
+                                        <button id="limparButton-info">
+                                            <img class="img-excluir" src="../style/img/excluir.png" alt="">
+                                            <img class="img-excluir" src="../style/img/excluir.png" alt="">
+                                        </button>
                                     </div>
-                                    <div style="max-height:25.3rem; overflow-y: auto;">
-                                        <table style="width: 100%; border-collapse: collapse;">
-                                            <thead>
-                                                <tr class="header-row">
-                                                    <th>Código EAN</th>
-                                                    <th>Descrição Produto</th>
-                                                    <th>Estoque Atual</th>
-                                                    <th>Preço Compra</th>
-                                                    <th>Preço Venda</th>
-                                                    <th>Qtd Vendida</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="ul-filtros">
-                                                <!-- As linhas dos produtos serão inseridas aqui -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
                         <div
-                            style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%; margin-top: -1%;">
-                            <footer class="div-form__footer" style="background-color: rgba(204, 221, 254, 0.266);">
-                                <p style="font-size: 1rem;justify-content: center;text-align: center;">
-                                    <img style="width: 1.3rem; margin-right: 1%;" src="../style/img/informacoes.png"
-                                        alt=""><strong>Informação:</strong> Por padrão, esta tela exibe todos os
-                                    produtos com seus dados e níveis de estoque. Para relatórios específicos, utilize os
-                                    filtros acima e pressione Buscar.
-                                </p>
-                                <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
-                                    <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
-                                            src="../style//img/procurar.png" alt="">Buscar</button>
-                                    <button id="limparButton-info"><img class="img-excluir"
-                                            src="../style//img/excluir.png" alt=""><img class="img-excluir"
-                                            src="../style//img/procurar.png" alt="">Limpar</button>
-                                </div>
-                            </footer>
+                            style="border-bottom: 5px solid rgb(221, 221, 221);position: sticky; top:5px;margin-left: .5%;">
+                        </div>
+                        <div
+                            style="height: 25rem; overflow-y: scroll; overflow-x: hidden; border: 1px solid #ececec;margin-top: -.5%;">
+                            <table>
+                                <thead>
+                                    <tr class="header-row">
+                                        <th>Código EAN</th>
+                                        <th>Descrição Produto</th>
+                                        <th>Estoque Atual</th>
+                                        <th>Preço Compra</th>
+                                        <th>Preço Venda</th>
+                                        <th>Qtd Vendida</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ul-filtros">
+                                    <!-- Linhas dos produtos -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
+                </section>
+                <div class="footer-wrapper" >
+                    <footer class="div-form__footer">
+                        <p class="footer-info">
+                            <img  src="../style/img/informacoes.png" alt="">
+                            <strong>Informação:</strong> Por padrão, esta tela exibe <strong>todos os produtos</strong> com seus respectivos <strong>dados</strong> e <strong>níveis de estoque</strong>. Para gerar <strong>relatórios específicos</strong>, utilize os <strong>filtros acima</strong> e pressione o botão <strong>Filtrar</strong>.
+                        </p>
+                    </footer>
                 </div>
-
             </div>
         </div>
     </body>

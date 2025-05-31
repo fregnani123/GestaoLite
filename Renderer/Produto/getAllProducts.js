@@ -100,89 +100,60 @@ const divInfo = document.querySelector('div-info-row')
 
 function renderProdutos(renderer, produtos) {
     renderer.innerHTML = '';
-    const divInfo = document.querySelector('.div-info-row');
 
-    // Informações agregadas no topo
     const totalItens = produtos.length;
     const valorEstoque = produtos.reduce((acc, produto) => {
         return acc + (parseFloat(produto.preco_compra || 0) * parseInt(produto.quantidade_estoque || 0));
     }, 0);
 
-    divInfo.innerHTML = `
-   <table>
-                                        <tr>
-                                            <th>
-                                                Total de itens filtrados
-                                            </th>
-                                            <th>
-                                                Valor total em estoque - baseado no preço de compra
-                                            </th>
-                                      <th>
-                                      Imprimir reatório
-                                      </th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                              ${totalItens}
-                                            </td>
-                                            <td>
-                                               ${formatarMoedaBR(valorEstoque)}
-                                            </td>
-                                            <td>
-                                              <button style="background-color: transparent; border: none; cursor: pointer;" title="Imprimir">
-                                      <img src="../style/img/impressora.png" alt="Imprimir" style="width: 24px; height: 24px;">
-                                      </button>
-                                            </td>
-                                            
-                                        </tr>
-                                    </table>
-`;
-
+    // Preenche os <td> com os valores
+    document.getElementById('td-total-itens').textContent = totalItens;
+    document.getElementById('td-valor-estoque').textContent = formatarMoedaBR(valorEstoque).replace('R$', '').trim();
 
     let unidades = ['un', 'cx', 'Rolo', 'pc'];
 
-produtos.forEach((produto, index) => { // <-- ADICIONADO index aqui
-    const tr = document.createElement('tr');
-    tr.classList.add('table-row');
+    produtos.forEach((produto, index) => { // <-- ADICIONADO index aqui
+        const tr = document.createElement('tr');
+        tr.classList.add('table-row');
 
-    // ✅ Alterna entre branco e azul
-    tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
+        // ✅ Alterna entre branco e azul
+        tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
 
-    const tdCodigo = document.createElement('td');
-    tdCodigo.textContent = produto.codigo_ean || 'Sem código';
+        const tdCodigo = document.createElement('td');
+        tdCodigo.textContent = produto.codigo_ean || 'Sem código';
 
-    const tdNome = document.createElement('td');
-    let texto = produto.nome_produto;
+        const tdNome = document.createElement('td');
+        let texto = produto.nome_produto;
 
-    if (produto.nome_cor_produto?.trim()) texto += ` ${produto.nome_cor_produto}`;
-    if (produto.tamanho_letras?.trim()) texto += ` ${produto.tamanho_letras}`;
-    if (produto.tamanho_numero?.trim()) texto += ` tam.${produto.tamanho_numero}`;
-    if (produto.medida_volume?.trim()) texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
-    if (produto.unidade_massa?.trim()) texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
-    if (produto.unidade_comprimento?.trim()) texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
-    tdNome.textContent = texto;
+        if (produto.nome_cor_produto?.trim()) texto += ` ${produto.nome_cor_produto}`;
+        if (produto.tamanho_letras?.trim()) texto += ` ${produto.tamanho_letras}`;
+        if (produto.tamanho_numero?.trim()) texto += ` tam.${produto.tamanho_numero}`;
+        if (produto.medida_volume?.trim()) texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
+        if (produto.unidade_massa?.trim()) texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
+        if (produto.unidade_comprimento?.trim()) texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
+        tdNome.textContent = texto;
 
-    const tdEstoque = document.createElement('td');
-    tdEstoque.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
+        const tdEstoque = document.createElement('td');
+        tdEstoque.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
 
-    const tdCompra = document.createElement('td');
-    tdCompra.textContent = formatarMoedaBR(parseFloat(produto.preco_compra || 0));
+        const tdCompra = document.createElement('td');
+        tdCompra.textContent = formatarMoedaBR(parseFloat(produto.preco_compra || 0)).replace('R$', '').trim();
 
-    const tdVenda = document.createElement('td');
-    tdVenda.textContent = formatarMoedaBR(parseFloat(produto.preco_venda || 0));
+        const tdVenda = document.createElement('td');
+        tdVenda.textContent = formatarMoedaBR(parseFloat(produto.preco_venda || 0)).replace('R$', '').trim();;
 
-    const tdVendida = document.createElement('td');
-    tdVendida.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
+        const tdVendida = document.createElement('td');
+        tdVendida.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
 
-    tr.appendChild(tdCodigo);
-    tr.appendChild(tdNome);
-    tr.appendChild(tdEstoque);
-    tr.appendChild(tdCompra);
-    tr.appendChild(tdVenda);
-    tr.appendChild(tdVendida);
+        tr.appendChild(tdCodigo);
+        tr.appendChild(tdNome);
+        tr.appendChild(tdEstoque);
+        tr.appendChild(tdCompra);
+        tr.appendChild(tdVenda);
+        tr.appendChild(tdVendida);
 
-    renderer.appendChild(tr);
-});
+        renderer.appendChild(tr);
+    });
 
 }
 

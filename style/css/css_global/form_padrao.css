@@ -1,7 +1,8 @@
-*{
+* {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
-strong{
+
+strong {
     font-weight: 600;
 }
 
@@ -18,10 +19,11 @@ body {
 }
 
 th {
-  background-color: #ededed;
-  font-weight: 500; /* ou 600 */
-  color: #1c0000;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #ededed;
+    font-weight: 500;
+    /* ou 600 */
+    color: #1c0000;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .div-form {
@@ -70,6 +72,7 @@ th {
     margin-top: .5%;
     margin-left: .5%;
 }
+
 .div-form__body-info {
     display: flex;
     flex-direction: column;
@@ -114,8 +117,12 @@ th {
     gap: 1%;
     width: 100%;
 }
-.span-dois-pontos{
-    position: absolute; margin-top:.4%; font-size: 1.2rem;margin-left: .2%;
+
+.span-dois-pontos {
+    position: absolute;
+    margin-top: .4%;
+    font-size: 1.2rem;
+    margin-left: .2%;
 }
 
 .input-select-wrapper {
@@ -182,8 +189,11 @@ th {
     text-align: center;
     font-weight: 600u8;
 }
-.quadro-img{
-    padding: 1rem;border: 3px dashed #999; margin: 10px 0;
+
+.quadro-img {
+    padding: 1rem;
+    border: 3px dashed #999;
+    margin: 10px 0;
 }
 
 
@@ -191,13 +201,15 @@ th {
     width: 37.5%;
 }
 
-.p-titulo{
+.p-titulo {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
 }
-.footer-venda,.msg-alterar{
+
+.footer-venda,
+.msg-alterar {
     display: flex;
     background-color: rgba(248, 255, 53, 0.142);
     text-align: center;
@@ -205,16 +217,26 @@ th {
     justify-content: center;
     font-size: 1rem;
     padding: .5%;
-  } 
-  .div-form__footer{
+}
+.container-btn-footer{
+    background: white; padding: 1%; display: flex; gap: 2%;
+    margin-left: .5%;
+    border-radius: 5px;
+}
+
+.footer-wrapper{
+ background-color: rgba(204, 221, 254, 0.266);
+ display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;
+}
+.div-form__footer {
     display: flex;
-    background-color: rgba(204, 221, 254, 0.266);
     text-align: center;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
     padding: .5%;
-  } 
+    height: 100%;
+}
 
 /* abaixo css tela deletar produto*/
 
@@ -239,7 +261,7 @@ th {
     flex-direction: column;
     width: 100%;
     border: 1px solid gray;
-    align-items:start;
+    align-items: start;
 }
 
 .secao-conteudo {
@@ -262,7 +284,8 @@ th {
 
 .foto-produto-container {
     margin-left: 30%;
-    text-align: center;}
+    text-align: center;
+}
 
 
 .filtros-container {
@@ -281,7 +304,14 @@ th {
     align-items: center;
 }
 
+.footer-info {
+  font-size: 1rem;
+}
 
+.footer-info img {
+  width: 1.3rem;
+  margin-right: 0.5%;
+}
 
 .botoes-acao {
     display: flex;
@@ -337,14 +367,40 @@ th {
     font-size: 0.95rem;
 }
 
-.container-footer{
-    border: 1px solid rgba(128, 128, 128, 0.516);padding: 1%; margin: .5%; margin-top: 0;
+.container-footer {
+    border: 1px solid rgba(128, 128, 128, 0.516);
+    padding: 1%;
+    margin: .5%;
+    margin-top: 0;
 }
 
-.container-inputs{
-    display: flex; flex-direction: column; width: 100%; border: 1px solid gray
+.container-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid gray;
+    background-color: white;
 }
 
-.img-fgl{
-    width: 100%;height: 62%; border: 1px solid rgba(128, 128, 128, 0.549); margin-top: 2%;border-radius: 5px;    background: linear-gradient(to bottom, #3b5a82, #2c4d6e); display: flex;align-items: center;justify-content: center;
+.img-fgl {
+    width: 100%;
+    height: 62%;
+    border: 1px solid rgba(128, 128, 128, 0.549);
+    margin-top: 2%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #3b5a82, #2c4d6e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table th,
+table td {
+  padding: 0.3rem;
+  text-align: center; 
+  border: 1px solid rgba(128, 128, 128, 0.549);
+}
+table{
+    margin-left: .5%;
+    margin-right: .5%;
 }

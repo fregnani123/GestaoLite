@@ -4,6 +4,7 @@ const filterButton = document.getElementById('filterButton');
 const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
 const titulo_relatorio = document.getElementById('titulo-relatorio');
+const tdata_periodo = document.getElementById('data-periodo');
 const numeroPedidoFiltro = document.getElementById('numeroPedidoFiltro');
 const cpfFiltro = document.getElementById('clienteFiltro');
 const linkID_3 = document.querySelector('.list-a3');
@@ -74,7 +75,8 @@ function obterPrimeiroEUltimoPedido(grouped) {
         primeiroPedido = grouped[pedidos[0]];
         ultimoPedido = grouped[pedidos[pedidos.length - 1]];
 
-        titulo_relatorio.innerHTML = `Período Filtrado: De ${formatarDataISOParaBR(primeiroPedido.data_venda)} até ${formatarDataISOParaBR(ultimoPedido.data_venda)}`;
+        titulo_relatorio.innerHTML = `Período Filtrado`;
+        tdata_periodo.innerHTML = `${formatarDataISOParaBR(primeiroPedido.data_venda)} até ${formatarDataISOParaBR(ultimoPedido.data_venda)}`
     }
 }
 
@@ -189,22 +191,25 @@ function displaySalesHistory(groupedSales) {
         `).join('');
 
         saleCard.innerHTML = `
-          
 <table class="tabela-comprovante">
-    <tr class='tr-numero'>
+    <tr class="tr-numero">
         <th colspan="5">
             <div class="alinha-centro">DOCUMENTO PARA CONFERÊNCIA DE MERCADORIAS</div>
         </th>
     </tr>
- <tr>
-  <th colspan="5">
-    <div class="th-numero-pedido">
-      <span><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</span>
-      <span>Nº000${saleGroup.numero_pedido}</span>
-    </div>
-  </th>
-</tr>
-
+    <tr>
+        <th colspan="5">
+            <div class="th-numero-pedido">
+                <span><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</span>
+                <span class="pedido-numero-botao">
+                    Nº000${saleGroup.numero_pedido}
+                    <button class="botao-imprimir" title="Imprimir">
+                        <img src="../style/img/impressora.png" alt="Imprimir" class="icone-impressora">
+                    </button>
+                </span>
+            </div>
+        </th>
+    </tr>
     <tr>
         <td colspan="5">
             <div class="alinha-esquerda"><strong>Cliente:</strong> ${saleGroup.cliente_nome}</div>
@@ -220,11 +225,9 @@ function displaySalesHistory(groupedSales) {
         <th>Valor Recebido</th>
         <th colspan="5">Troco </th>
     </tr>
-    <tr class='tr-troco'>
-        <td> ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}
-        </td>
-        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}
-        </td>
+    <tr class="tr-troco">
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}</td>
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}</td>
         <td colspan="5">${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.troco)}</td>
     </tr>
     <tr>
@@ -240,12 +243,11 @@ function displaySalesHistory(groupedSales) {
         <th class="col-total">Total</th>
     </tr>
     ${rowsProdutos}
-     <tr class="tr-separador">
-  <td colspan="5"></td>
-</tr>
-
-    
-</table>`;
+    <tr class="tr-separador">
+        <td colspan="5"></td>
+    </tr>
+</table>
+`;
 
         salesHistory.appendChild(saleCard);
     });
@@ -284,27 +286,27 @@ function displayTotalSales(totalRows) {
 
         // Definir a cor e armazenar o valor no objeto salesData
         switch (item.tipo_pagamento.toLowerCase()) {
-  case 'cartão crédito':
-    saleTotal.style.backgroundColor = '#2c3e6c'; // Azul mais claro
-    salesData.cartao_credito = item.total_vendas;
-    break;
-  case 'cartão débito':
-    saleTotal.style.backgroundColor = '#3f5481'; // Azul intermediário
-    salesData.cartao_debito = item.total_vendas;
-    break;
-  case 'crediário':
-    saleTotal.style.backgroundColor = '#334c74'; // Azul mais escuro
-    salesData.crediario = item.total_vendas;
-    break;
-  case 'dinheiro':
-    saleTotal.style.backgroundColor = '#5a6e96'; // Azul suave
-    salesData.dinheiro = item.total_vendas;
-    break;
-  case 'pix':
-    saleTotal.style.backgroundColor = '#6a74c2'; // Azul claro
-    salesData.pix = item.total_vendas;
-    break;
-}
+            case 'cartão crédito':
+                saleTotal.style.backgroundColor = '#2c3e6c'; // Azul mais claro
+                salesData.cartao_credito = item.total_vendas;
+                break;
+            case 'cartão débito':
+                saleTotal.style.backgroundColor = '#3f5481'; // Azul intermediário
+                salesData.cartao_debito = item.total_vendas;
+                break;
+            case 'crediário':
+                saleTotal.style.backgroundColor = '#334c74'; // Azul mais escuro
+                salesData.crediario = item.total_vendas;
+                break;
+            case 'dinheiro':
+                saleTotal.style.backgroundColor = '#5a6e96'; // Azul suave
+                salesData.dinheiro = item.total_vendas;
+                break;
+            case 'pix':
+                saleTotal.style.backgroundColor = '#6a74c2'; // Azul claro
+                salesData.pix = item.total_vendas;
+                break;
+        }
 
         saleTotal.innerHTML = `
             <p class='p-1-total'><strong>${item.tipo_pagamento}</strong></p>

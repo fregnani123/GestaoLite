@@ -15,11 +15,27 @@
     <link rel="stylesheet" href="../style/css/detalhes_vendas/crediario.css">
     <link rel="stylesheet" href="../style/css/detalhes_vendas/crediários-mes-vencer.css">
     <title>Crediário</title>
+    <style>
+        .input-display-only {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  background: transparent !important;
+  color: inherit;
+  font: inherit;
+  width: 100%;
+  pointer-events: none; 
+  height: 1rem;
+  text-align: center;
+}
+table th{
+    font-size: 1rem;
+}
+    </style>
 </head>
-
 <body>
     <header>
-   <img class="img-configuracao" src="../style/img/menu.png">
+        <img class="img-configuracao" src="../style/img/menu.png">
 
         <nav style="background-color: rgb(0, 38, 87);">
             <ul id="ul-Menu"></ul>
@@ -37,7 +53,7 @@
                         <a class="atalhos-btn" href="./crediario.html" id="btn-flex">Receber Pagamento</a>
                         <a class="atalhos-btn" id="btnCredVencer">Vencimentos do Mês – Todos os
                             Clientes</a>
-                        <a class="atalhos-btn"id="btn-atraso" href="#">Relatório de parcelas em
+                        <a class="atalhos-btn" id="btn-atraso" href="#">Relatório de parcelas em
                             Atraso</a>
                     </div>
                     <div class="img-fgl">
@@ -77,21 +93,58 @@
                         </div>
                     </div>
                     <!-- --------------------------------------------------------------------------------------------->
-                        <table>
-                            <tr>
-                                <th style="width: 20%;">🔍 Filtrar CPF</th>
-                                <th style="width: 50%;">Cliente</th>
-                                <th style="width: 10%;">Crédito Liberado</th>
-                                <th style="width: 10%;">Crédito Utilizado</th>
-                            </tr>
-                            <tr>
-                                <td><input type="input" id="cpfFiltrar" type="text" /></td>
-                                <td><input type="input" id="nomeClienteFiltrado" readonly /></td>
-                                <td> <input type="input" id="credito" readonly /></td>
-                                <td> <input type="input" id="credito-utilizado" readonly /></td>
-                            </tr>
-                        </table>
-                   
+                    <table>
+                        <tr>
+                            <th style="width: 20%;"> Filtrar CPF</th>
+                            <th style="width: 50%;">Cliente</th>
+                        </tr>
+                        <tr>
+                            <td><input type="input" id="cpfFiltrar" type="text" /></td>
+                            <td><input type="input" id="nomeClienteFiltrado" readonly /></td>
+
+
+                        </tr>
+                    </table>
+                    <table>
+                        <tr style="border: 1px solid gray;">
+                            <th style="text-align: center; ">
+                                Valor da multa por atraso
+                            </th>
+                            <th style="border: 1px solid gray;text-align: center;">
+                                Juros mensais após vencimento
+                            </th>
+                            <th style="border-left: 1px solid gray; text-align: center">
+                                Crédito liberado para este cliente
+                            </th>
+                            <th style="border-left: 1px solid gray; text-align: center">
+                                Crédito Utilizado
+                            </th>
+                            <th style="text-align: center;border-left: 1px solid gray;">
+                                Imprimir reatório
+                            </th>
+                        </tr>
+                        <tr style="border: 1px solid gray;text-align: center;">
+                            <td style="text-align: center;">
+                                R$<span id="multaSpan"></span>
+                            </td>
+                            <td style="border-left: 1px solid gray; text-align: center;">
+                                <span id="moraSpan"></span>
+                            </td>
+                            <td style="border-left: 1px solid gray; text-align: center">
+                            <input type="input" id="credito-utilizado" readonly class="input-display-only"/> 
+                            </td>
+                            <td style="border-left: 1px solid gray; text-align: center">
+                            <input type="input" id="credito" readonly class="input-display-only" />
+                            </td>
+                            <td style="border-left: 1px solid gray; text-align: center;">
+                                <button style="background-color: transparent; border: none; cursor: pointer;"
+                                    title="Imprimir">
+                                    <img src="../style/img/impressora.png" alt="Imprimir"
+                                        style="width: 24px; height: 24px;">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                     <div class="div-filtrados">
                     </div>
             </div>
@@ -100,8 +153,20 @@
                 style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.755); padding: 1%; margin: .5%;">
                 <footer class="div-form__footer">
                     <p style="font-size: 0.95rem;"><img style="width: 1.3rem; margin-right: .5%;"
-                            src="../style/img/atencao.png" alt=""> <strong>Atenção:</strong> Antes de baixar as parcelas, verifique os dados do cliente. A ação é irreversível. Parcelas em atraso têm multa fixa de <strong>R$<span id="multaSpan"></span></strong> e juros ao mês de <strong><span id="moraSpan"></span></strong>, conforme definido nas configurações do sistema.
-                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                            src="../style/img/atencao.png" alt=""> <strong>Atenção:</strong> Antes de <strong>baixar as
+                            parcelas</strong>, verifique os <strong>dados do cliente</strong>. Esta ação é
+                        <strong>irreversível</strong>.
+
+                        Parcelas em <strong>atraso</strong> estão sujeitas a <strong>multa fixa</strong> e <strong>juros
+                            mensais</strong>, conforme definido nas <strong>configurações do sistema</strong>, ajustadas
+                        manualmente pelo <strong>usuário</strong>.
+
+                        Ao <strong>filtrar um cliente</strong>, todas as <strong>parcelas</strong> — mesmo de
+                        <strong>pedidos diferentes</strong> — são exibidas por <strong>ordem de data</strong>, e não
+                        pelo <strong>número da venda</strong>.
+                    </p>
+
+                    <div style="background: white; padding: .5%; display: flex; gap: 2%; margin-left: 1%;">
                         <button id="filterButtonCrediario"><img class="img-excluir" src="../style//img/procurar.png"
                                 alt="">Buscar</button>
                         <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
@@ -119,4 +184,5 @@
 <script src="../Renderer/crediario/api_crediario.js"></script>
 <script src="../Renderer/crediario/crediario_vencer.js"></script>
 <script src="../Renderer/crediario/crediario_vencidos.js"></script>
+
 </html>
