@@ -9,7 +9,7 @@ const menuPainel1 = [
 const menuPainel2 = [
     // { id: '6', texto: '', src: '', to: '' },
     { id: '10', texto: 'Pagamento a Prazo', src: '../style/img/crediario.png', to: '../public/crediario.html' },
-    { id: '3', texto: 'Relatórios de pedidos lançados', src: '../style/img/detalhes vendas.png', to: '../public/detalhe_vendas.html' },
+    { id: '3', texto: 'Relatórios de Pedidos', src: '../style/img/detalhes vendas.png', to: '../public/grafico_pedido.html' },
     { id: '8', texto: 'Entrada/saída estoque', src: '../style/img/caixa-de-entrada.png', to: '../public/controle_estoque.html' },
     { id: '5', texto: 'Gerenciar fornecedor', src: '../style/img/fornecedor.png', to: '../public/fornecedor.html' },  
 ];

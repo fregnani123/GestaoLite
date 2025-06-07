@@ -4,79 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-    <link rel="stylesheet" href="../style/css/css_global/btn.css">
-    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-    <link rel="stylesheet" href="../style/css/css_global/info.css">
-    <link rel="stylesheet" href="../style/css/css_global/table.css">
-    <style>
-        #estoque-entrada-saida {
-            background: var(--hover-color);
-            color: rgb(255, 255, 255);
-            text-shadow: none;
-            border-bottom: 2px solid black;
-            cursor: pointer;
-        }
-
-        .form-group {
-            display: flex;
-        }
-    </style>
-    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <title></title>
 </head>
 
 <body>
-    <header>
- <img class="img-configuracao" src="../style/img/menu.png">
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
 
-        <nav style="background-color: rgb(0, 38, 87);">
-            <ul id="ul-Menu"></ul>
-        </nav>
-    </header>
-
-    <body>
-        <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
-        <div class="container-register"></div>
-        <div class="div-form">
-            <div class="atalhos-1">
-                <div class="atalhos">
-                    <div class="menu-secundario">
-                        <div class="pagamento">
-                            <a class="atalhos-btn" href="./registrar_produto.html">Cadastrar novo Produto</a>
-                            <a class="atalhos-btn" id="alterar-produto" href="./alterar_produto.html">Edição de Produto
-                                e Informações</a>
-                            <a class="atalhos-btn" id="Informacoes-Produtos" class="a2"
-                                href="./informacoes_produtos.html">Informações e Estoque de
-                                Produtos</a>
-                            <a id="estoque-entrada-saida" class="atalhos-btn" href="./controle_estoque.html">
-                                Controle de Estoque — Entradas e Saídas</a>
-                            <a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a>
-                        </div>
-                        <div class="img-fgl">
-                            <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
-                        </div>
-                    </div>
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="menu-lateral">
+                <nav class="menu-suspenso">
+                    <ul>
+                        <li><a href="./registrar_produto.html"><img class="img-informacao"
+                                    src="../style/img/adicionar-produto.png" alt="Atenção">Cadastrar novo
+                                produto</a></li>
+                        <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
+                                    alt="Atenção">Edição de produto e informações</a>
+                        </li>
+                        <li><a href="./informacoes_produtos.html"><img class="img-informacao"
+                                    src="../style/img/informacoes.png" alt="Atenção">Informações e estoque de
+                                produtos</a></li>
+                        <li><a id="btn-ativo"><img class="img-informacao" src="../style/img/estoque-pronto.png"
+                                    alt="Atenção">Estoque — Entrada e
+                                Saída</a></li>
+                        <li><a href="./desabilitar_produto.html"><img class="img-informacao"
+                                    src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
                 </div>
             </div>
-            <div class="container-inputs">
-                <div class="div-form-display">
-                    <div style="display: flex; width: 100%; height: 100%; position: relative;">
-                        <section class="div-form-img">
-                            <h4 style="position: absolute; top: 2%;left: 1%;">Controle de Estoque - Entrada / Saída</h4>
-                            <p class="titulo-img"><strong>Imagem do Produto</strong></p>
+
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-img">
+                            <p >Imagem do Produto</p>
                             <div class="quadro-img"><img class="img-produto" src="../style/img/em-estoque.png"
                                     alt="Produto sem imagem."></div>
-                        </section>
-                        <section class="div-form__body">
+                        </div>
+                        <div class="formulario-inputs">
 
-                            <table class="table-1-produto">
+                            <table class="table-1-entrada">
                                 <tr>
                                     <th>
-                                        🔍 Filtrar por código EAN
+                                        Filtrar por código EAN
                                     </th>
                                     <th>
                                         Nome / Descrição
@@ -91,7 +77,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <table class="table-1-produto">
+                            <table class="table-2-entrada">
                                 <tr>
                                     <th style="width: 25%;">
                                         Estoque Atual
@@ -125,7 +111,7 @@
                                             type="text" readonly type="text">
                                     </td>
                                 </tr>
-                                <table class="table-3-produto">
+                                <table class="table-3-entrada">
                                     <tr>
                                         <th style="width: 25%;">
                                             Situação do Movimento
@@ -150,13 +136,16 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <table class="table-3-produto">
+                                <table class="table-4-entrada">
                                     <tr>
                                         <th>
                                             Qtde a ser Movimentada
                                         </th>
                                         <th>
                                             Data da Movimentação
+                                        </th>
+                                        <th>
+                                            Ações
                                         </th>
                                     </tr>
                                     <tr>
@@ -171,41 +160,42 @@
                                         <td>
                                             <input id="dateEstoque" type="date" readonly>
                                         </td>
+                                        <td>
+                                            <div
+                                                style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                                                <button id="btn-estoque"><img class="img-disquete"
+                                                        src="../style//img/disquete.png">Alterar</button>
+                                                <button id="limparButton"><img class="img-excluir"
+                                                        src="../style//img/excluir.png" alt="">Limpar</button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
 
                             </table>
-                        </section>
-                    </div>
-                    <div
-                        style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%; margin-top: -1%;">
-                        <footer class="div-form__footer">
-                            <p style="font-size: 1rem;justify-content: center;text-align: center;">
-                                <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
-                                    alt=""><strong>Atenção:</strong> Ao <strong>alterar</strong> os dados do produto, as
-                                informações antigas serão <strong>substituídas</strong>. Caso necessário,
-                                <strong>revise</strong> antes de aplicar a alteração.
-                                O produto precisa estar <strong>previamente cadastrado</strong> no sistema para que
-                                possa ser alterado.
+                        </div>
 
-                            </p>
-                            <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
-                                <button id="btn-estoque"><img class="img-disquete"
-                                        src="../style//img/disquete.png">Alterar</button>
-                                <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                                        alt="">Limpar</button>
-                            </div>
-                        </footer>
+                    </div>
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p style="font-size: 1rem;justify-content: center;text-align: center;">
+                            <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                                alt=""><strong>Atenção:</strong> Ao <strong>alterar</strong> os dados do produto, as
+                            informações antigas serão <strong>substituídas</strong>. Caso necessário,
+                            <strong>revise</strong> antes de aplicar a alteração.
+                            O produto precisa estar <strong>previamente cadastrado</strong> no sistema para que
+                            possa ser alterado.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
-    <script src="../Renderer/services/alertMsg.js"></script>
-    <script src="../Renderer/services/converte_moeda.js"></script>
-    <script src="../Renderer/Menu/renderer_menu.js"></script>
-    <script src="../Renderer/services/formatters.js"></script>
-    <script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
-    <script src="../Renderer/controle_estoque/controle_estoque.js"></script>
+    </div>
+</body>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
+<script src="../Renderer/controle_estoque/controle_estoque.js"></script>
 
 </html>

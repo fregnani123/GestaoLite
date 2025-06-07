@@ -4,50 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-    <title>Relatório de pedidos</title>
-
-    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-    <link rel="stylesheet" href="../style/css/css_global/btn.css">
-    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-    <link rel="stylesheet" href="../style/css/css_global/info.css">
-    <link rel="stylesheet" href="../style/css/css_global/table.css">
-    <link rel="stylesheet" href="../style/css/detalhes_vendas/detalhe_vendas.css">
-    <link rel="stylesheet" href="../style/css/detalhes_vendas/pedido_historico.css">
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <link rel="stylesheet" href="../style/css-individual/historico_pedidos.css">
+    <title>Histórico de pedidos por número de saída</title>
 </head>
 
 <body>
-    <header>
-        <img class="img-configuracao" src="../style/img/menu.png">
-        <nav>
-            <ul id="ul-Menu"></ul>
-        </nav>
-    </header>
-    <div class="div-form">
-        <div class="atalhos-1">
-            <div class="atalhos">
-                <div class="menu-secundario">
-                    <div class="pagamento">
-                        <a class="atalhos-btn" href="./detalhe_vendas.html">Gráficos por forma de pagamento</a>
-                        <a class="atalhos-btn btn-ativo" id="btn-comprovante" href="./historico_pedidos.html">Histórico
-                            de pedidos por número de
-                            saída</a>
-                        <a class="atalhos-btn" id="btn-comprovante" href="#">Relatório de Metas do Mês</a>
-                    </div>
-                    <div class="img-fgl altura-custom-img">
-                        <img class="img-logo-lgl" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
-                    </div>
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
+
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="menu-lateral">
+                 <nav class="menu-suspenso">
+                    <ul>
+                        <li>
+                            <a href="./grafico_pedido.html"><img class="img-informacao" src="../style/img/detalhes-vendas.png"
+                                alt="Atenção">Gráficos por forma de pagamento</a>
+                        </li>
+                        <li>
+                            <a id="btn-ativo"><img class="img-informacao" src="../style/img/historico-de-pedidos.png" > Histórico de pedidos</a>
+                        </li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de Metas do Mês</a>
+                        </li>
+                         <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png"
+                                alt="Atenção">Mensagem informativa
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
                 </div>
             </div>
-        </div>
-        <div class="container-inputs">
-            <div class="wrapper-flex">
-                <section class="div-form__body corpo-form">
-                    <div class="corpo-interno">
-                        <div class="data-titulo">
-                            <table class="tabela-datas-historico">
+
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-inputs">
+                            <table style=" margin: .5%; width: 99%; ">
                                 <tr>
                                     <th class="col-inicial">Data Inicial</th>
                                     <th class="col-final">Data Final</th>
@@ -71,56 +74,48 @@
                                     </td>
                                 </tr>
                             </table>
-                       
-                        </div>
-                            <table>
-                                  <tr>
-                                    <th class="historico_pedidos" colspan="5">
-                                        Histórico de pedidos Filtrados
-                                    </th>
-                                </tr>
-                            </table> 
-                        <div class="container-tabelas-historico">
-                         
-                            <div class="comprovantes-div">
-                                <div id="sales-history" class="sales-history"></div>
+                            <div class="titulo-relatorio">
+                                <p> Histórico de pedidos Filtrados</p>
+                            </div>
+                            <div class="container-impressoes">
+                             
+                                    <div class="comprovantes-div">
+                                        <div id="sales-history" class="sales-history"></div>
+                                    </div>
+                                
                             </div>
 
+                            <table class="tabela-esquerda" style="display: none;">
+                                <tr class="linha-titulo">
+                                    <th id="titulo-relatorio"></th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="filtros">
+                                            <div class="total-filtradas"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-
-                        <table class="tabela-esquerda" style="display: none;">
-                            <tr class="linha-titulo">
-                                <th id="titulo-relatorio"></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="filtros">
-                                        <div class="total-filtradas"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
                     </div>
-                </section>
-            </div>
-            <div class="footer-wrapper">
-                <footer class="div-form__footer">
-                    <p class="footer-info">
-                        <img src="../style/img/informacoes.png" alt="Atenção">
-                        <strong>Informação:</strong> Por <strong>padrão</strong>, a tela de gráfico exibe todo o
-                        <strong>período</strong> desde o <strong>início</strong> da utilização do sistema. Para
-                        <strong>filtrar</strong> por períodos específicos, selecione acima a <strong>data de
-                            início</strong> e a <strong>data de fim</strong>, e clique no botão
-                        <strong>'Buscar'</strong>.
-                    </p>
-                </footer>
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p><img class="img-informacao" src="../style/img/informacoes.png" alt="Atenção">
+                            <strong>Informação:</strong> Por padrão, a tela de gráfico exibe todo o
+                            período desde o início da utilização do sistema. Para
+                            filtrar por períodos específicos, selecione acima a data de
+                            início e a data de fim, e clique no botão
+                            'Buscar'.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="../Renderer/Menu/renderer_menu.js"></script>
-    <script src="../Renderer/services/converte_moeda.js"></script>
-    <script src="../Renderer/services/formatters.js"></script>
-    <script src="../Renderer/detalhe_vendas/api_detalhes_vendas.js"></script>
 </body>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/detalhe_vendas/api_detalhes_vendas.js"></script>
 
 </html>

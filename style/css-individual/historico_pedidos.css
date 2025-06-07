@@ -1,0 +1,164 @@
+.tabela-comprovante {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 24px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+}
+
+.tabela-comprovante th,
+.tabela-comprovante td {
+    border: 1px solid #ccc;
+    padding: 7px 8px;
+    text-align: left;
+}
+
+.tr-numero th {
+    font-size: .9rem;
+    text-align: center;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #000;
+}
+
+.alinha-centro {
+    text-align: center;
+    font-weight: bold;
+}
+
+.alinha-esquerda {
+    text-align: left;
+    font-weight: normal;
+    padding-left: 8px;
+}
+
+.produtos-add {
+    display: flex;
+    justify-content: center;
+}
+
+.th-numero-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.pedido-numero-botao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.tr-produto th {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tr-separador td {
+    height: 30px;
+    border: none;
+}
+
+
+/* Colunas com largura específica */
+.col-codigo {
+    width: 15%;
+    text-align: center;
+}
+
+.col-produto {
+    width: 35%;
+}
+
+.col-quantidade {
+    width: 15%;
+    text-align: center;
+}
+
+.col-unitario {
+    width: 15%;
+    text-align: right;
+}
+
+.col-total {
+    width: 20%;
+    text-align: right;
+}
+
+.pedido-numero-botao {
+    gap: 8px;
+    /* espaço entre número e botão */
+}
+
+.botao-imprimir {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone-impressora {
+    width: 20px;
+    /* ajuste o tamanho como preferir */
+    height: 20px;
+}
+
+.botao-imprimir {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone-impressora {
+    width: 24px;
+    height: 24px;
+}
+
+.titulo-relatorio {
+ display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: left;
+    border : 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    margin-bottom: .5%;
+    text-align:center ;
+    font-weight: 600;
+    background-color: #f0f0f0 !important;
+}
+
+.sale-card table {
+    margin-top: 2%;
+    width: 99%;
+    margin-left: .5%;
+    min-height: 450px;
+    background: rgb(249, 249, 249);
+}
+
+.linha-pontilhada {
+    width: 100%;
+    border-bottom: 2px dashed gray;
+}
+
+.container-impressoes {
+    width: 98%;
+    overflow-y: scroll;
+    height: 500px;
+    border: 1px solid var(--border-color);
+
+}

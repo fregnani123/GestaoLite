@@ -1,6 +1,6 @@
 
-// Método para formatar código EAN
 
+// Método para formatar código EAN
 function formatarCodigoEAN(inputEan){
     inputEan.addEventListener('input', (e) => {
       // Remove non-numeric characters and limit the input to 13 characters

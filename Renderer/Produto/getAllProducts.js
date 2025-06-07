@@ -12,19 +12,23 @@ const ulFiltros = document.getElementById('ul-filtros'); // Lista para renderiza
 const codigoEAN = document.getElementById('codigoEAN');
 const produtoNome = document.getElementById('produtoNome');
 const filtrarProdutosButton = document.getElementById('filtrarProdutos');
-const linkID_4 = document.querySelector('.list-a4')
+const linkID_4 = document.querySelector('.list-a4');
+const btnAtivo = document.getElementById('btn-ativo');
 
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = '#5f8ac1';
-    linkID.style.textShadow = 'none'; // Sem sombra de texto
-    linkID.style.color = 'white'; // Cor do texto
-    linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    if (btnAtivo.id === 'btn-ativo') {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    }
 }
-estilizarLinkAtivo(linkID_4);
 
 document.addEventListener('DOMContentLoaded', () => {
-    codigoEAN.focus();
+    estilizarLinkAtivo(linkID_4);
+       codigoEAN.focus();
 })
+ 
 
 let allProducts = []; // Variável para armazenar todos os produtos
 formatarCodigoEANProdutos(codigoEAN)

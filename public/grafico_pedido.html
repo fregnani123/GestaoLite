@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <link rel="stylesheet" href="../style/css-individual/pedido-grafico.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
+
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="filtros-div"><button class="close-btn">X</button>
+                <p class="comprovantes-vendas">Comprovantes de Vendas</p>
+                <div class="comprovantes-div">
+                    <div id="sales-history" class="sales-history">
+                    </div>
+                </div>
+            </div>
+            <div class="menu-lateral">
+                <nav class="menu-suspenso">
+                    <ul>
+                        <li>
+                            <a id="btn-ativo"><img class="img-informacao" src="../style/img/detalhes-vendas.png"
+                                alt="Atenção">Gráficos por forma de pagamento</a>
+                        </li>
+                        <li>
+                            <a href="./historico_pedidos.html"><img class="img-informacao" src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
+                        </li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de Metas do Mês</a>
+                        </li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png"
+                                alt="Atenção">Mensagem Informativa
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+                </div>
+            </div>
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-img">
+                            <p>Gráficos por
+                                forma de pagamento</p>
+                            <div class="quadro-img img-fixa">
+                                <img class="img-produto" src="../style/img/detalhes vendas - interno.png"
+                                    alt="imagem produto">
+                            </div>
+                        </div>
+                        <div class="formulario-inputs">
+                            <table class="table-1-grafico">
+                                <tr>
+                                    <th>Data Inicial</th>
+                                    <th>Data Final</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="date" id="startDate"></td>
+                                    <td><input type="date" id="endDate"></td>
+                                    <td>
+                                        <div class="botoes-footer">
+                                            <button  id="filterButton">
+                                                <img class="img-excluir" src="../style//img/procurar.png" alt="">
+                                                Filtrar
+                                            </button>
+                                            <button id="limparButton">
+                                                <img class="img-excluir" src="../style//img/excluir.png" alt="">
+                                                Limpar
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <input type="hidden" id="numeroPedidoFiltro">
+                                    <input type="hidden" id="clienteFiltro">
+                                </tr>
+                            </table>
+
+                            <div class="corpo-interno">
+                                <div class="div-valores-grafico">
+                                    <table class="table-2-grafico">
+                                        <tr class="linha-titulo">
+                                            <th id="titulo-relatorio"></th>
+                                        </tr>
+                                        <tr>
+                                            <td id="data-periodo"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="filtros">
+                                                    <div class="total-filtradas"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="grafico-barras">
+                                    <p>Gráfico de Vendas por Forma de Pagamento e Período</p>
+                                    <div class="barra-container" id="barra-container">
+                                        <div class="nome">Cartão Crédito:</div>
+                                        <div class="barra credito">
+                                            <span id="credito">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="barra-container">
+                                        <div class="nome">Cartão Débito:</div>
+                                        <div class="barra debito">
+                                            <span id="debito">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="barra-container">
+                                        <div class="nome">Pagto a Prazo:</div>
+                                        <div class="barra crediario">
+                                            <span id="crediario">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="barra-container">
+                                        <span class="nome">Dinheiro:</span>
+                                        <div class="barra dinheiro">
+                                            <span id="dinheiro">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="barra-container">
+                                        <div class="nome">Pix:</div>
+                                        <div class="barra pix">
+                                            <span id="pix">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="barra-container barra-total">
+                                        <div class="nome">Total:</div>
+                                        <div class="barra total">
+                                            <span id="grafico-total">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p><img class="img-informacao" src="../style/img/informacoes.png"
+                                alt="Atenção"><strong>Informação</strong>: Por padrão, a tela de gráfico
+                            exibe todo o período desde o início da utilização do sistema.
+                            Para filtrar por períodos específicos, selecione acima a data de início
+                            e a data de fim, e clique no botão 'Buscar'.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js">
+</script>
+<script src="../Renderer/services/converte_moeda.js">
+</script>
+<script src="../Renderer/services/formatters.js">
+</script>
+<script src="../Renderer/detalhe_vendas/api_detalhes_vendas.js">
+</script>
+
+</html>

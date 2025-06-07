@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +19,7 @@
 
 <body>
     <header>
-<img class="img-configuracao" src="../style/img/menu.png">
+        <img class="img-configuracao" src="../style/img/menu.png">
 
         <nav>
             <ul id="ul-Menu"></ul>
@@ -49,7 +49,6 @@
         <div class="secao-principal">
             <div class="secao-conteudo">
                 <section class="secao-acao secao-acao-relative">
-                    <h4 style="position: absolute; top: 2%;left: 3%;">Desabilitar Produto</h4>
                     <div class="flex-full-align">
                         <div class="foto-produto-container">
                             <p class="titulo-img"><strong>Imagem do Produto</strong></p>
@@ -62,12 +61,26 @@
                                 <table style="background-color: transparent;box-shadow: none;">
                                     <tr>
                                         <th>
-                                            🔍 Filtrar por código EAN
+                                            Filtrar por código EAN
+                                        </th>
+                                        <th>
+                                            Ações
                                         </th>
                                     </tr>
                                     <tr>
                                         <td>
                                             <input type="text" id="codigoEAN" />
+                                        </td>
+                                        <td>
+                                            <div
+                                                style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                                                <button id="btnDesativar"
+                                                    style="background-color: gray; cursor: default;">Desabilitar</button>
+                                                <button id="limparButton">
+                                                    <img class="img-excluir" src="../style/img/excluir.png"
+                                                        alt="" />Limpar
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -76,30 +89,37 @@
                     </div>
                 </section>
 
-                <div class="lista-produtos">
-                    <ul id="ul-header" class="ul-header">
-                        <li><span>Código EAN</span></li>
-                        <li><span>Descrição Produto</span></li>
-                        <li><span>Preço Compra</span></li>
-                        <li><span>Preço Venda</span></li>
-                        <li><span>Qtd Vendida</span></li>
-                        <li><span>Estoque Atual</span></li>
-                    </ul>
-                    <ul id="ul-filtros" class="ul-filtros"></ul>
-                </div>
+                <table class="lista-produtos">
+                    <tr id="ul-header">
+                        <th><span>Código EAN</span></th>
+                        <th><span>Descrição Produto</span></th>
+                        <th><span>Preço Compra</span></th>
+                        <th><span>Preço Venda</span></th>
+                        <th><span>Qtd Vendida</span></th>
+                        <th><span>Estoque Atual</span></th>
+                    </tr>
+                    <tr id="ul-filtros" class="ul-filtros">
+                        <td></td>
+                    </tr>
+                </table>
             </div>
 
             <div class="tabela-dinamica">
-                <div class="div-form-display">
-                    <p class="titulo-produto-desabilitado">🚫 Histórico de produtos desabilitados</p>
-                    <ul id="ul-header" class="ul-header">
-                        <li><span>Código EAN</span></li>
-                        <li><span>Descrição Produto</span></li>
-                        <li><span>Preço Compra</span></li>
-                        <li><span>Preço Venda</span></li>
-                        <li><span>Qtd Vendida</span></li>
-                    </ul>
-                </div>
+                <table>
+                    <tr>
+                        <th>🚫 Histórico de produtos desabilitados</th>
+                    </tr>
+                </table>
+
+                <table class="div-form-display">
+                    <tr>
+                        <th>Código EAN</th>
+                        <th>Descrição Produto</th>
+                        <th>Preço Venda</th>
+                        <th>Qtd Vendida</th>
+                    </tr>
+
+                </table>
             </div>
 
             <div class="footer-container">
@@ -114,14 +134,6 @@
                             O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de
                                 Produtos Desabilitados</strong>.
                         </p>
-                        <div style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
-                            <button id="btnDesativar"
-                                style="background-color: gray; cursor: default;">Desabilitar</button>
-                            <button id="limparButton">
-                                <img class="img-excluir" src="../style/img/excluir.png" alt="" />Limpar
-                            </button>
-                        </div>
-
                     </footer>
                 </div>
             </div>
@@ -133,5 +145,291 @@
     <script src="../Renderer/services/formatters.js"></script>
     <script src="../Renderer/Produto/desabilitar_produto.js"></script>
 </body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
+
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="menu-lateral">
+                <nav class="menu-suspenso">
+                    <ul>
+                        <li>
+                            <a href="./registrar_produto.html"><img class="img-informacao"
+                                    src="../style/img/adicionar-produto.png" alt="Atenção">Cadastrar novo
+                                produto</a>
+                        </li>
+                        <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
+                                    alt="Atenção">Edição de produto e informações</a>
+                        </li>
+                        <li><a href="./informacoes_produtos.html"><img class="img-informacao"
+                                    src="../style/img/informacoes.png" alt="Atenção">Informações e estoque de
+                                produtos</a></li>
+                        <li><a href="./controle_estoque.html"><img class="img-informacao"
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Estoque — Entrada e
+                                Saída</a></li>
+                        <li><a id="btn-ativo"><img class="img-informacao" src="../style/img/cancelar.png"
+                                    alt="Atenção">Desabilitar produto</a></li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+                </div>
+            </div>
+
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-img">
+                            <p>Imagem do Produto</p>
+                            <div class="quadro-img"><img class="img-produto" src="../style/img/desabilitar.png"
+                                    alt="Produto sem imagem."></div>
+                        </div>
+                        <div class="formulario-inputs">
+                            <table class="table-1-produto">
+                                <tr>
+                                    <th style="width: 30%;">
+                                        Filtrar por código EAN
+                                    </th>
+                                    <th style="width: 70%;">
+                                        Nome / Descrição
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="number" class="codigoDeBarras" id="codigoDeBarras"
+                                            name="codigoDeBarras" autocomplete="off">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="nomeProduto" id="nomeProduto" name="nome"
+                                            autocomplete="off" placeholder="Nenhum produto selecionado" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-2-produto">
+                                <tr>
+                                    <th class="col-grupo btn-border-transparent">Grupo</th>
+                                    <th class="btn-border-transparent"></th>
+                                    <th class="col-subgrupo btn-border-transparent border-left">Subgrupo</th>
+                                    <th class="btn-border-transparent border-right"></th>
+                                </tr>
+                                <tr>
+                                    <td class="btn-border-transparent col-grupo">
+                                        <select id="grupo" name="grupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button id="add-grupo" class="add-grupo"><span
+                                                class="cad">Adicionar</span></button>
+                                    </td>
+                                    <td>
+                                        <select id="sub-grupo" name="grupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button id="add-subGrupo" class="add-subGrupo"><span
+                                                class="cad">Adicionar</span></button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-3-produto">
+                                <tr>
+                                    <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
+                                    <th class="btn-border-transparent th-15"></th>
+                                    <th>Caracteristica do Produto</th>
+                                </tr>
+                                <tr>
+                                    <td class="btn-border-transparent border-left">
+                                        <select id="corProduto" name="corProduto">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td class="btn-border-transparent">
+                                        <button id="add-cor" class="add-cor"><span class="cad">Adicionar</span></button>
+                                    </td>
+                                    <td>
+                                        <div class="caracteristica-container">
+                                            <select id="escolhaUM">
+                                                <option value="">Selecione</option>
+                                                <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                                <option value="Tamanho - Numeração">Tamanho - Numeração</option>
+                                                <option value="Medida de Volume">Medida de Volume</option>
+                                                <option value="Unidade Comprimento">Unidade Comprimento</option>
+                                                <option value="Unidade de Massa">Unidade de Massa</option>
+                                            </select>
+
+                                            <div id="volumeDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="volumeNumero" type="number">
+                                                <select id="medidaVolume" name="medidaVolume">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="comprimentoDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="comprimento" type="number">
+                                                <select id="unidadeComprimento" name="unidadeComprimento">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="massaDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="massaNumero" type="number">
+                                                <select id="unidadeDeMassa" name="unidadeMassa">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="divTamanho">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <select id="tamanhoLetras" name="tamanhoLetras">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="divTamanhoNUm">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <select id="tamanhoNumeros" name="tamanho">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-4-produto">
+                                <tr>
+                                    <th class="th-30">Preço de Compra</th>
+                                    <th class="th-30">Lucro Bruto (R$)</th>
+                                    <th class="th-30">Preço de Venda</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
+                                            autocomplete="off">
+                                        <!-- <label for="markup">Markup % :</label> -->
+                                        <input type="hidden" value="0" id="inputMarkup">
+                                    </td>
+                                    <td>
+                                        <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                                        <input type="hidden" value="0" id="inputMarkup">
+                                    </td>
+                                    <td>
+                                        <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-5-produto">
+                                <tr>
+                                    <th style="width: 70%;">
+                                        Nome fantasia filtrado
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                    <!-- <th style="width: 30%;">
+                                Filtrar por CNPJ
+                            </th> -->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input style="width: 100%;" id="cnpjFilter" name="fornecedor"
+                                            placeholder="Nenhum fornecedor — clique em buscar para selecionar">
+                                    </td>
+                                    <td style="width: 30%;text-align: center;">
+                                        <button id="buscar-fornecedor">Buscar Fornecedor</button>
+                                    </td>
+                                    <!-- <td>
+                                <select style="margin-bottom: 1%; width: 100%;" id="fornecedor" name="fornecedor"
+                                    disabled>
+                                    <option value="1">Fornecedor não Cadastrado</option>
+                                </select>
+                                <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"
+                                    style="display: none;"><img class="img-disquete" src="../style//img/disquete.png"
+                                        alt="">Alterar
+                                    Produto</button>
+                            </td> -->
+                                </tr>
+                            </table>
+                            <table class="table-5-produto">
+                                <tr>
+                                    <th class="th-50">Estoque Inicial</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-select-wrapper">
+                                            <input type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                            <select id="unidadeEstoque" name="unidadeEstoque">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="acoes-container">
+                                            <button class="btn-alterar-produto"><img class="img-disquete"
+                                                    src="../style/img/troca.png" alt="">Alterar</button>
+                                            <button id="limparButton"><img class="img-excluir"
+                                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <textarea style="display: none;" id="observacoes" name="observacoes"
+                                autocomplete="off"></textarea>
+                            <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                        </div>
+
+                    </div>
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p class="footer-aviso">
+                            <img src="../style/img/atencao.png" alt="" />
+                            <strong>Atenção:</strong> Ao <strong>desabilitar</strong> o produto:
+                            Ele <strong>não poderá ser encontrado</strong> em buscas futuras;
+                            O <strong>estoque será automaticamente zerado</strong>;
+                            A operação é <strong>irreversível</strong> após a confirmação.
+                            O produto desabilitado será mantido apenas como registro na tela de <strong>Histórico de
+                                Produtos Desabilitados</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+   <script src="../Renderer/Menu/renderer_menu.js"></script>
+    <script src="../Renderer/services/alertMsg.js"></script>
+    <script src="../Renderer/services/formatters.js"></script>
+    <script src="../Renderer/Produto/desabilitar_produto.js"></script>
 
 </html>

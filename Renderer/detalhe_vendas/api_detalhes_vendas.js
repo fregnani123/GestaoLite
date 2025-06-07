@@ -7,23 +7,27 @@ const titulo_relatorio = document.getElementById('titulo-relatorio');
 const tdata_periodo = document.getElementById('data-periodo');
 const numeroPedidoFiltro = document.getElementById('numeroPedidoFiltro');
 const cpfFiltro = document.getElementById('clienteFiltro');
-const linkID_3 = document.querySelector('.list-a3');
 const limparButton = document.getElementById('limparButton');
-
 const closeDiv = document.querySelector('.close-btn')
 const vendasFiltradasDiv = document.querySelector('.vendas-filtradas');
+const btnAtivo = document.getElementById('btn-ativo');
+const linkID_3 = document.querySelector('.list-a3');
 
-formatarEVerificarCPF(cpfFiltro)
-inputMaxCaracteres(cpfFiltro, 14);
-
+   formatarEVerificarCPF(cpfFiltro)
+    inputMaxCaracteres(cpfFiltro, 14);
 
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = '#5f8ac1';
-    linkID.style.textShadow = 'none'; // Sem sombra de texto
-    linkID.style.color = 'white'; // Cor do texto
-    linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    if (btnAtivo.id === 'btn-ativo') {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; // Sem sombra de texto
+        linkID.style.color = 'white'; // Cor do texto
+        linkID.style.borderBottom = '2px solid #d7d7d7'; // Borda inferior
+    }
 }
-estilizarLinkAtivo(linkID_3)
+
+document.addEventListener('DOMContentLoaded', () => {
+    estilizarLinkAtivo(linkID_3)
+})
 
 async function fetchSalesHistory({ startDate, endDate, cpfCliente, numeroPedido }) {
     try {
@@ -200,7 +204,7 @@ function displaySalesHistory(groupedSales) {
     <tr>
         <th colspan="5">
             <div class="th-numero-pedido">
-                <span><strong>Pedido Emitido:</strong> ${formatarDataISOParaBR(saleGroup.data_venda)}</span>
+                <span><strong class'strong'>Pedido Emitido:</strong>&nbsp;${formatarDataISOParaBR(saleGroup.data_venda)}</span>
                 <span class="pedido-numero-botao">
                     Nº000${saleGroup.numero_pedido}
                     <button class="botao-imprimir" title="Imprimir">
@@ -217,22 +221,13 @@ function displaySalesHistory(groupedSales) {
     </tr>
     <tr>
         <td colspan="5">
-            <div class="alinha-esquerda"><strong>Forma de Pagamento: </strong>${saleGroup.tipo_pagamento}</div>
+            <div class="alinha-esquerda">Forma de Pagamento: ${saleGroup.tipo_pagamento}</div>
         </td>
     </tr>
-    <tr>
-        <th>Total Líquido da Venda </th>
-        <th>Valor Recebido</th>
-        <th colspan="5">Troco </th>
-    </tr>
-    <tr class="tr-troco">
-        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}</td>
-        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}</td>
-        <td colspan="5">${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.troco)}</td>
-    </tr>
+  
     <tr>
         <th colspan="5">
-            <div class="alinha-esquerda"><strong>Produtos adicionados</strong></div>
+            <div class="produtos-add"><strong>Produtos adicionados</strong></div>
         </th>
     </tr>
     <tr class="tr-produto">
@@ -243,10 +238,24 @@ function displaySalesHistory(groupedSales) {
         <th class="col-total">Total</th>
     </tr>
     ${rowsProdutos}
-    <tr class="tr-separador">
+     <tr class="tr-separador">
+        <td colspan="5"></td>
+    </tr>
+      <tr  class="tr-troco">
+        <th>Total Pedido </th>
+        <th>Valor Recebido</th>
+        <th colspan="5">Troco </th>
+    </tr>
+       <tr>
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.total_liquido)}</td>
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.valor_recebido)}</td>
+        <td colspan="5">${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleGroup.troco)}</td>
+    </tr>
+     <tr class="tr-separador">
         <td colspan="5"></td>
     </tr>
 </table>
+<div class="linha-pontilhada"></div>
 `;
 
         salesHistory.appendChild(saleCard);
@@ -260,7 +269,7 @@ function displayTotalSales(totalRows) {
     if (totalRows.length === 0) {
         const noSalesMessage = document.createElement('div');
         noSalesMessage.className = 'no-sales-message';
-        noSalesMessage.innerHTML = `<p>Sem vendas para o filtro selecionado</p>`;
+        noSalesMessage.innerHTML = `<p>Nenhum pedido encontrado com o filtro aplicado.</p>`;
         filtrosDiv.appendChild(noSalesMessage);
         return;
     }
@@ -309,8 +318,8 @@ function displayTotalSales(totalRows) {
         }
 
         saleTotal.innerHTML = `
-            <p class='p-1-total'><strong>${item.tipo_pagamento}</strong></p>
-            <p class='p-total'>
+            <p class='p-1-total'>${item.tipo_pagamento}</p>
+            <p class='p-total-tipo'>
              
                 ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.total_vendas)}
             </p>
@@ -344,7 +353,7 @@ function displayTotalLiquido(totalLiquido) {
     const totalLiquidoDiv = document.createElement('div');
     totalLiquidoDiv.className = 'total-relatorio';
     totalLiquidoDiv.innerHTML = `
-        <p class='p-1-total'><div class='totalDiv'></div>Total de valores para o período: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalLiquido)}</p>
+        <p class='p-total'>Total de valores para o período: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalLiquido)}</p>
     `;
     filtrosDiv.appendChild(totalLiquidoDiv);
 }
@@ -392,9 +401,6 @@ function toggleVendasFiltradas() {
     btnDiv.style.borderBottom = isHidden ? '2px solid black' : '';
     btnDiv.style.cursor = isHidden ? 'pointer' : '';
 }
-
-// Adicionar evento de clique nos botões
-btnDiv.addEventListener('click', toggleVendasFiltradas);
 
 
 limparButton.addEventListener('click', () => {

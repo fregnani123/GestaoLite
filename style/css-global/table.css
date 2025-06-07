@@ -1,0 +1,90 @@
+table {
+  width: 99%;
+  border-collapse: collapse;
+  background-color: var(--bg-color);
+  font-size: 1rem;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--color);
+}
+
+td {
+  text-align: center;
+}
+
+th {
+  font-weight: 600;
+  text-align: left;
+  background-color: #f0f0f0 !important;
+}
+
+.btn-border-transparent {
+  border: none !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.table-1-produto,
+.table-2-produto,
+.table-3-produto,
+.table-4-produto,
+.table-5-produto,
+.table-6-produto {
+  width: 99%;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.table-1-grafico,
+.table-2-grafico,
+.table-3-grafico,
+.table-4-grafico,
+.table-5-grafico,
+.table-6-grafico {
+  width: 99%;
+  margin: 0.5%;
+  overflow: hidden;
+}
+
+.table-1-entrada,
+.table-2-entrada,
+.table-3-entrada,
+.table-4-entrada,
+.table-5-entrada,
+.table-6-entrada {
+  width: 99%;
+  margin: 0.5%;
+  overflow: hidden;
+}
+
+ .table-1-cliente{
+  margin-top: .5%;
+ }
+ .table-2-cliente,
+ .table-3-cliente,
+ .table-4-cliente,
+ .table-5-cliente,
+ .table-6-cliente {
+  width: 99%;
+  overflow: hidden;
+}
+
+
+.table-1-informacoes,
+.table-2-informacoes,
+.table-3-informacoes,
+.table-4-informacoes,
+.table-5-informacoes,
+.table-6-informacoes {
+  width: 99%;
+  margin: 0.5% !important;
+  overflow: hidden;
+}
+
+#formulario-inputs-gap-zero{
+  gap:0 !important;
+}

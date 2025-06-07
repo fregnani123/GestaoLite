@@ -1,1 +1,267 @@
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../style/css/login_menu/menu_interno.css"><link rel="stylesheet" href="../style/css/css_global/form_padrao.css"><link rel="stylesheet" href="../style/css/css_global/btn.css"><link rel="stylesheet" href="../style/css/css_global/info.css"><link rel="stylesheet" href="../style/css/css_global/inputs.css"><link rel="stylesheet" href="../style/css/css_global/table.css"><link rel="stylesheet" href="../style/css/css_global/produto_cadastro.css"><style></style><title>Cadastro de Produto</title></head><body><header><img class="img-configuracao" src="../style/img/menu.png"><nav><ul id="ul-Menu"></ul></nav></header><div class="container-register"></div><div class="div-form"><div class="atalhos-1"><div class="atalhos"><div class="menu-secundario"><div class="pagamento"><a class="atalhos-btn" id="cadastro-produto" href="./registrar_produto.html">Cadastrar novo Produto</a><a class="atalhos-btn" href="./alterar_produto.html">Edição de Produto e Informações</a><a class="atalhos-btn" href="./informacoes_produtos.html">Informações e Estoque de Produtos</a><a class="atalhos-btn" href="./controle_estoque.html">Controle de Estoque — Entradas e Saídas</a><a class="atalhos-btn" href="./desabilitar_produto.html">Desabilitar Produto</a></div><div class="img-fgl"><img style="width:250px" src="../style/img/logoLGL-removebg-preview (1).png" alt=""></div></div></div></div><div class="container-inputs"><div class="container-relative-full"><h4 class="titulo-cadastro-produto">Cadastrar novo Produto</h4><section class="div-form-img"><p class="titulo-img"><strong>Imagem do Produto</strong></p><div class="quadro-img"><img class="img-produto" src="../style/img/codigo-de-barras - interno.png" alt="imagem produto"></div><div class="input-file-wrapper"><input type="file" id="produto-imagem" accept="image/*"></div></section><section class="div-form__body"><table class="table-1-produto"><tr><th class="col-codigo">Código / Cód. Barras</th><th class="col-nome">Nome / Descrição</th></tr><tr><td><input type="number" id="codigoDeBarras" name="codigoDeBarras" autocomplete="off"></td><td><input type="text" id="nomeProduto" name="nome" autocomplete="off"></td></tr></table><table class="table-2-produto"><tr><th class="col-grupo">Grupo</th><th class="col-subgrupo">Subgrupo</th></tr><tr><td><div class="td-com-btn"><select id="grupo" name="grupo"><option value="">Selecione</option></select><button id="add-grupo" class="add-grupo"><span class="cad">Adicionar</span></button></div></td><td><div class="td-com-btn"><select id="sub-grupo" name="grupo"><option value="">Selecione</option></select><button id="add-subGrupo" class="add-subGrupo"><span class="cad">Adicionar</span></button></div></td></tr></table><table class="table-3-produto"><tr><th>Cor do Produto</th><th>Caracteristica do Produto</th></tr><tr><td><div class="td-com-btn"><select id="corProduto" name="corProduto"><option value="">Selecione</option></select><button id="add-cor" class="add-cor"><span class="cad">Adicionar</span></button></div></td><td><select id="escolhaUM"><option value="">Selecione</option><option value="Tamanho - P/GG">Tamanho - P/GG</option><option value="Tamanho - Numeração">Tamanho - Numeração</option><option value="Medida de Volume">Medida de Volume</option><option value="Unidade Comprimento">Unidade Comprimento</option><option value="Unidade de Massa">Unidade de Massa</option></select><span class="span-dois-pontos"><strong>:</strong></span></td><td id="volumeDiv"><div class="input-select-wrapper"><input id="volumeNumero" type="number" value=""><select id="medidaVolume" name="medidaVolume"><option value="">Selecione</option></select></div></td><td id="comprimentoDiv"><div class="input-select-wrapper"><input id="comprimento" type="number" value=""><select id="unidadeComprimento" name="unidadeComprimento"><option value="">Selecione</option></select></div></td><td id="massaDiv"><div class="input-select-wrapper"><input id="massaNumero" type="number" value=""><select id="unidadeDeMassa" name="unidadeMassa"><option value="">Selecione</option></select></div></td><td id="divTamanho"><select id="tamanhoLetras" name="tamanhoLetras"><option value="">Selecione</option></select></td><td id="divTamanhoNUm"><select id="tamanhoNumeros" name="tamanho"><option value="">Selecione</option></select></td></tr></table><table class="table-4-produto"><tr><th class="th-30">Preço de Compra</th><th class="th-30">Lucro Bruto (R$)</th><th class="th-30">Preço de Venda</th></tr><tr><td><input value="0,00" id="precoCusto" name="preco" autocomplete="off"></td><td><input value="0,00" id="lucro" name="" autocomplete="off" readonly="readonly"> <input type="hidden" value="0" id="inputMarkup"></td><td><input value="0,00" id="precoVenda" name="preco" autocomplete="off"></td></tr></table><table class="table-5-produto"><tr><th class="col-cnpj">🔍 Filtrar por CNPJ</th><th class="col-fantasia">Nome fantasia filtrado</th></tr><tr><td><input id="cnpjFilter" name="fornecedor"></td><td><select id="fornecedor" name="fornecedor" class="select-fornecedor" disabled="disabled"><option value="1">Fornecedor não Cadastrado</option></select></td></tr></table><table class="table-6-produto"><tr><th>Estoque Inicial</th><th></th><th></th></tr><tr><td><div class="input-select-wrapper"><input value="" type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off"><select id="unidadeEstoque" name="unidadeEstoque"><option value="">Selecione</option></select></div></td></tr></table><textarea style="display:none" id="observacoes" name="observacoes" autocomplete="off"></textarea><input type="hidden" id="Qtd_vendido" name="variavelOculta" value=""></section></div><div class="footer-wrapper"><footer class="div-form__footer"><p><img class="img-alerte" src="../style/img/atencao.png" alt=""><strong>Atenção:</strong>O<strong>lucro bruto</strong>é calculado automaticamente como: (<strong>Preço de Venda</strong>−<strong>Preço de Compra</strong>). Este valor é apenas<strong>demonstrativo</strong>e<strong>não é salvo</strong>no sistema.<strong>Verifique os valores com atenção antes de gravar os dados.</strong></p><div class="container-btn-footer"><button id="btn-cadastrar-produto" class="btn-cadastrar-produto"><img class="img-disquete" src="../style//img/disquete.png" alt="">Gravar</button><button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png" alt="">Limpar</button></div></footer></div></div></div></body><script src="../Renderer/Menu/renderer_menu.js"></script><script src="../Renderer/services/converte_moeda.js"></script><script src="../Renderer/Produto/renderizarInputsGrupo.js"></script><script src="../Renderer/Produto/apiEndpoints.js"></script><script src="../Renderer/services/alertMsg.js"></script><script src="../Renderer/Produto/renderer_produtos.js"></script><script src="../Renderer/services/formatters.js"></script></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
+
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="menu-lateral">
+                <nav class="menu-suspenso">
+                    <ul>
+                        <li><a id="btn-ativo" href="./registrar_produto.html"><img class="img-informacao" src="../style/img/adicionar-produto.png"
+                                alt="Atenção">Cadastrar novo
+                                produto</a></li>
+                        <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
+                                alt="Atenção">Edição de produto e informações</a>
+                        </li>
+                        <li><a href="./informacoes_produtos.html"><img class="img-informacao" src="../style/img/informacoes.png"
+                                alt="Atenção">Informações e estoque de
+                                produtos</a></li>
+                        <li><a href="./controle_estoque.html"><img class="img-informacao" src="../style/img/estoque-pronto.png"
+                                alt="Atenção">Estoque — Entrada e
+                                Saída</a></li>
+                        <li><a href="./desabilitar_produto.html"><img class="img-informacao" src="../style/img/cancelar.png"
+                                alt="Atenção">Desabilitar produto</a></li>
+                          <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png"
+                                alt="Atenção">Mensagem informativa
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+                </div>
+            </div>
+
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-img">
+                            <p>Adicionar imagem do produto</p>
+                            <div class="quadro-img">
+                                <img class="img-produto" src="../style/img/codigo-de-barras - interno.png"
+                                    alt="imagem produto">
+                            </div>
+                            <div class="input-file-wrapper">
+                                <input type="file" id="produto-imagem" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="formulario-inputs">
+                            <table class="table-1-produto">
+                                <tr>
+                                    <th class="col-codigo">Código / Cód. Barras</th>
+                                    <th class="col-nome">Nome / Descrição</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" id="codigoDeBarras" name="codigoDeBarras"
+                                            autocomplete="off"></td>
+                                    <td><input type="text" id="nomeProduto" name="nome" autocomplete="off"></td>
+                                </tr>
+                            </table>
+
+                            <table class="table-2-produto">
+                                <tr>
+                                    <th class="col-grupo btn-border-transparent">Grupo</th>
+                                    <th class="btn-border-transparent"></th>
+                                    <th class="col-subgrupo btn-border-transparent border-left">Subgrupo</th>
+                                    <th class="btn-border-transparent border-right"></th>
+                                </tr>
+                                <tr>
+                                    <td class="btn-border-transparent col-grupo">
+                                        <select id="grupo" name="grupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td class="btn-border-transparent">
+                                        <button id="add-grupo" class="add-grupo">Adicionar</button>
+                                    </td>
+                                    <td class="btn-border-transparent border-left">
+                                        <select id="sub-grupo" name="grupo">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td class="btn-border-transparent border-right">
+                                        <button id="add-subGrupo" class="add-subGrupo"><span
+                                                class="cad">Adicionar</span></button>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="table-3-produto">
+                                <tr>
+                                    <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
+                                    <th class="btn-border-transparent th-15"></th>
+                                    <th>Caracteristica do Produto</th>
+                                </tr>
+                                <tr>
+                                    <td class="btn-border-transparent border-left">
+                                        <select id="corProduto" name="corProduto">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td class="btn-border-transparent">
+                                        <button id="add-cor" class="add-cor"><span class="cad">Adicionar</span></button>
+                                    </td>
+                                    <td>
+                                        <div class="caracteristica-container">
+                                            <select id="escolhaUM">
+                                                <option value="">Selecione</option>
+                                                <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                                <option value="Tamanho - Numeração">Tamanho - Numeração</option>
+                                                <option value="Medida de Volume">Medida de Volume</option>
+                                                <option value="Unidade Comprimento">Unidade Comprimento</option>
+                                                <option value="Unidade de Massa">Unidade de Massa</option>
+                                            </select>
+
+                                            <div id="volumeDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="volumeNumero" type="number">
+                                                <select id="medidaVolume" name="medidaVolume">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="comprimentoDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="comprimento" type="number">
+                                                <select id="unidadeComprimento" name="unidadeComprimento">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="massaDiv" class="input-select-wrapper">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <input id="massaNumero" type="number">
+                                                <select id="unidadeDeMassa" name="unidadeMassa">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="divTamanho">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <select id="tamanhoLetras" name="tamanhoLetras">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="divTamanhoNUm">
+                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                <select id="tamanhoNumeros" name="tamanho">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="table-4-produto">
+                                <tr>
+                                    <th class="th-30">Preço de Compra</th>
+                                    <th class="th-30">Lucro Bruto (R$)</th>
+                                    <th class="th-30">Preço de Venda</th>
+                                </tr>
+                                <tr>
+                                    <td><input value="0,00" id="precoCusto" name="preco" autocomplete="off"></td>
+                                    <td>
+                                        <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                                        <input type="hidden" value="0" id="inputMarkup">
+                                    </td>
+                                    <td><input value="0,00" id="precoVenda" name="preco" autocomplete="off"></td>
+                                </tr>
+                            </table>
+
+                            <table class="table-5-produto">
+                                <tr>
+                                    <th class="col-fantasia border-none-right">Nome fantasia filtrado</th>
+                                    <th class="border-none-left"></th>
+                                </tr>
+                                <tr>
+                                    <td class="border-none-right">
+                                        <input id="cnpjFilter"
+                                            placeholder="Nenhum fornecedor — clique em buscar para selecionar"
+                                            name="fornecedor">
+                                    </td>
+                                    <td class="border-none-left">
+                                        <button id="buscar-fornecedor">Buscar Fornecedor</button>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="table-6-produto">
+                                <tr>
+                                    <th class="th-50">Estoque Inicial</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-select-wrapper">
+                                            <input type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                            <select id="unidadeEstoque" name="unidadeEstoque">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="acoes-container">
+                                            <button id="btn-cadastrar-produto" class="btn-cadastrar-produto">
+                                                <img class="img-disquete" src="../style/img/disquete.png" alt="">Gravar
+                                            </button>
+                                            <button id="limparButton">
+                                                <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <textarea style="display:none" id="observacoes" name="observacoes" autocomplete="off">
+                  </textarea>
+                            <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                        </div>
+                    </div>
+                    <div class="formulario-mensages-informativas">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus aperiam totam ad atque
+                            ducimus
+                            reprehenderit ipsa quidem quasi nostrum corporis enim hic optio voluptatem, quas tempore
+                            impedit
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../Renderer/Menu/renderer_menu.js">
+</script>
+<script src="../Renderer/services/converte_moeda.js">
+</script>
+<script src="../Renderer/Produto/renderizarInputsGrupo.js">
+</script>
+<script src="../Renderer/Produto/apiEndpoints.js">
+</script>
+<script src="../Renderer/services/alertMsg.js">
+</script>
+<script src="../Renderer/Produto/renderer_produtos.js">
+</script>
+<script src="../Renderer/services/formatters.js">
+</script>
+
+</html>
