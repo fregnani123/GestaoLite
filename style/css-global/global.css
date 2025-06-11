@@ -42,6 +42,20 @@
   box-sizing: border-box;
 }
 
+.menu-item-2, 
+.menu-item-3,
+.menu-item-4,
+.menu-item-5, 
+.menu-item-6, 
+.menu-item-7, 
+.menu-item-8, 
+.menu-item-9, 
+.menu-item-10 
+{display: flex;}
+
+.menu-item-0
+{display: none}
+
 body {
   background-color: rgb(1 38 87 / 43%);
   color: var(--primary-color);
@@ -51,7 +65,66 @@ body {
   align-items: center;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
+body.loading {
+  pointer-events: none;
+}
+/* Oculta o overlay inicialmente, mas mantém a posição */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #2C4D6E ; /* Pode ajustar cor e opacidade */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none; /* Impede interação quando invisível */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Quando ativado, fica visível e interativo */
+#loading-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #2C4D6E ;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+#loading-overlay p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: white;
+  display: flex; text-align: center;
+  margin-bottom: 1%;
+  margin-left: .7%;
+}
+
 
 .container {
   width: 100%;
@@ -154,13 +227,15 @@ header {
   margin-top: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   height: 100%;
 }
 
 .logo-empresa {
-  max-width: 180px;
-  height: auto;
+  max-width: 150px;
+  height: auto; 
+  margin-bottom: 2%
+  ;
 }
 
 /* FORMULÁRIO */
@@ -193,16 +268,21 @@ header {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.formulario-img .quadro-img {
-  width: 230px;
-  height: auto;
-  border: 2px dashed rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-lg);
-  padding: 3%;
-  margin-top: 3%;
+.quadro-img {
+    width: 220px;         /* defina o tamanho fixo desejado */
+    height: 220px;
+    overflow: hidden;     /* impede que a imagem ultrapasse o quadro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    border: 2px dashed  #2C4D6E;
+}
+
+.quadro-img .img-produto {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* ou 'cover', dependendo do efeito desejado */
 }
 
 .formulario-img p {
@@ -283,6 +363,35 @@ input[readonly] {
     gap: 2%;
     justify-content: center;
 }
+#btn-exit-juros,
+#btn-exit-venda,
+#btn-exit {
+  position: absolute;
+  top: 8px;
+  padding-bottom: 1%;
+  right: 8px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  color: #000;
+  font-size: 18px;
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+#btn-exit-juros:hover,
+#btn-exit:hover {
+  background-color: #e81123;
+  color: white;
+}
+
+
+
  button {
   display: flex;
   align-items: center;
@@ -330,7 +439,6 @@ button:hover {
   filter: brightness(0) invert(1);
   /* Deixa o ícone branco sem precisar de PNG branco */
 }
-
 
 /* MENSAGENS INFORMATIVAS */
 .formulario-mensages-informativas {

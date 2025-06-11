@@ -163,6 +163,10 @@
 </head>
 
 <body>
+     <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -174,23 +178,19 @@
         <div class="formulario-container">
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
-                    <ul>
-                        <li>
-                            <a href="./registrar_produto.html"><img class="img-informacao"
-                                    src="../style/img/adicionar-produto.png" alt="Atenção">Cadastrar novo
-                                produto</a>
+                   <ul>
+                        <li><a  href="./registrar_produto.html"><img class="img-informacao"
+                                    src="../style/img/mais.png" alt="Atenção">Cadastrar novo
+                                produto</a></li>
+                        <li><a  href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
+                                    alt="Atenção">Cadastro do produto / alterar</a>
                         </li>
-                        <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
-                                    alt="Atenção">Edição de produto e informações</a>
-                        </li>
-                        <li><a href="./informacoes_produtos.html"><img class="img-informacao"
-                                    src="../style/img/informacoes.png" alt="Atenção">Informações e estoque de
-                                produtos</a></li>
-                        <li><a href="./controle_estoque.html"><img class="img-informacao"
-                                    src="../style/img/estoque-pronto.png" alt="Atenção">Estoque — Entrada e
-                                Saída</a></li>
-                        <li><a id="btn-ativo"><img class="img-informacao" src="../style/img/cancelar.png"
-                                    alt="Atenção">Desabilitar produto</a></li>
+                           <li><a  href="./informacoes_produtos.html"><img class="img-informacao" src="../style/img/info-estoque.png"
+                                    alt="Atenção">Estoque e Informações do produto</a></li>
+                        <li><a  href="./controle_estoque.html"><img class="img-informacao"
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Movimentação de estoque</a></li>
+                        <li><a id="btn-ativo" href="./desabilitar_produto.html"><img class="img-informacao"
+                                    src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
                         <li>
                             <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
                                 informativa
@@ -427,6 +427,7 @@
         </div>
     </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
    <script src="../Renderer/Menu/renderer_menu.js"></script>
     <script src="../Renderer/services/alertMsg.js"></script>
     <script src="../Renderer/services/formatters.js"></script>

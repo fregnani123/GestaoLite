@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
     <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
+    <script src="../Renderer/transicao.js" defer></script>
     <title></title>
 </head>
 
 <body>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -24,24 +29,22 @@
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
                     <ul>
-                        <li><a id="btn-ativo" href="./registrar_produto.html"><img class="img-informacao" src="../style/img/adicionar-produto.png"
-                                alt="Atenção">Cadastrar novo
+                        <li><a id="btn-ativo" href="./registrar_produto.html"><img class="img-informacao"
+                                    src="../style/img/mais.png" alt="Atenção">Cadastrar novo
                                 produto</a></li>
                         <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
-                                alt="Atenção">Edição de produto e informações</a>
+                                    alt="Atenção">Cadastro do produto / alterar</a>
                         </li>
-                        <li><a href="./informacoes_produtos.html"><img class="img-informacao" src="../style/img/informacoes.png"
-                                alt="Atenção">Informações e estoque de
-                                produtos</a></li>
-                        <li><a href="./controle_estoque.html"><img class="img-informacao" src="../style/img/estoque-pronto.png"
-                                alt="Atenção">Estoque — Entrada e
-                                Saída</a></li>
-                        <li><a href="./desabilitar_produto.html"><img class="img-informacao" src="../style/img/cancelar.png"
-                                alt="Atenção">Desabilitar produto</a></li>
-                          <li>
-                            <a><img class="img-informacao" src="../style/img/conversacao.png"
-                                alt="Atenção">Mensagem informativa
-                        </a>
+                           <li><a href="./informacoes_produtos.html"><img class="img-informacao" src="../style/img/info-estoque.png"
+                                    alt="Atenção">Estoque e informações do produto</a></li>
+                        <li><a href="./controle_estoque.html"><img class="img-informacao"
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Movimentação de estoque</a></li>
+                        <li><a href="./desabilitar_produto.html"><img class="img-informacao"
+                                    src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -263,5 +266,4 @@
 </script>
 <script src="../Renderer/services/formatters.js">
 </script>
-
 </html>

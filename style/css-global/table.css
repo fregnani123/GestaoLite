@@ -73,13 +73,23 @@ th {
   overflow: hidden;
 }
 
-
 .table-1-informacoes,
 .table-2-informacoes,
 .table-3-informacoes,
 .table-4-informacoes,
 .table-5-informacoes,
 .table-6-informacoes {
+  width: 99%;
+  margin: 0.5% !important;
+  overflow: hidden;
+}
+
+.table-1-config,
+.table-2-config,
+.table-3-config,
+.table-4-config,
+.table-5-config,
+.table-6-config {
   width: 99%;
   margin: 0.5% !important;
   overflow: hidden;

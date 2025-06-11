@@ -6,13 +6,20 @@ const razaoSocial = document.getElementById('razaoSocial');
 const linkID_8 = document.querySelector('.list-a8');
 const filterButtonLimpar = document.querySelector('.limparButton-info');
 
+const btnAtivo = document.getElementById('btn-ativo');
+
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = '#5f8ac1';
-    linkID.style.textShadow = 'none'; // Sem sombra de texto
-    linkID.style.color = 'white'; // Cor do texto
-    linkID.style.borderBottom = '2px solid black'; // Borda inferior
+    if (btnAtivo.id === 'btn-ativo') {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    }
 }
-estilizarLinkAtivo(linkID_8);
+
+document.addEventListener('DOMContentLoaded', () => {
+      estilizarLinkAtivo(linkID_8)
+})
 
 filterButtonLimpar.addEventListener('click', () => location.reload());
 

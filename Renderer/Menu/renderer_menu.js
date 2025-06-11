@@ -1,5 +1,6 @@
 const menuPainel1 = [
     { id: '1', texto: 'Painel de controle', to: '../public/menu.html' },
+    { id: '0', texto: 'Configurações', to: '../public/config.html' },
     { id: '2', texto: 'Baixa no Estoque por Pedido', to: '../public/tela_vendas.html' },
     { id: '3', texto: 'Relatórios de Pedidos', to: '../public/grafico_pedido.html' },
     { id: '4', texto: 'Gerenciar produto', to: '../public/registrar_produto.html' },

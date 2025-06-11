@@ -224,7 +224,6 @@ font-size: 0.95rem;
     align-items: center;
 }
  
-
 #volumeDiv,
 #comprimentoDiv,
 #massaDiv,
@@ -232,4 +231,11 @@ font-size: 0.95rem;
 #divTamanhoNUm{
     display: none;
     width: 100%;
+}
+
+.div-filtrados{
+    width:99%;
+    height: 455px; 
+    border: 1px solid var(--border-color);
+    overflow-y: scroll;
 }

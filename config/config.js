@@ -1,4 +1,5 @@
 
+
 const id = document.getElementById('id');
 const senha1 = document.getElementById('senha1');
 const nomeFantasia = document.getElementById('nome_fantasia');
@@ -50,6 +51,18 @@ const multaParcela = document.getElementById('multaParcela');
 const taxaJurosAtraso = document.getElementById('taxaJurosAtraso');
 const idTaxas = document.getElementById('idTaxas');
 const btnAtualizarTaxas = document.getElementById('atualizar-juros');
+const linkID_0 = document.querySelector('.list-a0');
+
+function estilizarLinkAtivo_header(linkID) {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    estilizarLinkAtivo_header(linkID_0)
+})
 
 
 function toggleSection(button, sectionToShow) {
@@ -230,28 +243,18 @@ document.addEventListener('DOMContentLoaded', () => {
     getTaxasConfig();
 })
 
-// Ocultar elementos do menu secundário se existirem
-const menuItems = document.querySelectorAll('li.menu-item-2, li.menu-item-3, li.menu-item-4, li.menu-item-5, li.menu-item-6, li.menu-item-7, li.menu-item-8, li.menu-item-9, li.menu-item-10');
-if (menuItems.length > 0) {
-    menuItems.forEach(element => element.style.display = 'none');
-}
-
-const linkID_11 = document.querySelector('.list-a11');
-if (linkID_11) {
-    estilizarLinkAtivo(linkID_11);
-}
 
 function estilizarLinkAtivo(linkID) {
-    linkID.style.background = 'rgb(95, 138, 193)';
-    linkID.style.textShadow = 'none';
-    linkID.style.color = 'white';
-    linkID.style.borderBottom = '2px solid black';
+  linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
 }
 function estilizarLinkInativo(linkID) {
     linkID.style.background = '';
     linkID.style.textShadow = 'none';
     linkID.style.color = 'white';
-    linkID.style.borderBottom = '2px solid black';
+     linkID.style.borderBottom = '2px solid transparent';
 }
 
 

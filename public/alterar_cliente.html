@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css-global/global.css">
-    <link rel="stylesheet" href="../style/css-global/inputs.css">
-    <link rel="stylesheet" href="../style/css-global/table.css">
-    <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../style/css-global/global.css">
+<link rel="stylesheet" href="../style/css-global/inputs.css">
+<link rel="stylesheet" href="../style/css-global/table.css">
+
+<title></title>
 </head>
 
 <body>
+  <div id="loading-overlay" class="active">
+  <div class="spinner"></div>
+  <p>Carregando...</p>
+</div>
+
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -21,29 +26,33 @@
         </header>
         <div class="formulario-container">
             <div class="menu-lateral">
-                <nav class="menu-suspenso">
+              <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a id="li-cadastroCliente" href="./registrar_cliente.html"><img
-                                    class="img-informacao" src="../style/img/novo-usuario.png" alt=""> Cadastrar
+                            <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
+                                Cadastrar
                                 novo Cliente</a>
                         </li>
                         <li>
-                            <a id="btn-ativo"><img class="img-informacao" src="../style/img/informacoes.png"
-                                    alt="">Cadastro do Cliente /
+                            <a id="btn-ativo" href="./alterar_cliente.html"><img class="img-informacao"
+                                    src="../style/img/alterar.png" alt="">Cadastro do cliente /
                                 Alterar</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btn-flex"><img class="img-informacao"
-                                    src="../style/img/prazo.png" alt="">Receber pagamento a prazo</a>
+                            <a href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
+                                    alt="">Receber pagamento a prazo</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btnCredVencer"><img class="img-informacao"
-                                    src="../style/img/data-limite.png" alt="">Vencimentos do Mês – Todos os Clientes</a>
+                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do Mês – Todos os clientes</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btn-atraso" href="#"><img class="img-informacao"
-                                    src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em Atraso</a>
+                            <a href="./prazo_atrasado.html"><img class="img-informacao"
+                                    src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em atraso</a>
+                        </li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -57,12 +66,12 @@
                     <div class="formulario-conteudo">
                         <div class="formulario-img">
                             <p>Informações / Alterar</p>
-                            <div class="quadro-img img-fixa"><img class="img-produto" src="../style/img/alterar-cliente.png"
-                                    alt="">
+                            <div class="quadro-img img-fixa"><img class="img-produto"
+                                    src="../style/img/alterar-cliente.png" alt="">
                             </div>
                         </div>
                         <div class="formulario-inputs">
-                            <table class="table-1-produto">
+                            <table class="table-1-produto" style="margin-top: .5%;">
                                 <tr>
                                     <th style="width: 30%;">
                                         Filtrar CPF
@@ -213,7 +222,8 @@
                                 <strong>Atenção:</strong> ao <strong>alterar os dados
                                     do cliente</strong>, as informações <strong>anteriores serão permanentemente
                                     substituídas</strong>.
-                                Revise todas as informações com cuidado antes de <strong>confirmar a alteração</strong>.
+                                Revise todas as informações com cuidado antes de <strong>confirmar a
+                                    alteração</strong>.
                             </p>
                         </div>
                     </div>
@@ -222,6 +232,7 @@
         </div>
     </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/services/cidadesPorEstados.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>

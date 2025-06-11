@@ -12,6 +12,10 @@
 </head>
 
 <body>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -24,18 +28,17 @@
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
                     <ul>
-                        <li><a href="./registrar_produto.html"><img class="img-informacao"
-                                    src="../style/img/adicionar-produto.png" alt="Atenção">Cadastrar novo
+                        <li><a href="./registrar_produto.html"><img class="img-informacao" src="../style/img/mais.png"
+                                    alt="Atenção">Cadastrar novo
                                 produto</a></li>
-                        <li><a id="btn-ativo"><img class="img-informacao" src="../style/img/alterar.png"
-                                    alt="Atenção">Edição de produto e informações</a>
+                        <li><a id="btn-ativo" href="./alterar_produto.html"><img class="img-informacao"
+                                    src="../style/img/alterar.png" alt="Atenção">Cadastro do produto / alterar</a>
                         </li>
                         <li><a href="./informacoes_produtos.html"><img class="img-informacao"
-                                    src="../style/img/informacoes.png" alt="Atenção">Informações e estoque de
-                                produtos</a></li>
+                                    src="../style/img/info-estoque.png" alt="Atenção">Estoque e informações do
+                                produto</a></li>
                         <li><a href="./controle_estoque.html"><img class="img-informacao"
-                                    src="../style/img/estoque-pronto.png" alt="Atenção">Estoque — Entrada e
-                                Saída</a></li>
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Movimentação de estoque</a></li>
                         <li><a href="./desabilitar_produto.html"><img class="img-informacao"
                                     src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
                         <li>
@@ -110,7 +113,7 @@
                                     </td>
                                 </tr>
                             </table>
-                              <table class="table-3-produto">
+                            <table class="table-3-produto">
                                 <tr>
                                     <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
                                     <th class="btn-border-transparent th-15"></th>
@@ -177,49 +180,49 @@
                                     </td>
                                 </tr>
                             </table>
-                        <table class="table-4-produto">
-                            <tr>
-                                <th class="th-30">Preço de Compra</th>
-                                <th class="th-30">Lucro Bruto (R$)</th>
-                                <th class="th-30">Preço de Venda</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
-                                        autocomplete="off">
-                                    <!-- <label for="markup">Markup % :</label> -->
-                                    <input type="hidden" value="0" id="inputMarkup">
-                                </td>
-                                <td>
-                                    <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
-                                    <input type="hidden" value="0" id="inputMarkup">
-                                </td>
-                                <td>
-                                    <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="table-5-produto">
-                            <tr>
-                                <th style="width: 70%;">
-                                    Nome fantasia filtrado
-                                </th>
-                                <th>
-                                   
-                                </th>
-                                <!-- <th style="width: 30%;">
+                            <table class="table-4-produto">
+                                <tr>
+                                    <th class="th-30">Preço de Compra</th>
+                                    <th class="th-30">Lucro Bruto (R$)</th>
+                                    <th class="th-30">Preço de Venda</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
+                                            autocomplete="off">
+                                        <!-- <label for="markup">Markup % :</label> -->
+                                        <input type="hidden" value="0" id="inputMarkup">
+                                    </td>
+                                    <td>
+                                        <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                                        <input type="hidden" value="0" id="inputMarkup">
+                                    </td>
+                                    <td>
+                                        <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table-5-produto">
+                                <tr>
+                                    <th style="width: 70%;">
+                                        Nome fantasia filtrado
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                    <!-- <th style="width: 30%;">
                                 Filtrar por CNPJ
                             </th> -->
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input style="width: 100%;" id="cnpjFilter" name="fornecedor"
-                                        placeholder="Nenhum fornecedor — clique em buscar para selecionar">
-                                </td>
-                                <td style="width: 30%;text-align: center;">
-                                    <button id="buscar-fornecedor">Buscar Fornecedor</button>
-                                </td>
-                                <!-- <td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input style="width: 100%;" id="cnpjFilter" name="fornecedor"
+                                            placeholder="Nenhum fornecedor — clique em buscar para selecionar">
+                                    </td>
+                                    <td style="width: 30%;text-align: center;">
+                                        <button id="buscar-fornecedor">Buscar Fornecedor</button>
+                                    </td>
+                                    <!-- <td>
                                 <select style="margin-bottom: 1%; width: 100%;" id="fornecedor" name="fornecedor"
                                     disabled>
                                     <option value="1">Fornecedor não Cadastrado</option>
@@ -229,57 +232,58 @@
                                         alt="">Alterar
                                     Produto</button>
                             </td> -->
-                            </tr>
-                        </table>
-                        <table class="table-5-produto">
-                            <tr>
-                                <th class="th-50">Estoque Inicial</th>
-                                <th>Ações</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-select-wrapper">
-                                        <input type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
-                                        <select id="unidadeEstoque" name="unidadeEstoque">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="acoes-container">
-                                        <button class="btn-alterar-produto"><img class="img-disquete"
-                                                src="../style/img/troca.png" alt="">Alterar</button>
-                                        <button id="limparButton"><img class="img-excluir"
-                                                src="../style//img/excluir.png" alt="">Limpar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <textarea style="display: none;" id="observacoes" name="observacoes"
-                            autocomplete="off"></textarea>
-                        <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
-                    </div>
+                                </tr>
+                            </table>
+                            <table class="table-5-produto">
+                                <tr>
+                                    <th class="th-50">Estoque Inicial</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-select-wrapper">
+                                            <input type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                            <select id="unidadeEstoque" name="unidadeEstoque">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="acoes-container">
+                                            <button class="btn-alterar-produto"><img class="img-disquete"
+                                                    src="../style/img/troca.png" alt="">Alterar</button>
+                                            <button id="limparButton"><img class="img-excluir"
+                                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <textarea style="display: none;" id="observacoes" name="observacoes"
+                                autocomplete="off"></textarea>
+                            <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                        </div>
 
-                </div>
-                <div class="formulario-mensages-informativas" style="display: none;">
-                    <p style="font-size: 0.95rem;">
-                        <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
-                            alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações
-                        anteriores
-                        serão
-                        <strong>substituídas</strong>.
-                        Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
-                        Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
-                        <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode
-                            ser
-                            modificado</strong>.
-                    </p>
+                    </div>
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p style="font-size: 0.95rem;">
+                            <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
+                                alt=""><strong>Atenção:</strong> Ao alterar os dados do produto, as informações
+                            anteriores
+                            serão
+                            <strong>substituídas</strong>.
+                            Certifique-se de <strong>revisar</strong> os dados antes de confirmar a alteração.
+                            Além disso, o <u><strong>código EAN</strong></u> <strong>não pode ser alterado</strong>, e o
+                            <strong>estoque</strong> é apenas <strong>informativo</strong> nesta tela — <strong>não pode
+                                ser
+                                modificado</strong>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/Produto/renderizarInputsGrupo.js"></script>

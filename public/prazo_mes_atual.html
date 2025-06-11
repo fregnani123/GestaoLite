@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
-    <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
+    <link rel="stylesheet" href="../style/css-individual/prazo.css">
     <title></title>
 </head>
 
 <body>
-<div id="loading-overlay" class="active">
-  <div class="spinner"></div>
-  <p>Carregando...</p>
-</div>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
 
     <div class="container">
         <header>
@@ -27,7 +27,7 @@
         </header>
         <div class="formulario-container">
             <div class="menu-lateral">
-                   <nav class="menu-suspenso">
+      <nav class="menu-suspenso">
                     <ul>
                         <li>
                             <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
@@ -37,14 +37,14 @@
                         <li>
                             <a  href="./alterar_cliente.html"><img class="img-informacao"
                                     src="../style/img/alterar.png" alt="">Cadastro do cliente /
-                                Alterar</a>
+                                alterar</a>
                         </li>
                         <li>
-                            <a id="btn-ativo" href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
+                            <a  href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
                                     alt="">Receber pagamento a prazo</a>
                         </li>
                         <li>
-                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do mês – Todos os clientes</a>
+                            <a id="btn-ativo" href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do mês – Todos os clientes</a>
                         </li>
                         <li>
                             <a href="./prazo_atrasado.html"><img class="img-informacao"
@@ -66,21 +66,7 @@
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
                         <div class="formulario-inputs">
-                            <div id="crediários-mes-vencer" style="display: none;">
-                                <button class="close-btn">X</button>
-                                <div class="info-cmv">
-                                    <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
-                                    <p class="p-info"><span>Crediários do Mês: <span class="mesAvencer"></span></span>
-                                        <span style="font-size: .9rem;">Total:Paga/pendente : <span
-                                                class="parcelasTotal"></span></span>
-                                        <span> Total Pagas: <span class="parcelasPagas"></span></span>
-                                        <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
-                                    </p>
-                                </div>
-                                <div class="container-cmv">
-                                    <!-- aqui é criada a table -->
-                                </div>
-                            </div>
+
                             <div id="crediarios-vencidos" style="display: none;">
                                 <button id="close-btn-vencidos">X</button>
                                 <div class="info-cmv">
@@ -154,7 +140,20 @@
                                     </td>
                                 </tr>
                             </table>
-                            <div class="div-filtrados">
+                            <div id="crediários-mes-vencer">
+                                <button class="close-btn">X</button>
+                                <div class="info-cmv">
+                                    <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
+                                    <p class="p-info"><span>Crediários do Mês: <span class="mesAvencer"></span></span>
+                                        <span style="font-size: .9rem;">Total:Paga/pendente : <span
+                                                class="parcelasTotal"></span></span>
+                                        <span> Total Pagas: <span class="parcelasPagas"></span></span>
+                                        <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
+                                    </p>
+                                </div>
+                                <div class="container-cmv">
+                                    <!-- aqui é criada a table -->
+                                </div>
                             </div>
                         </div>
                     </div>

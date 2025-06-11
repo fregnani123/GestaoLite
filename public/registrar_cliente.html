@@ -11,6 +11,10 @@
 </head>
 
 <body>
+    <div id="loading-overlay" class="active">
+  <div class="spinner"></div>
+  <p>Carregando...</p>
+</div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -24,21 +28,30 @@
                 <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a id="btn-ativo" id="li-cadastroCliente" href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/novo-usuario.png" alt=""> Cadastrar
-                                novo Cliente</a>
+                            <a id="btn-ativo" href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
+                                Cadastrar
+                                novo cliente</a>
                         </li>
                         <li>
-                            <a href="./alterar_cliente.html"><img class="img-informacao" src="../style/img/informacoes.png" alt="">Cadastro do Cliente /
-                                Alterar</a>
+                            <a href="./alterar_cliente.html"><img class="img-informacao"
+                                    src="../style/img/alterar.png" alt="">Cadastro do cliente /
+                                alterar</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btn-flex"><img class="img-informacao" src="../style/img/prazo.png" alt="">Receber pagamento a prazo</a>
+                            <a href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
+                                    alt="">Receber pagamento a prazo</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btnCredVencer"><img class="img-informacao" src="../style/img/data-limite.png" alt="">Vencimentos do Mês – Todos os Clientes</a>
+                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do Mês – Todos os clientes</a>
                         </li>
                         <li>
-                            <a href="./crediario.html" id="btn-atraso" href="#"><img class="img-informacao" src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em Atraso</a>
+                            <a href="./prazo_atrasado.html"><img class="img-informacao"
+                                    src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em atraso</a>
+                        </li>
+                        <li>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -209,6 +222,7 @@
         </div>
     </div>
 </body>
+ <script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/Cliente/api_clientes.js"></script>

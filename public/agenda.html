@@ -12,27 +12,17 @@
     <link rel="stylesheet" href="../style/css/css_global/inputs.css">
     <link rel="stylesheet" href="../style/css/css_global/info.css">
     <link rel="stylesheet" href="../style/css/agenda/agenda.css">
-    <style>
-        #agendamentos {
-            background: var(--hover-color);
-            color: rgb(255, 255, 255);
-            text-shadow: none;
-            border-bottom: 2px solid black;
-        }
 
-        #filtrarHistorico {
-            margin-right: 2%;
-        }
-        label{
-            font-size: 1rem;
-        }
-    </style>
     <title></title>
 </head>
 
 <body>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <header class="header-menu">
-       <img class="img-configuracao" src="../style/img/menu.png">
+        <img class="img-configuracao" src="../style/img/menu.png">
 
         <nav>
             <ul id="ul-Menu"></ul>
@@ -43,9 +33,9 @@
             <div class="atalhos">
                 <div class="menu-secundario">
                     <div class="pagamento">
-                        <a class="atalhos-btn" id="agendamentos" href="./agenda.html">Lista de Agendamentos</a>
+                        <a class="atalhos-btn" id="agendamentos" href="./agenda.html">Lista de agendamentos</a>
                         <a class="atalhos-btn" id="li-cadastro-agenda" href="">Agendar</a>
-                        <a class="atalhos-btn" id="li-historico" href="">Histórico de Agendamentos</a>
+                        <a class="atalhos-btn" id="li-historico" href="">Histórico de agendamentos</a>
                         <a class="atalhos-btn" style="height: 2.8rem;"></a>
                         <a class="atalhos-btn" style="height: 2.8rem;"></a>
                     </div>
@@ -56,31 +46,31 @@
             </div>
         </div>
         <div class="container-inputs" style="position: relative;">
-                <div class="div-agendar" style="display: none;">
+            <div class="div-agendar" style="display: none;">
                 <button class="close-btn">x</button>
                 <label class="agendar-titulo" style="background-color: #f4f4f4; padding: 1%;">Cadastrar novo
                     Agendamento</label>
-                <div class="agendar" >
-                    <div style="display: flex; gap: 1%;padding: .5%;" >
+                <div class="agendar">
+                    <div style="display: flex; gap: 1%;padding: .5%;">
                         <div><label>CPF do Cliente </label> <input type="text" id="input-cpf" class="input-cpf"></div>
                         <div style="width: 50%;"><label>Nome do Cliente</label>
                             <input id="cliente-nome" autocomplete="off" readonly
-                                    style="background-color: rgb(228, 228, 228);">
-                                <input id="cliente-id" type="hidden">
+                                style="background-color: rgb(228, 228, 228);">
+                            <input id="cliente-id" type="hidden">
                         </div>
-                        <div  style="width: 18%;"><label>Data</label>
+                        <div style="width: 18%;"><label>Data</label>
                             <input type="date" id="input-data" class="input-data">
                         </div>
                         <div style="width: 15%;">
                             <label>Horário</label><input type="time" id="input-hora" class="input-hora">
                         </div>
                     </div>
-                    <div  style="display: flex; gap: 1%;padding: .5%;" >
-                        <div style="width: 85%;"><label>Motivo do Compromisso</label> 
+                    <div style="display: flex; gap: 1%;padding: .5%;">
+                        <div style="width: 85%;"><label>Motivo do Compromisso</label>
                             <input type="text" id="input-motivo" class="input-motivo">
                         </div>
-                        <div style="display: flex;align-items: flex-end;">  
-                            <button class="btn-cadastrar" id="btn-cadastrar" >
+                        <div style="display: flex;align-items: flex-end;">
+                            <button class="btn-cadastrar" id="btn-cadastrar">
                                 <img class="img-disquete" src="../style/img/agendar.png"> Agendar
                             </button>
                         </div>
@@ -131,7 +121,7 @@
                     </div>
                 </div>
                 <!-- aqui fica a table criada no js -->
-                <label  style="background-color: #f4f4f4; padding: 1%;">Lista de Agendamentos</label>
+                <label style="background-color: #f4f4f4; padding: 1%;">Lista de Agendamentos</label>
                 <div id="div-container-form">
                     <h3 class="msgAgenda">Sem agendamentos disponíveis no momento.</h3>
                 </div>
@@ -156,10 +146,10 @@
             </div>
         </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/agenda/api_agenda.js"></script>
 <script src="../Renderer/agenda/agenda_renderer.js"></script>
 <script src="../Renderer/services/alertMsg.js"></script>
-
 </html>

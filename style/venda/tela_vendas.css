@@ -1,0 +1,460 @@
+:root {
+    --background-color: rgb(0, 38, 87);
+    --background-venda: #1f3b57;
+}
+
+* {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+strong {
+    font-weight: 600;
+}
+
+
+
+ul {
+    list-style: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    flex: 0 0 40%;
+    padding: 0;
+    margin-top: 1%;
+}
+
+
+input,
+select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+}
+
+input[readonly] {
+    background-color: #e9ecef;
+    font-size: 1.2rem;
+}
+
+.div-nomeProduto {
+    color: rgb(0, 0, 0);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.div-time {
+    display: flex;
+    width: 40%;
+    gap: 4%;
+    align-items: flex-end;
+    justify-content: right;
+    margin-right: 1%;
+}
+
+.squere-hide {
+    color: transparent;
+}
+
+.info-container-label,
+.square-time,
+.square-day {
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.square-time {
+    font-size: 1.7rem;
+}
+
+.segundo {
+    font-size: 1rem;
+    margin-left: .3rem;
+}
+
+#data-venda,
+#numero-pedido,
+#nome-cliente {
+    text-align: left;
+    width: 20%;
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
+.info-item-pedido {
+    display: flex;
+    width: 15%;
+}
+
+.info-item-nome-cliente {
+    width: 40%;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.product-section>* {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.product-info {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-height: 100%;
+    gap: 1%;
+    margin-bottom: 0;
+}
+
+.div-img {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1%;
+}
+
+.img-produto {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 15px;
+    object-fit: contain;
+    padding: 2%;
+}
+
+.product-codigo {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+.product-codigo label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.product-codigo input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.product-quantity {
+    margin-top: 1%;
+    height: 20%;
+    text-align: center;
+    padding: 2%;
+}
+
+.product-quantity p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+.qtd-selecionada {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.product-section p span {
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.div-carrinho {
+    width: 100%;
+    margin-left: .5%;
+
+}
+
+.carrinho {
+    border: 1px solid gray;
+    width: 100%;
+    height: 400px;
+    /* Altura fixa */
+    overflow: hidden;
+    /* Impede que a altura aumente */
+    display: flex;
+    flex-direction: column;
+}
+
+.ul-descricao-produto {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-bottom: 3%;
+}
+
+.ul-carrinho {
+    display: flex;
+    width: 100%;
+    height: 3rem;
+    max-height: 95%;
+    justify-content: center;
+    padding: 1%;
+    font-size: 1.2rem;
+    background-color: #8888881e;
+}
+
+.li-titulo-carrino {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    max-height: 100%;
+    gap: 2%;
+    justify-content: left;
+}
+
+
+#total-pago,
+#troco,
+#mostrarDesconto,
+#mostrarDescontoReal,
+#total-liquido {
+    width: 50%;
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    outline: none;
+    box-shadow: none;
+    appearance: none;
+    /* Remove estilo padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+
+.div-liquido {
+    color: white;
+    width: 50%;
+    border: 1px solid rgb(173, 173, 173);
+    margin: 1%;
+    padding: 1.5rem;
+}
+
+
+.spanDescricao {
+    margin-left: 2%;
+}
+
+.spanIndex {
+    margin-right: 2%;
+}
+
+.spanEan {
+    margin-left: 3%;
+}
+
+.li-produto {
+    margin-top: .3%;
+    display: flex;
+    padding: 1%;
+    border-bottom: 1px dotted gray;
+    width: 100%;
+    justify-content: left;
+}
+
+.remove-item {
+    margin-left: -18%;
+}
+
+#exit-key,
+#limpar-tela-key {
+    font-size: 1.2rem;
+    display: flex;
+    text-align: center;
+}
+
+.p-info {
+    margin-top: 2%;
+}
+
+.exit-venda {
+    margin-left: -18%;
+}
+
+/* Efeito ao passar o mouse */
+.div-qtd,
+.exit-venda,
+.remove-item {
+    box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
+    /* 12px x 25px */
+}
+
+#btnBuscarNome {
+    background-color: #198754;
+    color: #fff;
+    padding: 5px 10px;
+    width: 8rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    margin-left: 2%;
+}
+
+#btnBuscarNome:hover {
+    background-color: #4cae4c;
+}
+
+.divNomes {
+    position: absolute;
+
+    max-width: 700px;
+    padding: 1%;
+    height: 50%;
+    background-color: rgb(229, 229, 229);
+}
+
+.div-info {
+    display: flex;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    border: 1px solid gray;
+    margin-bottom: .5%;
+}
+
+.p-nome-produto {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    padding-left: 2%;
+}
+
+.footer-venda,
+.msg-alterar {
+    margin-top: 1%;
+    display: flex;
+    background-color: rgba(248, 255, 53, 0.142);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    padding: .5%;
+}
+
+.div-vendas {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* desconto-venda */
+
+.desconto-venda {
+    position: absolute;
+}
+
+.div-total-liquido {
+    display: flex;
+    width: 100%;
+}
+
+.valores {
+    width: 31.3%;
+    border: 1px solid gray;
+    border-bottom: none;
+}
+
+.valores-2 {
+    width: 70%;
+    border: 1px solid gray;
+    border-left: none;
+    border-bottom: none;
+}
+
+.val-div {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    height: 2.7rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid gray;
+}
+
+.val-div p {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    gap: 1rem;
+    font-weight: 600;
+    margin-left:2%;
+}
+.val-div input {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    font-weight: normal;
+}
+
+.mensagem-informativa-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+    background-color: var(--footer-form);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-sm);
+    padding: 0.5%;
+    margin-top: .5%;
+}
+.formulario-mensages-informativas-p {
+  margin: 0;
+  max-width: 100%; 
+  text-align: left; 
+}
+
+#clienteNome {
+    width: 100%;
+    font-size: 1rem;
+    text-align: left;
+
+}
+
+ 

@@ -4,241 +4,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
-    <link rel="stylesheet" href="../style/css/login_menu/menu_interno.css">
-    <link rel="stylesheet" href="../style/css/css_global/form_padrao.css">
-    <link rel="stylesheet" href="../style/css/css_global/btn.css">
-    <link rel="stylesheet" href="../style/css/css_global/inputs.css">
-    <link rel="stylesheet" href="../style/css/css_global/info.css">
-    <link rel="stylesheet" href="../style/css/css_global/table.css">
-    <style>
-        #btn-flex {
-            background: var(--hover-color);
-            color: rgb(255, 255, 255);
-            text-shadow: none;
-            border-bottom: 2px solid black;
-        }
-    </style>
-    <title>Cadastro Fornecedor</title>
+    <link rel="stylesheet" href="../style/css-global/global.css">
+    <link rel="stylesheet" href="../style/css-global/inputs.css">
+    <link rel="stylesheet" href="../style/css-global/table.css">
+    <title></title>
 </head>
 
 <body>
-    <header>
-<img class="img-configuracao" src="../style/img/menu.png">
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+    <div class="container">
+        <header>
+            <nav class="menu-suspenso barra-header">
+                <ul id="ul-Menu">
 
-        <nav>
-            <ul id="ul-Menu"></ul>
-        </nav>
-    </header>
-    <!-- Não excluir este container, aqui renderiza o grupo e subgrupo -->
-    <div class="container-register"></div>
-    <div class="div-form">
-        <div class="atalhos-1">
-            <div class="atalhos">
+                </ul>
+            </nav>
+        </header>
+        <div class="formulario-container">
+            <div class="menu-lateral">
+                <nav class="menu-suspenso">
+                    <ul>
+                        <li>
+                            <a id="btn-ativo" href="./fornecedor.html"><img class="img-informacao"
+                                    src="../style/img/mais.png" alt="">Cadastrar novo fornecedor</a>
+                        </li>
+                        <li>
+                            <a href="./alterar_Fornecedor.html"><img class="img-informacao"
+                                    src="../style/img/alterar.png" alt="">Cadastro do fornecedor /
+                                Alterar</a>
+                        </li>
+                        <li>
+                            <a href="./informaçoes_fornecedor.html"><img class="img-informacao"
+                                    src="../style/img/informacoes.png" alt="">Produtos vinculados ao
+                                fornecedor</a>
+                        </li>
+                        <li>
+                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/informacoes.png"
+                                    alt="">Relatório de quebras e trocas</a>
+                        </li>
+                        <li>
+                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/informacoes.png"
+                                    alt="">Histórico de compras do fornecedor</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="div-logo-empresa">
+                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+                </div>
+            </div>
 
-                <div class="menu-secundario">
-                    <div class="pagamento">
-                        <a class="atalhos-btn" href="./fornecedor.html" id="btn-flex">Cadastrar novo Fornecedor</a>
-                        <a class="atalhos-btn" href="./alterar_Fornecedor.html">Informações Cadastrais do Fornecedor /
-                            Alterar</a>
-                        <a class="atalhos-btn" href="./informaçoes_fornecedor.html">Produtos vinculados ao
-                            Fornecedor</a>
-                        <a class="atalhos-btn" style="height: 2.8rem;">Relatório de Quebras e Trocas</a>
-                        <a class="atalhos-btn" style="height: 2.8rem;">Histórico de Compras do Fornecedor</a>
+            <div class="formulario">
+                <div class="div-formulario">
+                    <div class="formulario-conteudo">
+                        <div class="formulario-img">
+                            <p class="titulo-img">Cadastro fornecedor</p>
+                            <div class="quadro-img img-fixa">
+                                <img class="img-produto" src="../style/img/fornecedor - interno.png"
+                                    alt="Produto sem imagem.">
+                            </div>
+                        </div>
+                        <div class="formulario-inputs">
+                            <table>
+                                <tr>
+                                    <th style="width: 15%;">
+                                        Pessoa
+                                    </th>
+                                    <th id="label_cnpj_cpf" style="width: 25%;">CNPJ /
+                                        CPF
+                                    </th>
+                                    <th id="label_razao" style="width: 60%;">Razão Social /
+                                        Nome
+                                    </th>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="tipoPessoa" id="tipoPessoa">
+                                            <option value="">Selecione</option>
+                                            <option value="juridica">Jurídica</option>
+                                            <option value="fisica">Física</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="cnpj" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="razaoSocial" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table>
+                                <tr>
+                                    <th style="width: 15%;">
+                                        Inscrição Estadual
+                                    </th>
+                                    <th style="width: 25%;">
+                                        numero IE
+                                    </th>
+                                    <th class="labelFornecedor" style="width: 60%;">
+                                        Nome Fantasia
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <select name="inscricaoEstadual" id="inscricaoEstadual" disabled>
+                                            <option value="">Selecione</option>
+                                            <option value="contribuinte">Contribuinte</option>
+                                            <option value="isento">Isento</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="ie" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="nomeFantasia" readonly>
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <th style="width: 55%;">Endereço</th>
+                                    <th style="width: 10%;">Numero</th>
+                                    <th style="width: 35%;">Bairro</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="text" id="endereco">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="numero">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="bairro">
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <table>
+                                <tr>
+                                    <th style="width: 20%;">CEP</th>
+                                    <th style="width: 20%;">UF</th>
+                                    <th style="width: 60%;">Cidade</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="text" id="cep">
+                                    </td>
+                                    <td>
+                                        <select id="uf">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="cidade">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table>
+                                <tr>
+                                    <th style="width: 70%;">Email</th>
+                                    <th style="width: 30%;">Contato</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="email" id="email">
+                                    </td>
+                                    <td>
+                                        <input type="email" id="telefone">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <th style="width: 25%;">Ramos de atividade</th>
+                                    <th style="width: 25%;">Forma de Pgto</th>
+                                    <th style="width: 25%;">Condições Pgto</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="" id="atividade">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td> <select name="" id="formaPgto">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="" id="condicoesPgto">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </td>
+                                    <div class="form-group" style="display: none;">
+                                        <div id="text-area">
+                                            <div><label class="label" for="observacoes">Observações:</label>
+                                                <textarea rows="3" cols="37" id="observacoes" name="observacoes"
+                                                    placeholder="Informações adicionais Fornecedor"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="img-fgl">
-                        <img style="width: 250px;" src="../style/img/logoLGL-removebg-preview (1).png" alt="">
+                    <div class="formulario-mensages-informativas" style="display: none;">
+                        <p>
+                            <img src="../style/img/atencao.png" alt="Atenção" style="width: 1.3rem; margin-right: .5%;">
+                            <strong>Atenção:</strong> Verifique se as <strong>informações do fornecedor</strong> estão
+                            <strong>corretas</strong>. Campos <strong>bloqueados</strong> serão <strong>liberados
+                                automaticamente</strong> após selecionar <strong>Tipo de Pessoa</strong> e
+                            <strong>Inscrição Estadual</strong>.
+                        </p>
+                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                            <button id="btn-cad-fornecedor"><img class="img-disquete"
+                                    src="../style//img/disquete.png">Gravar</button>
+                            <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
+                                    alt="">Limpar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-inputs">
-            <div style="display: flex; width: 100%; height: 100%; position: relative;">
-                <h4 style="position: absolute; top: 2%;left: 1%;">Cadastrar novo Fornecedor</h4>
-                <section class="div-form-img" style="width: 27%;">
-                    <p class="titulo-img"><strong>Cadastro Fornecedor</strong></p>
-                    <div class="quadro-img">
-                        <img class="img-produto" src="../style/img/fornecedor - interno.png" alt="Produto sem imagem.">
-                    </div>
-                </section>
-                <section class="div-form__body">
-                    <table>
-                        <tr>
-                            <th style="width: 15%;">
-                                Pessoa
-                            </th>
-                            <th id="label_cnpj_cpf" style="width: 25%;">CNPJ /
-                                CPF
-                            </th>
-                            <th id="label_razao" style="width: 60%;">Razão Social /
-                                Nome
-                            </th>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                <select name="tipoPessoa" id="tipoPessoa">
-                                    <option value="">Selecione</option>
-                                    <option value="juridica">Jurídica</option>
-                                    <option value="fisica">Física</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" id="cnpj" readonly>
-                            </td>
-                            <td>
-                                <input type="text" id="razaoSocial" readonly>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th style="width: 15%;">
-                                Inscrição Estadual
-                            </th>
-                            <th style="width: 25%;">
-                                numero IE
-                            </th>
-                            <th class="labelFornecedor" style="width: 60%;">
-                                Nome Fantasia
-                            </th>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <select name="inscricaoEstadual" id="inscricaoEstadual" disabled>
-                                    <option value="">Selecione</option>
-                                    <option value="contribuinte">Contribuinte</option>
-                                    <option value="isento">Isento</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" id="ie" readonly>
-                            </td>
-                            <td>
-                                <input type="text" id="nomeFantasia" readonly>
-                            </td>
-
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <th style="width: 55%;">Endereço</th>
-                            <th style="width: 10%;">Numero</th>
-                            <th style="width: 35%;">Bairro</th>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="text" id="endereco">
-                            </td>
-                            <td>
-                                <input type="text" id="numero">
-                            </td>
-                            <td>
-                                <input type="text" id="bairro">
-                            </td>
-                        </tr>
-                    </table>
-
-
-                    <table>
-                        <tr>
-                            <th style="width: 20%;">CEP</th>
-                            <th style="width: 20%;">UF</th>
-                            <th style="width: 60%;">Cidade</th>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="text" id="cep">
-                            </td>
-                            <td>
-                                <select id="uf">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="cidade">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th style="width: 70%;">Email</th>
-                            <th style="width: 30%;">Contato</th>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <input type="email" id="email">
-                            </td>
-                            <td>
-                                <input type="email" id="telefone">
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <th style="width: 25%;">Ramos de atividade</th>
-                            <th style="width: 25%;">Forma de Pgto</th>
-                            <th style="width: 25%;">Condições Pgto</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <select name="" id="atividade">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </td>
-                            <td> <select name="" id="formaPgto">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="" id="condicoesPgto">
-                                    <option value="">Selecione</option>
-                                </select>
-                            </td>
-                            <div class="form-group" style="display: none;">
-                                <div id="text-area">
-                                    <div><label class="label" for="observacoes">Observações:</label>
-                                        <textarea rows="3" cols="37" id="observacoes" name="observacoes"
-                                            placeholder="Informações adicionais Fornecedor"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                    </table>
-                </section>
-            </div>
-            <div
-                style="display: flex; align-items: center; border: 1px solid rgba(128, 128, 128, 0.722); padding: 1%; margin: .5%;">
-                <footer class="div-form__footer" style="width: 100%;">
-                    <p style="font-size: 0.95rem;">
-                        <img src="../style/img/atencao.png" alt="Atenção"
-                            style="width: 1.3rem; margin-right: .5%;">
-                    <strong>Atenção:</strong> Verifique se as <strong>informações do fornecedor</strong> estão <strong>corretas</strong>. Campos <strong>bloqueados</strong> serão <strong>liberados automaticamente</strong> após selecionar <strong>Tipo de Pessoa</strong> e <strong>Inscrição Estadual</strong>.
-                    </p>
-                    <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                        <button id="btn-cad-fornecedor"><img class="img-disquete"
-                                src="../style//img/disquete.png">Gravar</button>
-                        <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                                alt="">Limpar</button>
-                    </div>
-                </footer>
-
-            </div>
-        </div>
-    </div>
-    </div>
     </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/Fornecedor/fornecedor.js"></script>

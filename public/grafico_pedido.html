@@ -12,6 +12,10 @@
 </head>
 
 <body>
+        <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -39,11 +43,11 @@
                             <a href="./historico_pedidos.html"><img class="img-informacao" src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
                         </li>
                         <li>
-                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de Metas do Mês</a>
+                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de metas do mês</a>
                         </li>
                         <li>
                             <a><img class="img-informacao" src="../style/img/conversacao.png"
-                                alt="Atenção">Mensagem Informativa
+                                alt="Atenção">Mensagem informativa
                         </a>
                         </li>
                     </ul>
@@ -170,6 +174,7 @@
         </div>
     </div>
 </body>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js">
 </script>
 <script src="../Renderer/services/converte_moeda.js">
