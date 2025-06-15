@@ -19,14 +19,20 @@ const closeBtn = document.querySelector(".close-btn");
 
 inputMaxCaracteres(inputMotivo, 80);
 
-function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#5f8ac1'; 
+const btnAtivo = document.getElementById('btn-ativo');
 
-  linkID.style.textShadow = 'none'; // Sem sombra de texto
-  linkID.style.color = 'white'; // Cor do texto
-  linkID.style.borderBottom = '2px solid black'; // Borda inferior
+function estilizarLinkAtivo(linkID) {
+    if (btnAtivo.id === 'btn-ativo') {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    }
 }
-estilizarLinkAtivo(linkID_10);
+
+document.addEventListener('DOMContentLoaded', () => {
+      estilizarLinkAtivo(linkID_10)
+})
 
 
 

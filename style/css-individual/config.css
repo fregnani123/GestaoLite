@@ -459,3 +459,11 @@ select {
     position: absolute;
     width: 20px;
 }
+
+.max-width{
+  width: 20%;
+}
+
+.max-width-img{
+  width: 180px; height: 180px;
+}

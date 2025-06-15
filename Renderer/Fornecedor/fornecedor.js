@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    cnpj.focus();
+     pessoa.focus();
 
     formatarTelefone(telefone);
     inputMaxCaracteres(telefone, 15);

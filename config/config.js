@@ -54,10 +54,10 @@ const btnAtualizarTaxas = document.getElementById('atualizar-juros');
 const linkID_0 = document.querySelector('.list-a0');
 
 function estilizarLinkAtivo_header(linkID) {
-        linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    linkID.style.background = '#3a5772';
+    linkID.style.textShadow = 'none';
+    linkID.style.color = 'white';
+    linkID.style.borderBottom = '2px solid #d7d7d7';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -90,8 +90,12 @@ btnAlterarSenha.addEventListener('click', () => {
         alertMsg("Não é possível modificar usuário e senha padrão sem antes cadastrar um usuário.", "info", 5000);
         return;
     };
-    toggleSection(btnAlterarSenha, divAlterarSenha);
-    estilizarLinkInativo(cadastroUsuario);
+
+    exibirOverlayEAposDelay(() => {
+        toggleSection(btnAlterarSenha, divAlterarSenha);
+        estilizarLinkInativo(cadastroUsuario);
+    });
+
 
     novoUsuario.value = '';
     novaSenha.value = '';
@@ -105,28 +109,33 @@ btnAlterSenhaVenda.addEventListener('click', () => {
         return;
     };
     toggleSection(btnAlterSenhaVenda, divAlterVenda);
-    estilizarLinkInativo(cadastroUsuario);
 });
 
 btnAlterarJuros.addEventListener('click', () => {
     if (id.value === '') {
         alertMsg("Não é possível modificar a senha padrão sem antes cadastrar um usuário.", "info", 5000);
         return;
-    };
-    toggleSection(btnAlterarJuros, divJuros);
-    estilizarLinkInativo(cadastroUsuario);
+    }
+
+    exibirOverlayEAposDelay(() => {
+        toggleSection(btnAlterarJuros, divJuros);
+        estilizarLinkInativo(cadastroUsuario);
+    });
 });
 
 [btnExit, btnExitVenda, btnExitJuros].forEach(btn => {
     btn.addEventListener('click', () => {
-        divAlterarSenha.style.display = 'none';
-        divAlterVenda.style.display = 'none';
-        divJuros.style.display = 'none';
-        estilizarLinkInativo(btnAlterarSenha)
-        estilizarLinkInativo(btnAlterSenhaVenda)
-        estilizarLinkInativo(btnAlterarJuros)
-        document.querySelectorAll('.btn').forEach(btn => estilizarLinkInativo(btn));
-        estilizarLinkAtivo(cadastroUsuario);
+        exibirOverlayEAposDelay(() => {
+            divAlterarSenha.style.display = 'none';
+            divAlterVenda.style.display = 'none';
+            divJuros.style.display = 'none';
+
+            estilizarLinkInativo(btnAlterarSenha);
+            estilizarLinkInativo(btnAlterSenhaVenda);
+            estilizarLinkInativo(btnAlterarJuros);
+            document.querySelectorAll('.btn').forEach(btn => estilizarLinkInativo(btn));
+            estilizarLinkAtivo(cadastroUsuario);
+        });
     });
 });
 
@@ -245,16 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function estilizarLinkAtivo(linkID) {
-  linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    linkID.style.background = '#3a5772';
+    linkID.style.textShadow = 'none';
+    linkID.style.color = 'white';
+    linkID.style.borderBottom = '2px solid #d7d7d7';
 }
 function estilizarLinkInativo(linkID) {
     linkID.style.background = '';
     linkID.style.textShadow = 'none';
     linkID.style.color = 'white';
-     linkID.style.borderBottom = '2px solid transparent';
+    linkID.style.borderBottom = '2px solid transparent';
 }
 
 
@@ -399,8 +408,8 @@ btnAtulizarSenha.addEventListener('click', (e) => {
 btnAtualizarUser.addEventListener('click', (e) => {
     e.preventDefault();
     // Seleciona o input radio que está marcado
-  
-   
+
+
     const usuarioAtualizar = {
         nome_fantasia: nomeFantasia.value,
         razao_social: razaoSocial.value,

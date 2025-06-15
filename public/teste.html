@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Estilo geral */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  padding: 20px;
+  color: #333;
+}
+
+/* Título e filtros */
+h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+label {
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+thead th {
+  background-color: #e8eef3;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 2px solid #d0d7de;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Linhas alternadas */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Ações */
+button {
+  background-color: #2d72d9;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #1a4fa0;
+}
+
+/* Status com cores */
+td.status-pendente {
+  background-color: #fff3cd;
+  color: #856404;
+  font-weight: bold;
+}
+
+td.status-confirmado {
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+}
+
+td.status-cancelado {
+  background-color: #f8d7da;
+  color: #721c24;
+  font-weight: bold;
+}
+
+td.status-concluido {
+  background-color: #cce5ff;
+  color: #004085;
+  font-weight: bold;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+    border: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Filtros -->
+<div style="margin-bottom: 20px;">
+  <label>Filtrar por Status:
+    <select>
+      <option value="">Todos</option>
+      <option value="pendente">Pendente</option>
+      <option value="confirmado">Confirmado</option>
+      <option value="concluido">Concluído</option>
+      <option value="cancelado">Cancelado</option>
+    </select>
+  </label>
+
+  <label style="margin-left: 20px;">Filtrar por Profissional:
+    <input type="text" placeholder="Nome do profissional">
+  </label>
+
+  <label style="margin-left: 20px;">Filtrar por Cliente:
+    <input type="text" placeholder="Nome do cliente">
+  </label>
+
+  <label style="margin-left: 20px;">Data:
+    <input type="date">
+  </label>
+</div>
+
+<!-- Tabela de Agendamentos -->
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>Criado em</th>
+      <th>CPF / CNPJ</th>
+      <th>Nome do Cliente</th>
+      <th>Contato</th>
+      <th>Agendado para</th>
+      <th>Hora</th>
+      <th>Profissional</th>
+      <th>Agendado por</th>
+      <th>Tipo de Serviço</th>
+      <th>Descrição</th>
+      <th>Materiais</th>
+      <th>Tempo Estimado</th>
+      <th>Valor</th>
+      <th>Pago?</th>
+      <th>Observações</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10/06/2025</td>
+      <td>000.000.000-00</td>
+      <td>Consumidor Final</td>
+      <td>(00) 00000-0000</td>
+      <td>12/06/2025</td>
+      <td>22:13</td>
+      <td>João Técnico</td>
+      <td>Maria Recepção</td>
+      <td>Manutenção</td>
+      <td>Revisão de equipamento</td>
+      <td>Chave de fenda, multímetro</td>
+      <td>1h30min</td>
+      <td>R$ 150,00</td>
+      <td>Sim</td>
+      <td>Cliente pediu urgência</td>
+      <td>Pendente</td>
+      <td>
+        <button>Confirmar</button>
+        <button>Reagendar</button>
+        <button>Cancelar</button>
+      </td>
+    </tr>
+    <!-- Outras linhas aqui -->
+  </tbody>
+</table>
+
+</body>
+</html>

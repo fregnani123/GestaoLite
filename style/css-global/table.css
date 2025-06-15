@@ -39,6 +39,18 @@ th {
   margin-bottom: 0;
 }
 
+
+.table-1-fornecedor,
+.table-2-fornecedor,
+.table-3-fornecedor,
+.table-4-fornecedor,
+.table-5-fornecedor,
+.table-6-fornecedor {
+  width: 99%;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
 .table-1-grafico,
 .table-2-grafico,
 .table-3-grafico,

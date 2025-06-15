@@ -1,0 +1,319 @@
+/* Área principal do agendamento */
+.div-table {
+    margin: .5%;
+    height: 90%;
+}
+
+table {
+    width: 100%;
+    font-family: 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+table th {
+    font-weight: 600 !important;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Botão salvar */
+.btn-save {
+    margin-top: 1.5rem;
+    background-color: #3498db;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #2980b9;
+}
+
+/* Botão fechar modal */
+.close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #e74c3c;
+}
+
+/* Container de tabela */
+#div-container-form {
+    margin-top: 0rem;
+    overflow: hidden;
+    border: 1px solid gray;
+    height: 78.6vh;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+/* Mensagem sem agendamentos */
+.msgAgenda {
+    text-align: center;
+    font-size: 1rem;
+    color: #7f8c8d;
+    padding: 0rem 0;
+}
+
+/* Tabela padrão */
+#div-container-form table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+#div-container-form th,
+#div-container-form td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #1c0000;
+}
+
+#div-container-form th {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Ações */
+.acoes-container-agenda {
+    display: flex;
+    width: 100%;
+    gap: 2%;
+}
+
+/* Tabela sem bordas inferiores */
+.table1,
+.table6 {
+    border-bottom: none !important;
+    border-collapse: collapse;
+    margin-bottom: 0 !important;
+}
+
+.table1 tr,
+.table1 td,
+.table1 th,
+.table6 tr,
+.table6 td,
+.table6 th {
+    border-bottom: none !important;
+}
+
+/* Layout fixo tabela 2 */
+.table2 {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* Linhas alternadas */
+#div-container-form tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Cabeçalho de tabelas 1 e 2 */
+.table1 th,
+.table2 th {
+    background-color: rgb(232, 232, 232);
+}
+
+/* Larguras específicas */
+.table1 th:nth-child(1) {
+    width: 10%;
+}
+
+.table1 th:nth-child(2) {
+    width: 15%;
+}
+
+.table1 th:nth-child(3) {
+    width: 50%;
+}
+
+.table1 th:nth-child(4) {
+    width: 17%;
+}
+
+.table1 th:nth-child(5) {
+    width: 7%;
+}
+
+.table5 td:nth-child(2),
+.table5 th:nth-child(2) {
+    width: 30% !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.table2 th:nth-child(1),
+.table2 td:nth-child(1),
+.table2 td:nth-child(2),
+.table2 th:nth-child(2),
+.table2 td:nth-child(3),
+.table2 th:nth-child(3),
+.table2 td:nth-child(4),
+.table2 th:nth-child(4) {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.table2 th:nth-child(1),
+.table2 td:nth-child(1) {
+    width: 15%;
+    text-align: center;
+    vertical-align: middle;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.table2 td:nth-child(2),
+.table2 th:nth-child(2) {
+    width: 15% !important;
+}
+
+.table2 td:nth-child(3),
+.table2 th:nth-child(3) {
+    width: 20% !important;
+}
+
+.table2 td:nth-child(4),
+.table2 th:nth-child(4) {
+    width: 30% !important;
+}
+
+/* Cabeçalhos sem borda */
+.table5 th,
+.table1 th,
+.table2 th,
+.table7 th {
+    border-collapse: collapse;
+    border-top: none !important;
+}
+
+.table1 th {
+    border-bottom: none !important;
+}
+
+/* Cores por status */
+.th-cancelado {
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    color: white !important;
+}
+
+.th-confirmado {
+    background-color: rgba(0, 128, 0, 0.2) !important;
+    color: white !important;
+}
+
+.th-pendente-hoje {
+    background-color: rgba(255, 255, 0, 0.5) !important;
+}
+
+.th-pendente-atrasado {
+    background-color: rgba(255, 0, 0, 0.92) !important;
+    color: white !important;
+}
+
+/* Ícones */
+.img-ico-btn {
+    border: none;
+    width: 18px;
+}
+
+.img-agenda {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* Caixa de tempo */
+.div-time {
+    background-color: #f4f4f4;
+    margin-right: 1%;
+    padding: 1%;
+    height: 2.5rem;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border: 1px solid gray;
+    margin-top: .5%;
+    margin-bottom: .5%;
+    font-weight: 600;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.div-time-right {
+    display: flex;
+    align-items: center;
+}
+
+.square-time {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    width: 90px;
+}
+
+.squere-hide {
+    opacity: 0;
+}
+
+.square-day-agenda {
+    margin-top: 1%;
+}

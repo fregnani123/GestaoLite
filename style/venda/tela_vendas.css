@@ -65,6 +65,7 @@ input[readonly] {
     align-items: flex-end;
     justify-content: right;
     margin-right: 1%;
+    height: 2.5rem;
 }
 
 .squere-hide {
@@ -81,13 +82,12 @@ input[readonly] {
 }
 
 .square-time {
-    font-size: 1.7rem;
+     font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  width: 90px; /* largura fixa evita deslocamento */
 }
 
-.segundo {
-    font-size: 1rem;
-    margin-left: .3rem;
-}
 
 #data-venda,
 #numero-pedido,
