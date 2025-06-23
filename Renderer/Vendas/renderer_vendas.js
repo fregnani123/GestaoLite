@@ -61,6 +61,7 @@ const inputMaxParcelas = document.getElementById('numeroParcela');
 const spanMaxParcelas = document.getElementById('spanMaxParcelas');
 const showSubtotal = document.querySelector('.span-subtotal')
 const carrinhoShowRemover = document.querySelector(".div-carrinho");
+ 
 
 // Mapeamento dos botões para as teclas de atalho desejadas
 const atalhos = {
@@ -81,6 +82,11 @@ const atalhos = {
     "btn-exit-desconto": 'Escape',
     "btn-exit-limpar": 'Escape',
     "btn-exit-remover": 'Escape',
+    "btn-exit-pag-1": 'Escape',
+    "btn-exit-pag-2": 'Escape',
+    "btn-exit-pag-3": 'Escape',
+    "btn-exit-pag-4": 'Escape',
+    "btn-exit-pag-5": 'Escape',
 };
 
 // Faz o loop automático
@@ -94,7 +100,6 @@ for (const [btnId, tecla] of Object.entries(atalhos)) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const linkID_2 = document.querySelector('.list-a2');
     if (linkID_2) {
@@ -103,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function estilizarLinkAtivo(linkID) {
- linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    linkID.style.background = '#3a5772';
+    linkID.style.textShadow = 'none';
+    linkID.style.color = 'white';
+    linkID.style.borderBottom = '2px solid #d7d7d7';
 }
 // Estado do carrinho
 let carrinho = [];
@@ -129,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const divSelecionarQtd = document.querySelector('.div-qtd');
     const divPagamento = document.querySelector('.payment-form-section');
     const divDesconto = document.querySelector('.desconto-venda');
+
 
 
     function limparInputsPagamento() {
@@ -243,8 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     vencimentosCrediario.value = `${ano}-${mes}-${dia}`;
 
                     CrediarioCliente.focus();
-                    informacaoCred.innerHTML = '⚠️ Informe o CPF do cliente já cadastrado no sistema.';
-                    informacaoCred.style.backgroundColor = 'rgba(255, 255, 0, 0.196)';
+                    informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
                     informacaoCred.style.color = 'black';
                     infoPag.style.display = 'none';
                     infoPagCred.style.display = 'flex'

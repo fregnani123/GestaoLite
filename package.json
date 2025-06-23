@@ -34,7 +34,7 @@
   },
   "build": {
     "appId": "com.gestaolite",
-    "productName": "Gestão Lite",
+    "productName": "Gerenciando Estoque FGL",
     "asar": false,
     "directories": {
       "output": "dist"

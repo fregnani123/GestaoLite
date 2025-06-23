@@ -6,15 +6,14 @@
 <link rel="stylesheet" href="../style/css-global/global.css">
 <link rel="stylesheet" href="../style/css-global/inputs.css">
 <link rel="stylesheet" href="../style/css-global/table.css">
-
 <title></title>
 </head>
 
 <body>
-  <div id="loading-overlay" class="active">
-  <div class="spinner"></div>
-  <p>Carregando...</p>
-</div>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
 
     <div class="container">
         <header>
@@ -26,10 +25,11 @@
         </header>
         <div class="formulario-container">
             <div class="menu-lateral">
-              <nav class="menu-suspenso">
+                <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
+                            <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png"
+                                    alt="">
                                 Cadastrar
                                 novo Cliente</a>
                         </li>
@@ -43,7 +43,8 @@
                                     alt="">Receber pagamento a prazo</a>
                         </li>
                         <li>
-                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do Mês – Todos os clientes</a>
+                            <a href="./prazo_mes_atual.html"><img class="img-informacao"
+                                    src="../style/img/data-limite.png" alt="">Vencimentos do Mês – Todos os clientes</a>
                         </li>
                         <li>
                             <a href="./prazo_atrasado.html"><img class="img-informacao"
@@ -64,7 +65,7 @@
             <div class="formulario">
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
-                        <div class="formulario-img">
+                        <div class="formulario-img" style="width: 20%;">
                             <p>Informações / Alterar</p>
                             <div class="quadro-img img-fixa"><img class="img-produto"
                                     src="../style/img/alterar-cliente.png" alt="">
@@ -73,20 +74,35 @@
                         <div class="formulario-inputs">
                             <table class="table-1-produto" style="margin-top: .5%;">
                                 <tr>
-                                    <th style="width: 30%;">
-                                        Filtrar CPF
+                                    <th style="width: 15%; text-align: center;">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; gap:6px;">
+                                            <img style="width: 25px;" src="../style/img/procurar-black.png" alt="">
+                                            Buscar por CPF
+                                        </div>
                                     </th>
-                                    <th style="width: 70%;">
+                                    <th style="width: 50%;">
                                         Nome Completo
                                     </th>
+
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="cpf" name="cpf" required>
+                                        <input type="text" id="cpf" placeholder="Digite para buscar" required>
                                     </td>
                                     <td>
-                                        <input type="text" id="cpf" name="cpf" required>
+                                        <div style="display: flex; text-align: center;align-items: center;gap: 1%;width: 100%;">
+                                            <input type="text" id="nome" style="width: 70%;" required>
+                                            <div
+                                                style="background: white; padding: .5%; display: flex;">
+                                                <button class="btn-buscar" style="width: 100%;"> <img
+                                                        style="width: 18px;" src="../style/img/procurar.png"
+                                                        alt="">Buscar por nome</button>
+                                            </div>
+                                        </div>
+
                                     </td>
+
                                 </tr>
                             </table>
                             <table class="table-2-produto">
@@ -110,7 +126,7 @@
                                     </td>
                                     <td>
                                         <select name="" id="ocupacao">
-                                            <option value="">Selecione:</option>
+
                                         </select>
                                     </td>
                                     <td>
@@ -205,7 +221,7 @@
                                     </td>
                                     <td>
                                         <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                                            <button class="btn-alterar-produto"><img class="img-disquete"
+                                            <button class="btn-atualizar"><img class="img-disquete"
                                                     src="../style/img/troca.png" alt="">Alterar</button>
                                             <button id="limparButton"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>

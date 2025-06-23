@@ -239,3 +239,8 @@ font-size: 0.95rem;
     border: 1px solid var(--border-color);
     overflow-y: scroll;
 }
+
+
+
+
+/* Tem que colocar no global para que todos fiquem igual */

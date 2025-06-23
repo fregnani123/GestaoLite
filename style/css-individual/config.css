@@ -9,6 +9,9 @@
 .menu-item-10 {
   display: none !important;
 }
+ a{
+  cursor: pointer !important;
+}
 
 .menu-item-0 {
   display: flex !important;

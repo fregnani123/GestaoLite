@@ -1,5 +1,5 @@
 const cpfCliente = document.getElementById('Crediario-cliente');
-const informacaoCred = document.querySelector('.titulo-choose-item-2');
+const informacaoCred = document.querySelector('.msg-cpf');
 const parcela = document.getElementById('Crediario-parcela');
 const parcelaValor = document.getElementById('Crediario-valor');
 const nomeClienteShow = document.getElementById('nomeCliente');
@@ -47,14 +47,14 @@ async function findCliente(cpf, nomeElemento) {
 
         if (!response.ok) {
             informacaoCred.innerHTML = '<strong>Cliente não encontrado.<strong> Verifique se o cadastro foi realizado anteriormente.'
-            informacaoCred.style.backgroundColor = 'rgb(255, 6, 6)';
-            informacaoCred.style.color = 'white'
+            // informacaoCred.style.backgroundColor = 'rgb(255, 6, 6)';
+            // informacaoCred.style.color = 'white'
 
             setTimeout(() => {
                 cpfCliente.value = ''; // Limpa o campo CPF
                 informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
-                informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
-                informacaoCred.style.color = 'white'
+                // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
+                // informacaoCred.style.color = 'white'
             }, 6000);
 
             return;
@@ -126,7 +126,7 @@ document.addEventListener('keydown', (e) => {
         nomeClienteShow.value = "";
         parcela.value = "";
         parcelaValor.value = "";
-        informacaoCred.innerHTML = "Finalize a venda pressionando Enter.";
+        informacaoCred.innerHTML = "Forma de pagamento.";
         informacaoCred.style.backgroundColor = "";
         informacaoCred.style.color = "";
         cpfCliente.focus();

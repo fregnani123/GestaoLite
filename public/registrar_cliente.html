@@ -12,9 +12,9 @@
 
 <body>
     <div id="loading-overlay" class="active">
-  <div class="spinner"></div>
-  <p>Carregando...</p>
-</div>
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
@@ -28,13 +28,14 @@
                 <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a id="btn-ativo" href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
+                            <a id="btn-ativo" href="./registrar_cliente.html"><img class="img-informacao"
+                                    src="../style/img/mais.png" alt="">
                                 Cadastrar
                                 novo cliente</a>
                         </li>
                         <li>
-                            <a href="./alterar_cliente.html"><img class="img-informacao"
-                                    src="../style/img/alterar.png" alt="">Cadastro do cliente /
+                            <a href="./alterar_cliente.html"><img class="img-informacao" src="../style/img/alterar.png"
+                                    alt="">Cadastro do cliente /
                                 alterar</a>
                         </li>
                         <li>
@@ -42,11 +43,12 @@
                                     alt="">Receber pagamento a prazo</a>
                         </li>
                         <li>
-                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/vencimento.png"alt="">Vencimentos do Mês – Todos os clientes</a>
+                            <a href="./prazo_mes_atual.html"><img class="img-informacao"
+                                    src="../style/img/vencimento.png" alt="">Vencimentos do Mês – Todos os clientes</a>
                         </li>
                         <li>
-                            <a href="./prazo_atrasado.html"><img class="img-informacao"
-                                    src="../style/img/alerta.png" alt="">Relatório de parcelas em atraso</a>
+                            <a href="./prazo_atrasado.html"><img class="img-informacao" src="../style/img/alerta.png"
+                                    alt="">Relatório de parcelas em atraso</a>
                         </li>
                         <li>
                             <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
@@ -196,8 +198,8 @@
                                     </td>
                                     <td>
                                         <div class="acoes-container">
-                                            <button class="btn-alterar-produto"><img class="img-disquete"
-                                                    src="../style/img/troca.png" alt="">Alterar</button>
+                                            <button id="salvar-cliente"><img class="img-disquete"
+                                                    src="../style/img/disquete.png" alt="">Gravar</button>
                                             <button id="limparButton"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>
                                         </div>
@@ -222,7 +224,7 @@
         </div>
     </div>
 </body>
- <script src="../Renderer/transicao.js" defer></script>
+<script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/Cliente/api_clientes.js"></script>

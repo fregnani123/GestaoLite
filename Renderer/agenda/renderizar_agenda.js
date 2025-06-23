@@ -131,7 +131,8 @@ function renderizarAgendamentos(agendamentos) {
         thead4.innerHTML = `
     <tr>   
     <th>Tipo de Serviço</th>
-    <th>Descrição</th></tr>
+    <th>Descrição</th>
+    <th>Tempo Estimado</th></tr>
 `;
         table4.appendChild(thead4);
 
@@ -140,35 +141,32 @@ function renderizarAgendamentos(agendamentos) {
         tr4.innerHTML = `
     <td>${'' || 'não cadastrado'}</td>
     <td>${'' || 'não cadastrado'}</td>
+    <td>${'' || 'não cadastrado'}</td>
 `;
         tbody4.appendChild(tr4);
         table4.appendChild(tbody4);
 
  // === TABELA 5 - Descrição detalhada do serviço a ser feito ===
-   const table5 = document.createElement('table');
-        table5.classList.add('table5');
+//    const table5 = document.createElement('table');
+//         table5.classList.add('table5');
 
-        const thead5 = document.createElement('thead');
-        thead5.innerHTML = `
-    <tr>   
-    <th>Materiais</th>
-    <th>Tempo Estimado</th>
+//         const thead5 = document.createElement('thead');
+//         thead5.innerHTML = `
+//     <tr>   
+   
+//     </tr>
+// `;
+//         table5.appendChild(thead5);
 
-    </tr>
-`;
-        table5.appendChild(thead5);
+//         const tbody5 = document.createElement('tbody');
+//         const tr5= document.createElement('tr');
+//         tr5.innerHTML = `
 
-        const tbody5 = document.createElement('tbody');
-        const tr5= document.createElement('tr');
-        tr5.innerHTML = `
-    <td>${'' || 'não cadastrado'}</td>
-    <td>${'' || 'não cadastrado'}</td>
-
-`;
-        tbody5.appendChild(tr5);
-        table5.appendChild(tbody5);
+  
+// `;
+//         tbody5.appendChild(tr5);
+//         table5.appendChild(tbody5);
     
-
 
         // === TABELA 6 ===
         const table6 = document.createElement('table');
@@ -204,6 +202,7 @@ function renderizarAgendamentos(agendamentos) {
         thead7.innerHTML = `
     <tr>
         <th>Observações</th>
+         <th>Materiais</th>
     </tr>
 `;
         table7.appendChild(thead7);
@@ -212,6 +211,7 @@ function renderizarAgendamentos(agendamentos) {
         const tr7 = document.createElement('tr');
         tr7.innerHTML = `
     <td>${agendamento.telefone || 'não cadastrado'}</td>
+        <td>${'' || 'não cadastrado'}</td>
 `;
         tbody7.appendChild(tr7);
         table7.appendChild(tbody7);
@@ -255,7 +255,7 @@ function renderizarAgendamentos(agendamentos) {
         if (agendamento.status === "Pendente") {
             const btnConfirm = document.createElement('button');
             btnConfirm.className = 'btn btn-confirm';
-            btnConfirm.innerHTML = 'Confirmado';
+            btnConfirm.innerHTML = 'Finalizar';
             btnConfirm.onclick = () => {
                 updateCliente({
                     data: agendamento.data,
@@ -325,7 +325,7 @@ function renderizarAgendamentos(agendamentos) {
         agendamentoContainer.appendChild(table1);
         agendamentoContainer.appendChild(table6);
         agendamentoContainer.appendChild(table4);
-        agendamentoContainer.appendChild(table5);
+        // agendamentoContainer.appendChild(table5);
          agendamentoContainer.appendChild(table7);
         agendamentoContainer.appendChild(table2);
         containerForm.appendChild(agendamentoContainer);

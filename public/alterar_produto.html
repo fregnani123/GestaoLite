@@ -56,7 +56,7 @@
             <div class="formulario">
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
-                        <div class="formulario-img">
+                        <div class="formulario-img" style="width: 21%;">
                             <p>Alterar Imagem do Produto</p>
                             <div class="quadro-img"><img class="img-produto" src="../style/img/alterar-interno.png"
                                     alt="Produto sem imagem."></div>
@@ -67,21 +67,32 @@
                         <div class="formulario-inputs">
                             <table class="table-1-produto">
                                 <tr>
-                                    <th style="width: 30%;">
-                                        Filtrar por código EAN
+                                    <th style=" display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                        <img style="width: 22px;" src="../style/img/procurar-black.png" alt=""> Buscar
+                                        EAN
                                     </th>
-                                    <th style="width: 70%;">
+                                    <th style="width: 60%;">
                                         Nome / Descrição
+                                    </th>
+                                    <th style="width: 20%;">
+                                        Açoes
                                     </th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <input type="number" class="codigoDeBarras" id="codigoDeBarras"
-                                            name="codigoDeBarras" autocomplete="off">
+                                            name="codigoDeBarras" autocomplete="off" placeholder="Digite para buscar">
                                     </td>
                                     <td>
-                                        <input type="text" class="nomeProduto" id="nomeProduto" name="nome"
-                                            autocomplete="off" placeholder="Nenhum produto selecionado" readonly>
+                                        <input type="text" id="nomeProduto" name="nome" autocomplete="off"
+                                            placeholder="Nenhum produto selecionado" readonly>
+                                    </td>
+                                    <td>
+                                    
+                                            <button class="btn-buscar" style="width: 100%;"> <img style="width: 18px;"
+                                                    src="../style/img/procurar.png" alt="">Buscar/nome</button>
+
+                                
                                     </td>
                                 </tr>
                             </table>
@@ -99,8 +110,14 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button id="add-grupo" class="add-grupo"><span
-                                                class="cad">Adicionar</span></button>
+                                       
+                                            <button id="add-grupo" class="add-grupo"
+                                                style="display: flex; align-items: center; gap: 8px;">
+                                                <img  src="../style/img/mais.png" alt=""
+                                                    style="width: 20px;">
+                                                <span>Adicionar</span>
+                                            </button>
+                                       
                                     </td>
                                     <td>
                                         <select id="sub-grupo" name="grupo">
@@ -108,9 +125,13 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button id="add-subGrupo" class="add-subGrupo"><span
-                                                class="cad">Adicionar</span></button>
+                                        <button id="add-subGrupo" class="add-subGrupo"
+                                          style="display: flex; align-items: center; gap: 8px;">
+                                            <img src="../style/img/mais.png" alt="Adicionar" style="width: 20px;">
+                                            <span>Adicionar</span>
+                                        </button>
                                     </td>
+
                                 </tr>
                             </table>
                             <table class="table-3-produto">
@@ -126,8 +147,13 @@
                                         </select>
                                     </td>
                                     <td class="btn-border-transparent">
-                                        <button id="add-cor" class="add-cor"><span class="cad">Adicionar</span></button>
+                                        <button id="add-cor" class="add-cor"
+                                             style="display: flex; align-items: center; gap: 8px;">
+                                            <img src="../style/img/mais.png" alt="Adicionar" style="width: 20px;">
+                                            <span>Adicionar</span>
+                                        </button>
                                     </td>
+
                                     <td>
                                         <div class="caracteristica-container">
                                             <select id="escolhaUM">
@@ -208,7 +234,7 @@
                                         Nome fantasia filtrado
                                     </th>
                                     <th>
-
+                                        Ações
                                     </th>
                                     <!-- <th style="width: 30%;">
                                 Filtrar por CNPJ
@@ -219,9 +245,15 @@
                                         <input style="width: 100%;" id="cnpjFilter" name="fornecedor"
                                             placeholder="Nenhum fornecedor — clique em buscar para selecionar">
                                     </td>
-                                    <td style="width: 30%;text-align: center;">
-                                        <button id="buscar-fornecedor">Buscar Fornecedor</button>
+                                    <td>
+                                        
+                                      
+                                            <button   style="display: flex; align-items: center; gap: 8px; width: 100%;"> <img style="width: 18px;"
+                                                    src="../style/img/procurar.png" class="buscar-fornecedor">Buscar
+                                                Fornecedor</button>
+                                      
                                     </td>
+
                                     <!-- <td>
                                 <select style="margin-bottom: 1%; width: 100%;" id="fornecedor" name="fornecedor"
                                     disabled>
@@ -250,9 +282,10 @@
                                     </td>
                                     <td>
                                         <div class="acoes-container">
-                                            <button class="btn-alterar-produto"><img class="img-disquete"
-                                                    src="../style/img/troca.png" alt="">Alterar</button>
-                                            <button id="limparButton"><img class="img-excluir"
+                                            <button class="btn-alterar-produto" style="width: 50%;"><img
+                                                    class="img-disquete" src="../style/img/troca.png"
+                                                    alt="">Alterar</button>
+                                            <button id="limparButton" style="width: 50%;"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>
                                         </div>
                                     </td>

@@ -31,7 +31,8 @@ function estilizarLinkAtivo(linkID) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-      estilizarLinkAtivo(linkID_10)
+      estilizarLinkAtivo(linkID_10
+      )
 })
 
 

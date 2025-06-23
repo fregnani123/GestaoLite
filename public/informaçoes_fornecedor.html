@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
+    <link rel="stylesheet" href="../style/css-individual/fornecedor.css">
     <title></title>
 </head>
+
 <body>
     <div id="loading-overlay" class="active">
         <div class="spinner"></div>
@@ -26,26 +29,27 @@
                 <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a href="./fornecedor.html"><img class="img-informacao" src="../style/img/informacoes.png"
+                            <a href="./fornecedor.html"><img class="img-informacao" src="../style/img/mais.png"
                                     alt="">Cadastrar novo fornecedor</a>
                         </li>
                         <li>
                             <a href="./alterar_Fornecedor.html"><img class="img-informacao"
-                                    src="../style/img/informacoes.png" alt="">Cadastro do fornecedor /
+                                    src="../style/img/alterar.png" alt="">Cadastro do fornecedor /
                                 Alterar</a>
                         </li>
                         <li>
                             <a id="btn-ativo" href="./informaçoes_fornecedor.html"><img class="img-informacao"
-                                    src="../style/img/informacoes.png" alt="">Produtos vinculados ao
+                                    src="../style/img/vinculo.png" alt="">Produtos vinculados ao
                                 fornecedor</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/informacoes.png"
+                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/quebra.png"
                                     alt="">Relatório de quebras e trocas</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/informacoes.png"
-                                    alt="">Histórico de compras do fornecedor</a>
+                            <a style="height: 2.8rem;"><img class="img-informacao"
+                                    src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
+                                fornecedor</a>
                         </li>
                     </ul>
                 </nav>
@@ -56,84 +60,93 @@
             <div class="formulario">
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
-                    
-                        <div class="formulario-inputs">
 
-                                <table id="filtroTabela" style="border-collapse: collapse; border: none;">
+                        <div class="formulario-inputs" style="gap: 0;">
+
+                            <table class="table-1-fornecedor" style="margin-top: .5%;">
+                                <tr>
+                                    <th class="th-15">
+                                        Filtrar CNPJ</th>
+
+                                    <th>
+                                        Razão Social
+                                    </th>
+                                    <th>
+                                        Nome
+                                        Fantasia</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="cnpjInfo">
+                                        <input type="hidden" id="fornecedorId">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="razaoSocial" readonly
+                                            style="background-color: rgb(239, 239, 239); color: black;">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="nomeFantasia" readonly
+                                            style="background-color: rgb(239, 239, 239); color: black;">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="div-info-row" style="width: 100% ;margin-left: 1%;">
+                                <table class="table-2-fornecedor">
                                     <tr>
-                                        <th>
-                                            Filtrar CNPJ</th>
-                                        
-                                           <th>
-                                             Razão Social
-                                           </th>
-                                        <th>
-                                            Nome
-                                            Fantasia</th>
+                                        <th style="border-top: none;"class="th-25">Itens sem fornecedor
+                                        </th>
+                                        <th style="border-top: none;" class="th-50">Total dos itens sem fornecedor (base: preço de
+                                            compra).</th>
+                                            <th style="border-top: none;">
+                                                Ações
+                                            </th>
                                     </tr>
-                                    <tr >
-                                        <td >
-                                            <input type="text" id="cnpjInfo">
-                                            <input type="hidden" id="fornecedorId">
-                                        </td>
-                                        <td>
-                                            <input type="text" id="razaoSocial" readonly
-                                                style="background-color: rgb(239, 239, 239); color: black;">
-                                        </td>
-                                        <td >
-                                            <input type="text" id="nomeFantasia" readonly
-                                                style="background-color: rgb(239, 239, 239); color: black;">
-                                        </td>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>R$ 0,00</td>
+                                        <td>      <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                            <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                    src="../style//img/procurar.png" alt="">Buscar</button>
+                            <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
+                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                        </div></td>
                                     </tr>
                                 </table>
-                         
-                                <div class="filtrados" style="width: 99%;">
-                                    <div class="div-info-row">
-                                        <table >
-                                            <tr>
-                                                <th>Total de itens filtrados sem fornecedor cadastrado</th>
-                                                <th>Valor total dos itens sem fornecedor, calculado pelo preço de compra.</th>
-                                            </tr>
-                                            <tr>
-                                                <td>0</td>
-                                                <td>R$ 0,00</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div style="max-height: 30.3rem; overflow-y: auto;">
-                                        <table style="width: 100%; border-collapse: collapse;">
-                                            <thead>
-                                                <tr class="header-row">
-                                                    <th>Código EAN</th>
-                                                    <th>Descrição Produto</th>
-                                                    <th>Preço Compra</th>
-                                                    <th>Qtd Vendida</th>
-                                                    <th>Estoque Atual</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="ul-filtros">
-                                                <!-- As linhas dos produtos serão inseridas aqui -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                        </div>
 
+                            </div>
+                            <div style="max-height: 30.3rem; overflow-y: auto; width: 100%;margin-left: 1%;">
+                                <table class="table-3-fornecedor">
+                                    <thead>
+                                        <tr class="header-row">
+                                            <th style="border-top: none;">Código EAN</th>
+                                            <th style="border-top: none;">Descrição Produto</th>
+                                            <th style="border-top: none;">Preço Compra</th>
+                                            <th style="border-top: none;">Qtd Vendida</th>
+                                            <th style="border-top: none;">Estoque Atual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ul-filtros">
+                                        <!-- As linhas dos produtos serão inseridas aqui -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
                     <div class="formulario-mensages-informativas" style="display: none;">
                         <p style="font-size: 1rem;justify-content: center;text-align: center;">
-                                <img style="width: 1.3rem; margin-right: .5%;"
-                                    src="../style/img/informacoes.png"><strong>Informação:</strong> Por padrão, esta
-                                tela exibe todos os <strong>produtos não vinculados a fornecedores</strong>. Para gerar
-                                <strong>relatórios específicos por fornecedor</strong>, utilize os <strong>filtros
-                                    acima</strong> e pressione <strong>Buscar</strong>.
-                            </p>
-                            <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                                <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
-                                        src="../style//img/procurar.png" alt="">Buscar</button>
-                                <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
-                                        src="../style//img/excluir.png" alt="">Limpar</button>
-                            </div>
+                            <img style="width: 1.3rem; margin-right: .5%;"
+                                src="../style/img/informacoes.png"><strong>Informação:</strong> Por padrão, esta
+                            tela exibe todos os <strong>produtos não vinculados a fornecedores</strong>. Para gerar
+                            <strong>relatórios específicos por fornecedor</strong>, utilize os <strong>filtros
+                                acima</strong> e pressione <strong>Buscar</strong>.
+                        </p>
+                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                            <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                    src="../style//img/procurar.png" alt="">Buscar</button>
+                            <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
+                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,4 +158,5 @@
 <script src="../Renderer/services/alertMsg.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/Fornecedor/info_fornecedor.js"></script>
+
 </html>

@@ -205,47 +205,59 @@ async function UpdateFornecedor(fornecedorId) {
     }
 };
 
-pessoa.addEventListener('change', () => {
-    const labelCnpjCPF = document.getElementById('filtrar');
-    const label_razao = document.getElementById('label_razao');
 
+const labelCnpjCPF = document.getElementById('label_cnpj_cpf');
+const label_razao = document.getElementById('label_razao');
+
+pessoa.addEventListener('change', () => {
     if (pessoa.value === "juridica") {
+        labelCnpjCPF.innerHTML = 'CNPJ';
+        label_razao.innerHTML = 'Razão Social';
+        cnpj.style.display = '';
+        razaoSocial.style.display = '';
+
         cnpj.value = '';
         cnpj.removeAttribute('readonly'); 
         razaoSocial.removeAttribute('readonly'); 
         formatarCNPJ(cnpj);
         inputMaxCaracteres(cnpj, 18);
-        labelCnpjCPF.innerHTML = '🔍 Filtrar CNPJ';
-        label_razao.innerHTML = 'Razão Social';
         contribuinte.removeAttribute('disabled');
         nomeFantasia.removeAttribute('readonly');
         contribuinte.value = 'isento';
         cnpj.focus();
+
     } else if (pessoa.value === "fisica") {
+        labelCnpjCPF.innerHTML = 'CPF';
+        label_razao.innerHTML = 'Nome';
+        cnpj.style.display = '';
+        razaoSocial.style.display = '';
+
         razaoSocial.addEventListener('input', () => {
             if (pessoa.value === "fisica") {
                 nomeFantasia.value = razaoSocial.value;
             }
         });        
         cnpj.value = '';
-        cnpj.removeAttribute('readonly'); // Remove o atributo readonly
+        cnpj.removeAttribute('readonly'); 
         razaoSocial.removeAttribute('readonly'); 
-        nomeFantasia.setAttribute('readonly',true);
+        nomeFantasia.setAttribute('readonly', true);
         nomeFantasia.value = razaoSocial.value;
         contribuinte.value = 'isento';
         formatarEVerificarCPF(cnpj);
         inputMaxCaracteres(cnpj, 14);
-        labelCnpjCPF.innerHTML = '🔍 Filtrar CPF';
-        label_razao.innerHTML = 'Nome';
         cnpj.focus();
+
     } else {
-        cnpj.value = '';
         labelCnpjCPF.innerHTML = 'CNPJ / CPF';
         label_razao.innerHTML = 'Razão Social / Nome';
+        
+        cnpj.value = '';
         cnpj.setAttribute('readonly', 'true'); 
-        contribuinte.setAttribute('disabled',true);
-        razaoSocial.setAttribute('readonly',true);
-        nomeFantasia.setAttribute('readonly',true);
+        razaoSocial.setAttribute('readonly', 'true');
+
+        // Oculta os inputs quando estiver vazio
+        cnpj.style.display = 'none';
+        razaoSocial.style.display = 'none';
     }
 });
 

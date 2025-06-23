@@ -12,7 +12,8 @@ const observacoesTextarea = document.getElementById('observacoes');
 const creditoLiberado = document.getElementById('alterarCredito');
 const setEstado = document.getElementById('uf');
 const inputCidade = document.getElementById('cidade');
-const btnAtualizar = document.querySelector('.btn-atualizar');
+const btnAtualizar = document.getElementById('btn-buscar');
+const btnBuscar = document.getElementById('btn-buscar');
 const limparButtonFilter = document.getElementById('limparButton');
 const creditoUtilizado = document.getElementById('creditoUtilizado');
 const linkID_7 = document.querySelector('.list-a7');
@@ -94,14 +95,14 @@ async function findCliente(cpf) {
         clienteAlterar = cliente.cliente_id;
 
         // Preenche os campos de entrada com os dados do cliente
-        nomeInput.value = cliente.nome || '';
-        dataNascimentoInput.value = cliente.data_nascimento || '';
-        telefoneInput.value = cliente.telefone || '';
-        emailInput.value = cliente.email || '';
-        cepInput.value = cliente.cep || '';
-        logradouroInput.value = cliente.logradouro || '';
+        nomeInput.value = cliente.nome;
+        dataNascimentoInput.value = cliente.data_nascimento;
+        telefoneInput.value = cliente.telefone;
+        emailInput.value = cliente.email;
+        cepInput.value = cliente.cep;
+        logradouroInput.value = cliente.logradouro;
         numeroInput.value = cliente.numero || '';
-        bairroInput.value = cliente.bairro || '';
+        bairroInput.value = cliente.bairro;
 
         creditoLiberado.value = new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: 2,
@@ -156,12 +157,28 @@ function limparInputs() {
     bairroInput.value = '';
     creditoLiberado.value = '0,00';
     ocupacao.value = 'Selecione';
-   
-    
     observacoesTextarea.value = '';
     setEstado.value = 'Selecione';
     inputCidade.value = 'Selecione';
 }
+
+function limparInputsAoAtulizar() {
+    cpfInput.value = ''
+    nomeInput.value = '';
+    dataNascimentoInput.value = '';
+    telefoneInput.value = '';
+    emailInput.value = '';
+    cepInput.value = '';
+    logradouroInput.value = '';
+    numeroInput.value = '';
+    bairroInput.value = '';
+    creditoLiberado.value = '0,00';
+    ocupacao.value = 'Selecione';
+    observacoesTextarea.value = '';
+    setEstado.value = 'Selecione';
+    inputCidade.value = 'Selecione';
+}
+
 
 // Garantir que o CPF seja formatado e validado
 formatarEVerificarCPF(cpfInput);
@@ -198,8 +215,8 @@ async function updateCliente(clienteId) {
         } else {
             alertMsg('Cliente atualizado com sucesso', 'success', 3000);
             setTimeout(() => {
-                location.reload();
-            }, 3000);
+               limparInputsAoAtulizar()
+            }, 2000);
 
         }
     } catch (error) {
@@ -207,7 +224,7 @@ async function updateCliente(clienteId) {
     }
 };
 
-btnAtualizar.addEventListener('click', atualizarCliente);
+
 
 function formatarNumero(valor) {
     // Remove todas as vírgulas (milhares) e troca a vírgula decimal por ponto
@@ -216,9 +233,7 @@ function formatarNumero(valor) {
     return parseFloat(valorFormatado);  // Converte para float
 }
 
-async function atualizarCliente(e) {
-    e.preventDefault();
-
+async function atualizarCliente() {
     const clienteId = {
         telefone: telefoneInput.value,
         email: emailInput.value,
@@ -228,15 +243,19 @@ async function atualizarCliente(e) {
         bairro: bairroInput.value,
         estado: setEstado.value,
         cidade: inputCidade.value,
-        credito_limite: formatarNumero(creditoLiberado.value), // Formata o valor de crédito limite
-        credito_utilizado: formatarNumero(creditoUtilizado.value), // Formata o valor de crédito utilizado
+        credito_limite: formatarNumero(creditoLiberado.value),
+        credito_utilizado: formatarNumero(creditoUtilizado.value),
         ocupacao: ocupacao.value,
         cliente_id: clienteAlterar
     };
 
-    // Chama a função para atualizar o cliente com os dados formatados
     updateCliente(clienteId);
 }
+
+btnAtualizar.addEventListener('click', () => {
+    exibirOverlayEAposDelay(atualizarCliente, 1000); // agora vai funcionar
+});
+
 
 limparButtonFilter.addEventListener('click',()=>{
     location.reload();

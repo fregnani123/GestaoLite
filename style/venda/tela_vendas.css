@@ -56,7 +56,12 @@ input[readonly] {
     justify-content: center;
     align-items: center;
 }
-
+.nomeProduto{
+    width: 100%;
+    display: flex !important;
+    justify-content: left !important;
+    margin-left: 1% !important;
+}
 
 .div-time {
     display: flex;
@@ -293,9 +298,6 @@ input[readonly] {
     justify-content: left;
 }
 
-.remove-item {
-    margin-left: -18%;
-}
 
 #exit-key,
 #limpar-tela-key {
@@ -307,7 +309,9 @@ input[readonly] {
 .p-info {
     margin-top: 2%;
 }
-
+.segundo{
+    font-size: .9rem;
+}
 .exit-venda {
     margin-left: -18%;
 }
@@ -317,26 +321,8 @@ input[readonly] {
 .exit-venda,
 .remove-item {
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
-    /* 12px x 25px */
 }
 
-#btnBuscarNome {
-    background-color: #198754;
-    color: #fff;
-    padding: 5px 10px;
-    width: 8rem;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-    margin-left: 2%;
-}
-
-#btnBuscarNome:hover {
-    background-color: #4cae4c;
-}
 
 .divNomes {
     position: absolute;
@@ -354,6 +340,7 @@ input[readonly] {
     width: 100%;
     border: 1px solid gray;
     margin-bottom: .5%;
+    background-color: rgb(240, 240, 240);
 }
 
 .p-nome-produto {
@@ -362,18 +349,15 @@ input[readonly] {
     width: 100%;
     padding-left: 2%;
 }
-
-.footer-venda,
-.msg-alterar {
-    margin-top: 1%;
+.ultimo-pro {
     display: flex;
-    background-color: rgba(248, 255, 53, 0.142);
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    padding: .5%;
+    justify-content: left;
+    width: 40%;
+    padding-left: 2%;
+    font-weight: 600;
 }
+
+ 
 
 .div-vendas {
     width: 100%;
@@ -383,8 +367,9 @@ input[readonly] {
     align-items: center;
 }
 
-/* desconto-venda */
-
+/* 
+-venda */
+#desconto{width: 100%;margin-left: -4%;}
 .desconto-venda {
     position: absolute;
 }
@@ -427,9 +412,10 @@ input[readonly] {
     margin-left:2%;
 }
 .val-div input {
+    display: flex;
     width: 100%;
     display: flex;
-    text-align: center;
+    text-align: left !important;
     font-weight: normal;
 }
 
@@ -438,16 +424,20 @@ input[readonly] {
     justify-content: center;
     align-items: center;
     height: 7rem;
-    background-color: var(--footer-form);
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    /* background-color: var(--footer-form); */
+    border: 1px solid rgb(129, 129, 129);
     box-shadow: var(--shadow-sm);
     padding: 0.5%;
     margin-top: .5%;
 }
 .formulario-mensages-informativas-p {
-  margin: 0;
+  margin: 1%;
   max-width: 100%; 
   text-align: left; 
+}
+.formulario-mensages-informativas{
+background-color: red;
+display: none;
 }
 
 #clienteNome {
@@ -456,5 +446,19 @@ input[readonly] {
     text-align: left;
 
 }
-
+ 
+.kbd-estilo {
+  display: inline-block;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: monospace;
+  font-size: 14px;
+  box-shadow: inset 0 -2px 0 #aaa;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  width: 100px;
+}
+ 
  

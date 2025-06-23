@@ -312,22 +312,29 @@ header {
   max-width: 100%;
   object-fit: contain;
 }
-
-input[readonly] {
-  all: unset;
-  font: inherit;
-  color: inherit;
-  background-color: transparent !important;
+.inputReadonly {
+  all: unset !important;
+  font: inherit !important;
+  color: inherit !important;
+  background-color: white !important;
 }
+
+/* input[readonly] {
+  font: inherit;
+  color: #555;  
+  background-color: #f2f2f2 !important;  
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+  pointer-events: none;  
+} */
+
 
 .formulario-inputs {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centraliza horizontalmente */
   justify-content: flex-start;
-  /* Alinha ao topo verticalmente */
   gap: .9rem;
   width: 75%;
   min-height: var(--formulario-inputs);
@@ -379,8 +386,16 @@ input[readonly] {
 }
 
 #btn-exit-juros,
+#btn-exit-desconto,
 #btn-exit-venda,
-#btn-exit {
+#btn-exit,
+#btn-exit-pag-1, 
+#btn-exit-pag-2, 
+#btn-exit-pag-3, 
+#btn-exit-pag-4, 
+#btn-exit-pag-5,
+#btn-exit-remover,
+#btn-exit-qtd {
   position: absolute;
   top: 8px;
   padding-bottom: 1%;
@@ -400,7 +415,15 @@ input[readonly] {
 }
 
 #btn-exit-juros:hover,
-#btn-exit:hover {
+#btn-exit-desconto:hover,
+#btn-exit:hover,
+#btn-exit-pag-1:hover, 
+#btn-exit-pag-2:hover, 
+#btn-exit-pag-3:hover, 
+#btn-exit-pag-4:hover, 
+#btn-exit-pag-5:hover,
+#btn-exit-remover:hover,
+#btn-exit-qtd:hover {
   background-color: #e81123;
   color: white;
 }

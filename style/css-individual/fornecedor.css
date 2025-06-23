@@ -3,7 +3,7 @@
 }
 
 .th-15 {
-    width: 15%;
+    width: 20%;
 }
 
 .th-30 {
@@ -12,4 +12,9 @@
 
 .th-50 {
     width: 50%;
+}
+
+td{
+    justify-content: left;
+    text-align: left;
 }
