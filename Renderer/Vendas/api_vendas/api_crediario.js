@@ -45,20 +45,20 @@ async function findCliente(cpf, nomeElemento) {
             }
         });
 
-        if (!response.ok) {
-            informacaoCred.innerHTML = '<strong>Cliente não encontrado.<strong> Verifique se o cadastro foi realizado anteriormente.'
-            // informacaoCred.style.backgroundColor = 'rgb(255, 6, 6)';
-            // informacaoCred.style.color = 'white'
+        // if (!response.ok) {
+        //     informacaoCred.innerHTML = '<strong>Cliente não encontrado.<strong> Verifique se o cadastro foi realizado anteriormente.'
+        //     // informacaoCred.style.backgroundColor = 'rgb(255, 6, 6)';
+        //     // informacaoCred.style.color = 'white'
 
-            setTimeout(() => {
-                cpfCliente.value = ''; // Limpa o campo CPF
-                informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
-                // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
-                // informacaoCred.style.color = 'white'
-            }, 6000);
+        //     setTimeout(() => {
+        //         cpfCliente.value = ''; // Limpa o campo CPF
+        //         informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
+        //         // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
+        //         // informacaoCred.style.color = 'white'
+        //     }, 6000);
 
-            return;
-        }
+        //     return;
+        // }
 
         const data = await response.json();
         console.log("Dados recebidos:", data); // Verifica a estrutura da resposta no console
@@ -88,9 +88,9 @@ async function findCliente(cpf, nomeElemento) {
             });
 
             parcela.focus();
-            informacaoCred.innerHTML = 'Informe o numero de Parcelas e precione Enter para finalizar a venda';
-            informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
-            informacaoCred.style.color = 'white'
+            // informacaoCred.innerHTML = 'Informe o numero de Parcelas e precione Enter para finalizar a venda';
+            // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
+            // informacaoCred.style.color = 'white'
         } else {
             nomeElemento.value = "Cliente encontrado, mas sem nome disponível";
         }
@@ -108,12 +108,13 @@ inputMaxCaracteres(cpfCliente, 14);
 cpfCliente.addEventListener('input', (e) => {
     const cpf = e.target.value.trim(); // Remove espaços em branco extras
     const cpfFormatado = formatarCPF(cpf)
-    informacaoCred.innerHTML = 'Buscando Cliente associado ao CPF'
+    // informacaoCred.innerHTML = 'Buscando Cliente associado ao CPF'
     if (cpf.length === 14) {
         findCliente(cpfFormatado, nomeClienteShow);
     }
     if (cpf.length === '') {
-        informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
+        console.log('Informe o CPF do cliente já cadastrado no sistema.')
+        // informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
     }
 });
 
@@ -278,17 +279,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 li.style.background = '#f9f9f9';
                 li.style.borderRadius = '4px';
 
-
-                // O CPF já está formatado, então você só pega o valor direto
                 const cpfFormatado = decode(cliente.cpf);
 
                 li.innerHTML = `
-                    CPF ${cpfFormatado} - ${cliente.nome}
-                 <button style="margin-left: 8px; padding: 2px 6px; font-size: 12px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;" data-cpf="${cpfFormatado}">
-                 Selecionar
-                </button>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+            <span>${cpfFormatado} - ${cliente.nome}</span>
+            <button 
+                style="margin-left: 8px; padding: 2px 6px; font-size: 12px;width:100px; background-color: #1f3b57; color: white; border: none; border-radius: 4px; cursor: pointer;" 
+                data-cpf="${cpfFormatado}">
+                Selecionar
+            </button>
+        </div>
+    `;
 
-                `;
                 lista.appendChild(li);
             });
 
@@ -331,4 +334,26 @@ btnBuscarNome.addEventListener('click', (e) => {
         divNomes.style.display = 'none';
         cpfCliente.focus(); // Certifique-se que 'cpfCliente' existe
     }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnExitNome = document.getElementById('btn-exit-nome');
+    const divNomes = document.querySelector('.divNomes');
+    const inputBusca = document.getElementById('buscaCliente');
+    const listaClientes = document.getElementById('listaClientes');
+
+    btnExitNome.addEventListener('click', () => {
+        // Oculta a div
+        divNomes.style.display = 'none';
+
+        // Limpa o campo de busca
+        inputBusca.value = '';
+
+        // Limpa a lista
+        listaClientes.innerHTML = '';
+
+        cpfCliente.focus();
+    });
+       
 });

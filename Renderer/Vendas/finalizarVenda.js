@@ -1,5 +1,5 @@
 async function findClienteAlterar(cpf) {
-   
+
     // Verifica se o CPF tem o formato correto (14 dígitos)
     if (cpf.length !== 14) {
         alertMsg("CPF inválido. Digite um CPF válido.", "error");
@@ -13,8 +13,8 @@ async function findClienteAlterar(cpf) {
     try {
         const response = await fetch(findOneClient, {
             method: 'GET',
-            headers: { 
-               'x-api-key': 'segredo123',
+            headers: {
+                'x-api-key': 'segredo123',
                 'Content-Type': 'application/json'
             }
         });
@@ -46,6 +46,7 @@ async function findClienteAlterar(cpf) {
 
         // Preenche os campos com os dados do cliente encontrado
         document.getElementById("nomeClienteAlter").value = cliente.nome || "Nome não disponível";
+        document.getElementById("clienteNome").value = cliente.nome || "Nome não disponível";
         clienteId.value = cliente.cliente_id || "";
 
     } catch (error) {
@@ -54,6 +55,8 @@ async function findClienteAlterar(cpf) {
         clienteId.value = "";
     }
 }
+
+
 
 // Evento para disparar a busca ao digitar um CPF válido
 alterCliente.addEventListener("input", async function () {
@@ -77,7 +80,7 @@ inputMaxCaracteres(alterCliente, 14);
 
 function parseCurrency(value) {
     if (!value) return 0;
-    
+
     // Remove caracteres não numéricos (exceto vírgula e ponto)
     value = value.replace(/[^\d,-]/g, '');
 
@@ -88,15 +91,15 @@ function parseCurrency(value) {
     return parseFloat(value) || 0;
 }
 
-async function FinalizarVenda(){
+async function FinalizarVenda() {
     imgProduto.src = ''
     if (carrinho.length === 0) {
         alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'warning');
         return;
     }
 
-    if(divCrediario.style.display === 'block' && CrediarioCliente.value === ''){
-        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda','info')
+    if (divCrediario.style.display === 'block' && CrediarioCliente.value === '') {
+        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda', 'info')
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
@@ -104,23 +107,23 @@ async function FinalizarVenda(){
         return;
     }
 
-    if(divCrediario.style.display === 'block' && parcela.value === ''){
-        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda','info');
+    if (divCrediario.style.display === 'block' && parcela.value === '') {
+        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda', 'info');
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
-        cpfCliente.value = '';       
+        cpfCliente.value = '';
         return;
     }
 
-// Quando precisar usar totalComJuros:
-inputTotalLiquido.value = converteMoeda(totalComJuros || parseCurrency(inputTotalLiquido.value));
+    // Quando precisar usar totalComJuros:
+    inputTotalLiquido.value = converteMoeda(totalComJuros || parseCurrency(inputTotalLiquido.value));
 
 
     const totalLiquido = parseCurrency(inputTotalLiquido.value);
     const valorPago = calcularValores();
 
-     
+
     if (valorPago < totalLiquido) {
         alertMsg('O valor pago está menor que o valor da compra.', 'warning');
         return;
@@ -165,43 +168,43 @@ inputTotalLiquido.value = converteMoeda(totalComJuros || parseCurrency(inputTota
     function formatarParaNumero(valor) {
         return parseFloat(valor.replace("R$", "").trim().replace(/\./g, "").replace(",", "."));
     }
-    
+
     const credCli = {
-        credito_limite: formatarParaNumero(creditoLimite.value), 
+        credito_limite: formatarParaNumero(creditoLimite.value),
         credito_utilizado: formatarParaNumero(creditoUtilizado.value) + formatarParaNumero(valorCrediario.value),
         cliente_id: clienteId.value
     };
-    
+
     // Verifica se o crédito utilizado mais o total líquido ultrapassa o crédito limite
     const excedente = credCli.credito_utilizado - credCli.credito_limite;
 
-// Validação do crédito
-if (divCrediario.style.display === 'block' && excedente > 0) {
-    codigoEan.focus();
-    alertMsg(
-        `Crédito insuficiente! O valor da venda excede o limite disponível em ${parseFloat(excedente).toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        })}`,
-        "warning"
-    );
+    // Validação do crédito
+    if (divCrediario.style.display === 'block' && excedente > 0) {
+        codigoEan.focus();
+        alertMsg(
+            `Crédito insuficiente! O valor da venda excede o limite disponível em ${parseFloat(excedente).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            })}`,
+            "warning"
+        );
 
-    // Restaurar o valor original antes dos juros
-    inputTotalLiquido.value = converteMoeda(totalLiquidoOriginal);
-    Crediario.value = converteMoeda(totalLiquidoOriginal);
-    totalComJuros = totalLiquidoOriginal;
-    codigoEan.focus();
-    cpfCliente.value = '';
-    creditoUtilizado.value = '';
-    creditoLimite.value = '0,00';
-    Crediario.value = '0,00';
-    CrediarioParcela.value = '';
-    CrediarioCliente.value = '';
-    inputTotalPago.value = '0,00';
-    clienteId.value = 1;
+        // Restaurar o valor original antes dos juros
+        inputTotalLiquido.value = converteMoeda(totalLiquidoOriginal);
+        Crediario.value = converteMoeda(totalLiquidoOriginal);
+        totalComJuros = totalLiquidoOriginal;
+        codigoEan.focus();
+        cpfCliente.value = '';
+        creditoUtilizado.value = '';
+        creditoLimite.value = '0,00';
+        Crediario.value = '0,00';
+        CrediarioParcela.value = '';
+        CrediarioCliente.value = '';
+        inputTotalPago.value = '0,00';
+        clienteId.value = 1;
 
-    return; // Bloqueia a continuação do processo
-}
+        return; // Bloqueia a continuação do processo
+    }
 
     // Continua o processo normalmente se não houver bloqueio
     // console.log('Acrescentar valor no credito utilizado: ', credCli)
@@ -211,24 +214,24 @@ if (divCrediario.style.display === 'block' && excedente > 0) {
         // Registra a venda no banco
         await postVendaDb(venda);
 
-        if(clienteId.value !== 1 ){
-            await validarCrediarioLoja(dataCrediario); 
-            await updateCrediario(credCli); 
-        }else{
+        if (clienteId.value !== 1) {
+            await validarCrediarioLoja(dataCrediario);
+            await updateCrediario(credCli);
+        } else {
             console.log('crediario não foi chamado...')
         }
-    
+
 
         alertMsg('Pedido finalizado com sucesso, obrigado!', 'success');
-        
+
         // Altera o estoque e o vendido
         await alteraEstoqueEVendido(carrinho);
         console.log('Estoque atualizado com sucesso!', 'success');
 
         // Busca os dados do pedido registrado e imprime
         await imprimirVenda(numeroPedido.value);
-       imgProduto.src = '../style/img/carrinho-de-compras.png';
-        
+        imgProduto.src = '../style/img/carrinho-de-compras.png';
+
 
     } catch (error) {
         console.error('Erro ao processar a venda ou atualizar estoque:', error);
@@ -244,8 +247,8 @@ async function imprimirVenda(numeroPedido) {
         }
 
         // Busca os dados do último pedido
-        await getUltimoPedidoImprimirFolha(numeroPedido,numeroPedido);
-      
+        await getUltimoPedidoImprimirFolha(numeroPedido, numeroPedido);
+
         // Atraso para garantir que a div foi preenchida antes de imprimir
         setTimeout(() => {
             // Salva o conteúdo original
@@ -267,7 +270,7 @@ async function imprimirVenda(numeroPedido) {
 
             // Restaura o título da página
             document.title = 'Tela de Vendas'; // Coloque o título original de volta, se necessário
-          
+
         }, 2000);  // 500ms de atraso para garantir que a div foi preenchida
         limparCampos();
     } catch (error) {
@@ -279,7 +282,7 @@ function limparCampos() {
     // Limpa o carrinho imediatamente
     carrinho = [];
     setTimeout(() => {
-      location.reload();
+        location.reload();
     }, 6000);
 }
 
@@ -292,7 +295,7 @@ btnFinalizarVenda.addEventListener('click', (e) => {
         FinalizarVenda();
         console.log('Venda finalizada');
     } else {
-        alertMsg('Selecione uma forma de pagamento','info');
+        alertMsg('Selecione uma forma de pagamento', 'info');
     }
 });
 
@@ -311,3 +314,8 @@ document.addEventListener('keydown', (e) => {
 
 
 
+const btnCliente = document.getElementById('btn-alterar-confirmar');
+btnCliente.addEventListener('click', () => {
+    divAlterarCliente.style.display = 'none'
+    return;
+})

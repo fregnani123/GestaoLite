@@ -183,8 +183,8 @@
                                                     <td>
                                                         <div
                                                             style="display: flex; align-items: center; gap: 2%; width: 100%; justify-content: center; text-align: center;">
-                                                            <!-- id="alterClienteCPF" -->
-                                                            <input type="text" style="width: 100%;"
+
+                                                            <input id="alterClienteCPF" type="text" style="width: 100%;"
                                                                 placeholder="Digite pada buscar">
 
                                                         </div>
@@ -204,16 +204,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <!-- id="nomeClienteAlter" -->
-                                                        <input type="text" readonly
+                                                        <!-- " -->
+                                                        <input id="nomeClienteAlter" type="text" readonly
                                                             placeholder="Cliente não cadastrado no pedido">
                                                     </td>
                                                 </tr>
                                             </table>
                                         </table>
-                                        <div class="botoes">
-                                            <button class="btn-alterar-produto">
-                                                <img class="img-disquete" src="../style/img/troca.png" alt="">Alterar
+                                        <div  style="width: 100%;display: flex; align-items: center;margin-top: 2%;justify-content: center; gap:2%;">
+                                            <button id="btn-alterar-confirmar">
+                                                <img style="width: 20px;" src="../style/img/troca.png" alt="">Alterar
                                             </button>
                                             <button id="limparButton">
                                                 <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
@@ -390,24 +390,39 @@
                         <!--Configurações - Crediario-loja     <div id="div-Crediario">-->
                         <div id="parcelado">
                             <div id="div-container-parcelado">
-                                <span id="btn-exit-qtd">x</span>
+                                <span id="btn-exit-parcelado">x</span>
+
                                 <label for="">Pedido Parcelado</label>
-                                <div class="divNomes"
-                                    style="display: none; box-sizing: border-box; max-height: 300px; ">
-                                    <p>Digite o nome do Cliente</p>
-                                    <input type="text" id="buscaCliente">
-                                    <ul id="listaClientes"
-                                        style="box-sizing: border-box; margin: 0; padding: 0; list-style: none; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
-
-                                    </ul>
+                                <div class="divNomes">
+                                    <span id="btn-exit-nome">x</span>
+                                    <label for="">
+                                        Buscar cliente por nome</label>
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                <div style="display: flex; align-items: center;">
+                                                    <img style="width: 22px; margin-right: 1%;" src="../style/img/procurar-black.png"
+                                                        alt="">
+                                                    Digite o nome do Cliente
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" id="buscaCliente"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <ul id="listaClientes">
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <table>
-                                    <tr>
-                                        <td class="msg-cpf">
 
-                                        </td>
-                                    </tr>
-                                </table>
+
+
+
+
 
                                 <table>
                                     <tr>
@@ -416,46 +431,61 @@
                                             <img style="width: 22px;" src="../style/img/procurar-black.png"
                                                 alt="">Buscar por CPF
                                         </th>
+                                        <th style="width: 50%;">
+                                            Ações
+                                        </th>
 
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div
-                                                style="display: flex; align-items: center; gap: 2%; width: 100%; justify-content: center; text-align: center;">
-                                                <input id="Crediario-cliente" type="text" value=""> <button
-                                                    style="width: 80%;" id="btnBuscarNome">
-                                                    Buscar por nome</button>
-                                            </div>
+
+                                            <input id="Crediario-cliente" type="text" value="">
+
+                                        </td>
+                                        <td>
+                                            <button style="width: 100%;" id="btnBuscarNome"> <img style="width: 22px;"
+                                                    src="../style/img/procurar.png" alt="">
+                                                Buscar por nome</button>
                                         </td>
                                     </tr>
                                 </table>
                                 <table style="margin-top: 2%;">
                                     <tr>
                                         <th>
-                                            Cliente
+                                            Nome do Cliente
                                         </th>
-                                        <th>
-                                            Numero de Parcelas
-                                        </th>
+
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input id="nomeCliente" type="text" style="flex: 1; margin-right: 2px;"
-                                                value="" readonly>
+                                            <input type="text" id="nomeCliente" readonly
+                                                placeholder="Cliente não cadastrado no pedido">
                                         </td>
-                                        <td>
-                                            <input id="Crediario-parcela" type="number" value="">
-                                        </td>
+
                                     </tr>
                                 </table>
 
-
-                                <table>
+                                <table style="margin-top: 2%;">
                                     <tr>
 
-                                        <th>
+                                        <th style="width: 50%;">
+                                            Selecione o num. parcelas
+                                        </th>
+                                        <th style="width: 50%;">
                                             Taxa de Juros %
                                         </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input id="Crediario-parcela" type="number" value="">
+                                        </td>
+                                        <td>
+                                            <input id="taxa-juros" type="number" value="" readonly>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top: 2%;">
+                                    <tr>
                                         <th>
                                             Valor da Parcela:
                                         </th>
@@ -464,10 +494,6 @@
                                         </th>
                                     </tr>
                                     <tr>
-
-                                        <td>
-                                            <input id="taxa-juros" type="number" value="" readonly>
-                                        </td>
                                         <td>
                                             <input id="Crediario-valor" type="number" value="" readonly>
                                         </td>
@@ -478,12 +504,10 @@
                                 </table>
 
 
-                                <table>
+                                <table style="margin-top: 2%;">
+
                                     <tr>
-                                        <th>
-                                            1º Vencimento para o
-                                            dia:
-                                        </th>
+
                                         <th>
                                             Crédito liberado:
                                         </th>
@@ -493,9 +517,7 @@
 
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input id="vencimentos" type="date">
-                                        </td>
+
                                         <td>
                                             <input id="creditoLimite" value="0,00" style="background-color: #e9ecef;"
                                                 readonly>
@@ -504,6 +526,34 @@
                                             <input id="creditoUtilizado" value="0,00" readonly>
                                         </td>
 
+                                    </tr>
+                                </table>
+
+                                <table style="margin-top: 2%;">
+                                    <tr>
+                                        <th style="width: 30%;">
+                                            Selecione o vencimento
+                                        </th>
+                                        <th>
+                                            Ações
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input id="vencimentos" type="date">
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 2%;">
+                                                <button style="width: 100%;" id="btn-finalizar-venda">
+                                                    <img style="width: 22px;" src="../style/img/confirmacao.png" alt="">
+                                                    Finalizar</button>
+                                                <button style="width: 100%;" id="btn-limpar-formulario">
+                                                    <img style="width: 22px;" src="../style/img/cancelar.png" alt="">
+                                                    Limpar
+                                                </button>
+
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
 
@@ -641,7 +691,7 @@
                                             <div
                                                 style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
                                                 <button style="width: 100%; ">
-                                                    Finalizar pedido (Enter)</button>
+                                                    Finalizar pedido</button>
                                             </div>
                                         </div>
 
@@ -810,9 +860,9 @@
 
                                         </div>
                                         <div class="val-div">
-                                            <p><span
+                                            <p style="display: flex; align-items: center;"><span
                                                     style="width: 10%;display: flex; justify-content: right;">Cliente:</span>
-                                                <input type="text" id="clienteNome" class="inputReadonly"
+                                                <input type="text" id="clienteNome" class="clienteNome"
                                                     value="Cliente não cadastrado no pedido" readonly
                                                     style="width: 80% !important;">
                                             </p>

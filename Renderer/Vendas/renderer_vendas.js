@@ -49,14 +49,14 @@ const inputdescontoPorcentagem = document.getElementById('desconto');
 const divValorDinheiro = document.getElementById('div-valorDinheiro');
 const divPIX = document.getElementById('div-PIX');
 const divCartaoDebito = document.getElementById('div-Cartao-Debito');
-const divCrediario = document.getElementById('div-Crediario');
+const divCrediario = document.getElementById('parcelado');
 const divCartaoCredito = document.getElementById('div-Cartao-Credito');
 const divDesconto = document.querySelector('.desconto-venda');
 const divPagamento = document.querySelector('.payment-form-section');
 const divAlterarCliente = document.querySelector('.alterarCliente')
 const nomeProduto = document.querySelector('.nomeProduto');
 const infoPag = document.getElementById('info-pag');
-const infoPagCred = document.getElementById('info-cred');
+// const infoPagCred = document.getElementById('info-cred');
 const inputMaxParcelas = document.getElementById('numeroParcela');
 const spanMaxParcelas = document.getElementById('spanMaxParcelas');
 const showSubtotal = document.querySelector('.span-subtotal')
@@ -79,6 +79,7 @@ const atalhos = {
     'btn-esc': 'Escape',
     "btn-exit": 'Escape',
     "btn-exit-qtd": 'Escape',
+    "btn-exit-parcelado": 'Escape',
     "btn-exit-desconto": 'Escape',
     "btn-exit-limpar": 'Escape',
     "btn-exit-remover": 'Escape',
@@ -156,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (event) => {
         // Selecionar as divs principais
-        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divSelecionarQtd, divDesconto, divAlterarCliente].filter(div => div.style.display === 'block');
-        const visibleDivsPag = [divValorDinheiro, divPIX, divCartaoDebito, divCartaoCredito, divCrediario];
+        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divSelecionarQtd, divDesconto, divAlterarCliente,divCrediario].filter(div => div.style.display === 'block');
+        const visibleDivsPag = [divValorDinheiro, divPIX, divCartaoDebito, divCartaoCredito, divCrediario ];
 
         // Função para gerenciar visibilidade de formas de pagamento
         function showOnlyThisDiv(targetDiv) {
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showOnlyThisDiv(divValorDinheiro);
                     valorDinheiro.focus();
                     infoPag.style.display = 'flex';
-                    infoPagCred.style.display = 'none'
+                    // infoPagCred.style.display = 'none'
                 }
                 break;
 
@@ -191,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     PIX.value = inputTotalLiquido.value;
                     PIX.focus();
                     infoPag.style.display = 'flex';
-                    infoPagCred.style.display = 'none'
+                    // infoPagCred.style.display = 'none'
                 }
                 break;
 
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     CartaoCredito.value = inputTotalLiquido.value
                     CartaoCredito.focus();
                     infoPag.style.display = 'flex';
-                    infoPagCred.style.display = 'none'
+                    // infoPagCred.style.display = 'none'
                 }
                 break;
 
@@ -217,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     CartaoDebito.value = inputTotalLiquido.value
                     CartaoDebito.focus();
                     infoPag.style.display = 'flex';
-                    infoPagCred.style.display = 'none'
+                    // infoPagCred.style.display = 'none'
                 }
                 break;
 
@@ -249,10 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     vencimentosCrediario.value = `${ano}-${mes}-${dia}`;
 
                     CrediarioCliente.focus();
-                    informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
-                    informacaoCred.style.color = 'black';
                     infoPag.style.display = 'none';
-                    infoPagCred.style.display = 'flex'
+                    divPagamento.style.left= '60%'
+                    // infoPagCred.style.display = 'flex'
                 }
                 break;
 
@@ -408,6 +408,35 @@ inputlimparTelakey.addEventListener('keydown', limparTelakey);
 
 
 
+  document.getElementById('btn-limpar-formulario').addEventListener('click', limparCamposCrediario);
 
+    function limparCamposCrediario() {
+        // Campos de texto e número
+        document.getElementById('Crediario-cliente').value = '';
+        document.getElementById('nomeCliente').value = '';
+        document.getElementById('Crediario-parcela').value = '';
+        document.getElementById('taxa-juros').value = '';
+        document.getElementById('Crediario-valor').value = '';
+        document.getElementById('Crediario').value = '0,00';
+        document.getElementById('creditoLimite').value = '0,00';
+        document.getElementById('creditoUtilizado').value = '0,00';
+        document.getElementById('vencimentos').value = '';
+
+        // Campo de busca de cliente
+        document.getElementById('buscaCliente').value = '';
+
+        // Lista de clientes (ul) esvaziada
+        const listaClientes = document.getElementById('listaClientes');
+        if (listaClientes) {
+            listaClientes.innerHTML = '';
+        }
+
+        // Oculta a div de nomes, se estiver visível
+        const divNomes = document.querySelector('.divNomes');
+        if (divNomes) {
+            divNomes.style.display = 'none';
+        }
+       cpfCliente.focus();
+    }
 
 
