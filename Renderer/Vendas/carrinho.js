@@ -69,6 +69,21 @@ async function alteraEstoqueEVendido(carrinho) {
 
 let desconto = parseFloat(inputdescontoPorcentagem.value.replace(',', '.')) || 0;
 
+const inputDescontoEmReal = document.getElementById('desconto-valor');
+const inputDescontoEmRealFormat = formatarMoedaBRL(inputDescontoEmReal);
+const inputDescontoPorcentagem = document.getElementById('desconto');
+
+inputDescontoEmReal.addEventListener('input', () => {
+    calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
+    showSubtotal.innerHTML = inputTotalLiquido.value;
+    mostrarDescontoReal.value = inputDescontoEmReal.value
+});
+
+inputDescontoPorcentagem.addEventListener('input', () => {
+    calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
+});
+
+
 function calCarrinho(carrinho, converteMoeda, inputTotalLiquido, textSelecionarQtd) {
     if (textSelecionarQtd) textSelecionarQtd.innerHTML = '1x'; // Atualiza o texto, se fornecido
 
@@ -79,18 +94,22 @@ function calCarrinho(carrinho, converteMoeda, inputTotalLiquido, textSelecionarQ
         return acc + precoFormatado * parseInt(item.Qtd, 10);
     }, 0);
 
-    if (desconto > 100) {
-        desconto = 100; // Evita desconto maior que 100%
-    }
+    const inputDescontoPorcentagem = document.getElementById('inputdescontoPorcentagem');
+    const descontoPorcentagem = parseFloat(inputDescontoPorcentagem?.value.replace(',', '.')) || 0;
 
-    // Aplica o desconto ao total
-    let valorDesconto = (total * desconto) / 100;
-    let novoTotal = total - valorDesconto;
+    const inputDescontoEmReal = document.getElementById('desconto-valor');
+    const descontoReais = parseFloat(inputDescontoEmReal?.value.replace(',', '.')) || 0;
 
-    if (inputTotalLiquido) inputTotalLiquido.value = converteMoeda(novoTotal); // Atualiza o campo, se fornecido
+    const descontoAplicado = Math.min(descontoPorcentagem, 100); // Garante máximo de 100%
+
+    const valorDesconto = (total * descontoAplicado) / 100;
+    const novoTotal = total - valorDesconto - descontoReais;
+
+    if (inputTotalLiquido) inputTotalLiquido.value = converteMoeda(novoTotal);
 
     return novoTotal;
 }
+
 
 function pushProdutoCarrinho({
     carrinho,
@@ -149,6 +168,7 @@ function pushProdutoCarrinho({
         inputdescontoPorcentagem,
     );
 
+
     // Atualiza o subtotal renderizado
     showSubtotal.innerHTML = inputTotalLiquido.value;
 
@@ -159,6 +179,25 @@ function pushProdutoCarrinho({
     // Oculta o alerta de limpar venda
     alertLimparVenda.style.display = 'none';
 }
+
+const btnExitDesconto = document.getElementById('btn-exit-desconto')
+
+btnExitDesconto.addEventListener('click', () => {
+    inputDescontoEmReal.value = '0,00';
+    inputDescontoPorcentagem.value = '';
+    calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
+    showSubtotal.innerHTML = inputTotalLiquido.value;
+    mostrarDesconto.value = '0';
+    mostrarDescontoReal.value = '0,00';
+});
+
+limparButtonDesconto.addEventListener('click', () => {
+    inputDescontoEmReal.value = '0,00';
+    inputDescontoPorcentagem.value = '';
+    calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
+    showSubtotal.innerHTML = inputTotalLiquido.value;
+    mostrarDescontoReal.value = '0,00'
+});
 
 // Limpa os campos de entrada
 function resetInputs() {

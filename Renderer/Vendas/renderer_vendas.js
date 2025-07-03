@@ -27,6 +27,7 @@ const formaPagamento = document.querySelector('.square-2-2-2-4');
 const inputExitVenda = document.querySelector('#exit-key');
 const inputlimparTelakey = document.querySelector('#limpar-tela-key');
 const inputExcluiItem = document.querySelector('#numero-Item');
+const limparButtonDesconto= document.getElementById('limparButton-desconto');
 const mensagemDiv = document.querySelector('#mensagem');
 const mostrarDesconto = document.getElementById("mostrarDesconto");
 const mostrarDescontoReal = document.getElementById("mostrarDescontoReal");
@@ -61,6 +62,8 @@ const inputMaxParcelas = document.getElementById('numeroParcela');
 const spanMaxParcelas = document.getElementById('spanMaxParcelas');
 const showSubtotal = document.querySelector('.span-subtotal')
 const carrinhoShowRemover = document.querySelector(".div-carrinho");
+const btnMsg = document.querySelector('.btn-msg');
+
  
 
 // Mapeamento dos botões para as teclas de atalho desejadas
@@ -173,7 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F1': // Forma pagamento Dinheiro
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
-
+                    codigoEan.focus();
+                      
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divValorDinheiro);
@@ -186,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F2': // Forma pagamento PIX
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+                        codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divPIX);
@@ -199,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F3': // Forma pagamento Cartão Crédito
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+                        codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoCredito);
@@ -212,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F4': // Forma pagamento Cartão Débito
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+                        codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoDebito);
@@ -232,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F7': // Forma pagamento 
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+                        codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCrediario);
@@ -439,4 +447,35 @@ inputlimparTelakey.addEventListener('keydown', limparTelakey);
        cpfCliente.focus();
     }
 
+ 
 
+const tipoDesconto = document.getElementById('tipoDesconto');
+
+// Porcentagem
+const thPorcentagem = document.getElementById('th-porcentagem');
+const tdPorcentagem = document.getElementById('td-porcentagem');
+
+// Valor real
+const thReal = document.getElementById('th-real');
+const tdReal = document.getElementById('td-real');
+
+tipoDesconto.addEventListener('change', () => {
+    if (tipoDesconto.value === 'porcentagem') {
+        // Mostra porcentagem
+        thPorcentagem.style.display = '';
+        tdPorcentagem.style.display = '';
+        // Esconde real
+        thReal.style.display = 'none';
+        tdReal.style.display = 'none';
+    } else {
+        // Mostra real
+        thReal.style.display = '';
+        tdReal.style.display = '';
+        // Esconde porcentagem
+        thPorcentagem.style.display = 'none';
+        tdPorcentagem.style.display = 'none';
+    }
+});
+
+// Garante que carregue certo
+tipoDesconto.dispatchEvent(new Event('change'));

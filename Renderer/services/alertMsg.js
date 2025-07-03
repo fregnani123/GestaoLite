@@ -25,6 +25,7 @@ function alertMsg(msg, type = 'info', time = ALERT_DEFAULT_TIME) {
     const titleSpan = document.createElement('span');
     const textSpan = document.createElement('span');
     const okButton = document.createElement('button');
+    okButton.classList.add('btn-msg')
 
     bloqueiaTela.style.position = 'fixed';
     bloqueiaTela.style.zIndex = '99999';

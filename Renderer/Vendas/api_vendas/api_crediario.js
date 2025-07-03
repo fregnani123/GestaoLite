@@ -231,93 +231,84 @@ async function updateCrediario(dadosClienteId) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const inputBusca = document.getElementById("buscaCliente");
+    function configurarBuscaCliente(idInput, idLista, idInputCPF, classeDivNomes) {
+        const input = document.getElementById(idInput);
+        const lista = document.getElementById(idLista);
+        const inputCPF = document.getElementById(idInputCPF);
+        const divNomes = document.querySelector(classeDivNomes);
 
-    if (!inputBusca) {
-        console.error("Erro: Elemento 'buscaCliente' não encontrado no DOM.");
-        return;
+        if (!input || !lista) {
+            console.error(`Erro: Elementos com id '${idInput}' ou '${idLista}' não encontrados.`);
+            return;
+        }
+
+        input.addEventListener("input", async function () {
+            const nome = input.value.trim();
+            if (nome.length < 2) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/getClienteNome/${nome}`, {
+                    method: 'GET',
+                    headers: {
+                        'x-api-key': 'segredo123',
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+                lista.innerHTML = "";
+
+                if (data.message) {
+                    lista.innerHTML = `<li>${data.message}</li>`;
+                    return;
+                }
+
+                data.forEach(cliente => {
+                    const li = document.createElement('li');
+                    li.style.textAlign = 'right';
+                    li.style.padding = '4px 8px';
+                    li.style.background = '#f9f9f9';
+                    li.style.borderRadius = '4px';
+
+                    const cpfFormatado = decode(cliente.cpf); // Se não tiver, substitua por função sua
+
+                    li.innerHTML = `
+                        <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                            <span>${cpfFormatado} - ${cliente.nome}</span>
+                            <button 
+                                style="margin-left: 8px; padding: 2px 6px; font-size: 12px;width:100px; background-color: #1f3b57; color: white; border: none; border-radius: 4px; cursor: pointer;" 
+                                data-cpf="${cpfFormatado}">
+                                Selecionar
+                            </button>
+                        </div>
+                    `;
+
+                    lista.appendChild(li);
+                });
+
+                lista.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const cpfSelecionado = btn.getAttribute('data-cpf');
+                        if (inputCPF) {
+                            inputCPF.value = cpfSelecionado;
+                            inputCPF.dispatchEvent(new Event('input'));
+                            inputCPF.focus();
+                        }
+                        if (divNomes) divNomes.style.display = 'none';
+                    });
+                });
+
+            } catch (error) {
+                console.error("Erro ao buscar clientes:", error);
+            }
+        });
     }
 
-    inputBusca.addEventListener("input", async function () {
-        const nome = inputBusca.value;
-
-        if (nome.length < 2) return;
-
-        try {
-            console.log("Buscando cliente:", nome);
-
-            const response = await fetch(`http://localhost:3000/getClienteNome/${nome}`, {
-                method: 'GET',
-                headers: {
-                    'x-api-key': 'segredo123',
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            console.log("Resposta da API:", response.status);
-
-            const data = await response.json();
-            console.log("Dados recebidos:", data);
-
-            const lista = document.getElementById("listaClientes");
-            lista.innerHTML = "";
-
-            if (data.message) {
-                lista.innerHTML = `<li>${data.message}</li>`;
-                return;
-            }
-
-            // Função para remover máscara do CPF
-            function removerMascaraCPF(cpf) {
-                return cpf.replace(/\D/g, '');
-            }
-
-            data.forEach(cliente => {
-                const li = document.createElement('li');
-                li.style.textAlign = 'right';
-                li.style.padding = '4px 8px';
-                li.style.background = '#f9f9f9';
-                li.style.borderRadius = '4px';
-
-                const cpfFormatado = decode(cliente.cpf);
-
-                li.innerHTML = `
-        <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
-            <span>${cpfFormatado} - ${cliente.nome}</span>
-            <button 
-                style="margin-left: 8px; padding: 2px 6px; font-size: 12px;width:100px; background-color: #1f3b57; color: white; border: none; border-radius: 4px; cursor: pointer;" 
-                data-cpf="${cpfFormatado}">
-                Selecionar
-            </button>
-        </div>
-    `;
-
-                lista.appendChild(li);
-            });
-
-            // Evento nos botões de seleção
-            lista.querySelectorAll('button').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const cpfFormatado = btn.getAttribute('data-cpf'); // Obtém CPF com a máscara
-
-                    const cpfCliente = document.getElementById("Crediario-cliente");
-                    if (cpfCliente) {
-                        cpfCliente.value = cpfFormatado; // Coloca o CPF com máscara diretamente no input
-                        cpfCliente.dispatchEvent(new Event('input')); // Dispara evento para chamar findCliente()
-                        cpfCliente.focus();
-                    }
-
-                    const divNomes = document.querySelector('.divNomes');
-                    if (divNomes) divNomes.style.display = 'none';
-                });
-            });
-
-
-        } catch (error) {
-            console.error("Erro ao buscar clientes:", error);
-        }
-    });
+    // 🔁 Use quantas vezes quiser:
+    configurarBuscaCliente("buscaCliente", "listaClientes", "Crediario-cliente", ".divNomes");
+    configurarBuscaCliente("buscaCliente-2", "listaClientes-2", "alterClienteCPF", ".divNomes-2"); // se houver outra
 });
+
 
 
 // Botão que abre/fecha a busca
@@ -335,6 +326,21 @@ btnBuscarNome.addEventListener('click', (e) => {
         cpfCliente.focus(); // Certifique-se que 'cpfCliente' existe
     }
 });
+// Botão que abre/fecha a busca
+const btnBuscarNomeAlter = document.getElementById('btn-nome-alterar');
+const divNomes2 = document.querySelector('.divNomes-2');
+const inputBusca2 = document.getElementById("buscaCliente-2");
+
+btnBuscarNomeAlter.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (divNomes2.style.display === 'none' || divNomes.style.display === '') {
+        divNomes2.style.display = 'flex';
+        inputBusca2.focus();
+    } else {
+        divNomes.style.display = 'none';
+        cpfCliente.focus(); // Certifique-se que 'cpfCliente' existe
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -342,6 +348,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const divNomes = document.querySelector('.divNomes');
     const inputBusca = document.getElementById('buscaCliente');
     const listaClientes = document.getElementById('listaClientes');
+
+    btnExitNome.addEventListener('click', () => {
+        // Oculta a div
+        divNomes.style.display = 'none';
+
+        // Limpa o campo de busca
+        inputBusca.value = '';
+
+        // Limpa a lista
+        listaClientes.innerHTML = '';
+
+        cpfCliente.focus();
+    });
+       
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnExitNome = document.getElementById('btn-exit-nome-2');
+    const divNomes = document.querySelector('.divNomes-2');
+    const inputBusca = document.getElementById('buscaCliente-2');
+    const listaClientes = document.getElementById('listaClientes-2');
 
     btnExitNome.addEventListener('click', () => {
         // Oculta a div

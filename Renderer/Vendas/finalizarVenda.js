@@ -312,10 +312,52 @@ document.addEventListener('keydown', (e) => {
 });
 
 
+const enterButtons = document.querySelectorAll('.enter-trigger');
+
+enterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const event = new KeyboardEvent('keydown', {
+            key: 'Enter',
+            code: 'Enter',
+            keyCode: 13,
+            which: 13,
+            bubbles: true
+        });
+
+        document.dispatchEvent(event);
+        divPagamento.style.display = 'none'
+    });
+});
+
+const deleteButtons = document.querySelectorAll('.confirme-delete'); 
+
+deleteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const event = new KeyboardEvent('keydown', {
+            key: 'Delete',
+            code: 'Delete',
+            keyCode: 46,
+            which: 46,
+            bubbles: true
+        });
+
+        document.dispatchEvent(event);
+       carrinhoShowRemover.classList.remove('zindex-alto');
+    });
+});
 
 
 const btnCliente = document.getElementById('btn-alterar-confirmar');
 btnCliente.addEventListener('click', () => {
     divAlterarCliente.style.display = 'none'
     return;
+})
+
+const limparButtonCliente = document.getElementById('limparButton-cliente');
+
+limparButtonCliente.addEventListener('click', () => {
+      document.getElementById("nomeClienteAlter").value = '';
+      document.getElementById("clienteNome").value = '';
+     clienteId.value = '1';
+     alterCliente.value = ''
 })
