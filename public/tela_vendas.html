@@ -36,7 +36,7 @@
                             <li><a id="btn-pgto-pix"><kbd>F2</kbd> Pagamento PIX</a></li>
                             <li><a id="btn-pgto-credito"><kbd>F3</kbd> Pagamento cartão crédito</a></li>
                             <li><a id="btn-pgto-debito"><kbd>F4</kbd> Pagamento cartão débito</a></li>
-                            <li><a id="btn-esc"><kbd>F5</kbd>Pagamento Boleto</a></li>
+                            <!-- <li><a id="btn-esc"><kbd>F5</kbd>Pagamento Boleto</a></li> -->
                             <li><a id="btn-cancelar-item"><kbd>F6</kbd> Remover item do Pedido</a></li>
                             <li><a id="btn-crediario-loja"><kbd>F7</kbd> Pedido Parcelado</a></li>
                             <li><a id="btn-alterar-cliente"><kbd>F8</kbd> Alterar cliente Pedido</a></li>
@@ -143,7 +143,7 @@
                                         </table>
 
                                         <div class="botoes">
-                                            <button class="btn-alterar-produto" style="width: 100%;">
+                                            <button id="btn-qtd-produto" style="width: 100%;">
                                                 <img class="img-disquete" src="../style/img/troca.png" alt="">Alterar
                                             </button>
                                         </div>
@@ -359,14 +359,15 @@
                                             </tr>
                                         </table>
 
-                                        <table >
+                                        <table>
                                             <!-- Desconto em valor -->
                                             <tr id="th-real" style="display: none;">
                                                 <th>Desconto em valor (R$)</th>
                                             </tr>
                                             <tr id="td-real" style="display: none;">
                                                 <td>
-                                                    <input placeholder="Digite o valor do desconto" id="desconto-valor" type="text">
+                                                    <input placeholder="Digite o valor do desconto" id="desconto-valor"
+                                                        type="text">
                                                 </td>
                                             </tr>
                                         </table>
@@ -379,7 +380,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span class="span-subtotal" ></span>
+                                                    <span class="span-subtotal"></span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -519,21 +520,20 @@
                                     </table>
                                 </div>
 
-
-
-
-
-
                                 <table>
                                     <tr>
                                         <th
-                                            style=" display: flex; align-items: center; justify-content: left; gap: 6px;">
+                                            style="display: flex; align-items: center; justify-content: left; gap: 6px;">
                                             <img style="width: 22px;" src="../style/img/procurar-black.png"
                                                 alt="">Buscar por CPF
                                         </th>
-                                        <th style="width: 50%;">
+                                        <th style="width: 55%;">
+                                            Nome do Cliente
+                                        </th>
+                                        <th style="width: 25%;">
                                             Ações
                                         </th>
+
 
                                     </tr>
                                     <tr>
@@ -544,49 +544,37 @@
 
                                         </td>
                                         <td>
+                                            <input type="text" id="nomeCliente" readonly
+                                                placeholder="Cliente não cadastrado no pedido">
+                                        </td>
+                                        <td>
                                             <button style="width: 100%;" id="btnBuscarNome"> <img style="width: 22px;"
                                                     src="../style/img/procurar.png" alt="">
                                                 Buscar por nome</button>
                                         </td>
+
                                     </tr>
                                 </table>
+                                <!-- <table style="margin-top: 2%;">
+                                    <tr>
+                                     
+
+                                    </tr>
+                                    <tr>
+                                     
+
+                                    </tr>
+                                </table> -->
+
                                 <table style="margin-top: 2%;">
                                     <tr>
+
                                         <th>
-                                            Nome do Cliente
+                                            Digite o num. parcelas
                                         </th>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" id="nomeCliente" readonly
-                                                placeholder="Cliente não cadastrado no pedido">
-                                        </td>
-
-                                    </tr>
-                                </table>
-
-                                <table style="margin-top: 2%;">
-                                    <tr>
-
-                                        <th style="width: 50%;">
-                                            Selecione o num. parcelas
-                                        </th>
-                                        <th style="width: 50%;">
+                                        <th>
                                             Taxa de Juros %
                                         </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input id="Crediario-parcela" type="number" value="">
-                                        </td>
-                                        <td>
-                                            <input id="taxa-juros" type="number" value="" readonly>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table style="margin-top: 2%;">
-                                    <tr>
                                         <th>
                                             Valor da Parcela:
                                         </th>
@@ -596,6 +584,12 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            <input id="Crediario-parcela" type="number" value="">
+                                        </td>
+                                        <td>
+                                            <input id="taxa-juros" type="number" value="" readonly>
+                                        </td>
+                                        <td>
                                             <input id="Crediario-valor" type="number" value="" readonly>
                                         </td>
                                         <td>
@@ -603,10 +597,7 @@
                                         </td>
                                     </tr>
                                 </table>
-
-
                                 <table style="margin-top: 2%;">
-
                                     <tr>
 
                                         <th>
@@ -615,7 +606,12 @@
                                         <th>
                                             Crédito utilizado:
                                         </th>
-
+                                        <th>
+                                            Selecione o vencimento
+                                        </th>
+                                        <th>
+                                            Ações
+                                        </th>
                                     </tr>
                                     <tr>
 
@@ -626,20 +622,6 @@
                                         <td>
                                             <input id="creditoUtilizado" value="0,00" readonly>
                                         </td>
-
-                                    </tr>
-                                </table>
-
-                                <table style="margin-top: 2%;">
-                                    <tr>
-                                        <th style="width: 30%;">
-                                            Selecione o vencimento
-                                        </th>
-                                        <th>
-                                            Ações
-                                        </th>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <input id="vencimentos" type="date">
                                         </td>
@@ -655,12 +637,46 @@
 
                                             </div>
                                         </td>
+
                                     </tr>
                                 </table>
 
 
+                                <table style="margin-top: 2%;">
+
+                                    <tr style="border: 1px solid gray;">
+                                        <td>
+                                            <p>
+                                                ⚠️ Para pedidos <strong>parcelados</strong>, o cliente <strong>já deve
+                                                    estar previamente cadastrado no sistema</strong>.
+                                                Verifique com <strong>atenção</strong> os dados antes de
+                                                finalizar.
+                                                O <strong>crédito</strong> também deve estar <strong>suficiente</strong>
+                                                e <strong>liberado</strong> no cadastro do cliente ou
+                                                <strong>ajustado</strong> na opção <strong>Alterar Cliente</strong>.
+                                            </p>
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                                <!-- <table style="margin-top: 2%;">
+                                    <tr>
+
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                </table> -->
+
+
                                 <!-- input para salvar o id Cliente Globalmente. -->
                                 <input id="id-cliente" type="hidden" value="1">
+
+
+
+
+
                             </div>
                         </div>
 

@@ -141,20 +141,24 @@ function formatarCPF(valor) {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 }
 
-// Função para limitar caracteres e impedir números negativos
-function inputMaxCaracteres(input, maxLength) {
-    input.addEventListener("input", function () {
-        // Impede valores negativos
-        if (input.value < 0) {
-            input.value = "";
-        }
+function inputMaxCaracteres(input, max) {
+    // Remove qualquer event listener antigo (usando uma função nomeada)
+    input.removeEventListener('input', limitarCaracteres);
 
-        // Limita a quantidade de caracteres
-        if (input.value.length > maxLength) {
-            input.value = input.value.slice(0, maxLength);
-        }
-    });
+    // Define o novo maxlength
+    input.setAttribute('maxlength', max);
+
+    // Adiciona novamente o listener com limite atualizado
+    input.addEventListener('input', limitarCaracteres);
 }
+
+function limitarCaracteres(e) {
+    const max = parseInt(e.target.getAttribute('maxlength'), 10);
+    if (e.target.value.length > max) {
+        e.target.value = e.target.value.slice(0, max);
+    }
+}
+
 function validarDescontoPorcentagem(input) {
     input.addEventListener('input', () => {
         let valor = input.value.replace(',', '.');
@@ -166,7 +170,8 @@ function validarDescontoPorcentagem(input) {
 
         // Limita valor máximo a 99.99
         if (parseFloat(valor) > 99.99) {
-            valor = '99.99';
+            valor = '99.00';
+             alertMsg(`${'Porcentagem máxima de desconto é 99.00%'}`, 'warning', 4000);
         }
 
         input.value = valor;

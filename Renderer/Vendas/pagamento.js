@@ -211,16 +211,39 @@ inputdescontoPorcentagem.addEventListener('blur', () => {
 });
 
 
-const salvarDesconto = document.getElementById('salvar-desconto')
+const btnQtd = document.getElementById('btn-qtd-produto');
+btnQtd.addEventListener('click', () => {
+  if(!inputQtd.value){
+    alertMsg('A quantidade não pode ser zero ou vazia', 'warning', 4000);
+    inputQtd.focus();
+    return;
+  }
+  const escEvent = new KeyboardEvent('keydown', {
+    key: 'Escape',
+    code: 'Escape',
+    keyCode: 27,
+    which: 27,
+    bubbles: true
+  });
+
+  document.dispatchEvent(escEvent);
+});
+
+const salvarDesconto = document.getElementById('salvar-desconto');
 salvarDesconto.addEventListener('click', () => {
  const valor = parseFloat(inputTotalLiquido.value.replace(',', '.'));
+
+//  if( inputDescontoEmReal.value === '0,00' && inputDescontoPorcentagem.value === ''){
+//    alertMsg(`${'O valor do desconto não pode estar vazio'}`, 'warning', 4000);
+//    return
+//  }
 
 if (inputTotalLiquido.value && valor >= 0) {
     // valor válido
 }  else {
     // valor inválido: nulo, vazio ou negativo
   alertMsg(`${'O valor total líquido não pode ser negativo ou vazio.'}`, 'warning', 4000);
-     inputDescontoEmReal.value = '0,00';
+    inputDescontoEmReal.value = '0,00';
     inputDescontoPorcentagem.value = '';
     calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
     showSubtotal.innerHTML = inputTotalLiquido.value;

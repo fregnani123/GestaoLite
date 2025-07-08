@@ -349,6 +349,10 @@ deleteButtons.forEach(button => {
 
 const btnCliente = document.getElementById('btn-alterar-confirmar');
 btnCliente.addEventListener('click', () => {
+    if(!alterCliente.value){
+        alertMsg('Para confirmar, altere o cliente', 'warning', 4000);
+        alterCliente.focus();
+        return;}
     divAlterarCliente.style.display = 'none'
     return;
 })

@@ -140,10 +140,12 @@ btnAlterarJuros.addEventListener('click', () => {
 });
 
 tipoUsuario.addEventListener('change', () => {
+
     if (!cnpjCpf || !labelCnpjCPF || !labelRazao) return;
 
 
     if (tipoUsuario.value === "juridica") {
+        cnpjCpf.value = '';
         cnpjCpf.removeAttribute('readonly');
         razaoSocial.removeAttribute('readonly');
         nomeFantasia.removeAttribute('readonly');
@@ -155,14 +157,15 @@ tipoUsuario.addEventListener('change', () => {
         formatarCNPJ(cnpjCpf);
         inputMaxCaracteres(cnpjCpf, 18);
         labelCnpjCPF.innerHTML = '';
-        labelCnpjCPF.append('CNPJ');
+        labelCnpjCPF.append('CNPJ'); 
         labelRazao.innerHTML = 'Razão Social';
         labelNomeFantasia.innerHTML = '';
         labelNomeFantasia.append('Nome Fantasia');
         cnpjCpf.focus();
+    }
 
-    } else if (tipoUsuario.value === "fisica") {
-
+    if (tipoUsuario.value === "fisica") {
+        cnpjCpf.value = '';
         const valor = cnpjCpf.value.replace(/\D/g, ''); // Remove tudo que não for número
 
         if (tipoUsuario.value === "fisica" && valor.length !== 11) {

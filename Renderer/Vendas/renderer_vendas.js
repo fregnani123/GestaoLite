@@ -296,6 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'F12': // Limpar venda
+                if(inputTotalLiquido.value === '0,00'){
+                      alertMsg(`${'Não é possível reiniciar a venda sem itens adicionados ou com subtotal igual a zero.'}`, 'warning', 4000);      
+                    return;
+                }
                 if (visibleDivs.length === 0) {
                     alertLimparVenda.style.display = 'block';
                 }

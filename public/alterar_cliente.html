@@ -91,10 +91,10 @@
                                         <input type="text" id="cpf" placeholder="Digite para buscar" required>
                                     </td>
                                     <td>
-                                        <div style="display: flex; text-align: center;align-items: center;gap: 1%;width: 100%;">
+                                        <div
+                                            style="display: flex; text-align: center;align-items: center;gap: 1%;width: 100%;">
                                             <input type="text" id="nome" style="width: 70%;" required>
-                                            <div
-                                                style="background: white; padding: .5%; display: flex;">
+                                            <div style="background: white; padding: .5%; display: flex;">
                                                 <button class="btn-buscar" style="width: 100%;"> <img
                                                         style="width: 18px;" src="../style/img/procurar.png"
                                                         alt="">Buscar por nome</button>
@@ -221,7 +221,7 @@
                                     </td>
                                     <td>
                                         <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                                            <button class="btn-atualizar"><img class="img-disquete"
+                                            <button id="btn-atualizar"><img class="img-disquete"
                                                     src="../style/img/troca.png" alt="">Alterar</button>
                                             <button id="limparButton"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>
@@ -234,7 +234,8 @@
                             <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
                         </div>
                         <div class="formulario-mensages-informativas" style="display: none;">
-                            <p><img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png" alt="">
+                            <p>
+                                <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png" alt="">
                                 <strong>Atenção:</strong> ao <strong>alterar os dados
                                     do cliente</strong>, as informações <strong>anteriores serão permanentemente
                                     substituídas</strong>.
