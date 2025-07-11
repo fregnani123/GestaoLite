@@ -117,63 +117,33 @@ function filterProdutoEan(codigoEan) {
     }
 }
 
-function getFornecedor(fornecedorId) {
+
+
+function getFornecedor() {
     const url = 'http://localhost:3000/fornecedor';
 
     fetch(url, {
         method: 'GET',
         headers: {
-            'x-api-key': 'segredo123',
             'Content-Type': 'application/json',
+            'x-api-key': 'segredo123'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-
-            const fornecedorEncontrado = data.find(fornecedor => fornecedor.fornecedor_id === fornecedorId);
-           
-            if (fornecedorEncontrado) {
-                const inputCnpj = document.getElementById('cnpjFilter');
-                const selectFornecedor = document.getElementById('fornecedor');
-
-                if (inputCnpj) {
-                    inputCnpj.value = fornecedorEncontrado.cnpj;
-                } else {
-                    console.warn('⚠️ Elemento inputCnpj não encontrado no DOM.');
-                }
-
-                if (selectFornecedor) {
-                    const razaoSocial = fornecedorEncontrado.razao_social || 'Fornecedor não Cadastrado';
-                    selectFornecedor.innerHTML = `<option value="${fornecedorEncontrado.fornecedor_id}" selected>${razaoSocial}</option>`;
-                } else {
-                    console.warn('⚠️ Elemento selectFornecedor não encontrado no DOM.');
-                }
-
-                // Adicionar o comportamento de busca inversa ao alterar o CNPJ
-                if (inputCnpj) {
-                    inputCnpj.addEventListener('input', function () {
-
-                        const fornecedorEncontrado = data.find(fornecedor => fornecedor.cnpj === cnpjFilter.value);
-
-                        if (fornecedorEncontrado) {
-                            const option = document.createElement('option');
-                            option.value = fornecedorEncontrado.fornecedor_id;
-                            option.textContent = fornecedorEncontrado.nome_fantasia;
-                            option.selected = true; // Define a opção como selecionada automaticamente
-                            selectFornecedor.appendChild(option);
-                        }
-                    });
-                }
-            } else {
-                console.warn('⚠️ Fornecedor não encontrado para o ID:', fornecedorId);
-            }
-        })
-        .catch(error => {
-            console.error('❌ Erro ao buscar dados:', error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('✅ Dados do fornecedor:', data);
+        // Aqui você pode processar os dados como necessário
+    })
+    .catch(error => {
+        console.error('❌ Erro ao buscar dados do fornecedor:', error);
+    });
 }
-
-
+getFornecedor()
 
 fetchAllProdutos(); // Aguarda o carregamento dos produtos
 let ultimoCodigoEan = ''; // Variável para armazenar o último valor digitado

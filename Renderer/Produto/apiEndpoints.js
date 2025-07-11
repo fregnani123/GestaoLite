@@ -119,37 +119,114 @@ function getunidadeEstoque(renderer) {
 };
 
 
-function getFornecedor(renderer, cnpjFilter) {
-    const getFornecedor = apiEndpoints.getFornecedor;
+function getFornecedor(filter) {
+    const url = 'http://localhost:3000/fornecedor';
 
-    fetch(getFornecedor, {
+    fetch(url, {
         method: 'GET',
         headers: {
-            'x-api-key': 'segredo123',
             'Content-Type': 'application/json',
-
+            'x-api-key': 'segredo123'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            // Limpa as opções anteriores do select
-            renderer.innerHTML = '';
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('✅ Dados do fornecedor:', data);
 
-            // Filtra os fornecedores pelo CNPJ digitado
-            const fornecedorEncontrado = data.find(fornecedor => fornecedor.cnpj === cnpjFilter.value);
+        const fornecedorFiltrado = data.filter(fornecedor =>
+            fornecedor.cnpj === filter.value
+        );
 
-            if (fornecedorEncontrado) {
-                const option = document.createElement('option');
-                option.value = fornecedorEncontrado.fornecedor_id;
-                option.textContent = fornecedorEncontrado.nome_fantasia;
-                option.selected = true; // Define a opção como selecionada automaticamente
-                renderer.appendChild(option);
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados:', error);
-        });
+        if (fornecedorFiltrado.length > 0) {
+            inputFornecedorFiltrado.value = fornecedorFiltrado[0].razao_social;
+            inputFornecedorRazãoSocial.value = fornecedorFiltrado[0].nome_fantasia;
+            inputSaveIdFornecedor.value = fornecedorFiltrado[0].fornecedor_id;
+            showFornecedor.value = fornecedorFiltrado[0].nome_fantasia;
+            console.log('🔎 Fornecedores filtrados:', fornecedorFiltrado);
+        } else {
+            alertMsg('Fornecedor não encontrado', 'info', 3000);
+        }
+    })
+    .catch(() => {
+        alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
+        console.log('Erro ao buscar dados do fornecedor');
+    });
 }
+
+
+
+
+
+const inputBuscaNome = document.getElementById('input-busca-nome');
+const resultadoNomes = document.getElementById('resultado-nomes');
+
+let todosFornecedores = [];
+
+inputBuscaNome.addEventListener('click', async (e) => {
+    e.preventDefault();
+    divBuscarPorNome.style.display = 'block';
+
+    if (todosFornecedores.length === 0) {
+        try {
+            const response = await fetch('http://localhost:3000/fornecedor', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'segredo123'
+                }
+            });
+            const data = await response.json();
+            todosFornecedores = data;
+        } catch (err) {
+            alertMsg('Erro ao buscar fornecedores', 'error', 3000);
+            console.error(err);
+        }
+    }
+});
+
+inputBuscaNome.addEventListener('input', () => {
+    const termo = inputBuscaNome.value.toLowerCase();
+    resultadoNomes.innerHTML = '';
+
+    const filtrados = todosFornecedores.filter(f =>
+        f.razao_social.toLowerCase().includes(termo) ||
+        f.nome_fantasia.toLowerCase().includes(termo)
+    );
+
+    filtrados.forEach(fornecedor => {
+        const div = document.createElement('div');
+        div.style.display = 'flex';
+        div.style.justifyContent = 'space-between';
+        div.style.alignItems = 'center';
+        div.style.border = '1px solid #ccc';
+        div.style.padding = '5px';
+        div.style.marginBottom = '5px';
+
+        div.innerHTML = `
+            <div>
+                <strong>${fornecedor.razao_social}</strong><br>
+                <small>${fornecedor.nome_fantasia}</small>
+            </div>
+            <button type="button" class="btn-add-fornecedor">Selecionar</button>
+        `;
+
+        div.querySelector('.btn-add-fornecedor').addEventListener('click', () => {
+            inputFornecedorFiltrado.value = fornecedor.razao_social;
+            inputFornecedorRazãoSocial.value = fornecedor.nome_fantasia;
+            inputSaveIdFornecedor.value = fornecedor.fornecedor_id;
+            showFornecedor.value = fornecedor.nome_fantasia;
+            divBuscarPorNome.style.display = 'none';
+        });
+
+        resultadoNomes.appendChild(div);
+    });
+});
+
 
 
 function getTamanhoLetras(renderer) {

@@ -4,7 +4,7 @@ async function postNewGrupoProduto(newGrupoData) {
     fetch(postNewGrupoProdutoData, {
         method: 'POST',
         headers: {
-              'x-api-key': 'segredo123',
+            'x-api-key': 'segredo123',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(newGrupoData),
@@ -32,7 +32,7 @@ async function postNewSubGrupoProduto(newSubGrupoData) {
     fetch(postNewSubGrupoProdutoData, {
         method: 'POST',
         headers: {
-              'x-api-key': 'segredo123',
+            'x-api-key': 'segredo123',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(newSubGrupoData),
@@ -58,7 +58,7 @@ async function postNewCorProduto(newCorData) {
     fetch(postNewCorProdutoData, {
         method: 'POST',
         headers: {
-              'x-api-key': 'segredo123',
+            'x-api-key': 'segredo123',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(newCorData),
@@ -79,39 +79,76 @@ async function postNewCorProduto(newCorData) {
         });
 };
 
-
 function criarEstruturaFormulario(container, tipo, placeholder, onSubmit, onExit) {
     container.innerHTML = '';
 
     const divContainer = document.createElement('div');
-    divContainer.className = `div-${tipo}`;
+    divContainer.id = 'divContainer'
+    const table = document.createElement('table');
+    table.className = `div-${tipo}`;
+    table.id = 'table-grupos';
 
-    const exitButton = document.createElement('button');
-    exitButton.id = 'btn-exit';
-    exitButton.className = 'btn-exit';
-    exitButton.textContent = 'X';
-    divContainer.appendChild(exitButton);
+    // Botão de sair
+    const exitButton = document.createElement('span');
+    exitButton.id = 'btn-exit-grupo';
+    exitButton.className = 'btn-exit-grupo';
+    exitButton.textContent = 'x';
 
-    const labelText = document.createElement('span');
-    labelText.textContent = `Cadastrar ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
-    divContainer.appendChild(labelText);
+    const trExit = document.createElement('tr');
+    const tdExit = document.createElement('td');
+    tdExit.colSpan = 2;
+    tdExit.appendChild(exitButton);
+    trExit.appendChild(tdExit);
+    table.appendChild(trExit);
 
+    // Título
+    const labelText = document.createElement('label');
+    labelText.textContent = `Cadastrar nova ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+    
+    const trLabel = document.createElement('tr');
+    const tdLabel = document.createElement('td');
+    tdLabel.colSpan = 2;
+    tdLabel.appendChild(labelText);
+    trLabel.appendChild(tdLabel);
+    table.appendChild(trLabel);
+
+    table.querySelectorAll('td, th').forEach(el => {
+  el.style.border = 'none';
+});
+
+
+    // Campo de input
     const input = document.createElement('input');
     input.className = `new${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
-    input.id = 'grupos-inputs'
+    input.id = 'grupos-inputs';
     input.type = 'text';
     input.placeholder = placeholder;
-    divContainer.appendChild(input);
 
+    const trInput = document.createElement('tr');
+    const tdInput = document.createElement('td');
+    tdInput.colSpan = 2;
+    tdInput.appendChild(input);
+    trInput.appendChild(tdInput);
+    table.appendChild(trInput);
+
+    // Botão de cadastrar
     const cadButton = document.createElement('button');
     cadButton.id = `btn-cad-${tipo}`;
+    cadButton.className= `btn-cad`;
     cadButton.textContent = 'Cadastrar';
-    divContainer.appendChild(cadButton);
 
+    const trButton = document.createElement('tr');
+    const tdButton = document.createElement('td');
+    tdButton.colSpan = 2;
+    tdButton.appendChild(cadButton);
+    trButton.appendChild(tdButton);
+    table.appendChild(trButton);
+
+    divContainer.appendChild(table);
     container.appendChild(divContainer);
-    
-      // Focar no input automaticamente
-      input.focus();
+
+    // Focar no input automaticamente
+    input.focus();
 
     // Eventos
     cadButton.addEventListener('click', onSubmit);
@@ -127,7 +164,7 @@ function renderizarInputsGrupo() {
     const inputNewGrupo = criarEstruturaFormulario(
         containerRegister,
         tipo,
-        '',
+        'Digite o novo grupo',
         (e) => {
             e.preventDefault();
 
@@ -136,12 +173,17 @@ function renderizarInputsGrupo() {
             };
 
             if (!inputNewGrupo.value.trim()) {
-                alertMsg('O campo de grupo não pode estar vazio!','orange');
+                alertMsg('O campo de grupo não pode estar vazio!', 'info',4000);
                 inputNewGrupo.focus();
                 return;
             }
 
             postNewGrupoProduto(newGrupo);
+                     alertMsg(
+            `Novo grupo adicionado com sucesso!`,
+            "success",
+            4000
+        );
             inputNewGrupo.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectGrupo.innerHTML = '<option value="">Selecione</option>';
@@ -159,20 +201,25 @@ function renderizarInputsSubGrupo() {
     const inputNewSubGrupo = criarEstruturaFormulario(
         containerRegister,
         tipo,
-        '',
+         'Digite o novo subgrupo',
         (e) => {
             e.preventDefault();
-        
+
             const newSubGrupo = {
                 nome_sub_grupo: inputNewSubGrupo.value.trim()
             };
 
             if (!inputNewSubGrupo.value.trim()) {
-                alertMsg('O campo de sub-grupo não pode estar vazio!','orange');
+                alertMsg('O campo de sub-grupo não pode estar vazio!', 'info',4000);
                 inputNewSubGrupo.focus();
                 return;
             }
             postNewSubGrupoProduto(newSubGrupo);
+                 alertMsg(
+            `Novo subgrupo adicionado com sucesso!`,
+            "success",
+            4000
+        );
             inputNewSubGrupo.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectSubGrupo.innerHTML = '<option value="">Selecione</option>';
@@ -190,20 +237,25 @@ function renderizarInputsColor() {
     const inputNewCor = criarEstruturaFormulario(
         containerRegister,
         tipo,
-        '',
+         'Digite a nova cor',
         (e) => {
             e.preventDefault();
-        
+
             const newCor = {
                 nome_cor_produto: inputNewCor.value.trim()
             };
 
             if (!inputNewCor.value.trim()) {
-                alertMsg('O campo nome da cor não pode estar vazio!','orange');
+                alertMsg('O campo nome da cor não pode estar vazio!', 'info',4000);
                 inputNewCor.focus();
                 return;
             }
             postNewCorProduto(newCor);
+              alertMsg(
+            `Nova cor adicionada com sucesso!`,
+            "success",
+            4000
+        );
             inputNewCor.value = ''; // Limpa o campo após o envio
             // Limpa as opções atuais do select e redefine a primeira como "Selecione"
             selectCorProduto.innerHTML = '<option value="">Selecione</option>';
@@ -214,3 +266,18 @@ function renderizarInputsColor() {
         }
     );
 }
+
+
+const btnBuscarFornecedor = document.getElementById('buscar-fornecedor');
+const divContainerFornecedor = document.getElementById('divFornecedor');
+const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');
+
+btnBuscarFornecedor.addEventListener('click', (e) => {
+            e.preventDefault();
+           divContainerFornecedor.style.display = 'flex';
+           cnpjFilter.focus();
+})
+btnExitFornecedor.addEventListener('click', (e) => {
+            e.preventDefault();
+           divContainerFornecedor.style.display = 'none';
+})

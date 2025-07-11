@@ -53,7 +53,7 @@ function alertMsg(msg, type = 'info', time = ALERT_DEFAULT_TIME) {
     alertDiv.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
     alertDiv.style.fontFamily = 'Arial, sans-serif';
 
-    titleSpan.textContent = `${icons[type]} Mensagem de Alerta.`;
+    titleSpan.textContent = `${icons[type]} Mensagem informativa.`;
     titleSpan.style.fontSize = '20px';
     titleSpan.style.fontWeight = 'bold';
     titleSpan.style.color = '#333';

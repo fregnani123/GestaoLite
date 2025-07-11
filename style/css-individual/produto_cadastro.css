@@ -1,4 +1,4 @@
-.table-1-produto{
+.table-1-produto {
     margin-top: .5%;
 }
 
@@ -100,25 +100,26 @@
 .table-5-produto td {
     text-align: left;
 }
-.span-dois-pontos{
+
+.span-dois-pontos {
     margin: 2%;
 }
+
 #volumeNumero,
 #comprimento,
 #estoqueQtd,
-#massaNumero
-{
-border-top-right-radius: 0;
-border-bottom-right-radius: 0;
+#massaNumero {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 #medidaVolume,
 #unidadeEstoque,
 #unidadeComprimento,
-#unidadeDeMassa{
-border-top-left-radius: 0;
-border-bottom-left-radius: 0;
-border-left: none;
+#unidadeDeMassa {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
 }
 
 /* Estilo geral da tabela */
@@ -129,50 +130,56 @@ border-left: none;
 
 .table-6-produto th,
 .table-6-produto td {
-   
+
     text-align: left;
 }
 
 .container-relative-full {
-  display: flex;
-  width: 99%;
-  height: 100%;
-  position: relative;
-  margin: .5%;
+    display: flex;
+    width: 99%;
+    height: 100%;
+    position: relative;
+    margin: .5%;
 }
 
 .titulo-cadastro-produto {
-  position: absolute;
-  top: 2%;
-  left: 1%;
+    position: absolute;
+    top: 2%;
+    left: 1%;
 }
 
 .input-file-wrapper {
-  width: 100%;
+    width: 100%;
 }
 
 
 .th-30 {
-  width: 30%;
+    width: 30%;
 }
 
 .footer-wrapper {
-  display: flex;
-  align-items: center;
-  border: 1px solid rgba(128, 128, 128, 0.755);
-  margin: .5%;
-  padding: 1%;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(128, 128, 128, 0.755);
+    margin: .5%;
+    padding: 1%;
 }
 
-.footer-wrapper  p{
-font-size: 0.95rem;
+.footer-wrapper p {
+    font-size: 0.95rem;
 }
- 
-.img-alerte{
-    width: 1.3rem; margin-right: 1%;
+
+.img-alerte {
+    width: 1.3rem;
+    margin-right: 1%;
 }
-.div-btn-footer{
-    background: white; padding: .5%; display: flex; gap: 2%; margin-left: .5%;
+
+.div-btn-footer {
+    background: white;
+    padding: .5%;
+    display: flex;
+    gap: 2%;
+    margin-left: .5%;
 }
 
 
@@ -223,24 +230,110 @@ font-size: 0.95rem;
     display: flex;
     align-items: center;
 }
- 
+
 #volumeDiv,
 #comprimentoDiv,
 #massaDiv,
 #divTamanho,
-#divTamanhoNUm{
+#divTamanhoNUm {
     display: none;
     width: 100%;
 }
 
-.div-filtrados{
-    width:99%;
-    height: 455px; 
+.div-filtrados {
+    width: 99%;
+    height: 455px;
     border: 1px solid var(--border-color);
     overflow-y: scroll;
 }
 
+.container-register {
+    left: 0;
+    top: 0;
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
 
+#divContainer {
+    padding-top: 3%;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    padding: 1%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
+}
+#tdButton{
+    display: flex;
+    justify-content: center;
+    background-color: rebeccapurple;
+}
 
+.btn-cad{
+    margin-left: 21%;
+}
 
-/* Tem que colocar no global para que todos fiquem igual */
+#divFornecedor{
+    left: 0;
+    top: 0;
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+
+#divContainerFornecedor {
+    padding-top: 3%;
+    width: 750px;
+    height: 510px;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    padding: 1%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
+}
+
+#divBuscarPorNome{
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    padding-top: 3%;
+    flex-direction: column;
+    width: 750px;
+    height: 510px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    padding: 1%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
+}
+
+#resultado-nomes{
+    margin-top: 2%;
+    height: 300px;
+    width: 100%;
+}

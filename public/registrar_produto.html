@@ -68,6 +68,10 @@
                             </div>
                         </div>
                         <div class="formulario-inputs">
+                            <!-- div responsavel por renderizar o grup e subgrupo e cores. -->
+                            <div class="container-register">
+
+                            </div>
                             <table class="table-1-produto">
                                 <tr>
                                     <th class="col-codigo">Código / Cód. Barras</th>
@@ -96,8 +100,7 @@
                                     <td class="btn-border-transparent">
                                         <button id="add-grupo" class="add-grupo"
                                             style="display: flex; align-items: center; gap: 8px;">
-                                            <img  src="../style/img/mais.png" alt=""
-                                                style="width: 18px;">
+                                            <img src="../style/img/mais.png" alt="" style="width: 18px;">
                                             <span>Adicionar</span>
                                         </button>
                                     </td>
@@ -130,7 +133,7 @@
                                     </td>
                                     <td class="btn-border-transparent">
                                         <button id="add-cor" class="add-cor"
-                                             style="display: flex; align-items: center; gap: 8px;">
+                                            style="display: flex; align-items: center; gap: 8px;">
                                             <img src="../style/img/mais.png" alt="Adicionar" style="width: 18px;">
                                             <span>Adicionar</span>
                                         </button>
@@ -204,6 +207,154 @@
                                 </tr>
                             </table>
 
+
+
+
+
+
+
+
+
+                            <div id="divFornecedor">
+                                <!-- Div para pesquisar e buscar o nome do fornecedor a ser adicionado no cadastro do produto -->
+
+                                <div id="divContainerFornecedor">
+                                    <div id="divBuscarPorNome">
+                                      
+                                        <label style="margin-top: 1%;">Selecione o fornecedor vinculado ao produto</label>
+                                          <span id="exit-nome-fornecedor">x</span>
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                   <div style="display: flex; align-items: center; gap: 1%;">
+                                                     <img style="width: 22px;" src="../style/img/procurar-black.png"
+                                                        alt="">
+                                                    Buscar fornecedor por nome
+                                                   </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="input-busca-nome"
+                                                        placeholder="Digite o nome do fornecedor..." />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <table style="margin-top: 1%;">
+                                            <tr >
+                                                <td>
+
+                                                    <div id="resultado-nomes"></div>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <span id="btn-exit-fornecedor-prod">x</span>
+                                    <label>Selecione o fornecedor vinculado ao produto</label>
+                                    <table>
+                                        <tr>
+                                            <th style="white-space: nowrap;">
+                                                <div style="display: inline-flex; align-items: center; gap: 5px;">
+                                                    <img style="width: 22px;" src="../style/img/procurar-black.png"
+                                                        alt="">
+                                                    Buscar fornecedor por CNPJ
+                                                </div>
+                                            </th>
+                                            <th style="white-space: nowrap;">
+                                                <div style="display: inline-flex; align-items: center; gap: 5px;">
+                                                    <img style="width: 22px;" src="../style/img/procurar-black.png"
+                                                        alt="">
+                                                    Buscar fornecedor por CPF
+                                                </div>
+                                            </th>
+
+                                            <th>
+                                                Ações
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id="cnpjFilter" type="text" placeholder="Digite pada buscar">
+                                                <input type="hidden" id="fornecedorID">
+                                            </td>
+                                            <td>
+                                                <input id="cpfFilter" type="text" placeholder="Digite pada buscar">
+                                            </td>
+                                            <td>
+                                                <button style="width: 100%;" id="btn-nome-buscar"> <img
+                                                        style="width: 18px;" src="../style/img/procurar.png"
+                                                        alt="">Buscar por nome</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                Razão Social fornecedor
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <!-- " -->
+                                                <input id="fornecedorEncontrado" type="text" readonly
+                                                    placeholder="Fornecedor não selecionado">
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+
+                                            <th>
+                                                Nome Fantasia fornecedor
+                                            </th>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <!-- " -->
+                                                <input id="inputFornecedorRazãoSocial" type="text" readonly
+                                                    placeholder="Fornecedor não selecionado">
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div
+                                        style="width: 100%;display: flex; align-items: center;margin-top: 2%;justify-content: center; gap:2%;">
+                                        <button id="btn-alterar-confirmar">
+                                            <img style="width: 20px;" src="../style/img/disquete.png" alt="">Confirmar
+                                        </button>
+                                        <button id="limparButton-fornecedor">
+                                            <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
+                                        </button>
+                                    </div>
+                                    <table style="margin-top: 3%;">
+                                        <tr>
+                                            <td class="info-pag" id="info-pag">
+                                                ⚠️ O fornecedor precisa estar previamente cadastrado no
+                                                sistema para que o produto seja vinculado.
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
                             <table class="table-5-produto">
                                 <tr>
                                     <th class="col-fantasia border-none-right">Nome fantasia filtrado</th>
@@ -211,13 +362,13 @@
                                 </tr>
                                 <tr>
                                     <td class="border-none-right">
-                                        <input id="cnpjFilter"
+                                        <input id="showFornecedor"
                                             placeholder="Nenhum fornecedor — clique em buscar para selecionar"
-                                            name="fornecedor">
+                                            name="fornecedor" readonly>
                                     </td>
                                     <td class="border-none-left">
                                         <button id="buscar-fornecedor" style="width: 100%;"><img style="width: 18px;"
-                                                    src="../style/img/procurar.png" alt="">Buscar Fornecedor</button>
+                                                src="../style/img/procurar.png" alt="">Buscar Fornecedor</button>
                                     </td>
                                 </tr>
                             </table>
@@ -238,7 +389,8 @@
                                     </td>
                                     <td>
                                         <div class="acoes-container">
-                                            <button id="btn-cadastrar-produto" class="btn-cadastrar-produto" style="width: 50%;">
+                                            <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"
+                                                style="width: 50%;">
                                                 <img class="img-disquete" src="../style/img/disquete.png" alt="">Gravar
                                             </button>
                                             <button id="limparButton" style="width: 50%;">

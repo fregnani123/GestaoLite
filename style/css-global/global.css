@@ -385,6 +385,9 @@ header {
   justify-content: center;
 }
 
+#btn-exit-grupo,
+#exit-nome-fornecedor,
+#btn-exit-fornecedor-prod,
 #btn-exit-juros,
 #btn-exit-desconto,
 #btn-exit-venda,
@@ -416,8 +419,12 @@ header {
   border-radius: 4px;
   transition: background 0.2s, color 0.2s;
 }
+ 
 
+#btn-exit-fornecedor-prod:hover,
+#exit-nome-fornecedor:hover,
 #btn-exit-juros:hover,
+#btn-exit-grupo:hover,
 #btn-exit-desconto:hover,
 #btn-exit:hover,
 #btn-exit-parcelado:hover ,
