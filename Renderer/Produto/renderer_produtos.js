@@ -14,6 +14,7 @@ const selectMedidaVolume = document.querySelector('#medidaVolume');
 const selectUnidadeComprimento = document.querySelector('#unidadeComprimento');
 const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 const selectCorProduto = document.querySelector('#corProduto');
+const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
 
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
@@ -37,24 +38,72 @@ const btnCadCor = document.querySelector('#add-cor');
 const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
 const exitNome = document.getElementById('exit-nome-fornecedor');
 
+
 // Seleciona os campos de input
 const inputMarkup = document.querySelector('#inputMarkup');
 const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputprecoVenda = document.querySelector('#precoVenda');
 const inputLucro = document.querySelector('#lucro');
 
-btnNomeBuscar.addEventListener('click', (e) => {
-    e.preventDefault();
-    divBuscarPorNome.style.display = 'block';
+document.addEventListener('DOMContentLoaded', () => {
+  const codigoDeBarrasAlter = document.querySelector('.codigoDeBarras');
+  if (codigoDeBarrasAlter) {
+    codigoDeBarrasAlter.focus();
+  }
+  inputMaxCaracteres(codigoDeBarrasAlter, 13);
 });
 
 
+btnNomeBuscar.addEventListener('click', (e) => {
+  e.preventDefault();
+  divBuscarPorNome.style.display = 'block';
+  setTimeout(() => {
+    inputBuscaNome.focus()
+  }, 100)
+});
+
+btnConfirmarFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (inputFornecedorRazãoSocial.value.trim() === '') {
+    alertMsg('Nenhum fornecedor selecionado.', 'info', 3000);
+    return;
+  }
+  else {
+    divContainerFornecedor.style.display = 'none';
+    setTimeout(() => {
+      inputCodigoEANProduto.focus()
+    }, 100)
+  }
+});
+
+const btnBuscarFornecedor = document.getElementById('buscar-fornecedor');
+const divContainerFornecedor = document.getElementById('divFornecedor');
+const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');
+
+btnBuscarFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  divContainerFornecedor.style.display = 'flex';
+  cnpjFilter.focus();
+})
+btnExitFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  divContainerFornecedor.style.display = 'none';
+  cnpjFilter.value = '';
+  cpfFilter.value = '';
+  inputBuscaNome.value = '';
+  if (inputBuscaNome.value === '') {
+    resultadoNomes.innerHTML = ''
+  }
+  limparFornecedor(); // sua função de limpeza aqui
+})
+
 exitNome.addEventListener('click', (e) => {
   e.preventDefault();
-    if (divBuscarPorNome.style.display === 'block') {
-        divBuscarPorNome.style.display = 'none';
-        cnpjFilter.focus();
-    }
+  if (divBuscarPorNome.style.display === 'block') {
+    divBuscarPorNome.style.display = 'none';
+    cnpjFilter.focus();
+  }
+
 });
 
 // Adiciona um atraso para evitar requisições a cada digitação
@@ -95,9 +144,9 @@ cpfFilter.addEventListener('input', (e) => {
 });
 
 limparButtonFornecedor.addEventListener('click', () => {
-  limparFornecedor(); 
-  cpfFilter.value= '';
-  cnpjFilter.value='';
+  limparFornecedor();
+  cpfFilter.value = '';
+  cnpjFilter.value = '';
 })
 
 function limparFornecedor() {
@@ -105,6 +154,7 @@ function limparFornecedor() {
   inputFornecedorRazãoSocial.value = '';
   inputSaveIdFornecedor.value = '';
   showFornecedor.value = '';
+
 }
 
 

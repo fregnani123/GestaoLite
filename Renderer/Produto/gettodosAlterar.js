@@ -1,3 +1,93 @@
+// Seleciona os elementos do dropdown
+const selectGrupo = document.querySelector('#grupo');
+const selectSubGrupo = document.querySelector('#sub-grupo');
+const inputFornecedor = document.getElementById('showFornecedor');
+const inputFornecedorRazãoSocial = document.querySelector('#inputFornecedorRazãoSocial');
+const cnpjFilter = document.querySelector('#cnpjFilter');
+const cpfFilter = document.querySelector('#cpfFilter');
+const inputSaveIdFornecedor = document.querySelector('#fornecedorID');
+const showFornecedor = document.getElementById('showFornecedor')
+const selectTamanhoLetras = document.querySelector('#tamanhoLetras');
+const selectTamanhoNumeros = document.querySelector('#tamanhoNumeros');
+const selectUnidadeMassa = document.querySelector('#unidadeDeMassa');
+const selectMedidaVolume = document.querySelector('#medidaVolume');
+const selectUnidadeComprimento = document.querySelector('#unidadeComprimento');
+const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
+const selectCorProduto = document.querySelector('#corProduto');
+const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
+
+// Seleciona todos os campos de input
+const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
+const btnNomeBuscar = document.querySelector('#btn-nome-buscar');
+
+const inputNomeProduto = document.querySelector('#nomeProduto');
+const inputFornecedorFiltrado = document.getElementById('fornecedorEncontrado');
+const inputObservacoes = document.querySelector('#observacoes');
+const inputMassa = document.querySelector('#massaNumero');
+const inputVolume = document.querySelector('#volumeNumero');
+const inputComprimento = document.querySelector('#comprimento');
+const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
+const inputQuantidadeVendido = document.querySelector('#Qtd_vendido'); //Input Oculto, salva codidade 0 
+const inputPathImg = document.querySelector('#produto-imagem');
+const divImgProduct = document.querySelector('.quadro-img');
+const divBuscarPorNome = document.getElementById('divBuscarPorNome');
+const btnFornecedorMenu = document.querySelector('.li-fornecedor');
+const containerRegister = document.querySelector('.container-register');
+const btnCadGrupo = document.querySelector('#add-grupo');
+const btnCadSubGrupo = document.querySelector('#add-subGrupo');
+const btnCadCor = document.querySelector('#add-cor');
+const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
+const exitNome = document.getElementById('exit-nome-fornecedor');
+
+
+// Seleciona os campos de input
+const inputMarkup = document.querySelector('#inputMarkup');
+const inputPrecoCompra = document.querySelector('#precoCusto');
+const inputprecoVenda = document.querySelector('#precoVenda');
+const inputLucro = document.querySelector('#lucro');
+
+
+//Metodos criado por mim que renderizam os values iniciais padrões ou cadastrados no DB.
+getGrupo(selectGrupo);
+getSubGrupo(selectSubGrupo);
+getTamanhoLetras(selectTamanhoLetras);
+getTamanhoNumeros(selectTamanhoNumeros);
+getunidadeComprimento(selectUnidadeComprimento);
+getunidadeEstoque(selectUnidadeEstoque);
+getMedidaVolume(selectMedidaVolume);
+getCorProduto(selectCorProduto);
+getunidadeDeMassa(selectUnidadeMassa);
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const codigoDeBarrasAlter = document.querySelector('.codigoDeBarras');
+    if (codigoDeBarrasAlter) {
+        codigoDeBarrasAlter.focus();
+    }
+    inputMaxCaracteres(codigoDeBarrasAlter, 13);
+});
+
+// Função para calcular lucro
+function calcularLucro() {
+    // Remove qualquer coisa que não seja número, e converte para float
+    let precoCompraNum = parseFloat(inputPrecoCompra.value.replace(/\D/g, '')) / 100;
+    let precoVendaNum = parseFloat(inputprecoVenda.value.replace(/\D/g, '')) / 100;
+
+    // Verifica se os valores são números válidos
+    if (isNaN(precoCompraNum) || isNaN(precoVendaNum)) {
+        inputLucro.value = ''; // Se não for válido, limpa o campo
+        return;
+    }
+
+    // Calcula o lucro
+    const lucro = precoVendaNum - precoCompraNum;
+
+    // Atualiza o campo de lucro com o valor calculado
+    inputLucro.value = lucro < 0 ? '0,00' : lucro.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+
 const { ipcRenderer } = require('electron');
 const path = require('path');
 const fs = require('fs');
@@ -27,13 +117,14 @@ function fetchAllProdutos() {
         .then(response => response.json())
         .then(data => {
             produtoFilter = data; // Armazena os produtos no array global
-            // console.log('Produtos do array:', produtoFilter);
+            console.log('Produtos do array:', produtoFilter);
         })
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
 
 // Chama a função para carregar os produtos
 fetchAllProdutos();
+
 
 // Função para mapear e exibir os divs necessários
 function exibirDivsSeNecessario(produtoEncontrado) {
@@ -59,10 +150,40 @@ function exibirDivsSeNecessario(produtoEncontrado) {
 
 let imagePath = '';
 
+function getFornecedorID(filter) {
+    const url = 'http://localhost:3000/fornecedor';
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'segredo123'
+        }
+    })
+    .then(response => {
+        if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+        return response.json();
+    })
+    .then(data => {
+        console.log('✅ Dados do fornecedor:', data);
+
+        const fornecedor = data.find(f => f.fornecedor_id === Number(filter));
+
+        if (fornecedor) {
+            inputFornecedor.value = fornecedor.razao_social;
+            console.log('🔎 Fornecedor encontrado:', fornecedor);
+        } else {
+            alertMsg('Fornecedor não encontrado', 'info', 3000);
+        }
+    })
+    .catch(() => {
+        alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
+        console.log('Erro ao buscar dados do fornecedor');
+    });
+}
+
 // Função para preencher os inputs e ativar os divs necessários
 async function preencherInputs(produtoEncontrado) {
-
-    getFornecedor(produtoEncontrado.fornecedor_id)
 
     // Solicitar o caminho APPDATA
     const appDataPath = await ipcRenderer.invoke('get-app-data-path');
@@ -92,19 +213,23 @@ async function preencherInputs(produtoEncontrado) {
     inputMassa.value = produtoEncontrado.unidade_massa_qtd || '';
     inputVolume.value = produtoEncontrado.medida_volume_qtd || '';
     inputComprimento.value = produtoEncontrado.unidade_comprimento_qtd || '';
-    selectFornecedor.value = produtoEncontrado.fornecedor_id;
+    getFornecedorID(produtoEncontrado.fornecedor_id);
+    inputSaveIdFornecedor.value = produtoEncontrado.fornecedor_id
     selectCorProduto.value = produtoEncontrado.cor_produto_id || '';
     inputObservacoes.value = produtoEncontrado.observacoes || '';
+
+    calcularLucro()
 
     // Verificar se o caminho da imagem existe e definir a imagem correta
     if (imgPath && fs.existsSync(imgPath)) {
         imgProduto.src = imgPath;  // Caminho da imagem fornecido
     } else {
-        relativePath.src = '../style/img/alterar.png';  // Imagem padrão caso não haja imagem
+        relativePath.src = '../style/img/alterar-interno.png';  // Imagem padrão caso não haja imagem
     }
 
     exibirDivsSeNecessario(produtoEncontrado); // Exibe os divs necessários
 }
+
 
 // Função para filtrar produto por código EAN
 function filterProdutoEan(codigoEan) {
@@ -112,38 +237,13 @@ function filterProdutoEan(codigoEan) {
     if (produtoEncontrado) {
         console.log('Produto Filtrado EAN:', produtoEncontrado)
         preencherInputs(produtoEncontrado);
+        calcularLucro()
     } else {
         alertMsg('Produto não encontrado, verifique se o código EAN está correto.', 'info');
     }
 }
 
 
-
-function getFornecedor() {
-    const url = 'http://localhost:3000/fornecedor';
-
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'segredo123'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('✅ Dados do fornecedor:', data);
-        // Aqui você pode processar os dados como necessário
-    })
-    .catch(error => {
-        console.error('❌ Erro ao buscar dados do fornecedor:', error);
-    });
-}
-getFornecedor()
 
 fetchAllProdutos(); // Aguarda o carregamento dos produtos
 let ultimoCodigoEan = ''; // Variável para armazenar o último valor digitado
@@ -181,11 +281,162 @@ findProduto.addEventListener('input', (e) => {
         inputMassa.value = '';
         inputVolume.value = '';
         inputComprimento.value = '';
-        selectFornecedor.value = '';
+        inputFornecedor.value = '';
         selectCorProduto.value = '';
         inputObservacoes.value = '';
-        relativePath.src = "../style/img/alterar.png";
+        relativePath.src = "../style/img/alterar-interno.png";
     }
+});
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const inputPathImg = document.querySelector('#produto-imagem');
+  const divImgProduct = document.querySelector('.quadro-img');
+
+  inputPathImg.onchange = function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      // Verifica se já existe uma imagem com a classe .img-produto e a remove
+      let imgProduto = divImgProduct.querySelector('.img-produto');
+      if (imgProduto) {
+        divImgProduct.removeChild(imgProduto);
+      }
+
+      // Cria um novo elemento de imagem
+      imgProduto = document.createElement('img');
+      imgProduto.className = 'img-produto';
+
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        imgProduto.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+
+      // Adiciona a nova imagem à div.quadro-img
+      divImgProduct.appendChild(imgProduto);
+
+      const relativePath = file.name.replace(/\.[^/.]+$/, "");
+      inputPathImg.setAttribute('data-relative-path', relativePath);
+    }
+  };
+});
+
+
+
+
+
+
+
+
+btnNomeBuscar.addEventListener('click', (e) => {
+  e.preventDefault();
+  divBuscarPorNome.style.display = 'block';
+  setTimeout(() => {
+    inputBuscaNome.focus()
+  }, 100)
+});
+
+btnConfirmarFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (inputFornecedorRazãoSocial.value.trim() === '') {
+    alertMsg('Nenhum fornecedor selecionado.', 'info', 3000);
+    return;
+  }
+  else {
+    divContainerFornecedor.style.display = 'none';
+    setTimeout(() => {
+      inputCodigoEANProduto.focus()
+    }, 100)
+  }
+});
+
+// Adiciona um atraso para evitar requisições a cada digitação
+let timeout;
+
+cnpjFilter.addEventListener('input', (e) => {
+  cpfFilter.value = ''
+  formatarCNPJ(cnpjFilter);
+  inputMaxCaracteres(cnpjFilter, 18);
+
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    const cnpj = cnpjFilter.value;
+
+    if (cnpj.length === 18) {
+      getFornecedor(cnpjFilter);
+    } else {
+      limparFornecedor(); // sua função de limpeza aqui
+    }
+  }, 100);
+});
+
+cpfFilter.addEventListener('input', (e) => {
+  cnpjFilter.value = ''
+  formatarCNPJ(cpfFilter);
+  inputMaxCaracteres(cpfFilter, 18);
+
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    const cnpj = cpfFilter.value;
+
+    if (cnpj.length === 18) {
+      getFornecedor(cpfFilter);
+    } else {
+      limparFornecedor(); // sua função de limpeza aqui
+    }
+  }, 100);
+});
+
+limparButtonFornecedor.addEventListener('click', () => {
+  limparFornecedor();
+  cpfFilter.value = '';
+  cnpjFilter.value = '';
+})
+
+function limparFornecedor() {
+  inputFornecedorFiltrado.value = '';
+  inputFornecedorRazãoSocial.value = '';
+  inputSaveIdFornecedor.value = '';
+  showFornecedor.value = '';
+
+}
+
+
+
+
+const btnBuscarFornecedor = document.getElementById('buscar-fornecedor');
+const divContainerFornecedor = document.getElementById('divFornecedor');
+const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');
+
+btnBuscarFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  divContainerFornecedor.style.display = 'flex';
+  cnpjFilter.focus();
+})
+btnExitFornecedor.addEventListener('click', (e) => {
+  e.preventDefault();
+  divContainerFornecedor.style.display = 'none';
+  cnpjFilter.value = '';
+  cpfFilter.value = '';
+  inputBuscaNome.value = '';
+  if (inputBuscaNome.value === '') {
+    resultadoNomes.innerHTML = ''
+  }
+  limparFornecedor(); // sua função de limpeza aqui
+})
+
+exitNome.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (divBuscarPorNome.style.display === 'block') {
+    divBuscarPorNome.style.display = 'none';
+    cnpjFilter.focus();
+  }
+
 });
 
 // Atualizar apenas os dados do produto
@@ -240,9 +491,19 @@ async function uploadImagem(imagemFile) {
 
 let inputFile = document.getElementById('produto-imagem');
 let fileNameGlobal = ''
-const codigoDeBarras = document.querySelector('#codigoDeBarras');
+
+inputFile.addEventListener('click', function (e) {
+    if (inputCodigoEANProduto.value === '') {
+        alertMsg('Filtre o produto antes de selecionar a imagem', 'info', 3000);
+        e.preventDefault(); // Impede a abertura da janela de arquivos
+    }
+});
 
 inputFile.addEventListener('change', function () {
+    if(inputCodigoEANProduto.value === ''){
+        alertMsg('Filtre o produto antes de selecionar a imagem','info',3000)
+        return;
+    }
     if (this.files && this.files[0]) {
         const fileName = this.files[0].name;
         fileNameGlobal = fileName;
@@ -294,7 +555,7 @@ function alterarProduto(e) {
         unidade_massa_qtd: parseFloat(inputMassa.value || 0),
         medida_volume_qtd: parseFloat(inputVolume.value || 0),
         unidade_comprimento_qtd: parseFloat(inputComprimento.value || 0),
-        fornecedor_id: selectFornecedor.value || null,
+        fornecedor_id: inputSaveIdFornecedor.value || null,
         caminho_img_produto: fileNameGlobal || imagePath || '',
         cor_produto_id: selectCorProduto.value || null,
         observacoes: inputObservacoes.value.trim() || '',
@@ -303,7 +564,7 @@ function alterarProduto(e) {
 
     try {
         updateProduto(coletarDadosAtualizados);
-        
+
         if (inputFile.files.length > 0) {
             uploadImagem(inputFile.files[0]);
         }
@@ -331,6 +592,6 @@ function limpar() {
 }
 
 const filterButtonAlterar = document.getElementById('limparButton');
-filterButtonAlterar.addEventListener('click',()=>{
+filterButtonAlterar.addEventListener('click', () => {
     location.reload();
-  })
+})

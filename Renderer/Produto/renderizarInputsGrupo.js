@@ -268,16 +268,3 @@ function renderizarInputsColor() {
 }
 
 
-const btnBuscarFornecedor = document.getElementById('buscar-fornecedor');
-const divContainerFornecedor = document.getElementById('divFornecedor');
-const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');
-
-btnBuscarFornecedor.addEventListener('click', (e) => {
-            e.preventDefault();
-           divContainerFornecedor.style.display = 'flex';
-           cnpjFilter.focus();
-})
-btnExitFornecedor.addEventListener('click', (e) => {
-            e.preventDefault();
-           divContainerFornecedor.style.display = 'none';
-})

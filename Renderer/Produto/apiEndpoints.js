@@ -22,9 +22,9 @@ const btnAtivo = document.getElementById('btn-ativo');
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
@@ -61,7 +61,7 @@ function getGrupo(renderer) {
         .catch(error => {
             console.error('Erro ao buscar dados:', error);
         });
-} 
+}
 function getSubGrupo(renderer) {
     const getSubGrupo = apiEndpoints.getSubGrupo;
 
@@ -129,37 +129,34 @@ function getFornecedor(filter) {
             'x-api-key': 'segredo123'
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('✅ Dados do fornecedor:', data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Dados do fornecedor:', data);
 
-        const fornecedorFiltrado = data.filter(fornecedor =>
-            fornecedor.cnpj === filter.value
-        );
+            const fornecedorFiltrado = data.filter(fornecedor =>
+                fornecedor.cnpj === filter.value
+            );
 
-        if (fornecedorFiltrado.length > 0) {
-            inputFornecedorFiltrado.value = fornecedorFiltrado[0].razao_social;
-            inputFornecedorRazãoSocial.value = fornecedorFiltrado[0].nome_fantasia;
-            inputSaveIdFornecedor.value = fornecedorFiltrado[0].fornecedor_id;
-            showFornecedor.value = fornecedorFiltrado[0].nome_fantasia;
-            console.log('🔎 Fornecedores filtrados:', fornecedorFiltrado);
-        } else {
-            alertMsg('Fornecedor não encontrado', 'info', 3000);
-        }
-    })
-    .catch(() => {
-        alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
-        console.log('Erro ao buscar dados do fornecedor');
-    });
+            if (fornecedorFiltrado.length > 0) {
+                inputFornecedorFiltrado.value = fornecedorFiltrado[0].razao_social;
+                inputFornecedorRazãoSocial.value = fornecedorFiltrado[0].nome_fantasia;
+                inputSaveIdFornecedor.value = fornecedorFiltrado[0].fornecedor_id;
+                showFornecedor.value = fornecedorFiltrado[0].nome_fantasia;
+                console.log('🔎 Fornecedores filtrados:', fornecedorFiltrado);
+            } else {
+                alertMsg('Fornecedor não encontrado', 'info', 3000);
+            }
+        })
+        .catch(() => {
+            alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
+            console.log('Erro ao buscar dados do fornecedor');
+        });
 }
-
-
-
 
 
 const inputBuscaNome = document.getElementById('input-busca-nome');
@@ -167,7 +164,7 @@ const resultadoNomes = document.getElementById('resultado-nomes');
 
 let todosFornecedores = [];
 
-inputBuscaNome.addEventListener('click', async (e) => {
+inputBuscaNome.addEventListener('input', async (e) => {
     e.preventDefault();
     divBuscarPorNome.style.display = 'block';
 
@@ -205,15 +202,14 @@ inputBuscaNome.addEventListener('input', () => {
         div.style.alignItems = 'center';
         div.style.border = '1px solid #ccc';
         div.style.padding = '5px';
-        div.style.marginBottom = '5px';
 
         div.innerHTML = `
-            <div>
-                <strong>${fornecedor.razao_social}</strong><br>
-                <small>${fornecedor.nome_fantasia}</small>
-            </div>
-            <button type="button" class="btn-add-fornecedor">Selecionar</button>
-        `;
+  <div style="text-align: left; display: flex; flex-direction: column;  ">
+    <strong style="margin: 0; padding: 0;">${fornecedor.razao_social}</strong>
+    <small style="margin: 0; padding: 0;">${fornecedor.nome_fantasia}</small>
+  </div>
+  <button type="button" class="btn-add-fornecedor">Selecionar</button>
+`;
 
         div.querySelector('.btn-add-fornecedor').addEventListener('click', () => {
             inputFornecedorFiltrado.value = fornecedor.razao_social;
@@ -224,6 +220,10 @@ inputBuscaNome.addEventListener('input', () => {
         });
 
         resultadoNomes.appendChild(div);
+
+        if(inputBuscaNome.value === ''){
+             resultadoNomes.innerHTML=''
+        }
     });
 });
 
@@ -442,7 +442,7 @@ async function postNewProdutoWithImage(produtoData, selectedFile) {
         console.log('Produto e imagem adicionados com sucesso:', data);
 
         // Exibe a mensagem de sucesso
-        alertMsg('Produto adicionados com sucesso!', 'success' );
+        alertMsg('Produto adicionados com sucesso!', 'success');
 
         limparCampos();
 
