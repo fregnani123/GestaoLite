@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F12': // Limpar venda
                 if(inputTotalLiquido.value === '0,00'){
-                      alertMsg(`${'Não é possível reiniciar a venda sem itens adicionados ou com subtotal igual a zero.'}`, 'warning', 4000);      
+                      alertMsg(`${'Não é possível reiniciar a venda sem itens adicionados ou com subtotal igual a zero.'}`, 'info', 4000);      
                     return;
                 }
                 if (visibleDivs.length === 0) {
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             imgProduto.src = carrinho[carrinho.length - 1].imgSrc || "../style/img/carrinho-de-compras.png";
                         }
 
-                        alertMsg(`Item ${index + 1} removido do carrinho.`, 'warning', 3000);
+                        alertMsg(`Item ${index + 1} removido do carrinho.`,'info', 4000);
                     }
                     nomeProduto.innerHTML = ''
                     alertRemoverItem.style.display = 'none';
@@ -403,7 +403,7 @@ inputQtd.addEventListener('input', function (e) {
 const limparTelakey = (e) => {
     if (e.key === 'Enter') {
         if (inputlimparTelakey.value === 'adm') {
-            alertMsg('Todos os campos serão limpos e a venda será reiniciada.', 'warning', 6000);
+            alertMsg('Todos os campos serão limpos e a venda será reiniciada.','info', 4000);
             limparCampos();
         } else {
             alertMsg('Senha incorreta, tente novamente.', 'error', 3000);

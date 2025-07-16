@@ -28,23 +28,40 @@ const inputVolume = document.querySelector('#volumeNumero');
 const inputComprimento = document.querySelector('#comprimento');
 const inputQuantidadeEstoque = document.querySelector('#estoqueQtd');
 const inputQuantidadeVendido = document.querySelector('#Qtd_vendido'); //Input Oculto, salva codidade 0 
-const inputPathImg = document.querySelector('#produto-imagem');
-const divImgProduct = document.querySelector('.quadro-img');
+// const inputPathImg = document.querySelector('#produto-imagem');
+// const divImgProduct = document.querySelector('.quadro-img');
 const divBuscarPorNome = document.getElementById('divBuscarPorNome');
-const btnFornecedorMenu = document.querySelector('.li-fornecedor');
+// const btnFornecedorMenu = document.querySelector('.li-fornecedor');
 const containerRegister = document.querySelector('.container-register');
 const btnCadGrupo = document.querySelector('#add-grupo');
 const btnCadSubGrupo = document.querySelector('#add-subGrupo');
 const btnCadCor = document.querySelector('#add-cor');
 const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
 const exitNome = document.getElementById('exit-nome-fornecedor');
-
+const select = document.getElementById("escolhaUM");
 
 // Seleciona os campos de input
 const inputMarkup = document.querySelector('#inputMarkup');
 const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputprecoVenda = document.querySelector('#precoVenda');
 const inputLucro = document.querySelector('#lucro');
+btnCadGrupo.addEventListener('click', (e) => {
+    e.preventDefault();
+    containerRegister.style.display = 'flex';
+    renderizarInputsGrupo();
+});
+
+btnCadSubGrupo.addEventListener('click', (e) => {
+    e.preventDefault();
+    containerRegister.style.display = 'flex';
+    renderizarInputsSubGrupo();
+});
+
+btnCadCor.addEventListener('click', (e) => {
+    e.preventDefault();
+    containerRegister.style.display = 'flex';
+    renderizarInputsColor();
+});
 
 
 //Metodos criado por mim que renderizam os values iniciais padrões ou cadastrados no DB.
@@ -59,6 +76,57 @@ getCorProduto(selectCorProduto);
 getunidadeDeMassa(selectUnidadeMassa);
 
 
+const divTamanho = document.getElementById("divTamanho");
+const divTamanhoNum = document.getElementById("divTamanhoNUm");
+const volumeDiv = document.getElementById("volumeDiv");
+const comprimentoDiv = document.getElementById("comprimentoDiv");
+const massaDiv = document.getElementById("massaDiv");
+
+const sections = {
+    "Tamanho - P/GG": divTamanho,
+    "Tamanho - Numeração": divTamanhoNum,
+    "Medida de Volume": volumeDiv,
+    "Unidade Comprimento": comprimentoDiv,
+    "Unidade de Massa": massaDiv
+};
+
+function atualizarSelect() {
+    for (const [nome, div] of Object.entries(sections)) {
+        if (getComputedStyle(div).display === 'flex') {
+            select.value = nome;
+            break;  // Para assim que encontrar a primeira div visível
+        }
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("escolhaUM");
+
+    const sections = {
+        "Tamanho - P/GG": divTamanho,
+        "Tamanho - Numeração": divTamanhoNum,
+        "Medida de Volume": volumeDiv,
+        "Unidade Comprimento": comprimentoDiv,
+        "Unidade de Massa": massaDiv
+    };
+
+    select.addEventListener("change", function () {
+        // Oculta todos os divs
+        Object.values(sections).forEach(div => {
+            div.style.display = "none";
+        });
+
+        // Exibe o div correspondente, se um valor válido for selecionado
+        const selectedValue = select.value;
+        if (sections[selectedValue]) {
+            sections[selectedValue].style.display = "flex";
+        }
+
+        // Atualiza o select (opcional, pode remover se quiser)
+        atualizarSelect();
+    });
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const codigoDeBarrasAlter = document.querySelector('.codigoDeBarras');
@@ -118,6 +186,7 @@ function fetchAllProdutos() {
         .then(data => {
             produtoFilter = data; // Armazena os produtos no array global
             console.log('Produtos do array:', produtoFilter);
+
         })
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
@@ -160,26 +229,26 @@ function getFornecedorID(filter) {
             'x-api-key': 'segredo123'
         }
     })
-    .then(response => {
-        if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-        return response.json();
-    })
-    .then(data => {
-        console.log('✅ Dados do fornecedor:', data);
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Dados do fornecedor:', data);
+            console.log('🔎 Fornecedor encontrado:', data);
+            const fornecedor = data.find(f => f.fornecedor_id === Number(filter));
 
-        const fornecedor = data.find(f => f.fornecedor_id === Number(filter));
-
-        if (fornecedor) {
-            inputFornecedor.value = fornecedor.razao_social;
-            console.log('🔎 Fornecedor encontrado:', fornecedor);
-        } else {
-            alertMsg('Fornecedor não encontrado', 'info', 3000);
-        }
-    })
-    .catch(() => {
-        alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
-        console.log('Erro ao buscar dados do fornecedor');
-    });
+            if (fornecedor) {
+                inputFornecedor.value = fornecedor.razao_social;
+                console.log('🔎 Fornecedor encontrado:', fornecedor);
+            } else {
+                alertMsg('Fornecedor não encontrado', 'info', 3000);
+            }
+        })
+        .catch(() => {
+            alertMsg('Erro ao buscar dados do fornecedor', 'error', 3000);
+            console.log('Erro ao buscar dados do fornecedor');
+        });
 }
 
 // Função para preencher os inputs e ativar os divs necessários
@@ -219,6 +288,7 @@ async function preencherInputs(produtoEncontrado) {
     inputObservacoes.value = produtoEncontrado.observacoes || '';
 
     calcularLucro()
+    // Exibir o div correto ao carregar a página conforme o select
 
     // Verificar se o caminho da imagem existe e definir a imagem correta
     if (imgPath && fs.existsSync(imgPath)) {
@@ -238,6 +308,10 @@ function filterProdutoEan(codigoEan) {
         console.log('Produto Filtrado EAN:', produtoEncontrado)
         preencherInputs(produtoEncontrado);
         calcularLucro()
+        setTimeout(() => {
+            atualizarSelect();
+        }, 300); // espera 300ms — ajuste conforme necessário
+
     } else {
         alertMsg('Produto não encontrado, verifique se o código EAN está correto.', 'info');
     }
@@ -284,6 +358,7 @@ findProduto.addEventListener('input', (e) => {
         inputFornecedor.value = '';
         selectCorProduto.value = '';
         inputObservacoes.value = '';
+        select.value = '';
         relativePath.src = "../style/img/alterar-interno.png";
     }
 });
@@ -293,37 +368,37 @@ findProduto.addEventListener('input', (e) => {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  const inputPathImg = document.querySelector('#produto-imagem');
-  const divImgProduct = document.querySelector('.quadro-img');
+    const inputPathImg = document.querySelector('#produto-imagem');
+    const divImgProduct = document.querySelector('.quadro-img');
 
-  inputPathImg.onchange = function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      // Verifica se já existe uma imagem com a classe .img-produto e a remove
-      let imgProduto = divImgProduct.querySelector('.img-produto');
-      if (imgProduto) {
-        divImgProduct.removeChild(imgProduto);
-      }
+    inputPathImg.onchange = function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Verifica se já existe uma imagem com a classe .img-produto e a remove
+            let imgProduto = divImgProduct.querySelector('.img-produto');
+            if (imgProduto) {
+                divImgProduct.removeChild(imgProduto);
+            }
 
-      // Cria um novo elemento de imagem
-      imgProduto = document.createElement('img');
-      imgProduto.className = 'img-produto';
+            // Cria um novo elemento de imagem
+            imgProduto = document.createElement('img');
+            imgProduto.className = 'img-produto';
 
-      const reader = new FileReader();
+            const reader = new FileReader();
 
-      reader.onload = function (e) {
-        imgProduto.src = e.target.result;
-      };
+            reader.onload = function (e) {
+                imgProduto.src = e.target.result;
+            };
 
-      reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
 
-      // Adiciona a nova imagem à div.quadro-img
-      divImgProduct.appendChild(imgProduto);
+            // Adiciona a nova imagem à div.quadro-img
+            divImgProduct.appendChild(imgProduto);
 
-      const relativePath = file.name.replace(/\.[^/.]+$/, "");
-      inputPathImg.setAttribute('data-relative-path', relativePath);
-    }
-  };
+            const relativePath = file.name.replace(/\.[^/.]+$/, "");
+            inputPathImg.setAttribute('data-relative-path', relativePath);
+        }
+    };
 });
 
 
@@ -334,75 +409,75 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 btnNomeBuscar.addEventListener('click', (e) => {
-  e.preventDefault();
-  divBuscarPorNome.style.display = 'block';
-  setTimeout(() => {
-    inputBuscaNome.focus()
-  }, 100)
+    e.preventDefault();
+    divBuscarPorNome.style.display = 'block';
+    setTimeout(() => {
+        inputBuscaNome.focus()
+    }, 100)
 });
 
 btnConfirmarFornecedor.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (inputFornecedorRazãoSocial.value.trim() === '') {
-    alertMsg('Nenhum fornecedor selecionado.', 'info', 3000);
-    return;
-  }
-  else {
-    divContainerFornecedor.style.display = 'none';
-    setTimeout(() => {
-      inputCodigoEANProduto.focus()
-    }, 100)
-  }
+    e.preventDefault();
+    if (inputFornecedorRazãoSocial.value.trim() === '') {
+        alertMsg('Nenhum fornecedor selecionado.', 'info', 3000);
+        return;
+    }
+    else {
+        divContainerFornecedor.style.display = 'none';
+        setTimeout(() => {
+            inputCodigoEANProduto.focus()
+        }, 100)
+    }
 });
 
 // Adiciona um atraso para evitar requisições a cada digitação
 let timeout;
 
 cnpjFilter.addEventListener('input', (e) => {
-  cpfFilter.value = ''
-  formatarCNPJ(cnpjFilter);
-  inputMaxCaracteres(cnpjFilter, 18);
+    cpfFilter.value = ''
+    formatarCNPJ(cnpjFilter);
+    inputMaxCaracteres(cnpjFilter, 18);
 
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    const cnpj = cnpjFilter.value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const cnpj = cnpjFilter.value;
 
-    if (cnpj.length === 18) {
-      getFornecedor(cnpjFilter);
-    } else {
-      limparFornecedor(); // sua função de limpeza aqui
-    }
-  }, 100);
+        if (cnpj.length === 18) {
+            getFornecedor(cnpjFilter);
+        } else {
+            limparFornecedor(); // sua função de limpeza aqui
+        }
+    }, 100);
 });
 
 cpfFilter.addEventListener('input', (e) => {
-  cnpjFilter.value = ''
-  formatarCNPJ(cpfFilter);
-  inputMaxCaracteres(cpfFilter, 18);
+    cnpjFilter.value = ''
+    formatarCNPJ(cpfFilter);
+    inputMaxCaracteres(cpfFilter, 18);
 
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    const cnpj = cpfFilter.value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const cnpj = cpfFilter.value;
 
-    if (cnpj.length === 18) {
-      getFornecedor(cpfFilter);
-    } else {
-      limparFornecedor(); // sua função de limpeza aqui
-    }
-  }, 100);
+        if (cnpj.length === 18) {
+            getFornecedor(cpfFilter);
+        } else {
+            limparFornecedor(); // sua função de limpeza aqui
+        }
+    }, 100);
 });
 
 limparButtonFornecedor.addEventListener('click', () => {
-  limparFornecedor();
-  cpfFilter.value = '';
-  cnpjFilter.value = '';
+    limparFornecedor();
+    cpfFilter.value = '';
+    cnpjFilter.value = '';
 })
 
 function limparFornecedor() {
-  inputFornecedorFiltrado.value = '';
-  inputFornecedorRazãoSocial.value = '';
-  inputSaveIdFornecedor.value = '';
-  showFornecedor.value = '';
+    inputFornecedorFiltrado.value = '';
+    inputFornecedorRazãoSocial.value = '';
+    inputSaveIdFornecedor.value = '';
+    showFornecedor.value = '';
 
 }
 
@@ -414,28 +489,28 @@ const divContainerFornecedor = document.getElementById('divFornecedor');
 const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');
 
 btnBuscarFornecedor.addEventListener('click', (e) => {
-  e.preventDefault();
-  divContainerFornecedor.style.display = 'flex';
-  cnpjFilter.focus();
+    e.preventDefault();
+    divContainerFornecedor.style.display = 'flex';
+    cnpjFilter.focus();
 })
 btnExitFornecedor.addEventListener('click', (e) => {
-  e.preventDefault();
-  divContainerFornecedor.style.display = 'none';
-  cnpjFilter.value = '';
-  cpfFilter.value = '';
-  inputBuscaNome.value = '';
-  if (inputBuscaNome.value === '') {
-    resultadoNomes.innerHTML = ''
-  }
-  limparFornecedor(); // sua função de limpeza aqui
+    e.preventDefault();
+    divContainerFornecedor.style.display = 'none';
+    cnpjFilter.value = '';
+    cpfFilter.value = '';
+    inputBuscaNome.value = '';
+    if (inputBuscaNome.value === '') {
+        resultadoNomes.innerHTML = ''
+    }
+    limparFornecedor(); // sua função de limpeza aqui
 })
 
 exitNome.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (divBuscarPorNome.style.display === 'block') {
-    divBuscarPorNome.style.display = 'none';
-    cnpjFilter.focus();
-  }
+    e.preventDefault();
+    if (divBuscarPorNome.style.display === 'block') {
+        divBuscarPorNome.style.display = 'none';
+        cnpjFilter.focus();
+    }
 
 });
 
@@ -500,8 +575,8 @@ inputFile.addEventListener('click', function (e) {
 });
 
 inputFile.addEventListener('change', function () {
-    if(inputCodigoEANProduto.value === ''){
-        alertMsg('Filtre o produto antes de selecionar a imagem','info',3000)
+    if (inputCodigoEANProduto.value === '') {
+        alertMsg('Filtre o produto antes de selecionar a imagem', 'info', 3000)
         return;
     }
     if (this.files && this.files[0]) {

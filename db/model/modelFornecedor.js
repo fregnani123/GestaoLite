@@ -30,6 +30,33 @@ async function getFornecedor() {
     }
 };
 
+
+// Função para gerar um número aleatório de 3 dígitos
+function generateRandomNumber(cpf) {
+    // Soma os códigos char do CPF (após remover pontuação)
+    const cleanCpf = cpf.replace(/\D/g, '');
+    let sum = 0;
+    for (let i = 0; i < cleanCpf.length; i++) {
+        sum += cleanCpf.charCodeAt(i);
+    }
+    return (sum % 900) + 100; // Sempre entre 100 e 999
+}
+
+
+// Função para inverter a string
+function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
+// Função para codificar o CNPJ/CPF antes de salvar
+function encode(cod) {
+    const randomNumber = generateRandomNumber(cod); // ✅ passa o cod como argumento
+    const codRandom = cod.replace('.', `.${randomNumber}.`); // ainda insere o número no CPF
+    const valorComPrefixo = "fgl" + reverseString(codRandom || "") + "1969";
+    return Buffer.from(valorComPrefixo).toString('base64');
+}
+
+
 async function postNewFornecedor(fornecedor) {
     await ensureDBInitialized();
     try {
@@ -48,12 +75,24 @@ async function postNewFornecedor(fornecedor) {
     `;
     
     const result = db.prepare(insertQuery).run(
-        fornecedor.cnpj, fornecedor.inscricao_estadual || null, fornecedor.razao_social || null,
-        fornecedor.nome_fantasia || null, fornecedor.cep || null, fornecedor.cidade || null,
-        fornecedor.bairro || null, fornecedor.uf || null, fornecedor.endereco || null,
-        fornecedor.telefone || null, fornecedor.email || null, fornecedor.observacoes || null,
-        fornecedor.pessoa || null, fornecedor.contribuinte || null, fornecedor.numero || null,
-        fornecedor.ramos_de_atividade || null, fornecedor.forma_de_Pgto || null, fornecedor.condicoes_Pgto || null
+        encode(fornecedor.cnpj), 
+        fornecedor.inscricao_estadual || null, 
+        fornecedor.razao_social || null,
+        fornecedor.nome_fantasia || null, 
+        fornecedor.cep || null,
+        fornecedor.cidade || null,
+        fornecedor.bairro || null, 
+        fornecedor.uf || null, 
+        fornecedor.endereco || null,
+        fornecedor.telefone || null, 
+        fornecedor.email || null, 
+        fornecedor.observacoes || null,
+        fornecedor.pessoa || null, 
+        fornecedor.contribuinte || null, 
+        fornecedor.numero || null,
+        fornecedor.ramos_de_atividade || null, 
+        fornecedor.forma_de_Pgto || null, 
+        fornecedor.condicoes_Pgto || null
     );
     
         return { insertId: result.lastInsertRowid };

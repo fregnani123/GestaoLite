@@ -310,7 +310,7 @@ function formatDate(dateString) {
     const day = String(date.getDate()).padStart(2, '0'); // Adiciona zero à esquerda se o dia for 1-9
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');      
     
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
@@ -328,7 +328,7 @@ function removeRandomNumber(cnpjCpf) {
     }
     return parts.join('.');
 }
-
+ 
 // Função para decodificar o CNPJ/CPF config
 function decodeCnpjCpf(encodedCnpjCpf) {
     const decodedValue = atob(encodedCnpjCpf);

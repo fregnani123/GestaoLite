@@ -51,7 +51,7 @@ async function findClienteAlterar(cpf) {
 
     } catch (error) {
         console.error("Erro ao buscar cliente:", error);
-        alertMsg("Cliente não encontrado. Verifique o CPF informado.", "warning", 3000);
+        alertMsg("Cliente não encontrado. Verifique o CPF informado.", "info", 3000);
         clienteId.value = "";
     }
 }
@@ -94,12 +94,12 @@ function parseCurrency(value) {
 async function FinalizarVenda() {
     imgProduto.src = ''
     if (carrinho.length === 0) {
-        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'warning');
+        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'info',4000);
         return;
     }
 
     if (divCrediario.style.display === 'block' && CrediarioCliente.value === '') {
-        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda', 'info')
+        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda', 'info',4000)
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
@@ -108,7 +108,7 @@ async function FinalizarVenda() {
     }
 
     if (divCrediario.style.display === 'block' && parcela.value === '') {
-        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda', 'info');
+        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda', 'info',4000);
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
@@ -125,14 +125,14 @@ async function FinalizarVenda() {
 
 
     if (valorPago < totalLiquido) {
-        alertMsg('O valor pago está menor que o valor da compra.', 'warning');
+        alertMsg('O valor pago está menor que o valor da compra.', 'info', 4000);
         return;
     }
     const debito = parseCurrency(CartaoDebito.value);
     const credito = parseCurrency(CartaoCredito.value);
 
     if (debito > totalLiquido || credito > totalLiquido) {
-        alertMsg('O valor pago no cartão não pode ser maior que o valor da compra.', 'warning');
+        alertMsg('O valor pago no cartão não pode ser maior que o valor da compra.', 'info', 4000);
         inputTotalPago.value = '0,00';
         inputTroco.value = '0,00';
         return;
@@ -186,7 +186,7 @@ async function FinalizarVenda() {
                 style: 'currency',
                 currency: 'BRL'
             })}`,
-            "warning"
+            'info', 4000
         );
 
         // Restaurar o valor original antes dos juros
@@ -350,7 +350,7 @@ deleteButtons.forEach(button => {
 const btnCliente = document.getElementById('btn-alterar-confirmar');
 btnCliente.addEventListener('click', () => {
     if(!alterCliente.value){
-        alertMsg('Para confirmar, altere o cliente', 'warning', 4000);
+        alertMsg('Para confirmar, altere o cliente', 'info', 4000);
         alterCliente.focus();
         return;}
     divAlterarCliente.style.display = 'none'

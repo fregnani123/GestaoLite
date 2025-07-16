@@ -214,7 +214,7 @@ inputdescontoPorcentagem.addEventListener('blur', () => {
 const btnQtd = document.getElementById('btn-qtd-produto');
 btnQtd.addEventListener('click', () => {
   if(!inputQtd.value){
-    alertMsg('A quantidade não pode ser zero ou vazia', 'warning', 4000);
+    alertMsg('A quantidade não pode ser zero ou vazia', 'info', 4000);
     inputQtd.focus();
     return;
   }
@@ -234,7 +234,7 @@ salvarDesconto.addEventListener('click', () => {
  const valor = parseFloat(inputTotalLiquido.value.replace(',', '.'));
 
 //  if( inputDescontoEmReal.value === '0,00' && inputDescontoPorcentagem.value === ''){
-//    alertMsg(`${'O valor do desconto não pode estar vazio'}`, 'warning', 4000);
+//    alertMsg(`${'O valor do desconto não pode estar vazio'}`, 'info', 4000);
 //    return
 //  }
 
@@ -242,7 +242,7 @@ if (inputTotalLiquido.value && valor >= 0) {
     // valor válido
 }  else {
     // valor inválido: nulo, vazio ou negativo
-  alertMsg(`${'O valor total líquido não pode ser negativo ou vazio.'}`, 'warning', 4000);
+  alertMsg(`${'O valor total líquido não pode ser negativo ou vazio.'}`, 'info', 4000);
     inputDescontoEmReal.value = '0,00';
     inputDescontoPorcentagem.value = '';
     calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
@@ -253,7 +253,7 @@ if (inputTotalLiquido.value && valor >= 0) {
   }
 
   if (!inputdescontoPorcentagem.value && !inputDescontoEmReal.value) {
-    alertMsg(`${'Para confirmar, o desconto não pode ser igual a zero.'}`, 'warning', 4000);
+    alertMsg(`${'Para confirmar, o desconto não pode ser igual a zero.'}`,'info', 4000);
   } else {
     divDesconto.style.display = 'none';
   }

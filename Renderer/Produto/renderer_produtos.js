@@ -329,6 +329,9 @@ btnCadCor.addEventListener('click', (e) => {
   renderizarInputsColor();
 });
 
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
   const inputPathImg = document.querySelector('#produto-imagem');
   const divImgProduct = document.querySelector('.quadro-img');
