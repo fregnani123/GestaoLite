@@ -19,18 +19,52 @@ db.pragma('foreign_keys = ON');
 console.log('Chaves estrangeiras ativadas.');
 
 
+function decode(encoded) {
+    try {
+        const decoded = Buffer.from(encoded, 'base64').toString('utf-8');
+
+        if (!decoded.startsWith("fgl") || !decoded.endsWith("1969")) {
+            return encoded; // já está em formato normal
+        }
+
+        const trimmed = decoded.slice(3, -4); // remove "fgl" e "1969"
+        const reversed = reverseString(trimmed); // desfaz o reverse
+
+        // Remove o número aleatório de 3 dígitos inserido entre pontos
+        const cleaned = reversed.replace(/\.(\d{3})\./, '.'); // substitui ".123." por "."
+
+        return cleaned;
+    } catch (err) {
+        console.error("Erro ao decodificar:", err.message);
+        return encoded;
+    }
+}
+
+
 async function getUsuario() {
     await ensureDBInitialized();
-
     try {
-        // Adiciona uma cláusula WHERE para filtrar produtos ativos
         const rows = db.prepare('SELECT * FROM usuario').all();
-        return rows;
+
+        const usuario = rows.map(row => {
+            // Decodifica apenas se os campos existirem
+            if (row.cnpj_cpf) {
+                row.cnpj_cpf = decode(row.cnpj_cpf);
+            }
+            if (row.senha) {
+                row.senha = decode(row.senha);
+            }
+            return row;
+        });
+
+        return usuario;
     } catch (error) {
-        console.error('Erro ao conectar ao banco de dados SQLite ou executar a consultar usuarios:', error);
+        console.error('Erro ao conectar ao banco de dados SQLite ou executar a consulta do usuário:', error);
         throw error;
     }
 }
+
+
 
 // Função para gerar um número aleatório de 3 dígitos
 function generateRandomNumber() {
@@ -80,7 +114,7 @@ async function postNewUsuario(usuario) {
             usuario.cidade,
             usuario.estado,
             usuario.contato,
-            encode(usuario.cnpj_cpf), // Codifica o CNPJ/CPF antes de salvar
+            encode(usuario.cnpj_cpf),
             usuario.inscricao_estadual || null,
             usuario.email,
             usuario.site || null,

@@ -19,16 +19,6 @@ const condicoesPgto = [
     { value: "entrada mais parcelas", text: "Entrada mais Parcelas" },
 ];
 
-function preencherSelect(idSelect) {
-    const select = document.getElementById(idSelect);
-    if (!select) return;
-
-    condicoesPgto.forEach(ocupacao => {
-        const option = document.createElement("option");
-        option.value = ocupacao.value;
-        option.textContent = ocupacao.text;
-        select.appendChild(option);
-    });
-}
-
-preencherSelect('condicoesPgto')
+// Preenche condição de pagamento
+preencherSelect('condicoesPgto', condicoesPgto);
+ 

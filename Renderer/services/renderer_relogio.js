@@ -40,3 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarRelogio(); // chama uma vez ao carregar
     setInterval(atualizarRelogio, 1000); // atualiza a cada segundo
 });
+

@@ -16,16 +16,8 @@ const formasDePagamento = [
     { value: "permuta", text: "Permuta" },
 ];
 
-function preencherSelect(idSelect) {
-    const select = document.getElementById(idSelect);
-    if (!select) return;
 
-    formasDePagamento.forEach(ocupacao => {
-        const option = document.createElement("option");
-        option.value = ocupacao.value;
-        option.textContent = ocupacao.text;
-        select.appendChild(option);
-    });
-}
+// Preenche forma de pagamento
+preencherSelect('formaPgto', formasDePagamento);
 
-preencherSelect('formaPgto')
+ 

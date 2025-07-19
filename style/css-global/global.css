@@ -386,6 +386,7 @@ header {
 }
 
 #btn-exit-grupo,
+#btn-exit-serial,
 #exit-nome-fornecedor,
 #btn-exit-fornecedor-prod,
 #btn-exit-juros,
@@ -436,7 +437,8 @@ header {
 #btn-exit-pag-4:hover, 
 #btn-exit-pag-5:hover,
 #btn-exit-remover:hover,
-#btn-exit-qtd:hover {
+#btn-exit-qtd:hover,
+#btn-exit-serial:hover {
   background-color: #e81123;
   color: white;
 }

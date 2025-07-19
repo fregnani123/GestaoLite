@@ -26,19 +26,19 @@ const btnAtivo = document.getElementById('btn-ativo');
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-      estilizarLinkAtivo(linkID_8)
+    estilizarLinkAtivo(linkID_8)
 })
 
 document.addEventListener('DOMContentLoaded', () => {
     pessoa.focus();
-    
+
     formatarTelefone(telefone);
     inputMaxCaracteres(telefone, 15);
 
@@ -68,10 +68,41 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 cnpj.addEventListener('input', () => {
-    if (cnpj.value.length === 18) {
+    if (cnpj.value.length === 14 && pessoa.value === "fisica") {
         getFornecedores();
-    } 
+    }else if(cnpj.value.length === 18 && pessoa.value === "juridica"){
+     getFornecedores();
+    }
 });
+
+function normalizarTexto(texto) {
+    if (typeof texto !== 'string') return '';
+    return texto.trim().replace(/\s+/g, ' ');
+}
+
+function normalizarFornecedor(f) {
+    return {
+        ...f,
+        cnpj: normalizarTexto(f.cnpj),
+        razao_social: normalizarTexto(f.razao_social),
+        nome_fantasia: normalizarTexto(f.nome_fantasia),
+        inscricao_estadual: normalizarTexto(f.inscricao_estadual),
+        telefone: normalizarTexto(f.telefone),
+        cep: normalizarTexto(f.cep),
+        email: normalizarTexto(f.email),
+        endereco: normalizarTexto(f.endereco),
+        bairro: normalizarTexto(f.bairro),
+        cidade: normalizarTexto(f.cidade),
+        uf: normalizarTexto(f.uf),
+        numero: normalizarTexto(f.numero),
+        pessoa: normalizarTexto(f.pessoa),
+        contribuinte: normalizarTexto(f.contribuinte),
+        forma_de_Pgto: normalizarTexto(f.forma_de_Pgto),
+        ramos_de_atividade: normalizarTexto(f.ramos_de_atividade),
+        condicoes_Pgto: normalizarTexto(f.condicoes_Pgto),
+        observacoes: normalizarTexto(f.observacoes)
+    };
+}
 
 function getFornecedores() {
     const getFornecedor = 'http://localhost:3000/fornecedor';
@@ -85,89 +116,67 @@ function getFornecedores() {
     })
         .then(response => response.json())
         .then(data => {
-            const fornecedorEncontrado = data.find(fornecedor => fornecedor.cnpj === cnpj.value);
-            console.log('Fornecedor: ', data);
-            if (fornecedorEncontrado) {
-                razaoSocial.value = fornecedorEncontrado.razao_social || '';
-                nomeFantasia.value = fornecedorEncontrado.nome_fantasia || '';
-                ie.value = fornecedorEncontrado.inscricao_estadual || '';
-                telefone.value = fornecedorEncontrado.telefone || '';
-                cep.value = fornecedorEncontrado.cep || '';
-                email.value = fornecedorEncontrado.email || '';
-                endereco.value = fornecedorEncontrado.endereco || '';
-                bairro.value = fornecedorEncontrado.bairro || '';
-                uf.value = fornecedorEncontrado.uf || '';
-                observacoes.value = fornecedorEncontrado.observacoes || '';
-                numero.value = fornecedorEncontrado.numero || '';
+            const fornecedoresNormalizados = data.map(normalizarFornecedor);
+            const fornecedorEncontrado = fornecedoresNormalizados.find(
+                f => f.cnpj === normalizarTexto(cnpj.value)
+            );
 
-                // Define o valor do estado
+            if (fornecedorEncontrado) {
+            } else if (!fornecedorEncontrado && pessoa.value === 'fisica'){
+                alertMsg('Fornecedor não encontrado para o CPF informado.','info', 4000);
+                limparCamposFornecedor();
+            }  else if (!fornecedorEncontrado && pessoa.value === 'juridica'){
+                alertMsg('Fornecedor não encontrado para o CNPJ informado.','info', 4000);
+                limparCamposFornecedor();
+            } 
+
+
+            console.log('Fornecedor:', fornecedorEncontrado);
+
+            if (fornecedorEncontrado) {
+                razaoSocial.value = fornecedorEncontrado.razao_social;
+                nomeFantasia.value = fornecedorEncontrado.nome_fantasia;
+                ie.value = fornecedorEncontrado.inscricao_estadual;
+                telefone.value = fornecedorEncontrado.telefone;
+                cep.value = fornecedorEncontrado.cep;
+                email.value = fornecedorEncontrado.email;
+                endereco.value = fornecedorEncontrado.endereco;
+                bairro.value = fornecedorEncontrado.bairro;
+                numero.value = fornecedorEncontrado.numero;
                 uf.value = fornecedorEncontrado.uf || 'Selecione';
 
-                // Dispara o evento change para carregar as cidades
+                // Dispara evento para carregar cidades
                 const eventoChange = new Event('change');
-                uf.dispatchEvent(eventoChange); // Dispara o evento change
-               
-                // Verifica todas as opções do select e marca a cidade correspondente
-                for (let option of cidade.options) {
-                    if (option.text === fornecedorEncontrado.cidade) {
-                        option.selected = true;
-                        break;  // Sai do loop assim que encontrar a cidade
-                    }
-                }
+                uf.dispatchEvent(eventoChange);
 
-                for (let option of pessoa.options) {
-                    // Remove os acentos e converte para minúsculas para a comparação
-                    const optionTextNormalized = option.text.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const fornecedorPessoaNormalized = fornecedorEncontrado.pessoa.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    
-                    if (optionTextNormalized === fornecedorPessoaNormalized) {
+                // Seleciona cidade
+                for (let option of cidade.options) {
+                    if (normalizarTexto(option.text) === fornecedorEncontrado.cidade) {
                         option.selected = true;
                         break;
                     }
                 }
-                
-                for (let option of contribuinte.options) {
-                    const optionTextNormalized = option.text.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const fornecedorContribuinteNormalized = fornecedorEncontrado.contribuinte.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    
-                    if (optionTextNormalized === fornecedorContribuinteNormalized) {
-                        option.selected = true;
-                        break;  // Sai do loop assim que encontrar o valor
-                    }
-                }
-                
-                for (let option of forma_de_Pgto.options) {
-                    const optionTextNormalized = option.text.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const fornecedorRamosDeAtividadeNormalized = fornecedorEncontrado.forma_de_Pgto.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    
-                    if (optionTextNormalized === fornecedorRamosDeAtividadeNormalized) {
-                        option.selected = true;
-                        break;  // Sai do loop assim que encontrar o valor
-                    }
-                }
-                
-                for (let option of ramos_de_atividade.options) {
-                    const optionTextNormalized = option.text.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const fornecedorRamosDeAtividadeNormalized = fornecedorEncontrado.ramos_de_atividade.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    
-                    if (optionTextNormalized === fornecedorRamosDeAtividadeNormalized) {
-                        option.selected = true;
-                        break;  // Sai do loop assim que encontrar o valor
+
+                // Função auxiliar para selecionar a opção correta
+                function selecionarOption(selectElement, valor) {
+                    if (!selectElement || !valor) return;
+
+                    const valorNormalizado = normalizarTexto(valor).toLowerCase();
+
+                    for (let option of selectElement.options) {
+                        const optionValor = normalizarTexto(option.value).toLowerCase();
+                        if (optionValor === valorNormalizado) {
+                            option.selected = true;
+                            break;
+                        }
                     }
                 }
 
-                for (let option of condicoes_Pgto.options) {
-                    const optionTextNormalized = option.text.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const fornecedorRamosDeAtividadeNormalized = fornecedorEncontrado.condicoes_Pgto.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    
-                    if (optionTextNormalized === fornecedorRamosDeAtividadeNormalized) {
-                        option.selected = true;
-                        break;  // Sai do loop assim que encontrar o valor
-                    }
-                }
-              
-                
-          
+                selecionarOption(pessoa, fornecedorEncontrado.pessoa);
+                selecionarOption(contribuinte, fornecedorEncontrado.contribuinte);
+                selecionarOption(forma_de_Pgto, fornecedorEncontrado.forma_de_Pgto);
+                selecionarOption(ramos_de_atividade, fornecedorEncontrado.ramos_de_atividade);
+                selecionarOption(condicoes_Pgto, fornecedorEncontrado.condicoes_Pgto);
             } else {
                 limparCamposFornecedor();
             }
@@ -175,7 +184,7 @@ function getFornecedores() {
         .catch(error => {
             console.error('Erro ao buscar dados:', error);
         });
-};
+}
 
 
 async function UpdateFornecedor(fornecedorId) {
@@ -217,8 +226,8 @@ pessoa.addEventListener('change', () => {
         razaoSocial.style.display = '';
 
         cnpj.value = '';
-        cnpj.removeAttribute('readonly'); 
-        razaoSocial.removeAttribute('readonly'); 
+        cnpj.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
         formatarCNPJ(cnpj);
         inputMaxCaracteres(cnpj, 18);
         contribuinte.removeAttribute('disabled');
@@ -236,10 +245,10 @@ pessoa.addEventListener('change', () => {
             if (pessoa.value === "fisica") {
                 nomeFantasia.value = razaoSocial.value;
             }
-        });        
+        });
         cnpj.value = '';
-        cnpj.removeAttribute('readonly'); 
-        razaoSocial.removeAttribute('readonly'); 
+        cnpj.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
         nomeFantasia.setAttribute('readonly', true);
         nomeFantasia.value = razaoSocial.value;
         contribuinte.value = 'isento';
@@ -250,9 +259,9 @@ pessoa.addEventListener('change', () => {
     } else {
         labelCnpjCPF.innerHTML = 'CNPJ / CPF';
         label_razao.innerHTML = 'Razão Social / Nome';
-        
+
         cnpj.value = '';
-        cnpj.setAttribute('readonly', 'true'); 
+        cnpj.setAttribute('readonly', 'true');
         razaoSocial.setAttribute('readonly', 'true');
 
         // Oculta os inputs quando estiver vazio
@@ -286,15 +295,15 @@ btnAtualizar.addEventListener('click', (e) => {
         telefone: telefone.value,
         email: email.value,
         observacoes: '',  // Aqui está vazio, está correto?
-        pessoa: pessoa.value, 
+        pessoa: pessoa.value,
         contribuinte: contribuinte.value,
-        numero: numero.value, 
-        ramos_de_atividade: ramos_de_atividade.value, 
-        forma_de_Pgto: forma_de_Pgto.value, 
-        condicoes_Pgto: condicoes_Pgto.value, 
+        numero: numero.value,
+        ramos_de_atividade: ramos_de_atividade.value,
+        forma_de_Pgto: forma_de_Pgto.value,
+        condicoes_Pgto: condicoes_Pgto.value,
         cnpj: cnpj.value
     };
-    
+
     UpdateFornecedor(fornecedorId);
 });
 
@@ -311,12 +320,12 @@ function limparCamposFornecedor() {
     uf.value = '';
     observacoes.value = '';
     pessoa.value = '';
-    contribuinte.value  = '';
-    numero.value  = '';
-    ramos_de_atividade.value  = ''; 
-    forma_de_Pgto.value  = '';
-    condicoes_Pgto.value  = '';
-    cnpj.value  = ''
+    contribuinte.value = '';
+    numero.value = '';
+    ramos_de_atividade.value = '';
+    forma_de_Pgto.value = '';
+    condicoes_Pgto.value = '';
+    cnpj.value = ''
 }
 
 const limparButtonFilter = document.getElementById('limparButton');

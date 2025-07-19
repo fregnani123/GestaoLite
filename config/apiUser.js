@@ -36,36 +36,7 @@ async function postConfigUser(usuario) {
     }
 }
 
-// Função para inverter a string
-function reverseString(str) {
-    return str.split('').reverse().join('');
-}
-// Função para remover o número aleatório inserido no CNPJ/CPF
-function removeRandomNumber(cnpjCpf) {
-    // Encontra a posição do primeiro ponto e remove o número aleatório entre o ponto
-    const parts = cnpjCpf.split('.');
-    if (parts.length > 2) {
-        parts.splice(1, 1); // Remove o número aleatório (posição 1)
-    }
-    return parts.join('.');
-}
-
-// Função para decodificar o CNPJ/CPF
-function decodeCnpjCpf(encodedCnpjCpf) {
-    // Decodifica o valor Base64
-    const decodedValue = atob(encodedCnpjCpf);
-
-    // Remove o prefixo 'fgl' e o sufixo '1969'
-    const cleanedValue = decodedValue.slice(3, decodedValue.length - 4);
-
-    // Inverte a string novamente para obter o CNPJ/CPF original
-    const reversedValue = reverseString(cleanedValue);
-
-    // Remove o número aleatório inserido após o primeiro ponto
-    return removeRandomNumber(reversedValue);
-}
-
-let cnpjCpfDecoded = '';
+let cnpjCpfUser = '';
 let contatoUser = '';
 let nomeFantasiaUser = '';
 let ramoAtuacaoUser = '';
@@ -106,7 +77,7 @@ async function getUser() {
         }
 
         // Verifique se 'data[0]' existe antes de tentar acessar suas propriedades
-        cnpjCpfDecoded = data[0] && data[0].cnpj_cpf ? decodeCnpjCpf(data[0].cnpj_cpf) : null;
+        cnpjCpfUser = data[0].cnpj_cpf;
         contatoUser = data[0].contato;
         nomeFantasiaUser = data[0].nome_fantasia;
         ramoAtuacaoUser = data[0].atividade;
@@ -120,11 +91,10 @@ async function getUser() {
         razaoSocialUser = data[0].razao_social;
         cepUser = data[0].cep;
         senhaVendaUser = data[0].senha_venda;
-
+        
         // console.log('Usuário obtido com sucesso:', data);
 
-        // Retorne o usuário com o CNPJ/CPF decodificado, se disponível
-        return { ...data, cnpj_cpf: cnpjCpfDecoded };
+       
     } catch (error) {
         console.error('Erro ao obter usuário:', error.message);
         alertMsg(error.message, 'error', 4000);
@@ -163,7 +133,7 @@ async function getUserAtualizar() {
 Antes de confirmar a alteração, <strong>verifique atentamente todas as informações</strong> inseridas. Os dados serão <strong>sobrescritos</strong> no sistema e <strong>impressos no cupom não fiscal e relatórios</strong>. `;
         }
 
-        cnpjCpf.value = data[0] && data[0].cnpj_cpf ? decodeCnpjCpf(data[0].cnpj_cpf) : "";
+        cnpjCpf.value = data[0].cnpj_cpf;
         nomeFantasia.value = data[0].nome_fantasia || '';
         razaoSocial.value = data[0].razao_social || '';
         cep.value = data[0].cep || "";
@@ -176,13 +146,15 @@ Antes de confirmar a alteração, <strong>verifique atentamente todas as informa
         email.value = data[0].email || "";
         site.value = data[0].site || "";
         novoUsuario.value = data[0].usuario || "";
-        novaSenha.value = data[0] && data[0].senha ? decodeCnpjCpf(data[0].senha) : "";
+        novaSenha.value = data[0].senha;
         tipoUsuario.value = data[0].tipo_usuario || "";
         atividade.value = data[0].atividade || "";
         slogan.value = data[0].slogan || "";
         pathImg.value = data[0].path_img || "";
         ativo.value = data[0].ativo || "";
         contribuinte.value = data[0].contribuinte || "";
+        usuarioAtual.value = data[0].usuario || ""
+        senhaAtual.value = data[0].senha || ""
         // Supondo que senhaVendaUser já tem um valor
         const senhaVendaUser = data[0].senha_venda;
 
@@ -270,7 +242,7 @@ async function updateUsuarioSenha(usuarioId) {
         if (!patchResponse.ok) {
             alertMsg('Erro ao atualizar Usuário e Senha', 'info', 3000);
         } else {
-            alertMsg('Usuário e Senha atualizado com sucesso', 'success', 3000);
+            alertMsg('Usuário e Senha atualizado com sucesso!', 'success', 3000);
             setTimeout(() => {
                 location.reload();
             }, 3000);

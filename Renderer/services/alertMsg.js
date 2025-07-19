@@ -28,7 +28,7 @@ function alertMsg(msg, type = 'info', time = ALERT_DEFAULT_TIME) {
     okButton.classList.add('btn-msg')
 
     bloqueiaTela.style.position = 'fixed';
-    bloqueiaTela.style.zIndex = '99999';
+    bloqueiaTela.style.zIndex = '9999999';
     bloqueiaTela.style.width = '100%';
     bloqueiaTela.style.height = '100vh';
     bloqueiaTela.style.top = '0';
@@ -74,6 +74,7 @@ function alertMsg(msg, type = 'info', time = ALERT_DEFAULT_TIME) {
     okButton.style.cursor = 'pointer';
     okButton.style.backgroundColor = '#198754';
     okButton.style.color = '#fff';
+    okButton.style.display = 'none';
 
     // Função de fechar alerta
     function fecharAlerta() {

@@ -58,14 +58,31 @@
                                     </label>
                                     <table>
                                         <tr>
-                                            <th>Digite o novo nome do usuário
+                                            <th>
+                                                Usuário Atual
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                           <td class="tr-relative"><img class="img-user img-cadeado-margin"
+                                                    src="../style/img/user.png" alt="">
+                                                <input type="text" id="usuarioAtual" name="usuario"  readonly
+                                                    class="input-centered">
+                                                <input type="hidden" id="senhaAtual" name="usuario"  readonly
+                                                    class="input-centered" >
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th>Alterar o nome do usuário
                                             </th>
                                         </tr>
                                         <tr>
                                             <td class="tr-relative"><img class="img-user img-cadeado-margin"
                                                     src="../style/img/user.png" alt="">
                                                 <input type="text" id="novoUsuario" name="usuario"
-                                                    class="input-centered">
+                                                    placeholder="Digite o nome do novo usuário" class="input-centered">
                                             </td>
                                         </tr>
                                     </table>
@@ -78,7 +95,7 @@
                                             <td class="td-relative"><img class="img-cadeado img-cadeado-margin"
                                                     src="../style/img/cadeado.png" alt="">
                                                 <input type="password" id="nova-senha" name="nova-senha"
-                                                    class="input-centered">
+                                                    class="input-centered" placeholder="Digite a nova senha">
                                             </td>
                                         </tr>
                                     </table>
@@ -91,15 +108,16 @@
                                             <td><img class="img-cadeado img-cadeado-margin"
                                                     src="../style/img/cadeado.png" alt="">
                                                 <input type="password" id="repetir-senha" name="repetir-senha"
-                                                    class="input-centered">
+                                                    class="input-centered" placeholder="Repita a Nova Senha">
                                             </td>
                                         </tr>
                                     </table>
 
                                     <div class="acoes-container"><button id="btn-senha"><img class="img-disquete"
-                                                src="../style//img/troca.png">Atualizar</button><button
+                                                src="../style//img/troca.png">Atualizar</button>
+                                                <!-- <button
                                             id="limparButton"><img class="img-excluir"
-                                                src="../style//img/excluir.png">Limpar</button>
+                                                src="../style//img/excluir.png">Limpar</button> -->
                                     </div>
                                     <div class="formulario-mensages-informativas">
                                         <p><img class="footer-img" src="../style/img/atencao.png"><strong>
@@ -297,7 +315,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="cnpjCpf" readonly="readonly">
+                                        <input id="cnpjCpf" type="text" value="">
+
                                     </td>
                                     <td>
                                         <input type="text" id="razao_social" readonly="readonly">
@@ -349,7 +368,7 @@
                                         <input type="text" id="endereco">
                                     </td>
                                     <td>
-                                        <input type="text" id="numero">
+                                        <input type="numero" id="numero">
                                     </td>
                                 </tr>
                             </table>

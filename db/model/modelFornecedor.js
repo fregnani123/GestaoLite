@@ -19,16 +19,52 @@ const db = new Database(dbPath, { verbose: console.log });
 db.pragma('foreign_keys = ON');
 console.log('Chaves estrangeiras ativadas.');
 
+
+
+function decode(encoded) {
+    try {
+        const decoded = Buffer.from(encoded, 'base64').toString('utf-8');
+
+        if (!decoded.startsWith("fgl") || !decoded.endsWith("1969")) {
+            return encoded; // já está em formato normal, não precisa decodificar
+        }
+
+        const trimmed = decoded.slice(3, -4); // remove "fgl" e "1969"
+        const reversed = reverseString(trimmed); // desfaz o reverse
+        const parts = reversed.split('.');
+
+        // Remove o número aleatório inserido entre os pontos
+        if (parts.length >= 3) {
+            parts.splice(1, 1); // remove o índice 1 (número aleatório)
+        }
+
+        return parts.join('.');
+    } catch (err) {
+        console.error("Erro ao decodificar:", err);
+        return encoded;
+    }
+}
+
+
 async function getFornecedor() {
     await ensureDBInitialized();
     try {
         const rows = db.prepare('SELECT * FROM fornecedor').all();
-        return rows;
+
+        const fornecedores = rows.map(row => {
+            // Faça isso apenas para o campo de documento
+            if (row.cnpj) {
+                row.cnpj = decode(row.cnpj);
+            }
+            return row;
+        });
+
+        return fornecedores;
     } catch (error) {
         console.error('Erro ao conectar ao banco de dados SQLite ou executar a consulta de fornecedor:', error);
         throw error;
     }
-};
+}
 
 
 // Função para gerar um número aleatório de 3 dígitos
@@ -102,31 +138,67 @@ async function postNewFornecedor(fornecedor) {
     }
 };
 
+
+function isBase64EncodedCNPJ(cnpj) {
+    try {
+        const decoded = Buffer.from(cnpj, 'base64').toString('utf-8');
+        return decoded.startsWith("fgl") && decoded.endsWith("1969");
+    } catch {
+        return false;
+    }
+}
+
 async function updateFornecedor(dadosFornecedor) {
     await ensureDBInitialized();
 
     try {
+        const cnpjOriginal = dadosFornecedor.cnpj;
+        const cnpjCodificado = encode(cnpjOriginal);
+
+        // Verifica se existe fornecedor com CNPJ puro
+        const fornecedorExistenteOriginal = db
+            .prepare(`SELECT fornecedor_id FROM fornecedor WHERE cnpj = ?`)
+            .get(cnpjOriginal);
+
+        const fornecedorExistenteCodificado = db
+            .prepare(`SELECT fornecedor_id FROM fornecedor WHERE cnpj = ?`)
+            .get(cnpjCodificado);
+
+        let cnpjWhere;
+        let precisaAtualizarCNPJ = false;
+
+        if (fornecedorExistenteOriginal) {
+            cnpjWhere = cnpjOriginal;
+            precisaAtualizarCNPJ = true; // vamos atualizar o CNPJ para o codificado
+        } else if (fornecedorExistenteCodificado) {
+            cnpjWhere = cnpjCodificado;
+        } else {
+            throw new Error("CNPJ não encontrado no banco de dados.");
+        }
+
+        // Monta a query principal
         const query = `
-        UPDATE fornecedor
-        SET inscricao_estadual = ?, 
-            razao_social = ?, 
-            nome_fantasia = ?, 
-            cep = ?, 
-            cidade = ?, 
-            bairro = ?, 
-            uf = ?, 
-            endereco = ?, 
-            telefone = ?, 
-            email = ?, 
-            observacoes = ?, 
-            pessoa = ?, 
-            contribuinte = ?, 
-            numero = ?, 
-            ramos_de_atividade = ?, 
-            forma_de_Pgto = ?, 
-            condicoes_Pgto = ?
-        WHERE cnpj = ?
-    `;
+            UPDATE fornecedor
+            SET inscricao_estadual = ?, 
+                razao_social = ?, 
+                nome_fantasia = ?, 
+                cep = ?, 
+                cidade = ?, 
+                bairro = ?, 
+                uf = ?, 
+                endereco = ?, 
+                telefone = ?, 
+                email = ?, 
+                observacoes = ?, 
+                pessoa = ?, 
+                contribuinte = ?, 
+                numero = ?, 
+                ramos_de_atividade = ?, 
+                forma_de_Pgto = ?, 
+                condicoes_Pgto = ?,
+                cnpj = ?
+            WHERE cnpj = ?
+        `;
 
         const result = db.prepare(query).run(
             dadosFornecedor.inscricao_estadual || null,
@@ -146,7 +218,8 @@ async function updateFornecedor(dadosFornecedor) {
             dadosFornecedor.ramos_de_atividade || null,
             dadosFornecedor.forma_de_Pgto || null,
             dadosFornecedor.condicoes_Pgto || null,
-            dadosFornecedor.cnpj
+            cnpjCodificado,    // Novo valor do CNPJ (sempre codificado)
+            cnpjWhere           // Onde: pode ser original ou codificado
         );
 
         console.log('Fornecedor atualizado com sucesso:', result.changes);
@@ -156,7 +229,7 @@ async function updateFornecedor(dadosFornecedor) {
         console.error('Erro ao atualizar fornecedor:', error.message);
         throw error;
     }
-};
+}
 
 
 module.exports = {

@@ -68,16 +68,5 @@ const ramosDeAtividade = [
     { value: "Vidraçaria e Esquadrias", text: "Vidraçaria e Esquadrias" }
 ];
 
-function preencherSelect(idSelect) {
-    const select = document.getElementById(idSelect);
-    if (!select) return;
-
-    ramosDeAtividade.forEach(ocupacao => {
-        const option = document.createElement("option");
-        option.value = ocupacao.value;
-        option.textContent = ocupacao.text;
-        select.appendChild(option);
-    });
-}
-
-preencherSelect('atividade')
+// Preenche ramo de atividade
+preencherSelect('atividade', ramosDeAtividade);

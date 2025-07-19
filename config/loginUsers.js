@@ -3,28 +3,6 @@ const passwordCod = document.getElementById('password');
 
 usernameCod.focus()
 
-// Função para inverter a string
-function reverseString(str) {
-    return str.split('').reverse().join('');
-}
-// Função para remover o número aleatório inserido no CNPJ/CPF
-function removeRandomNumber(cnpjCpf) {
-    // Encontra a posição do primeiro ponto e remove o número aleatório entre o ponto
-    const parts = cnpjCpf.split('.');
-    if (parts.length > 2) {
-        parts.splice(1, 1); // Remove o número aleatório (posição 1)
-    }
-    return parts.join('.');
-}
-
-function decodeCnpjCpf(encodedCnpjCpf) {
-    const decodedValue = atob(encodedCnpjCpf);
-    const cleanedValue = decodedValue.slice(3, decodedValue.length - 4);
-    const reversedValue = reverseString(cleanedValue);
-
-    return removeRandomNumber(reversedValue);
-}
-
 let senhaCodificada = '';
 let usuaroiCod  = '';
 
@@ -50,7 +28,7 @@ async function getUser() {
 
         if (!data || data.length === 0) {
             console.log('Nenhum usuário encontrado. Definindo login padrão (adm, adm)');
-            senhaCodificada = 'ZmdsbWRhMTk2OQ==';
+            senhaCodificada = 'adm';
             usuaroiCod = 'adm';
         } else {
             senhaCodificada = data[0].senha || "";
@@ -91,7 +69,7 @@ document.getElementById('formLogin').addEventListener('click', (e) => {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    const senhaDecodificada = decodeCnpjCpf(senhaCodificada);
+    const senhaDecodificada = senhaCodificada;
 
 
     if (username === usuaroiCod && password === senhaDecodificada) {
@@ -104,6 +82,7 @@ document.getElementById('formLogin').addEventListener('click', (e) => {
         usernameCod.focus();
     }
 });
+getUser();
 
 // document.addEventListener('DOMContentLoaded', () => {
 //     const checkbox = document.getElementById('termos');
@@ -146,6 +125,6 @@ document.getElementById('formLogin').addEventListener('click', (e) => {
 
 // verificaValidadeDate();
 // verificaAtivacaoMysql();
-getUser();
+
 
 

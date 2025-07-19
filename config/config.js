@@ -1,5 +1,3 @@
-
-
 const id = document.getElementById('id');
 const senha1 = document.getElementById('senha1');
 const nomeFantasia = document.getElementById('nome_fantasia');
@@ -52,6 +50,9 @@ const taxaJurosAtraso = document.getElementById('taxaJurosAtraso');
 const idTaxas = document.getElementById('idTaxas');
 const btnAtualizarTaxas = document.getElementById('atualizar-juros');
 const linkID_0 = document.querySelector('.list-a0');
+
+const usuarioAtual = document.getElementById('usuarioAtual');
+const senhaAtual = document.getElementById('senhaAtual');
 
 function estilizarLinkAtivo_header(linkID) {
     linkID.style.background = '#3a5772';
@@ -145,7 +146,6 @@ tipoUsuario.addEventListener('change', () => {
 
 
     if (tipoUsuario.value === "juridica") {
-        cnpjCpf.value = '';
         cnpjCpf.removeAttribute('readonly');
         razaoSocial.removeAttribute('readonly');
         nomeFantasia.removeAttribute('readonly');
@@ -157,7 +157,7 @@ tipoUsuario.addEventListener('change', () => {
         formatarCNPJ(cnpjCpf);
         inputMaxCaracteres(cnpjCpf, 18);
         labelCnpjCPF.innerHTML = '';
-        labelCnpjCPF.append('CNPJ'); 
+        labelCnpjCPF.append('CNPJ');
         labelRazao.innerHTML = 'Razão Social';
         labelNomeFantasia.innerHTML = '';
         labelNomeFantasia.append('Nome Fantasia');
@@ -339,8 +339,8 @@ btnUser.addEventListener('click', (e) => {
 btnSenha.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (!novaSenha.value || !repetirSenha.value) {
-        alertMsg("Os campos de senha não podem estar vazios", "info", 4000);
+    if (!novaSenha.value && !repetirSenha.value && !novoUsuario.value) {
+        alertMsg("Preencha todos os campos obrigatórios.", "info", 4000);
         return;
     }
 
@@ -363,8 +363,8 @@ btnSenha.addEventListener('click', (e) => {
         inscricao_estadual: ie.value || null,
         email: email.value,
         site: site.value || null,
-        usuario: novoUsuario.value,
-        senha: novaSenha.value,
+        usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
+        senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -393,8 +393,8 @@ btnAtulizarSenha.addEventListener('click', (e) => {
         inscricao_estadual: ie.value || null,
         email: email.value,
         site: site.value || null,
-        usuario: novoUsuario.value,
-        senha: novaSenha.value,
+        usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
+        senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -427,8 +427,8 @@ btnAtualizarUser.addEventListener('click', (e) => {
         inscricao_estadual: ie.value || null,
         email: email.value,
         site: site.value || null,
-        usuario: novoUsuario.value,
-        senha: novaSenha.value,
+        usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
+         senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -441,48 +441,7 @@ btnAtualizarUser.addEventListener('click', (e) => {
 
     updateUsuario(usuarioAtualizar);
 });
-
-btnSenha.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    if (!novaSenha.value || !repetirSenha.value) {
-        alertMsg("Os campos de senha não podem estar vazios", "info", 4000);
-        return;
-    }
-
-    if (repetirSenha.value !== novaSenha.value) {
-        alertMsg("As senhas são diferentes", "info", 4000);
-        return;
-    }
-
-    const usuarioAtualizar = {
-        nome_fantasia: nomeFantasia.value,
-        razao_social: razaoSocial.value,
-        cep: cep.value,
-        endereco: endereco.value,
-        numero: numero.value || null,
-        bairro: bairro.value,
-        cidade: cidade.value,
-        estado: estado.value,
-        contato: contato.value,
-        cnpj_cpf: cnpjCpf.value,
-        inscricao_estadual: ie.value || null,
-        email: email.value,
-        site: site.value || null,
-        usuario: novoUsuario.value,
-        senha: novaSenha.value,
-        tipo_usuario: tipoUsuario.value,
-        slogan: slogan.value || null,
-        path_img: pathImg.value || null,
-        ativo: ativo.value ?? 1,
-        contribuinte: contribuinte.value,
-        atividade: atividade.value,
-        senha_venda: document.querySelector('input[name="senha"]:checked')?.value || null, // Obtém o valor do rádio 
-        id: id.value
-    };
-    updateUsuarioSenha(usuarioAtualizar);
-});
-
+ 
 formatarMoedaBRL(multaParcela);
 
 btnAtualizarTaxas.addEventListener('click', (e) => {

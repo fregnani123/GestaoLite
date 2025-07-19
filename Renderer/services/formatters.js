@@ -365,3 +365,16 @@ function formatarDataISOCupom(dataISO) {
     return `${dia}/${mes}/${ano}`;
 }
 
+function preencherSelect(idSelect, opcoes) {
+    const select = document.getElementById(idSelect);
+    if (!select) return;
+
+    select.innerHTML = ''; // Limpa opções antigas
+
+    opcoes.forEach(opcao => {
+        const option = document.createElement("option");
+        option.value = opcao.value;
+        option.textContent = opcao.text;
+        select.appendChild(option);
+    });
+}
