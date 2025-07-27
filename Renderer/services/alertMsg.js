@@ -28,7 +28,7 @@ function alertMsg(msg, type = 'info', time = ALERT_DEFAULT_TIME) {
     okButton.classList.add('btn-msg')
 
     bloqueiaTela.style.position = 'fixed';
-    bloqueiaTela.style.zIndex = '9999999';
+    bloqueiaTela.style.zIndex = '999999999';
     bloqueiaTela.style.width = '100%';
     bloqueiaTela.style.height = '100vh';
     bloqueiaTela.style.top = '0';

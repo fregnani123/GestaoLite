@@ -7,6 +7,115 @@ const inputTaxaJuros = document.getElementById('taxa-juros'); // Pegando a taxa 
 const vencimentosCrediario = document.getElementById('vencimentos');
 let jurosParcelaAcima = ''
 
+document.addEventListener("DOMContentLoaded", function () {
+    const condicaoSelect = document.getElementById("condicao-vencimento");
+    const tipoPagamentoSelect = document.getElementById("tipo-pagamento");
+    const valorEntradaInput = document.getElementById("valorEntrada");
+    const parcelaSelect = document.getElementById("Crediario-parcela");
+    const vencimentosCrediario = document.getElementById("vencimentos");
+
+    function formatDateToYMD(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function calcularDataVencimento() {
+        const condicao = condicaoSelect.value;
+        if (!condicao) return;
+
+        const diasMap = {
+            "30": 30,
+            "15": 15,
+            "7": 7,
+            "entrada+30": 30,
+            "entrada+15": 15,
+            "entrada+7": 7,
+        };
+
+        const dias = diasMap[condicao] || 30;
+        const hoje = new Date();
+        hoje.setDate(hoje.getDate() + dias);
+
+        vencimentosCrediario.value = formatDateToYMD(hoje);
+    }
+
+    function atualizarCamposEntrada() {
+        const condicao = condicaoSelect.value;
+        const temEntrada = condicao.startsWith("entrada+");
+
+        tipoPagamentoSelect.disabled = !temEntrada;
+
+        if (temEntrada && tipoPagamentoSelect.value !== "") {
+            valorEntradaInput.disabled = false;
+            valorEntradaInput.readOnly = false;
+        } else {
+            valorEntradaInput.disabled = true;
+            valorEntradaInput.readOnly = true;
+            valorEntradaInput.value = "0,00";
+        }
+
+        if (!condicao) {
+            parcelaSelect.disabled = true;
+            parcelaSelect.innerHTML = "";
+            const optionDefault = document.createElement("option");
+            optionDefault.value = "";
+            optionDefault.textContent = "Selecione a condição de pagamento";
+            parcelaSelect.appendChild(optionDefault);
+            return;
+        }
+
+        parcelaSelect.disabled = false;
+        atualizarOpcoesParcelas(temEntrada);
+        calcularDataVencimento(); // Atualiza a data com base na condição
+    }
+
+    function atualizarOpcoesParcelas(temEntrada) {
+        parcelaSelect.innerHTML = "";
+
+        const optionDefault = document.createElement("option");
+        optionDefault.value = "";
+        optionDefault.textContent = "Selecione";
+        parcelaSelect.appendChild(optionDefault);
+
+        const maxParcelas = 24;
+
+        for (let i = 1; i <= maxParcelas; i++) {
+            const option = document.createElement("option");
+
+            if (temEntrada) {
+                option.value = i + 1;
+                option.textContent = `Entrada + ${i} parcela${i > 1 ? 's' : ''}`;
+            } else {
+                option.value = i;
+                option.textContent = `${i} parcela${i > 1 ? 's' : ''}`;
+            }
+
+            parcelaSelect.appendChild(option);
+        }
+    }
+
+    // Impede datas anteriores a hoje
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    vencimentosCrediario.min = formatDateToYMD(hoje);
+
+    vencimentosCrediario.addEventListener("change", () => {
+        const dataSelecionada = new Date(vencimentosCrediario.value);
+        dataSelecionada.setHours(0, 0, 0, 0);
+
+        if (dataSelecionada < hoje) {
+            alert("A data de vencimento não pode ser anterior à data atual.");
+            vencimentosCrediario.value = formatDateToYMD(hoje);
+        }
+    });
+
+    condicaoSelect.addEventListener("change", atualizarCamposEntrada);
+    atualizarCamposEntrada(); // Executa ao iniciar
+});
+
+
 async function getTaxas() {
     try {
         const response = await fetch('http://localhost:3000/getTaxas', {
@@ -45,20 +154,6 @@ async function findCliente(cpf, nomeElemento) {
             }
         });
 
-        // if (!response.ok) {
-        //     informacaoCred.innerHTML = '<strong>Cliente não encontrado.<strong> Verifique se o cadastro foi realizado anteriormente.'
-        //     // informacaoCred.style.backgroundColor = 'rgb(255, 6, 6)';
-        //     // informacaoCred.style.color = 'white'
-
-        //     setTimeout(() => {
-        //         cpfCliente.value = ''; // Limpa o campo CPF
-        //         informacaoCred.innerHTML = 'Informe o CPF do cliente já cadastrado no sistema.';
-        //         // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
-        //         // informacaoCred.style.color = 'white'
-        //     }, 6000);
-
-        //     return;
-        // }
 
         const data = await response.json();
         console.log("Dados recebidos:", data); // Verifica a estrutura da resposta no console
@@ -87,10 +182,8 @@ async function findCliente(cpf, nomeElemento) {
                 currency: 'BRL'
             });
 
-            parcela.focus();
-            // informacaoCred.innerHTML = 'Informe o numero de Parcelas e precione Enter para finalizar a venda';
-            // informacaoCred.style.backgroundColor = 'rgb(5, 90, 0)';
-            // informacaoCred.style.color = 'white'
+            // parcela.focus();
+       
         } else {
             nomeElemento.value = "Cliente encontrado, mas sem nome disponível";
         }
@@ -118,21 +211,6 @@ cpfCliente.addEventListener('input', (e) => {
     }
 });
 
-// Evento para limpar os inputs ao pressionar ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        cpfCliente.value = "";
-        creditoLimite.value = ""
-        creditoUtilizado.value = ""
-        nomeClienteShow.value = "";
-        parcela.value = "";
-        parcelaValor.value = "";
-        informacaoCred.innerHTML = "Forma de pagamento.";
-        informacaoCred.style.backgroundColor = "";
-        informacaoCred.style.color = "";
-        cpfCliente.focus();
-    }
-});
 
 function parseCurrency(value) {
     return Number(value.replace(/[^0-9,.-]+/g, "").replace(",", ".")); // Ajustando para ponto no número
@@ -147,37 +225,74 @@ function parseCurrency(value) {
 let totalComJuros; // Declara a variável globalmente
 let totalLiquidoOriginal = parseCurrency(inputTotalLiquido.value); // Armazena o valor original antes da alteração
 
-parcela.addEventListener('input', (e) => {
-    const numeroParcelas = Number(e.target.value.trim());
-    const totalLiquido = parseCurrency(inputTotalLiquido.value);
-    let taxaJuros = parseFloat(inputTaxaJuros.value.replace(",", ".")) || 0.000001; // Garante que seja um número válido
+function atualizarParcelas() {
+    const numeroParcelas = Number(parcela.value.trim()); // Quantidade total de parcelas (incluindo entrada, se for o caso)
+    const totalLiquido = parseCurrency(inputTotalLiquido.value); // Total da venda
+    entradaCrediario.value = ''
 
+    const entradaRaw = entradaCrediario.value.replace(/\./g, '').replace(',', '.');
+    const entrada = parseFloat(entradaRaw) || 0;
+
+    // Define taxa de juros mínima para evitar erro de cálculo
+    let taxaJuros = parseFloat(inputTaxaJuros.value.replace(",", ".")) || 0.000001;
+
+    // Se o número de parcelas ultrapassar o limite, aplica a taxa real
     if (numeroParcelas > jurosParcelaAcima) {
         taxaJuros = parseFloat(inputTaxaJuros.value.replace(",", ".")) / 100;
     } else {
-        taxaJuros = 0; // Sem juros se for menor ou igual à quantidade configurada
+        taxaJuros = 0;
     }
 
-    if (!isNaN(numeroParcelas) && numeroParcelas > 0 && !isNaN(totalLiquido) && !isNaN(taxaJuros)) {
-        // Salva o valor antes de calcular os juros
+    // 👉 Ajuste importante: número de parcelas REAIS (sem entrada)
+    const parcelasReal = entrada > '' ? numeroParcelas - 1 : numeroParcelas;
+
+    if (!isNaN(parcelasReal) && parcelasReal > 0 && !isNaN(totalLiquido) && !isNaN(taxaJuros)) {
         totalLiquidoOriginal = totalLiquido;
 
-        // Aplica a fórmula correta para o cálculo de juros compostos
-        if (taxaJuros > 0) {
-            const fatorJuros = Math.pow(1 + taxaJuros, numeroParcelas);
-            parcelaValor.value = ((totalLiquido * (fatorJuros * taxaJuros)) / (fatorJuros - 1)).toFixed(2);
-        } else {
-            parcelaValor.value = (totalLiquido / numeroParcelas).toFixed(2); // Caso não tenha juros
+        const saldoDevedor = totalLiquido - entrada;
+
+        if (saldoDevedor <= 0) {
+            alertMsg("Valor da entrada não pode ser maior ou igual ao total da compra.", 'info', 4000);
+            parcelaValor.value = "";
+            Crediario.value = "";
+            totalComJuros = null;
+            return;
         }
 
-        totalComJuros = parseFloat(parcelaValor.value) * numeroParcelas;
-        Crediario.value = converteMoeda(totalComJuros);
+        let valorParcela = 0;
+
+        // Cálculo da parcela com ou sem juros
+        if (taxaJuros > 0) {
+            const fatorJuros = Math.pow(1 + taxaJuros, parcelasReal);
+            valorParcela = (saldoDevedor * (fatorJuros * taxaJuros)) / (fatorJuros - 1);
+        } else {
+            valorParcela = saldoDevedor / parcelasReal;
+        }
+
+        if (valorParcela < 1) {
+            parcelaValor.value = "";
+            Crediario.value = "";
+            totalComJuros = null;
+            alertMsg("Valor da parcela não pode ser menor que R$ 1,00.", 'info', 4000);
+            return;
+        }
+
+       parcelaValor.value = valorParcela.toFixed(2);
+totalComJuros = (valorParcela * parcelasReal) + entrada;
+Crediario.value = converteMoeda(totalComJuros);
+
+// Só define entrada se for parcelado com entrada (mais de 1 parcela)
+entradaCrediario.value = numeroParcelas > 1 ? valorParcela.toFixed(2) : '';
+
     } else {
         parcelaValor.value = "";
         totalComJuros = null;
         Crediario.value = "";
     }
-});
+}
+
+parcela.addEventListener('change', atualizarParcelas);
+
 
 async function validarCrediarioLoja(dataCrediario) {
 
@@ -188,7 +303,7 @@ async function validarCrediarioLoja(dataCrediario) {
                 'x-api-key': 'segredo123',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(dataCrediario), // Apenas serialize aqui
+            body: JSON.stringify(dataCrediario),  
         });
 
         if (!response.ok) {

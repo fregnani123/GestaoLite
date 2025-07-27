@@ -76,8 +76,6 @@ formatarEVerificarCPF(alterCliente);
 inputMaxCaracteres(alterCliente, 14);
 
 
-
-
 function parseCurrency(value) {
     if (!value) return 0;
 
@@ -91,28 +89,43 @@ function parseCurrency(value) {
     return parseFloat(value) || 0;
 }
 
+function parseValorMonetario(valor) {
+    if (typeof valor !== 'string') return valor;
+
+    return parseFloat(
+        valor
+            .replace(/\s/g, '')         // Remove espaços
+            .replace('R$', '')          // Remove símbolo R$
+            .replace(/\./g, '')         // Remove pontos dos milhares
+            .replace(',', '.')          // Troca vírgula decimal por ponto
+    );
+}
+
+
 async function FinalizarVenda() {
     imgProduto.src = ''
     if (carrinho.length === 0) {
-        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'info',4000);
+        alertMsg("Seu carrinho está vazio. Adicione itens antes de concluir a venda.", 'info', 5000);
         return;
     }
 
     if (divCrediario.style.display === 'block' && CrediarioCliente.value === '') {
-        alertMsg('É necessário informar e cadastrar o CPF do cliente antes de realizar a venda', 'info',4000)
+        alertMsg('Para realizar um pedido parcelado na loja, é necessário informar o CPF de um cliente previamente cadastrado no sistema.', 'info', 4000)
         creditoUtilizado.value = '';
         creditoLimite.value = '';
         clienteId.value = '';
         cpfCliente.value = '';
         return;
     }
+if ((entradaCrediario.value !== '' && entradaCrediario.value !== '0') && !tipoPagamento.value) {
+    alertMsg('É necessário informar o tipo de pagamento da entrada.', 'info', 4000);
+    tipoPagamento.focus();
+    return;
+}
 
     if (divCrediario.style.display === 'block' && parcela.value === '') {
-        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda', 'info',4000);
-        creditoUtilizado.value = '';
-        creditoLimite.value = '';
-        clienteId.value = '';
-        cpfCliente.value = '';
+        alertMsg('É necessário informar o numero de parcelas antes de realizar a venda', 'info', 4000);
+        parcela.focus();
         return;
     }
 
@@ -160,11 +173,15 @@ async function FinalizarVenda() {
     const dataCrediario = {
         venda_id: numeroPedido.value,
         cliente_id: clienteId.value,
-        valorTotal: parcelaValor.value,
-        numParcelas: parcela.value,
+        valorTotal: parseValorMonetario(Crediario.value),
+        numParcelas: parseInt(parcela.value),
         dataPrimeiroVencimento: vencimentosCrediario.value,
-    }
+        tipoPagamento: tipoPagamento.value  === '' ? 'Sem entrada' : tipoPagamento.value,
+        condicao: condicaoCrediario.value,
+        entrada: parseFloat(entradaCrediario.value.replace(',', '.')) || 0,
+    };
 
+    
     function formatarParaNumero(valor) {
         return parseFloat(valor.replace("R$", "").trim().replace(/\./g, "").replace(",", "."));
     }
@@ -206,9 +223,7 @@ async function FinalizarVenda() {
         return; // Bloqueia a continuação do processo
     }
 
-    // Continua o processo normalmente se não houver bloqueio
-    // console.log('Acrescentar valor no credito utilizado: ', credCli)
-    // console.log( 'o que foi enviado crediario',dataCrediario);
+
 
     try {
         // Registra a venda no banco
@@ -217,6 +232,7 @@ async function FinalizarVenda() {
         if (clienteId.value !== 1) {
             await validarCrediarioLoja(dataCrediario);
             await updateCrediario(credCli);
+            console.log('dados crediario enviado',dataCrediario);
         } else {
             console.log('crediario não foi chamado...')
         }
@@ -329,7 +345,7 @@ enterButtons.forEach(button => {
     });
 });
 
-const deleteButtons = document.querySelectorAll('.confirme-delete'); 
+const deleteButtons = document.querySelectorAll('.confirme-delete');
 
 deleteButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -342,17 +358,18 @@ deleteButtons.forEach(button => {
         });
 
         document.dispatchEvent(event);
-       carrinhoShowRemover.classList.remove('zindex-alto');
+        carrinhoShowRemover.classList.remove('zindex-alto');
     });
 });
 
 
 const btnCliente = document.getElementById('btn-alterar-confirmar');
 btnCliente.addEventListener('click', () => {
-    if(!alterCliente.value){
+    if (!alterCliente.value) {
         alertMsg('Para confirmar, altere o cliente', 'info', 4000);
         alterCliente.focus();
-        return;}
+        return;
+    }
     divAlterarCliente.style.display = 'none'
     return;
 })
@@ -360,8 +377,8 @@ btnCliente.addEventListener('click', () => {
 const limparButtonCliente = document.getElementById('limparButton-cliente');
 
 limparButtonCliente.addEventListener('click', () => {
-      document.getElementById("nomeClienteAlter").value = '';
-      document.getElementById("clienteNome").value = '';
-     clienteId.value = '1';
-     alterCliente.value = ''
+    document.getElementById("nomeClienteAlter").value = '';
+    document.getElementById("clienteNome").value = '';
+    clienteId.value = '1';
+    alterCliente.value = ''
 })

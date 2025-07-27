@@ -3,11 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    
+    <!-- ✅ Content Security Policy segura -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000; img-src 'self' data:;">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
     <link rel="stylesheet" href="../style/css-individual/config.css">
+    
     <title>Configurações</title>
 </head>
 
@@ -315,8 +322,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input id="cnpjCpf" type="text" value="">
-
+                                        <input id="cnpjCpf" type="text" value=""  readonly>
                                     </td>
                                     <td>
                                         <input type="text" id="razao_social" readonly="readonly">

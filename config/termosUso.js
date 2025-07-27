@@ -4,18 +4,19 @@ function criarSerialBox() {
   if (document.getElementById('serial-box')) return;
 
   const serialContainer = document.createElement('div');
-  serialContainer.className = 'termos-uso'; // reutiliza o mesmo estilo do termos-box
+  serialContainer.className = 'termos-uso';  
   serialContainer.id = 'serial-box';
   const imgFundoSerial = document.createElement('img');
   imgFundoSerial.classList = 'imgFundoSerial';
   imgFundoSerial.src = "../style/img/ChatGPT.png"
   serialContainer.innerHTML = `
- 
+           <header class='headerSerial'>
+          <img class='img-logo-serial' src="../style/img/logoFGL.png" alt="Logo FGL">
+          </header>
         <div class="termo-conteudo-serial">
-               <span id="btn-exit-serial">X</span>
-                <div>
-                  <img class="img-logo-serial" src="../style/img/logoFGL.png" alt="GestãoLite">
-            <h3>Digite o Serial do Produto</h3>
+          <div class="barra"> <span id="btn-exit-serial">X</span></div>
+            <div class='div-conteudo'>                  
+           <h3>Digite a chave de licença adquirida.</h3> 
             <div class='div-input-serial'>
                 <input type="text" maxlength="4" class="serial-input" id='serial-input-1' placeholder="XXXX"> - 
                 <input type="text" maxlength="4" class="serial-input" id='serial-input-2' placeholder="XXXX"> -
@@ -49,11 +50,9 @@ function criarSerialBox() {
   // Botão de fechar
   const btnExit = document.getElementById('btn-exit-serial');
   btnExit.addEventListener('click', () => {
-        window.close();
-  
-  });
+    window.close();
 
- 
+  });
 }
 
 criarSerialBox()
@@ -63,12 +62,14 @@ function criarTermosUso() {
   if (document.getElementById('termos-box')) return;
 
   const termosContainer = document.createElement('div');
-  termosContainer.className = 'termos-uso';
+  termosContainer.className = 'termos-uso-1';
   termosContainer.id = 'termos-box';
   termosContainer.innerHTML = `
      <button id="btn-exit">X</button>
 <div class="termo-conteudo">
   <h2><strong>Termos de Uso - Gerenciando Estoque FGL</strong></h2>
+  <div class='container-li'>
+
 
   <p>Ao instalar, acessar ou utilizar o sistema <strong>Gerenciando Estoque FGL</strong>, o usuário declara ter lido, compreendido e concordado integralmente com os termos e condições estabelecidos abaixo.</p>
 
@@ -167,22 +168,27 @@ function criarTermosUso() {
   </ol>
     <p>© FGL Software Solutions – Todos os direitos reservados Versão 2.1.0</p>
     <p><strong>Última atualização:</strong> 01/08/2025</p>
+</div>
+  
     <div style="margin-top: 20px;">
   <label style="display: flex; align-items: center; gap: 8px;">
     <input type="checkbox" id="aceito-termos">
     <span>Li e aceito os termos de uso.</span>
-  
   </label>
     <div class='div-aceitar'>
          <button id="confirmar-termos"   style="margin-top: 10px;">
-    Aceitar      <button id="nao-confirmar-termos" style="margin-top: 10px;">Sair do Aplicativo
+    Aceitar      <button id="nao-confirmar-termos" style="margin-top: 10px;">Recusar e sair
         </button>
   </button>
   </div>
 </div>
 </div>
+
     `;
   document.body.appendChild(termosContainer);
+
+   const termosUso = document.querySelector('.termos-uso-1')
+    getTermos(termosUso)
 
   // AGORA os elementos existem no DOM
   const btnFechar = document.getElementById('btn-exit');
@@ -205,6 +211,11 @@ function criarTermosUso() {
       alertMsg('Para prosseguir, é necessário aceitar os termos de uso.', 'info', 4000);
       aceitoTermos.focus();
     } else {
+      const ativarSerial = {
+        userID: "1",
+        ativado: 1
+      }
+      updateTermos(ativarSerial)
       termosBox.style.display = 'none';
       // localStorage.setItem('aceitou_termos', 'true');
     }
@@ -226,8 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
   criarTermosUso();
 });
 
-
-const dataLogin= document.querySelector('#current-year');
+const dataLogin = document.querySelector('#current-year');
 const dataLogin1 = document.querySelector('#current-year-1');
 const dataAtual = new Date();
 const ano = dataAtual.getFullYear();
@@ -252,7 +262,7 @@ serialInputs.forEach((input, index) => {
     if (input.value.length === 4 && index < serialInputs.length - 1) {
       serialInputs[index + 1].focus(); // Avança para o próximo input
     }
-    updateSerialConst();
+    postSerialConst();
   });
 
   // Backspace para voltar ao anterior
@@ -263,24 +273,37 @@ serialInputs.forEach((input, index) => {
   });
 });
 
-// Atualiza a constante do serial completo
+
 let serialCompleto = '';
 
-function updateSerialConst() {
+function postSerialConst() {
   serialCompleto = serial1.value + serial2.value + serial3.value + serial4.value;
   console.log('Serial atual:', serialCompleto);
 
-if (serialCompleto.length === 16) {
-  if (serialCompleto === 'AAAAAAAAAAAAAAAA') {
-    if (termosContainer) {
-      termosContainer.style.display = 'none';
-    }
-    alert('Serial válido!');
-  } else {
-    alertMsg('Chave serial inválida','info',4000);
+  if (serialCompleto.length === 16) {
+    const serialAdicionado = {
+      userID: "1",
+      serialKey: serialCompleto,
+      ativado: 0
+    };
+
+    postNewSerial(serialAdicionado); // Toda a lógica está lá dentro
+  }
+}
+function postSerialConst() {
+  serialCompleto = serial1.value + serial2.value + serial3.value + serial4.value;
+  console.log('Serial atual:', serialCompleto);
+
+  if (serialCompleto.length === 16) {
+    const serialAdicionado = {
+      userID: "1",
+      serialKey: serialCompleto,
+      ativado: 0
+    };
+
+    postNewSerial(serialAdicionado); // Toda a lógica está lá dentro
   }
 }
 
-}
-
-
+const serialBox = document.getElementById('serial-box');
+getSerial(serialBox);

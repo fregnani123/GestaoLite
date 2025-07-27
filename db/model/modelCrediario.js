@@ -19,46 +19,107 @@ db.pragma('foreign_keys = ON');
 console.log('Chaves estrangeiras ativadas.');
 
 
-async function registrarCrediario(vendaId, clienteId, valorTotal, numParcelas, dataPrimeiroVencimento) {
+async function registrarCrediario(vendaId, clienteId, valorTotal, numParcelas, dataPrimeiroVencimento, condicao, tipoPagamento, entrada = 0) {
+    await ensureDBInitialized();
 
-    await ensureDBInitialized
+    console.log("Dados recebidos:");
+    console.log({ vendaId, clienteId, valorTotal, numParcelas, dataPrimeiroVencimento, condicao, entrada, tipoPagamento });
 
     const parcelas = [];
-    // const valorParcela = (valorTotal / numParcelas).toFixed(2);
     const dataBase = new Date(dataPrimeiroVencimento);
+    const valorParcelado = valorTotal - entrada;
+    const parcelasRestantes = numParcelas - (entrada > 0 ? 1 : 0);
+    const valorParcela = (valorParcelado / parcelasRestantes).toFixed(2);
 
-    for (let i = 1; i <= numParcelas; i++) {
-        const dataVencimento = new Date(dataBase);
-        dataVencimento.setMonth(dataBase.getMonth() + (i - 1));
+    const intervalos = {
+        "30": 30,
+        "15": 15,
+        "7": 7,
+        "entrada+30": 30,
+        "entrada+15": 15,
+        "entrada+7": 7,
+    };
 
-        parcelas.push({
-            venda_id: vendaId,
-            cliente_id: clienteId,
-            parcela_numero: i,
-            valor_parcela: valorTotal,
-            data_vencimento: dataVencimento.toISOString().split('T')[0],
-            status: 'PENDENTE',
-        });
-    }
+    const intervalo = intervalos[condicao] || 30;
+    console.log("Intervalo escolhido:", intervalo);
 
+    let parcelaIndex = 1;
+
+function formatDateToYMD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// Parcela de entrada (se houver)
+if (entrada > 0) {
+    const agora = new Date();
+    const entradaParcela = {
+        venda_id: vendaId,
+        cliente_id: clienteId,
+        parcela_numero: parcelaIndex++,
+        valor_parcela: entrada.toFixed(2),
+        data_vencimento: formatDateToYMD(agora),
+        data_pagamento: formatDateToYMD(agora),
+        status: 'PAGO',
+        tipo_entrada: tipoPagamento,
+        condicao_vencimento: condicao,
+    };
+    parcelas.push(entradaParcela);
+    console.log("Parcela de entrada:", entradaParcela);
+}
+
+// Demais parcelas
+for (let i = 0; i < parcelasRestantes; i++) {
+    const vencimento = new Date(dataBase);
+    vencimento.setDate(vencimento.getDate() + (i * intervalo) + 1); // +1 dia aqui
+
+    const parcela = {
+        venda_id: vendaId,
+        cliente_id: clienteId,
+        parcela_numero: parcelaIndex++,
+        valor_parcela: valorParcela,
+        data_vencimento: formatDateToYMD(vencimento),
+        data_pagamento: null,
+        status: 'PENDENTE',
+        tipo_entrada: tipoPagamento,
+        condicao_vencimento: condicao,
+    };
+    parcelas.push(parcela);
+}
+
+
+    console.log("Todas as parcelas geradas:", parcelas);
+
+    // Correção: incluir apenas campos existentes
     const stmt = db.prepare(`
-        INSERT INTO crediario (cliente_id, venda_id, parcela_numero, valor_parcela, data_vencimento, status)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO crediario (
+            cliente_id, venda_id, parcela_numero, 
+            valor_parcela, data_vencimento, data_pagamento, 
+            status, tipo_entrada, condicao_vencimento
+        ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const parcela of parcelas) {
+        console.log("Inserindo parcela:", parcela);
         stmt.run(
             parcela.cliente_id,
             parcela.venda_id,
             parcela.parcela_numero,
             parcela.valor_parcela,
             parcela.data_vencimento,
-            parcela.status
+            parcela.data_pagamento,
+            parcela.status,
+            parcela.tipo_entrada,
+            parcela.condicao_vencimento
         );
     }
 
-    return parcelas.length; // Retorna o número de parcelas inseridas
-};
+    return parcelas.length;
+}
+
 
 function generateRandomNumber(cpf) {
     const cleanCpf = cpf.replace(/\D/g, '');
@@ -66,7 +127,7 @@ function generateRandomNumber(cpf) {
     for (let i = 0; i < cleanCpf.length; i++) {
         sum += cleanCpf.charCodeAt(i);
     }
-    return (sum % 900) + 100; 
+    return (sum % 900) + 100;
 }
 
 function reverseString(str) {
@@ -75,7 +136,7 @@ function reverseString(str) {
 
 // Função para codificar o CNPJ/CPF antes de salvar
 function encode(cod) {
-    const randomNumber = generateRandomNumber(cod); 
+    const randomNumber = generateRandomNumber(cod);
     const codRandom = cod.replace('.', `.${randomNumber}.`);
     const valorComPrefixo = "fgl" + reverseString(codRandom || "") + "1969";
     return Buffer.from(valorComPrefixo).toString('base64');
@@ -139,7 +200,7 @@ async function updateCrediario(dadosCrediario) {
           multa_atraso= ?
           WHERE crediario_id = ?;
         `;
-        
+
         const result = db.prepare(query).run(
             dadosCrediario.data_pagamento,
             dadosCrediario.status,
@@ -149,7 +210,7 @@ async function updateCrediario(dadosCrediario) {
 
         console.log('Registro baixa parcela do crediario atualizado com sucesso:', result.changes);
         return result.changes;
-    
+
     } catch (error) {
         console.error('Erro ao executar baixa crediario:', error.message);
         throw error;
@@ -245,7 +306,7 @@ async function updateTaxas(dadosTaxas) {
 
         console.log('Taxas do crediário atualizado com sucesso:', result.changes);
         return result.changes;
-    
+
     } catch (error) {
         console.error('Erro ao executar atualizações taxas crediário:', error.message);
         throw error;
@@ -254,4 +315,4 @@ async function updateTaxas(dadosTaxas) {
 };
 
 
-module.exports = { registrarCrediario, getCrediarioByCPF, updateCrediario, getCrediariosMesVigente, getCrediariosVencidos, getTaxas,  updateTaxas, getCrediarioNumeroPed};
+module.exports = { registrarCrediario, getCrediarioByCPF, updateCrediario, getCrediariosMesVigente, getCrediariosVencidos, getTaxas, updateTaxas, getCrediarioNumeroPed };

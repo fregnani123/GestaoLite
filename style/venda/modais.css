@@ -131,12 +131,18 @@
   left: 0;
 }
 
+td input {
+  text-align: left;
+  font-size: 1rem !important;
+  /* outras estilizações se quiser */
+}
+
 #div-container-parcelado {
     padding-top: 3%;
-    width: 1000px;
+    width: 1050px;
     position: absolute;
-    top: 50%;
-    left: 60%;
+    top: 53%;
+    left: 63%;
     transform: translate(-50%, -50%);
     z-index: 999;
     padding: 1%;

@@ -50,3 +50,5 @@ divConfig.addEventListener('click', () => {
 })
 
 getUser()
+
+

@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
@@ -11,8 +14,10 @@
     <link rel="stylesheet" href="../style/venda/tela_vendas.css">
     <link rel="stylesheet" href="../style/venda/cupon.css">
     <link rel="stylesheet" href="../style/venda/modais.css">
-    <title></title>
+
+    <title>Baixa no estoque por pedido</title>
 </head>
+
 
 <body>
     <div id="loading-overlay" class="active">
@@ -38,7 +43,7 @@
                             <li><a id="btn-pgto-debito"><kbd>F4</kbd> Pagamento cartão débito</a></li>
                             <!-- <li><a id="btn-esc"><kbd>F5</kbd>Pagamento Boleto</a></li> -->
                             <li><a id="btn-cancelar-item"><kbd>F6</kbd> Remover item do Pedido</a></li>
-                            <li><a id="btn-crediario-loja"><kbd>F7</kbd> Pedido Parcelado</a></li>
+                            <li><a id="btn-crediario-loja"><kbd>F7</kbd> Pedido Parcelado (Crediário Loja)</a></li>
                             <li><a id="btn-alterar-cliente"><kbd>F8</kbd> Alterar cliente Pedido</a></li>
                             <li><a id="btn-alterar-qtd"><kbd>F9</kbd> Alterar quantidade</a></li>
                             <li><a id="btn-desconto-venda"><kbd>F10</kbd> Desconto no pedido</a></li>
@@ -421,7 +426,10 @@
                                             </tr>
 
                                             <td>
-                                                <input id="limpar-tela-key" type="password">
+                                                <form>
+                                                    <input id="limpar-tela-key" type="password" name="senha"
+                                                        autocomplete="current-password" placeholder="Digite a senha">
+                                                </form>
                                             </td>
                                         </table>
                                         <div
@@ -493,7 +501,7 @@
                             <div id="div-container-parcelado">
                                 <span id="btn-exit-parcelado">x</span>
 
-                                <label for="">Pedido Parcelado</label>
+                                <label for="">Pedido Parcelado (Crediário loja)</label>
                                 <div class="divNomes">
                                     <span id="btn-exit-nome">x</span>
                                     <label for="">
@@ -569,9 +577,93 @@
                                 <table style="margin-top: 2%;">
                                     <tr>
 
-                                        <th>
+                                        <th style="width: 40%;">
+                                            Condição de pagamento:
+                                        </th>
+                                        <th style="width: 20%;">
                                             Digite o num. parcelas
                                         </th>
+                                        <th>
+                                            Tipo de entrada
+                                        </th>
+                                        <th style="width: 20%;">
+                                          Valor da entrada
+                                        </th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select id="condicao-vencimento" style="font-size: 1rem; padding: 0.2rem;">
+                                                <option value="">Selecione</option>
+                                                <option value="entrada+30">Entrada + pagamentos mensais (30 dias)
+                                                </option>
+                                                <option value="30">Pagamentos mensais (30 dias)</option>
+                                                <option value="15">Pagamentos quinzenais (15 dias)</option>
+                                                <option value="entrada+15">Entrada + pagamentos quinzenais (15 dias)
+                                                </option>
+                                                <option value="7">Pagamentos semanais (7 dias)</option>
+                                                <option value="entrada+7">Entrada + Pgto semanais (7 dias)</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="" id="Crediario-parcela"
+                                                style="font-size: 1rem; padding: 0.2rem;">
+                                                <option value="">Selecione</option>
+                                                <option value="1">1 parcela</option>
+                                                <option value="2">2 parcelas</option>
+                                                <option value="3">3 parcelas</option>
+                                                <option value="4">4 parcelas</option>
+                                                <option value="5">5 parcelas</option>
+                                                <option value="6">6 parcelas</option>
+                                                <option value="7">7 parcelas</option>
+                                                <option value="8">8 parcelas</option>
+                                                <option value="9">9 parcelas</option>
+                                                <option value="10">10 parcelas</option>
+                                                <option value="11">11 parcelas</option>
+                                                <option value="12">12 parcelas</option>
+                                                <option value="13">13 parcelas</option>
+                                                <option value="14">14 parcelas</option>
+                                                <option value="15">15 parcelas</option>
+                                                <option value="16">16 parcelas</option>
+                                                <option value="17">17 parcelas</option>
+                                                <option value="18">18 parcelas</option>
+                                                <option value="19">19 parcelas</option>
+                                                <option value="20">20 parcelas</option>
+                                                <option value="21">21 parcelas</option>
+                                                <option value="22">22 parcelas</option>
+                                                <option value="23">23 parcelas</option>
+                                                <option value="24">24 parcelas</option>
+                                                <option value="30">30 parcelas</option>
+                                                <option value="36">36 parcelas</option>
+                                                <option value="48">48 parcelas</option>
+                                                <option value="60">60 parcelas</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="tipo-pagamento" style="font-size: 1rem; padding: 0.2rem;">
+                                                <option value="">Selecione</option>
+                                                <option value="Dinheiro">Dinheiro</option>
+                                                <option value="PIX">PIX</option>
+                                                <option value="Cartão Crédito">Cartão Crédito</option>
+                                                <option value="Cartão Débito">Cartão Débito</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input id="valorEntrada"  placeholder="0,00" readonly >
+                                        </td>
+
+
+
+                                    </tr>
+                                </table>
+
+                                <table style="margin-top: 2%;">
+                                    <tr>
+                                        <th style="width: 20%;">
+                                           Data do 1º vencimento
+                                        </th>
+
                                         <th>
                                             Taxa de Juros %
                                         </th>
@@ -584,7 +676,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input id="Crediario-parcela" type="number" value="">
+                                            <input id="vencimentos" type="date">
                                         </td>
                                         <td>
                                             <input id="taxa-juros" type="number" value="" readonly>
@@ -595,21 +687,22 @@
                                         <td>
                                             <input id="Crediario" type="text" value="0,00" readonly>
                                         </td>
+
+
                                     </tr>
+
                                 </table>
                                 <table style="margin-top: 2%;">
                                     <tr>
 
-                                        <th>
+                                        <th style="width: 20%;">
                                             Crédito liberado:
                                         </th>
-                                        <th>
+                                        <th style="width: 20%;">
                                             Crédito utilizado:
                                         </th>
-                                        <th>
-                                            Selecione o vencimento
-                                        </th>
-                                        <th>
+
+                                        <th style="width: 20%;">
                                             Ações
                                         </th>
                                     </tr>
@@ -622,9 +715,7 @@
                                         <td>
                                             <input id="creditoUtilizado" value="0,00" readonly>
                                         </td>
-                                        <td>
-                                            <input id="vencimentos" type="date">
-                                        </td>
+
                                         <td>
                                             <div style="display: flex; align-items: center; gap: 2%;">
                                                 <button style="width: 100%;" id="btn-finalizar-venda">
@@ -642,35 +733,32 @@
                                 </table>
 
 
+
                                 <table style="margin-top: 2%;">
 
                                     <tr style="border: 1px solid gray;">
                                         <td>
-                                            <p>
+                                            <p style="text-align: left;">
                                                 ⚠️ Para pedidos <strong>parcelados</strong>, o cliente <strong>já deve
                                                     estar previamente cadastrado no sistema</strong>.
-                                                Verifique com <strong>atenção</strong> os dados antes de
-                                                finalizar.
+                                                Verifique com <strong>atenção</strong> os dados antes de finalizar.
                                                 O <strong>crédito</strong> também deve estar <strong>suficiente</strong>
                                                 e <strong>liberado</strong> no cadastro do cliente ou
-                                                <strong>ajustado</strong> na opção <strong>Alterar Cliente</strong>.
+                                                <strong>ajustado</strong> na opção <strong>Alterar
+                                                    Cliente</strong>.<br>
+
+                                                * As <strong>taxas de juros</strong> aplicadas nas parcelas são, por
+                                                padrão, <strong>zero</strong>.
+                                                Cabe ao <strong>administrador do sistema</strong> definir, configurar ou
+                                                aplicar alterações conforme necessário, na seção <strong>Configurações
+                                                    &gt; Configurar Multas e Juros</strong>.
                                             </p>
+
+
                                         </td>
 
                                     </tr>
                                 </table>
-
-                                <!-- <table style="margin-top: 2%;">
-                                    <tr>
-
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                </table> -->
-
-
-                                <!-- input para salvar o id Cliente Globalmente. -->
                                 <input id="id-cliente" type="hidden" value="1">
 
 
@@ -797,11 +885,11 @@
                                             </span>
                                             <table>
                                                 <tr>
-                                                    <th for="Cartao-Credito">Boleto bancário:</th>
+                                                    <th for="Cartao-boleto">Boleto bancário:</th>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input id="Cartao-Credito" type="text" value="0,00">
+                                                        <input id="boleto" type="text" value="0,00">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1031,7 +1119,6 @@
 <script src="../Renderer/Vendas/pagamento.js"></script>
 <script src="../Renderer/Vendas/finalizarVenda.js"></script>
 <script src="../Renderer/Vendas/api_vendas/api_crediario.js"></script>
-<script src="../config/apiUser.js"></script>
 <script src="../Renderer/imprimir/cupom.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 

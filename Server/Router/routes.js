@@ -13,6 +13,7 @@ const controllersDesativar = require('../Controller/desativarProdutoSistema');
 const controllersCrediario = require('../Controller/crediario');
 const controllersAgenda = require('../Controller/agendamento');
 const controllersUsuario = require('../Controller/usuario');
+const controllersSerial = require('../Controller/serial');
 
 // Definições de rotas
 Router.get('/getUsuario', controllersUsuario.getUsuario);
@@ -40,10 +41,12 @@ Router.get('/getCrediariosMesVigente', controllersCrediario.getCrediariosMesVige
 Router.get('/getCrediariosVencidos', controllersCrediario.getCrediariosVencidos);
 Router.get('/getTaxas', controllersCrediario.getTaxas);
 Router.get('/getVendaPorNumeroPedido/:numero_pedido', controllersVenda.getVendasPorNumeroVenda);
+Router.get('/getSerial', controllersSerial.getSerial);
 
 Router.post('/postNewProduto', controllersProduto.postNewProductWithImage);
 Router.post('/newGrupo', controllersGruposProduto.postNewProductGrupo);
 Router.post('/newSubGrupo', controllersGruposProduto.postNewProductSubGrupo);
+2
 Router.post('/newFornecedor', controllersFornecedor.postNewFornecedor);
 Router.post('/postControleEstoque', controllersEstoque.postNewControleEstoque);
 Router.post('/postVenda', controllersVenda.postNewVenda);
@@ -52,6 +55,7 @@ Router.post('/postNewCrediario', controllersCrediario.postNewCrediario);
 Router.post('/postNewAgendamento', controllersAgenda.postNewAgendamento);
 Router.post('/upload-imagem', controllersProduto.UploadImagem);
 Router.post('/postNewCliente', controllersCliente.postNewCliente);
+Router.post('/postNewSerial', controllersSerial.postNewSerial);
 
 
 Router.post('/postNewUsuario', controllersUsuario.postNewUsuario);
@@ -69,6 +73,7 @@ Router.patch('/updateCliente', controllersCliente.updateCliente);
 Router.patch('/updateCredito', controllersCliente.updateCreditoCliente);
 Router.patch('/UpdateUsuario', controllersUsuario.updateUsuario);
 Router.patch('/updateTaxas', controllersCrediario.updateTaxas);
+Router.patch('/updateTermo', controllersSerial.alterarTermo);
 
 
 module.exports = Router;

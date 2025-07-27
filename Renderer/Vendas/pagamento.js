@@ -89,13 +89,13 @@ camposPagamento.forEach(campo => {
 
 function getFormasDePagamento() {
   const formasDePagamento = [];
-
+  
   const valorDinheiro = parseCurrency(document.getElementById('valorDinheiro').value);
   const valorPIX = parseCurrency(document.getElementById('PIX').value);
   const valorCartaoDebito = parseCurrency(document.getElementById('Cartao-Debito').value);
   const valorCartaoCredito = parseCurrency(document.getElementById('Cartao-Credito').value);
   const valorCrediario = parseCurrency(document.getElementById('Crediario').value);
-
+  
 
   if (valorDinheiro > 0) {
     formasDePagamento.push({ tipo: 'Dinheiro', valor: valorDinheiro.toFixed(2) });

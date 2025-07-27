@@ -1,6 +1,32 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../config/.env') });
 
+
+
+async function garantirColunasCrediario(db) {
+    const colunas = [
+        { nome: 'tipo_entrada', tipo: 'TEXT DEFAULT NULL' },
+        { nome: 'condicao_vencimento', tipo: 'TEXT DEFAULT NULL' },
+    ];
+
+    const verificarColuna = (coluna) => {
+        return db.prepare(`PRAGMA table_info(crediario);`).all().some(r => r.name === coluna);
+    };
+
+    for (const col of colunas) {
+        try {
+            const existe = verificarColuna(col.nome);
+            if (!existe) {
+                db.prepare(`ALTER TABLE crediario ADD COLUMN ${col.nome} ${col.tipo};`).run();
+                console.log(`✅ Coluna '${col.nome}' adicionada.`);
+            }
+        } catch (err) {
+            console.error(`Erro ao adicionar coluna '${col.nome}':`, err.message);
+        }
+    }
+}
+
+
 async function initializeDB(db) {
     try {
 
@@ -204,18 +230,21 @@ async function initializeDB(db) {
 
             //Criar Tabela crediario
             `CREATE TABLE IF NOT EXISTS crediario (
-            crediario_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Ajuste para SQLite
-            cliente_id INT NOT NULL, -- Relacionado ao cliente
-            venda_id INT NOT NULL, -- Relacionado à venda
-            parcela_numero INT NOT NULL, -- Número da parcela
-            valor_parcela DECIMAL(10, 2) NOT NULL, -- Valor da parcela
-            data_vencimento DATE NOT NULL, -- Data de vencimento
-            data_pagamento DATE DEFAULT NULL, -- Data em que foi paga (NULL se não foi paga)
-            status TEXT DEFAULT 'PENDENTE', -- Status da parcela,
-            multa_atraso DECIMAL(10, 2) DEFAULT 0.00,
-            FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id),
-            FOREIGN KEY (venda_id) REFERENCES venda(venda_id)
-           );`,
+               crediario_id INTEGER PRIMARY KEY AUTOINCREMENT,
+               cliente_id INT NOT NULL,
+               venda_id INT NOT NULL,
+               parcela_numero INT NOT NULL,
+               valor_parcela DECIMAL(10, 2) NOT NULL,
+               data_vencimento DATE NOT NULL,
+               data_pagamento DATE DEFAULT NULL,
+               status TEXT DEFAULT 'PENDENTE',
+               multa_atraso DECIMAL(10, 2) DEFAULT 0.00,
+               tipo_entrada TEXT DEFAULT NULL, -- NOVA COLUNA
+               condicao_vencimento TEXT DEFAULT NULL, -- NOVA COLUNA '',  
+               FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id),
+               FOREIGN KEY (venda_id) REFERENCES venda(venda_id)
+            );
+`,
 
             //Criar Tabela taxas crediário
             `CREATE TABLE IF NOT EXISTS taxa (
@@ -285,10 +314,13 @@ async function initializeDB(db) {
         queries.forEach(query => {
             db.prepare(query).run();
         });
+            await garantirColunasCrediario(db);
     } catch (err) {
         console.error('Erro ao conectar ao banco de dados SQLite:', err.message);
         throw err;
     }
+
+
 }
 
 // Fecha o banco de dados ao desligar o servidor

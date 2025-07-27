@@ -59,12 +59,17 @@ const nomeProduto = document.querySelector('.nomeProduto');
 const infoPag = document.getElementById('info-pag');
 // const infoPagCred = document.getElementById('info-cred');
 const inputMaxParcelas = document.getElementById('numeroParcela');
+
+const condicaoCrediario = document.getElementById('condicao-vencimento');
+const tipoPagamento = document.getElementById('tipo-pagamento');
+const entradaCrediario = document.getElementById('valorEntrada');
+
 const spanMaxParcelas = document.getElementById('spanMaxParcelas');
 const showSubtotal = document.querySelector('.span-subtotal')
 const carrinhoShowRemover = document.querySelector(".div-carrinho");
 const btnMsg = document.querySelector('.btn-msg');
 
- 
+
 
 // Mapeamento dos botões para as teclas de atalho desejadas
 const atalhos = {
@@ -78,7 +83,6 @@ const atalhos = {
     'btn-alterar-qtd': 'F9',
     'btn-desconto-venda': 'F10',
     'btn-reiniciar-venda': 'F12',
-    'btn-finalizar-venda': 'Enter',
     'btn-esc': 'Escape',
     "btn-exit": 'Escape',
     "btn-exit-qtd": 'Escape',
@@ -245,17 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showOnlyThisDiv(divCrediario);
                     Crediario.value = inputTotalLiquido.value;
 
-                    // Criar um objeto Date e adicionar 30 dias
-                    const Vencimentos = new Date();
-                    Vencimentos.setDate(Vencimentos.getDate() + 30);
-
-                    // Formatar para input[type="date"] (YYYY-MM-DD)
-                    const ano = Vencimentos.getFullYear();
-                    const mes = (Vencimentos.getMonth() + 1).toString().padStart(2, '0');
-                    const dia = Vencimentos.getDate().toString().padStart(2, '0');
-
-                    // Definir no input (tem que ser YYYY-MM-DD)
-                    vencimentosCrediario.value = `${ano}-${mes}-${dia}`;
+                    formatarMoedaBRL(entradaCrediario) 
 
                     CrediarioCliente.focus();
                     infoPag.style.display = 'none';
@@ -418,20 +412,20 @@ const limparTelakey = (e) => {
 
 inputlimparTelakey.addEventListener('keydown', limparTelakey);
 
-
-
   document.getElementById('btn-limpar-formulario').addEventListener('click', limparCamposCrediario);
 
     function limparCamposCrediario() {
         // Campos de texto e número
         document.getElementById('Crediario-cliente').value = '';
         document.getElementById('nomeCliente').value = '';
+        document.getElementById('condicao-vencimento').value = '';
         document.getElementById('Crediario-parcela').value = '';
-        document.getElementById('taxa-juros').value = '';
+        document.getElementById('tipo-pagamento').value = '';
+        document.getElementById('valorEntrada').value = '';
         document.getElementById('Crediario-valor').value = '';
-        document.getElementById('Crediario').value = '0,00';
-        document.getElementById('creditoLimite').value = '0,00';
-        document.getElementById('creditoUtilizado').value = '0,00';
+        // document.getElementById('Crediario').value = '0,00';
+        // document.getElementById('creditoLimite').value = '0,00';
+        // document.getElementById('creditoUtilizado').value = '0,00';
         document.getElementById('vencimentos').value = '';
 
         // Campo de busca de cliente

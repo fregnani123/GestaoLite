@@ -4,10 +4,6 @@
     height: 92%;
 }
  
-/* .agendamento{
-height: 9rem;
-overflow: hidden;
-} */
 
 table {
     width: 100%;
@@ -321,4 +317,13 @@ table th {
 .square-day-agenda {
     margin-top: 1%;
     font-size: 1.1rem;
+}
+
+
+
+.div-agendar{
+    position: absolute;
+    background-color: rgb(255, 252, 252);
+    width: 100%;
+     
 }

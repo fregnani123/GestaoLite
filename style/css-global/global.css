@@ -319,14 +319,11 @@ header {
   background-color: white !important;
 }
 
-/* input[readonly] {
-  font: inherit;
-  color: #555;  
-  background-color: #f2f2f2 !important;  
-  border: 1px solid #ccc;
-  cursor: not-allowed;
-  pointer-events: none;  
-} */
+ td input {
+  text-align: left;
+  font-size: 1rem !important;
+  /* outras estilizações se quiser */
+}
 
 
 .formulario-inputs {
@@ -439,7 +436,7 @@ header {
 #btn-exit-remover:hover,
 #btn-exit-qtd:hover,
 #btn-exit-serial:hover {
-  background-color: #e81123;
+  background-color: #c0c0c0;
   color: white;
 }
 

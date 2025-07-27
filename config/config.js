@@ -165,7 +165,7 @@ tipoUsuario.addEventListener('change', () => {
     }
 
     if (tipoUsuario.value === "fisica") {
-        cnpjCpf.value = '';
+
         const valor = cnpjCpf.value.replace(/\D/g, ''); // Remove tudo que não for número
 
         if (tipoUsuario.value === "fisica" && valor.length !== 11) {

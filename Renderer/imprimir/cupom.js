@@ -1,3 +1,95 @@
+let cnpjCpfUser = '';
+let contatoUser = '';
+let nomeFantasiaUser = '';
+let ramoAtuacaoUser = '';
+let enderecoUser = '';
+let numeroUser = '';
+let bairroUser = '';
+let cidadeUser = '';
+let ufUser = '';
+let sloganUser = '';
+let redeSocialUser = '';
+let razaoSocialUser = '';
+let cepUser = '';
+let senhaVendaUser = '';
+
+
+async function getUser() {
+    const getUserApi = 'http://localhost:3000/getUsuario';
+
+    try {
+        const response = await fetch(getUserApi, {
+            method: 'GET',
+            headers: {
+                'x-api-key': 'segredo123',
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            throw new Error(errorResponse.error);
+        }
+
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            console.log('Nenhum usuário encontrado');
+            return [];
+        }
+
+        // Verifique se 'data[0]' existe antes de tentar acessar suas propriedades
+        cnpjCpfUser = data[0].cnpj_cpf;
+        contatoUser = data[0].contato;
+        nomeFantasiaUser = data[0].nome_fantasia;
+        ramoAtuacaoUser = data[0].atividade;
+        enderecoUser = data[0].endereco;
+        numeroUser = data[0].numero;
+        bairroUser = data[0].bairro;
+        cidadeUser = data[0].cidade;
+        ufUser = data[0].estado;
+        sloganUser = data[0].slogan;
+        redeSocialUser = data[0].path_img;
+        razaoSocialUser = data[0].razao_social;
+        cepUser = data[0].cep;
+        senhaVendaUser = data[0].senha_venda;
+
+        // console.log('Usuário obtido com sucesso:', data);
+
+
+    } catch (error) {
+        console.error('Erro ao obter usuário:', error.message);
+        alertMsg(error.message, 'error', 4000);
+        return [];  // Return an empty array in case of error
+    }
+}
+
+
+function decode(encoded) {
+    try {
+        const decoded = Buffer.from(encoded, 'base64').toString('utf-8');
+
+        if (!decoded.startsWith("fgl") || !decoded.endsWith("1969")) {
+            return encoded;
+        }
+
+        const trimmed = decoded.slice(3, -4);
+        const reversed = reverseString(trimmed);
+        const parts = reversed.split('.');
+
+
+        if (parts.length >= 3) {
+            parts.splice(1, 1);
+        }
+
+        return parts.join('.');
+    } catch (err) {
+        console.error("Erro ao decodificar:", err);
+        return encoded;
+    }
+}
+
+
 getUser();
 const divCupon = document.querySelector('.cupom');
 const imgLogo = document.querySelector('.imgLogo');
@@ -14,24 +106,6 @@ function formatarDataISO(dataISO) {
         minute: '2-digit',
         hour12: false
     });
-}
-
-function decode(encoded) {
-    try {
-        const decoded = Buffer.from(encoded, 'base64').toString('utf-8');
-        if (!decoded.startsWith("fgl") || !decoded.endsWith("1969")) {
-            throw new Error("Formato inválido");
-        }
-        const trimmed = decoded.slice(3, -4);
-        const reversed = trimmed.split('').reverse().join('');
-        const parts = reversed.split('.');
-        if (parts.length >= 3) {
-            parts.splice(1, 1);
-        }
-        return parts.join('.');
-    } catch (err) {
-        return "Erro ao decodificar: " + err.message;
-    }
 }
 
 function formatarValorReal(valor) {
@@ -73,15 +147,14 @@ async function getUltimoPedidoImprimirFolha(venda_id, numero_pedido_imprimir) {
         }
 
         const data = vendaData;
-        const cpfDecod = decode(data[0].cpf);
-
+        // const cpfDecod = ;
         const nomeFantasia = nomeFantasiaUser;
         const ramoAtuacao = ramoAtuacaoUser;
         const endereco = `${enderecoUser} - ${numeroUser}, ${bairroUser} - ${cidadeUser}/${ufUser}`;
         const contato = contatoUser;
-        const cnpj = cnpjCpfDecoded;
+        const cnpj = cnpjCpfUser;
         const cliente = data[0].cliente_nome;
-        const CPF = cpfDecod;
+        const CPF = decode(data[0].cpf);
         const dataVenda = formatarDataISO(data[0].data_venda);
         const numeroVenda = data[0].numero_pedido;
         const naoFiscal = 'Não é documento Fiscal';
@@ -110,16 +183,32 @@ async function getUltimoPedidoImprimirFolha(venda_id, numero_pedido_imprimir) {
                 vencimentosDiv.appendChild(titulo);
 
                 // Agora sim, adiciona as parcelas
-                clienteData.forEach(parcela => {
-                    const divParcela = document.createElement('div');
-                    divParcela.classList.add('parcela-info');
-                    divParcela.innerHTML = `
-                <span>Parcela ${parcela.parcela_numero}:</span>
-                <span>R$ ${formatarValorReal(parcela.valor_parcela)}</span>
-                <span>Vencimento: ${formatarDataISOCupom(parcela.data_vencimento)}</span>
-            `;
-                    vencimentosDiv.appendChild(divParcela);
-                });
+  clienteData.forEach(parcela => {
+    const existe = vencimentosDiv.querySelector(`[data-id-parcela="${parcela.parcela_numero}"]`);
+    if (existe) return;
+
+    const divParcela = document.createElement('div');
+    divParcela.classList.add('parcela-info');
+    divParcela.setAttribute('data-id-parcela', parcela.parcela_numero);
+
+    const isEntrada = parcela.parcela_numero === 1 && parcela.status === 'PAGO';
+    const dataFormatada = formatarDataISOCupom(parcela.data_vencimento);
+
+    const labelParcela = `Parcela ${parcela.parcela_numero}${isEntrada ? ' (Entrada)' : ''}`;
+    const vencimentoOuStatus = isEntrada
+        ? `Pago: ${dataFormatada}`
+        : `Vencimento: ${dataFormatada}`;
+
+    divParcela.innerHTML = `
+        <span>${labelParcela}</span>
+        <span>R$ ${formatarValorReal(parcela.valor_parcela)}</span>
+        <span>${vencimentoOuStatus}</span>
+    `;
+
+    vencimentosDiv.appendChild(divParcela);
+});
+
+
             } else {
                 vencimentosDiv.style.display = 'block';
                 vencimentosDiv.innerHTML = '<span></span>';
@@ -154,43 +243,43 @@ async function getUltimoPedidoImprimirFolha(venda_id, numero_pedido_imprimir) {
         data.forEach(item => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('item-venda');
-        
+
             // Construir a descrição completa
             let descricao = item.produto_nome;
-        
+
             if (item.nome_cor_produto?.trim()) {
                 descricao += ` ${item.nome_cor_produto}`;
             }
-        
+
             if (item.tamanho_letras?.trim()) {
                 descricao += ` ${item.tamanho_letras}`;
             }
-        
+
             if (item.tamanho_numero?.trim()) {
                 descricao += ` tam.${item.tamanho_numero}`;
             }
-        
+
             if (item.medida_volume?.trim()) {
                 descricao += ` ${item.medida_volume_qtd || ''}${item.medida_volume}`;
             }
-        
+
             if (item.unidade_massa?.trim()) {
                 descricao += ` ${item.unidade_massa_qtd || ''}${item.unidade_massa}`;
             }
-        
+
             if (item.unidade_comprimento?.trim()) {
                 descricao += ` ${item.unidade_comprimento_qtd || ''}${item.unidade_comprimento}`;
             }
-        
+
             itemDiv.innerHTML = `
                 <span>${item.codigo_ean}</span>
                 <span>${descricao}</span>
                 <span>${item.quantidade}${item.unidade_estoque_nome} x ${formatarValorReal(item.preco)}</span>
             `;
-        
+
             listaItens.appendChild(itemDiv);
         });
-        
+
 
     } catch (error) {
         console.error('Erro ao buscar informações:', error);
