@@ -115,8 +115,10 @@ document.addEventListener("DOMContentLoaded", function () {
     atualizarCamposEntrada(); // Executa ao iniciar
 });
 
-
+const taxaDeJurosElemento = document.querySelector('.taxa');
+const taxaDeJurosParcela = document.querySelector('.taxa-parcela');
 async function getTaxas() {
+
     try {
         const response = await fetch('http://localhost:3000/getTaxas', {
             method: 'GET',
@@ -131,6 +133,10 @@ async function getTaxas() {
         jurosParcelaAcima = Number(data[0].juros_parcela_acima);
         inputMaxParcelas.value = jurosParcelaAcima;
         spanMaxParcelas.innerText = inputMaxParcelas.value;
+        taxaDeJurosElemento.innerText = `${data[0].juros_crediario_venda}%`;
+        taxaDeJurosParcela.innerText = Number(data[0].juros_parcela_acima) < 10
+            ? '0' + Number(data[0].juros_parcela_acima)
+            : Number(data[0].juros_parcela_acima);
 
         console.log('Taxas Crediário: ', data)
 
@@ -183,9 +189,10 @@ async function findCliente(cpf, nomeElemento) {
             });
 
             // parcela.focus();
-       
+
         } else {
-            nomeElemento.value = "Cliente encontrado, mas sem nome disponível";
+            nomeElemento.value = "Não encontrado. Verifique se o cliente está previamente cadastrado.";
+
         }
 
     } catch (error) {
@@ -196,6 +203,9 @@ async function findCliente(cpf, nomeElemento) {
 }
 formatarEVerificarCPF(cpfCliente);
 inputMaxCaracteres(cpfCliente, 14);
+
+
+
 
 
 cpfCliente.addEventListener('input', (e) => {
@@ -224,6 +234,7 @@ function parseCurrency(value) {
 
 let totalComJuros; // Declara a variável globalmente
 let totalLiquidoOriginal = parseCurrency(inputTotalLiquido.value); // Armazena o valor original antes da alteração
+
 
 function atualizarParcelas() {
     const numeroParcelas = Number(parcela.value.trim()); // Quantidade total de parcelas (incluindo entrada, se for o caso)
@@ -277,12 +288,12 @@ function atualizarParcelas() {
             return;
         }
 
-       parcelaValor.value = valorParcela.toFixed(2);
-totalComJuros = (valorParcela * parcelasReal) + entrada;
-Crediario.value = converteMoeda(totalComJuros);
+        parcelaValor.value = valorParcela.toFixed(2);
+        totalComJuros = (valorParcela * parcelasReal) + entrada;
+        Crediario.value = converteMoeda(totalComJuros);
 
-// Só define entrada se for parcelado com entrada (mais de 1 parcela)
-entradaCrediario.value = numeroParcelas > 1 ? valorParcela.toFixed(2) : '';
+        // Só define entrada se for parcelado com entrada (mais de 1 parcela)
+        entradaCrediario.value = numeroParcelas > 1 ? valorParcela.toFixed(2) : '';
 
     } else {
         parcelaValor.value = "";
@@ -303,7 +314,7 @@ async function validarCrediarioLoja(dataCrediario) {
                 'x-api-key': 'segredo123',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(dataCrediario),  
+            body: JSON.stringify(dataCrediario),
         });
 
         if (!response.ok) {
@@ -476,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cpfCliente.focus();
     });
-       
+
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -497,5 +508,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cpfCliente.focus();
     });
-       
+
 });

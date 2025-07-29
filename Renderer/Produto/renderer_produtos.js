@@ -400,30 +400,49 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
     relativePath = `${inputPathImg.getAttribute('data-relative-path')}.${extension}`;
   }
 
-  const produtoData = {
-    codigo_ean: inputCodigoEANProduto.value,
-    grupo_id: selectGrupo.value,
-    sub_grupo_id: selectSubGrupo.value,
-    nome_produto: inputNomeProduto.value,
-    tamanho_letras_id: selectTamanhoLetras.value,
-    tamanho_num_id: selectTamanhoNumeros.value,
-    unidade_massa_id: selectUnidadeMassa.value,
-    medida_volume_id: selectMedidaVolume.value,
-    unidade_comprimento_id: selectUnidadeComprimento.value,
-    quantidade_estoque: parseInt(inputQuantidadeEstoque.value, 10),
-    quantidade_vendido: parseInt(inputQuantidadeVendido.value, 10),
-    preco_compra: parseFloat(inputPrecoCompra.value.replace(',', '.')),
-    markup: parseFloat(inputMarkup.value.replace(',', '.')),
-    preco_venda: parseFloat(inputprecoVenda.value.replace(',', '.')),
-    unidade_estoque_id: selectUnidadeEstoque.value,
-    unidade_massa_qtd: parseFloat(inputMassa.value || 0),
-    medida_volume_qtd: parseFloat(inputVolume.value || 0),
-    unidade_comprimento_qtd: parseFloat(inputComprimento.value || 0),
-    fornecedor_id: inputSaveIdFornecedor.value || '1',
-    caminho_img_produto: relativePath,
-    cor_produto_id: selectCorProduto.value,
-    observacoes: inputObservacoes.value,
-  };
+const isVisible = (id) => {
+  const el = document.getElementById(id);
+  return el && window.getComputedStyle(el).display === 'flex';
+};
+
+// Verifica se nenhum bloco está visível
+if (
+  !isVisible("divTamanho") &&
+  !isVisible("divTamanhoNUm") &&
+  !isVisible("volumeDiv") &&
+  !isVisible("comprimentoDiv") &&
+  !isVisible("massaDiv")
+) {
+  alertMsg("Por favor, selecione uma característica do produto (tamanho, volume, massa ou comprimento).",'info',4000);
+  return;
+}
+
+// Se passou na verificação, monta o objeto normalmente
+const produtoData = { 
+  codigo_ean: inputCodigoEANProduto.value,
+  grupo_id: selectGrupo.value,
+  sub_grupo_id: selectSubGrupo.value,
+  nome_produto: inputNomeProduto.value,
+  tamanho_letras_id: isVisible("divTamanho") ? selectTamanhoLetras.value : null,
+  tamanho_num_id: isVisible("divTamanhoNUm") ? selectTamanhoNumeros.value : null,
+  unidade_massa_id: isVisible("massaDiv") ? selectUnidadeMassa.value : null,
+  medida_volume_id: isVisible("volumeDiv") ? selectMedidaVolume.value : null,
+  unidade_comprimento_id: isVisible("comprimentoDiv") ? selectUnidadeComprimento.value : null,
+  quantidade_estoque: parseInt(inputQuantidadeEstoque.value, 10),
+  quantidade_vendido: parseInt(inputQuantidadeVendido.value, 10),
+  preco_compra: parseFloat(inputPrecoCompra.value.replace(',', '.')),
+  markup: parseFloat(inputMarkup.value.replace(',', '.')),
+  preco_venda: parseFloat(inputprecoVenda.value.replace(',', '.')),
+  unidade_estoque_id: selectUnidadeEstoque.value,
+  unidade_massa_qtd: isVisible("massaDiv") ? parseFloat(document.getElementById("massaNumero").value || 0) : null,
+  medida_volume_qtd: isVisible("volumeDiv") ? parseFloat(document.getElementById("volumeNumero").value || 0) : null,
+  unidade_comprimento_qtd: isVisible("comprimentoDiv") ? parseFloat(document.getElementById("comprimento").value || 0) : null,
+  fornecedor_id: inputSaveIdFornecedor.value || '1',
+  caminho_img_produto: relativePath,
+  cor_produto_id: selectCorProduto.value,
+  observacoes: inputObservacoes.value,
+};
+
 
   // Verificar quais campos obrigatórios não foram preenchidos
   let camposFaltando = [];

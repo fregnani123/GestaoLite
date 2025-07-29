@@ -483,7 +483,6 @@ function limparFornecedor() {
 
 
 
-
 const btnBuscarFornecedor = document.getElementById('buscar-fornecedor');
 const divContainerFornecedor = document.getElementById('divFornecedor');
 const btnExitFornecedor = document.getElementById('btn-exit-fornecedor-prod');

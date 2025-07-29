@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             limparInputsPagamento();
+            limparCamposCrediario()   
             carrinhoShowRemover.classList.remove('zindex-alto');
 
         }
