@@ -140,17 +140,18 @@ function formatarCPF(valor) {
     // Retorna o CPF formatado corretamente
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 }
-
+ 
 function inputMaxCaracteres(input, max) {
-    // Remove qualquer event listener antigo (usando uma função nomeada)
+    if (!input) {
+        console.log('Elemento input não encontrado.');
+        return;
+    }
+
     input.removeEventListener('input', limitarCaracteres);
-
-    // Define o novo maxlength
     input.setAttribute('maxlength', max);
-
-    // Adiciona novamente o listener com limite atualizado
     input.addEventListener('input', limitarCaracteres);
 }
+
 
 function limitarCaracteres(e) {
     const max = parseInt(e.target.getAttribute('maxlength'), 10);

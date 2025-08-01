@@ -60,34 +60,44 @@ inputPrecoCompra.addEventListener('input', () => {
   }
 });
 
-inputMarkupEstoque.addEventListener('input', () => {
-  try {
-    // Remove caracteres inválidos, permitindo apenas números e um único ponto decimal
-    let value = inputMarkupEstoque.value;
+ 
+if (inputMarkupEstoque) {
+  inputMarkupEstoque.addEventListener('input', () => {
+    try {
+      // Remove caracteres inválidos, permitindo apenas números e um único ponto decimal
+      let value = inputMarkupEstoque.value;
 
-    // Substitui caracteres que não sejam números ou pontos
-    value = value.replace(/[^0-9.]/g, '');
+      // Substitui caracteres que não sejam números ou pontos
+      value = value.replace(/[^0-9.]/g, '');
 
-    // Garante que apenas o primeiro ponto seja mantido
-    const parts = value.split('.');
-    if (parts.length > 2) {
-      value = parts[0] + '.' + parts.slice(1).join(''); // Remove pontos adicionais
+      // Garante que apenas o primeiro ponto seja mantido
+      const parts = value.split('.');
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join(''); // Remove pontos adicionais
+      }
+
+      // Limita a duas casas decimais
+      if (value.indexOf('.') !== -1) {
+        value = value.slice(0, value.indexOf('.') + 3); // mantém duas casas após o ponto
+      }
+
+      // Atualiza o campo de entrada com o valor limpo e com no máximo 2 casas decimais
+      inputMarkupEstoque.value = value;
+
+      // Chama a função de cálculo com os valores
+      calcularPrecoVenda(
+        parseFloat(inputPrecoCompra.value.replace(',', '.')) || 0,
+        parseFloat(value) || 0,
+        inputprecoVenda
+      );
+    } catch (error) {
+      console.error(error.message);
     }
+  });
+} else {
+  console.log('Elemento inputMarkupEstoque não encontrado no DOM');
+}
 
-    // Limita a duas casas decimais
-    if (value.indexOf('.') !== -1) {
-      value = value.slice(0, value.indexOf('.') + 3); // mantém duas casas após o ponto
-    }
-
-    // Atualiza o campo de entrada com o valor limpo e com no máximo 2 casas decimais
-    inputMarkupEstoque.value = value;
-
-    // Chama a função de cálculo com os valores
-    calcularPrecoVenda(parseFloat(inputPrecoCompra.value.replace(',', '.')) || 0, parseFloat(value) || 0, inputprecoVenda);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
 
 // Evento para calcular o markup quando o preço de venda é alterado
 inputprecoVenda.addEventListener('input', (e) => {

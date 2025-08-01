@@ -2,14 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css-global/global.css">
-    <link rel="stylesheet" href="../style/css-global/inputs.css">
-    <link rel="stylesheet" href="../style/css-global/table.css">
-    <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
-    <title></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <link rel="stylesheet" href="../style/css-global/global.css" />
+  <link rel="stylesheet" href="../style/css-global/inputs.css" />
+  <link rel="stylesheet" href="../style/css-global/table.css" />
+  <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
+  <title>Alterar informações do produto</title>
 </head>
+
 
 <body>
     <div id="loading-overlay" class="active">
@@ -38,7 +40,7 @@
                                     src="../style/img/info-estoque.png" alt="Atenção">Estoque e informações do
                                 produto</a></li>
                         <li><a href="./controle_estoque.html"><img class="img-informacao"
-                                    src="../style/img/estoque-pronto.png" alt="Atenção">Movimentação de estoque</a></li>
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Entradas e Saídas de Estoque</a></li>
                         <li><a href="./desabilitar_produto.html"><img class="img-informacao"
                                     src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
                         <li>
@@ -55,163 +57,197 @@
 
             <div class="formulario">
                 <div class="div-formulario">
-                    <div class="formulario-conteudo">
-                        <div class="formulario-img" style="width: 21%;">
-                            <p>Alterar Imagem do Produto</p>
-                            <div class="quadro-img">
-                                <img class="img-produto" src="../style/img/alterar-interno.png"
-                                    alt="Produto sem imagem."></div>
-                            <div style="width: 100%; display: flex;align-items: center;">
-                                <input type="file" id="produto-imagem" accept="image/*">
-                            </div>
-                        </div>
-                        <div class="formulario-inputs">
-                                  <!-- div responsavel por renderizar o grup e subgrupo e cores. -->
+                    <div class="formulario-conteudo"  style="gap: 0; border-right: none;">
+
+                        <div class="formulario-inputs" style="border-left:none; margin-left: 0;">
+                            <!-- div responsavel por renderizar o grup e subgrupo e cores. -->
                             <div class="container-register">
 
                             </div>
-                            <table class="table-1-produto">
-                                <tr>
-                                    <th style=" display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                        <img style="width: 22px;" src="../style/img/procurar-black.png" alt=""> Buscar
-                                        EAN
-                                    </th>
-                                    <th style="width: 60%;">
-                                        Nome / Descrição
-                                    </th>
-                                    <th style="width: 20%;">
-                                        Açoes
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="number" id="codigoDeBarras" class="codigoDeBarras"
-                                            autocomplete="off" placeholder="Digite para buscar">
-                                    </td>
-                                    <td>
-                                        <input type="text" id="nomeProduto" name="nome" autocomplete="off"
-                                            placeholder="Nenhum produto selecionado" readonly>
-                                    </td>
-                                    <td>
 
-                                        <button class="btn-buscar" style="width: 100%;"> <img style="width: 18px;"
-                                                src="../style/img/procurar.png" alt="">Buscar/nome</button>
+                            <div style="display: flex; width: 100%; margin-bottom: -.5%;">
+                                <div class="formulario-img" style="border:none;margin-left: 1%;">
+                                    <p>Alterar Imagem do Produto</p>
+                                    <div class="quadro-img">
+                                        <img class="img-produto" src="../style/img/alterar-interno.png"
+                                            alt="Produto sem imagem.">
+                                    </div>
+                                    <div style="width: 100%; display: flex;align-items: center;">
+                                        <input type="file" id="produto-imagem" accept="image/*">
+                                    </div>
+                                </div>
+                                <div style="width: 100%; margin-left: 1%;">
 
 
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="table-2-produto">
+                                    <table  style="margin-bottom: 1%; margin-top: .5%;">
+                                        <tr>
+                                            <th
+                                                style=" display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                                <img style="width: 22px;" src="../style/img/procurar-black.png" alt="">
+                                                Buscar
+                                                EAN
+                                            </th>
+                                            <th style="width: 60%;">
+                                                Nome / Descrição
+                                            </th>
+                                            <th style="width: 20%;">
+                                                Açoes
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="number" id="codigoDeBarras" class="codigoDeBarras"
+                                                    autocomplete="off" placeholder="Digite para buscar">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="nomeProduto" name="nome" autocomplete="off"
+                                                    placeholder="Nenhum produto selecionado" readonly>
+                                            </td>
+                                            <td>
+
+                                                <button class="btn-buscar" style="width: 100%;"> <img
+                                                        style="width: 18px;" src="../style/img/procurar.png"
+                                                        alt="">Buscar/nome</button>
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="margin-bottom: 1.5%;">
+                                        <tr>
+                                            <th class="col-grupo btn-border-transparent">Grupo</th>
+                                            <th class="btn-border-transparent">+ Grupo</th>
+                                            <th class="col-subgrupo btn-border-transparent border-left">Subgrupo</th>
+                                            <th class="btn-border-transparent border-right">+ Subgrupo</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="btn-border-transparent col-grupo">
+                                                <select id="grupo" name="grupo">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </td>
+                                            <td>
+
+                                                <button id="add-grupo" class="add-grupo"
+                                                    style="display: flex; align-items: center; gap: 8px;">
+                                                    <img src="../style/img/mais.png" alt="" style="width: 20px;">
+                                                    <span>Adicionar</span>
+                                                </button>
+
+                                            </td>
+                                            <td>
+                                                <select id="sub-grupo" name="grupo">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button id="add-subGrupo" class="add-subGrupo"
+                                                    style="display: flex; align-items: center; gap: 8px;">
+                                                    <img src="../style/img/mais.png" alt="Adicionar"
+                                                        style="width: 20px;">
+                                                    <span>Adicionar</span>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <table >
+                                        <tr>
+                                            <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
+                                            <th class="btn-border-transparent th-15">+ Cor</th>
+                                            <th>Caracteristica do Produto</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="btn-border-transparent border-left">
+                                                <select id="corProduto" name="corProduto">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </td>
+                                            <td class="btn-border-transparent">
+                                                <button id="add-cor" class="add-cor"
+                                                    style="display: flex; align-items: center; gap: 8px;">
+                                                    <img src="../style/img/mais.png" alt="Adicionar"
+                                                        style="width: 20px;">
+                                                    <span>Adicionar</span>
+                                                </button>
+                                            </td>
+
+                                            <td>
+                                                <div class="caracteristica-container">
+                                                    <select id="escolhaUM">
+                                                        <option value="">Selecione</option>
+                                                        <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                                        <option value="Tamanho - Numeração">Tamanho - Numeração</option>
+                                                        <option value="Medida de Volume">Medida de Volume</option>
+                                                        <option value="Unidade Comprimento">Unidade Comprimento</option>
+                                                        <option value="Unidade de Massa">Unidade de Massa</option>
+                                                    </select>
+
+                                                    <div id="volumeDiv" class="input-select-wrapper">
+                                                        <span class="span-dois-pontos"><strong>:</strong></span>
+                                                        <input id="volumeNumero" type="number">
+                                                        <select id="medidaVolume" name="medidaVolume">
+                                                        </select>
+                                                    </div>
+
+                                                    <div id="comprimentoDiv" class="input-select-wrapper">
+                                                        <span class="span-dois-pontos"><strong>:</strong></span>
+                                                        <input id="comprimento" type="number">
+                                                        <select id="unidadeComprimento" name="unidadeComprimento">
+                                                        </select>
+                                                    </div>
+
+                                                    <div id="massaDiv" class="input-select-wrapper">
+                                                        <span class="span-dois-pontos"><strong>:</strong></span>
+                                                        <input id="massaNumero" type="number">
+                                                        <select id="unidadeDeMassa" name="unidadeMassa">
+                                                        </select>
+                                                    </div>
+
+                                                    <div id="divTamanho">
+                                                        <span class="span-dois-pontos"><strong>:</strong></span>
+                                                        <select id="tamanhoLetras" name="tamanhoLetras">
+                                                        </select>
+                                                    </div>
+
+                                                    <div id="divTamanhoNUm">
+                                                        <span class="span-dois-pontos"><strong>:</strong></span>
+                                                        <select id="tamanhoNumeros" name="tamanho">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            
+                            <table>
                                 <tr>
-                                    <th class="col-grupo btn-border-transparent">Grupo</th>
-                                    <th class="btn-border-transparent">+ Grupo</th>
-                                    <th class="col-subgrupo btn-border-transparent border-left">Subgrupo</th>
-                                    <th class="btn-border-transparent border-right">+ Subgrupo</th>
+                                    <th style="width: 30%;">
+                                        Marca
+                                    </th>
+                                    <th>
+                                        + Marcas
+                                    </th>
+                                    <th  >Preço de Compra</th>
+                                    <th >Lucro Bruto (R$)</th>
+                                    <th  >Preço de Venda</th>
                                 </tr>
                                 <tr>
-                                    <td class="btn-border-transparent col-grupo">
-                                        <select id="grupo" name="grupo">
-                                            <option value="">Selecione</option>
+                                          <td    style="background-color: red !important;">
+                                        <select name="" id="">
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
-                                    <td>
-
-                                        <button id="add-grupo" class="add-grupo"
-                                            style="display: flex; align-items: center; gap: 8px;">
-                                            <img src="../style/img/mais.png" alt="" style="width: 20px;">
-                                            <span>Adicionar</span>
-                                        </button>
-
-                                    </td>
-                                    <td>
-                                        <select id="sub-grupo" name="grupo">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <button id="add-subGrupo" class="add-subGrupo"
-                                            style="display: flex; align-items: center; gap: 8px;">
-                                            <img src="../style/img/mais.png" alt="Adicionar" style="width: 20px;">
+                                    <td class="btn-border-transparent border-right"
+                                        style="background-color: red !important;">
+                                        <button id="" class="" style="display: flex; align-items: center; gap: 8px;">
+                                            <img src="../style/img/mais.png" alt="Adicionar" style="width: 18px;">
                                             <span>Adicionar</span>
                                         </button>
                                     </td>
-
-                                </tr>
-                            </table>
-                            <table class="table-3-produto">
-                                <tr>
-                                    <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
-                                    <th class="btn-border-transparent th-15">+ Cor</th>
-                                    <th>Caracteristica do Produto</th>
-                                </tr>
-                                <tr>
-                                    <td class="btn-border-transparent border-left">
-                                        <select id="corProduto" name="corProduto">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </td>
-                                    <td class="btn-border-transparent">
-                                        <button id="add-cor" class="add-cor"
-                                            style="display: flex; align-items: center; gap: 8px;">
-                                            <img src="../style/img/mais.png" alt="Adicionar" style="width: 20px;">
-                                            <span>Adicionar</span>
-                                        </button>
-                                    </td>
-
-                                    <td>
-                                        <div class="caracteristica-container">
-                                            <select id="escolhaUM">
-                                                <option value="">Selecione</option>
-                                                <option value="Tamanho - P/GG">Tamanho - P/GG</option>
-                                                <option value="Tamanho - Numeração">Tamanho - Numeração</option>
-                                                <option value="Medida de Volume">Medida de Volume</option>
-                                                <option value="Unidade Comprimento">Unidade Comprimento</option>
-                                                <option value="Unidade de Massa">Unidade de Massa</option>
-                                            </select>
-
-                                            <div id="volumeDiv" class="input-select-wrapper">
-                                                <span class="span-dois-pontos"><strong>:</strong></span>
-                                                <input id="volumeNumero" type="number">
-                                                <select id="medidaVolume" name="medidaVolume">
-                                                </select>
-                                            </div>
-
-                                            <div id="comprimentoDiv" class="input-select-wrapper">
-                                                <span class="span-dois-pontos"><strong>:</strong></span>
-                                                <input id="comprimento" type="number">
-                                                <select id="unidadeComprimento" name="unidadeComprimento">  
-                                                </select>
-                                            </div>
-
-                                            <div id="massaDiv" class="input-select-wrapper">
-                                                <span class="span-dois-pontos"><strong>:</strong></span>
-                                                <input id="massaNumero" type="number">
-                                                <select id="unidadeDeMassa" name="unidadeMassa">
-                                                </select>
-                                            </div>
-
-                                            <div id="divTamanho">
-                                                <span class="span-dois-pontos"><strong>:</strong></span>
-                                                <select id="tamanhoLetras" name="tamanhoLetras">
-                                                </select>
-                                            </div>
-
-                                            <div id="divTamanhoNUm">
-                                                <span class="span-dois-pontos"><strong>:</strong></span>
-                                                <select id="tamanhoNumeros" name="tamanho">
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="table-4-produto">
-                                <tr>
-                                    <th class="th-30">Preço de Compra</th>
-                                    <th class="th-30">Lucro Bruto (R$)</th>
-                                    <th class="th-30">Preço de Venda</th>
-                                </tr>
-                                <tr>
                                     <td>
                                         <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
                                             autocomplete="off">
@@ -324,7 +360,7 @@
 
                                         </tr>
                                         <tr>
-                                            <td> 
+                                            <td>
                                                 <input id="fornecedorEncontrado" type="text" readonly
                                                     placeholder="Fornecedor não selecionado">
                                             </td>
@@ -375,24 +411,21 @@
 
 
 
-
-
-
-
-
-
-
-                            <table class="table-5-produto">
+                            <table >
                                 <tr>
-                                    <th style="width: 70%;">
+                                     <th style="width: 50%;">
                                         Fornecedor - Razão Social
                                     </th>
-                                    <th>
-                                        Ações
+                                    <th style="width: 20%;">
+                                      Buscar Fornecedor
                                     </th>
-                                    <!-- <th style="width: 30%;">
-                                Filtrar por CNPJ
-                            </th> -->
+
+                                    <th>
+                                        Estoque mínimo
+                                    </th>
+                                    <th>
+                                        Estoque máximo
+                                    </th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -401,23 +434,25 @@
                                         <input type="hidden" id="fornecedorID">
                                     </td>
                                     <td>
-
-
-                                        <button id="buscar-fornecedor"
-                                            style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                        <button id="buscar-fornecedor">
                                             <img style="width: 18px;" src="../style/img/procurar.png">
                                             Buscar Fornecedor
                                         </button>
-
-
+                                    </td>
+                                         <td style="background-color: red !important;">
+                                        <input type="text" placeholder="0">
+                                    </td>
+                                    <td    style="background-color: red !important;">
+                                        <input type="text" placeholder="0">
                                     </td>
                                 </tr>
                             </table>
-                            <table class="table-5-produto">
-                                <tr>
-                                    <th class="th-50">Estoque Inicial</th>
-                                    <th>Ações</th>
-                                </tr>
+                            <table style="margin-top:-.5% !important;">
+                                        <tr>
+                                        <th style="width: 30%;">Estoque Inicial</th>
+                                        <th style="width: 30%;">Ações</th>
+                                         <th style="width: 45%;"></th>
+                                    </tr>
                                 <tr>
                                     <td>
                                         <div class="input-select-wrapper">

@@ -178,7 +178,7 @@ if ((entradaCrediario.value !== '' && entradaCrediario.value !== '0') && !tipoPa
         dataPrimeiroVencimento: vencimentosCrediario.value,
         tipoPagamento: tipoPagamento.value  === '' ? 'Sem entrada' : tipoPagamento.value,
         condicao: condicaoCrediario.value,
-        entrada: parseFloat(entradaCrediario.value.replace(',', '.')) || 0,
+        entrada: parseFloat(entradaCrediario.value.replace(',', '.')),
     };
 
     

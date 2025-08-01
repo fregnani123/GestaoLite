@@ -198,6 +198,8 @@ getSubGrupo(selectSubGrupo);
 fetchAllProdutos(ulFiltros);
 
 const filterButtonInfor = document.getElementById('limparButton-info');
-filterButtonInfor.addEventListener('click', () => {
+if (filterButtonInfor) {
+  filterButtonInfor.addEventListener('click', () => {
     location.reload();
-})
+  });
+}

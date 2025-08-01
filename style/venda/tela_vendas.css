@@ -323,7 +323,6 @@ input[readonly] {
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
 
-
 .divNomes {
     position: absolute;
     padding-top: 2% !important;
@@ -340,6 +339,7 @@ input[readonly] {
     border-radius: 0.5rem;
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
+
 .divNomes-2 {
     display: none;
     position: absolute;

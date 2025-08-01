@@ -205,20 +205,6 @@ function applyFilters() {
     }
 }
 
-ulFiltros.addEventListener('click', (event) => {
-    const produtoDesativar = {
-        codigo_ean: produtoSelecionado.codigo_ean,
-        quantidade_estoque: 0,
-        produto_ativado: 0
-    };
-
-    if (event.target && event.target.id === 'btnDesativar') {
-        desativarProduto(produtoDesativar)
-        alertMsg('Produto desativado no sistema.', 'sucess');
-        ulFiltros.innerHTML = '';
-        codigoEAN.focus();
-    }
-});
 
 // Função para limpar os inputs
 function clearInputs() {

@@ -4,15 +4,14 @@ const parcela = document.getElementById('Crediario-parcela');
 const parcelaValor = document.getElementById('Crediario-valor');
 const nomeClienteShow = document.getElementById('nomeCliente');
 const inputTaxaJuros = document.getElementById('taxa-juros'); // Pegando a taxa de juros
-const vencimentosCrediario = document.getElementById('vencimentos');
+const condicaoSelect = document.getElementById("condicao-vencimento");
+const tipoPagamentoSelect = document.getElementById("tipo-pagamento");
+const parcelaSelect = document.getElementById("Crediario-parcela");
+const vencimentosCrediario = document.getElementById("vencimentos");
 let jurosParcelaAcima = ''
 
 document.addEventListener("DOMContentLoaded", function () {
-    const condicaoSelect = document.getElementById("condicao-vencimento");
-    const tipoPagamentoSelect = document.getElementById("tipo-pagamento");
-    const valorEntradaInput = document.getElementById("valorEntrada");
-    const parcelaSelect = document.getElementById("Crediario-parcela");
-    const vencimentosCrediario = document.getElementById("vencimentos");
+
 
     function formatDateToYMD(date) {
         const year = date.getFullYear();
@@ -47,13 +46,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tipoPagamentoSelect.disabled = !temEntrada;
 
-        if (temEntrada && tipoPagamentoSelect.value !== "") {
-            valorEntradaInput.disabled = false;
-            valorEntradaInput.readOnly = false;
+        if (temEntrada) {
+            tipoPagamentoSelect.disabled = false;
+
+            // Se a opção ainda for "Sem Entrada", forçar seleção para "Dinheiro"
+            if (tipoPagamentoSelect.value === "Sem Entrada" || tipoPagamentoSelect.value === "") {
+                tipoPagamentoSelect.value = "Dinheiro"; // ou qualquer padrão desejado
+            }
+
+            entradaCrediario.disabled = false;
+            entradaCrediario.readOnly = false;
+
+            if (!entradaCrediario.value || entradaCrediario.value === "0" || entradaCrediario.value === "0.00") {
+                entradaCrediario.value = "0,00";
+            }
+
         } else {
-            valorEntradaInput.disabled = true;
-            valorEntradaInput.readOnly = true;
-            valorEntradaInput.value = "0,00";
+            tipoPagamentoSelect.value = "Sem Entrada"; // Zera o select se não tiver entrada
+            tipoPagamentoSelect.entradaCrediario
+            entradaCrediario.disabled = true;
+            entradaCrediario.readOnly = true;
+            entradaCrediario.value = "0,00";
         }
 
         if (!condicao) {
@@ -68,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         parcelaSelect.disabled = false;
         atualizarOpcoesParcelas(temEntrada);
-        calcularDataVencimento(); // Atualiza a data com base na condição
+        calcularDataVencimento();
     }
 
     function atualizarOpcoesParcelas(temEntrada) {
@@ -235,11 +248,12 @@ function parseCurrency(value) {
 let totalComJuros; // Declara a variável globalmente
 let totalLiquidoOriginal = parseCurrency(inputTotalLiquido.value); // Armazena o valor original antes da alteração
 
-
 function atualizarParcelas() {
     const numeroParcelas = Number(parcela.value.trim()); // Quantidade total de parcelas (incluindo entrada, se for o caso)
     const totalLiquido = parseCurrency(inputTotalLiquido.value); // Total da venda
-    entradaCrediario.value = ''
+
+    const condicao = document.getElementById("condicao-vencimento").value;
+    const temEntrada = condicao.startsWith("entrada+");
 
     const entradaRaw = entradaCrediario.value.replace(/\./g, '').replace(',', '.');
     const entrada = parseFloat(entradaRaw) || 0;
@@ -255,12 +269,12 @@ function atualizarParcelas() {
     }
 
     // 👉 Ajuste importante: número de parcelas REAIS (sem entrada)
-    const parcelasReal = entrada > '' ? numeroParcelas - 1 : numeroParcelas;
+    const parcelasReal = temEntrada ? numeroParcelas - 1 : numeroParcelas;
 
     if (!isNaN(parcelasReal) && parcelasReal > 0 && !isNaN(totalLiquido) && !isNaN(taxaJuros)) {
         totalLiquidoOriginal = totalLiquido;
 
-        const saldoDevedor = totalLiquido - entrada;
+        const saldoDevedor = totalLiquido - (temEntrada ? entrada : 0);
 
         if (saldoDevedor <= 0) {
             alertMsg("Valor da entrada não pode ser maior ou igual ao total da compra.", 'info', 4000);
@@ -289,11 +303,11 @@ function atualizarParcelas() {
         }
 
         parcelaValor.value = valorParcela.toFixed(2);
-        totalComJuros = (valorParcela * parcelasReal) + entrada;
+        totalComJuros = (valorParcela * parcelasReal) + (temEntrada ? entrada : 0);
         Crediario.value = converteMoeda(totalComJuros);
 
-        // Só define entrada se for parcelado com entrada (mais de 1 parcela)
-        entradaCrediario.value = numeroParcelas > 1 ? valorParcela.toFixed(2) : '';
+        //  Só define entrada automaticamente se for parcelado COM entrada
+        entradaCrediario.value = (temEntrada && numeroParcelas > 1) ? valorParcela.toFixed(2) : '';
 
     } else {
         parcelaValor.value = "";
@@ -301,6 +315,7 @@ function atualizarParcelas() {
         Crediario.value = "";
     }
 }
+
 
 parcela.addEventListener('change', atualizarParcelas);
 

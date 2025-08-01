@@ -81,9 +81,9 @@
     width: 30%;
 }
 
-.col-fantasia {
+/* .col-fantasia {
     width: 70%;
-}
+} */
 
 /* Estilo para o select */
 .select-fornecedor {
@@ -195,10 +195,7 @@
     border-right: none !important;
 }
 
-.border-none-left {
-    border-left: none !important;
-}
-
+ 
 .btn-border-transparent {
     border: none;
     background-color: transparent;

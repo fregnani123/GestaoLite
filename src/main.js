@@ -73,7 +73,7 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
     mainWindow.maximize();
     // Abre as ferramentas de desenvolvedor (opcional)
-    //  mainWindow.webContents.openDevTools();
+     mainWindow.webContents.openDevTools();
 }
 
 // Evento quando a aplicação estiver pronta
