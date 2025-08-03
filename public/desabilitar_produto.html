@@ -16,20 +16,19 @@
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
     <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css">
-
+    <script src="../Renderer/transicao.js" defer></script>
     <title>Cadastro de Produto</title>
 </head>
 
 <body>
-    <!-- <div id="loading-overlay" class="active">
+    <div id="loading-overlay" class="active">
         <div class="spinner"></div>
         <p>Carregando...</p>
-    </div> -->
+    </div>
     <div class="container">
         <header>
             <nav class="menu-suspenso barra-header">
                 <ul id="ul-Menu">
-
                 </ul>
             </nav>
         </header>
@@ -80,7 +79,9 @@
                                         <img class="img-produto" src="../style/img/excluir.png"
                                             alt="Produto sem imagem.">
                                     </div>
-
+                                    <!-- <div class="input-file-wrapper">
+                                        <input type="file" id="produto-imagem" accept="image/*">
+                                    </div> -->
                                 </div>
                                 <div style="width: 100%; margin-left: 1%;">
 
@@ -89,7 +90,8 @@
                                         <tr>
                                             <th style="width: 20%;">
                                                 <div style="display: flex; align-items: center;">
-                                                    <img style="width: 22px;margin-right: 1%;" src="../style/img/procurar-black.png">
+                                                    <img style="width: 22px;margin-right: 1%;"
+                                                        src="../style/img/procurar-black.png">
                                                     Buscar código Barras
                                                 </div>
 
@@ -114,9 +116,9 @@
                                     <table style="margin-bottom: 1.5%;">
                                         <tr>
                                             <th class="col-grupo btn-border-transparent">Grupo</th>
-                                        
+
                                             <th class="col-subgrupo btn-border-transparent border-left">Subgrupo</th>
-                                  
+
                                         </tr>
                                         <tr>
                                             <td class="btn-border-transparent col-grupo">
@@ -124,13 +126,13 @@
                                                     <option value="">Selecione</option>
                                                 </select>
                                             </td>
-                            
+
                                             <td>
                                                 <select id="sub-grupo" name="grupo">
                                                     <option value="">Selecione</option>
                                                 </select>
                                             </td>
-                            
+
 
                                         </tr>
                                     </table>
@@ -145,7 +147,7 @@
                                                     <option value="">Selecione</option>
                                                 </select>
                                             </td>
-                                
+
 
                                             <td>
                                                 <div class="caracteristica-container">
@@ -160,21 +162,21 @@
 
                                                     <div id="volumeDiv" class="input-select-wrapper">
                                                         <span class="span-dois-pontos"><strong>:</strong></span>
-                                                        <input id="volumeNumero" type="number">
+                                                        <input id="volumeNumero" type="number" placeholder="0" style="text-align: center;">
                                                         <select id="medidaVolume" name="medidaVolume">
                                                         </select>
                                                     </div>
 
                                                     <div id="comprimentoDiv" class="input-select-wrapper">
                                                         <span class="span-dois-pontos"><strong>:</strong></span>
-                                                        <input id="comprimento" type="number">
+                                                        <input id="comprimento" type="number" placeholder="0" style="text-align: center;">
                                                         <select id="unidadeComprimento" name="unidadeComprimento">
                                                         </select>
                                                     </div>
 
                                                     <div id="massaDiv" class="input-select-wrapper">
                                                         <span class="span-dois-pontos"><strong>:</strong></span>
-                                                        <input id="massaNumero" type="number">
+                                                        <input id="massaNumero" type="number" placeholder="0" placeholder="0" style="text-align: center;">
                                                         <select id="unidadeDeMassa" name="unidadeMassa">
                                                         </select>
                                                     </div>
@@ -203,18 +205,17 @@
                                     <th style="width: 30%;">
                                         Marca
                                     </th>
-                              
+
                                     <th>Preço de Compra</th>
                                     <th>Lucro Bruto (R$)</th>
                                     <th>Preço de Venda</th>
                                 </tr>
+
                                 <tr>
                                     <td style="background-color: red !important;">
-                                        <select name="" id="">
-                                            <option value="">-- Selecione --</option>
-                                        </select>
+                                       <input type="text" id="marca_nome" name="" id="">
                                     </td>
-                             
+
                                     <td>
                                         <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
                                             autocomplete="off">
@@ -243,7 +244,7 @@
 
 
                             <div id="divFornecedor">
-                                <!-- Div para pesquisar e buscar o nome do fornecedor a ser adicionado no cadastro do produto -->
+                                <!-- Div para pesquisar e buscar o nome ''''    do fornecedor a ser adicionado no cadastro do produto -->
 
                                 <div id="divContainerFornecedor">
                                     <div id="divBuscarPorNome">
@@ -383,9 +384,7 @@
                                     <th style="width: 50%;">
                                         Fornecedor - Razão Social
                                     </th>
-                                    <th style="width: 20%;">
-                                        Buscar Fornecedor
-                                    </th>
+                               
 
                                     <th>
                                         Estoque mínimo
@@ -400,7 +399,7 @@
                                             placeholder="Nenhum fornecedor — clique em buscar para selecionar" readonly>
                                         <input type="hidden" id="fornecedorID">
                                     </td>
-                                 
+
                                     <td style="background-color: red !important;">
                                         <input type="text" placeholder="0">
                                     </td>
@@ -418,7 +417,7 @@
                                 <tr>
                                     <td>
                                         <div class="input-select-wrapper">
-                                            <input type="number" id="estoqueQtd" name="estoqueQtd" autocomplete="off">
+                                            <input type="number" id="estoqueQtd" name="estoqueQtd" placeholder="0" autocomplete="off" style="text-align: center;">
                                             <select id="unidadeEstoque" name="unidadeEstoque">
                                                 <option value="">Selecione</option>
                                             </select>

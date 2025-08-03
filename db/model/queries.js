@@ -26,6 +26,32 @@ async function garantirColunasCrediario(db) {
     }
 }
 
+async function garantirColunasProduto(db) {
+   const colunas = [
+    { nome: 'estoque_minimo', tipo: 'INTEGER DEFAULT 0' },
+    { nome: 'estoque_maximo', tipo: 'INTEGER DEFAULT 0' },
+    { nome: 'marca_nome', tipo: "TEXT DEFAULT 'Geral'" }, 
+];
+
+
+    try {
+        const colunasAtuais = db.prepare(`PRAGMA table_info(produto);`).all();
+        const nomesColunas = colunasAtuais.map(col => col.name);
+
+        for (const col of colunas) {
+            if (!nomesColunas.includes(col.nome)) {
+                db.prepare(`ALTER TABLE produto ADD COLUMN ${col.nome} ${col.tipo};`).run();
+                console.log(`✅ Coluna '${col.nome}' adicionada com sucesso à tabela produto.`);
+            } else {
+                console.log(`ℹ️ Coluna '${col.nome}' já existe na tabela produto.`);
+            }
+        }
+    } catch (err) {
+        console.error(`❌ Erro ao garantir colunas na tabela 'produto':`, err.message);
+    }
+}
+
+
 
 async function initializeDB(db) {
     try {
@@ -272,49 +298,64 @@ async function initializeDB(db) {
 
             // Criar Tabela produto
             `CREATE TABLE IF NOT EXISTS produto (
-                produto_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                codigo_ean TEXT,
-                grupo_id INTEGER,
-                sub_grupo_id INTEGER,
-                nome_produto TEXT,
-                tamanho_letras_id INTEGER,
-                tamanho_num_id INTEGER,
-                unidade_massa_id INTEGER,
-                medida_volume_id INTEGER,
-                unidade_comprimento_id INTEGER,
-                quantidade_estoque INTEGER,
-                quantidade_vendido INTEGER,
-                preco_compra REAL,
-                markup REAL,
-                preco_venda REAL,
-                unidade_estoque_id INTEGER,
-                unidade_massa_qtd INTEGER,
-                medida_volume_qtd INTEGER,
-                unidade_comprimento_qtd INTEGER,
-                fornecedor_id INTEGER,
-                caminho_img_produto TEXT,
-                cor_produto_id INTEGER,
-                observacoes TEXT,
-                produto_ativado INTEGER DEFAULT 1,
-                FOREIGN KEY (grupo_id) REFERENCES grupo(grupo_id),
-                FOREIGN KEY (sub_grupo_id) REFERENCES sub_grupo(sub_grupo_id),
-                FOREIGN KEY (tamanho_letras_id) REFERENCES tamanho_letras(tamanho_id),
-                FOREIGN KEY (tamanho_num_id) REFERENCES tamanho_numero(tamanho_id),
-                FOREIGN KEY (unidade_massa_id) REFERENCES unidade_massa(unidade_massa_id),
-                FOREIGN KEY (medida_volume_id) REFERENCES medida_volume(medida_volume_id),
-                FOREIGN KEY (unidade_comprimento_id) REFERENCES unidade_comprimento(unidade_comprimento_id),
-                FOREIGN KEY (unidade_estoque_id) REFERENCES unidade_estoque(unidade_estoque_id),
-                FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(fornecedor_id),
-                FOREIGN KEY (cor_produto_id) REFERENCES cor_produto(cor_produto_id)
-            );`
-        ];
+             produto_id INTEGER PRIMARY KEY AUTOINCREMENT,
+             codigo_ean TEXT,
+             grupo_id INTEGER,
+             sub_grupo_id INTEGER,
+             nome_produto TEXT,
+             tamanho_letras_id INTEGER,
+             tamanho_num_id INTEGER,
+             unidade_massa_id INTEGER,
+             medida_volume_id INTEGER,
+             unidade_comprimento_id INTEGER,
+             quantidade_estoque INTEGER,
+             quantidade_vendido INTEGER,
+             preco_compra REAL,
+             markup REAL,
+             preco_venda REAL,
+             unidade_estoque_id INTEGER,
+             unidade_massa_qtd INTEGER,
+             medida_volume_qtd INTEGER,
+             unidade_comprimento_qtd INTEGER,
+             fornecedor_id INTEGER,
+             caminho_img_produto TEXT,
+             cor_produto_id INTEGER,
+             observacoes TEXT,
+             produto_ativado INTEGER DEFAULT 1,
+             estoque_minimo INTEGER DEFAULT 0,
+             estoque_maximo INTEGER DEFAULT 0,
+             marca_nome TEXT DEFAULT 'Geral',
 
+             FOREIGN KEY (grupo_id) REFERENCES grupo(grupo_id),
+             FOREIGN KEY (sub_grupo_id) REFERENCES sub_grupo(sub_grupo_id),
+             FOREIGN KEY (tamanho_letras_id) REFERENCES tamanho_letras(tamanho_id),
+             FOREIGN KEY (tamanho_num_id) REFERENCES tamanho_numero(tamanho_id),
+             FOREIGN KEY (unidade_massa_id) REFERENCES unidade_massa(unidade_massa_id),
+             FOREIGN KEY (medida_volume_id) REFERENCES medida_volume(medida_volume_id),
+             FOREIGN KEY (unidade_comprimento_id) REFERENCES unidade_comprimento(unidade_comprimento_id),
+             FOREIGN KEY (unidade_estoque_id) REFERENCES unidade_estoque(unidade_estoque_id),
+             FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(fornecedor_id),
+             FOREIGN KEY (cor_produto_id) REFERENCES cor_produto(cor_produto_id)
+          
+             );
+    `,
+
+                   // Criar Tabela marca
+            `CREATE TABLE IF NOT EXISTS marca (
+             marca_id INTEGER PRIMARY KEY AUTOINCREMENT,
+             marca_nome TEXT DEFAULT 'Geral'
+               );
+                `,
+
+        ];
+          
 
         // Executar cada query para criar tabelas
         queries.forEach(query => {
             db.prepare(query).run();
         });
-            await garantirColunasCrediario(db);
+        await garantirColunasCrediario(db);
+        await garantirColunasProduto(db);
     } catch (err) {
         console.error('Erro ao conectar ao banco de dados SQLite:', err.message);
         throw err;

@@ -46,7 +46,9 @@ Router.get('/getSerial', controllersSerial.getSerial);
 Router.post('/postNewProduto', controllersProduto.postNewProductWithImage);
 Router.post('/newGrupo', controllersGruposProduto.postNewProductGrupo);
 Router.post('/newSubGrupo', controllersGruposProduto.postNewProductSubGrupo);
-2
+Router.post('/newMarca', controllersGruposProduto.postNewMarca);
+
+
 Router.post('/newFornecedor', controllersFornecedor.postNewFornecedor);
 Router.post('/postControleEstoque', controllersEstoque.postNewControleEstoque);
 Router.post('/postVenda', controllersVenda.postNewVenda);

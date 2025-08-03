@@ -1,12 +1,12 @@
 const path = require('path');
-const Database = require('better-sqlite3'); 
+const Database = require('better-sqlite3');
 const { app } = require('electron');
 
 const { ensureDBInitialized } = require(path.join(__dirname, './ensureDBInitialized'));
 
 // Obtém o caminho dinâmico para o diretório %APPDATA% e cria uma subpasta para o aplicativo
 const appDataPath = app.getPath('appData');
-const appDBPath = path.join(appDataPath, 'electronmysql','db'); // Subpasta do aplicativo
+const appDBPath = path.join(appDataPath, 'electronmysql', 'db'); // Subpasta do aplicativo
 
 // Caminho completo para o banco de dados
 const dbPath = path.join(appDBPath, 'gestaolite.db');
@@ -41,7 +41,7 @@ async function getAllProdutos() {
 
             WHERE p.produto_ativado = 1
         `).all();
-        
+
         return rows;
     } catch (error) {
         console.error('Erro ao conectar ao banco de dados SQLite ou executar a consulta:', error);
@@ -70,7 +70,7 @@ async function findProductByBarcode(barcode) {
             LEFT JOIN unidade_comprimento uc ON p.unidade_comprimento_id = uc.unidade_comprimento_id
             WHERE p.codigo_ean = ?
         `).all(barcode);
-        
+
         return rows;
     } catch (error) {
         console.error('Erro ao buscar produto:', error);
@@ -98,18 +98,37 @@ async function postNewProduct(produto) {
                 unidade_massa_qtd, unidade_massa_id, medida_volume_qtd, medida_volume_id,
                 unidade_comprimento_qtd, unidade_comprimento_id, cor_produto_id, quantidade_estoque,
                 quantidade_vendido, observacoes, preco_compra, markup, preco_venda, unidade_estoque_id,
-                fornecedor_id, caminho_img_produto
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+                fornecedor_id, caminho_img_produto,estoque_minimo,estoque_maximo, marca_nome
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)`;
 
         const result = db.prepare(insertQuery).run(
-            produto.codigo_ean, produto.nome_produto, produto.grupo_id || null, produto.sub_grupo_id || null,
-            produto.tamanho_letras_id || null, produto.tamanho_num_id || null, produto.unidade_massa_qtd || 0,
-            produto.unidade_massa_id || null, produto.medida_volume_qtd || 0, produto.medida_volume_id || null,
-            produto.unidade_comprimento_qtd || 0, produto.unidade_comprimento_id || null, produto.cor_produto_id || null,
-            produto.quantidade_estoque || 0, produto.quantidade_vendido || 0, produto.observacoes || '',
-            produto.preco_compra || 0, produto.markup || 0, produto.preco_venda || 0,
-            produto.unidade_estoque_id || null, produto.fornecedor_id || null, produto.caminho_img_produto || ''
+            produto.codigo_ean,
+            produto.nome_produto,
+            produto.grupo_id || null,
+            produto.sub_grupo_id || null,
+            produto.tamanho_letras_id || null,
+            produto.tamanho_num_id || null,
+            produto.unidade_massa_qtd || 0,
+            produto.unidade_massa_id || null,
+            produto.medida_volume_qtd || 0,
+            produto.medida_volume_id || null,
+            produto.unidade_comprimento_qtd || 0,
+            produto.unidade_comprimento_id || null,
+            produto.cor_produto_id || null,
+            produto.quantidade_estoque || 0,
+            produto.quantidade_vendido || 0,
+            produto.observacoes || '',
+            produto.preco_compra || 0,
+            produto.markup || 0,
+            produto.preco_venda || 0,
+            produto.unidade_estoque_id || null,
+            produto.fornecedor_id || null,
+            produto.caminho_img_produto || '',
+            produto.estoque_minimo || 0,    // ADICIONADO
+            produto.estoque_maximo || 0,    // ADICIONADO
+            produto.marca_nome || 'Geral'   // ADICIONADO
         );
+
 
         return { insertId: result.lastInsertRowid };
     } catch (error) {
@@ -123,33 +142,36 @@ async function UpdateProduto(produto) {
     await ensureDBInitialized();
     try {
         const query = `
-            UPDATE produto
-            SET 
-                grupo_id = ?,
-                sub_grupo_id = ?,
-                nome_produto = ?,
-                tamanho_letras_id = ?,
-                tamanho_num_id = ?,
-                unidade_massa_id = ?,
-                medida_volume_id = ?,
-                unidade_comprimento_id = ?,
-                quantidade_estoque = ?,
-                quantidade_vendido = ?,
-                preco_compra = ?,
-                markup = ?,
-                preco_venda = ?,
-                unidade_estoque_id = ?,
-                unidade_massa_qtd = ?,
-                medida_volume_qtd = ?,
-                unidade_comprimento_qtd = ?,
-                fornecedor_id = ?,
-                cor_produto_id = ?,
-                observacoes = ?,
-                caminho_img_produto = ?
-            WHERE codigo_ean = ?
-        `;
+    UPDATE produto
+    SET 
+        grupo_id = ?,
+        sub_grupo_id = ?,
+        nome_produto = ?,
+        tamanho_letras_id = ?,
+        tamanho_num_id = ?,
+        unidade_massa_id = ?,
+        medida_volume_id = ?,
+        unidade_comprimento_id = ?,
+        quantidade_estoque = ?,
+        quantidade_vendido = ?,
+        preco_compra = ?,
+        markup = ?,
+        preco_venda = ?,
+        unidade_estoque_id = ?,
+        unidade_massa_qtd = ?,
+        medida_volume_qtd = ?,
+        unidade_comprimento_qtd = ?,
+        fornecedor_id = ?,
+        cor_produto_id = ?,
+        observacoes = ?,
+        caminho_img_produto = ?,
+        estoque_minimo = ?,
+        estoque_maximo = ?,
+        marca_nome = ?
+    WHERE codigo_ean = ?
+`;
 
-        // Substituir valores vazios por NULL
+        // Substituir valores vazios por NULL ou padrão
         const parametros = [
             produto.grupo_id || null,
             produto.sub_grupo_id || null,
@@ -172,12 +194,16 @@ async function UpdateProduto(produto) {
             produto.cor_produto_id || null,
             produto.observacoes || null,
             (typeof produto.caminho_img_produto === 'string' && produto.caminho_img_produto) ? produto.caminho_img_produto : null,
+            produto.estoque_minimo || 0,
+            produto.estoque_maximo || 0,
+            produto.marca_nome || 'Geral',
             produto.codigo_ean || null
         ];
 
+
         // Adicionando logs para cada parâmetro
         console.log('Produto:', produto);
-        
+
         parametros.forEach((param, index) => {
             console.log(`Parâmetro ${index + 1}:`, param);
         });

@@ -16,6 +16,12 @@ const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 const selectCorProduto = document.querySelector('#corProduto');
 const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
 
+
+const inputEstoqueMim = document.getElementById('estoque_minimo');
+const inputEstoqueMax = document.getElementById('estoque_maximo');
+const inputMarca = document.getElementById('marca_nome');
+
+
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
 const btnNomeBuscar = document.querySelector('#btn-nome-buscar');
@@ -286,6 +292,10 @@ async function preencherInputs(produtoEncontrado) {
     inputSaveIdFornecedor.value = produtoEncontrado.fornecedor_id
     selectCorProduto.value = produtoEncontrado.cor_produto_id || '';
     inputObservacoes.value = produtoEncontrado.observacoes || '';
+    inputEstoqueMim.value = produtoEncontrado.estoque_minimo;
+    inputEstoqueMax.value = produtoEncontrado.estoque_maximo;
+    inputMarca.value = produtoEncontrado.marca_nome;
+
 
     calcularLucro()
     // Exibir o div correto ao carregar a página conforme o select
@@ -360,6 +370,9 @@ findProduto.addEventListener('input', (e) => {
         inputObservacoes.value = '';
         select.value = '';
         relativePath.src = "../style/img/alterar-interno.png";
+        inputEstoqueMim.value = '';
+        inputEstoqueMax.value = '';
+        inputMarca.value = '';
     }
 });
 
@@ -633,7 +646,10 @@ function alterarProduto(e) {
         caminho_img_produto: fileNameGlobal || imagePath || '',
         cor_produto_id: selectCorProduto.value || null,
         observacoes: inputObservacoes.value.trim() || '',
-        codigo_ean: inputCodigoEANProduto.value.trim()
+        codigo_ean: inputCodigoEANProduto.value.trim(),
+        estoque_minimo: inputEstoqueMim.value,
+        estoque_maximo: inputEstoqueMax.value,
+        marca_nome: inputMarca.value
     };
 
     try {

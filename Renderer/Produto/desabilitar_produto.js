@@ -1,25 +1,57 @@
 // Constantes de API
-const btnDesabilitar = document.getElementById('filtrarProdutos');
 const apiEndpoints = {
     getAllProdutos: 'http://localhost:3000/produtos',
     updateDesativarProduto: 'http://localhost:3000/UpdateDesativar',
+    getGrupo: 'http://localhost:3000/grupos',
+    getSubGrupo: 'http://localhost:3000/subGrupos',
+    getFornecedor: 'http://localhost:3000/fornecedor',
+    getTamanhoLetras: 'http://localhost:3000/tamanhoLetras',
+    getTamanhoNumeros: 'http://localhost:3000/tamanhoNumeros',
+    getunidadeDeMassa: 'http://localhost:3000/unidadeMassa',
+    getMedidaVolume: 'http://localhost:3000/medidaVolume',
+    getunidadeComprimento: 'http://localhost:3000/unidadeComprimento',
+    getunidadeEstoque: 'http://localhost:3000/unidadeEstoque',
+    getCorProduto: 'http://localhost:3000/corProduto',
+    postNewProduto: 'http://localhost:3000/postNewProduto',
+    postNewGrupoProduto: 'http://localhost:3000/newGrupo',
+    postNewSubGrupoProduto: 'http://localhost:3000/newSubGrupo',
+    postNewCorProduto: 'http://localhost:3000/postNewCor',
+    getVendaPorNumeroPedido: 'http://localhost:3000/getVendaPorNumeroPedido'
 };
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
     codigoEAN.focus();
 })
 
-// Seletores do DOM
-const selectGrupo = document.getElementById('grupo');
-const selectSubGrupo = document.getElementById('subgrupo');
-const ulFiltros = document.getElementById('ul-filtros'); // Lista para renderizar os produtos
+const btnDesabilitar = document.getElementById('filtrarProdutos');
 const codigoEAN = document.getElementById('codigoEAN');
-const produtoNome = document.getElementById('produtoNome');
-const btnFiltrar = document.getElementById('filtrarProdutos');
-const btnDesativar = document.getElementById('btnDesativar');
-const linkID_4 = document.querySelector('.list-a4')
+const nomeProduto = document.getElementById('nomeProduto');
+const grupo = document.getElementById('grupo');
+const subGrupo = document.getElementById('sub-grupo');
+const corProduto = document.getElementById('corProduto');
 
+const tamanhoLetras = document.getElementById('tamanhoLetras');
+const tamanhoNumeros =document.getElementById('tamanhoNumeros');
+const unidadeMassa =  document.getElementById('unidadeDeMassa');
+const medidaVolume = document.getElementById('medidaVolume');
+const unidadeComprimento = document.getElementById('unidadeComprimento');
+const unidadeEstoque = document.getElementById('unidadeEstoque');
+
+
+getGrupo(grupo);
+getSubGrupo(subGrupo);
+getTamanhoLetras(tamanhoLetras);
+getTamanhoNumeros(tamanhoNumeros);
+getunidadeComprimento(unidadeComprimento);
+getunidadeEstoque(unidadeEstoque);
+getMedidaVolume(medidaVolume);
+getCorProduto(corProduto);
+getunidadeDeMassa(unidadeMassa);
+
+
+const linkID_4 = document.querySelector('.list-a4');
 const btnAtivo = document.getElementById('btn-ativo');
+
 
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
@@ -35,12 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
+let allProducts = [];
+let produtoJaBuscado = false;
 
-let allProducts = []; // Variável para armazenar todos os produtos
-let filteredProduct = null; // Constante para armazenar apenas um produto filtrado
 formatarCodigoEANProdutos(codigoEAN);
 
-// Função para formatar valores como moeda brasileira
 function formatarMoedaBR(valor) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
 }
@@ -48,16 +79,37 @@ function formatarMoedaBR(valor) {
 codigoEAN.addEventListener('input', () => {
     const ean = codigoEAN.value.trim();
 
-    // Se tiver exatamente 13 dígitos, aplica o filtro
-    if (ean.length === 13) {
+    // Limpa nomeProduto se o EAN for menor que 13 caracteres
+    if (ean.length < 13) {
+        nomeProduto.value = '';
+        produtoJaBuscado = false; // Permite nova busca quando o usuário continuar digitando
+        return;
+    }
+
+    if (ean.length > 13) {
+        nomeProduto.value = ''; // Se quiser limpar também quando for maior que 13
+        produtoJaBuscado = false;
+        return;
+    }
+
+    // Se tiver exatamente 13 e ainda não buscou, faz a busca
+    if (ean.length === 13 && !produtoJaBuscado) {
         fetchAllProdutos(() => {
-            applyFilters(); // Aplica os filtros após carregar os produtos
-            codigoEAN.value = ''; // Limpa o campo após o filtro
+            const produtoEncontrado = allProducts.find(prod => String(prod.codigo_ean) === ean);
+
+            if (produtoEncontrado) {
+                nomeProduto.value = produtoEncontrado.nome_produto || '';
+                produtoJaBuscado = true;
+            } else {
+                alertMsg('Produto não encontrado. Verifique se está cadastrado.','info',4000);
+                console.log('Produto não encontrado. Verifique se está cadastrado.');
+                produtoJaBuscado = true;
+            };
         });
     }
 });
 
-// Ajuste em `fetchAllProdutos`
+
 function fetchAllProdutos(callback) {
     fetch(apiEndpoints.getAllProdutos, {
         method: 'GET',
@@ -66,13 +118,17 @@ function fetchAllProdutos(callback) {
             'Content-Type': 'application/json',
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            allProducts = data;
-            if (callback) callback(); // Chama a função de callback, se existir
-        })
-        .catch(error => console.error('Erro ao buscar produtos:', error));
+    .then(response => response.json())
+    .then(data => {
+        allProducts = data;
+        if (callback) callback();
+    })
+    .catch(() => {
+        alert('Erro ao buscar produtos. Tente novamente.');
+        produtoJaBuscado = true; // Bloqueia novas buscas mesmo com erro
+    });
 }
+
 
 
 async function desativarProduto(produto) {
@@ -96,79 +152,10 @@ async function desativarProduto(produto) {
     }
 };
 
-
 // Função para renderizar os produtos
-function renderProdutos(renderer, produtos) {
-    renderer.innerHTML = ''; // Limpa a lista antes de renderizar
-    const divBtns = document.getElementById('div-btns');
-    divBtns.innerHTML = ''; // <- Limpa os botões antigos
-    // Dados dos produtos
+function renderProdutos(produtos) {
+
     
-    let unidades = ['un', 'cx', 'rolo', 'pc'];
-
-    produtos.forEach(produto => {
-        const li = document.createElement('li');
-        li.classList.add('li-list');
-        const divBtns = document.getElementById('div-btns');
-
-        const spanCodigo = document.createElement('span');
-        spanCodigo.textContent = produto.codigo_ean || 'Sem código';
-
-        const spanNome = document.createElement('span');
-        let texto = produto.nome_produto;
-
-        if (produto.nome_cor_produto?.trim()) {
-            texto += ` ${produto.nome_cor_produto}`;
-        }
-
-        if (produto.tamanho_letras?.trim()) {
-            texto += ` ${produto.tamanho_letras}`;
-        }
-
-        if (produto.tamanho_numero?.trim()) {
-            texto += ` tam.${produto.tamanho_numero}`;
-        }
-
-        if (produto.medida_volume?.trim()) {
-            texto += ` ${produto.medida_volume_qtd}${produto.medida_volume}`;
-        }
-
-        if (produto.unidade_massa?.trim()) {
-            texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
-        }
-        if (produto.unidade_comprimento?.trim()) {
-            texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
-        }
-
-        spanNome.textContent = texto || 'Produto desconhecido';
-
-
-        const spanPrecoCompra = document.createElement('span');
-        spanPrecoCompra.textContent = `${formatarMoedaBR(parseFloat(produto.preco_compra || 0))}`;
-
-        const spanPrecoVenda = document.createElement('span');
-        spanPrecoVenda.textContent = `${formatarMoedaBR(parseFloat(produto.preco_venda || 0))}`;
-
-        const spanVendido = document.createElement('span');
-        spanVendido.textContent = produto.quantidade_vendido || 0;
-
-        const spanEstoqueAtual = document.createElement('span');
-        spanEstoqueAtual.textContent = `${produto.quantidade_estoque} ${unidades[produto.unidade_estoque_id - 1]}` || 0;
-        const btnDesativar = document.createElement('button');
-        btnDesativar.textContent = 'Desabilitar';
-        btnDesativar.id = 'btnDesativar'; // Adiciona um id ao botão
-
-
-        li.appendChild(spanCodigo);
-        li.appendChild(spanNome);
-        li.appendChild(spanPrecoCompra);
-        li.appendChild(spanPrecoVenda);
-        li.appendChild(spanVendido);
-        li.appendChild(spanEstoqueAtual);
-        divBtns.appendChild(btnDesativar);
-
-        renderer.appendChild(li);
-    });
 }
 
 // Variável global para armazenar o produto único selecionado
@@ -205,13 +192,9 @@ function applyFilters() {
     }
 }
 
-
 // Função para limpar os inputs
 function clearInputs() {
-    codigoEAN.value = '';
-    produtoNome.value = '';
-    selectGrupo.value = '';
-    selectSubGrupo.value = '';
+
 }
 
 const filterButtonLimpar = document.getElementById('filterButtonLimpar');
@@ -219,3 +202,319 @@ const filterButtonLimpar = document.getElementById('filterButtonLimpar');
 filterButtonLimpar.addEventListener('click', () => {
     location.reload();
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const select = document.getElementById("escolhaUM");
+
+  // Mapeamento dos valores do select para os IDs dos divs
+  const sections = {
+    "Tamanho - P/GG": "divTamanho",
+    "Tamanho - Numeração": "divTamanhoNUm",
+    "Medida de Volume": "volumeDiv",
+    "Unidade Comprimento": "comprimentoDiv",
+    "Unidade de Massa": "massaDiv"
+  };
+
+  // Evento para mudar a exibição
+  select.addEventListener("change", function () {
+    // Oculta todos os divs
+    Object.values(sections).forEach(id => {
+      document.getElementById(id).style.display = "none";
+    });
+
+    // Exibe o div correspondente, se um valor válido for selecionado
+    const selectedValue = select.value;
+    if (sections[selectedValue]) {
+      document.getElementById(sections[selectedValue]).style.display = "flex";
+    }
+  });
+});
+
+
+
+
+function getGrupo(renderer) {
+    const getGrupo = apiEndpoints.getGrupo;
+
+    fetch(getGrupo, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Ordenar os dados em ordem alfabética com base no nome do grupo
+            data.sort((a, b) => a.nome_grupo.localeCompare(b.nome_grupo));
+
+            // Adicionar as opções ao select
+            data.forEach(grupo => {
+                const option = document.createElement('option');
+                option.innerHTML = grupo.nome_grupo;
+                option.value = grupo.grupo_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+function getSubGrupo(renderer) {
+    const getSubGrupo = apiEndpoints.getSubGrupo;
+
+    fetch(getSubGrupo, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Ordenar os subgrupos em ordem alfabética com base no nome do subgrupo
+            data.sort((a, b) => a.nome_sub_grupo.localeCompare(b.nome_sub_grupo));
+
+            // Adicionar as opções ao select
+            data.forEach(subGrupo => {
+                const option = document.createElement('option');
+                option.innerHTML = subGrupo.nome_sub_grupo;
+                option.value = subGrupo.sub_grupo_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+
+
+
+
+function getCorProduto(renderer) {
+    const getCorProduto = apiEndpoints.getCorProduto;
+
+    fetch(getCorProduto, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Ordenar os dados em ordem alfabética com base no nome da cor
+            data.sort((a, b) => a.nome_cor_produto.localeCompare(b.nome_cor_produto));
+
+            // Adicionar as opções ao select
+            data.forEach(cor => {
+                const option = document.createElement('option');
+                option.innerHTML = cor.nome_cor_produto;
+                option.value = cor.cor_produto_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+
+function getTamanhoLetras(renderer) {
+    const getTamanho = apiEndpoints.getTamanhoLetras;
+
+    fetch(getTamanho, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((tamanho) => {
+                const option = document.createElement('option');
+                option.innerHTML = tamanho.tamanho;
+                option.value = tamanho.tamanho_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+
+function getunidadeDeMassa(renderer) {
+    const getunidadeDeMassa = apiEndpoints.getunidadeDeMassa;
+
+    fetch(getunidadeDeMassa, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((unMassa) => {
+                const option = document.createElement('option');
+                option.innerHTML = unMassa.unidade_nome;
+                option.value = unMassa.unidade_massa_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+}
+
+function getTamanhoNumeros(renderer) {
+    const getTamanho = apiEndpoints.getTamanhoNumeros;
+
+    fetch(getTamanho, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((tamanho) => {
+                const option = document.createElement('option');
+                option.innerHTML = tamanho.tamanho;
+                option.value = tamanho.tamanho_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+};
+
+
+function getunidadeComprimento(renderer) {
+    const getComprimento = apiEndpoints.getunidadeComprimento;
+
+    fetch(getComprimento, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((comprimento) => {
+                const option = document.createElement('option');
+                option.innerHTML = comprimento.unidade_nome;
+                option.value = comprimento.unidade_comprimento_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+};
+
+
+
+function getunidadeEstoque(renderer) {
+    const getEstoque = apiEndpoints.getunidadeEstoque;
+
+    fetch(getEstoque, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((unidadeEstoque) => {
+                const option = document.createElement('option');
+                option.innerHTML = unidadeEstoque.estoque_nome;
+                option.value = unidadeEstoque.unidade_estoque_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+};
+
+function getMedidaVolume(renderer) {
+    const getVolume = apiEndpoints.getMedidaVolume;
+
+    fetch(getVolume, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((medida) => {
+                const option = document.createElement('option');
+                option.innerHTML = medida.medida_nome;
+                option.value = medida.medida_volume_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+};

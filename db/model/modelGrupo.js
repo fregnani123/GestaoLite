@@ -81,9 +81,31 @@ async function postNewProductSubGrupo(newSubGrupo) {
     }
 }
 
+// Função para inserir uma nova marca, verificando se já existe
+async function postMarca(marca) {
+    await ensureDBInitialized();
+    try {
+        const checkQuery = 'SELECT marca_id FROM marca WHERE marca_nome = ?';
+        const existingMarca = db.prepare(checkQuery).get(marca.nome_marca);
+
+        if (existingMarca) {
+            throw new Error('Esta marca com o mesmo nome já existe.');
+        }
+
+        const insertQuery = 'INSERT INTO marca (marca_nome) VALUES (?)';
+        const result = db.prepare(insertQuery).run(marca.nome_marca);
+        return result.lastInsertRowid;
+    } catch (error) {
+        console.error('Erro ao inserir a marca:', error.message);
+        throw error;
+    }
+}
+
+
 module.exports = {
     postNewProductSubGrupo,
     postNewProductGrupo,
     getGrupo,
-    getSubGrupo
+    getSubGrupo,
+    postMarca
 };

@@ -62,6 +62,7 @@ function getGrupo(renderer) {
             console.error('Erro ao buscar dados:', error);
         });
 }
+
 function getSubGrupo(renderer) {
     const getSubGrupo = apiEndpoints.getSubGrupo;
 

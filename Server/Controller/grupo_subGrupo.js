@@ -3,7 +3,8 @@ const {
     postNewProductGrupo,
     postNewProductSubGrupo,
     getGrupo,
-    getSubGrupo
+    getSubGrupo,
+    postMarca
 } = require(path.join(__dirname, '../../db/model/modelGrupo'));
 
 
@@ -59,6 +60,23 @@ const controllersGruposProduto = {
             res.status(500).json({ error: 'Erro ao inserir novo sub-grupo.' });
         }
     },
+
+    
+    postNewMarca: async (req, res) => {
+        try {
+            const marca = req.body;
+            const marcaId  = await postMarca(marca);
+
+            res.json({
+                message: 'marca inserido com sucesso!',
+                marca_id: marcaId
+            });
+        } catch (error) {
+            console.error('Erro ao inserir nova marca:', error);
+            res.status(500).json({ error: 'Erro ao inserir nova marca.' });
+        }
+    },
+
 
 }
 

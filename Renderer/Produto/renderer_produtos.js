@@ -16,6 +16,11 @@ const selectUnidadeEstoque = document.querySelector('#unidadeEstoque');
 const selectCorProduto = document.querySelector('#corProduto');
 const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
 
+
+const inputEstoqueMim = document.getElementById('estoque_minimo');
+const inputEstoqueMax = document.getElementById('estoque_maximo');
+const inputMarca =  document.getElementById('marca_nome');
+
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
 const btnNomeBuscar = document.querySelector('#btn-nome-buscar');
@@ -400,50 +405,53 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
     relativePath = `${inputPathImg.getAttribute('data-relative-path')}.${extension}`;
   }
 
-const isVisible = (id) => {
-  const el = document.getElementById(id);
-  return el && window.getComputedStyle(el).display === 'flex';
-};
+  const isVisible = (id) => {
+    const el = document.getElementById(id);
+    return el && window.getComputedStyle(el).display === 'flex';
+  };
 
-// Verifica se nenhum bloco está visível
-if (
-  !isVisible("divTamanho") &&
-  !isVisible("divTamanhoNUm") &&
-  !isVisible("volumeDiv") &&
-  !isVisible("comprimentoDiv") &&
-  !isVisible("massaDiv")
-) {
-  alertMsg("Por favor, selecione uma característica do produto (tamanho, volume, massa ou comprimento).",'info',4000);
-  return;
-}
+  // Verifica se nenhum bloco está visível
+  if (
+    !isVisible("divTamanho") &&
+    !isVisible("divTamanhoNUm") &&
+    !isVisible("volumeDiv") &&
+    !isVisible("comprimentoDiv") &&
+    !isVisible("massaDiv")
+  ) {
+    alertMsg("Por favor, selecione uma característica do produto (tamanho, volume, massa ou comprimento).", 'info', 4000);
+    return;
+  }
 
-// Se passou na verificação, monta o objeto normalmente
-const produtoData = { 
-  codigo_ean: inputCodigoEANProduto.value,
-  grupo_id: selectGrupo.value,
-  sub_grupo_id: selectSubGrupo.value,
-  nome_produto: inputNomeProduto.value,
-  tamanho_letras_id: isVisible("divTamanho") ? selectTamanhoLetras.value : null,
-  tamanho_num_id: isVisible("divTamanhoNUm") ? selectTamanhoNumeros.value : null,
-  unidade_massa_id: isVisible("massaDiv") ? selectUnidadeMassa.value : null,
-  medida_volume_id: isVisible("volumeDiv") ? selectMedidaVolume.value : null,
-  unidade_comprimento_id: isVisible("comprimentoDiv") ? selectUnidadeComprimento.value : null,
-  quantidade_estoque: parseInt(inputQuantidadeEstoque.value, 10),
-  quantidade_vendido: parseInt(inputQuantidadeVendido.value, 10),
-  preco_compra: parseFloat(inputPrecoCompra.value.replace(',', '.')),
-  markup: parseFloat(inputMarkup.value.replace(',', '.')),
-  preco_venda: parseFloat(inputprecoVenda.value.replace(',', '.')),
-  unidade_estoque_id: selectUnidadeEstoque.value,
-  unidade_massa_qtd: isVisible("massaDiv") ? parseFloat(document.getElementById("massaNumero").value || 0) : null,
-  medida_volume_qtd: isVisible("volumeDiv") ? parseFloat(document.getElementById("volumeNumero").value || 0) : null,
-  unidade_comprimento_qtd: isVisible("comprimentoDiv") ? parseFloat(document.getElementById("comprimento").value || 0) : null,
-  fornecedor_id: inputSaveIdFornecedor.value || '1',
-  caminho_img_produto: relativePath,
-  cor_produto_id: selectCorProduto.value,
-  observacoes: inputObservacoes.value,
-};
+  // Se passou na verificação, monta o objeto normalmente
+  const produtoData = {
+    codigo_ean: inputCodigoEANProduto.value,
+    grupo_id: selectGrupo.value,
+    sub_grupo_id: selectSubGrupo.value,
+    nome_produto: inputNomeProduto.value,
+    tamanho_letras_id: isVisible("divTamanho") ? selectTamanhoLetras.value : null,
+    tamanho_num_id: isVisible("divTamanhoNUm") ? selectTamanhoNumeros.value : null,
+    unidade_massa_id: isVisible("massaDiv") ? selectUnidadeMassa.value : null,
+    medida_volume_id: isVisible("volumeDiv") ? selectMedidaVolume.value : null,
+    unidade_comprimento_id: isVisible("comprimentoDiv") ? selectUnidadeComprimento.value : null,
+    quantidade_estoque: parseInt(inputQuantidadeEstoque.value, 10),
+    quantidade_vendido: parseInt(inputQuantidadeVendido.value, 10),
+    preco_compra: parseFloat(inputPrecoCompra.value.replace(',', '.')),
+    markup: parseFloat(inputMarkup.value.replace(',', '.')),
+    preco_venda: parseFloat(inputprecoVenda.value.replace(',', '.')),
+    unidade_estoque_id: selectUnidadeEstoque.value,
+    unidade_massa_qtd: isVisible("massaDiv") ? parseFloat(document.getElementById("massaNumero").value || 0) : null,
+    medida_volume_qtd: isVisible("volumeDiv") ? parseFloat(document.getElementById("volumeNumero").value || 0) : null,
+    unidade_comprimento_qtd: isVisible("comprimentoDiv") ? parseFloat(document.getElementById("comprimento").value || 0) : null,
+    fornecedor_id: inputSaveIdFornecedor.value || '1',
+    caminho_img_produto: relativePath,
+    cor_produto_id: selectCorProduto.value,
+    observacoes: inputObservacoes.value,
+    estoque_minimo: inputEstoqueMim.value,
+    estoque_maximo: inputEstoqueMax.value,
+    marca_nome: inputMarca.value
+  };
 
-
+   
   // Verificar quais campos obrigatórios não foram preenchidos
   let camposFaltando = [];
 
