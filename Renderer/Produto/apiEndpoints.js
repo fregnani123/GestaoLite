@@ -13,6 +13,8 @@ const apiEndpoints = {
     postNewProduto: 'http://localhost:3000/postNewProduto',
     postNewGrupoProduto: 'http://localhost:3000/newGrupo',
     postNewSubGrupoProduto: 'http://localhost:3000/newSubGrupo',
+    postNewMarca: 'http://localhost:3000/newMarca',
+    getMarca: 'http://localhost:3000/getMarca',
     postNewCorProduto: 'http://localhost:3000/postNewCor',
     getVendaPorNumeroPedido: 'http://localhost:3000/getVendaPorNumeroPedido'
 };
@@ -54,6 +56,35 @@ function getGrupo(renderer) {
                 const option = document.createElement('option');
                 option.innerHTML = grupo.nome_grupo;
                 option.value = grupo.grupo_id;
+                renderer.appendChild(option);
+            });
+            // console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+};
+
+function getMarca(renderer) {
+    const getMarca = apiEndpoints.getMarca;
+
+    fetch(getMarca, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+             
+            data.sort((a, b) => a.marca_nome.localeCompare(b.marca_nome));
+ 
+            data.forEach(marca => {
+                const option = document.createElement('option');
+                option.innerHTML = marca.marca_nome;
+                option.value = marca.marca_nome;
                 renderer.appendChild(option);
             });
             // console.log(data);

@@ -19,7 +19,7 @@ const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
 
 const inputEstoqueMim = document.getElementById('estoque_minimo');
 const inputEstoqueMax = document.getElementById('estoque_maximo');
-const inputMarca = document.getElementById('marca_nome');
+const selectMarca = document.getElementById('marca_nome');
 
 
 // Seleciona todos os campos de input
@@ -40,6 +40,7 @@ const divBuscarPorNome = document.getElementById('divBuscarPorNome');
 // const btnFornecedorMenu = document.querySelector('.li-fornecedor');
 const containerRegister = document.querySelector('.container-register');
 const btnCadGrupo = document.querySelector('#add-grupo');
+const btnMarca = document.querySelector('#btnMarca');
 const btnCadSubGrupo = document.querySelector('#add-subGrupo');
 const btnCadCor = document.querySelector('#add-cor');
 const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
@@ -51,6 +52,7 @@ const inputMarkup = document.querySelector('#inputMarkup');
 const inputPrecoCompra = document.querySelector('#precoCusto');
 const inputprecoVenda = document.querySelector('#precoVenda');
 const inputLucro = document.querySelector('#lucro');
+
 btnCadGrupo.addEventListener('click', (e) => {
     e.preventDefault();
     containerRegister.style.display = 'flex';
@@ -69,6 +71,13 @@ btnCadCor.addEventListener('click', (e) => {
     renderizarInputsColor();
 });
 
+btnMarca.addEventListener('click', (e) => {
+    e.preventDefault();
+    containerRegister.style.display = 'flex';
+    selectMarca.innerHTML=''
+    renderizarMarca();
+});
+
 
 //Metodos criado por mim que renderizam os values iniciais padrões ou cadastrados no DB.
 getGrupo(selectGrupo);
@@ -80,6 +89,7 @@ getunidadeEstoque(selectUnidadeEstoque);
 getMedidaVolume(selectMedidaVolume);
 getCorProduto(selectCorProduto);
 getunidadeDeMassa(selectUnidadeMassa);
+getMarca(selectMarca);
 
 
 const divTamanho = document.getElementById("divTamanho");
@@ -294,7 +304,7 @@ async function preencherInputs(produtoEncontrado) {
     inputObservacoes.value = produtoEncontrado.observacoes || '';
     inputEstoqueMim.value = produtoEncontrado.estoque_minimo;
     inputEstoqueMax.value = produtoEncontrado.estoque_maximo;
-    inputMarca.value = produtoEncontrado.marca_nome;
+    selectMarca.value = produtoEncontrado.marca_nome;
 
 
     calcularLucro()
@@ -649,7 +659,7 @@ function alterarProduto(e) {
         codigo_ean: inputCodigoEANProduto.value.trim(),
         estoque_minimo: inputEstoqueMim.value,
         estoque_maximo: inputEstoqueMax.value,
-        marca_nome: inputMarca.value
+        marca_nome: selectMarca.value
     };
 
     try {

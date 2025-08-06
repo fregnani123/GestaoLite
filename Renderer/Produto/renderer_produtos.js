@@ -19,7 +19,8 @@ const btnConfirmarFornecedor = document.querySelector('#btn-alterar-confirmar');
 
 const inputEstoqueMim = document.getElementById('estoque_minimo');
 const inputEstoqueMax = document.getElementById('estoque_maximo');
-const inputMarca =  document.getElementById('marca_nome');
+const selectMarcaProduto = document.getElementById('marca_nome');
+const selectMarca = document.getElementById('marca_nome');
 
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
@@ -40,6 +41,7 @@ const containerRegister = document.querySelector('.container-register');
 const btnCadGrupo = document.querySelector('#add-grupo');
 const btnCadSubGrupo = document.querySelector('#add-subGrupo');
 const btnCadCor = document.querySelector('#add-cor');
+const btnMarca = document.querySelector('#btnMarca');
 const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
 const exitNome = document.getElementById('exit-nome-fornecedor');
 
@@ -173,6 +175,7 @@ getunidadeEstoque(selectUnidadeEstoque);
 getMedidaVolume(selectMedidaVolume);
 getCorProduto(selectCorProduto);
 getunidadeDeMassa(selectUnidadeMassa);
+getMarca(selectMarca);
 
 document.addEventListener("DOMContentLoaded", function () {
   const select = document.getElementById("escolhaUM");
@@ -334,6 +337,12 @@ btnCadCor.addEventListener('click', (e) => {
   renderizarInputsColor();
 });
 
+btnMarca.addEventListener('click', (e) => {
+  e.preventDefault();
+  containerRegister.style.display = 'flex';
+  renderizarMarca()
+});
+
 
 
 
@@ -448,10 +457,10 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
     observacoes: inputObservacoes.value,
     estoque_minimo: inputEstoqueMim.value,
     estoque_maximo: inputEstoqueMax.value,
-    marca_nome: inputMarca.value
+    marca_nome: selectMarcaProduto.value
   };
 
-   
+
   // Verificar quais campos obrigatórios não foram preenchidos
   let camposFaltando = [];
 
@@ -463,6 +472,7 @@ document.querySelector('#btn-cadastrar-produto').addEventListener('click', async
   if (!produtoData.preco_venda) camposFaltando.push("Preço de Venda");
   if (!produtoData.unidade_estoque_id) camposFaltando.push("Unidade de Estoque");
   if (!produtoData.quantidade_estoque) camposFaltando.push("Quantidade em Estoque");
+  if (!produtoData.marca_nome) camposFaltando.push("Marca");
 
   // Se algum campo obrigatório estiver faltando
   if (camposFaltando.length > 0) {

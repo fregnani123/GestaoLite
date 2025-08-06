@@ -5,7 +5,7 @@ const { app } = require('electron');
 const initializeDB = require('./queries'); 
 
 const {insertSubGrupo, insertGrupo, insertTamanhoLetras, insertTamanhoNumeros,
-    insertUnidadeMassa, insertUnidadeVolume, insertUnidadeComprimento, insertUnidadeEstoque, insertFornecedorPadrao, insertCorProduto, insertClienteDefault,insertTaxaDefault
+    insertUnidadeMassa, insertUnidadeVolume, insertUnidadeComprimento, insertUnidadeEstoque, insertFornecedorPadrao, insertCorProduto, insertClienteDefault,insertTaxaDefault,insertMarca
 } = require(path.join(__dirname, './initializeDB'));
 
 
@@ -73,7 +73,8 @@ async function ensureDBInitialized() {
                 { name: 'fornecedor', insertFunc: insertFornecedorPadrao },
                 { name: 'cor_produto', insertFunc: insertCorProduto },
                 { name: 'cliente', insertFunc: insertClienteDefault },
-                { name: 'taxa', insertFunc: insertTaxaDefault }
+                { name: 'taxa', insertFunc: insertTaxaDefault },
+                { name: 'marca', insertFunc: insertMarca }
             ];
 
             for (let table of tables) {

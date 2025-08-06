@@ -42,6 +42,7 @@ Router.get('/getCrediariosVencidos', controllersCrediario.getCrediariosVencidos)
 Router.get('/getTaxas', controllersCrediario.getTaxas);
 Router.get('/getVendaPorNumeroPedido/:numero_pedido', controllersVenda.getVendasPorNumeroVenda);
 Router.get('/getSerial', controllersSerial.getSerial);
+Router.get('/getMarca', controllersGruposProduto.getMarca);
 
 Router.post('/postNewProduto', controllersProduto.postNewProductWithImage);
 Router.post('/newGrupo', controllersGruposProduto.postNewProductGrupo);

@@ -104,7 +104,7 @@
                                         <tr>
                                             <td> <input type="text" id="codigoEAN" autocomplete="off"
                                                     placeholder="Digite para buscar" />
-
+                                                  <input type="hidden" id="codigoEANDB">
                                             </td>
                                             <td>
                                                 <input type="text" id="nomeProduto" name="nome" autocomplete="off"
@@ -123,13 +123,13 @@
                                         <tr>
                                             <td class="btn-border-transparent col-grupo">
                                                 <select id="grupo" name="grupo">
-                                                    <option value="">Selecione</option>
+                                                    <option value="">-- Selecione --</option>
                                                 </select>
                                             </td>
 
                                             <td>
                                                 <select id="sub-grupo" name="grupo">
-                                                    <option value="">Selecione</option>
+                                                    <option value="">-- Selecione --</option>
                                                 </select>
                                             </td>
 
@@ -207,27 +207,26 @@
                                     </th>
 
                                     <th>Preço de Compra</th>
-                                    <th>Lucro Bruto (R$)</th>
+                              
                                     <th>Preço de Venda</th>
                                 </tr>
 
                                 <tr>
-                                    <td style="background-color: red !important;">
-                                       <input type="text" id="marca_nome" name="" id="">
+                                    <td >
+                                       <input type="text" id="marca_nome" name="" placeholder="-- Selecione --" style="text-align: center;" readonly>
                                     </td>
 
                                     <td>
-                                        <input value="0,00" id="precoCusto" class="precoCusto" name="preco"
-                                            autocomplete="off">
-                                        <!-- <label for="markup">Markup % :</label> -->
-                                        <input type="hidden" value="0" id="inputMarkup">
+                                        <input id="precoCusto" class="precoCusto" name="preco"
+                                            autocomplete="off"  placeholder="0,00"  readonly>
+                                        
+                                        <input type="hidden"  id="inputMarkup" placeholder="0,00">
                                     </td>
+                                  
+                                        <input type="hidden"   id="inputMarkup">
+                                
                                     <td>
-                                        <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
-                                        <input type="hidden" value="0" id="inputMarkup">
-                                    </td>
-                                    <td>
-                                        <input value="0,00" id="precoVenda" name="preco" autocomplete="off">
+                                        <input   id="precoVenda" name="preco" autocomplete="off"  placeholder="0,00"  readonly>
                                     </td>
                                 </tr>
                             </table>
@@ -374,18 +373,12 @@
                             </div>
 
 
-
-
-
-
-
                             <table>
                                 <tr>
                                     <th style="width: 50%;">
                                         Fornecedor - Razão Social
                                     </th>
                                
-
                                     <th>
                                         Estoque mínimo
                                     </th>
@@ -395,16 +388,18 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input style="width: 100%;" id="showFornecedor" name="fornecedor"
-                                            placeholder="Nenhum fornecedor — clique em buscar para selecionar" readonly>
+                                        <select name="" id="showFornecedor">
+                                            <option value="">-- Nenhum fornecedor selecionado -- </option>
+                                        </select>
+                                          
                                         <input type="hidden" id="fornecedorID">
                                     </td>
 
-                                    <td style="background-color: red !important;">
-                                        <input type="text" placeholder="0">
+                                    <td  >
+                                        <input  id="inputMim" type="text" placeholder="0">
                                     </td>
-                                    <td style="background-color: red !important;">
-                                        <input type="text" placeholder="0">
+                                    <td   >
+                                        <input id="inputMax" type="text" placeholder="0">
                                     </td>
                                 </tr>
                             </table>
@@ -425,9 +420,9 @@
                                     </td>
                                     <td>
                                         <div class="acoes-container">
-                                            <button class="btn-alterar-produto" style="width: 50%;"><img
-                                                    class="img-disquete" src="../style/img/troca.png"
-                                                    alt="">Alterar</button>
+                                            <button id="btn-desativar" style="width: 50%;"><img
+                                                    class="img-disquete" src="../style/img/excluir.png"
+                                                    alt="">Desabilitar</button>
                                             <button id="filterButtonLimpar" style="width: 50%;"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>
                                         </div>

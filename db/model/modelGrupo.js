@@ -25,7 +25,19 @@ function getGrupo() {
         const rows =  db.prepare('SELECT * FROM grupo').all();
         return rows;
     } catch (error) {
-        console.error('Erro ao executar a consulta:', error);
+        console.error('Erro ao executar a consulta grupo:', error);
+        throw error;
+    }
+}
+
+
+function getMarca() {
+     ensureDBInitialized();
+    try {
+        const rows =  db.prepare('SELECT * FROM marca').all();
+        return rows;
+    } catch (error) {
+        console.error('Erro ao executar a consulta marca:', error);
         throw error;
     }
 }
@@ -36,7 +48,7 @@ function getGrupo() {
         const rows = db.prepare('SELECT * FROM sub_grupo').all();
         return rows;
     } catch (error) {
-        console.error('Erro ao executar a consulta:', error);
+        console.error('Erro ao executar a consulta subgrupo:', error);
         throw error;
     }
 }
@@ -107,5 +119,7 @@ module.exports = {
     postNewProductGrupo,
     getGrupo,
     getSubGrupo,
+    getMarca, 
     postMarca
+    
 };

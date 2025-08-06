@@ -34,6 +34,24 @@ async function insertSubGrupo(db) {
     }
 }
 
+async function insertMarca(db) {
+    try {
+        const query = `INSERT OR IGNORE INTO marca (marca_nome) VALUES ('Geral')`;
+        const info = db.prepare(query).run();
+
+        if (info.changes) {
+            console.log('Marca de produtos inserido com sucesso.');
+            return info.changes;
+        } else {
+            console.log('Marca de produtos já existe.');
+            return 0;
+        }
+    } catch (error) {
+        console.error('Erro ao inserir marca de produtos:', error);
+        throw error;
+    }
+}
+
 async function insertTamanhoLetras(db) {
     try {
         const query = `INSERT OR IGNORE INTO tamanho_letras (tamanho) 
@@ -226,7 +244,8 @@ module.exports = {
     insertUnidadeEstoque,
     insertFornecedorPadrao,
     insertClienteDefault,
-    insertTaxaDefault
+    insertTaxaDefault,
+    insertMarca
 };
 
 

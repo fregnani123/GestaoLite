@@ -24,29 +24,28 @@ console.log('Chaves estrangeiras ativadas.');
 async function desativarProdutoSistema(produto) {
     await ensureDBInitialized();
     try {
-        // Modifica o codigo_ean para indicar que o produto foi desativado
-        const novoCodigoEAN = `${produto.codigo_ean}-DESATIVADO`;  // Sufixo para identificar produto desativado
+        const novoCodigoEAN = `${produto.codigo_ean_original}-DESATIVADO`;
 
         const query = `
             UPDATE produto
             SET 
-            codigo_ean = ?,
-            quantidade_estoque = ?,
-            produto_ativado = ? 
+                codigo_ean = ?,
+                quantidade_estoque = ?,
+                produto_ativado = ? 
             WHERE codigo_ean = ?
         `;
 
         const result = db.prepare(query).run(
-            novoCodigoEAN,   // Novo código EAN modificado
+            novoCodigoEAN,
             produto.quantidade_estoque,
             produto.produto_ativado,
-            produto.codigo_ean // Usa o código original para localizar o produto
+            produto.codigo_ean_original
         );
 
-        console.log('Registro Estoque e qtd vendido atualizado com sucesso:', result.changes);
+        console.log('Produto desativado com sucesso. Linhas afetadas:', result.changes);
         return result.changes;
     } catch (error) {
-        console.error('Erro ao atualizar estoque:', error.message);
+        console.error('Erro ao desativar produto:', error.message);
         throw error;
     }
 }

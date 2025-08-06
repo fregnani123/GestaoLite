@@ -3,6 +3,7 @@ const apiEndpoints = {
     getGrupo: 'http://localhost:3000/grupos',
     getSubGrupo: 'http://localhost:3000/subGrupos',
     getAllProdutos: 'http://localhost:3000/produtos',
+    getMarca: 'http://localhost:3000/getMarca',
 };
 
 // Seletores do DOM
@@ -18,17 +19,17 @@ const btnAtivo = document.getElementById('btn-ativo');
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     estilizarLinkAtivo(linkID_4);
-       codigoEAN.focus();
+    codigoEAN.focus();
 })
- 
+
 
 let allProducts = []; // Variável para armazenar todos os produtos
 formatarCodigoEANProdutos(codigoEAN)
@@ -58,6 +59,28 @@ function getGrupo(renderer) {
             });
         })
         .catch(error => console.error('Erro ao buscar grupos:', error));
+}
+
+// Função para buscar e renderizar as marcas
+function getMarca(renderer) {
+    fetch(apiEndpoints.getMarca, {
+        method: 'GET',
+        headers: {
+            'x-api-key': 'segredo123',
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            data.sort((a, b) => a.marca_nome.localeCompare(b.marca_nome));
+            data.forEach(marca => {
+                const option = document.createElement('option');
+                option.textContent = marca.marca_nome;
+                option.value = marca.marca_nome;
+                renderer.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Erro ao buscar marcas:', error));
 }
 
 // Função para buscar e renderizar os subgrupos
@@ -149,12 +172,33 @@ function renderProdutos(renderer, produtos) {
         const tdVendida = document.createElement('td');
         tdVendida.textContent = `${produto.quantidade_vendido} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
 
+        const tdQtdMim = document.createElement('td');
+        tdQtdMim.textContent = `${produto.estoque_minimo} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
+
+        // const tdQtdMax = document.createElement('td');
+        // tdQtdMax.textContent = `${produto.estoque_maximo} ${unidades[produto.unidade_estoque_id - 1]}` || '0';
+
+        const tdMarca = document.createElement('td');
+        tdMarca.textContent = `${produto.marca_nome}`;
+
         tr.appendChild(tdCodigo);
         tr.appendChild(tdNome);
         tr.appendChild(tdEstoque);
+        tr.appendChild(tdQtdMim);
+        // tr.appendChild(tdQtdMax);
         tr.appendChild(tdCompra);
         tr.appendChild(tdVenda);
         tr.appendChild(tdVendida);
+        tr.appendChild(tdMarca);
+
+
+        if (Number(produto.quantidade_estoque) < Number(produto.estoque_minimo)) {
+            tdEstoque.style.background = '#d1ecf1';  // azul clarinho
+            tdQtdMim.style.background = '#d1ecf1';
+
+            alertMsg('Há produtos com quantidade inferior ao estoque mínimo permitido.', 'info', 4000)
+        }
+
 
         renderer.appendChild(tr);
     });
@@ -180,7 +224,7 @@ function applyFilters() {
     });
 
     renderProdutos(ulFiltros, filteredProducts);
-    clearInputs();
+    // clearInputs();
 }
 
 // Função para limpar os inputs
@@ -197,9 +241,100 @@ getGrupo(selectGrupo);
 getSubGrupo(selectSubGrupo);
 fetchAllProdutos(ulFiltros);
 
-const filterButtonInfor = document.getElementById('limparButton-info');
+const filterButtonInfor = document.getElementById('limparButton');
 if (filterButtonInfor) {
-  filterButtonInfor.addEventListener('click', () => {
-    location.reload();
-  });
+    filterButtonInfor.addEventListener('click', () => {
+        location.reload();
+    });
+}
+
+
+const botaoImprimir = document.querySelector('.botao-imprimir');
+botaoImprimir.addEventListener('click', imprimirTabela)
+
+function imprimirTabela() {
+    const tabela = document.getElementById('tabela-produtos');
+
+    if (!tabela) {
+        alert('Tabela não encontrada para impressão.');
+        return;
+    }
+
+    const janelaImpressao = window.open('', '_blank');
+    janelaImpressao.document.write(`
+        <html>
+            <head>
+                <title>Estoque Atual – Relatório Impresso</title>
+                <style>
+                    /* Estilo geral para a impressão A4 retrato */
+                    @page {
+                        size: A4 portrait;
+                        margin: 20mm 15mm;
+                    }
+
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 12px;
+                        margin: 0;
+                        padding: 10mm;
+                        box-sizing: border-box;
+                        color: #000;
+                    }
+
+                    h2 {
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        table-layout: fixed;
+                        word-wrap: break-word;
+                    }
+
+                    th, td {
+                        border: 1px solid #aaa;
+                        padding: 6px 8px;
+                        text-align: left;
+                        vertical-align: middle;
+                    }
+
+                    th {
+                        background-color: #f0f0f0;
+                    }
+
+                    /* Cores para linhas alternadas */
+                    .linha-branca {
+                        background-color: #fff;
+                    }
+
+                    .linha-azul {
+                        background-color: #f4f9ff;
+                    }
+
+                    /* Ajuste de largura das colunas */
+                    th:nth-child(2), td:nth-child(2) {
+                        width: 35%; /* Diminuir um pouco a segunda coluna (Descrição) */
+                    }
+                    th:nth-child(7), td:nth-child(7) {
+                        width: 10%; /* Coluna Qtd Vendida */
+                        text-align: center;
+                    }
+                    /* Outras colunas terão largura automática */
+
+                    /* Evita quebras de página no meio das linhas */
+                    tr {
+                        page-break-inside: avoid;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Estoque Atual – Relatório Impresso</h2>
+                ${tabela.outerHTML}
+            </body>
+        </html>
+    `);
+    janelaImpressao.document.close();
+    janelaImpressao.print();
 }

@@ -60,6 +60,11 @@ th {
   width: 99%;
   margin: 0.5%;
   overflow: hidden;
+   
+}
+
+.table-2-grafico{
+  height: 520px !important;
 }
 
 .table-1-entrada,
@@ -109,4 +114,12 @@ th {
 
 #formulario-inputs-gap-zero{
   gap:0 !important;
+}
+
+select {
+  color: #000 !important;
+  font-weight: 400;         /* Peso normal (não grosso) */
+  font-family: 'Arial', sans-serif; /* Ou outra fonte limpa */
+  background-color: white;  /* Garante contraste */
+  border: 1px solid #ccc;   /* Borda leve */
 }

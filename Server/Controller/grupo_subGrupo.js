@@ -4,7 +4,8 @@ const {
     postNewProductSubGrupo,
     getGrupo,
     getSubGrupo,
-    postMarca
+    postMarca,
+    getMarca
 } = require(path.join(__dirname, '../../db/model/modelGrupo'));
 
 
@@ -28,6 +29,16 @@ const controllersGruposProduto = {
         } catch (error) {
             console.error('Erro ao buscar grupo_produto:', error);
             res.status(500).json({ error: 'Erro ao buscar grupo_produto' });
+        }
+    },
+
+    getMarca: async (req, res) => {
+        try {
+            const marca = await getMarca();
+            res.json(marca);
+        } catch (error) {
+            console.error('Erro ao buscar marca:', error);
+            res.status(500).json({ error: 'Erro ao buscar marca' });
         }
     },
 

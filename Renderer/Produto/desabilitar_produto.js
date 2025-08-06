@@ -18,24 +18,37 @@ const apiEndpoints = {
     postNewCorProduto: 'http://localhost:3000/postNewCor',
     getVendaPorNumeroPedido: 'http://localhost:3000/getVendaPorNumeroPedido'
 };
- 
+
 document.addEventListener('DOMContentLoaded', () => {
     codigoEAN.focus();
 })
 
 const btnDesabilitar = document.getElementById('filtrarProdutos');
 const codigoEAN = document.getElementById('codigoEAN');
+const codigoEANDB = document.getElementById('codigoEANDB');
 const nomeProduto = document.getElementById('nomeProduto');
 const grupo = document.getElementById('grupo');
 const subGrupo = document.getElementById('sub-grupo');
 const corProduto = document.getElementById('corProduto');
 
+const precoCusto = document.getElementById('precoCusto');
+const precoVenda = document.getElementById('precoVenda');
+const showFornecedor = document.getElementById('showFornecedor');
+
+
 const tamanhoLetras = document.getElementById('tamanhoLetras');
-const tamanhoNumeros =document.getElementById('tamanhoNumeros');
-const unidadeMassa =  document.getElementById('unidadeDeMassa');
+const tamanhoNumeros = document.getElementById('tamanhoNumeros');
+const unidadeMassa = document.getElementById('unidadeDeMassa');
 const medidaVolume = document.getElementById('medidaVolume');
 const unidadeComprimento = document.getElementById('unidadeComprimento');
 const unidadeEstoque = document.getElementById('unidadeEstoque');
+const inputQtd = document.getElementById('estoqueQtd');
+
+const inputMarca = document.getElementById('marca_nome');
+const inputMim = document.getElementById('inputMim');
+const inputMax = document.getElementById('inputMax');
+const selectEscolheUm = document.getElementById("escolhaUM");
+
 
 
 getGrupo(grupo);
@@ -48,6 +61,23 @@ getMedidaVolume(medidaVolume);
 getCorProduto(corProduto);
 getunidadeDeMassa(unidadeMassa);
 
+document.getElementById('grupo').disabled = true;
+document.getElementById('sub-grupo').disabled = true;
+document.getElementById('corProduto').disabled = true;
+
+
+tamanhoLetras.disabled = true;
+tamanhoNumeros.disabled = true;
+unidadeMassa.disabled = true;
+medidaVolume.disabled = true;
+unidadeComprimento.disabled = true;
+unidadeEstoque.disabled = true;
+inputQtd.disabled = true;
+selectEscolheUm.disabled = true;
+inputMim.disabled = true;
+inputMax.disabled = true;
+showFornecedor.disabled = true;
+
 
 const linkID_4 = document.querySelector('.list-a4');
 const btnAtivo = document.getElementById('btn-ativo');
@@ -56,9 +86,9 @@ const btnAtivo = document.getElementById('btn-ativo');
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
@@ -75,39 +105,145 @@ formatarCodigoEANProdutos(codigoEAN);
 function formatarMoedaBR(valor) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("escolhaUM");
 
-codigoEAN.addEventListener('input', () => {
-    const ean = codigoEAN.value.trim();
+    const sections = {
+        "Tamanho - P/GG": "divTamanho",
+        "Tamanho - Numeração": "divTamanhoNUm",
+        "Medida de Volume": "volumeDiv",
+        "Unidade Comprimento": "comprimentoDiv",
+        "Unidade de Massa": "massaDiv"
+    };
 
-    // Limpa nomeProduto se o EAN for menor que 13 caracteres
-    if (ean.length < 13) {
-        nomeProduto.value = '';
-        produtoJaBuscado = false; // Permite nova busca quando o usuário continuar digitando
-        return;
-    }
-
-    if (ean.length > 13) {
-        nomeProduto.value = ''; // Se quiser limpar também quando for maior que 13
-        produtoJaBuscado = false;
-        return;
-    }
-
-    // Se tiver exatamente 13 e ainda não buscou, faz a busca
-    if (ean.length === 13 && !produtoJaBuscado) {
-        fetchAllProdutos(() => {
-            const produtoEncontrado = allProducts.find(prod => String(prod.codigo_ean) === ean);
-
-            if (produtoEncontrado) {
-                nomeProduto.value = produtoEncontrado.nome_produto || '';
-                produtoJaBuscado = true;
-            } else {
-                alertMsg('Produto não encontrado. Verifique se está cadastrado.','info',4000);
-                console.log('Produto não encontrado. Verifique se está cadastrado.');
-                produtoJaBuscado = true;
-            };
+    function ocultarTodosOsCamposMedida() {
+        Object.values(sections).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = "none";
         });
     }
+
+    select.addEventListener("change", function () {
+        ocultarTodosOsCamposMedida();
+        const selectedValue = select.value;
+        if (sections[selectedValue]) {
+            document.getElementById(sections[selectedValue]).style.display = "flex";
+        }
+    });
+
+
+    // Função para buscar todos os produtos
+    function fetchAllFornecedores() {
+        fetch(apiEndpoints.getFornecedor, {
+            method: 'GET',
+            headers: {
+                'x-api-key': 'segredo123',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const fornecedores = data;
+
+                const select = document.getElementById('showFornecedor'); // <- define aqui
+
+                fornecedores.forEach(fornecedor => {
+                    const option = document.createElement('option');
+                    option.value = fornecedor.fornecedor_id;
+                    option.textContent = fornecedor.razao_social;
+                    select.appendChild(option);
+                });
+
+                console.log(fornecedores);
+            })
+            .catch(error => console.error('Erro ao buscar produtos:', error));
+    }
+
+    fetchAllFornecedores();
+
+
+    // --- EAN listener ---
+    const codigoEAN = document.getElementById("codigoEAN");
+    let produtoJaBuscado = false;
+
+    codigoEAN.addEventListener('input', () => {
+        const ean = codigoEAN.value.trim();
+
+        if (ean.length !== 13) {
+            nomeProduto.value = '';
+            produtoJaBuscado = false;
+            return;
+        }
+
+        if (!produtoJaBuscado) {
+            fetchAllProdutos(() => {
+                const produtoEncontrado = allProducts.find(prod => String(prod.codigo_ean) === ean);
+                console.log(produtoEncontrado);
+
+                if (produtoEncontrado) {
+                    codigoEANDB.value = produtoEncontrado.codigo_ean;
+                    nomeProduto.value = produtoEncontrado.nome_produto || '';
+                    grupo.value = produtoEncontrado.grupo_id;
+                    subGrupo.value = produtoEncontrado.sub_grupo_id;
+                    corProduto.value = produtoEncontrado.cor_produto_id;
+                    unidadeEstoque.value = produtoEncontrado.unidade_estoque_id;
+                    inputQtd.value = produtoEncontrado.quantidade_estoque;
+                    inputMarca.value = produtoEncontrado.marca_nome;
+                    inputMim.value = produtoEncontrado.estoque_maximo;
+                    inputMax.value = produtoEncontrado.estoque_minimo
+                    showFornecedor.value = produtoEncontrado.fornecedor_id
+
+
+                        ;
+                    precoCusto.value = Number(produtoEncontrado.preco_compra || 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+
+                    precoVenda.value = Number(produtoEncontrado.preco_venda || 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+
+
+
+                    tamanhoLetras.value = produtoEncontrado.tamanho_letras_id;
+                    tamanhoNumeros.value = produtoEncontrado.tamanho_num_id;
+                    unidadeComprimento.value = produtoEncontrado.unidade_comprimento_id;
+                    medidaVolume.value = produtoEncontrado.medida_volume_id;
+                    unidadeMassa.value = produtoEncontrado.unidade_massa_id;
+
+                    // 🔥 Determina qual tipo de unidade ativar com base no que veio preenchido
+                    ocultarTodosOsCamposMedida(); // Oculta tudo primeiro
+
+                    if (produtoEncontrado.tamanho_letras_id) {
+                        select.value = "Tamanho - P/GG";
+                        document.getElementById(sections["Tamanho - P/GG"]).style.display = "flex";
+                    } else if (produtoEncontrado.tamanho_num_id) {
+                        select.value = "Tamanho - Numeração";
+                        document.getElementById(sections["Tamanho - Numeração"]).style.display = "flex";
+                    } else if (produtoEncontrado.medida_volume_id) {
+                        select.value = "Medida de Volume";
+                        document.getElementById(sections["Medida de Volume"]).style.display = "flex";
+                    } else if (produtoEncontrado.unidade_comprimento_id) {
+                        select.value = "Unidade Comprimento";
+                        document.getElementById(sections["Unidade Comprimento"]).style.display = "flex";
+                    } else if (produtoEncontrado.unidade_massa_id) {
+                        select.value = "Unidade de Massa";
+                        document.getElementById(sections["Unidade de Massa"]).style.display = "flex";
+                    }
+
+                    produtoJaBuscado = true;
+                } else {
+                    alertMsg('Produto não encontrado. Verifique se está cadastrado.', 'info', 4000);
+                    produtoJaBuscado = true;
+                }
+            });
+        }
+    });
 });
+
+
 
 
 function fetchAllProdutos(callback) {
@@ -118,45 +254,19 @@ function fetchAllProdutos(callback) {
             'Content-Type': 'application/json',
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        allProducts = data;
-        if (callback) callback();
-    })
-    .catch(() => {
-        alert('Erro ao buscar produtos. Tente novamente.');
-        produtoJaBuscado = true; // Bloqueia novas buscas mesmo com erro
-    });
-}
-
-
-
-async function desativarProduto(produto) {
-    try {
-        const patchResponse = await fetch(apiEndpoints.updateDesativarProduto, {
-            method: 'PATCH',
-            headers: {
-                'x-api-key': 'segredo123',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(produto), // Apenas serialize aqui
+        .then(response => response.json())
+        .then(data => {
+            allProducts = data;
+            if (callback) callback();
+        })
+        .catch(() => {
+            alert('Erro ao buscar produtos. Tente novamente.');
+            produtoJaBuscado = true; // Bloqueia novas buscas mesmo com erro
         });
-
-        if (!patchResponse.ok) {
-            console.log('Erro ao desativar estoque do produto');
-        } else {
-            console.log('produto desativado com sucesso');
-        }
-    } catch (error) {
-        console.log('Erro durante a desativação do produto:', error);
-    }
-};
-
-// Função para renderizar os produtos
-function renderProdutos(produtos) {
-
-    
 }
+
+
+
 
 // Variável global para armazenar o produto único selecionado
 let produtoSelecionado = null;
@@ -202,65 +312,6 @@ const filterButtonLimpar = document.getElementById('filterButtonLimpar');
 filterButtonLimpar.addEventListener('click', () => {
     location.reload();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const select = document.getElementById("escolhaUM");
-
-  // Mapeamento dos valores do select para os IDs dos divs
-  const sections = {
-    "Tamanho - P/GG": "divTamanho",
-    "Tamanho - Numeração": "divTamanhoNUm",
-    "Medida de Volume": "volumeDiv",
-    "Unidade Comprimento": "comprimentoDiv",
-    "Unidade de Massa": "massaDiv"
-  };
-
-  // Evento para mudar a exibição
-  select.addEventListener("change", function () {
-    // Oculta todos os divs
-    Object.values(sections).forEach(id => {
-      document.getElementById(id).style.display = "none";
-    });
-
-    // Exibe o div correspondente, se um valor válido for selecionado
-    const selectedValue = select.value;
-    if (sections[selectedValue]) {
-      document.getElementById(sections[selectedValue]).style.display = "flex";
-    }
-  });
-});
-
 
 
 
@@ -518,3 +569,43 @@ function getMedidaVolume(renderer) {
             console.error('Erro ao buscar dados:', error);
         });
 };
+
+
+const btnDesativar = document.getElementById('btn-desativar');
+
+btnDesativar.addEventListener('click', async () => {
+    const produto = {
+        codigo_ean_original: codigoEANDB.value,
+        quantidade_estoque: 0,
+        produto_ativado: 0
+    };
+
+    try {
+        const patchResponse = await fetch(apiEndpoints.updateDesativarProduto, {
+            method: 'PATCH',
+            headers: {
+                'x-api-key': 'segredo123',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(produto)
+        });
+
+        if (!patchResponse.ok) {
+            console.error('Erro ao desativar estoque do produto');
+            alertMsg('Erro ao desativar produto.', 'error', 3000);
+            return;
+        }
+
+        console.log('Produto desativado com sucesso');
+        alertMsg('Produto desativado com sucesso!', 'success', 3000);
+
+        setTimeout(() => {
+            location.reload();
+        },3000)
+
+    } catch (error) {
+        console.error('Erro durante a desativação do produto:', error);
+        alertMsg('Erro inesperado.', 'error', 3000);
+    }
+});
+

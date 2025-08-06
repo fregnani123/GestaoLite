@@ -2,17 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css-global/global.css">
-    <link rel="stylesheet" href="../style/css-global/inputs.css">
-    <link rel="stylesheet" href="../style/css-global/table.css">
-    <link rel="stylesheet" href="../style/css-individual/pedido-grafico.css">
-    <title>Document</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style/css-global/global.css">
+        <link rel="stylesheet" href="../style/css-global/inputs.css">
+        <link rel="stylesheet" href="../style/css-global/table.css">
+        <link rel="stylesheet" href="../style/css-individual/pedido-grafico.css">
+        <title>Graficos Pedidos</title>
+    </head>
+
+
 </head>
 
 <body>
-        <div id="loading-overlay" class="active">
+    <div id="loading-overlay" class="active">
         <div class="spinner"></div>
         <p>Carregando...</p>
     </div>
@@ -37,18 +44,20 @@
                     <ul>
                         <li>
                             <a id="btn-ativo"><img class="img-informacao" src="../style/img/detalhes-vendas.png"
-                                alt="Atenção">Gráficos por forma de pagamento</a>
+                                    alt="Atenção">Gráficos por forma de pagamento</a>
                         </li>
                         <li>
-                            <a href="./historico_pedidos.html"><img class="img-informacao" src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
+                            <a href="./historico_pedidos.html"><img class="img-informacao"
+                                    src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
                         </li>
                         <li>
-                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de metas do mês</a>
+                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de metas do
+                                mês</a>
                         </li>
                         <li>
-                            <a><img class="img-informacao" src="../style/img/conversacao.png"
-                                alt="Atenção">Mensagem informativa
-                        </a>
+                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                informativa
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -79,7 +88,7 @@
                                     <td><input type="date" id="endDate"></td>
                                     <td>
                                         <div class="botoes-footer">
-                                            <button  id="filterButton">
+                                            <button id="filterButton">
                                                 <img class="img-excluir" src="../style//img/procurar.png" alt="">
                                                 Filtrar
                                             </button>
@@ -96,12 +105,15 @@
 
                             <div class="corpo-interno">
                                 <div class="div-valores-grafico">
+                                    <p id="titulo-relatorio"
+                                        style=" background-color: rgb(237, 237, 237) !important; padding: 0.5rem 1rem; background-color: var(--border-color);font-weight: 600;">
+                                    </p>
                                     <table class="table-2-grafico">
                                         <tr class="linha-titulo">
-                                            <th id="titulo-relatorio"></th>
+
                                         </tr>
                                         <tr>
-                                            <td id="data-periodo"></td>
+                                            <td id="data-periodo" style="height: 10%; text-align: left;"></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -114,49 +126,51 @@
                                 </div>
                                 <div class="grafico-barras">
                                     <p>Gráfico de Vendas por Forma de Pagamento e Período</p>
-                                    <div class="barra-container" id="barra-container">
-                                        <div class="nome">Cartão Crédito:</div>
-                                        <div class="barra credito">
-                                            <span id="credito">0%</span>
+                                    
+                                    <div style="margin-top: 10%; justify-content: left;">
+                                        <div class="barra-container" id="barra-container">
+                                            <div class="nome">Cartão Crédito:</div>
+                                            <div class="barra credito">
+                                                <span id="credito">0%</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="barra-container">
-                                        <div class="nome">Cartão Débito:</div>
-                                        <div class="barra debito">
-                                            <span id="debito">0%</span>
+                                        <div class="barra-container">
+                                            <div class="nome">Cartão Débito:</div>
+                                            <div class="barra debito">
+                                                <span id="debito">0%</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="barra-container">
-                                        <div class="nome">Pagto a Prazo:</div>
-                                        <div class="barra crediario">
-                                            <span id="crediario">0%</span>
+                                        <div class="barra-container">
+                                            <div class="nome">Pagto a Prazo:</div>
+                                            <div class="barra crediario">
+                                                <span id="crediario">0%</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="barra-container">
-                                        <span class="nome">Dinheiro:</span>
-                                        <div class="barra dinheiro">
-                                            <span id="dinheiro">0%</span>
+                                        <div class="barra-container">
+                                            <span class="nome">Dinheiro:</span>
+                                             <div class="barra dinheiro">
+                                                <span id="dinheiro">0%</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="barra-container">
-                                        <div class="nome">Pix:</div>
-                                        <div class="barra pix">
-                                            <span id="pix">0%</span>
+                                        <div class="barra-container">
+                                            <div class="nome">Pix:</div>
+                                            <div class="barra pix">
+                                                <span id="pix">0%</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="barra-container barra-total">
-                                        <div class="nome">Total:</div>
-                                        <div class="barra total">
-                                            <span id="grafico-total">100%</span>
+                                        <div class="barra-container barra-total">
+                                            <div class="nome">Total:</div>
+                                            <div class="barra total">
+                                                <span id="grafico-total">100%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                         </div>

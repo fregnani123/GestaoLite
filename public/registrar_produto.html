@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';">
-  <link rel="stylesheet" href="../style/css-global/global.css" />
-  <link rel="stylesheet" href="../style/css-global/inputs.css" />
-  <link rel="stylesheet" href="../style/css-global/table.css" />
-  <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
-  <script src="../Renderer/transicao.js" defer></script>
-  <title>Cadastrar Produto</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <link rel="stylesheet" href="../style/css-global/global.css" />
+    <link rel="stylesheet" href="../style/css-global/inputs.css" />
+    <link rel="stylesheet" href="../style/css-global/table.css" />
+    <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
+
+    <title>Cadastrar Produto</title>
 </head>
 
 <body>
@@ -40,7 +41,8 @@
                                     src="../style/img/info-estoque.png" alt="Atenção">Estoque e informações do
                                 produto</a></li>
                         <li><a href="./controle_estoque.html"><img class="img-informacao"
-                                    src="../style/img/estoque-pronto.png" alt="Atenção">Entradas e Saídas de Estoque</a></li>
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Entradas e Saídas de Estoque</a>
+                        </li>
                         <li><a href="./desabilitar_produto.html"><img class="img-informacao"
                                     src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
                         <li>
@@ -216,19 +218,19 @@
                                     <th>
                                         + Marcas
                                     </th>
-                                    <th >Preço de Compra</th>
-                                    <th >Lucro Bruto (R$)</th>
-                                    <th  >Preço de Venda</th>
+                                    <th>Preço de Compra</th>
+                                    <th>Lucro Bruto (R$)</th>
+                                    <th>Preço de Venda</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <select name="" id="marca_nome">
-                                        <option value="">-- Selecione --</option>
-                                    </select>
+                                            <option value="">-- Selecione --</option>
+                                        
+                                        </select>
                                     </td>
-                                    <td class="btn-border-transparent border-right"
-                                        style="background-color: red !important;">
-                                        <button id="" class="" style="display: flex; align-items: center; gap: 8px;">
+                                    <td class="btn-border-transparent border-right">
+                                        <button id="btnMarca" class="" style="display: flex; align-items: center; gap: 8px;">
                                             <img src="../style/img/mais.png" alt="Adicionar" style="width: 18px;">
                                             <span>Adicionar</span>
                                         </button>
@@ -397,15 +399,15 @@
                                         Fornecedor - Razão Social
                                     </th>
                                     <th style="width: 20%;">
-                                      Buscar Fornecedor
+                                        Buscar Fornecedor
                                     </th>
 
                                     <th>
                                         Estoque mínimo
                                     </th>
-                                    <th>
+                                    <!-- <th>
                                         Estoque máximo
-                                    </th>
+                                    </th> -->
                                 </tr>
                                 <tr>
                                     <td>
@@ -421,15 +423,13 @@
                                     <td>
                                         <input type="text" id="estoque_minimo" placeholder="0">
                                     </td>
-                                    <td>
-                                        <input type="text"  id="estoque_maximo" placeholder="0">
-                                    </td>
+                                        <input type="hidden" id="estoque_maximo" placeholder="0">
                                 </tr>
                                 <table class="table-6-produto">
                                     <tr>
                                         <th style="width: 30%;">Estoque Inicial</th>
                                         <th style="width: 25%;">Ações</th>
-                                         <th></th>
+                                        <th></th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -441,22 +441,21 @@
                                                 </select>
                                             </div>
                                         </td>
-                                   
+
                                         <td>
-                                            <div class="acoes-container" >
-                                                <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"
-                                                    >
+                                            <div class="acoes-container">
+                                                <button id="btn-cadastrar-produto" class="btn-cadastrar-produto">
                                                     <img class="img-disquete" src="../style/img/disquete.png"
                                                         alt="">Gravar
                                                 </button>
-                                                <button id="limparButton" >
+                                                <button id="limparButton">
                                                     <img class="img-excluir" src="../style/img/excluir.png"
                                                         alt="">Limpar
                                                 </button>
                                             </div>
                                         </td>
-                                             <td>
-                                            
+                                        <td>
+
                                         </td>
                                     </tr>
                                 </table>
@@ -478,19 +477,13 @@
         </div>
     </div>
 </body>
-<script src="../Renderer/Menu/renderer_menu.js">
-</script>
-<script src="../Renderer/services/converte_moeda.js">
-</script>
-<script src="../Renderer/Produto/renderizarInputsGrupo.js">
-</script>
-<script src="../Renderer/Produto/apiEndpoints.js">
-</script>
-<script src="../Renderer/services/alertMsg.js">
-</script>
-<script src="../Renderer/Produto/renderer_produtos.js">
-</script>
-<script src="../Renderer/services/formatters.js">
-</script>
+<script src="../Renderer/transicao.js" defer></script>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
+<script src="../Renderer/Produto/renderizarInputsGrupo.js"></script>
+<script src="../Renderer/Produto/apiEndpoints.js"></script>
+<script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/Produto/renderer_produtos.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
 
 </html>
