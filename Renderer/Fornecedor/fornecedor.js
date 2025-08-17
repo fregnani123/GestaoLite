@@ -27,20 +27,20 @@ const btnAtivo = document.getElementById('btn-ativo');
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-      estilizarLinkAtivo(linkID_8)
+    estilizarLinkAtivo(linkID_8)
 })
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-     pessoa.focus();
+    pessoa.focus();
 
     formatarTelefone(telefone);
     inputMaxCaracteres(telefone, 15);
@@ -75,51 +75,64 @@ pessoa.addEventListener('change', () => {
     if (pessoa.value === "juridica") {
         labelCnpjCPF.innerHTML = 'CNPJ';
         label_razao.innerHTML = 'Razão Social';
+        cnpj.placeholder = "Digite o CNPJ"
+        razaoSocial.placeholder = "Digite a Razão Social"
         cnpj.style.display = '';
         razaoSocial.style.display = '';
-
+        ie.placeholder = "Isento"
         cnpj.value = '';
-        cnpj.removeAttribute('readonly'); 
-        razaoSocial.removeAttribute('readonly'); 
+        cnpj.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
         formatarCNPJ(cnpj);
         inputMaxCaracteres(cnpj, 18);
         contribuinte.removeAttribute('disabled');
         nomeFantasia.removeAttribute('readonly');
         contribuinte.value = 'isento';
+        nomeFantasia.placeholder = 'Digite o nome fantasia';
         cnpj.focus();
 
     } else if (pessoa.value === "fisica") {
         labelCnpjCPF.innerHTML = 'CPF';
-        label_razao.innerHTML = 'Nome';
+        label_razao.innerHTML = 'Nome completo do fornecedor';
+        cnpj.placeholder = "Digite o CPF";
+        razaoSocial.placeholder = "Digite o nome do Fornecedor"
         cnpj.style.display = '';
         razaoSocial.style.display = '';
-
-        razaoSocial.addEventListener('input', () => {
+        ie.placeholder = "Isento";
+        nomeFantasia.placeholder = 'Campo bloqueado para fornecedor pessoa física';
+        razaoSocial.addEventListener('change', () => {
             if (pessoa.value === "fisica") {
                 nomeFantasia.value = razaoSocial.value;
             }
-        });        
+
+        });
         cnpj.value = '';
-        cnpj.removeAttribute('readonly'); 
-        razaoSocial.removeAttribute('readonly'); 
+        cnpj.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
         nomeFantasia.setAttribute('readonly', true);
         nomeFantasia.value = razaoSocial.value;
         contribuinte.value = 'isento';
         formatarEVerificarCPF(cnpj);
         inputMaxCaracteres(cnpj, 14);
         cnpj.focus();
+        contribuinte.disabled = true; // desabilita o select
+
 
     } else {
         labelCnpjCPF.innerHTML = 'CNPJ / CPF';
         label_razao.innerHTML = 'Razão Social / Nome';
-        
-        cnpj.value = '';
-        cnpj.setAttribute('readonly', 'true'); 
-        razaoSocial.setAttribute('readonly', 'true');
 
+        cnpj.value = '';
+        cnpj.setAttribute('readonly', 'true');
+        razaoSocial.setAttribute('readonly', 'true');
+        cnpj.placeholder = "Selecione CNPJ / CPF";
+        razaoSocial.placeholder = "Selecione o tipo de pessoa: Física ou Jurídica";
+        nomeFantasia.setAttribute('readonly', true);
+ ie.placeholder = "Selecione";
+  nomeFantasia.placeholder="Selecione o tipo de pessoa: Física ou Jurídica" 
         // Oculta os inputs quando estiver vazio
-        cnpj.style.display = 'none';
-        razaoSocial.style.display = 'none';
+        // cnpj.style.display = 'none';
+        // razaoSocial.style.display = 'none';
     }
 });
 
@@ -127,9 +140,11 @@ pessoa.addEventListener('change', () => {
 contribuinte.addEventListener('change', () => {
     if (contribuinte.value === 'contribuinte') {
         ie.removeAttribute('readonly');
+        ie.placeholder='Digite a IE'
     } else {
         ie.value = '';
         ie.setAttribute('readonly', true);
+         ie.placeholder = "Isento";
     }
 });
 

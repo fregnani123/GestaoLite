@@ -1,5 +1,5 @@
 const formasDePagamento = [
-    { value: "Selecione", text: "Selecione:" },
+    { value: "", text: "-- Selecione --" },
     { value: "dinheiro", text: "Dinheiro" },
     { value: "boleto", text: "Boleto Bancário" },
     { value: "cartao credito", text: "Cartão de Crédito" },

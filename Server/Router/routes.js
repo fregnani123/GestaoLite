@@ -27,6 +27,7 @@ Router.get('/unidadeMassa', controllersUnidadeMedida.getUnidadeMassa);
 Router.get('/medidaVolume', controllersUnidadeMedida.getMedidaVolume);
 Router.get('/unidadeComprimento', controllersUnidadeMedida.getUnidadeComprimento);
 Router.get('/unidadeEstoque', controllersEstoque.getUnidadeEstoque);
+Router.get('/getControleEstoque', controllersEstoque.getControleEstoque);
 Router.get('/corProduto', controllersUnidadeMedida.getCorProduto);
 Router.get('/produto/:codigoDeBarras', controllersProduto.findOneProduct);
 Router.get('/getVenda', controllersVenda.getVenda);

@@ -5,20 +5,24 @@ const fornecedorId = document.getElementById('fornecedorId');
 const razaoSocial = document.getElementById('razaoSocial');
 const linkID_8 = document.querySelector('.list-a8');
 const filterButtonLimpar = document.querySelector('.limparButton-info');
+const pessoa = document.getElementById('tipoPessoa');
+const labelCnpjCPF = document.getElementById('labelCnpjCPF');
+const labelRazao = document.getElementById('labelRazao');
+const contato = document.getElementById('contato');
 
 const btnAtivo = document.getElementById('btn-ativo');
 
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-      estilizarLinkAtivo(linkID_8)
+    estilizarLinkAtivo(linkID_8)
 })
 
 filterButtonLimpar.addEventListener('click', () => location.reload());
@@ -32,7 +36,7 @@ const apiEndpoints = {
 
 let allProducts = [];
 
-function getFornecedor(cnpj) {
+function getFornecedor(cnpjInfo) {
     fetch(apiEndpoints.getAllFornecedor, {
         method: 'GET',
         headers: {
@@ -42,10 +46,12 @@ function getFornecedor(cnpj) {
     })
         .then(response => response.json())
         .then(data => {
-            const fornecedor = data.find(f => f.cnpj === cnpj) || {};
+            console.log(data)
+            const fornecedor = data.find(f => f.cnpj === cnpjInfo) || {};
             razaoSocial.value = fornecedor.razao_social || "";
             nomeFantasia.value = fornecedor.nome_fantasia || "";
             fornecedorId.value = fornecedor.fornecedor_id || "";
+            contato.value = fornecedor.telefone || "";
 
             // Se encontrou fornecedor, aplica os filtros automaticamente
             if (fornecedorId.value) {
@@ -61,7 +67,7 @@ inputMaxCaracteres(cnpjInfo, 18);
 cnpjInfo.addEventListener('input', (e) => getFornecedor(e.target.value));
 
 document.addEventListener('DOMContentLoaded', async () => {
-    cnpjInfo.focus();
+    pessoa.focus();
     await fetchAllProdutos(); // Buscar produtos antes de executar o filtro
     produtoSemFornecedor(); // Agora os produtos já foram carregados
 });
@@ -112,12 +118,12 @@ function renderProdutos(renderer, produtos) {
         semVinculoValor.textContent = `${formatarMoedaBR(valorEstoque)}`;
     }
 
-     let unidades = ['un', 'cx', 'Rolo', 'pc'];
+    let unidades = ['un', 'cx', 'Rolo', 'pc'];
     produtos.forEach((produto, index) => {
         const tr = document.createElement('tr');
-         tr.classList.add('table-row');
-            // ✅ Alterna entre branco e azul
-    tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
+        tr.classList.add('table-row');
+        // ✅ Alterna entre branco e azul
+        tr.classList.add(index % 2 === 0 ? 'linha-branca' : 'linha-azul');
         tr.innerHTML = `
             <td>${produto.codigo_ean || 'Sem código'}</td>
             <td>${produto.nome_produto || 'Produto desconhecido'}</td>
@@ -146,6 +152,87 @@ function applyFilters() {
     renderProdutos(ulFiltros, filteredProducts);
     clearInputs();
 }
+
+
+
+
+function criarLabelComImagem(texto, comImagem = false) {
+    const spanWrapper = document.createElement('span');
+    spanWrapper.style.display = 'inline-flex';
+    spanWrapper.style.alignItems = 'center';
+    spanWrapper.style.justifyContent = 'center';
+    spanWrapper.style.gap = '5px';
+
+    const textoNode = document.createTextNode(texto);
+    spanWrapper.appendChild(textoNode);
+
+    if (comImagem) {
+        const imgLupa = document.createElement('img');
+        imgLupa.classList.add('imgLupa');
+        imgLupa.src = "../style/img/procurar-black.png";
+        imgLupa.style.width = "25px";
+        spanWrapper.appendChild(imgLupa);
+    }
+
+    return spanWrapper;
+}
+
+pessoa.addEventListener('change', () => {
+    if (pessoa.value === "juridica") {
+        // Texto + lupa
+        labelCnpjCPF.innerHTML = '';
+        labelCnpjCPF.appendChild(criarLabelComImagem('CNPJ', true));
+
+        labelRazao.innerHTML = 'Razão Social';
+        cnpjInfo.placeholder = "Digite o CNPJ";
+        razaoSocial.placeholder = "Digite a Razão Social";
+        cnpjInfo.style.display = '';
+        razaoSocial.style.display = '';
+        cnpjInfo.value = '';
+        cnpjInfo.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
+        formatarCNPJ(cnpjInfo);
+        inputMaxCaracteres(cnpjInfo, 18);
+        nomeFantasia.removeAttribute('readonly');
+        nomeFantasia.placeholder = 'Digite o nome fantasia';
+        pessoa.focus();
+
+    } else if (pessoa.value === "fisica") {
+        // Texto + lupa
+        labelCnpjCPF.innerHTML = '';
+        labelCnpjCPF.appendChild(criarLabelComImagem('CPF', true));
+
+        cnpjInfo.placeholder = "Digite o CPF";
+        labelRazao.innerHTML = 'Nome completo do fornecedor';
+        razaoSocial.placeholder = "Digite o nome do Fornecedor";
+        cnpjInfo.style.display = '';
+        razaoSocial.style.display = '';
+        nomeFantasia.placeholder = 'Campo bloqueado para fornecedor pessoa física';
+
+        razaoSocial.addEventListener('change', () => {
+            if (pessoa.value === "fisica") {
+                nomeFantasia.value = razaoSocial.value;
+            }
+        });
+
+        cnpjInfo.value = '';
+        cnpjInfo.removeAttribute('readonly');
+        razaoSocial.removeAttribute('readonly');
+        nomeFantasia.setAttribute('readonly', true);
+        nomeFantasia.value = razaoSocial.value;
+        formatarEVerificarCPF(cnpjInfo);
+        inputMaxCaracteres(cnpjInfo, 14);
+        cnpjInfo.focus();
+
+    } 
+});
+
+ pessoa.addEventListener('change', () => {
+    if(pessoa.value === '') {
+     location.reload();
+    }
+})
+
 
 
 function clearInputs() {

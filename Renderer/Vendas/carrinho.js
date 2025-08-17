@@ -125,7 +125,7 @@ function pushProdutoCarrinho({
     calCarrinho,
     converteMoeda,
     inputTotalLiquido,
-    textSelecionarQtd,
+  
     getVenda,
     numeroPedido,
     alertLimparVenda,
@@ -164,7 +164,6 @@ function pushProdutoCarrinho({
         carrinho,
         converteMoeda,
         inputTotalLiquido,
-        textSelecionarQtd,
         inputdescontoPorcentagem,
     );
 
@@ -220,7 +219,7 @@ function createSpan(className, textContent) {
 function resetInputs() {
     descricao.value = '';
     precoVenda.value = '';
-    inputQtd.value = '';
+    inputQtd.value = '1';
     codigoEan.value = '';
     unidadeEstoqueRender.value = '';
 };

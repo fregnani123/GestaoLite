@@ -266,20 +266,14 @@ function liberarInputs() {
     // Verificar se o valor do select é "2"
     if (alterarPreco.value === '2') {
         inputPrecoCompra.readOnly = false; // Habilitar edição
-        inputMarkupEstoque.readOnly = false;
         inputprecoVenda.readOnly = false;
-
         inputPrecoCompra.style.background = 'white';
-        inputMarkupEstoque.style.background = 'white';
         inputprecoVenda.style.background = 'white';
     } else {
         inputPrecoCompra.readOnly = true; // Tornar somente leitura
-        inputMarkupEstoque.readOnly = true;
         inputprecoVenda.readOnly = true;
-
-        inputPrecoCompra.style.background = '#007bff00';
-        inputMarkupEstoque.style.background = '#007bff00';
-        inputprecoVenda.style.background = '#007bff00';
+          inputPrecoCompra.style.background = 'rgb(232, 232, 232)';
+        inputprecoVenda.style.background = 'rgb(232, 232, 232)';
     }
 }
 
@@ -300,6 +294,13 @@ function liberarInputsNV() {
     } else {
         inputqtvenda_id.readOnly = true; // Tornar somente leitura
         inputqtvenda_id.style.background = '#007bff00';
+    }
+}
+function liberarInputsPreco() {
+    if (situacaoSelect.value === '1') {
+        alterarPreco.disabled = false;
+    } else {
+       alterarPreco.disabled = true;
     }
 }
 

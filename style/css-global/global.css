@@ -356,19 +356,38 @@ header {
   align-items: center;
 }
 
-.botao-imprimir {
+.botao-imprimir{
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 1%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: none !important;
+  border: 1px solid rgb(200, 200, 200);
+  margin-left: 2%;
+
 }
 
-.botao-imprimir:hover {
-  background-color: rgba(167, 203, 243, 0.303);
+.imprimirCrediario {
+  background: transparent;
+  border: none;
+  padding: 4%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  border: 1px solid rgb(200, 200, 200);
+  margin-left: 2%;
+  margin-left: 10%;
+  width: 6rem;
+}
+
+
+.botao-imprimir:hover, .imprimirCrediario:hover {
+   border: 1px solid rgb(130, 130, 130);
 }
 
 .icone-impressora {
@@ -402,20 +421,19 @@ header {
 #btn-exit-qtd {
   position: absolute;
   top: 8px;
-  padding-bottom: 1%;
   right: 8px;
-  width: 25px;
-  height: 25px;
+  width: 45px;
+  height: 23px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
-  color: #000;
-  font-size: 18px;
+  color: #414040;
+  font-size: 23px;
   font-weight: normal;
   cursor: pointer;
-  border-radius: 4px;
   transition: background 0.2s, color 0.2s;
+  border: 1px solid rgb(230, 230, 230);
 }
  
 
@@ -436,9 +454,19 @@ header {
 #btn-exit-remover:hover,
 #btn-exit-qtd:hover,
 #btn-exit-serial:hover {
-  background-color: #c0c0c0;
-  color: white;
+  background-color: #c40000;
+  color: rgb(255, 255, 255);
 }
+
+.btn-exit-span,
+#btn-exit-pag-1, 
+#btn-exit-pag-2, 
+#btn-exit-pag-3, 
+#btn-exit-pag-4, 
+#btn-exit-pag-5{
+ padding-bottom: .7%;
+}
+
 
 button {
   display: flex;
@@ -499,4 +527,8 @@ button:hover {
 .img-informacao {
   width: 25px;
   margin-right: .5%;
+}
+
+.imgLupa{
+width: 25px;
 }

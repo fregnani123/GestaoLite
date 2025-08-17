@@ -63,43 +63,24 @@
                         <div class="formulario-inputs" id="formulario-inputs-gap-zero">
                             <table class="table-1-informacoes">
                                 <tr>
-                                    <th style="width: 20%;">Filtrar Cód. EAN</th>
-                                    <th style="width: 50%;">Filtrar Produto (Nome)</th>
-                                    <th style="width: 15%;">Filtrar Grupo</th>
-                                    <th style="width: 15%;">Filtrar SubGrupo</th>
+                                    <th style="width: 18%;">Filtrar Cód. EAN</th>
+                                    <th style="width: 20%;">Filtrar Grupo</th>
+                                    <th style="width: 20%;">Filtrar SubGrupo</th>
+                                    <th style="width: 18%;">Ações (Filtrar por grupo / subgrupo)</th>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="text" id="codigoEAN" style="width: 100%;"></td>
-                                    <td><input type="text" id="produtoNome" style="width: 100%;"></td>
+                                    <td><input placeholder="Digite para buscar" type="text" id="codigoEAN"
+                                            style="width: 100%;"></td>
                                     <td>
                                         <select id="grupo" style="width: 100%;">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select id="subgrupo" style="width: 100%;">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="table-2-informacoes">
-                                <tr class="info-recebe-th">
-                                    <th style="width: 20%;">Total de itens filtrados</th>
-                                    <th style="width: 25%;">Total em estoque (preço compra)</th>
-                                    <th style="width: 20%;">Imprimir relatório</th>
-                                    <th style="width: 30%;">Ações</th>
-                                </tr>
-                                <tr class="info-recebe-td">
-                                    <td id="td-total-itens"></td>
-                                    <td id="td-valor-estoque"></td>
-                                    <td>
-
-                                        <button class="botao-imprimir" title="Imprimir">
-                                            <img src="../style/img/impressora.png" alt="Imprimir" style="width: 30px;">
-                                        </button>
-
                                     </td>
                                     <td>
                                         <div class="acoes-container" style="display: flex; gap: 2%;">
@@ -114,6 +95,33 @@
                                         </div>
                                     </td>
                                 </tr>
+                            </table>
+                            <table class="table-2-informacoes">
+                                <tr class="info-recebe-th">
+                                    <th style="width: 16%;">Total de itens filtrados</th>
+                                    <th style="width: 24%;">Total em estoque (preço compra)</th>
+                                    <th style="width: 28%;">Imprimir relatório</th>
+
+                                </tr>
+                                <tr class="info-recebe-td">
+                                    <td id="td-total-itens"></td>
+                                    <td id="td-valor-estoque"></td>
+                                    <td>
+                                        <div style="display: flex; align-items: center;">
+                                            <select id="tipo-relatorio">
+                                                <option value="">-- Selecione --</option>
+                                                <option value="estoque">Relatório estoque</option>
+                                                <option value="preco">Relatório preço(Saída)</option>
+                                            </select>
+                                            <button class="botao-imprimir" title="Imprimir">
+                                                <img src="../style/img/impressora.png" alt="Imprimir"
+                                                    style="width: 25px;">
+                                            </button>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
                                 </tbody>
                             </table>
 
@@ -122,7 +130,7 @@
                             </div>
                             <div
                                 style="width: 99%; height: 29rem; overflow-x: auto; overflow-y: auto; border: 1px solid #ececec; margin-top: 0%;">
-                                <table id="tabela-produtos"  class="table-3-informacoes"
+                                <table id="tabela-produtos" class="table-3-informacoes"
                                     style="width: max-content; border-collapse: collapse;">
                                     <thead>
                                         <tr class="header-row">
@@ -130,7 +138,6 @@
                                             <th style="width: 450px;text-align: center;">Descrição Produto</th>
                                             <th style="width: auto ;">Estoque Atual</th>
                                             <th style="width: auto;">Estoque mínimo</th>
-                                            
                                             <th style="width: auto;">Preço Compra</th>
                                             <th style="width: auto;">Preço Venda</th>
                                             <th style="width: auto;">Qtd Vendida</th>

@@ -111,8 +111,41 @@ async function postControleEstoque(controleEstoque) {
 };
 
 
+async function getControleEstoque() {
+    await ensureDBInitialized();
+    try {
+        const controleEstoque = db.prepare(`
+            SELECT 
+                ce.*,
+                p.*, 
+                c.nome_cor_produto,
+                t.tamanho AS tamanho_letras,
+                tn.tamanho AS tamanho_numero,
+                tm.medida_nome AS medida_volume,
+                um.unidade_nome AS unidade_massa,
+                uc.unidade_nome AS unidade_comprimento
+            FROM controle_estoque ce
+            LEFT JOIN produto p ON ce.produto_id = p.produto_id
+            LEFT JOIN cor_produto c ON p.cor_produto_id = c.cor_produto_id
+            LEFT JOIN tamanho_letras t ON p.tamanho_letras_id = t.tamanho_id
+            LEFT JOIN tamanho_numero tn ON p.tamanho_num_id = tn.tamanho_id
+            LEFT JOIN medida_volume tm ON p.medida_volume_id = tm.medida_volume_id
+            LEFT JOIN unidade_massa um ON p.unidade_massa_id = um.unidade_massa_id
+            LEFT JOIN unidade_comprimento uc ON p.unidade_comprimento_id = uc.unidade_comprimento_id
+            ORDER BY ce.data_movimentacao DESC
+        `).all();
+
+        return controleEstoque;
+    } catch (error) {
+        console.error('Erro ao buscar controle de estoque com produto:', error);
+        throw error;
+    }
+}
+
+
 module.exports = {
     getUnidadeEstoque,
     UpdateEstoque,
-    postControleEstoque
+    postControleEstoque,
+    getControleEstoque
 };

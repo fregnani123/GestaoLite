@@ -4501,6 +4501,25 @@
     "Vale do Anari	",
     "Vale do Paraíso","Vilhena",],
 
+    "RR": [
+    "Alto Alegre",
+    "Amajari",
+    "Boa Vista",
+    "Bonfim",
+    "Cantá",
+    "Caracaraí",
+    "Caroebe",
+    "Iracema",
+    "Mucajaí",
+    "Normandia",
+    "Pacaraima",
+    "Rorainópolis",
+    "São João da Baliza",
+    "São Luiz",
+    "Uiramutã"
+],
+
+
    "SC": [
       "Abdon Batista", "Abelardo Luz", "Agrolândia", "Agronômica", "Água Doce", "Águas de Chapecó", "Águas Frias", "Águas Mornas", "Alfredo Wagner", "Alto Bela Vista",
       "Anchieta", "Angelina", "Anita Garibaldi", "Anitápolis", "Antônio Carlos", "Apiúna", "Arabutã", "Araquari", "Araranguá", "Armazém",
@@ -5422,7 +5441,7 @@
     // Adiciona a opção padrão "Selecione"
     const optionDefault = document.createElement('option');
     optionDefault.value = '';
-    optionDefault.textContent = 'Selecione';
+    optionDefault.textContent = '-- Selecione --';
     inputCidade.appendChild(optionDefault);
 
     // Adiciona as opções de cidade baseadas no estado selecionado

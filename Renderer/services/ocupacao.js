@@ -1,5 +1,5 @@
 const ocupacoes = [
-    { value: "", text: "Selecione:" },
+    { value: "", text: "-- Selecione --" },
     { value: "administrador", text: "Administrador" },
     { value: "advogado", text: "Advogado" },
     { value: "agricultor", text: "Agricultor" },

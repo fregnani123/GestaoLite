@@ -10,16 +10,24 @@
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
-    <link rel="stylesheet" href="../style/venda/pagamento.css">
     <link rel="stylesheet" href="../style/venda/tela_vendas.css">
+    <link rel="stylesheet" href="../style/venda/pagamento.css">
     <link rel="stylesheet" href="../style/venda/cupon.css">
     <link rel="stylesheet" href="../style/venda/modais.css">
 
     <title>Baixa no estoque por pedido</title>
 </head>
 
-
 <body>
+    <input id="numeroParcela" type="hidden" value="12" readonly>
+    <input id="id-cliente" type="hidden" value="1">
+    <input id="numeroParcela" type="hidden" type="number" value="12" readonly>
+    <!-- Quantidade, Descrição -->
+    <input type="hidden" id="medidaEstoque" readonly>
+    <input type="hidden" id="input-descricao" readonly>
+    <!-- valor unitario produto -->
+    <input type="hidden" id="valor-unitario" readonly>
+    <input id="id-cliente" type="hidden" value="1">
     <div id="loading-overlay" class="active">
         <div class="spinner"></div>
         <p>Carregando...</p>
@@ -28,344 +36,141 @@
         <header>
             <nav class="menu-suspenso barra-header">
                 <ul id="ul-Menu">
-
+                    <!-- renderiza no <script src="../Renderer/Menu/renderer_menu.js"></script> -->
                 </ul>
             </nav>
         </header>
         <div class="formulario-container">
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
-                    <ul>
-                        <ul>
-                            <li><a id="btn-pgto-dinheiro"><kbd>F1</kbd> Pagamento dinheiro</a></li>
-                            <li><a id="btn-pgto-pix"><kbd>F2</kbd> Pagamento PIX</a></li>
-                            <li><a id="btn-pgto-credito"><kbd>F3</kbd> Pagamento cartão crédito</a></li>
-                            <li><a id="btn-pgto-debito"><kbd>F4</kbd> Pagamento cartão débito</a></li>
-                            <!-- <li><a id="btn-esc"><kbd>F5</kbd>Pagamento Boleto</a></li> -->
-                            <li><a id="btn-cancelar-item"><kbd>F6</kbd> Remover item do Pedido</a></li>
-                            <li><a id="btn-crediario-loja"><kbd>F7</kbd> Pedido Parcelado (Crediário Loja)</a></li>
-                            <li><a id="btn-alterar-cliente"><kbd>F8</kbd> Alterar cliente Pedido</a></li>
-                            <li><a id="btn-alterar-qtd"><kbd>F9</kbd> Alterar quantidade</a></li>
-                            <li><a id="btn-desconto-venda"><kbd>F10</kbd> Desconto no pedido</a></li>
-                            <li><a id="btn-desconto-venda"><kbd>F11</kbd>Orçamento</a></li>
-                            <li><a id="btn-reiniciar-venda"><kbd>F12</kbd> Reiniciar pedido</a></li>
-                            <li><a id="btn-esc"><kbd>ESC</kbd> Fechar sub-telas abertas</a></li>
-                        </ul>
-
+                    <ul id="ul-Menu-Pagamentos">
+                        <!-- renderiza no <script src="../Renderer/Menu/renderer_menu.js"></script> -->
                     </ul>
                 </nav>
-
                 <div class="div-logo-empresa">
                     <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
                 </div>
             </div>
-
             <div class="formulario">
-
                 <div class="formulario-conteudo">
-
                     <div>
-                        <div
-                            style="height: 100hv; width: 100%; display: flex; align-items: center; justify-content: center;">
-                            <div class="cupom">
-                                <div class="cabecalho">
-                                    <div class="div-titulo">
-                                        <h3>
-                                            <span class="titulo-cupom" id=""></span>
-                                        </h3>
-                                    </div>
-                                    <span id="razaoSocial"></span>
-                                    <span id="cep"></span>
-                                    <span id="endereco"></span>
-                                    <span id="contato"></span>
-                                    <span id="cnpj"></span>
-                                </div>
-                                <div class="dados">
-                                    <span><strong>Cliente:</strong> <span id="cliente"></span></span>
-                                    <span><strong>CPF:</strong> <span id="CPFCli"></span> </span>
-                                    <span><strong>Data e Hora:</strong> <span id="dataVenda"></span></span>
-                                    <span><strong>Pedido Nº:</strong> <span id="numeroVenda"></span></span>
-                                    <span><strong>Doc. auxiliar do pedido :</strong> <span id="naoFiscal"></span></span>
-                                </div>
-                                <div class="itens-venda">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <strong>CÓDIGO</strong>
-                                        <strong>DESCRIÇÃO</strong>
-                                        <strong>VALOR R$</strong>
-                                    </div>
-                                    <div id="listaItens">
-                                    </div> <!-- Aqui vamos adicionar os itens -->
-                                </div>
-                                <div class="total">
-                                    <span class="total-span"><span>Desconto Aplicado:</span><span
-                                            id="cuponDesconto"></span></span>
-                                    <span class="total-span"><span>Total da Nota:</span><span
-                                            id="totalNota"></span></span>
-                                    <span class="total-span"><span>Valor Recebido:</span> <span
-                                            id="valorRecebidoCupom"></span></span>
-                                    <span class="total-span"><span>Troco:</span> <span id="trocoCupom"></span></span>
-                                    <span class="total-span"><span>Forma de Pagamento:</span> <span
-                                            id="formaPgto"></span></span>
-                                </div>
-                                <div class="assinatura">
-                                    <span class="text-recebi">Recebi os produto(s) conforme descrito(s)
-                                        acima.</span>
-                                    <hr>
-                                    <span class="text-assinatura">ASSINATURA DO CLIENTE</span>
-                                </div>
-                                <div class="rodape">
-
-                                    <span class="redeSocial"></span>
-                                    <span class="text-acesse">Acesse nossas redes sociais.</span>
-                                    <span class="text-slogan"></span>
-                                </div>
-
-                                <div class="carne-cred">
-                                    <span id='tituloCred'></span>
-                                    <!-- Aqui é criado o Crediario loja - impressao cupom. -->
-                                </div>
-                            </div>
-                            <!-- Div que renderiza a impressão -->
-                            <div id="impressaoCupom"></div>
-
-                            <!-- Div que renderiza a alterção da Qtd -->
-                            <div class="div-qtd">
-                                <div class="div-qtd-container">
-                                    <span id="btn-exit-qtd">x</span>
-                                    <div class="campo">
-                                        <label>Alterar Quantidade</label>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    Informe a quantidade
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input style="width: 100%;" type="text" id="input-qtd" value="1">
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                        <div class="botoes">
-                                            <button id="btn-qtd-produto" style="width: 100%;">
-                                                <img class="img-disquete" src="../style/img/troca.png" alt="">Alterar
-                                            </button>
-                                        </div>
-                                        <table style="margin-top: 3%;">
-                                            <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ Ao confirmar a alteração, o campo mudará de cor
-                                                    com a nova quantidade. Por
-                                                    padrão, o sistema insere 1x caso nenhuma quantidade seja selecionada
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        <div class="formulario-div-flex">
                             <!-- Div que renderiza a alterção do Cliente no Pedido -->
                             <div class="alterarCliente">
                                 <div class="div-container">
-
+                                    <!-- Busca por nome -->
                                     <div class="divNomes-2">
                                         <span id="btn-exit-nome-2">x</span>
-                                        <label for="">
-                                            Buscar cliente por nome</label>
-                                        <table>
+                                        <label for="buscaCliente-2">Buscar cliente por nome</label>
+                                        <table class="tabela-busca-nome">
                                             <tr>
                                                 <th>
-                                                    <div style="display: flex; align-items: center;">
-                                                        <img style="width: 22px; margin-right: 1%;"
-                                                            src="../style/img/procurar-black.png" alt="">
-                                                        Digite o nome do Cliente
+                                                    <div class="th-conteudo">
+                                                        <img src="../style/img/procurar-black.png" alt=""> Digite o nome
+                                                        do Cliente
                                                     </div>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" id="buscaCliente-2"></td>
+                                                <td>
+                                                    <input type="text" id="buscaCliente-2">
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <ul id="listaClientes-2" class="listaClientes-2">
-                                                    </ul>
+                                                    <ul id="listaClientes-2" class="listaClientes-2"></ul>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <span id="btn-exit">x</span>
+                                    <!-- Alterar cliente pedido -->
                                     <div class="campo-cliente">
                                         <label>Alterar Cliente Pedido</label>
-                                        <table>
-                                            <table>
-                                                <tr>
-                                                    <th
-                                                        style=" display: flex; align-items: center; justify-content: left; gap: 6px;">
-                                                        <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                            alt="">Buscar por CPF
-                                                    </th>
 
-                                                    <th>
-
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div
-                                                            style="display: flex; align-items: center; gap: 2%; width: 100%; justify-content: center; text-align: center;">
-
-                                                            <input id="alterClienteCPF" type="text" style="width: 100%;"
-                                                                placeholder="Digite pada buscar">
-
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button style="width: 100%;" id="btn-nome-alterar"> <img
-                                                                style="width: 18px;" src="../style/img/procurar.png"
-                                                                alt="">Buscar por
-                                                            nome</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th>
-                                                        Cliente selecionado
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!-- " -->
-                                                        <input id="nomeClienteAlter" type="text" readonly
-                                                            placeholder="Cliente não cadastrado no pedido">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </table>
-                                        <div
-                                            style="width: 100%;display: flex; align-items: center;margin-top: 2%;justify-content: center; gap:2%;">
-                                            <button id="btn-alterar-confirmar">
-                                                <img style="width: 20px;" src="../style/img/troca.png" alt="">Alterar
-                                            </button>
-                                            <button id="limparButton-cliente">
-                                                <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
-                                            </button>
-                                        </div>
-                                        <table style="margin-top: 3%;">
+                                        <table class="tabela-busca-cliente">
                                             <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ O cliente precisa estar previamente cadastrado no
-                                                    sistema para que a
-                                                    alteração no pedido seja possível.
+                                                <th class="th-busca-cpf">
+                                                    <img src="../style/img/procurar-black.png" alt=""> Buscar por CPF
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-busca-cpf">
+                                                        <input id="alterClienteCPF" type="text"
+                                                            placeholder="Digite para buscar">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button id="btn-nome-alterar">
+                                                        <img src="../style/img/procurar.png" alt=""> Buscar por nome
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </table>
-
+                                        <table class="tabela-cliente-selecionado">
+                                            <tr>
+                                                <th>Cliente selecionado</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input id="nomeClienteAlter" type="text" readonly
+                                                        placeholder="Cliente não cadastrado no pedido">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="botoes-cliente">
+                                            <button id="btn-alterar-confirmar">
+                                                <img src="../style/img/troca.png" alt=""> Alterar
+                                            </button>
+                                            <button id="limparButton-cliente">
+                                                <img class="img-excluir" src="../style/img/excluir.png" alt=""> Limpar
+                                            </button>
+                                        </div>
+                                        <table class="tabela-info-cliente">
+                                            <tr>
+                                                <td class="info-pag" id="info-pag">
+                                                    ⚠️ O cliente precisa estar previamente cadastrado no sistema para
+                                                    que a alteração no pedido seja possível.
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div class="desconto-venda">
                                 <div class="div-container">
                                     <div class="campo">
                                         <span id="btn-exit-desconto">x</span>
                                         <label>Desconto no Pedido</label>
-                                        <table>
+                                        <table class="tabela-tipo-desconto">
                                             <tr>
                                                 <th>Selecione a forma de desconto</th>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select id="tipoDesconto" style="
-                                                      color: black;
-                                                      padding: 0 1rem;
-                                                      font-size: 1rem;
-                                                      border-radius: 6px;
-                                                     
-                                                      text-align-last: center;
-                                                      width: 100%;
-                                                      box-sizing: border-box;
-                                                  ">
+                                                    <select id="tipoDesconto">
                                                         <option value="porcentagem" selected>Desconto em (%)</option>
                                                         <option value="real">Desconto em valor (R$)</option>
                                                     </select>
-
                                                 </td>
                                             </tr>
                                         </table>
                                         <!-- Desconto em porcentagem -->
-                                        <table style="margin-top: 2%">
+                                        <table class="tabela-porcentagem">
                                             <tr id="th-porcentagem" style="display: none;">
                                                 <th>Desconto em (%)</th>
                                             </tr>
                                             <tr id="td-porcentagem" style="display: none;">
                                                 <td>
-                                                    <input placeholder="Digite a porcentagem" id="desconto"
-                                                        type="text"><span class="span-porcent">%</span>
+                                                    <input placeholder="Digite a porcentagem" id="desconto" type="text">
+                                                    <span class="span-porcent">%</span>
                                                 </td>
                                             </tr>
                                         </table>
-
-                                        <table>
-                                            <!-- Desconto em valor -->
+                                        <!-- Desconto em valor -->
+                                        <table class="tabela-valor">
                                             <tr id="th-real" style="display: none;">
                                                 <th>Desconto em valor (R$)</th>
                                             </tr>
@@ -377,11 +182,9 @@
                                             </tr>
                                         </table>
 
-                                        <table style="margin-top: 2%">
+                                        <table class="tabela-subtotal">
                                             <tr>
-                                                <th>
-                                                    Subtotal do pedido atualizado:
-                                                </th>
+                                                <th>Subtotal do pedido atualizado:</th>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -389,16 +192,16 @@
                                                 </td>
                                             </tr>
                                         </table>
-
                                         <div class="botoes">
-                                            <button id="salvar-desconto"><img class="img-disquete"
-                                                    src="../style/img/disquete.png" alt="">Confirmar</button>
+                                            <button id="salvar-desconto">
+                                                <img class="img-disquete" src="../style/img/disquete.png"
+                                                    alt="">Confirmar
+                                            </button>
                                             <button id="limparButton-desconto">
                                                 <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
                                             </button>
                                         </div>
-
-                                        <table style="margin-top: 3%;">
+                                        <table class="tabela-info">
                                             <tr>
                                                 <td class="info-pag" id="info-pag">
                                                     ⚠️ Antes de confirmar o desconto, verifique os valores com atenção.
@@ -406,16 +209,13 @@
                                             </tr>
                                         </table>
 
-
                                     </div>
-
                                 </div>
                             </div>
-
                             <div class="confirmation-clear">
                                 <div class="div-container">
                                     <div class="campo-clear">
-                                        <span id="btn-exit-pag-5">x</span>
+                                        <p id="btn-exit-pag-5">&times;</p>
                                         <label>Reiniciar Pedido</label>
                                         <table>
                                             <tr>
@@ -424,7 +224,6 @@
                                                     administrador
                                                 </th>
                                             </tr>
-
                                             <td>
                                                 <form>
                                                     <input id="limpar-tela-key" type="password" name="senha"
@@ -438,7 +237,6 @@
                                                 <img style="width: 18px;" src="../style/img/confirmacao.png"
                                                     alt="">Confirmar e reiniciar </button>
                                         </div>
-
                                         <table style="margin-top: 3%;">
                                             <tr>
                                                 <td class="info-pag" id="info-pag">
@@ -451,7 +249,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="remove-item">
                                 <div class="div-container-remover">
                                     <span id="btn-exit-remover">x</span>
@@ -491,297 +288,162 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-                        <!--Configurações - Crediario-loja     <div id="div-Crediario">-->
+                        <!-- Configurações - Crediário Loja -->
                         <div id="parcelado">
-                            <div id="div-container-parcelado">
-                                <span id="btn-exit-parcelado">x</span>
-
-                                <label for="">Pedido Parcelado (Crediário loja)</label>
-                                <div class="divNomes">
-                                    <span id="btn-exit-nome">x</span>
-                                    <label for="">
-                                        Buscar cliente por nome</label>
-                                    <table>
-                                        <tr>
-                                            <th>
-                                                <div style="display: flex; align-items: center;">
-                                                    <img style="width: 22px; margin-right: 1%;"
-                                                        src="../style/img/procurar-black.png" alt="">
-                                                    Digite o nome do Cliente
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" id="buscaCliente"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <ul id="listaClientes">
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-
-                                <table>
+                            <div id="btn-exit-parcelado" class="btn-exit-span">&times;</div>
+                            <p class="p-titulo">
+                                <th>Pedido Parcelado (Crediário loja)</th>
+                            </p>
+                            <!-- Busca por nome do cliente -->
+                            <div class="divNomes">
+                                <span id="btn-exit-nome" class="btn-exit">x</span>
+                                <label for="buscaCliente">Buscar cliente por nome</label>
+                                <table class="tabela-busca-nome">
                                     <tr>
-                                        <th
-                                            style="display: flex; align-items: center; justify-content: left; gap: 6px;">
-                                            <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                alt="">Buscar por CPF
-                                        </th>
-                                        <th style="width: 55%;">
-                                            Nome do Cliente
-                                        </th>
-                                        <th style="width: 25%;">
-                                            Ações
-                                        </th>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-
-                                            <input id="Crediario-cliente" type="text" value=""
-                                                placeholder="Digite o CPF">
-
-                                        </td>
-                                        <td>
-                                            <input type="text" id="nomeCliente" readonly
-                                                placeholder="Cliente não cadastrado no pedido">
-                                        </td>
-                                        <td>
-                                            <button style="width: 100%;" id="btnBuscarNome"> <img style="width: 22px;"
-                                                    src="../style/img/procurar.png" alt="">
-                                                Buscar por nome</button>
-                                        </td>
-
-                                    </tr>
-                                </table>
-                                <!-- <table style="margin-top: 2%;">
-                                    <tr>
-                                     
-
-                                    </tr>
-                                    <tr>
-                                     
-
-                                    </tr>
-                                </table> -->
-
-                                <table style="margin-top: 2%;">
-                                    <tr>
-
-                                        <th style="width: 40%;">
-                                            Condição de pagamento:
-                                        </th>
-                                        <th style="width: 20%;">
-                                            Digite o num. parcelas
-                                        </th>
                                         <th>
-                                            Tipo de entrada
-                                        </th>
-                                        <th style="width: 20%;">
-                                            Valor da entrada
-                                        </th>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <select id="condicao-vencimento" style="font-size: 1rem; padding: 0.2rem;">
-                                                <option value="">Selecione</option>
-                                                <option value="entrada+30">Entrada + pagamentos mensais (30 dias)
-                                                </option>
-                                                <option value="30">Pagamentos mensais (30 dias)</option>
-                                                <option value="15">Pagamentos quinzenais (15 dias)</option>
-                                                <option value="entrada+15">Entrada + pagamentos quinzenais (15 dias)
-                                                </option>
-                                                <option value="7">Pagamentos semanais (7 dias)</option>
-                                                <option value="entrada+7">Entrada + Pgto semanais (7 dias)</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="" id="Crediario-parcela"
-                                                style="font-size: 1rem; padding: 0.2rem;">
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select id="tipo-pagamento" style="font-size: 1rem; padding: 0.2rem;">
-                                                <option value="Sem Entrada">-- Selecione --</option>
-                                                <option value="Dinheiro">Dinheiro</option>
-                                                <option value="PIX">PIX</option>
-                                                <option value="Cartão Crédito">Cartão Crédito</option>
-                                                <option value="Cartão Débito">Cartão Débito</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input id="valorEntrada" placeholder="0,00" readonly>
-                                        </td>
-
-
-
-                                    </tr>
-                                </table>
-
-                                <table style="margin-top: 2%;">
-                                    <tr>
-                                        <th style="width: 20%;">
-                                            Data do 1º vencimento
-                                        </th>
-
-                                        <th>
-                                            Taxa de Juros %
-                                        </th>
-                                        <th>
-                                            Valor da Parcela:
-                                        </th>
-                                        <th>
-                                            Subtotal crediário (com taxa de juros)
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input id="vencimentos" type="date">
-                                        </td>
-                                        <td>
-                                            <input id="taxa-juros" type="number" value="" readonly>
-                                        </td>
-                                        <td>
-                                            <input id="Crediario-valor" type="number" value="" placeholder="0,00"
-                                                readonly>
-                                        </td>
-                                        <td>
-                                            <input id="Crediario" type="text" value="0,00" readonly>
-                                        </td>
-
-
-                                    </tr>
-
-                                </table>
-                                <table style="margin-top: 2%;">
-                                    <tr>
-
-                                        <th style="width: 20%;">
-                                            Crédito liberado:
-                                        </th>
-                                        <th style="width: 20%;">
-                                            Crédito utilizado:
-                                        </th>
-
-                                        <th style="width: 20%;">
-                                            Ações
-                                        </th>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            <input id="creditoLimite" value="0,00" style="background-color: #e9ecef;"
-                                                readonly>
-                                        </td>
-                                        <td>
-                                            <input id="creditoUtilizado" value="0,00" readonly>
-                                        </td>
-
-                                        <td>
-                                            <div style="display: flex; align-items: center; gap: 2%;">
-                                                <button style="width: 100%;" id="btn-finalizar-venda">
-                                                    <img style="width: 22px;" src="../style/img/confirmacao.png" alt="">
-                                                    Finalizar</button>
-                                                <button style="width: 100%;" id="btn-limpar-formulario">
-                                                    <img style="width: 22px;" src="../style/img/cancelar.png" alt="">
-                                                    Limpar
-                                                </button>
-
+                                            <div class="th-conteudo">
+                                                <img class="icon-img" src="../style/img/procurar-black.png" alt="">
+                                                Digite o nome do Cliente
                                             </div>
-                                        </td>
-
+                                        </th>
                                     </tr>
-                                </table>
-
-                                <p class="obs-taxa">
-                                    <strong>Taxa de juros</strong> de <span class="taxa"></span> sobre o
-                                    <strong>total</strong>, que será adicionada a partir da
-                                    <strong>parcela</strong> <span class="taxa-parcela"></span> — esta taxa é
-                                    configurada pelo <strong>administrador do sistema</strong>.
-                                </p>
-
-
-                                <table style="margin-top: 2%;">
-
-                                    <tr style="border: 1px solid gray;">
+                                    <tr>
+                                        <td><input type="text" id="buscaCliente" class="input-busca"></td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            <p style="text-align: left;">
-                                                ⚠️ Para pedidos <strong>parcelados</strong>, o cliente <strong>já deve
-                                                    estar previamente cadastrado no sistema</strong>.
-                                                Verifique com <strong>atenção</strong> os dados antes de finalizar.
-                                                O <strong>crédito</strong> também deve estar <strong>suficiente</strong>
-                                                e <strong>liberado</strong> no cadastro do cliente ou
-                                                <strong>ajustado</strong> na opção <strong>Alterar
-                                                    Cliente</strong>.<br>
-
-                                                * As <strong>taxas de juros</strong> aplicadas nas parcelas são, por
-                                                padrão, <strong>zero</strong>.
-                                                Cabe ao <strong>administrador do sistema</strong> definir, configurar ou
-                                                aplicar alterações conforme necessário, na seção <strong>Configurações
-                                                    &gt; Configurar Multas e Juros</strong>.
-                                            </p>
-
-
+                                            <ul id="listaClientes" class="listaClientes"></ul>
                                         </td>
-
                                     </tr>
                                 </table>
-                                <input id="id-cliente" type="hidden" value="1">
-
-
-
-
-
                             </div>
+                            <!-- Busca por CPF e Nome -->
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img class="icon-img" src="../style/img/procurar-black.png" alt=""> Buscar
+                                        por CPF
+                                    </th>
+                                    <th>Nome do Cliente</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td><input id="Crediario-cliente" type="text" placeholder="Digite o CPF"></td>
+                                    <td><input type="text" id="nomeCliente" readonly
+                                            placeholder="Cliente não cadastrado no pedido"></td>
+                                    <td>
+                                        <button id="btnBuscarNome" class="btn-acao">
+                                            <img class="icon-img" src="../style/img/procurar.png" alt=""> Buscar por
+                                            nome
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Condição de pagamento e parcelas -->
+                            <table class="tabela-pagamento">
+                                <tr>
+                                    <th>Condição de pagamento:</th>
+                                    <th>Digite o num. parcelas</th>
+                                    <th>Tipo de entrada</th>
+                                    <th>Valor da entrada</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select id="condicao-vencimento" class="select-condicao">
+                                            <option value="">Selecione</option>
+                                            <option value="entrada+30">Entrada + pagamentos mensais (30 dias)
+                                            </option>
+                                            <option value="30">Pagamentos mensais (30 dias)</option>
+                                            <option value="15">Pagamentos quinzenais (15 dias)</option>
+                                            <option value="entrada+15">Entrada + pagamentos quinzenais (15 dias)
+                                            </option>
+                                            <option value="7">Pagamentos semanais (7 dias)</option>
+                                            <option value="entrada+7">Entrada + Pgto semanais (7 dias)</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="Crediario-parcela" class="select-parcela"></select>
+                                    </td>
+                                    <td>
+                                        <select id="tipo-pagamento" class="select-tipo-pagamento">
+                                            <option value="Sem Entrada">-- Selecione --</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                            <option value="PIX">PIX</option>
+                                            <option value="Cartão Crédito">Cartão Crédito</option>
+                                            <option value="Cartão Débito">Cartão Débito</option>
+                                        </select>
+                                    </td>
+                                    <td><input id="valorEntrada" class="input-entrada" placeholder="0,00" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Datas, juros e valores -->
+                            <table class="tabela-valores">
+                                <tr>
+                                    <th>Data do 1º vencimento</th>
+                                    <th>Taxa de Juros %</th>
+                                    <th>Valor da Parcela</th>
+                                    <th>Subtotal crediário (com taxa de juros)</th>
+                                </tr>
+                                <tr>
+                                    <td><input id="vencimentos" type="date" class="input-vencimento"></td>
+                                    <td><input id="taxa-juros" type="number" class="input-juros" readonly></td>
+                                    <td><input id="Crediario-valor" type="number" class="input-parcela"
+                                            placeholder="0,00" readonly></td>
+                                    <td><input id="Crediario" type="text" class="input-subtotal" value="0,00" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Crédito e ações -->
+                            <table class="tabela-credito">
+                                <tr>
+                                    <th>Crédito liberado</th>
+                                    <th>Crédito utilizado</th>
+                                    <th>Ações</th>
+                                </tr>
+                                <tr>
+                                    <td><input id="creditoLimite" class="input-credito-liberado" value="0,00" readonly>
+                                    </td>
+                                    <td><input id="creditoUtilizado" class="input-credito-utilizado" value="0,00"
+                                            readonly></td>
+                                    <td>
+                                        <div class="div-botoes-credito">
+                                            <button id="btn-finalizar-venda" class="btn-acao">
+                                                <img class="icon-img" src="../style/img/confirmacao.png" alt="">
+                                                Finalizar
+                                            </button>
+                                            <button id="btn-limpar-formulario" class="btn-acao">
+                                                <img class="icon-img" src="../style/img/cancelar.png" alt=""> Limpar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p class="obs-taxa">
+                                <strong>Taxa de juros</strong> de <span class="taxa"></span> sobre o
+                                <strong>total</strong>, que será adicionada a partir da
+                                <strong>parcela</strong> <span class="taxa-parcela"></span> — esta taxa é
+                                configurada pelo <strong>administrador do sistema</strong>.
+                            </p>
+                            <table class="tabela-aviso">
+                                <tr>
+                                    <td>
+                                        <p id="aviso-pedidos">
+                                            <!-- renderiza no <script <script src="../Renderer/services/informacoes.js"></script> -->
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            </p>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="payment-form-section">
                             <div class="div-pagamento">
-                                <label class="titulo-choose-item-2">
-                                    Forma de pagamento
-                                </label>
+                                <label class="titulo-choose-item-2">Forma de pagamento</label>
                                 <div class="pagamento-container">
                                     <div class="pagamento-default">
                                         <div class="pagamento-default-1" id="div-valorDinheiro">
-                                            <span id="btn-exit-pag-1">x
-                                            </span>
+                                            <p id="btn-exit-pag-1">p</p>
                                             <table>
                                                 <tr>
                                                     <th for="valorDinheiro">À Vista (Dinheiro):</th>
@@ -792,16 +454,13 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div
-                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                                <button style="width: 100%;" id="enter-aVista" class="enter-trigger">
-                                                    Finalizar pedido (Enter)</button>
+                                            <div class="button-wrapper">
+                                                <button id="enter-aVista" class="enter-trigger">Finalizar pedido
+                                                    (Enter)</button>
                                             </div>
                                         </div>
-
                                         <div class="pagamento-default-1" id="div-PIX">
-                                            <span id="btn-exit-pag-2">x
-                                            </span>
+                                            <p id="btn-exit-pag-2">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th for="PIX">PIX:</th>
@@ -812,16 +471,13 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div
-                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                                <button style="width: 100%;" id="enter-PIX" class="enter-trigger">
-                                                    Finalizar pedido (Enter)</button>
+                                            <div class="button-wrapper">
+                                                <button id="enter-PIX" class="enter-trigger">Finalizar pedido
+                                                    (Enter)</button>
                                             </div>
                                         </div>
-
                                         <div class="pagamento-default-1" id="div-Cartao-Debito">
-                                            <span id="btn-exit-pag-3">x
-                                            </span>
+                                            <p id="btn-exit-pag-3">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th for="Cartao-Debito">Cartão Débito:</th>
@@ -832,16 +488,12 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div
-                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                                <button style="width: 100%;" class="enter-trigger">
-                                                    Finalizar pedido (Enter)</button>
+                                            <div class="button-wrapper">
+                                                <button class="enter-trigger">Finalizar pedido (Enter)</button>
                                             </div>
                                         </div>
-
                                         <div class="pagamento-default-1" id="div-Cartao-Credito">
-                                            <span id="btn-exit-pag-4">x
-                                            </span>
+                                            <p id="btn-exit-pag-4">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th for="Cartao-Credito">Cartão Crédito:</th>
@@ -852,15 +504,12 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div
-                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                                <button style="width: 100%;" class="enter-trigger">
-                                                    Finalizar pedido (Enter)</button>
+                                            <div class="button-wrapper">
+                                                <button class="enter-trigger">Finalizar pedido (Enter)</button>
                                             </div>
                                         </div>
-                                        <div class="pagamento-default-1" id="div-boleto" style="display: none;">
-                                            <span id="btn-exit-pag-5">x
-                                            </span>
+                                        <div class="pagamento-default-1" id="div-boleto">
+                                            <p id="btn-exit-pag-5">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th for="Cartao-boleto">Boleto bancário:</th>
@@ -871,233 +520,160 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div
-                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                                <button style="width: 100%; ">
-                                                    Finalizar pedido</button>
+                                            <div class="button-wrapper">
+                                                <button>Finalizar pedido</button>
                                             </div>
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     </div>
                                     <div class="formulario-mensages-informativas">
                                         <p><strong>Atenção:</strong> Parcelamentos no crediário acima de
                                             <strong><span id="spanMaxParcelas"></span>X</strong> parcelas
                                             terão uma taxa de X% de juros,
-                                            definida pelo setor financeiro nas configurações do
-                                            sistema.<input id="numeroParcela" type="hidden" type="number" value="12"
-                                                readonly>
+                                            definida pelo setor financeiro nas configurações do sistema.
+
                                         </p>
                                     </div>
-
                                     <table>
                                         <tr>
                                             <td class="info-pag" id="info-pag">
-                                                Pressione (Shift + Atalho Pgto) para adicionar mais opções de
-                                                Pgto
+                                                Pressione (Shift + Atalho Pgto) para adicionar mais opções de Pgto
                                             </td>
                                         </tr>
                                     </table>
-
-                                </div>
-                            </div>
-                            </strong>
-                        </div>
-                        <!-- Quantidade, Descrição -->
-                        <input type="hidden" id="medidaEstoque" readonly>
-                        <input type="hidden" id="input-descricao" readonly>
-                        <!-- valor unitario produto -->
-                        <input type="hidden" id="valor-unitario" readonly>
-                        <!-------------------------------------------------------------------------------------------->
-                        <!-- Dados do produto -->
-
-                        <!-- <section class="product-section">
-                                    <div class="info-item-nome-cliente" style="display: none;">
-                                        <label class="info-container-label" for="nome-cliente">Cliente:</label>
-                                        <input id="nome-cliente" type="text" readonly value="Consumidor Final">
-
-                                      <input id="id-cliente" type="hidden" value="1">
-                                      <input id="creditoLimite" >
-                                       <input id="creditoUtilizado" >  -->
-                    </div>
-
-                    <div style="width: 100%;height: 100%; gap: 0%;">
-                        <div class="div-info">
-                            <div class="info-item-data" style="display: none;">
-                                <label class="info-container-label" for="data-venda">Data da
-                                    Venda:</label>
-                                <input type="text" id="data-venda" readonly>
-                            </div>
-                            <div class="div-nomeProduto">
-                                <p class="p-nome-produto"><span class="ultimo-pro">Último produto
-                                        adicionado:</span><span class="nomeProduto"></span>
-                                </p>
-                            </div>
-
-                            <div class="div-time">
-                                <p class="square-time"><span class="squere-hide">.</span></p>
-                                <p class="square-day">Obrigado pela preferência!</p>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; width: 100%;height: 56.5%;">
-                            <div style="height: 400px; border: 1px solid gray; width: 500px;">
-                                <div class="product-codigo">
-                                    <div class="div-img"
-                                        style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                                        <img style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                                            class="img-produto" src="../style/img/carrinho-de-compras.png">
-                                    </div>
-                                    <p>Filtrar por código EAN</p>
-                                    <input type="text" id="codigo" style="margin-top: 3%;">
-                                    <div class="product-quantity">
-                                        <p>Quantidade: <span class="qtd-selecionada">1x</span></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="div-carrinho">
-                                <div class="carrinho">
-                                    <div style="overflow: hidden;">
-                                        <ul class="ul-carrinho">
-                                            <li class="li-titulo-carrino">
-                                                <label style="border-bottom: 1px solid black; margin-top: 10px;"
-                                                    for="numero-pedido">Nº Pedido:</label>
-                                                <input type="text" id="numero-pedido" readonly>
-                                                <span style="border-bottom: 1px solid black;">Itens
-                                                    adicionados</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="ul-descricao-produto">
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div style="width: 100%; margin-top: 1%;">
-                            <div class="div-total-liquido">
-                                <div class="valores">
-                                    <div class=" val-div">
-                                        <p><span style="width: 50%;display: flex; justify-content: right;">Desconto
-                                                (%):</span> <input id="mostrarDesconto" class="inputReadonly"
-                                                type="text" value="0%" readonly></p>
-                                    </div>
+                        <div id="div-container-venda">
+                            <div class="div-info">
+                                <div class="info-item-data">
+                                    <label class="info-container-label" for="data-venda">Data da Venda:</label>
+                                    <input type="text" id="data-venda" readonly>
+                                </div>
 
-                                    <div class=" val-div">
-                                        <p><span style="width: 50%;display: flex; justify-content: right;">Desc.
-                                                em
-                                                (R$): </span><input id="mostrarDescontoReal" class="inputReadonly"
-                                                type="text" value="0,00" readonly></p>
+                                <div class="div-nomeProduto">
+                                    <p class="p-nome-produto">
+                                        <span class="ultimo-pro">Último produto adicionado:</span>
+                                        <span class="nomeProduto"></span>
+                                    </p>
+                                </div>
 
-                                    </div>
+                                <div class="div-time">
+                                    <p class="square-time"><span class="squere-hide">.</span></p>
+                                    <p class="square-day">Obrigado pela preferência!</p>
+                                </div>
+                            </div>
 
-                                    <div class="val-div">
-                                        <p><span style="width: 50%;display: flex; justify-content: right;">Valores
-                                                Pagos:</span><input id="total-pago" class="inputReadonly" value="0,00"
-                                                type="text" readonly>
-                                        </p>
-
+                            <div class="produtos-carrinho">
+                                <div class="produto-box">
+                                    <div class="product-codigo">
+                                        <div class="div-img">
+                                            <img class="img-produto" src="../style/img/carrinho-de-compras.png">
+                                        </div>
+                                        <div>
+                                            <div class="div-filtrar">
+                                                <p>Filtrar por código EAN</p>
+                                                <input id="codigo">
+                                            </div>
+                                            <div>
+                                                <p style="text-align: center;">Quantidade
+                                                    <input style="width: 100%;" type="text" id="input-qtd" value="1"
+                                                        readonly>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="valores-2">
-                                    <div class="val-2">
+
+                                <div class="div-carrinho">
+                                    <div class="carrinho">
+                                        <div class="carrinho-listas">
+                                            <ul class="ul-carrinho">
+                                                <li class="li-titulo-carrinho">
+                                                    <div>
+                                                        <label for="numero-pedido">Nº Pedido:</label>
+                                                        <input type="text" id="numero-pedido" readonly>
+                                                        <p class="p-titulo-carrinho">Itens adicionados</p>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                            <ul class="ul-descricao-produto"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="total-wrapper">
+                                <div class="div-total-liquido">
+                                    <div class="valores">
                                         <div class="val-div">
-                                            <p><span
-                                                    style="width: 10%; display: flex; justify-content: right;">Troco:</span>
-                                                <input id="troco" value="0,00" type="text" class="inputReadonly"
+                                            <p><span class="label-direita">Desconto (%):</span>
+                                                <input id="mostrarDesconto" class="inputReadonly" type="text" value="0%"
                                                     readonly>
                                             </p>
                                         </div>
-                                        <div class="val-div">
-                                            <p><span
-                                                    style="width: 10%; display: flex;justify-content: right;">Subtotal:</span>
-                                                <input id="total-liquido" type="text" value="0,00" class="inputReadonly"
-                                                    readonly>
-                                            </p>
 
+                                        <div class="val-div">
+                                            <p><span class="label-direita">Desc. em (R$): </span>
+                                                <input id="mostrarDescontoReal" class="inputReadonly" type="text"
+                                                    value="0,00" readonly>
+                                            </p>
                                         </div>
                                         <div class="val-div">
-                                            <p style="display: flex; align-items: center;"><span
-                                                    style="width: 10%;display: flex; justify-content: right;">Cliente:</span>
+                                            <p><span class="label-direita">Valores Pagos:</span>
+                                                <input id="total-pago" class="inputReadonly" value="0,00" type="text"
+                                                    readonly>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="valores-2">
+                                        <div class="val-div-1">
+                                            <p><span class="label-direita label-troco">Troco:</span>
+                                                <input id="troco" value="0,00" type="text" class="inputReadonly">
+                                            </p>
+                                        </div>
+                                        <div class="val-div-1">
+                                            <p><span class="label-direita label-subtotal">Subtotal:</span>
+                                                <input id="total-liquido" type="text" value="0,00"
+                                                    class="inputReadonly">
+                                            </p>
+                                        </div>
+                                        <div class="val-div-1">
+                                            <p class="linha-cliente">
+                                                <span class="label-cliente">Cliente:</span>
                                                 <input placeholder="Cliente não cadastrado no pedido" type="text"
-                                                    id="clienteNome" class="clienteNome" value="" readonly
-                                                    style="width: 80% !important;">
+                                                    id="clienteNome" class="clienteNome" value="" readonly>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="mensagem-informativa-wrapper">
-                            <p class="formulario-mensages-informativas-p">
-                                <strong>
-                                </strong>⚠️ Esta tela é destinada ao
-                                <strong>controle de saída de estoque</strong> e
-                                <strong>registro de pedidos</strong>, organizados por
-                                período e forma de pagamento.
-                                A
-                                emissão gerada é apenas um
-                                <strong>cupom sem validade fiscal</strong>, utilizado
-                                <strong>exclusivamente para
-                                    fins
-                                    de controle interno</strong>.
-                                O objetivo é permitir a geração de
-                                <strong>relatórios</strong> personalizados sobre o destino
-                                dos
-                                produtos no estoque.
-                                Este sistema <strong>não realiza gestão fiscal ou
-                                    burocrática do usuário.</strong>
-                            </p>
+                            <div class="mensagem-informativa-wrapper"></div>
+                            <div id="impressaoCupom"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
     </div>
     </div>
 </body>
 <script src="../Renderer/transicao.js" defer></script>
-<script src="../Renderer/Vendas/renderer_vendas.js"></script>
-<script src="../Renderer/services/converte_moeda.js"></script>
-<script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/Vendas/api_vendas/api_vendas.js"></script>
 <script src="../Renderer/services/renderer_relogio.js"></script>
+<script src="../Renderer/Vendas/venda_api.js"></script>
+<script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/alertMsg.js"></script>
+<script src="../Renderer/services/informacoes.js"></script>
+<script src="../Renderer/services/formatters.js"></script>
+<script src="../Renderer/Vendas/venda.js"></script>
+<script src="../Renderer/Vendas/btn_venda.js"></script>
 <script src="../Renderer/Vendas/carrinho.js"></script>
+<script src="../Renderer/Menu/renderer_menu.js"></script>
+<script src="../Renderer/Vendas/renderer_vendas.js"></script>
+<script src="../Renderer/Vendas/api_vendas/api_vendas.js"></script>
 <script src="../Renderer/Vendas/pagamento.js"></script>
 <script src="../Renderer/Vendas/finalizarVenda.js"></script>
 <script src="../Renderer/Vendas/api_vendas/api_crediario.js"></script>
 <script src="../Renderer/imprimir/cupom.js"></script>
-<script src="../Renderer/Menu/renderer_menu.js"></script>
 
 </html>

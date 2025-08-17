@@ -206,7 +206,7 @@ async function postNewSerial(newSerial) {
 
     // Oculta o container, se existir
     if (termosContainer) termosContainer.style.display = 'none';
-
+    location.reload();
     return true;
 
   } catch (error) {

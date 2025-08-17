@@ -1,5 +1,5 @@
 const ramosDeAtividade = [
-    { value: "Selecione:", text: "Selecione:" },
+    { value: "", text: "-- Selecione --" },
     { value: "Agropecuária", text: "Agropecuária" },
     { value: "Alimentício", text: "Alimentício" },
     { value: "Artesanato", text: "Artesanato" },

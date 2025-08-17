@@ -62,7 +62,7 @@ if (entrada > 0) {
         valor_parcela: entrada.toFixed(2),
         data_vencimento: formatDateToYMD(agora),
         data_pagamento: formatDateToYMD(agora),
-        status: 'PAGO',
+        status: 'Paga',
         tipo_entrada: tipoPagamento,
         condicao_vencimento: condicao,
     };

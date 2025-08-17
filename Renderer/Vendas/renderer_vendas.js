@@ -27,7 +27,7 @@ const formaPagamento = document.querySelector('.square-2-2-2-4');
 const inputExitVenda = document.querySelector('#exit-key');
 const inputlimparTelakey = document.querySelector('#limpar-tela-key');
 const inputExcluiItem = document.querySelector('#numero-Item');
-const limparButtonDesconto= document.getElementById('limparButton-desconto');
+const limparButtonDesconto = document.getElementById('limparButton-desconto');
 const mensagemDiv = document.querySelector('#mensagem');
 const mostrarDesconto = document.getElementById("mostrarDesconto");
 const mostrarDescontoReal = document.getElementById("mostrarDescontoReal");
@@ -45,7 +45,7 @@ const CrediarioCliente = document.getElementById('Crediario-cliente');
 const info_container = document.querySelector('.info-container');
 const imgProduto = document.querySelector('.img-produto');
 const impressaoCupom = document.getElementById('impressaoCupom');
-const div_qtd = document.querySelector('.product-quantity')
+
 const inputdescontoPorcentagem = document.getElementById('desconto');
 const divValorDinheiro = document.getElementById('div-valorDinheiro');
 const divPIX = document.getElementById('div-PIX');
@@ -80,7 +80,6 @@ const atalhos = {
     'btn-cancelar-item': 'F6',
     'btn-crediario-loja': 'F7',
     'btn-alterar-cliente': 'F8',
-    'btn-alterar-qtd': 'F9',
     'btn-desconto-venda': 'F10',
     'btn-reiniciar-venda': 'F12',
     'btn-esc': 'Escape',
@@ -139,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputQtd = document.querySelector('#input-qtd');
     const alertLimparVenda = document.querySelector('.confirmation-clear');
     const alertRemoverItem = document.querySelector('.remove-item');
-    const divSelecionarQtd = document.querySelector('.div-qtd');
     const divPagamento = document.querySelector('.payment-form-section');
     const divDesconto = document.querySelector('.desconto-venda');
 
@@ -157,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             limparInputsPagamento();
-            limparCamposCrediario()   
+            limparCamposCrediario()
             carrinhoShowRemover.classList.remove('zindex-alto');
 
         }
@@ -165,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (event) => {
         // Selecionar as divs principais
-        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divSelecionarQtd, divDesconto, divAlterarCliente,divCrediario].filter(div => div.style.display === 'block');
-        const visibleDivsPag = [divValorDinheiro, divPIX, divCartaoDebito, divCartaoCredito, divCrediario ];
+        const visibleDivs = [alertRemoverItem, divPagamento, alertLimparVenda, divDesconto, divAlterarCliente, divCrediario].filter(div => div.style.display === 'block');
+        const visibleDivsPag = [divValorDinheiro, divPIX, divCartaoDebito, divCartaoCredito, divCrediario];
 
         // Função para gerenciar visibilidade de formas de pagamento
         function showOnlyThisDiv(targetDiv) {
@@ -182,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
                     codigoEan.focus();
-                      
+
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divValorDinheiro);
@@ -195,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F2': // Forma pagamento PIX
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
-                        codigoEan.focus();
+                    codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divPIX);
@@ -209,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F3': // Forma pagamento Cartão Crédito
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
-                        codigoEan.focus();
+                    codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoCredito);
@@ -223,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F4': // Forma pagamento Cartão Débito
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
-                        codigoEan.focus();
+                    codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCartaoDebito);
@@ -244,17 +242,17 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F7': // Forma pagamento 
                 if (inputTotalLiquido.value === '0,00') {
                     alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
-                        codigoEan.focus();
+                    codigoEan.focus();
                 } else if (event.shiftKey || visibleDivs.length === 0) {
                     divPagamento.style.display = 'block';
                     showOnlyThisDiv(divCrediario);
                     Crediario.value = inputTotalLiquido.value;
 
-                    formatarMoedaBRL(entradaCrediario) 
+                    formatarMoedaBRL(entradaCrediario)
 
                     CrediarioCliente.focus();
                     infoPag.style.display = 'none';
-                    divPagamento.style.left= '60%'
+                    divPagamento.style.left = '60%'
                     // infoPagCred.style.display = 'flex'
                 }
                 break;
@@ -273,13 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 inputExcluiItem.focus();
                 break;
-            case 'F9': // Alterar quantidade de produtos
-                if (visibleDivs.length === 0) {
-                    divSelecionarQtd.style.display = 'block';
-                    inputQtd.value = ''
-                    inputQtd.focus();
-                }
+
+
+            case 'F9': // Aplicar desconto na venda
+                inputQtd.readOnly = false; // libera edição
+                inputQtd.focus();          // foca no campo
                 break;
+
 
             case 'F10': // Aplicar desconto na venda
                 if (inputTotalLiquido.value === '0,00') {
@@ -291,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'F12': // Limpar venda
-                if(inputTotalLiquido.value === '0,00'){
-                      alertMsg(`${'Não é possível reiniciar a venda sem itens adicionados ou com subtotal igual a zero.'}`, 'info', 4000);      
+                if (inputTotalLiquido.value === '0,00') {
+                    alertMsg(`${'Não é possível reiniciar a venda sem itens adicionados ou com subtotal igual a zero.'}`, 'info', 4000);
                     return;
                 }
                 if (visibleDivs.length === 0) {
@@ -317,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             imgProduto.src = carrinho[carrinho.length - 1].imgSrc || "../style/img/carrinho-de-compras.png";
                         }
 
-                        alertMsg(`Item ${index + 1} removido do carrinho.`,'info', 4000);
+                        alertMsg(`Item ${index + 1} removido do carrinho.`, 'info', 4000);
                     }
                     nomeProduto.innerHTML = ''
                     alertRemoverItem.style.display = 'none';
@@ -339,14 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 break;
 
-            case 'Enter': // Confirmar quantidade ou exclusão
-                if (alertRemoverItem.style.display === 'block') {
-                    inputExcluiItem.focus();
-                } else if (divSelecionarQtd.style.display === 'block') {
-                    divSelecionarQtd.style.display = 'none';
-                    codigoEan.focus();
-                }
-                break;
+
         }
     });
 });
@@ -364,41 +355,20 @@ codigoEan.addEventListener('input', (e) => {
                 carrinho,
                 converteMoeda,
                 inputTotalLiquido,
-                textSelecionarQtd
+
             );
-            div_qtd.style.backgroundColor = '';
+
         }, 100);
     } else if (e.target.value.length === 0) resetInputs();
     getVenda(numeroPedido.value);
 });
 
-inputQtd.addEventListener('input', function (e) {
-    let value = e.target.value;
-    if (parseInt(inputQtd.value) === 0) {
-        alertMsg('Não é permitido adicionar 0, minimo 1', 'orange', 3000);
-        inputQtd.value = '1'
-        div_qtd.style.backgroundColor = ''
-        divSelecionarQtd.style.display = 'none';
-        return;
-    }
-    // Remove qualquer caractere que não seja número
-    value = value.replace(/\D/g, '');
-
-    // Limita o número de caracteres a 13
-    if (value.length > 9) {
-        value = value.substring(0, 9);
-    }
-    // Atualiza o valor do input com o valor formatado
-    e.target.value = value;
-    textSelecionarQtd.innerHTML = `${e.target.value}x`
-    div_qtd.style.backgroundColor = 'yellow';
-});
 
 
 const limparTelakey = (e) => {
     if (e.key === 'Enter') {
         if (inputlimparTelakey.value === 'adm') {
-            alertMsg('Todos os campos serão limpos e a venda será reiniciada.','info', 4000);
+            alertMsg('Todos os campos serão limpos e a venda será reiniciada.', 'info', 4000);
             limparCampos();
         } else {
             alertMsg('Senha incorreta, tente novamente.', 'error', 3000);
@@ -413,40 +383,40 @@ const limparTelakey = (e) => {
 
 inputlimparTelakey.addEventListener('keydown', limparTelakey);
 
-  document.getElementById('btn-limpar-formulario').addEventListener('click', limparCamposCrediario);
+document.getElementById('btn-limpar-formulario').addEventListener('click', limparCamposCrediario);
 
-    function limparCamposCrediario() {
-        // Campos de texto e número
-        document.getElementById('Crediario-cliente').value = '';
-        document.getElementById('nomeCliente').value = '';
-        document.getElementById('condicao-vencimento').value = '';
-        document.getElementById('Crediario-parcela').value = '';
-        document.getElementById('tipo-pagamento').value = '';
-        document.getElementById('valorEntrada').value = '';
-        document.getElementById('Crediario-valor').value = '';
-        // document.getElementById('Crediario').value = '0,00';
-        // document.getElementById('creditoLimite').value = '0,00';
-        // document.getElementById('creditoUtilizado').value = '0,00';
-        document.getElementById('vencimentos').value = '';
+function limparCamposCrediario() {
+    // Campos de texto e número
+    document.getElementById('Crediario-cliente').value = '';
+    document.getElementById('nomeCliente').value = '';
+    document.getElementById('condicao-vencimento').value = '';
+    document.getElementById('Crediario-parcela').value = '';
+    document.getElementById('tipo-pagamento').value = '';
+    document.getElementById('valorEntrada').value = '';
+    document.getElementById('Crediario-valor').value = '';
+    // document.getElementById('Crediario').value = '0,00';
+    // document.getElementById('creditoLimite').value = '0,00';
+    // document.getElementById('creditoUtilizado').value = '0,00';
+    document.getElementById('vencimentos').value = '';
 
-        // Campo de busca de cliente
-        document.getElementById('buscaCliente').value = '';
+    // Campo de busca de cliente
+    document.getElementById('buscaCliente').value = '';
 
-        // Lista de clientes (ul) esvaziada
-        const listaClientes = document.getElementById('listaClientes');
-        if (listaClientes) {
-            listaClientes.innerHTML = '';
-        }
-
-        // Oculta a div de nomes, se estiver visível
-        const divNomes = document.querySelector('.divNomes');
-        if (divNomes) {
-            divNomes.style.display = 'none';
-        }
-       cpfCliente.focus();
+    // Lista de clientes (ul) esvaziada
+    const listaClientes = document.getElementById('listaClientes');
+    if (listaClientes) {
+        listaClientes.innerHTML = '';
     }
 
- 
+    // Oculta a div de nomes, se estiver visível
+    const divNomes = document.querySelector('.divNomes');
+    if (divNomes) {
+        divNomes.style.display = 'none';
+    }
+    cpfCliente.focus();
+}
+
+
 
 const tipoDesconto = document.getElementById('tipoDesconto');
 

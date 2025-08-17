@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<meta charset="UTF-8">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,7 +96,9 @@
                                     <td>
                                         <div
                                             style="display: flex; text-align: center;align-items: center;gap: 1%;width: 100%;">
-                                            <input type="text" id="nome" style="width: 70%;" required>
+                                            <input type="text" id="nome" style="width: 70%;"
+                                                placeholder="Nenhum cliente selecionado" required readonly>
+
                                             <div style="background: white; padding: .5%; display: flex;">
                                                 <button class="btn-buscar" style="width: 100%;"> <img
                                                         style="width: 18px;" src="../style/img/procurar.png"
@@ -134,10 +135,12 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input id="alterarCredito" value="" name="credito" required></input>
+                                        <input id="alterarCredito" value="" name="credito" placeholder="0,00"
+                                            required></input>
                                     </td>
                                     <td>
-                                        <input id="creditoUtilizado" value="" name="creditoUtilizado" required></input>
+                                        <input id="creditoUtilizado" value="" placeholder="0,00" name="creditoUtilizado"
+                                            required></input>
                                     </td>
                                 </tr>
                             </table>
@@ -147,23 +150,23 @@
                                         CEP
                                     </th>
                                     <th style="width: 70%;">
-                                        Endereço
+                                        Endereço / Nome da rua
                                     </th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="td-com-btn">
-                                            <input type="text" id="cep" name="cep" required>
+                                            <input type="text" id="cep" name="cep" placeholder="00000-000" required>
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="text" id="logradouro" name="logradouro">
+                                        <input type="text" id="logradouro" name="logradouro"  placeholder="Nenhum Endereço selecionado" >
                                     </td>
                             </table>
                             <table class="table-1-produto">
                                 <tr>
                                     <th style="width: 30%;">
-                                        Número
+                                        Número (Casa/Ap)
                                     </th>
 
                                     <th style="width: 70%;">
@@ -172,11 +175,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="numero" name="numero">
+                                        <input type="text" id="numero" name="numero"  placeholder="S/N" >
                                     </td>
 
                                     <td>
-                                        <input type="text" id="bairro" name="bairro">
+                                        <input type="text" id="bairro"  placeholder="Nenhum Bairro selecionado"  name="bairro">
                                     </td>
                                 </tr>
                             </table>
@@ -206,7 +209,7 @@
                                         <select id="cidade" name="cidade" required></select>
                                     </td>
                                     <td>
-                                        <input type="tel" id="telefone" name="telefone" required>
+                                        <input type="tel" id="telefone" name="telefone" placeholder="(99) 9999-99999" required>
                                     </td>
                                 </tr>
                             </table>
@@ -221,7 +224,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="email" id="email" name="email" required>
+                                        <input type="email" id="email" name="email" placeholder="exemplo@dominio.com" required>
                                     </td>
                                     <td>
                                         <div style="background: white; padding: .5%; display: flex; gap: 2%;">

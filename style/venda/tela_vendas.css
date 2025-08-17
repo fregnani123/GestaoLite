@@ -561,3 +561,28 @@ display: none;
     margin-top: 2%;
      background-color: #f5f5f5;
  }
+
+
+ .payment-form-section {
+    display: none;
+}
+
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 3% 0;
+}
+
+.button-wrapper button {
+    width: 100%;
+}
+
+#div-boleto {
+    display: none;
+}
+.p-titulo-carrinho{
+    margin-top: 1%;
+    margin-left: 30%;
+    font-weight: 600;
+}

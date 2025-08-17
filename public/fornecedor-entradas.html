@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none';">
+
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
     <link rel="stylesheet" href="../style/css-individual/prazo.css">
     <title></title>
 </head>
+
 
 <body>
     <div id="loading-overlay" class="active">
@@ -30,32 +35,28 @@
                 <nav class="menu-suspenso">
                     <ul>
                         <li>
-                            <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png"
-                                    alt="">
-                                Cadastrar
-                                novo cliente</a>
+                            <a href="./fornecedor.html"><img class="img-informacao" src="../style/img/mais.png"
+                                    alt="">Cadastrar novo fornecedor</a>
                         </li>
                         <li>
-                            <a href="./alterar_cliente.html"><img class="img-informacao" src="../style/img/alterar.png"
-                                    alt="">Cadastro do cliente /
+                            <a href="./alterar_Fornecedor.html"><img class="img-informacao"
+                                    src="../style/img/alterar.png" alt="">Cadastro do fornecedor /
                                 Alterar</a>
                         </li>
                         <li>
-                            <a href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
-                                    alt="">Receber pagamento a prazo</a>
+                            <a href="./informaçoes_fornecedor.html"><img class="img-informacao"
+                                    src="../style/img/vinculo.png" alt="">Produtos vinculados ao
+                                fornecedor</a>
                         </li>
                         <li>
-                            <a href="./prazo_mes_atual.html"><img class="img-informacao"
-                                    src="../style/img/data-limite.png" alt="">Vencimentos do Mês – Todos os clientes</a>
+                            <a  style="height: 2.8rem;" href="./fornecedor-troca.html"><img
+                                    class="img-informacao" src="../style/img/quebra.png">Relatório de quebras e
+                                trocas</a>
                         </li>
-                        <li>
-                            <a id="btn-ativo" href="./prazo_atrasado.html"><img class="img-informacao"
-                                    src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em atraso</a>
-                        </li>
-                        <li>
-                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
-                                informativa
-                            </a>
+                          <li>
+                            <a id="btn-ativo" style="height: 2.8rem;" href="./fornecedor-entradas.html"><img class="img-informacao"
+                                    src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
+                                fornecedor</a>
                         </li>
                     </ul>
                 </nav>
@@ -68,15 +69,10 @@
 
                 </div>
             </div>
+
         </div>
 </body>
 <script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
-<script src="../Renderer/services/alertMsg.js"></script>
-<script src="../Renderer/services/converte_moeda.js"></script>
-<script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/crediario/api_crediario.js"></script>
-<script src="../Renderer/crediario/crediario_vencer.js"></script>
-<script src="../Renderer/crediario/crediario_vencidos.js"></script>
 
 </html>

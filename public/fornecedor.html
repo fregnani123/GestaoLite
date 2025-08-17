@@ -4,12 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Política de segurança para evitar eval e scripts externos não autorizados -->
+    <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self';
+            script-src 'self';
+            style-src 'self' 'unsafe-inline';
+            img-src 'self' data:;
+            font-src 'self';
+            connect-src 'self' http://localhost:3000;
+            object-src 'none';
+        ">
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
-    <link rel="stylesheet" href="../style/css-individual/fornecedor">
-    <title></title>
+    <title>Cadastrar fornecedor</title>
 </head>
+
 
 <body>
     <div id="loading-overlay" class="active">
@@ -43,11 +54,11 @@
                                 fornecedor</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/quebra.png"
-                                    alt="">Relatório de quebras e trocas</a>
+                            <a style="height: 2.8rem;" href="./fornecedor-troca.html"><img class="img-informacao"
+                                    src="../style/img/quebra.png">Relatório de quebras e trocas</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao"
+                            <a style="height: 2.8rem;"  href="./fornecedor-entradas.html"><img class="img-informacao"
                                     src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
                                 fornecedor</a>
                         </li>
@@ -74,11 +85,11 @@
                                     <th style="width: 20%;">
                                         Pessoa
                                     </th>
-                                    <th  id="label_cnpj_cpf" style="width: 25%;">CNPJ /
+                                    <th id="label_cnpj_cpf" style="width: 25%;">CNPJ /
                                         CPF
                                     </th>
                                     <th id="label_razao" style="width: 60%;">Razão Social /
-                                        Nome
+                                        Nome completo do fornecedor
                                     </th>
                                 </tr>
                                 <tr>
@@ -90,10 +101,11 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="cnpj" readonly>
+                                        <input type="text" id="cnpj" placeholder="Selecione CNPJ / CPF" readonly>
                                     </td>
                                     <td>
-                                        <input type="text" id="razaoSocial" readonly>
+                                        <input type="text" id="razaoSocial"
+                                            placeholder="Selecione o tipo de pessoa: Física ou Jurídica" readonly>
                                     </td>
                                 </tr>
                             </table>
@@ -121,30 +133,31 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="ie" readonly>
+                                        <input type="text" id="ie" placeholder="Selecione" readonly>
                                     </td>
                                     <td>
-                                        <input type="text" id="nomeFantasia" readonly>
+                                        <input type="text" id="nomeFantasia"
+                                            placeholder="Selecione o tipo de pessoa: Física ou Jurídica" readonly>
                                     </td>
 
                                 </tr>
                             </table>
                             <table class="table-3-fornecedor">
                                 <tr>
-                                    <th style="width: 55%;">Endereço</th>
-                                    <th style="width: 15%;">Numero</th>
+                                    <th style="width: 55%;">Endereço / Nome da rua</th>
+                                    <th style="width: 17%;">Número</th>
                                     <th style="width: 30%;">Bairro</th>
                                 </tr>
 
                                 <tr>
                                     <td>
-                                        <input type="text" id="endereco">
+                                        <input type="text" id="endereco" placeholder="Digite o nome da rua">
                                     </td>
                                     <td>
-                                        <input type="text" id="numero">
+                                        <input type="text" id="numero" placeholder="Digite o nº">
                                     </td>
                                     <td>
-                                        <input type="text" id="bairro">
+                                        <input type="text" id="bairro" placeholder="Digite o bairro">
                                     </td>
                                 </tr>
                             </table>
@@ -159,16 +172,16 @@
 
                                 <tr>
                                     <td>
-                                        <input type="text" id="cep">
+                                        <input type="text" id="cep" placeholder="Digite o CEP">
                                     </td>
                                     <td>
                                         <select id="uf">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select id="cidade">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -183,10 +196,10 @@
 
                                 <tr>
                                     <td>
-                                        <input type="email" id="email">
+                                        <input type="email" id="email" placeholder="exemplo@dominio.com">
                                     </td>
                                     <td>
-                                        <input type="email" id="telefone">
+                                        <input type="email" id="telefone" placeholder="(99) 9999-99999">
                                     </td>
                                     <td>
                                         <select name="" id="atividade">
@@ -257,4 +270,5 @@
 <script src="../Renderer/services/ramos_atividades.js"></script>
 <script src="../Renderer/services/forma_pgto.js"></script>
 <script src="../Renderer/services/condicoesPag.js"></script>
+
 </html>

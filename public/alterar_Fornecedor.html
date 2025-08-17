@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
     <link rel="stylesheet" href="../style/css-global/table.css">
-     <link rel="stylesheet" href="../style/css-individual/fornecedor.css">
-    <title></title>
+    <link rel="stylesheet" href="../style/css-individual/fornecedor.css">
+    <title>Alterar informações fornecedor</title>
 </head>
 
 <body>
@@ -43,11 +43,11 @@
                                 fornecedor</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao" src="../style/img/quebra.png"
-                                    alt="">Relatório de quebras e trocas</a>
+                            <a style="height: 2.8rem;" href="./fornecedor-troca.html"><img class="img-informacao"
+                                    src="../style/img/quebra.png">Relatório de quebras e trocas</a>
                         </li>
                         <li>
-                            <a style="height: 2.8rem;"><img class="img-informacao"
+                            <a style="height: 2.8rem;" href="./fornecedor-entradas.html"><img class="img-informacao"
                                     src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
                                 fornecedor</a>
                         </li>
@@ -71,12 +71,17 @@
                         <div class="formulario-inputs">
                             <table class="table-1-fornecedor" style="margin-top: .5%;">
                                 <tr>
-                                   <th style="width: 20%;">
+                                    <th style="width: 20%;">
                                         Pessoa
                                     </th>
-                                    <th  id="label_cnpj_cpf" style="width: 25%;">CNPJ /
-                                        CPF
+                                    <th id="label_cnpj_cpf" style="width: 25%; text-align: center;">
+                                        <span
+                                            style="display: inline-flex; align-items: center; justify-content: center; gap: 5px;">
+                                            Buscar por CNPJ / CPF
+                                            <img style="width: 25px;" src="../style/img/procurar-black.png" alt="">
+                                        </span>
                                     </th>
+
                                     <th id="label_razao" style="width: 60%;">Razão Social /
                                         Nome
                                     </th>
@@ -90,16 +95,17 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="cnpjAlterar" readonly>
+                                        <input type="text" id="cnpjAlterar" placeholder="Selecione CNPJ / CPF" readonly>
                                     </td>
                                     <td>
-                                        <input type="text" id="razaoSocial" readonly>
+                                        <input type="text" id="razaoSocial" readonly
+                                            placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
                                     </td>
                                 </tr>
                             </table>
 
                             <table class="table-2-fornecedor">
-                                       <tr>
+                                <tr>
                                     <th style="width: 20%;">
                                         Inscrição Estadual
                                     </th>
@@ -120,34 +126,35 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="ie" readonly>
+                                        <input type="text" id="ie" readonly placeholder="Selecione">
                                     </td>
                                     <td>
-                                        <input type="text" id="nomeFantasia" readonly>
+                                        <input type="text" id="nomeFantasia" readonly
+                                            placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
                                     </td>
                                 </tr>
                             </table>
 
                             <table class="table-3-fornecedor">
                                 <tr>
-                               <th style="width: 55%;">Endereço</th>
+                                    <th style="width: 55%;">Endereço</th>
                                     <th style="width: 15%;">Numero</th>
                                     <th style="width: 30%;">Bairro</th>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="endereco">
+                                        <input type="text" placeholder="Digite o nome da rua" id="endereco">
                                     </td>
                                     <td>
-                                        <input type="number" id="numero">
+                                        <input type="number" placeholder="Digite o nº" id="numero">
                                     </td>
                                     <td>
-                                        <input type="text" id="bairro">
+                                        <input type="text" placeholder="Digite o bairro" id="bairro">
                                     </td>
                                 </tr>
                             </table>
 
-                            <table class="table-4-fornecedor"> 
+                            <table class="table-4-fornecedor">
                                 <tr>
                                     <th style="width: 20%;">CEP</th>
                                     <th style="width: 20%;">UF</th>
@@ -155,16 +162,16 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="cep">
+                                        <input type="text" id="cep" placeholder="Digite o CEP">
                                     </td>
                                     <td>
                                         <select id="uf">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select id="cidade">
-                                            <option value="">Selecione</option>
+                                            <option value="">-- Selecione --</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -176,12 +183,12 @@
                                     <th style="width: 25%;">Contato</th>
                                     <th style="width: 25%;">Ramos de atividade</th>
                                 </tr>
-                                <tr>   
+                                <tr>
                                     <td>
-                                        <input type="email" id="email">
+                                        <input type="email" placeholder="exemplo@dominio.com" id="email">
                                     </td>
                                     <td>
-                                        <input type="email" id="telefone">
+                                        <input type="email" id="telefone" placeholder="(99) 9999-99999">
                                     </td>
                                     <td>
                                         <select name="" id="atividade">
@@ -210,12 +217,12 @@
                                         </select>
                                     </td>
                                     <td>
-                                            <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                            <button id="atualizar-fornecedor"><img class="img-disquete"
-                                    src="../style//img/disquete.png">Gravar</button>
-                            <button id="limparButton"><img class="img-excluir" src="../style//img/excluir.png"
-                                    alt="">Limpar</button>
-                        </div>
+                                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                                            <button id="atualizar-fornecedor"><img class="img-disquete"
+                                                    src="../style//img/disquete.png">Gravar</button>
+                                            <button id="limparButton"><img class="img-excluir"
+                                                    src="../style//img/excluir.png" alt="">Limpar</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -234,7 +241,7 @@
                             <strong>Revise</strong> antes de confirmar.
                         </p>
 
-                    
+
                     </div>
                 </div>
             </div>

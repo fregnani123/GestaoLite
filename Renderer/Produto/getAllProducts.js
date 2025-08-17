@@ -185,7 +185,6 @@ function renderProdutos(renderer, produtos) {
         tr.appendChild(tdNome);
         tr.appendChild(tdEstoque);
         tr.appendChild(tdQtdMim);
-        // tr.appendChild(tdQtdMax);
         tr.appendChild(tdCompra);
         tr.appendChild(tdVenda);
         tr.appendChild(tdVendida);
@@ -250,15 +249,49 @@ if (filterButtonInfor) {
 
 
 const botaoImprimir = document.querySelector('.botao-imprimir');
-botaoImprimir.addEventListener('click', imprimirTabela)
+
+botaoImprimir.addEventListener('click', () => {
+    const select = document.getElementById('tipo-relatorio');
+    const tipo = select.value;
+
+    if (tipo === 'estoque') {
+        imprimirTabela();
+    } else if (tipo === 'preco') {
+        imprimirTabelaPreco();
+    } else {
+        alertMsg('Selecione um tipo de relatório antes de imprimir.', 'info', 4000);
+    }
+});
+
+
 
 function imprimirTabela() {
     const tabela = document.getElementById('tabela-produtos');
 
     if (!tabela) {
-        alert('Tabela não encontrada para impressão.');
+        alertMsg('Tabela não encontrada para impressão.','info',4000);
         return;
     }
+
+    // Clonar a tabela original
+    const tabelaClone = tabela.cloneNode(true);
+
+    // Remover as colunas indesejadas (5, 6 e 8)
+    const indicesParaRemover = [7, 5, 4]; // Começa do fim para não bagunçar os índices
+
+    // Remove do <thead>
+    const theadRow = tabelaClone.querySelector('thead tr');
+    indicesParaRemover.forEach(i => {
+        if (theadRow.children[i]) theadRow.removeChild(theadRow.children[i]);
+    });
+
+    // Remove do <tbody>
+    const tbodyRows = tabelaClone.querySelectorAll('tbody tr');
+    tbodyRows.forEach(tr => {
+        indicesParaRemover.forEach(i => {
+            if (tr.children[i]) tr.removeChild(tr.children[i]);
+        });
+    });
 
     const janelaImpressao = window.open('', '_blank');
     janelaImpressao.document.write(`
@@ -266,7 +299,6 @@ function imprimirTabela() {
             <head>
                 <title>Estoque Atual – Relatório Impresso</title>
                 <style>
-                    /* Estilo geral para a impressão A4 retrato */
                     @page {
                         size: A4 portrait;
                         margin: 20mm 15mm;
@@ -282,7 +314,7 @@ function imprimirTabela() {
                     }
 
                     h2 {
-                        text-align: center;
+                        text-align: left;
                         margin-bottom: 20px;
                     }
 
@@ -304,7 +336,6 @@ function imprimirTabela() {
                         background-color: #f0f0f0;
                     }
 
-                    /* Cores para linhas alternadas */
                     .linha-branca {
                         background-color: #fff;
                     }
@@ -313,17 +344,16 @@ function imprimirTabela() {
                         background-color: #f4f9ff;
                     }
 
-                    /* Ajuste de largura das colunas */
+                    /* Ajuste específico para colunas */
                     th:nth-child(2), td:nth-child(2) {
-                        width: 35%; /* Diminuir um pouco a segunda coluna (Descrição) */
+                        width: 35%;
                     }
-                    th:nth-child(7), td:nth-child(7) {
-                        width: 10%; /* Coluna Qtd Vendida */
-                        text-align: center;
-                    }
-                    /* Outras colunas terão largura automática */
 
-                    /* Evita quebras de página no meio das linhas */
+                    th:nth-child(5), td:nth-child(5) {
+                        text-align: center;
+                        width: 10%;
+                    }
+
                     tr {
                         page-break-inside: avoid;
                     }
@@ -331,10 +361,130 @@ function imprimirTabela() {
             </head>
             <body>
                 <h2>Estoque Atual – Relatório Impresso</h2>
-                ${tabela.outerHTML}
+                ${tabelaClone.outerHTML}
             </body>
         </html>
     `);
+
     janelaImpressao.document.close();
+    janelaImpressao.focus();
+    janelaImpressao.print();
+}
+function imprimirTabelaPreco() {
+    const tabela = document.getElementById('tabela-produtos');
+
+    if (!tabela) {
+        alertMsg('Tabela não encontrada para impressão.', 'info', 4000);
+        return;
+    }
+
+    const tabelaClone = tabela.cloneNode(true);
+
+    // Índices das colunas que devem permanecer
+    const colunasMantidas = [0, 1,2, 5, 6];
+
+    // Remove colunas indesejadas do <thead>
+    const theadRow = tabelaClone.querySelector('thead tr');
+    if (theadRow) {
+        for (let i = theadRow.children.length - 1; i >= 0; i--) {
+            if (!colunasMantidas.includes(i)) {
+                theadRow.removeChild(theadRow.children[i]);
+            }
+        }
+    }
+
+    // Remove colunas indesejadas do <tbody>
+    const tbodyRows = tabelaClone.querySelectorAll('tbody tr');
+    tbodyRows.forEach(tr => {
+        for (let i = tr.children.length - 1; i >= 0; i--) {
+            if (!colunasMantidas.includes(i)) {
+                tr.removeChild(tr.children[i]);
+            }
+        }
+    });
+
+    // Abre nova janela com a tabela formatada para impressão
+    const janelaImpressao = window.open('', '_blank');
+    janelaImpressao.document.write(`
+        <html>
+            <head>
+                <title>Relatório de Preço – Impressão</title>
+                <style>
+                    @page {
+                        size: A4 portrait;
+                        margin: 20mm 15mm;
+                    }
+
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 12px;
+                        margin: 0;
+                        padding: 10mm;
+                        box-sizing: border-box;
+                        color: #000;
+                    }
+
+                    h2 {
+                        text-align: left;
+                        margin-bottom: 20px;
+                    }
+
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        table-layout: fixed;
+                        word-wrap: break-word;
+                    }
+
+                    th, td {
+                        border: 1px solid #aaa;
+                        padding: 6px 8px;
+                        text-align: left;
+                        vertical-align: middle;
+                    }
+
+                    th {
+                        background-color: #f0f0f0;
+                    }
+
+                    .linha-branca {
+                        background-color: #fff;
+                    }
+
+                    .linha-azul {
+                        background-color: #f4f9ff;
+                    }
+
+                    /* Largura personalizada */
+                    th:nth-child(1), td:nth-child(1) {
+                        width: auto;
+                    }
+
+                    th:nth-child(2), td:nth-child(2) {
+                        width: 450px;
+                        text-align: center;
+                    }
+
+                    th:nth-child(3), td:nth-child(3),
+                    th:nth-child(4), td:nth-child(4),
+                    th:nth-child(5), td:nth-child(5) {
+                        width: auto;
+                        text-align: center;
+                    }
+
+                    tr {
+                        page-break-inside: avoid;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Relatório de Preço – Impressão</h2>
+                ${tabelaClone.outerHTML}
+            </body>
+        </html>
+    `);
+
+    janelaImpressao.document.close();
+    janelaImpressao.focus();
     janelaImpressao.print();
 }

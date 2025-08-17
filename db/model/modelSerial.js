@@ -42,28 +42,36 @@ function encode(cod) {
 async function postNewSerial(serial) {
     await ensureDBInitialized();
     try {
-        // Verifica se já existe um serial cadastrado
-        const existingSerial = db.prepare("SELECT COUNT(*) as total FROM Serial_Key").get();
+        const tamanhoNovaSerial = serial.serialKey.length;
 
-        if (existingSerial.total > 0) {
-            throw new Error("Já existe uma serial cadastrada. Apenas uma chave serial é permitida.");
+        // Verifica se existe serial com tamanho 18 ou menor que a nova
+        const existingInvalid = db.prepare(
+            `SELECT userID FROM Serial_Key WHERE LENGTH(serialKey) <= ?`
+        ).all(18); // ou tamanhoNovaSerial, se quiser comparar com o tamanho da nova
+
+        if (existingInvalid.length > 0) {
+            // Exclui completamente os usuários encontrados
+            const deleteStmt = db.prepare(
+                `DELETE FROM Serial_Key WHERE LENGTH(serialKey) <= ?`
+            );
+            deleteStmt.run(18); // ou tamanhoNovaSerial
+
+            console.log(`Removidos ${existingInvalid.length} registro(s) com chave inválida.`);
         }
 
+        // Agora insere a nova serial normalmente
         const insertQuery = `
-    INSERT INTO Serial_Key (
-        userID, serialKey, startedDate, expirationDate, ativado
-    ) VALUES (?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?)
-`;
-
+            INSERT INTO Serial_Key (
+                userID, serialKey, startedDate, expirationDate, ativado
+            ) VALUES (?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?)
+        `;
 
         const stmt = db.prepare(insertQuery);
-
         const result = stmt.run(
             serial.userID,
             encode(serial.serialKey),
             serial.ativado
         );
-
 
         return { insertId: result.lastInsertRowid };
     } catch (err) {
@@ -71,7 +79,6 @@ async function postNewSerial(serial) {
         throw err;
     }
 }
-
 
 
 function getSerial() {

@@ -2,18 +2,19 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';" />
-  <link rel="stylesheet" href="../style/css-global/global.css" />
-  <link rel="stylesheet" href="../style/css-global/inputs.css" />
-  <link rel="stylesheet" href="../style/css-global/table.css" />
-  <title>Entradas e Saídas de Estoque</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';" />
+    <link rel="stylesheet" href="../style/css-global/global.css" />
+    <link rel="stylesheet" href="../style/css-global/inputs.css" />
+    <link rel="stylesheet" href="../style/css-global/table.css" />
+    <title>Entradas e Saídas de Estoque</title>
 </head>
 
 
 <body>
-        <div id="loading-overlay" class="active">
+    <div id="loading-overlay" class="active">
         <div class="spinner"></div>
         <p>Carregando...</p>
     </div>
@@ -28,17 +29,19 @@
         <div class="formulario-container">
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
-                     <ul>
-                        <li><a  href="./registrar_produto.html"><img class="img-informacao"
-                                    src="../style/img/mais.png" alt="Atenção">Cadastrar novo
+                    <ul>
+                        <li><a href="./registrar_produto.html"><img class="img-informacao" src="../style/img/mais.png"
+                                    alt="Atenção">Cadastrar novo
                                 produto</a></li>
-                        <li><a  href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
+                        <li><a href="./alterar_produto.html"><img class="img-informacao" src="../style/img/alterar.png"
                                     alt="Atenção">Cadastro do produto / alterar</a>
                         </li>
-                           <li><a  href="./informacoes_produtos.html"><img class="img-informacao" src="../style/img/info-estoque.png"
-                                    alt="Atenção">Estoque e informações do produto</a></li>
+                        <li><a href="./informacoes_produtos.html"><img class="img-informacao"
+                                    src="../style/img/info-estoque.png" alt="Atenção">Estoque e informações do
+                                produto</a></li>
                         <li><a id="btn-ativo" href="./controle_estoque.html"><img class="img-informacao"
-                                    src="../style/img/estoque-pronto.png" alt="Atenção">Entradas e Saídas de Estoque</a></li>
+                                    src="../style/img/estoque-pronto.png" alt="Atenção">Entradas e Saídas de Estoque</a>
+                        </li>
                         <li><a href="./desabilitar_produto.html"><img class="img-informacao"
                                     src="../style/img/cancelar.png" alt="Atenção">Desabilitar produto</a></li>
                         <li>
@@ -56,130 +59,168 @@
             <div class="formulario">
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
-                        <div class="formulario-img">
-                            <p >Imagem do Produto</p>
-                            <div class="quadro-img"><img class="img-produto" src="../style/img/em-estoque.png"
-                                    alt="Produto sem imagem."></div>
+
+                        <div style="width: 100%; border: 1px solid rgb(199, 199, 199); ">
+
+                            <div class="" style="  width: 100%;">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="formulario-img" style="border:none;margin: .5%;">
+
+                                        <div class="quadro-img" style="border: 2px solid #1f3b57; display: block;">
+                                            <p style="text-align: center;">Imagem do Produto</p><img class="img-produto"
+                                                src="../style/img/em-estoque.png" alt="Produto sem imagem.">
+                                        </div>
+                                    </div>
+                                    <div style="width: 99%;">
+                                        <table class="table-1-entrada">
+                                            <tr>
+                                                <th style="width: 23%;">
+                                                    Filtrar por código EAN
+                                                </th>
+                                                <th>
+                                                    Nome / Descrição
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="CodigoEanBuscar"
+                                                        placeholder="Digite para Buscar">
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="produtoEncontrado"
+                                                        placeholder="Nenhum produto selecionado" readonly>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table class="table-3-entrada">
+                                            <tr>
+                                                <th style="width: 25%;">
+                                                    Situação do Movimento
+                                                </th>
+                                                <th style="width: 25%;">
+                                                    Motivo da Movimentação
+                                                </th>
+                                                <th style="width: 25%;">
+                                                    Estoque Atual
+                                                </th>
+                                                <th>
+                                                    Qtde a ser Movimentada
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td>
+                                                    <select name="" id="situacao">
+                                                        <option value="">-- Selecione --</option>
+                                                        <option value="1">Entrada</option>
+                                                        <option value="2">Saída</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="" id="movimento">
+                                                        <option value="">-- Selecione --</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input id="estoqueAtual" type="text" placeholder="0" readonly
+                                                        type="text" style="text-align: center;">
+                                                </td>
+                                                <td>
+                                                    <input id="qtdeMovimentacao" placeholder="0"
+                                                        style="text-align: center;">
+                                                    <input type="hidden" style="background-color: #007bff00;"
+                                                        id="venda_id" readonly>
+                                                    <input type="hidden" style="background-color: #007bff00;"
+                                                        id="inputqtChaveCompra" readonly>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                                <div style="width: 99%;">
+
+                                    <table class="table-2-entrada">
+                                        <tr>
+
+                                            <th style="width: 25%;">
+                                                Alterar valores
+                                            </th>
+                                            <th style="width: 25%;">
+                                                Preço de Compra
+                                            </th>
+                                            <th style="width: 25%;">
+                                                Preço de Venda
+                                            </th>
+
+                                            <th>
+                                                Data Movimentação
+                                            </th>
+                                            <th>
+                                                Ações
+                                            </th>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <select id="alterarPreco">
+                                                    <option value="1">Não</option>
+                                                    <option value="2">Sim</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input style="background-color:rgb(232, 232, 232);"
+                                                    id="inputPrecoCompra" type="text" readonly>
+                                            </td>
+                                            <td>
+                                                <input style="background-color:rgb(232, 232, 232);"
+                                                    id="precoVendaEstoque" type="text" readonly>
+                                            </td>
+
+                                            <td>
+                                                <input id="dateEstoque" type="date" readonly
+                                                    style="text-align: center;">
+                                            </td>
+                                            <td>
+                                                <div
+                                                    style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
+                                                    <button id="btn-estoque"><img class="img-disquete"
+                                                            src="../style//img/disquete.png">Alterar</button>
+                                                    <button id="limparButton"><img class="img-excluir"
+                                                            src="../style//img/excluir.png" alt="">Limpar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <p
+                                style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); margin-top: 1%;margin-bottom: 1%; padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0;">
+                                Ultimas Movimentações de Produtos</p>
+                            <div>
+                                <div id="div-controle-estoque"
+                                    style="border: 1px solid rgb(199, 199, 199); width: 99%; height: 37.5vh; overflow: scroll; margin-left: .5%;border-bottom: none;">
+                                    <table id="tabela-produtos" class="table-3-informacoes"
+                                        style="width: max-content; border-collapse: collapse; width: 120%;">
+                                        <tr>
+                                            <th style=" text-align: center; width: 15%;">Data</th>
+                                            <th style=" text-align: center;  width: 13%;">Código EAN</th>
+                                            <th style=" text-align: left;  width: 25%;">Descrição Produto</th>
+                                              <th style=" text-align: center;  width: 11%;">Movimento</th>
+                                            <th style=" text-align: center;  width: 18%;">Motivo da Movimentação</th>
+                                            <th style=" text-align: center;  width: 15%;">Qtde Movimentada</th>
+                                        </tr>
+                                        <tbody id="fitrados">
+                                            <!-- Linhas dos produtos -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div class="formulario-inputs">
-
-                            <table class="table-1-entrada">
-                                <tr>
-                                    <th>
-                                        Filtrar por código EAN
-                                    </th>
-                                    <th>
-                                        Nome / Descrição
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" id="CodigoEanBuscar">
-                                    </td>
-                                    <td>
-                                        <input type="text" id="produtoEncontrado" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table class="table-2-entrada">
-                                <tr>
-                                    <th style="width: 25%;">
-                                        Estoque Atual
-                                    </th>
-                                    <th style="width: 25%;">
-                                        Alterar valores
-                                    </th>
-                                    <th style="width: 25%;">
-                                        Preço de Compra
-                                    </th>
-                                    <th style="width: 25%;">
-                                        Preço de Venda
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input id="estoqueAtual" type="text" readonly type="text">
-                                    </td>
-                                    <td>
-                                        <select id="alterarPreco">
-                                            <option value="1">Não</option>
-                                            <option value="2">Sim</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input style="background-color:rgb(232, 232, 232);" id="inputPrecoCompra"
-                                            type="text" readonly>
-                                    </td>
-                                    <td>
-                                        <input style="background-color:rgb(232, 232, 232);" id="precoVendaEstoque"
-                                            type="text" readonly type="text">
-                                    </td>
-                                </tr>
-                                <table class="table-3-entrada">
-                                    <tr>
-                                        <th style="width: 25%;">
-                                            Situação do Movimento
-                                        </th>
-                                        <th style="width: 25%;">
-                                            Motivo da Movimentação
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>
-                                            <select name="" id="situacao">
-                                                <option value="">Selecione</option>
-                                                <option value="1">Entrada</option>
-                                                <option value="2">Saída</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="" id="movimento">
-                                                <option value="">Selecione</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="table-4-entrada">
-                                    <tr>
-                                        <th>
-                                            Qtde a ser Movimentada
-                                        </th>
-                                        <th>
-                                            Data da Movimentação
-                                        </th>
-                                        <th>
-                                            Ações
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>
-                                            <input id="qtdeMovimentacao">
-                                            <input type="hidden" style="background-color: #007bff00;" id="venda_id"
-                                                readonly>
-                                            <input type="hidden" style="background-color: #007bff00;"
-                                                id="inputqtChaveCompra" readonly>
-                                        </td>
-                                        <td>
-                                            <input id="dateEstoque" type="date" readonly>
-                                        </td>
-                                        <td>
-                                            <div
-                                                style="background: rgb(255, 255, 255); padding: .5%; display: flex; gap: 2%;">
-                                                <button id="btn-estoque"><img class="img-disquete"
-                                                        src="../style//img/disquete.png">Alterar</button>
-                                                <button id="limparButton"><img class="img-excluir"
-                                                        src="../style//img/excluir.png" alt="">Limpar</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                            </table>
-                        </div>
-
                     </div>
+
                     <div class="formulario-mensages-informativas" style="display: none;">
                         <p style="font-size: 1rem;justify-content: center;text-align: center;">
                             <img style="width: 1.3rem; margin-right: .5%;" src="../style/img/atencao.png"
@@ -200,7 +241,7 @@
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/controle_estoque/api_controle_estoque.js"></script>
+<!-- <script src="../Renderer/controle_estoque/api_controle_estoque.js"></script> -->
 <script src="../Renderer/controle_estoque/controle_estoque.js"></script>
 
 </html>

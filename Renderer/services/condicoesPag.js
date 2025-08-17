@@ -1,5 +1,5 @@
 const condicoesPgto = [
-    { value: "Selecione", text: "Selecione:" },
+    { value: "", text: "-- Selecione --" },
     { value: "avista", text: "À Vista" },
     { value: "30 Dias", text: "30 Dias" },
     { value: "60 Dias", text: "60 Dias" },

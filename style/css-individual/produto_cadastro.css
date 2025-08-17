@@ -240,7 +240,7 @@ select{
 
 .div-filtrados {
     width: 99%;
-    height: 455px;
+    height: 410px;
     border: 1px solid var(--border-color);
     overflow-y: scroll;
 }

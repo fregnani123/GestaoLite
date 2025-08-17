@@ -4,6 +4,7 @@ const {
     postControleEstoque,
     getUnidadeEstoque,
     UpdateEstoque,
+    getControleEstoque
 } = require(path.join(__dirname, '../../db/model/modelEstoque'));
 
 
@@ -34,6 +35,16 @@ const controllersEstoque = {
         } catch (error) {
             console.error('Erro ao buscar UnidadeEstoque:', error);
             res.status(500).json({ error: 'Erro ao buscar UnidadeEstoque' });
+        }
+    },
+
+    getControleEstoque: async (req, res) => {
+        try {
+            const controleEstoque = await getControleEstoque();
+            res.json(controleEstoque);
+        } catch (error) {
+            console.error('Erro ao buscar getControleEstoque:', error);
+            res.status(500).json({ error: 'Erro ao buscar getControleEstoque' });
         }
     },
 

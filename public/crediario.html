@@ -109,17 +109,17 @@
                             <!-- --------------------------------------------------------------------------------------------->
                             <table>
                                 <tr>
-                                    <th style="width: 20%;"> Filtrar CPF</th>
+                                    <th style="width: 18%;"> Filtrar CPF</th>
                                     <th style="width: 50%;">Cliente</th>
-                                    <th>Açoes</th>
+                                    <th style="width: 32%;">Açoes</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="input" id="cpfFiltrar" type="text" /></td>
-                                    <td><input type="input" id="nomeClienteFiltrado" readonly /></td>
+                                    <td><input type="input" id="cpfFiltrar" type="text" placeholder="Digite para buscar" /></td>
+                                    <td><input type="input" id="nomeClienteFiltrado" placeholder="Nenhum cliente selecionado" readonly /></td>
                                     <td>
                                         <div class="acoes-container">
-                                            <button id="filterButtonCrediario"><img class="img-excluir"
-                                                    src="../style//img/procurar.png" alt="">Buscar</button>
+                                            <button id="filterButtonCrediario" style="width: 100%;"><img class="img-excluir"
+                                                    src="../style//img/procurar.png" alt="">Buscar por nome</button>
                                             <button id="limparButton"><img class="img-excluir"
                                                     src="../style//img/excluir.png" alt="">Limpar</button>
                                         </div>
@@ -131,15 +131,16 @@
                                     <th style="text-align: center; ">
                                         Valor da multa por atraso
                                     </th>
-                                    <th style="border: 1px solid gray;text-align: center;">
+                                    <th style=" text-align: center;">
                                         Juros mensais após vencimento
                                     </th>
-                                    <th style="border-left: 1px solid gray; text-align: center">
+                                       <th style="border-left: 1px solid gray; text-align: center">
                                         Crédito liberado para este cliente
                                     </th>
                                     <th style="border-left: 1px solid gray; text-align: center">
                                         Crédito Utilizado
                                     </th>
+                                    
                                     <th style="text-align: center;border-left: 1px solid gray;">
                                         Imprimir reatório
                                     </th>
@@ -151,15 +152,16 @@
                                     <td style="border-left: 1px solid gray; text-align: center;">
                                         <span id="moraSpan"></span>
                                     </td>
+                                          <td style="border-left: 1px solid gray; text-align: center">
+                                        <input type="input" id="credito" readonly class="input-display-only" placeholder="0,00" />
+                                    </td>
                                     <td style="border-left: 1px solid gray; text-align: center">
-                                        <input type="input" id="credito-utilizado" readonly
+                                        <input type="input" id="credito-utilizado" placeholder="0,00" readonly
                                             class="input-display-only" />
                                     </td>
-                                    <td style="border-left: 1px solid gray; text-align: center">
-                                        <input type="input" id="credito" readonly class="input-display-only" />
-                                    </td>
+                              
                                     <td style="border-left: 1px solid gray; text-align: center;">
-                                        <button style="background-color: transparent; border: none; cursor: pointer;"
+                                        <button class="imprimirCrediario"
                                             title="Imprimir">
                                             <img src="../style/img/impressora.png" alt="Imprimir"
                                                 style="width: 24px; height: 24px;">
@@ -167,6 +169,8 @@
                                     </td>
                                 </tr>
                             </table>
+                             <p
+                                style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0; width: 100%;">Pedidos parcelados — filtro aplicado</p>
                             <div class="div-filtrados">
                             </div>
                         </div>
@@ -192,7 +196,4 @@
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/crediario/api_crediario.js"></script>
-<script src="../Renderer/crediario/crediario_vencer.js"></script>
-<script src="../Renderer/crediario/crediario_vencidos.js"></script>
-
 </html>
