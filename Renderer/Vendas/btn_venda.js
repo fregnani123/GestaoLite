@@ -21,7 +21,7 @@ function criaLiPagamento(item) {
     const li = document.createElement('li');
     const a = document.createElement('a');
 
-    a.id = 'btn-' + item.id; 
+    a.id = 'btn-' + item.id;
     a.href = '#'; // ou coloque uma URL se quiser
 
     const kbd = document.createElement('kbd');
@@ -69,12 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
     estilizarLink(linkID_2);
 
     // Ao clicar no link crediário
-    linkCrediario.addEventListener('click', (e) => {
-        e.preventDefault();
-        divCrediario.style.display = 'block';
-        divContainerVenda.style.display = 'none';
-        estilizarLink(linkCrediario); // aplica estilo ao abrir
-    });
+linkCrediario.addEventListener('click', (e) => {
+
+    if (inputTotalLiquido.value === '0,00') {
+        divPagamento.style.display = 'none';
+        divCrediario.style.display = 'none';
+        alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info', 4000);
+        codigoEan.focus();
+        return;
+    }
+
+    // Só abre divCrediario se divPagamento estiver escondida
+    const pagamentoVisivel = getComputedStyle(divPagamento).display !== 'none';
+    if (pagamentoVisivel) {
+        alertMsg('Finalize ou feche a forma de pagamento antes de abrir o crediário.', 'info', 4000);
+        return;
+    }
+
+    e.preventDefault();
+    divCrediario.style.display = 'block';
+    divContainerVenda.style.display = 'none';
+    estilizarLink(linkCrediario); // aplica estilo ao abrir
+});
 
     // Ao clicar no botão X para fechar
     btnExit.addEventListener('click', (e) => {

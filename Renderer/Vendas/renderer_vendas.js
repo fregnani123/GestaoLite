@@ -68,8 +68,27 @@ const spanMaxParcelas = document.getElementById('spanMaxParcelas');
 const showSubtotal = document.querySelector('.span-subtotal')
 const carrinhoShowRemover = document.querySelector(".div-carrinho");
 const btnMsg = document.querySelector('.btn-msg');
+const btnAlterarQtd = document.getElementById('btn-alterar-qtd');
+const divVenda = document.getElementById('div-container-venda');
+
+btnAlterarQtd.addEventListener('click', () => {
+    inputQtd.readOnly = false; // libera edição
+    inputQtd.focus();
+    inputQtd.value = '';
+    inputQtd.placeholder = 'Digite a Qtd - Pressione Enter';
 
 
+    // adiciona listener de tecla
+    inputQtd.addEventListener('keydown', function handler(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // evita submit se estiver em form
+            codigoEan.focus();  // foca no input do código EAN
+            inputQtd.readOnly = true; // se quiser travar de novo
+            // remove o listener pra não acumular toda vez que clica no botão
+            inputQtd.removeEventListener('keydown', handler);
+        }
+    });
+});
 
 // Mapeamento dos botões para as teclas de atalho desejadas
 const atalhos = {
@@ -241,19 +260,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'F7': // Forma pagamento 
                 if (inputTotalLiquido.value === '0,00') {
-                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info');
+                    divPagamento.style.display = 'none';
+                    divCrediario.style.display = 'none';
+                    alertMsg('Não é possível adicionar forma de pagamento sem itens no pedido.', 'info', 4000);
                     codigoEan.focus();
+                    return;
                 } else if (event.shiftKey || visibleDivs.length === 0) {
-                    divPagamento.style.display = 'block';
+
+                    // só abre divCrediario se divPagamento estiver escondida
+                    if (divPagamento.style.display === 'none' || divPagamento.style.display === '') {
+                        divCrediario.style.display = 'block';
+                        Crediario.value = inputTotalLiquido.value;
+                        formatarMoedaBRL(entradaCrediario);
+                        CrediarioCliente.focus();
+                        infoPag.style.display = 'none';
+                        divPagamento.style.left = '60%';
+                    }
+
+                    // mostra somente a divCrediario e mantém divPagamento escondida
                     showOnlyThisDiv(divCrediario);
-                    Crediario.value = inputTotalLiquido.value;
-
-                    formatarMoedaBRL(entradaCrediario)
-
-                    CrediarioCliente.focus();
-                    infoPag.style.display = 'none';
-                    divPagamento.style.left = '60%'
-                    // infoPagCred.style.display = 'flex'
+                    divPagamento.style.display = 'none';
                 }
                 break;
 
@@ -276,7 +302,21 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'F9': // Aplicar desconto na venda
                 inputQtd.readOnly = false; // libera edição
                 inputQtd.focus();          // foca no campo
+                inputQtd.value = '';
+                inputQtd.placeholder = 'Digite a Qtd - Pressione Enter';
+
+
+                // listener para Enter
+                inputQtd.addEventListener('keydown', function handler(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();   // evita submit automático
+                        codigoEan.focus();    // foca no campo do código EAN
+                        inputQtd.readOnly = true; // opcional: trava de novo
+                        inputQtd.removeEventListener('keydown', handler); // evita acumular
+                    }
+                });
                 break;
+
 
 
             case 'F10': // Aplicar desconto na venda
@@ -327,9 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             case 'Escape': // Fechar janelas
                 inputExcluiItem.value = '';
-                // inputExitVenda.value = '';
+
                 if (visibleDivs.length !== 0) {
                     visibleDivs.forEach(div => div.style.display = 'none');
+                    divVenda.style.display = 'block';
                     codigoEan.focus();
                 } else {
                     alertMsg('Todas as sub-telas foram fechadas.', 'info', 3000);

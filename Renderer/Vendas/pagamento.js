@@ -211,24 +211,6 @@ inputdescontoPorcentagem.addEventListener('blur', () => {
 });
 
 
-const btnQtd = document.getElementById('btn-qtd-produto');
-btnQtd.addEventListener('click', () => {
-  if(!inputQtd.value){
-    alertMsg('A quantidade não pode ser zero ou vazia', 'info', 4000);
-    inputQtd.focus();
-    return;
-  }
-  const escEvent = new KeyboardEvent('keydown', {
-    key: 'Escape',
-    code: 'Escape',
-    keyCode: 27,
-    which: 27,
-    bubbles: true
-  });
-
-  document.dispatchEvent(escEvent);
-});
-
 const salvarDesconto = document.getElementById('salvar-desconto');
 salvarDesconto.addEventListener('click', () => {
  const valor = parseFloat(inputTotalLiquido.value.replace(',', '.'));

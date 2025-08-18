@@ -458,15 +458,24 @@ header {
   color: rgb(255, 255, 255);
 }
 
+
 .btn-exit-span,
 #btn-exit-pag-1, 
 #btn-exit-pag-2, 
 #btn-exit-pag-3, 
 #btn-exit-pag-4, 
 #btn-exit-pag-5{
- padding-bottom: .7%;
+ padding-bottom: .7% !important;
 }
 
+.btn-exit-pag-5,
+.btn-exit-remover{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+ padding-bottom: 7% !important;
+}
 
 button {
   display: flex;

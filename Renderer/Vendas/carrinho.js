@@ -19,6 +19,8 @@ function rendererCarrinho(carrinho, ulDescricaoProduto, createSpan) {
         // Adiciona o produto à lista
         ulDescricaoProduto.appendChild(produto);
 
+        inputQtd.readOnly = true;
+
     });
 
     carrinho.forEach((item) => {
@@ -67,7 +69,7 @@ async function alteraEstoqueEVendido(carrinho) {
     }
 }
 
-let desconto = parseFloat(inputdescontoPorcentagem.value.replace(',', '.')) || 0;
+// let desconto = parseFloat(inputdescontoPorcentagem.value.replace(',', '.')) || 0;
 
 const inputDescontoEmReal = document.getElementById('desconto-valor');
 const inputDescontoEmRealFormat = formatarMoedaBRL(inputDescontoEmReal);
@@ -125,7 +127,7 @@ function pushProdutoCarrinho({
     calCarrinho,
     converteMoeda,
     inputTotalLiquido,
-  
+
     getVenda,
     numeroPedido,
     alertLimparVenda,
@@ -190,13 +192,13 @@ btnExitDesconto.addEventListener('click', () => {
     mostrarDescontoReal.value = '0,00';
 });
 
-limparButtonDesconto.addEventListener('click', () => {
-    inputDescontoEmReal.value = '0,00';
-    inputDescontoPorcentagem.value = '';
-    calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
-    showSubtotal.innerHTML = inputTotalLiquido.value;
-    mostrarDescontoReal.value = '0,00'
-});
+// limparButtonDesconto.addEventListener('click', () => {
+//     inputDescontoEmReal.value = '0,00';
+//     inputDescontoPorcentagem.value = '';
+//     calCarrinho(carrinho, converteMoeda, inputTotalLiquido);
+//     showSubtotal.innerHTML = inputTotalLiquido.value;
+//     mostrarDescontoReal.value = '0,00'
+// });
 
 // Limpa os campos de entrada
 function resetInputs() {

@@ -59,8 +59,9 @@
                             <div class="alterarCliente">
                                 <div class="div-container">
                                     <!-- Busca por nome -->
+                                      <p id="btn-exit-nome-2">&times;</p>
                                     <div class="divNomes-2">
-                                        <span id="btn-exit-nome-2">x</span>
+                                       
                                         <label for="buscaCliente-2">Buscar cliente por nome</label>
                                         <table class="tabela-busca-nome">
                                             <tr>
@@ -83,7 +84,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <span id="btn-exit">x</span>
+                                    <p id="btn-exit">&times;</p>
                                     <!-- Alterar cliente pedido -->
                                     <div class="campo-cliente">
                                         <label>Alterar Cliente Pedido</label>
@@ -104,7 +105,7 @@
                                                 </td>
                                                 <td>
                                                     <button id="btn-nome-alterar">
-                                                        <img src="../style/img/procurar.png" alt=""> Buscar por nome
+                                                        <img src="../style/img/procurar.png"  style="width: 25px;"> Buscar por nome
                                                     </button>
                                                 </td>
                                             </tr>
@@ -140,9 +141,8 @@
                                 </div>
                             </div>
                             <div class="desconto-venda">
-                                <div class="div-container">
                                     <div class="campo">
-                                        <span id="btn-exit-desconto">x</span>
+                                        <p id="btn-exit-desconto">&times;</p>
                                         <label>Desconto no Pedido</label>
                                         <table class="tabela-tipo-desconto">
                                             <tr>
@@ -210,12 +210,12 @@
                                         </table>
 
                                     </div>
-                                </div>
                             </div>
                             <div class="confirmation-clear">
                                 <div class="div-container">
+                                    <p id="btn-exit-pag-5"><span class="btn-exit-pag-5">&times;</span></p>
                                     <div class="campo-clear">
-                                        <p id="btn-exit-pag-5">&times;</p>
+                                        
                                         <label>Reiniciar Pedido</label>
                                         <table>
                                             <tr>
@@ -251,7 +251,7 @@
                             </div>
                             <div class="remove-item">
                                 <div class="div-container-remover">
-                                    <span id="btn-exit-remover">x</span>
+                                    <p id="btn-exit-remover"><span class="btn-exit-remover">&times;</span></p>
                                     <div class="campo-remover">
                                         <label>Remover produto do pedido</label>
                                         <table>
@@ -443,7 +443,7 @@
                                 <div class="pagamento-container">
                                     <div class="pagamento-default">
                                         <div class="pagamento-default-1" id="div-valorDinheiro">
-                                            <p id="btn-exit-pag-1">p</p>
+                                            <p id="btn-exit-pag-1">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th for="valorDinheiro">À Vista (Dinheiro):</th>
@@ -660,12 +660,11 @@
 </body>
 <script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/services/renderer_relogio.js"></script>
-<script src="../Renderer/Vendas/venda_api.js"></script>
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/alertMsg.js"></script>
 <script src="../Renderer/services/informacoes.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/Vendas/venda.js"></script>
+ 
 <script src="../Renderer/Vendas/btn_venda.js"></script>
 <script src="../Renderer/Vendas/carrinho.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
