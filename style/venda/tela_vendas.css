@@ -511,7 +511,7 @@ input[readonly] {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 7rem;
+    height: 6.5rem;
     /* background-color: var(--footer-form); */
     border: 1px solid rgb(129, 129, 129);
     box-shadow: var(--shadow-sm);
@@ -566,7 +566,9 @@ display: none;
  .payment-form-section {
     display: none;
 }
-
+.img-nome-alterar{
+    width: 25px;
+}
 .button-wrapper {
     width: 100%;
     display: flex;
@@ -586,3 +588,5 @@ display: none;
     margin-left: 30%;
     font-weight: 600;
 }
+
+ 

@@ -20,25 +20,34 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${year}-${month}-${day}`;
     }
 
-    function calcularDataVencimento() {
-        const condicao = condicaoSelect.value;
-        if (!condicao) return;
+ function calcularDataVencimento() {
+    const condicao = condicaoSelect.value;
+    if (!condicao) return;
 
-        const diasMap = {
-            "30": 30,
-            "15": 15,
-            "7": 7,
-            "entrada+30": 30,
-            "entrada+15": 15,
-            "entrada+7": 7,
-        };
+    const diasMap = {
+        "30": 30,
+        "15": 15,
+        "7": 7,
+        "entrada+30": 30,
+        "entrada+15": 15,
+        "entrada+7": 7,
+    };
 
-        const dias = diasMap[condicao] || 30;
-        const hoje = new Date();
-        hoje.setDate(hoje.getDate() + dias);
+    const hoje = new Date();
 
+    // Se for com entrada, a data deve ser HOJE
+    if (condicao.startsWith("entrada+")) {
         vencimentosCrediario.value = formatDateToYMD(hoje);
+        return;
     }
+
+    // Se não tem entrada, soma os dias
+    const dias = diasMap[condicao] || 30;
+    hoje.setDate(hoje.getDate() + dias);
+
+    vencimentosCrediario.value = formatDateToYMD(hoje);
+}
+
 
     function atualizarCamposEntrada() {
         const condicao = condicaoSelect.value;
@@ -84,30 +93,28 @@ document.addEventListener("DOMContentLoaded", function () {
         calcularDataVencimento();
     }
 
-    function atualizarOpcoesParcelas(temEntrada) {
-        parcelaSelect.innerHTML = "";
+function atualizarOpcoesParcelas(temEntrada) {
+  parcelaSelect.innerHTML = "";
 
-        const optionDefault = document.createElement("option");
-        optionDefault.value = "";
-        optionDefault.textContent = "Selecione";
-        parcelaSelect.appendChild(optionDefault);
+  const optionDefault = document.createElement("option");
+  optionDefault.value = "";
+  optionDefault.textContent = "Selecione";
+  parcelaSelect.appendChild(optionDefault);
 
-        const maxParcelas = 24;
+  const maxParcelas = 24;
 
-        for (let i = 1; i <= maxParcelas; i++) {
-            const option = document.createElement("option");
+  for (let i = 1; i <= maxParcelas; i++) {
+    const option = document.createElement("option");
+    const totalParcelas = temEntrada ? (i + 1) : i; // entrada conta como 1
 
-            if (temEntrada) {
-                option.value = i + 1;
-                option.textContent = `Entrada + ${i} parcela${i > 1 ? 's' : ''}`;
-            } else {
-                option.value = i;
-                option.textContent = `${i} parcela${i > 1 ? 's' : ''}`;
-            }
+    option.value = String(totalParcelas); // garante número ao dar parse depois
+    option.textContent = temEntrada
+      ? `${totalParcelas}x (Entrada + ${i} parcela${i > 1 ? 's' : ''})`
+      : `${totalParcelas}x`;
 
-            parcelaSelect.appendChild(option);
-        }
-    }
+    parcelaSelect.appendChild(option);
+  }
+}
 
     // Impede datas anteriores a hoje
     const hoje = new Date();
@@ -236,86 +243,84 @@ cpfCliente.addEventListener('input', (e) => {
 
 
 function parseCurrency(value) {
-    return Number(value.replace(/[^0-9,.-]+/g, "").replace(",", ".")); // Ajustando para ponto no número
+  if (value == null) return 0;
+  // remove símbolos e milhares, troca vírgula por ponto
+  const limpo = String(value).replace(/[^0-9,.-]/g, '').replace(/\./g, '').replace(',', '.');
+  const n = parseFloat(limpo);
+  return isNaN(n) ? 0 : n;
 }
 
-function parseCurrency(value) {
-    if (!value) return 0;
-    // Remove pontos e substitui a vírgula pelo ponto para converter corretamente
-    return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-}
 
 let totalComJuros; // Declara a variável globalmente
 let totalLiquidoOriginal = parseCurrency(inputTotalLiquido.value); // Armazena o valor original antes da alteração
 
 function atualizarParcelas() {
-    const numeroParcelas = Number(parcela.value.trim()); // Quantidade total de parcelas (incluindo entrada, se for o caso)
-    const totalLiquido = parseCurrency(inputTotalLiquido.value); // Total da venda
+  const numeroParcelas = Number(parcela.value); // total incluindo a entrada quando houver
+  if (!numeroParcelas || numeroParcelas < 1) {
+    parcelaValor.value = "";
+    Crediario.value = "";
+    return;
+  }
 
-    const condicao = document.getElementById("condicao-vencimento").value;
-    const temEntrada = condicao.startsWith("entrada+");
+  const totalLiquido = parseCurrency(inputTotalLiquido.value); // total da venda
+  if (!totalLiquido || isNaN(totalLiquido)) {
+    console.warn("totalLiquido inválido:", inputTotalLiquido?.value);
+    parcelaValor.value = "";
+    Crediario.value = "";
+    return;
+  }
 
-    const entradaRaw = entradaCrediario.value.replace(/\./g, '').replace(',', '.');
-    const entrada = parseFloat(entradaRaw) || 0;
+  const temEntrada = (condicaoSelect.value || "").startsWith("entrada+");
 
-    // Define taxa de juros mínima para evitar erro de cálculo
-    let taxaJuros = parseFloat(inputTaxaJuros.value.replace(",", ".")) || 0.000001;
+  // taxa de juros mensal
+  let taxa = parseFloat(String(inputTaxaJuros.value).replace(",", "."));
+  taxa = isNaN(taxa) ? 0 : taxa;
 
-    // Se o número de parcelas ultrapassar o limite, aplica a taxa real
-    if (numeroParcelas > jurosParcelaAcima) {
-        taxaJuros = parseFloat(inputTaxaJuros.value.replace(",", ".")) / 100;
-    } else {
-        taxaJuros = 0;
-    }
+  // aplica juros só se exceder o limite configurado
+  if (numeroParcelas > Number(jurosParcelaAcima || 0)) {
+    taxa = taxa / 100; // vira fração
+  } else {
+    taxa = 0;
+  }
 
-    // 👉 Ajuste importante: número de parcelas REAIS (sem entrada)
-    const parcelasReal = temEntrada ? numeroParcelas - 1 : numeroParcelas;
+  let valorParcela = 0;
 
-    if (!isNaN(parcelasReal) && parcelasReal > 0 && !isNaN(totalLiquido) && !isNaN(taxaJuros)) {
-        totalLiquidoOriginal = totalLiquido;
+  if (taxa > 0) {
+    // PMT: parcelas fixas e iguais
+    const fator = Math.pow(1 + taxa, numeroParcelas);
+    valorParcela = (totalLiquido * (fator * taxa)) / (fator - 1);
+  } else {
+    valorParcela = totalLiquido / numeroParcelas;
+  }
 
-        const saldoDevedor = totalLiquido - (temEntrada ? entrada : 0);
+  // arredonda para 2 casas
+  let parcelaFixada = Number(valorParcela.toFixed(2));
 
-        if (saldoDevedor <= 0) {
-            alertMsg("Valor da entrada não pode ser maior ou igual ao total da compra.", 'info', 4000);
-            parcelaValor.value = "";
-            Crediario.value = "";
-            totalComJuros = null;
-            return;
-        }
+  // 🔹 ajuste para não perder 1 centavo
+  let totalArredondado = parcelaFixada * numeroParcelas;
+  let diferenca = Number((totalLiquido - totalArredondado).toFixed(2));
 
-        let valorParcela = 0;
+  // Se houver diferença (tipo 0.01 ou -0.01), ajusta na última parcela
+  if (Math.abs(diferenca) >= 0.01) {
+    parcelaFixada = ((totalLiquido - (parcelaFixada * (numeroParcelas - 1))) ).toFixed(2);
+  }
 
-        // Cálculo da parcela com ou sem juros
-        if (taxaJuros > 0) {
-            const fatorJuros = Math.pow(1 + taxaJuros, parcelasReal);
-            valorParcela = (saldoDevedor * (fatorJuros * taxaJuros)) / (fatorJuros - 1);
-        } else {
-            valorParcela = saldoDevedor / parcelasReal;
-        }
+  // exibe a parcela padrão (sem diferenciar entrada/última)
+  parcelaValor.value = (totalLiquido / numeroParcelas).toFixed(2);
 
-        if (valorParcela < 1) {
-            parcelaValor.value = "";
-            Crediario.value = "";
-            totalComJuros = null;
-            alertMsg("Valor da parcela não pode ser menor que R$ 1,00.", 'info', 4000);
-            return;
-        }
+  // total com juros (se houver)
+  const totalComJurosCalc = totalLiquido.toFixed(2);
+  Crediario.value = converteMoeda(totalComJurosCalc);
 
-        parcelaValor.value = valorParcela.toFixed(2);
-        totalComJuros = (valorParcela * parcelasReal) + (temEntrada ? entrada : 0);
-        Crediario.value = converteMoeda(totalComJuros);
-
-        //  Só define entrada automaticamente se for parcelado COM entrada
-        entradaCrediario.value = (temEntrada && numeroParcelas > 1) ? valorParcela.toFixed(2) : '';
-
-    } else {
-        parcelaValor.value = "";
-        totalComJuros = null;
-        Crediario.value = "";
-    }
+  // entrada = mesma lógica
+  if (temEntrada) {
+    entradaCrediario.value = (totalLiquido / numeroParcelas).toFixed(2);
+    entradaCrediario.readOnly = true;
+  } else {
+    entradaCrediario.value = "0,00";
+    entradaCrediario.readOnly = true;
+  }
 }
-
 
 parcela.addEventListener('change', atualizarParcelas);
 

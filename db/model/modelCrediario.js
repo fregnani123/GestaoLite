@@ -19,18 +19,36 @@ db.pragma('foreign_keys = ON');
 console.log('Chaves estrangeiras ativadas.');
 
 
-async function registrarCrediario(vendaId, clienteId, valorTotal, numParcelas, dataPrimeiroVencimento, condicao, tipoPagamento, entrada = 0) {
+async function registrarCrediario(
+    vendaId,
+    clienteId,
+    valorTotal,
+    numParcelas,
+    dataPrimeiroVencimento,
+    condicao,
+    tipoPagamento,
+    entrada = 0
+) {
     await ensureDBInitialized();
 
     console.log("Dados recebidos:");
-    console.log({ vendaId, clienteId, valorTotal, numParcelas, dataPrimeiroVencimento, condicao, entrada, tipoPagamento });
+    console.log({
+        vendaId,
+        clienteId,
+        valorTotal,
+        numParcelas,
+        dataPrimeiroVencimento,
+        condicao,
+        entrada,
+        tipoPagamento
+    });
 
     const parcelas = [];
-    const dataBase = new Date(dataPrimeiroVencimento);
     const valorParcelado = valorTotal - entrada;
     const parcelasRestantes = numParcelas - (entrada > 0 ? 1 : 0);
     const valorParcela = (valorParcelado / parcelasRestantes).toFixed(2);
 
+    // intervalos configurados
     const intervalos = {
         "30": 30,
         "15": 15,
@@ -39,60 +57,100 @@ async function registrarCrediario(vendaId, clienteId, valorTotal, numParcelas, d
         "entrada+15": 15,
         "entrada+7": 7,
     };
-
     const intervalo = intervalos[condicao] || 30;
     console.log("Intervalo escolhido:", intervalo);
 
     let parcelaIndex = 1;
 
-function formatDateToYMD(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
+    // helpers de data sem UTC
+    function parseYMDLocal(ymd) {
+        const [y, m, d] = String(ymd).split("-").map(Number);
+        return new Date(y, (m || 1) - 1, d || 1, 0, 0, 0, 0);
+    }
+    function formatDateToYMD(date) {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        const d = String(date.getDate()).padStart(2, "0");
+        return `${y}-${m}-${d}`;
+    }
+    function addDaysLocal(date, days) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days, 0, 0, 0, 0);
+    }
+    function todayLocal() {
+        const n = new Date();
+        return new Date(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0, 0);
+    }
 
-// Parcela de entrada (se houver)
-if (entrada > 0) {
-    const agora = new Date();
-    const entradaParcela = {
-        venda_id: vendaId,
-        cliente_id: clienteId,
-        parcela_numero: parcelaIndex++,
-        valor_parcela: entrada.toFixed(2),
-        data_vencimento: formatDateToYMD(agora),
-        data_pagamento: formatDateToYMD(agora),
-        status: 'Paga',
-        tipo_entrada: tipoPagamento,
-        condicao_vencimento: condicao,
-    };
-    parcelas.push(entradaParcela);
-    console.log("Parcela de entrada:", entradaParcela);
-}
+    const temEntrada = Number(entrada) > 0;
+    const ehEntradaMais = String(condicao || "").startsWith("entrada+");
 
-// Demais parcelas
-for (let i = 0; i < parcelasRestantes; i++) {
-    const vencimento = new Date(dataBase);
-    vencimento.setDate(vencimento.getDate() + (i * intervalo) + 1); // +1 dia aqui
+    // -------------------
+    // PARCELA DE ENTRADA
+    // -------------------
+    if (temEntrada) {
+        const hoje = todayLocal();
+        const entradaParcela = {
+            venda_id: vendaId,
+            cliente_id: clienteId,
+            parcela_numero: parcelaIndex++,
+            valor_parcela: Number(entrada).toFixed(2),
+            data_vencimento: formatDateToYMD(hoje),
+            data_pagamento: formatDateToYMD(hoje),
+            status: "Paga",
+            tipo_entrada: tipoPagamento,
+            condicao_vencimento: condicao,
+        };
+        parcelas.push(entradaParcela);
+        console.log("Parcela de entrada:", entradaParcela);
+    }
 
-    const parcela = {
-        venda_id: vendaId,
-        cliente_id: clienteId,
-        parcela_numero: parcelaIndex++,
-        valor_parcela: valorParcela,
-        data_vencimento: formatDateToYMD(vencimento),
-        data_pagamento: null,
-        status: 'PENDENTE',
-        tipo_entrada: tipoPagamento,
-        condicao_vencimento: condicao,
-    };
-    parcelas.push(parcela);
-}
+    // -------------------
+    // BASE DE VENCIMENTO
+    // -------------------
+    let baseVencimento;
+    if (temEntrada && ehEntradaMais) {
+        // entrada+X → 1ª pendente = hoje + X dias
+        baseVencimento = addDaysLocal(todayLocal(), intervalo);
+    } else {
+        // senão, usa a data recebida
+        baseVencimento = parseYMDLocal(dataPrimeiroVencimento);
+    }
 
+    // -------------------
+    // DEMAIS PARCELAS
+    // -------------------
+    // Ajusta a data base para começar com um dia a mais
+    let vencimento = new Date(
+        baseVencimento.getFullYear(),
+        baseVencimento.getMonth(),
+        baseVencimento.getDate() + 1, // <--- adiciona 1 dia
+        0, 0, 0, 0
+    );
+
+    for (let i = 0; i < parcelasRestantes; i++) {
+        if (i > 0) {
+            vencimento = addDaysLocal(vencimento, intervalo);
+        }
+
+        const parcela = {
+            venda_id: vendaId,
+            cliente_id: clienteId,
+            parcela_numero: parcelaIndex++,
+            valor_parcela: valorParcela,
+            data_vencimento: formatDateToYMD(vencimento),
+            data_pagamento: null,
+            status: "PENDENTE",
+            tipo_entrada: tipoPagamento,
+            condicao_vencimento: condicao,
+        };
+        parcelas.push(parcela);
+    }
 
     console.log("Todas as parcelas geradas:", parcelas);
 
-    // Correção: incluir apenas campos existentes
+    // -------------------
+    // INSERÇÃO NO BANCO
+    // -------------------
     const stmt = db.prepare(`
         INSERT INTO crediario (
             cliente_id, venda_id, parcela_numero, 
@@ -119,6 +177,7 @@ for (let i = 0; i < parcelasRestantes; i++) {
 
     return parcelas.length;
 }
+
 
 
 function generateRandomNumber(cpf) {

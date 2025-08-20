@@ -178,7 +178,7 @@ if ((entradaCrediario.value !== '' && entradaCrediario.value !== '0') && !tipoPa
         dataPrimeiroVencimento: vencimentosCrediario.value,
         tipoPagamento: tipoPagamento.value  === '' ? 'Sem entrada' : tipoPagamento.value,
         condicao: condicaoCrediario.value,
-        entrada: parseFloat(entradaCrediario.value.replace(',', '.')),
+        entrada: parseFloat(parcelaValor.value),
     };
 
     
@@ -306,14 +306,17 @@ const btnFinalizarVenda = document.getElementById('btn-finalizar-venda');
 
 
 btnFinalizarVenda.addEventListener('click', (e) => {
-    const estilo = getComputedStyle(divPagamento); // pega o estilo computado real
-    if (estilo.display !== 'none') {
+    const estiloPagamento = getComputedStyle(divPagamento); 
+    const estiloCrediario = getComputedStyle(divCrediario);
+
+    if (estiloPagamento.display !== 'none' || estiloCrediario.display !== 'none') {
         FinalizarVenda();
         console.log('Venda finalizada');
     } else {
         alertMsg('Selecione uma forma de pagamento', 'info');
     }
 });
+
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {

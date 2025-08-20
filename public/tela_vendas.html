@@ -19,6 +19,61 @@
 </head>
 
 <body>
+    <div class="cupom">
+        <div class="cabecalho">
+            <div class="div-titulo">
+                <!-- <img class="imgLogo" alt="Logo da Loja"> -->
+                <h3>
+                    <span class="titulo-cupom" id=""></span>
+                </h3>
+            </div>
+            <span id="razaoSocial"></span>
+            <span id="cep"></span>
+            <span id="endereco"></span>
+            <span id="contato"></span>
+            <span id="cnpj"></span>
+        </div>
+        <div class="dados">
+            <span><strong>Cliente:</strong> <span id="cliente"></span></span>
+            <span><strong>CPF:</strong> <span id="CPFCli"></span> </span>
+            <span><strong>Data e Hora:</strong> <span id="dataVenda"></span></span>
+            <span><strong>Pedido Nº:</strong> <span id="numeroVenda"></span></span>
+            <span><strong>Doc. auxiliar de venda :</strong> <span id="naoFiscal"></span></span>
+        </div>
+        <div class="itens-venda">
+            <div style="display: flex; justify-content: space-between;">
+                <strong>CÓDIGO</strong>
+                <strong>DESCRIÇÃO</strong>
+                <strong>VALOR R$</strong>
+            </div>
+            <div id="listaItens">
+            </div> <!-- Aqui vamos adicionar os itens -->
+        </div>
+        <div class="total">
+            <span class="total-span"><span>Desconto Aplicado:</span><span id="cuponDesconto"></span></span>
+            <span class="total-span"><span>Total da Nota:</span><span id="totalNota"></span></span>
+            <span class="total-span"><span>Valor Recebido:</span> <span id="valorRecebidoCupom"></span></span>
+            <span class="total-span"><span>Troco:</span> <span id="trocoCupom"></span></span>
+            <span class="total-span"><span>Forma de Pagamento:</span> <span id="formaPgto"></span></span>
+        </div>
+        <div class="assinatura">
+            <span class="text-recebi">Recebi os produto(s) conforme descrito(s) acima.</span>
+            <hr>
+            <span class="text-assinatura">ASSINATURA DO CLIENTE</span>
+        </div>
+        <div class="rodape">
+
+            <span class="redeSocial"></span>
+            <span class="text-acesse">Acesse nossas redes sociais.</span>
+            <span class="text-slogan"></span>
+        </div>
+
+        <div class="carne-cred">
+            <span id='tituloCred'></span>
+            <!-- Aqui é criado o Crediario loja - impressao cupom. -->
+        </div>
+    </div>
+
     <input id="numeroParcela" type="hidden" value="12" readonly>
     <input id="id-cliente" type="hidden" value="1">
     <input id="numeroParcela" type="hidden" type="number" value="12" readonly>
@@ -41,106 +96,118 @@
             </nav>
         </header>
         <div class="formulario-container">
-            <div class="menu-lateral">
-                <nav class="menu-suspenso">
-                    <ul id="ul-Menu-Pagamentos">
-                        <!-- renderiza no <script src="../Renderer/Menu/renderer_menu.js"></script> -->
-                    </ul>
-                </nav>
-                <div class="div-logo-empresa">
-                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
-                </div>
-            </div>
-            <div class="formulario">
-                <div class="formulario-conteudo">
-                    <div>
-                        <div class="formulario-div-flex">
-                            <!-- Div que renderiza a alterção do Cliente no Pedido -->
-                            <div class="alterarCliente">
-                                <div class="div-container">
-                                    <!-- Busca por nome -->
-                                      <p id="btn-exit-nome-2">&times;</p>
-                                    <div class="divNomes-2">
-                                       
-                                        <label for="buscaCliente-2">Buscar cliente por nome</label>
-                                        <table class="tabela-busca-nome">
-                                            <tr>
-                                                <th>
-                                                    <div class="th-conteudo">
-                                                        <img src="../style/img/procurar-black.png" alt=""> Digite o nome
-                                                        do Cliente
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" id="buscaCliente-2">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <ul id="listaClientes-2" class="listaClientes-2"></ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <p id="btn-exit">&times;</p>
-                                    <!-- Alterar cliente pedido -->
-                                    <div class="campo-cliente">
-                                        <label>Alterar Cliente Pedido</label>
+            <div  class="formulario-container-flex">
 
-                                        <table class="tabela-busca-cliente">
-                                            <tr>
-                                                <th class="th-busca-cpf">
-                                                    <img src="../style/img/procurar-black.png" alt=""> Buscar por CPF
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="input-busca-cpf">
-                                                        <input id="alterClienteCPF" type="text"
-                                                            placeholder="Digite para buscar">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <button id="btn-nome-alterar">
-                                                        <img src="../style/img/procurar.png"  style="width: 25px;"> Buscar por nome
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <table class="tabela-cliente-selecionado">
-                                            <tr>
-                                                <th>Cliente selecionado</th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input id="nomeClienteAlter" type="text" readonly
-                                                        placeholder="Cliente não cadastrado no pedido">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div class="botoes-cliente">
-                                            <button id="btn-alterar-confirmar">
-                                                <img src="../style/img/troca.png" alt=""> Alterar
-                                            </button>
-                                            <button id="limparButton-cliente">
-                                                <img class="img-excluir" src="../style/img/excluir.png" alt=""> Limpar
-                                            </button>
+
+                <div class="menu-lateral">
+                    <nav class="menu-suspenso">
+                        <ul id="ul-Menu-Pagamentos">
+                            <!-- renderiza no <script src="../Renderer/Menu/renderer_menu.js"></script> -->
+                        </ul>
+                    </nav>
+                    <div class="div-logo-empresa">
+                        <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png"
+                            alt="logo-empresa">
+                    </div>
+                </div>
+                <div class="formulario">
+                    <div class="formulario-conteudo">
+                        <div>
+                            <div class="formulario-div-flex">
+                                <div id="impressaoCupom"></div>
+                                <!-- Div que renderiza a alterção do Cliente no Pedido -->
+                                <div class="alterarCliente">
+
+                                    <div class="div-container">
+                                        <!-- Busca por nome -->
+
+                                        <div class="divNomes-2">
+                                            <p id="btn-exit-nome-2">&times;</p>
+                                            <label for="buscaCliente-2">Buscar cliente por nome</label>
+                                            <table class="tabela-busca-nome">
+                                                <tr>
+                                                    <th>
+                                                        <div class="th-conteudo">
+                                                            <img src="../style/img/procurar-black.png" alt=""> Digite o
+                                                            nome
+                                                            do Cliente
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" id="buscaCliente-2">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <ul id="listaClientes-2" class="listaClientes-2"></ul>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                        <table class="tabela-info-cliente">
-                                            <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ O cliente precisa estar previamente cadastrado no sistema para
-                                                    que a alteração no pedido seja possível.
-                                                </td>
-                                            </tr>
-                                        </table>
+
+                                        <!-- Alterar cliente pedido -->
+                                        <div class="campo-cliente">
+                                            <p id="btn-exit">&times;</p>
+                                            <label>Alterar Cliente Pedido</label>
+
+                                            <table class="tabela-busca-cliente">
+                                                <tr>
+                                                    <th class="th-busca-cpf">
+                                                        <img src="../style/img/procurar-black.png" alt=""> Buscar por
+                                                        CPF
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-busca-cpf">
+                                                            <input id="alterClienteCPF" type="text"
+                                                                placeholder="Digite para buscar">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button id="btn-nome-alterar">
+                                                            <img src="../style/img/procurar.png"
+                                                                class="img-nome-alterar"> Buscar por nome
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table class="tabela-cliente-selecionado">
+                                                <tr>
+                                                    <th>Cliente selecionado</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input id="nomeClienteAlter" type="text" readonly
+                                                            placeholder="Cliente não cadastrado no pedido">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="botoes-cliente">
+                                                <button id="btn-alterar-confirmar">
+                                                    <img src="../style/img/troca.png" alt=""> Alterar
+                                                </button>
+                                                <button id="limparButton-cliente">
+                                                    <img class="img-excluir" src="../style/img/excluir.png" alt="">
+                                                    Limpar
+                                                </button>
+                                            </div>
+                                            <table class="tabela-info-cliente">
+                                                <tr>
+                                                    <td>
+                                                        ⚠️ O cliente precisa estar previamente cadastrado no sistema
+                                                        para
+                                                        que a alteração no pedido seja possível.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="desconto-venda">
+                                <div class="desconto-venda">
                                     <div class="campo">
                                         <p id="btn-exit-desconto">&times;</p>
                                         <label>Desconto no Pedido</label>
@@ -210,448 +277,456 @@
                                         </table>
 
                                     </div>
-                            </div>
-                            <div class="confirmation-clear">
-                                <div class="div-container">
-                                    <p id="btn-exit-pag-5"><span class="btn-exit-pag-5">&times;</span></p>
-                                    <div class="campo-clear">
-                                        
-                                        <label>Reiniciar Pedido</label>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    Digite a senha do
-                                                    administrador
-                                                </th>
-                                            </tr>
-                                            <td>
-                                                <form>
-                                                    <input id="limpar-tela-key" type="password" name="senha"
-                                                        autocomplete="current-password" placeholder="Digite a senha">
-                                                </form>
-                                            </td>
-                                        </table>
-                                        <div
-                                            style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
-                                            <button style="width: 100%; ">
-                                                <img style="width: 18px;" src="../style/img/confirmacao.png"
-                                                    alt="">Confirmar e reiniciar </button>
-                                        </div>
-                                        <table style="margin-top: 3%;">
-                                            <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ Ao confirmar o início de um novo pedido, todos os
-                                                    dados atuais serão
-                                                    perdidos.
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="remove-item">
-                                <div class="div-container-remover">
-                                    <p id="btn-exit-remover"><span class="btn-exit-remover">&times;</span></p>
-                                    <div class="campo-remover">
-                                        <label>Remover produto do pedido</label>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    Digite o núm. do item para remover.
-                                                </th>
-                                            </tr>
-                                            <tr>
+                                <div class="confirmation-clear">
+                                    <div class="div-container">
+                                        <p id="btn-exit-pag-5"><span class="btn-exit-pag-5">&times;</span></p>
+                                        <div class="campo-clear">
+
+                                            <label>Reiniciar Pedido</label>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        Digite a senha do
+                                                        administrador
+                                                    </th>
+                                                </tr>
                                                 <td>
-
-                                                    <input id="numero-Item" placeholder="Digite o número do item"
-                                                        type="number" style="margin-top: 2%">
+                                                    <form>
+                                                        <input id="limpar-tela-key" type="password" name="senha"
+                                                            autocomplete="current-password"
+                                                            placeholder="Digite a senha">
+                                                    </form>
                                                 </td>
-                                            </tr>
-                                        </table>
-                                        <div class="botoes">
-                                            <button id="confirme-delete" class="confirme-delete" style="width: 100%;">
-                                                <img class="img-disquete" src="../style/img/confirmacao.png"
-                                                    alt="">Remover item
-                                            </button>
+                                            </table>
+                                            <div
+                                                style="width: 100%; display: flex;justify-content: center;margin-top: 3% ;margin-bottom: 3%;">
+                                                <button style="width: 100%; ">
+                                                    <img style="width: 18px;" src="../style/img/confirmacao.png"
+                                                        alt="">Confirmar e reiniciar </button>
+                                            </div>
+                                            <table style="margin-top: 3%;">
+                                                <tr>
+                                                    <td class="info-pag" id="info-pag">
+                                                        ⚠️ Ao confirmar o início de um novo pedido, todos os
+                                                        dados atuais serão
+                                                        perdidos.
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                        <table style="margin-top: 3%;">
-                                            <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ Ao remover um produto do pedido, a ação não poderá ser
-                                                    desfeita.O
-                                                    valor do pedido
-                                                    será recalculado, atualizando o total de itens e o subtotal.
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    </div>
+                                </div>
+                                <div class="remove-item">
+                                    <div class="div-container-remover">
+                                        <p id="btn-exit-remover"><span class="btn-exit-remover">&times;</span></p>
+                                        <div class="campo-remover">
+                                            <label>Remover produto do pedido</label>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        Digite o núm. do item para remover.
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+
+                                                        <input id="numero-Item" placeholder="Digite o número do item"
+                                                            type="number" style="margin-top: 2%">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="botoes">
+                                                <button id="confirme-delete" class="confirme-delete"
+                                                    style="width: 100%;">
+                                                    <img class="img-disquete" src="../style/img/confirmacao.png"
+                                                        alt="">Remover item
+                                                </button>
+                                            </div>
+                                            <table style="margin-top: 3%;">
+                                                <tr>
+                                                    <td class="info-pag" id="info-pag">
+                                                        ⚠️ Ao remover um produto do pedido, a ação não poderá ser
+                                                        desfeita.O
+                                                        valor do pedido
+                                                        será recalculado, atualizando o total de itens e o subtotal.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Configurações - Crediário Loja -->
-                        <div id="parcelado">
-                            <div id="btn-exit-parcelado" class="btn-exit-span">&times;</div>
-                            <p class="p-titulo">
-                                <th>Pedido Parcelado (Crediário loja)</th>
-                            </p>
-                            <!-- Busca por nome do cliente -->
-                            <div class="divNomes">
-                                <span id="btn-exit-nome" class="btn-exit">x</span>
-                                <label for="buscaCliente">Buscar cliente por nome</label>
-                                <table class="tabela-busca-nome">
-                                    <tr>
-                                        <th>
-                                            <div class="th-conteudo">
-                                                <img class="icon-img" src="../style/img/procurar-black.png" alt="">
-                                                Digite o nome do Cliente
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" id="buscaCliente" class="input-busca"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <ul id="listaClientes" class="listaClientes"></ul>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- Busca por CPF e Nome -->
-                            <table>
-                                <tr>
-                                    <th>
-                                        <img class="icon-img" src="../style/img/procurar-black.png" alt=""> Buscar
-                                        por CPF
-                                    </th>
-                                    <th>Nome do Cliente</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr>
-                                    <td><input id="Crediario-cliente" type="text" placeholder="Digite o CPF"></td>
-                                    <td><input type="text" id="nomeCliente" readonly
-                                            placeholder="Cliente não cadastrado no pedido"></td>
-                                    <td>
-                                        <button id="btnBuscarNome" class="btn-acao">
-                                            <img class="icon-img" src="../style/img/procurar.png" alt=""> Buscar por
-                                            nome
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                            <!-- Condição de pagamento e parcelas -->
-                            <table class="tabela-pagamento">
-                                <tr>
-                                    <th>Condição de pagamento:</th>
-                                    <th>Digite o num. parcelas</th>
-                                    <th>Tipo de entrada</th>
-                                    <th>Valor da entrada</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select id="condicao-vencimento" class="select-condicao">
-                                            <option value="">Selecione</option>
-                                            <option value="entrada+30">Entrada + pagamentos mensais (30 dias)
-                                            </option>
-                                            <option value="30">Pagamentos mensais (30 dias)</option>
-                                            <option value="15">Pagamentos quinzenais (15 dias)</option>
-                                            <option value="entrada+15">Entrada + pagamentos quinzenais (15 dias)
-                                            </option>
-                                            <option value="7">Pagamentos semanais (7 dias)</option>
-                                            <option value="entrada+7">Entrada + Pgto semanais (7 dias)</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select id="Crediario-parcela" class="select-parcela"></select>
-                                    </td>
-                                    <td>
-                                        <select id="tipo-pagamento" class="select-tipo-pagamento">
-                                            <option value="Sem Entrada">-- Selecione --</option>
-                                            <option value="Dinheiro">Dinheiro</option>
-                                            <option value="PIX">PIX</option>
-                                            <option value="Cartão Crédito">Cartão Crédito</option>
-                                            <option value="Cartão Débito">Cartão Débito</option>
-                                        </select>
-                                    </td>
-                                    <td><input id="valorEntrada" class="input-entrada" placeholder="0,00" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                            <!-- Datas, juros e valores -->
-                            <table class="tabela-valores">
-                                <tr>
-                                    <th>Data do 1º vencimento</th>
-                                    <th>Taxa de Juros %</th>
-                                    <th>Valor da Parcela</th>
-                                    <th>Subtotal crediário (com taxa de juros)</th>
-                                </tr>
-                                <tr>
-                                    <td><input id="vencimentos" type="date" class="input-vencimento"></td>
-                                    <td><input id="taxa-juros" type="number" class="input-juros" readonly></td>
-                                    <td><input id="Crediario-valor" type="number" class="input-parcela"
-                                            placeholder="0,00" readonly></td>
-                                    <td><input id="Crediario" type="text" class="input-subtotal" value="0,00" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                            <!-- Crédito e ações -->
-                            <table class="tabela-credito">
-                                <tr>
-                                    <th>Crédito liberado</th>
-                                    <th>Crédito utilizado</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr>
-                                    <td><input id="creditoLimite" class="input-credito-liberado" value="0,00" readonly>
-                                    </td>
-                                    <td><input id="creditoUtilizado" class="input-credito-utilizado" value="0,00"
-                                            readonly></td>
-                                    <td>
-                                        <div class="div-botoes-credito">
-                                            <button id="btn-finalizar-venda" class="btn-acao">
-                                                <img class="icon-img" src="../style/img/confirmacao.png" alt="">
-                                                Finalizar
-                                            </button>
-                                            <button id="btn-limpar-formulario" class="btn-acao">
-                                                <img class="icon-img" src="../style/img/cancelar.png" alt=""> Limpar
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <p class="obs-taxa">
-                                <strong>Taxa de juros</strong> de <span class="taxa"></span> sobre o
-                                <strong>total</strong>, que será adicionada a partir da
-                                <strong>parcela</strong> <span class="taxa-parcela"></span> — esta taxa é
-                                configurada pelo <strong>administrador do sistema</strong>.
-                            </p>
-                            <table class="tabela-aviso">
-                                <tr>
-                                    <td>
-                                        <p id="aviso-pedidos">
-                                            <!-- renderiza no <script <script src="../Renderer/services/informacoes.js"></script> -->
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            </p>
-                        </div>
-                        <div class="payment-form-section">
-                            <div class="div-pagamento">
-                                <label class="titulo-choose-item-2">Forma de pagamento</label>
-                                <div class="pagamento-container">
-                                    <div class="pagamento-default">
-                                        <div class="pagamento-default-1" id="div-valorDinheiro">
-                                            <p id="btn-exit-pag-1">&times;</p>
-                                            <table>
-                                                <tr>
-                                                    <th for="valorDinheiro">À Vista (Dinheiro):</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input id="valorDinheiro" type="text" value="0,00">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="button-wrapper">
-                                                <button id="enter-aVista" class="enter-trigger">Finalizar pedido
-                                                    (Enter)</button>
-                                            </div>
-                                        </div>
-                                        <div class="pagamento-default-1" id="div-PIX">
-                                            <p id="btn-exit-pag-2">&times;</p>
-                                            <table>
-                                                <tr>
-                                                    <th for="PIX">PIX:</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input id="PIX" type="text" value="0,00">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="button-wrapper">
-                                                <button id="enter-PIX" class="enter-trigger">Finalizar pedido
-                                                    (Enter)</button>
-                                            </div>
-                                        </div>
-                                        <div class="pagamento-default-1" id="div-Cartao-Debito">
-                                            <p id="btn-exit-pag-3">&times;</p>
-                                            <table>
-                                                <tr>
-                                                    <th for="Cartao-Debito">Cartão Débito:</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input id="Cartao-Debito" type="text" value="0,00">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="button-wrapper">
-                                                <button class="enter-trigger">Finalizar pedido (Enter)</button>
-                                            </div>
-                                        </div>
-                                        <div class="pagamento-default-1" id="div-Cartao-Credito">
-                                            <p id="btn-exit-pag-4">&times;</p>
-                                            <table>
-                                                <tr>
-                                                    <th for="Cartao-Credito">Cartão Crédito:</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input id="Cartao-Credito" type="text" value="0,00">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="button-wrapper">
-                                                <button class="enter-trigger">Finalizar pedido (Enter)</button>
-                                            </div>
-                                        </div>
-                                        <div class="pagamento-default-1" id="div-boleto">
-                                            <p id="btn-exit-pag-5">&times;</p>
-                                            <table>
-                                                <tr>
-                                                    <th for="Cartao-boleto">Boleto bancário:</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input id="boleto" type="text" value="0,00">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="button-wrapper">
-                                                <button>Finalizar pedido</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="formulario-mensages-informativas">
-                                        <p><strong>Atenção:</strong> Parcelamentos no crediário acima de
-                                            <strong><span id="spanMaxParcelas"></span>X</strong> parcelas
-                                            terão uma taxa de X% de juros,
-                                            definida pelo setor financeiro nas configurações do sistema.
-
-                                        </p>
-                                    </div>
-                                    <table>
+                            <!-- Configurações - Crediário Loja -->
+                            <div id="parcelado">
+                                <p id="btn-exit-parcelado" class="btn-exit-span">&times;</p>
+                                <p class="p-titulo">
+                                    <th>Pedido Parcelado (Crediário loja)</th>
+                                </p>
+                                <!-- Busca por nome do cliente -->
+                                <div class="divNomes">
+                                    <span id="btn-exit-nome" class="btn-exit">&times;</span>
+                                    <label for="buscaCliente">Buscar cliente por nome</label>
+                                    <table class="tabela-busca-nome">
                                         <tr>
-                                            <td class="info-pag" id="info-pag">
-                                                Pressione (Shift + Atalho Pgto) para adicionar mais opções de Pgto
+                                            <th>
+                                                <div class="th-conteudo">
+                                                    <img class="icon-img" src="../style/img/procurar-black.png" alt="">
+                                                    Digite o nome do Cliente
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" id="buscaCliente" class="input-busca"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <ul id="listaClientes" class="listaClientes"></ul>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
+                                <!-- Busca por CPF e Nome -->
+                                <table>
+                                    <tr>
+                                        <th>
+                                            <img class="icon-img" src="../style/img/procurar-black.png" alt=""> Buscar
+                                            por CPF
+                                        </th>
+                                        <th>Nome do Cliente</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="Crediario-cliente" type="text" placeholder="Digite o CPF"></td>
+                                        <td><input type="text" id="nomeCliente" readonly
+                                                placeholder="Cliente não cadastrado no pedido"></td>
+                                        <td>
+                                            <button id="btnBuscarNome" class="btn-acao">
+                                                <img class="icon-img" src="../style/img/procurar.png" alt=""> Buscar por
+                                                nome
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Condição de pagamento e parcelas -->
+                                <table class="tabela-pagamento">
+                                    <tr>
+                                        <th>Condição de pagamento:</th>
+                                        <th>Digite o num. parcelas</th>
+                                        <th>Tipo de entrada</th>
+                                        <th>Valor da entrada</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select id="condicao-vencimento" class="select-condicao">
+                                                <option value="">Selecione</option>
+                                                <option value="entrada+30">Entrada + pagamentos mensais (30 dias)
+                                                </option>
+                                                <option value="30">Pagamentos mensais (30 dias)</option>
+                                                <option value="15">Pagamentos quinzenais (15 dias)</option>
+                                                <option value="entrada+15">Entrada + pagamentos quinzenais (15 dias)
+                                                </option>
+                                                <option value="7">Pagamentos semanais (7 dias)</option>
+                                                <option value="entrada+7">Entrada + Pgto semanais (7 dias)</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="Crediario-parcela" class="select-parcela"></select>
+                                        </td>
+                                        <td>
+                                            <select id="tipo-pagamento" class="select-tipo-pagamento">
+                                                <option value="Sem Entrada">-- Selecione --</option>
+                                                <option value="Dinheiro">Dinheiro</option>
+                                                <option value="PIX">PIX</option>
+                                                <option value="Cartão Crédito">Cartão Crédito</option>
+                                                <option value="Cartão Débito">Cartão Débito</option>
+                                            </select>
+                                        </td>
+                                        <td><input id="valorEntrada" class="input-entrada" placeholder="0,00" readonly>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Datas, juros e valores -->
+                                <table class="tabela-valores">
+                                    <tr>
+                                        <th>Data do 1º vencimento</th>
+                                        <th>Taxa de Juros %</th>
+                                        <th>Valor da Parcela</th>
+                                        <th>Subtotal crediário (com taxa de juros)</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="vencimentos" type="date" class="input-vencimento"></td>
+                                        <td><input id="taxa-juros" type="number" class="input-juros" readonly></td>
+                                        <td><input id="Crediario-valor" type="number" class="input-parcela"
+                                                placeholder="0,00" readonly></td>
+                                        <td><input id="Crediario" type="text" class="input-subtotal" value="0,00"
+                                                readonly>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Crédito e ações -->
+                                <table class="tabela-credito">
+                                    <tr>
+                                        <th>Crédito liberado</th>
+                                        <th>Crédito utilizado</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="creditoLimite" class="input-credito-liberado" value="0,00"
+                                                readonly>
+                                        </td>
+                                        <td><input id="creditoUtilizado" class="input-credito-utilizado" value="0,00"
+                                                readonly></td>
+                                        <td>
+                                            <div class="div-botoes-credito">
+                                                <button id="btn-finalizar-venda" class="btn-acao">
+                                                    <img class="icon-img" src="../style/img/confirmacao.png" alt="">
+                                                    Finalizar
+                                                </button>
+                                                <button id="btn-limpar-formulario" class="btn-acao">
+                                                    <img class="icon-img" src="../style/img/cancelar.png" alt=""> Limpar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="obs-taxa">
+                                    <strong>Taxa de juros</strong> de <span class="taxa"></span> sobre o
+                                    <strong>total</strong>, que será adicionada a partir da
+                                    <strong>parcela</strong> <span class="taxa-parcela"></span> — esta taxa é
+                                    configurada pelo <strong>administrador do sistema</strong>.
+                                </p>
+                                <table class="tabela-aviso">
+                                    <tr>
+                                        <td>
+                                            <p id="aviso-pedidos">
+                                                <!-- renderiza no <script <script src="../Renderer/services/informacoes.js"></script> -->
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                </p>
                             </div>
-                        </div>
-                        <div id="div-container-venda">
-                            <div class="div-info">
-                                <div class="info-item-data">
-                                    <label class="info-container-label" for="data-venda">Data da Venda:</label>
-                                    <input type="text" id="data-venda" readonly>
-                                </div>
-
-                                <div class="div-nomeProduto">
-                                    <p class="p-nome-produto">
-                                        <span class="ultimo-pro">Último produto adicionado:</span>
-                                        <span class="nomeProduto"></span>
-                                    </p>
-                                </div>
-
-                                <div class="div-time">
-                                    <p class="square-time"><span class="squere-hide">.</span></p>
-                                    <p class="square-day">Obrigado pela preferência!</p>
-                                </div>
-                            </div>
-
-                            <div class="produtos-carrinho">
-                                <div class="produto-box">
-                                    <div class="product-codigo">
-                                        <div class="div-img">
-                                            <img class="img-produto" src="../style/img/carrinho-de-compras.png">
+                            <div class="payment-form-section">
+                                <div class="div-pagamento">
+                                    <label class="titulo-choose-item-2">Forma de pagamento</label>
+                                    <div class="pagamento-container">
+                                        <div class="pagamento-default">
+                                            <div class="pagamento-default-1" id="div-valorDinheiro">
+                                                <p id="btn-exit-pag-1">&times;</p>
+                                                <table>
+                                                    <tr>
+                                                        <th for="valorDinheiro">À Vista (Dinheiro):</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="valorDinheiro" type="text" value="0,00">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="button-wrapper">
+                                                    <button id="enter-aVista" class="enter-trigger">Finalizar pedido
+                                                        (Enter)</button>
+                                                </div>
+                                            </div>
+                                            <div class="pagamento-default-1" id="div-PIX">
+                                                <p id="btn-exit-pag-2">&times;</p>
+                                                <table>
+                                                    <tr>
+                                                        <th for="PIX">PIX:</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="PIX" type="text" value="0,00">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="button-wrapper">
+                                                    <button id="enter-PIX" class="enter-trigger">Finalizar pedido
+                                                        (Enter)</button>
+                                                </div>
+                                            </div>
+                                            <div class="pagamento-default-1" id="div-Cartao-Debito">
+                                                <p id="btn-exit-pag-3">&times;</p>
+                                                <table>
+                                                    <tr>
+                                                        <th for="Cartao-Debito">Cartão Débito:</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="Cartao-Debito" type="text" value="0,00">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="button-wrapper">
+                                                    <button class="enter-trigger">Finalizar pedido (Enter)</button>
+                                                </div>
+                                            </div>
+                                            <div class="pagamento-default-1" id="div-Cartao-Credito">
+                                                <p id="btn-exit-pag-4">&times;</p>
+                                                <table>
+                                                    <tr>
+                                                        <th for="Cartao-Credito">Cartão Crédito:</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="Cartao-Credito" type="text" value="0,00">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="button-wrapper">
+                                                    <button class="enter-trigger">Finalizar pedido (Enter)</button>
+                                                </div>
+                                            </div>
+                                            <div class="pagamento-default-1" id="div-boleto">
+                                                <p id="btn-exit-pag-5">&times;</p>
+                                                <table>
+                                                    <tr>
+                                                        <th for="Cartao-boleto">Boleto bancário:</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input id="boleto" type="text" value="0,00">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="button-wrapper">
+                                                    <button>Finalizar pedido</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div class="div-filtrar">
-                                                <p>Filtrar por código EAN</p>
-                                                <input id="codigo">
+                                        <div class="formulario-mensages-informativas">
+                                            <p><strong>Atenção:</strong> Parcelamentos no crediário acima de
+                                                <strong><span id="spanMaxParcelas"></span>X</strong> parcelas
+                                                terão uma taxa de X% de juros,
+                                                definida pelo setor financeiro nas configurações do sistema.
+
+                                            </p>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <td class="info-pag" id="info-pag">
+                                                    Pressione (Shift + Atalho Pgto) para adicionar mais opções de Pgto
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div-container-venda">
+                                <div class="div-info">
+                                    <div class="info-item-data">
+                                        <label class="info-container-label" for="data-venda">Data da Venda:</label>
+                                        <input type="text" id="data-venda" readonly>
+                                    </div>
+
+                                    <div class="div-nomeProduto">
+                                        <p class="p-nome-produto">
+                                            <span class="ultimo-pro">Último produto adicionado:</span>
+                                            <span class="nomeProduto"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="div-time">
+                                        <p class="square-time"><span class="squere-hide">.</span></p>
+                                        <p class="square-day">Obrigado pela preferência!</p>
+                                    </div>
+                                </div>
+
+                                <div class="produtos-carrinho">
+                                    <div class="produto-box">
+                                        <div class="product-codigo">
+                                            <div class="div-img">
+                                                <img class="img-produto" src="../style/img/carrinho-de-compras.png">
                                             </div>
                                             <div>
-                                                <p style="text-align: center;">Quantidade
-                                                    <input style="width: 100%;" type="text" id="input-qtd" value="1"
-                                                        readonly>
+                                                <div class="div-filtrar">
+                                                    <p>Filtrar por código EAN</p>
+                                                    <input id="codigo">
+                                                </div>
+                                                <div>
+                                                    <p style="text-align: center;">Quantidade
+                                                        <input style="width: 100%;" type="text" id="input-qtd" value="1"
+                                                            readonly>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="div-carrinho">
+                                        <div class="carrinho">
+                                            <div class="carrinho-listas">
+                                                <ul class="ul-carrinho">
+                                                    <li class="li-titulo-carrinho">
+                                                        <div>
+                                                            <label for="numero-pedido">Nº Pedido:</label>
+                                                            <input type="text" id="numero-pedido" readonly>
+                                                            <p class="p-titulo-carrinho">Itens adicionados</p>
+                                                        </div>
+
+                                                    </li>
+                                                </ul>
+                                                <ul class="ul-descricao-produto"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="total-wrapper">
+                                    <div class="div-total-liquido">
+                                        <div class="valores">
+                                            <div class="val-div">
+                                                <p><span class="label-direita">Desconto (%):</span>
+                                                    <input id="mostrarDesconto" class="inputReadonly" type="text"
+                                                        value="0%" readonly>
+                                                </p>
+                                            </div>
+
+                                            <div class="val-div">
+                                                <p><span class="label-direita">Desc. em (R$): </span>
+                                                    <input id="mostrarDescontoReal" class="inputReadonly" type="text"
+                                                        value="0,00" readonly>
+                                                </p>
+                                            </div>
+                                            <div class="val-div">
+                                                <p><span class="label-direita">Valores Pagos:</span>
+                                                    <input id="total-pago" class="inputReadonly" value="0,00"
+                                                        type="text" readonly>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="valores-2">
+                                            <div class="val-div-1">
+                                                <p><span class="label-direita label-troco">Troco:</span>
+                                                    <input id="troco" value="0,00" type="text" class="inputReadonly">
+                                                </p>
+                                            </div>
+                                            <div class="val-div-1">
+                                                <p><span class="label-direita label-subtotal">Subtotal:</span>
+                                                    <input id="total-liquido" type="text" value="0,00"
+                                                        class="inputReadonly">
+                                                </p>
+                                            </div>
+                                            <div class="val-div-1">
+                                                <p class="linha-cliente">
+                                                    <span class="label-cliente">Cliente:</span>
+                                                    <input placeholder="Cliente não cadastrado no pedido" type="text"
+                                                        id="clienteNome" class="clienteNome" value="" readonly>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mensagem-informativa-wrapper"></div>
 
-                                <div class="div-carrinho">
-                                    <div class="carrinho">
-                                        <div class="carrinho-listas">
-                                            <ul class="ul-carrinho">
-                                                <li class="li-titulo-carrinho">
-                                                    <div>
-                                                        <label for="numero-pedido">Nº Pedido:</label>
-                                                        <input type="text" id="numero-pedido" readonly>
-                                                        <p class="p-titulo-carrinho">Itens adicionados</p>
-                                                    </div>
-
-                                                </li>
-                                            </ul>
-                                            <ul class="ul-descricao-produto"></ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="total-wrapper">
-                                <div class="div-total-liquido">
-                                    <div class="valores">
-                                        <div class="val-div">
-                                            <p><span class="label-direita">Desconto (%):</span>
-                                                <input id="mostrarDesconto" class="inputReadonly" type="text" value="0%"
-                                                    readonly>
-                                            </p>
-                                        </div>
-
-                                        <div class="val-div">
-                                            <p><span class="label-direita">Desc. em (R$): </span>
-                                                <input id="mostrarDescontoReal" class="inputReadonly" type="text"
-                                                    value="0,00" readonly>
-                                            </p>
-                                        </div>
-                                        <div class="val-div">
-                                            <p><span class="label-direita">Valores Pagos:</span>
-                                                <input id="total-pago" class="inputReadonly" value="0,00" type="text"
-                                                    readonly>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="valores-2">
-                                        <div class="val-div-1">
-                                            <p><span class="label-direita label-troco">Troco:</span>
-                                                <input id="troco" value="0,00" type="text" class="inputReadonly">
-                                            </p>
-                                        </div>
-                                        <div class="val-div-1">
-                                            <p><span class="label-direita label-subtotal">Subtotal:</span>
-                                                <input id="total-liquido" type="text" value="0,00"
-                                                    class="inputReadonly">
-                                            </p>
-                                        </div>
-                                        <div class="val-div-1">
-                                            <p class="linha-cliente">
-                                                <span class="label-cliente">Cliente:</span>
-                                                <input placeholder="Cliente não cadastrado no pedido" type="text"
-                                                    id="clienteNome" class="clienteNome" value="" readonly>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mensagem-informativa-wrapper"></div>
-                            <div id="impressaoCupom"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="div-correcao-view">
+
             </div>
         </div>
     </div>
@@ -664,7 +739,7 @@
 <script src="../Renderer/services/alertMsg.js"></script>
 <script src="../Renderer/services/informacoes.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
- 
+
 <script src="../Renderer/Vendas/btn_venda.js"></script>
 <script src="../Renderer/Vendas/carrinho.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>

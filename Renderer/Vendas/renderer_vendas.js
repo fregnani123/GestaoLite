@@ -11,7 +11,7 @@ const nomeClienteAlter = document.getElementById("nomeClienteAlter");
 const clienteId = document.querySelector("#id-cliente");
 const creditoUtilizado = document.querySelector("#creditoUtilizado");
 const creditoLimite = document.querySelector("#creditoLimite");
-
+const impressaoCupom = document.getElementById('impressaoCupom');
 const ulDescricaoProduto = document.querySelector('.ul-descricao-produto');
 const numeroPedido = document.querySelector('#numero-pedido');
 
@@ -44,7 +44,7 @@ const CrediarioCliente = document.getElementById('Crediario-cliente');
 
 const info_container = document.querySelector('.info-container');
 const imgProduto = document.querySelector('.img-produto');
-const impressaoCupom = document.getElementById('impressaoCupom');
+ 
 
 const inputdescontoPorcentagem = document.getElementById('desconto');
 const divValorDinheiro = document.getElementById('div-valorDinheiro');
@@ -81,6 +81,10 @@ btnAlterarQtd.addEventListener('click', () => {
     // adiciona listener de tecla
     inputQtd.addEventListener('keydown', function handler(e) {
         if (e.key === 'Enter') {
+            if (inputQtd.value === '' || inputQtd.value === '0') {
+                inputQtd.value = '1';
+            }
+
             e.preventDefault(); // evita submit se estiver em form
             codigoEan.focus();  // foca no input do código EAN
             inputQtd.readOnly = true; // se quiser travar de novo

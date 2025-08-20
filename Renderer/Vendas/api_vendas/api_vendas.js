@@ -129,7 +129,7 @@ async function getProduto(descricaoElement, codigoEan, precoVendaElement) {
             imgProduto.src = `file://${imgPath}`;
             imgProduto.onload = () => console.log("Imagem carregada com sucesso");
             imgProduto.onerror = () => {
-                console.error(`Erro ao carregar a imagem de: ${imgPath}, usando imagem padrão`);
+                console.log(`Imagem não localizada no repositório indicado: ${imgPath}, usando imagem padrão`);
                 imgProduto.src = `../style/img/carrinho-de-compras.png`; // Corrigido para um caminho válido
             };
 

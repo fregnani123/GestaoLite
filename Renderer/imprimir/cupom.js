@@ -191,7 +191,7 @@ async function getUltimoPedidoImprimirFolha(venda_id, numero_pedido_imprimir) {
     divParcela.classList.add('parcela-info');
     divParcela.setAttribute('data-id-parcela', parcela.parcela_numero);
 
-    const isEntrada = parcela.parcela_numero === 1 && parcela.status === 'PAGO';
+    const isEntrada = parcela.parcela_numero === 1 && parcela.status === 'Paga';
     const dataFormatada = formatarDataISOCupom(parcela.data_vencimento);
 
     const labelParcela = `Parcela ${parcela.parcela_numero}${isEntrada ? ' (Entrada)' : ''}`;

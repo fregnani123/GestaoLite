@@ -22,7 +22,7 @@ const controllersCrediario = {
                 dataPrimeiroVencimento,
                 condicao,
                 tipoPagamento,
-                entrada = 0
+                entrada
             } = req.body;
 
             // Verificar se algum campo importante está vazio ou faltando

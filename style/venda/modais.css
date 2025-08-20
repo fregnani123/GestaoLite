@@ -458,7 +458,6 @@ kbd {
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
 
 /* Campo interno */
@@ -471,11 +470,10 @@ kbd {
 }
 
 /* Botão fechar */
+
 #btn-exit-desconto {
   cursor: pointer;
   float: right;
-  font-weight: bold;
-  font-size: 1.2rem;
 }
 
 /* Select tipo de desconto */
@@ -556,15 +554,14 @@ table {
   display: flex;
   flex-direction: column;
   align-items: center;
- 
 }
 
 /* Botões de fechar */
+#btn-exit-venda,
 #btn-exit,
 #btn-exit-nome-2 {
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-weight: normal;
   align-self: flex-end;
 }
 
@@ -671,8 +668,8 @@ table {
 /* Botão fechar */
 .btn-exit {
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.2rem;
+  
+  font-weight: normal;
   align-self: flex-end;
 }
 
