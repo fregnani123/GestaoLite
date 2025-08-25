@@ -60,431 +60,450 @@
                     </div>
                 </div>
 
-                <div class="formulario">
-                    <div class="div-formulario">
-                        <div class="formulario-conteudo" style="gap: 0; border-right: none;">
+                <div style="width: 100%;height: 100vh;">
 
-                            <div class="formulario-inputs" style="border-left:none; margin-left: 0;">
+                    <div class="formulario">
+                        <div class="div-formulario"  >
+                            <div class="formulario-conteudo" style="gap: 0; border-right: none;">
 
-                                <div style="display: flex; width: 100%;">
-                                    <div class="formulario-img" style="border:none;margin-left: 1%;">
-                                        <p>Imagem do produto</p>
-                                        <div class="quadro-img">
-                                            <img class="img-produto" src="../style/img/codigo-de-barras - interno.png"
-                                                alt="imagem produto">
+                                <div class="formulario-inputs" style=" margin-left: 0;padding-bottom: 1%;">
+
+                                    <div style="display: flex; width: 100%;">
+                                        <div class="formulario-img" style="border:none;margin-left: 1%;">
+                                            <p>Imagem do produto</p>
+                                            <div class="quadro-img">
+                                                <img class="img-produto"
+                                                    src="../style/img/codigo-de-barras - interno.png"
+                                                    alt="imagem produto">
+                                            </div>
+                                            <div class="input-file-wrapper">
+                                                <input type="file" id="produto-imagem" accept="image/*">
+                                            </div>
+
                                         </div>
-                                        <div class="input-file-wrapper">
-                                            <input type="file" id="produto-imagem" accept="image/*">
-                                        </div>
-
-                                    </div>
-                                    <div style="width: 100%; margin-left: 1.5%;">
+                                        <div style="width: 100%; margin-left: 1.5%;">
 
 
-                                        <table class="table-1-produto" style="margin-bottom: 2%;">
-                                            <tr>
-                                                <th class="col-codigo">Código / Cód. Barras</th>
-                                                <th class="col-nome">Nome / Descrição</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" id="codigoDeBarras" name="codigoDeBarras"
-                                                        autocomplete="off" placeholder="Digite o Cod. barras">
-                                                </td>
-                                                <td><input type="text" id="nomeProduto" name="nome" autocomplete="off"
-                                                        placeholder="Digite o nome do produto">
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                        <table class="table-2-produto" style="margin-bottom: 2%;">
-                                            <tr>
-                                                <th class="col-grupo btn-border-transparent">Grupo</th>
-                                                <th class="btn-border-transparent">+ Grupo</th>
-                                                <th class="col-subgrupo btn-border-transparent border-left">Subgrupo
-                                                </th>
-                                                <th class="btn-border-transparent border-right">+ Subgrupo</th>
-                                            </tr>
-                                            <tr>
-                                                <td class="btn-border-transparent col-grupo">
-                                                    <select id="grupo" name="grupo">
-                                                        <option value="">-- Selecione --</option>
-                                                    </select>
-                                                </td>
-                                                <td class="btn-border-transparent">
-                                                    <button id="add-grupo" class="add-grupo"
-                                                        style="display: flex; align-items: center; gap: 8px;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button>
-                                                </td>
-                                                <td class="btn-border-transparent border-left">
-                                                    <select id="sub-grupo" name="grupo">
-                                                        <option value="">-- Selecione --</option>
-                                                    </select>
-                                                </td>
-                                                <td class="btn-border-transparent border-right">
-                                                    <button id="add-subGrupo" class="add-subGrupo"
-                                                        style="display: flex; align-items: center; gap: 8px;">
-                                                        <img src="../style/img/mais.png" alt="Adicionar"
-                                                            style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                        <table class="table-3-produto" style="margin-bottom: 0%;">
-                                            <tr>
-                                                <th class="btn-border-transparent border-left th-25">Cor do Produto</th>
-                                                <th class="btn-border-transparent th-15">+ Cor</th>
-                                                <th>Caracteristica do Produto</th>
-                                            </tr>
-                                            <tr>
-                                                <td class="btn-border-transparent border-left">
-                                                    <select id="corProduto" name="corProduto">
-                                                        <option value="">-- Selecione --</option>
-                                                    </select>
-                                                </td>
-                                                <td class="btn-border-transparent">
-                                                    <button id="add-cor" class="add-cor"
-                                                        style="display: flex; align-items: center; gap: 8px;">
-                                                        <img src="../style/img/mais.png" alt="Adicionar"
-                                                            style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <div class="caracteristica-container">
-                                                        <select id="escolhaUM">
-                                                            <option value="">-- Selecione Caracteristica do Produto --
-                                                            </option>
-                                                            <option value="Tamanho - P/GG">Tamanho - P/GG</option>
-                                                            <option value="Tamanho - Numeração">Tamanho - Numeração
-                                                            </option>
-                                                            <option value="Medida de Volume">Medida de Volume</option>
-                                                            <option value="Unidade Comprimento">Unidade Comprimento
-                                                            </option>
-                                                            <option value="Unidade de Massa">Unidade de Massa</option>
-                                                        </select>
-
-
-                                                        <div id="volumeDiv" class="input-select-wrapper">
-                                                            <span class="span-dois-pontos"><strong>:</strong></span>
-                                                            <input id="volumeNumero" type="number">
-                                                            <select id="medidaVolume" name="medidaVolume">
-                                                            </select>
-                                                        </div>
-
-                                                        <div id="comprimentoDiv" class="input-select-wrapper">
-                                                            <span class="span-dois-pontos"><strong>:</strong></span>
-                                                            <input id="comprimento" type="number">
-                                                            <select id="unidadeComprimento" name="unidadeComprimento">
-                                                            </select>
-                                                        </div>
-
-                                                        <div id="massaDiv" class="input-select-wrapper">
-                                                            <span class="span-dois-pontos"><strong>:</strong></span>
-                                                            <input id="massaNumero" type="number">
-                                                            <select id="unidadeDeMassa" name="unidadeMassa">
-                                                            </select>
-                                                        </div>
-
-                                                        <div id="divTamanho">
-                                                            <span class="span-dois-pontos"><strong>:</strong></span>
-                                                            <select id="tamanhoLetras" name="tamanhoLetras">
-                                                            </select>
-                                                        </div>
-
-                                                        <div id="divTamanhoNUm">
-                                                            <span class="span-dois-pontos"><strong>:</strong></span>
-                                                            <select id="tamanhoNumeros" name="tamanho">
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- div responsavel por renderizar o grup e subgrupo e cores. -->
-                                <div class="container-register">
-
-                                </div>
-
-
-
-                                <table style="width: 100%;margin-right: .5%;">
-                                    <tr>
-                                        <th style="width: 30%;">
-                                            Marca
-                                        </th>
-                                        <th>
-                                            + Marcas
-                                        </th>
-                                        <th>Preço de Compra</th>
-                                        <th>Lucro Bruto (R$)</th>
-                                        <th>Preço de Venda</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <select name="" id="marca_nome">
-                                                <option value="">-- Selecione --</option>
-
-                                            </select>
-                                        </td>
-                                        <td class="btn-border-transparent border-right">
-                                            <button id="btnMarca" class=""
-                                                style="display: flex; align-items: center; gap: 8px;">
-                                                <img src="../style/img/mais.png" alt="Adicionar" style="width: 18px;">
-                                                <span>Adicionar</span>
-                                            </button>
-                                        </td>
-                                        <td><input value="0,00" id="precoCusto" name="preco" autocomplete="off"></td>
-                                        <td>
-                                            <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
-                                            <input type="hidden" value="0" id="inputMarkup">
-                                        </td>
-                                        <td><input value="0,00" id="precoVenda" name="preco" autocomplete="off"></td>
-                                    </tr>
-                                </table>
-
-
-
-
-
-
-
-
-
-                                <div id="divFornecedor">
-                                    <!-- Div para pesquisar e buscar o nome do fornecedor a ser adicionado no cadastro do produto -->
-
-                                    <div id="divContainerFornecedor">
-                                        <div id="divBuscarPorNome">
-
-                                            <label style="margin-top: 1%;">Selecione o fornecedor vinculado ao
-                                                produto</label>
-                                            <span id="exit-nome-fornecedor">x</span>
-                                            <table>
+                                            <table class="table-1-produto" style="margin-bottom: 2%;">
                                                 <tr>
-                                                    <th>
-                                                        <div style="display: flex; align-items: center; gap: 1%;">
-                                                            <img style="width: 22px;"
-                                                                src="../style/img/procurar-black.png" alt="">
-                                                            Buscar fornecedor por nome
-                                                        </div>
+                                                    <th class="col-codigo">Código / Cód. Barras</th>
+                                                    <th class="col-nome">Nome / Descrição</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="number" id="codigoDeBarras" name="codigoDeBarras"
+                                                            autocomplete="off" placeholder="Digite o Cod. barras">
+                                                    </td>
+                                                    <td><input type="text" id="nomeProduto" name="nome"
+                                                            autocomplete="off" placeholder="Digite o nome do produto">
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table class="table-2-produto" style="margin-bottom: 2%;">
+                                                <tr>
+                                                    <th class="col-grupo btn-border-transparent">Grupo</th>
+                                                    <th class="btn-border-transparent">+ Grupo</th>
+                                                    <th class="col-subgrupo btn-border-transparent border-left">Subgrupo
                                                     </th>
+                                                    <th class="btn-border-transparent border-right">+ Subgrupo</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="text" id="input-busca-nome"
-                                                            placeholder="Digite o nome do fornecedor..." />
+                                                    <td class="btn-border-transparent col-grupo">
+                                                        <select id="grupo" name="grupo">
+                                                            <option value="">-- Selecione --</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="btn-border-transparent">
+                                                        <button id="add-grupo" class="add-grupo"
+                                                            style="display: flex; align-items: center; gap: 8px;">
+                                                            <img src="../style/img/mais.png" alt=""
+                                                                style="width: 18px;">
+                                                            <span>Adicionar</span>
+                                                        </button>
+                                                    </td>
+                                                    <td class="btn-border-transparent border-left">
+                                                        <select id="sub-grupo" name="grupo">
+                                                            <option value="">-- Selecione --</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="btn-border-transparent border-right">
+                                                        <button id="add-subGrupo" class="add-subGrupo"
+                                                            style="display: flex; align-items: center; gap: 8px;">
+                                                            <img src="../style/img/mais.png" alt="Adicionar"
+                                                                style="width: 18px;">
+                                                            <span>Adicionar</span>
+                                                        </button>
                                                     </td>
                                                 </tr>
-
                                             </table>
-                                            <table style="margin-top: 1%;">
+
+                                            <table class="table-3-produto" style="margin-bottom: 0%;">
                                                 <tr>
+                                                    <th class="btn-border-transparent border-left th-25">Cor do Produto
+                                                    </th>
+                                                    <th class="btn-border-transparent th-15">+ Cor</th>
+                                                    <th>Caracteristica do Produto</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="btn-border-transparent border-left">
+                                                        <select id="corProduto" name="corProduto">
+                                                            <option value="">-- Selecione --</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="btn-border-transparent">
+                                                        <button id="add-cor" class="add-cor"
+                                                            style="display: flex; align-items: center; gap: 8px;">
+                                                            <img src="../style/img/mais.png" alt="Adicionar"
+                                                                style="width: 18px;">
+                                                            <span>Adicionar</span>
+                                                        </button>
+                                                    </td>
                                                     <td>
+                                                        <div class="caracteristica-container">
+                                                            <select id="escolhaUM">
+                                                                <option value="">-- Selecione Caracteristica do Produto
+                                                                    --
+                                                                </option>
+                                                                <option value="Tamanho - P/GG">Tamanho - P/GG</option>
+                                                                <option value="Tamanho - Numeração">Tamanho - Numeração
+                                                                </option>
+                                                                <option value="Medida de Volume">Medida de Volume
+                                                                </option>
+                                                                <option value="Unidade Comprimento">Unidade Comprimento
+                                                                </option>
+                                                                <option value="Unidade de Massa">Unidade de Massa
+                                                                </option>
+                                                            </select>
 
-                                                        <div id="resultado-nomes"></div>
 
+                                                            <div id="volumeDiv" class="input-select-wrapper">
+                                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                                <input id="volumeNumero" type="number">
+                                                                <select id="medidaVolume" name="medidaVolume">
+                                                                </select>
+                                                            </div>
+
+                                                            <div id="comprimentoDiv" class="input-select-wrapper">
+                                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                                <input id="comprimento" type="number">
+                                                                <select id="unidadeComprimento"
+                                                                    name="unidadeComprimento">
+                                                                </select>
+                                                            </div>
+
+                                                            <div id="massaDiv" class="input-select-wrapper">
+                                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                                <input id="massaNumero" type="number">
+                                                                <select id="unidadeDeMassa" name="unidadeMassa">
+                                                                </select>
+                                                            </div>
+
+                                                            <div id="divTamanho">
+                                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                                <select id="tamanhoLetras" name="tamanhoLetras">
+                                                                </select>
+                                                            </div>
+
+                                                            <div id="divTamanhoNUm">
+                                                                <span class="span-dois-pontos"><strong>:</strong></span>
+                                                                <select id="tamanhoNumeros" name="tamanho">
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </table>
-
                                         </div>
-                                        <span id="btn-exit-fornecedor-prod">x</span>
-                                        <label>Selecione o fornecedor vinculado ao produto</label>
-                                        <table>
-                                            <tr>
-                                                <th style="white-space: nowrap;">
-                                                    <div style="display: inline-flex; align-items: center; gap: 5px;">
-                                                        <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                            alt="">
-                                                        Buscar fornecedor por CNPJ
-                                                    </div>
-                                                </th>
-                                                <th style="white-space: nowrap;">
-                                                    <div style="display: inline-flex; align-items: center; gap: 5px;">
-                                                        <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                            alt="">
-                                                        Buscar fornecedor por CPF
-                                                    </div>
-                                                </th>
+                                    </div>
 
-                                                <th>
-                                                    Ações
-                                                </th>
-                                            </tr>
 
-                                            <tr>
-                                                <td>
-                                                    <input id="cnpjFilter" type="text" placeholder="Digite pada buscar">
-                                                    <input type="hidden" id="fornecedorID">
-                                                </td>
-                                                <td>
-                                                    <input id="cpfFilter" type="text" placeholder="Digite pada buscar">
-                                                </td>
-                                                <td>
-                                                    <button style="width: 100%;" id="btn-nome-buscar"> <img
-                                                            style="width: 18px;" src="../style/img/procurar.png"
-                                                            alt="">Buscar por nome</button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    Razão Social fornecedor
-                                                </th>
 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <!-- " -->
-                                                    <input id="fornecedorEncontrado" type="text" readonly
-                                                        placeholder="Fornecedor não selecionado">
-                                                </td>
-
-                                            </tr>
-                                        </table>
-                                        <table>
-                                            <tr>
-
-                                                <th>
-                                                    Nome Fantasia fornecedor
-                                                </th>
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-
-                                                    <input id="inputFornecedorRazãoSocial" type="text" readonly
-                                                        placeholder="Fornecedor não selecionado">
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                        <div
-                                            style="width: 100%;display: flex; align-items: center;margin-top: 2%;justify-content: center; gap:2%;">
-                                            <button id="btn-alterar-confirmar">
-                                                <img style="width: 20px;" src="../style/img/disquete.png"
-                                                    alt="">Confirmar
-                                            </button>
-                                            <button id="limparButton-fornecedor">
-                                                <img class="img-excluir" src="../style/img/excluir.png" alt="">Limpar
-                                            </button>
-                                        </div>
-                                        <table style="margin-top: 3%;">
-                                            <tr>
-                                                <td class="info-pag" id="info-pag">
-                                                    ⚠️ O fornecedor precisa estar previamente cadastrado no
-                                                    sistema para que o produto seja vinculado.
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <!-- div responsavel por renderizar o grup e subgrupo e cores. -->
+                                    <div class="container-register">
 
                                     </div>
-                                </div>
 
 
 
-
-
-
-
-
-
-
-
-                                <table class="table-5-produto" style="width: 100%; margin-right: .5%;">
-                                    <tr>
-                                        <th style="width: 50%;">
-                                            Fornecedor - Razão Social
-                                        </th>
-                                        <th style="width: 20%;">
-                                            Buscar Fornecedor
-                                        </th>
-
-                                        <th>
-                                            Estoque mínimo
-                                        </th>
-                                        <!-- <th>
-                                        Estoque máximo
-                                    </th> -->
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input id="showFornecedor"
-                                                placeholder="Nenhum fornecedor — clique em buscar para selecionar"
-                                                name="fornecedor" readonly>
-                                        </td>
-                                        <td class="border-none-left">
-                                            <button id="buscar-fornecedor" style="width: 100%;"><img
-                                                    style="width: 18px;" src="../style/img/procurar.png"
-                                                    alt="">Buscar</button>
-                                        </td>
-
-                                        <td>
-                                            <input type="text" id="estoque_minimo" placeholder="0">
-                                        </td>
-                                        <input type="hidden" id="estoque_maximo" placeholder="0">
-                                    </tr>
-                                    <table class="table-6-produto">
+                                    <table style="width: 100%;margin-right: .5%;">
                                         <tr>
-                                            <th style="width: 30%;">Estoque Inicial</th>
-                                            <th style="width: 25%;">Ações</th>
-                                            <th></th>
+                                            <th style="width: 30%;">
+                                                Marca
+                                            </th>
+                                            <th>
+                                                + Marcas
+                                            </th>
+                                            <th>Preço de Compra</th>
+                                            <th>Lucro Bruto (R$)</th>
+                                            <th>Preço de Venda</th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="input-select-wrapper">
-                                                    <input type="number" id="estoqueQtd" name="estoqueQtd"
-                                                        placeholder="0" autocomplete="off" style="text-align: center;">
-                                                    <select id="unidadeEstoque" name="unidadeEstoque">
-                                                        <option value="">-- Selecione --</option>
-                                                    </select>
-                                                </div>
-                                            </td>
+                                                <select name="" id="marca_nome">
+                                                    <option value="">-- Selecione --</option>
 
-                                            <td>
-                                                <div class="acoes-container">
-                                                    <button id="btn-cadastrar-produto" class="btn-cadastrar-produto">
-                                                        <img class="img-disquete" src="../style/img/disquete.png"
-                                                            alt="">Gravar
-                                                    </button>
-                                                    <button id="limparButton">
-                                                        <img class="img-excluir" src="../style/img/excluir.png"
-                                                            alt="">Limpar
-                                                    </button>
-                                                </div>
+                                                </select>
+                                            </td>
+                                            <td class="btn-border-transparent border-right">
+                                                <button id="btnMarca" class=""
+                                                    style="display: flex; align-items: center; gap: 8px;">
+                                                    <img src="../style/img/mais.png" alt="Adicionar"
+                                                        style="width: 18px;">
+                                                    <span>Adicionar</span>
+                                                </button>
+                                            </td>
+                                            <td><input value="0,00" id="precoCusto" name="preco" autocomplete="off">
                                             </td>
                                             <td>
-
+                                                <input value="0,00" id="lucro" name="" autocomplete="off" readonly>
+                                                <input type="hidden" value="0" id="inputMarkup">
+                                            </td>
+                                            <td><input value="0,00" id="precoVenda" name="preco" autocomplete="off">
                                             </td>
                                         </tr>
                                     </table>
 
-                                    <textarea style="display:none" id="observacoes" name="observacoes"
-                                        autocomplete="off">
+
+
+
+
+
+
+
+
+                                    <div id="divFornecedor">
+                                        <!-- Div para pesquisar e buscar o nome do fornecedor a ser adicionado no cadastro do produto -->
+
+                                        <div id="divContainerFornecedor">
+                                            <div id="divBuscarPorNome">
+
+                                                <label style="margin-top: 1%;">Selecione o fornecedor vinculado ao
+                                                    produto</label>
+                                                <span id="exit-nome-fornecedor">x</span>
+                                                <table>
+                                                    <tr>
+                                                        <th>
+                                                            <div style="display: flex; align-items: center; gap: 1%;">
+                                                                <img style="width: 22px;"
+                                                                    src="../style/img/procurar-black.png" alt="">
+                                                                Buscar fornecedor por nome
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" id="input-busca-nome"
+                                                                placeholder="Digite o nome do fornecedor..." />
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                                <table style="margin-top: 1%;">
+                                                    <tr>
+                                                        <td>
+
+                                                            <div id="resultado-nomes"></div>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                            <span id="btn-exit-fornecedor-prod">x</span>
+                                            <label>Selecione o fornecedor vinculado ao produto</label>
+                                            <table>
+                                                <tr>
+                                                    <th style="white-space: nowrap;">
+                                                        <div
+                                                            style="display: inline-flex; align-items: center; gap: 5px;">
+                                                            <img style="width: 22px;"
+                                                                src="../style/img/procurar-black.png" alt="">
+                                                            Buscar fornecedor por CNPJ
+                                                        </div>
+                                                    </th>
+                                                    <th style="white-space: nowrap;">
+                                                        <div
+                                                            style="display: inline-flex; align-items: center; gap: 5px;">
+                                                            <img style="width: 22px;"
+                                                                src="../style/img/procurar-black.png" alt="">
+                                                            Buscar fornecedor por CPF
+                                                        </div>
+                                                    </th>
+
+                                                    <th>
+                                                        Ações
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input id="cnpjFilter" type="text"
+                                                            placeholder="Digite pada buscar">
+                                                        <input type="hidden" id="fornecedorID">
+                                                    </td>
+                                                    <td>
+                                                        <input id="cpfFilter" type="text"
+                                                            placeholder="Digite pada buscar">
+                                                    </td>
+                                                    <td>
+                                                        <button style="width: 100%;" id="btn-nome-buscar"> <img
+                                                                style="width: 18px;" src="../style/img/procurar.png"
+                                                                alt="">Buscar por nome</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        Razão Social fornecedor
+                                                    </th>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <!-- " -->
+                                                        <input id="fornecedorEncontrado" type="text" readonly
+                                                            placeholder="Fornecedor não selecionado">
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                            <table>
+                                                <tr>
+
+                                                    <th>
+                                                        Nome Fantasia fornecedor
+                                                    </th>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        <input id="inputFornecedorRazãoSocial" type="text" readonly
+                                                            placeholder="Fornecedor não selecionado">
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div
+                                                style="width: 100%;display: flex; align-items: center;margin-top: 2%;justify-content: center; gap:2%;">
+                                                <button id="btn-alterar-confirmar">
+                                                    <img style="width: 20px;" src="../style/img/disquete.png"
+                                                        alt="">Confirmar
+                                                </button>
+                                                <button id="limparButton-fornecedor">
+                                                    <img class="img-excluir" src="../style/img/excluir.png"
+                                                        alt="">Limpar
+                                                </button>
+                                            </div>
+                                            <table style="margin-top: 3%;">
+                                                <tr>
+                                                    <td class="info-pag" id="info-pag">
+                                                        ⚠️ O fornecedor precisa estar previamente cadastrado no
+                                                        sistema para que o produto seja vinculado.
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                    <table class="table-5-produto" style="width: 100%; margin-right: .5%;">
+                                        <tr>
+                                            <th style="width: 50%;">
+                                                Fornecedor - Razão Social
+                                            </th>
+                                            <th style="width: 20%;">
+                                                Buscar Fornecedor
+                                            </th>
+
+                                            <th>
+                                                Estoque mínimo
+                                            </th>
+                                            <!-- <th>
+                                        Estoque máximo
+                                    </th> -->
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input id="showFornecedor"
+                                                    placeholder="Nenhum fornecedor — clique em buscar para selecionar"
+                                                    name="fornecedor" readonly>
+                                            </td>
+                                            <td class="border-none-left">
+                                                <button id="buscar-fornecedor" style="width: 100%;"><img
+                                                        style="width: 18px;" src="../style/img/procurar.png"
+                                                        alt="">Buscar</button>
+                                            </td>
+
+                                            <td>
+                                                <input type="text" id="estoque_minimo" placeholder="0">
+                                            </td>
+                                            <input type="hidden" id="estoque_maximo" placeholder="0">
+                                        </tr>
+                                        <table >
+                                            <tr>
+                                                <th style="width: 30%;">Estoque Inicial</th>
+                                                <th style="width: 25%;">Ações</th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-select-wrapper">
+                                                        <input type="number" id="estoqueQtd" name="estoqueQtd"
+                                                            placeholder="0" autocomplete="off"
+                                                            style="text-align: center;">
+                                                        <select id="unidadeEstoque" name="unidadeEstoque">
+                                                            <option value="">-- Selecione --</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="acoes-container">
+                                                        <button id="btn-cadastrar-produto"
+                                                            class="btn-cadastrar-produto">
+                                                            <img class="img-disquete" src="../style/img/disquete.png"
+                                                                alt="">Gravar
+                                                        </button>
+                                                        <button id="limparButton">
+                                                            <img class="img-excluir" src="../style/img/excluir.png"
+                                                                alt="">Limpar
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <textarea style="display:none" id="observacoes" name="observacoes"
+                                            autocomplete="off">
                                     </textarea>
-                                    <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                                        <input type="hidden" id="Qtd_vendido" name="variavelOculta" value="">
+                                </div>
                             </div>
+
                         </div>
+                    </div>
+                    <div class="div-correcao-view">
 
                     </div>
                 </div>
 
             </div>
-            <div class="div-correcao-view" style="width: 100%; height: 98%; background-color: #2c4d6e; margin-bottom: 2%;">
-
-            </div>
         </div>
-    </div>
 </body>
 <script src="../Renderer/transicao.js" defer></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>

@@ -226,6 +226,12 @@ function applyFilters() {
     // clearInputs();
 }
 
+// Quando digitar no campo código EAN, aplica os filtros automaticamente
+codigoEAN.addEventListener("input", () => {
+    applyFilters();
+});
+
+
 // Função para limpar os inputs
 function clearInputs() {
     codigoEAN.value = '';

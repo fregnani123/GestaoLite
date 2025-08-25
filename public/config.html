@@ -31,6 +31,7 @@
             </nav>
         </header>
         <div class="formulario-container">
+            <div class="formulario-container-flex">
             <div class="menu-lateral">
                 <nav class="menu-suspenso">
                     <ul>
@@ -48,7 +49,7 @@
                         src="../style/img/logoLGL-removebg-preview (1).png" alt="">
                 </div>
             </div>
-
+ <div style="width: 100%;height: 100vh;">
             <div class="formulario">
                 <div class="div-formulario">
                     <div class="formulario-conteudo">
@@ -299,9 +300,9 @@
                                 <tr>
                                     <th id="div-ativo" class="tr-tipo-pessoa">Ativo:
                                     </th>
-                                    <th class="th-pessoa">Pessoa
+                                    <th style="width:20%;" class="th-pessoa">Pessoa
                                     </th>
-                                    <th id="label_cnpj_cpf">CNPJ / CPF
+                                    <th style="width:23%;" id="label_cnpj_cpf">CNPJ / CPF 
                                     </th>
                                     <th id="label_razao">Razão Social / Nome
                                     </th>
@@ -312,7 +313,7 @@
                                         <input type="hidden" id="id">
                                     </td>
                                     <td>
-                                        <select id="tipoPessoa" name="tipoPessoa">
+                                        <select id="tipoPessoa" name="tipoPessoa" >
 
                                             <option value="">Selecione</option>
 
@@ -322,10 +323,10 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input id="cnpjCpf" type="text" value=""  readonly>
+                                        <input id="cnpjCpf" type="text" value="" placeholder="Selecione CNPJ / CPF"  readonly> 
                                     </td>
                                     <td>
-                                        <input type="text" id="razao_social" readonly="readonly">
+                                        <input type="text" id="razao_social" readonly="readonly"   placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
                                     </td>
                                 </tr>
                             </table>
@@ -350,10 +351,10 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="inscricao_estadual" readonly="readonly">
+                                        <input type="text" id="inscricao_estadual" readonly="readonly" placeholder="Selecione">
                                     </td>
                                     <td>
-                                        <input type="text" id="nome_fantasia" readonly="readonly">
+                                        <input type="text" id="nome_fantasia" readonly="readonly"   placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
                                     </td>
                                 </tr>
                             </table>
@@ -361,20 +362,20 @@
                                 <tr>
                                     <th class="labelFornecedor">Cep
                                     </th>
-                                    <th class="th-endereco">Endereço
+                                    <th class="th-endereco">Endereço / Nome da rua
                                     </th>
                                     <th class="th-numero">Número
                                     </th>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="cep">
+                                        <input type="text" id="cep" placeholder="Digite o CEP" >
                                     </td>
                                     <td>
-                                        <input type="text" id="endereco">
+                                        <input type="text" id="endereco" placeholder="Digite o nome da rua">
                                     </td>
                                     <td>
-                                        <input type="numero" id="numero">
+                                        <input type="numero" id="numero"  placeholder="Digite o nº">
                                     </td>
                                 </tr>
                             </table>
@@ -389,7 +390,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="text" id="bairro">
+                                        <input type="text" id="bairro" placeholder="Digite o bairro">
                                     </td>
                                     <td>
                                         <select id="uf" name="estado">
@@ -401,7 +402,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <table class="table-5-config">
+                            <table class="table-3-config">
                                 <tr>
                                     <th class="th-email">E-mail
                                     </th>
@@ -412,10 +413,10 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="email" id="email">
+                                        <input type="email" id="email" placeholder="exemplo@dominio.com">
                                     </td>
                                     <td>
-                                        <input type="text" id="contato">
+                                        <input type="text" id="contato" placeholder="(99) 9999-99999">
                                     </td>
                                     <td>
                                         <select id="atividade">
@@ -423,7 +424,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <table class="table-6-config">
+                            <table class="table-3-config">
                                 <tr>
                                     <th class="hidden">Site
                                     </th>
@@ -440,10 +441,10 @@
                                         <input type="url" id="site">
                                     </td>
                                     <td>
-                                        <input type="text" id="slogan">
+                                        <input type="text" id="slogan" placeholder="Digite o seu slogan,ex: 'Sempre inovando!'">
                                     </td>
                                     <td>
-                                        <input type="text" id="qr_code_img">
+                                        <input type="text" id="qr_code_img"  placeholder="Digite o @exemplo"> 
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -479,7 +480,13 @@
                         </footer>
                     </div>
                 </div>
+                
             </div>
+                <div class="div-correcao-view">
+
+                        </div>
+            </div>
+        </div>
         </div>
     </div>
 </body>

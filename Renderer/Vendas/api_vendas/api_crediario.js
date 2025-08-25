@@ -12,7 +12,6 @@ let jurosParcelaAcima = ''
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
     function formatDateToYMD(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             entradaCrediario.disabled = false;
-            entradaCrediario.readOnly = false;
+           
 
             if (!entradaCrediario.value || entradaCrediario.value === "0" || entradaCrediario.value === "0.00") {
                 entradaCrediario.value = "0,00";
@@ -308,6 +307,12 @@ function atualizarParcelas() {
   // exibe a parcela padrão (sem diferenciar entrada/última)
   parcelaValor.value = (totalLiquido / numeroParcelas).toFixed(2);
 
+//  verifica se existe entrada e insere o valor no input entrada caso seja true.
+entradaCrediario.value = temEntrada && parcelaValor 
+    ? parcelaValor.value 
+    : '0,00';
+
+
   // total com juros (se houver)
   const totalComJurosCalc = totalLiquido.toFixed(2);
   Crediario.value = converteMoeda(totalComJurosCalc);
@@ -450,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 🔁 Use quantas vezes quiser:
+
     configurarBuscaCliente("buscaCliente", "listaClientes", "Crediario-cliente", ".divNomes");
     configurarBuscaCliente("buscaCliente-2", "listaClientes-2", "alterClienteCPF", ".divNomes-2"); // se houver outra
 });

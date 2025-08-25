@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self';">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/css-global/global.css">
     <link rel="stylesheet" href="../style/css-global/inputs.css">
@@ -27,64 +28,56 @@
             </nav>
         </header>
         <div class="formulario-container">
-            <div class="menu-lateral">
-                <nav class="menu-suspenso">
-                    <ul>
-                        <li>
-                            <a><img class="img-informacao" src="../style/img/mais.png">Agendar</a>
-                        </li>
-                        <li>
-                            <a href=""><img class="img-informacao" src="../style/img/historico-de-pedidos.png">Histórico
-                                de agendamentos</a>
-                        </li>
-                        <li>
-                            <a id="btn-ativo" id="agendamentos" href="./agenda.html"><img class="img-informacao"
-                                    src="../style/img/lista.png">Lista de agendamentos</a>
-                        </li>
-                        <li>
-                            <a id="agendamentos" href="./agenda.html"><img class="img-informacao"
-                                    src="../style/img/rapido.png">Cadastro rápido - Cliente</a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="formulario-container-flex">
+                <div class="menu-lateral">
+                    <nav class="menu-suspenso">
+                        <ul>
+                            <li>
+                                <a><img class="img-informacao" src="../style/img/mais.png">Agendar</a>
+                            </li>
+                            <li>
+                                <a href=""><img class="img-informacao"
+                                        src="../style/img/historico-de-pedidos.png">Histórico
+                                    de agendamentos</a>
+                            </li>
+                            <li>
+                                <a id="btn-ativo" id="agendamentos" href="./agenda.html"><img class="img-informacao"
+                                        src="../style/img/lista.png">Lista de agendamentos</a>
+                            </li>
+                            <li>
+                                <a id="agendamentos" href="./agenda.html"><img class="img-informacao"
+                                        src="../style/img/rapido.png">Cadastro rápido - Cliente</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-                <div class="div-logo-empresa"
-                    style="align-items: center; flex-direction: column;justify-content: center;">
-                    <img style="width: 300px; " src="../style/img/agenda-logo.png" alt="logo-empresa">
-                    <div class="div-time-right">
-                        <p class="square-time">
-                            <span class="squere-hide">.</span>
-                        </p>
-                        <span class="square-day-agenda"></span>
+                    <div class="div-logo-empresa"
+                        style="align-items: center; flex-direction: column;justify-content: center;">
+                        <img style="width: 300px; " src="../style/img/agenda-logo.png" alt="logo-empresa">
+                        <div class="div-time-right">
+                            <p class="square-time">
+                                <span class="squere-hide">.</span>
+                            </p>
+                            <span class="square-day-agenda"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div style="width: 100%;height: 100vh;">
 
-            <div class="formulario">
-                <div class="div-formulario">
-                    <div class="formulario-conteudo">
-                        <div class="formulario-inputs">
-                            <div class="div-form" style="width: 100%;">
-
-
+                    <div class="formulario">
+                        <div class="div-formulario" style="background-color: white;">
+                            <div class="formulario-conteudo">
+                                <div class="formulario-inputs">
+                                    <div class="div-form" style="width: 100%;">
 
 
 
 
+                                        
 
-
-
-
-
-
-
-
-
-
-
-                                <div class="container-inputs" style="position: relative; z-index: 9;">
-                                    <div class="div-agendar">
-                                        <!--                                      
+                                        <div class="container-inputs" style="position: relative; z-index: 9;">
+                                            <div class="div-agendar">
+                                                <!--                                      
                                         <label class="agendar-titulo"
                                             style="background-color: #f4f4f4; padding: 1%;">Cadastrar novo
                                             Agendamento</label>
@@ -117,365 +110,391 @@
                                                 </div>
                                             </div> -->
 
-                                        <!-- Tabela 1 - já feita por você -->
-                                        <table style="margin-top: .5%; width: 99%; margin-left: .5%;margin-right: .5%;">
-                                            <tr style="background-color: #f9f9f9;">
-                                                <th style="width: 15%;">Criado em</th>
-                                                <th style="width: 20%;">CPF / CNPJ</th>
-                                                <th style="width: 50%;">Nome do Agendado</th>
-                                                <th style="width: 20%;">Buscar por nome</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="date" id="criadoEm" name="criadoEm" /></td>
-                                                <td><input type="text" id="cpfCnpj" name="cpfCnpj" /></td>
-                                                <td><input type="text" id="nomeCliente" name="nomeCliente" /></td>
-                                                <td>
-                                                    <button style="width: 100%;" id=""><img style="width: 22px;"
-                                                            src="../style/img/procurar.png" alt="">
-                                                        Buscar</button>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                                <!-- Tabela 1 - já feita por você -->
+                                                <table
+                                                    style="margin-top: .5%; width: 99%; margin-left: .5%;margin-right: .5%;">
+                                                    <tr style="background-color: #f9f9f9;">
+                                                        <th style="width: 15%;">Criado em</th>
+                                                        <th style="width: 20%;">CPF / CNPJ</th>
+                                                        <th style="width: 50%;">Nome do Agendado</th>
+                                                        <th style="width: 20%;">Buscar por nome</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="date" id="criadoEm" name="criadoEm" /></td>
+                                                        <td><input type="text" id="cpfCnpj" name="cpfCnpj" /></td>
+                                                        <td><input type="text" id="nomeCliente" name="nomeCliente" />
+                                                        </td>
+                                                        <td>
+                                                            <button style="width: 100%;" id=""><img style="width: 22px;"
+                                                                    src="../style/img/procurar.png" alt="">
+                                                                Buscar</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
 
-                                        <!-- Tabela 2 -->
-                                        <table style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
-                                            <tr style="background-color: #f9f9f9;">
-                                                <th style="width: 20%;">Contato</th>
-                                                <th style="width: 15%;">Agendado para</th>
-                                                <th style="width: 15%;">+ Agendado para</th>
-                                                <th style="width: 15%;">Hora</th>
-                                                <th style="width: 30%;">Profissional</th>
-                                                <th style="width: 15%;">+ Profissional</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" id="contato" name="" /></td>
-                                                <td><input type="date" id="dataAgendada" name="dataAgendada" /></td>
-                                                <td><button id="" class=""
-                                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button></td>
-                                                <td><input type="time" id="hora" name="hora" /></td>
-                                                <td> <select id="tipoServico" name="tipoServico" required>
-                                                        <option value="">-- Selecione --</option>
-                                                        <option value="outro">Outro</option>
-                                                    </select></td>
-                                                <td><button id="" class=""
-                                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button></td>
-                                            </tr>
-                                        </table>
+                                                <!-- Tabela 2 -->
+                                                <table
+                                                    style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
+                                                    <tr style="background-color: #f9f9f9;">
+                                                        <th style="width: 20%;">Contato</th>
+                                                        <th style="width: 15%;">Agendado para</th>
+                                                        <th style="width: 15%;">+ Agendado para</th>
+                                                        <th style="width: 15%;">Hora</th>
+                                                        <th style="width: 30%;">Profissional</th>
+                                                        <th style="width: 15%;">+ Profissional</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" id="contato" name="" /></td>
+                                                        <td><input type="date" id="dataAgendada" name="dataAgendada" />
+                                                        </td>
+                                                        <td><button id="" class=""
+                                                                style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                                                <img src="../style/img/mais.png" alt=""
+                                                                    style="width: 18px;">
+                                                                <span>Adicionar</span>
+                                                            </button></td>
+                                                        <td><input type="time" id="hora" name="hora" /></td>
+                                                        <td> <select id="tipoServico" name="tipoServico" required>
+                                                                <option value="">-- Selecione --</option>
+                                                                <option value="outro">Outro</option>
+                                                            </select></td>
+                                                        <td><button id="" class=""
+                                                                style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                                                <img src="../style/img/mais.png" alt=""
+                                                                    style="width: 18px;">
+                                                                <span>Adicionar</span>
+                                                            </button></td>
+                                                    </tr>
+                                                </table>
 
-                                        <!-- Tabela 3 -->
-                                        <table style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
-                                            <tr style="background-color: #f9f9f9;">
-                                                <th>Agendado por</th>
-                                                <th style="width: 15%;">+ Agendado por</th>
-                                                <th>Tipo de Serviço</th>
-                                                <th style="width: 15%;">+ Tipo de Serviço</th>
-                                            </tr>
-                                            <tr>
-                                                <td><select id="" name="tipoServico" required>
-                                                        <option value="">-- Selecione --</option>
-                                                        <option value="manutencao">Manutenção</option>
-                                                        <option value="instalacao">Instalação</option>
-                                                        <option value="consulta">Consulta Técnica</option>
-                                                        <option value="orcamento">Orçamento</option>
-                                                        <option value="outro">Outro</option>
-                                                    </select>
-                                                </td>
-                                                <td><button id="" class="add-grupo"
-                                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button></td>
-                                                <td><select id="tipoServico" name="tipoServico" required>
-                                                        <option value="">-- Selecione --</option>
-                                                        <option value="manutencao">Manutenção</option>
-                                                        <option value="instalacao">Instalação</option>
-                                                        <option value="consulta">Consulta Técnica</option>
-                                                        <option value="orcamento">Orçamento</option>
-                                                        <option value="outro">Outro</option>
-                                                    </select>
-                                                </td>
-                                                <td><button id="" class="add-grupo"
-                                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button></td>
-                                            </tr>
-                                        </table>
+                                                <!-- Tabela 3 -->
+                                                <table
+                                                    style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
+                                                    <tr style="background-color: #f9f9f9;">
+                                                        <th>Agendado por</th>
+                                                        <th style="width: 15%;">+ Agendado por</th>
+                                                        <th>Tipo de Serviço</th>
+                                                        <th style="width: 15%;">+ Tipo de Serviço</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><select id="" name="tipoServico" required>
+                                                                <option value="">-- Selecione --</option>
+                                                                <option value="manutencao">Manutenção</option>
+                                                                <option value="instalacao">Instalação</option>
+                                                                <option value="consulta">Consulta Técnica</option>
+                                                                <option value="orcamento">Orçamento</option>
+                                                                <option value="outro">Outro</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button id="" class="add-grupo"
+                                                                style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                                                <img src="../style/img/mais.png" alt=""
+                                                                    style="width: 18px;">
+                                                                <span>Adicionar</span>
+                                                            </button></td>
+                                                        <td><select id="tipoServico" name="tipoServico" required>
+                                                                <option value="">-- Selecione --</option>
+                                                                <option value="manutencao">Manutenção</option>
+                                                                <option value="instalacao">Instalação</option>
+                                                                <option value="consulta">Consulta Técnica</option>
+                                                                <option value="orcamento">Orçamento</option>
+                                                                <option value="outro">Outro</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button id="" class="add-grupo"
+                                                                style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                                                <img src="../style/img/mais.png" alt=""
+                                                                    style="width: 18px;">
+                                                                <span>Adicionar</span>
+                                                            </button></td>
+                                                    </tr>
+                                                </table>
 
-                                        <!-- Tabela 4 -->
-                                        <table style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
-                                            <tr style="background-color: #f9f9f9;">
-                                                <th style="width: 40%;">Descrição</th>
-                                                <th style="width: 15%;">+ Descrição</th>
-                                                  <th style="width: 30%;">Tempo Estimado</th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <select id="descricaoServico" name="descricaoServico" required>
-                                                        <option value="">-- Selecione a descrição --</option>
-                                                    </select>
+                                                <!-- Tabela 4 -->
+                                                <table
+                                                    style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
+                                                    <tr style="background-color: #f9f9f9;">
+                                                        <th style="width: 40%;">Descrição</th>
+                                                        <th style="width: 15%;">+ Descrição</th>
+                                                        <th style="width: 30%;">Tempo Estimado</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <select id="descricaoServico" name="descricaoServico"
+                                                                required>
+                                                                <option value="">-- Selecione a descrição --</option>
+                                                            </select>
 
-                                                </td>
-                                                <td><button id="" class="add-grupo"
-                                                        style="display: flex; align-items: center; gap: 8px; width: 100%;">
-                                                        <img src="../style/img/mais.png" alt="" style="width: 18px;">
-                                                        <span>Adicionar</span>
-                                                    </button></td>
-                                               
-                                                          <td><select id="tempoEstimado" name="tempoEstimado" required>
-                                                        <option value="">-- Selecione o tempo estimado --</option>
+                                                        </td>
+                                                        <td><button id="" class="add-grupo"
+                                                                style="display: flex; align-items: center; gap: 8px; width: 100%;">
+                                                                <img src="../style/img/mais.png" alt=""
+                                                                    style="width: 18px;">
+                                                                <span>Adicionar</span>
+                                                            </button></td>
 
-                                                        <!-- Minutos -->
+                                                        <td><select id="tempoEstimado" name="tempoEstimado" required>
+                                                                <option value="">-- Selecione o tempo estimado --
+                                                                </option>
 
-                                                        <option value="5min">Sem estimativa</option>
-                                                        <option value="5min">5 minutos</option>
-                                                        <option value="10min">10 minutos</option>
-                                                        <option value="15min">15 minutos</option>
-                                                        <option value="30min">30 minutos</option>
+                                                                <!-- Minutos -->
 
-                                                        <!-- Horas -->
-                                                        <option value="1h">1 hora</option>
-                                                        <option value="2h">2 horas</option>
-                                                        <option value="3h">3 horas</option>
-                                                        <option value="4h">4 horas</option>
-                                                        <option value="5h">5 horas</option>
-                                                        <option value="6h">6 horas</option>
-                                                        <option value="7h">7 horas</option>
-                                                        <option value="8h">8 horas</option>
-                                                        <option value="9h">9 horas</option>
-                                                        <option value="10h">10 horas</option>
-                                                        <option value="11h">11 horas</option>
-                                                        <option value="12h">12 horas</option>
-                                                        <option value="13h">13 horas</option>
-                                                        <option value="14h">14 horas</option>
-                                                        <option value="15h">15 horas</option>
-                                                        <option value="16h">16 horas</option>
-                                                        <option value="17h">17 horas</option>
-                                                        <option value="18h">18 horas</option>
-                                                        <option value="19h">19 horas</option>
-                                                        <option value="20h">20 horas</option>
-                                                        <option value="21h">21 horas</option>
-                                                        <option value="22h">22 horas</option>
-                                                        <option value="23h">23 horas</option>
-                                                        <option value="24h">24 horas</option>
+                                                                <option value="5min">Sem estimativa</option>
+                                                                <option value="5min">5 minutos</option>
+                                                                <option value="10min">10 minutos</option>
+                                                                <option value="15min">15 minutos</option>
+                                                                <option value="30min">30 minutos</option>
 
-                                                        <!-- Dias -->
-                                                        <option value="1d">1 dia</option>
-                                                    </select></td>
-                                            </tr>
-                                        </table>
+                                                                <!-- Horas -->
+                                                                <option value="1h">1 hora</option>
+                                                                <option value="2h">2 horas</option>
+                                                                <option value="3h">3 horas</option>
+                                                                <option value="4h">4 horas</option>
+                                                                <option value="5h">5 horas</option>
+                                                                <option value="6h">6 horas</option>
+                                                                <option value="7h">7 horas</option>
+                                                                <option value="8h">8 horas</option>
+                                                                <option value="9h">9 horas</option>
+                                                                <option value="10h">10 horas</option>
+                                                                <option value="11h">11 horas</option>
+                                                                <option value="12h">12 horas</option>
+                                                                <option value="13h">13 horas</option>
+                                                                <option value="14h">14 horas</option>
+                                                                <option value="15h">15 horas</option>
+                                                                <option value="16h">16 horas</option>
+                                                                <option value="17h">17 horas</option>
+                                                                <option value="18h">18 horas</option>
+                                                                <option value="19h">19 horas</option>
+                                                                <option value="20h">20 horas</option>
+                                                                <option value="21h">21 horas</option>
+                                                                <option value="22h">22 horas</option>
+                                                                <option value="23h">23 horas</option>
+                                                                <option value="24h">24 horas</option>
 
-                                        <!-- Tabela 5 -->
-                                        <table style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
-                                            <tr style="background-color: #f9f9f9;">
-                                                <th>Materiais</th>
-                                                <th style="width: 50%;">Observações</th>
-                                            </tr>
-                                            <tr>
-                                                 <td><input id="materiais" name="materiais" rows="2"
-                                                        style="width: 100%;"></input></td>
-                                                <td><input id="observacoes" name="observacoes"
-                                                        style="width: 100%;"></input></td>
-                                              
-                                            </tr>
-                                        </table>
+                                                                <!-- Dias -->
+                                                                <option value="1d">1 dia</option>
+                                                            </select></td>
+                                                    </tr>
+                                                </table>
 
-                                        <!-- Tabela 6 -->
-                                        <table
-                                            style="  width: 99%; margin-left: .5%;margin-right: .5%; margin-top: .5%; margin-bottom: 1%;">
-                                            <tr style="background-color: #f9f9f9;">
+                                                <!-- Tabela 5 -->
+                                                <table
+                                                    style=" margin-top: 1%; width: 99%; margin-left: .5%;margin-right: .5%;">
+                                                    <tr style="background-color: #f9f9f9;">
+                                                        <th>Materiais</th>
+                                                        <th style="width: 50%;">Observações</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input id="materiais" name="materiais" rows="2"
+                                                                style="width: 100%;"></input></td>
+                                                        <td><input id="observacoes" name="observacoes"
+                                                                style="width: 100%;"></input></td>
 
-                                                <th>Valor</th>
-                                                <th>Tipo de Pgto</th>
-                                                <th>Pago?</th>
-                                                <th>Status</th>
-                                                <th>Ações</th>
-                                            </tr>
-                                            <tr>
+                                                    </tr>
+                                                </table>
 
-                                                <td><input type="number" step="0.01" id="valor" name="valor" /></td>
-                                                     <td>
-                                                    <select id="" name="">
-                                                        <option value="">PIX</option>
-                                                        <option value="">Dinherio</option>
-                                                        <option value="">Cartão Crédito</option>
-                                                        <option value="">Cartão Débito</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select id="pago" name="pago">
-                                                        <option value="Não">Não</option>
-                                                        <option value="Sim">Sim</option>
-                                                        <option value="Parcial">Parcial</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select id="status" name="status">
-                                                        <option value="Pendente">Pendente</option>
-                                                        <option value="Confirmado">Confirmado</option>
-                                                        <option value="Concluído">Concluído</option>
-                                                        <option value="Cancelado">Cancelado</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <div class="acoes-container">
-                                                        <button id="btn-cadastrar-produto" class="btn-cadastrar-produto"
-                                                            style="width: 50%;">
-                                                            <img class="img-disquete" src="../style/img/disquete.png"
-                                                                alt="">Gravar
-                                                        </button>
-                                                        <button id="limparButton" style="width: 50%;">
-                                                            <img class="img-excluir" src="../style/img/excluir.png"
-                                                                alt="">Limpar
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                                <!-- Tabela 6 -->
+                                                <table
+                                                    style="  width: 99%; margin-left: .5%;margin-right: .5%; margin-top: .5%; margin-bottom: 1%;">
+                                                    <tr style="background-color: #f9f9f9;">
 
-                                    </div>
+                                                        <th>Valor</th>
+                                                        <th>Tipo de Pgto</th>
+                                                        <th>Pago?</th>
+                                                        <th>Status</th>
+                                                        <th>Ações</th>
+                                                    </tr>
+                                                    <tr>
 
-                                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                <div class="div-historico" style="display: none;">
-                                    <div class="agendar-border">
-                                        <p class="agendar-titulo">Histórico de Agendamentos</p>
-                                        <button class="btnCloseHist">X</button>
-                                        <table class="agendar" style="width: 70%;">
-                                            <tr>
-                                                <th>Filtrar por CPF</th>
-                                                <th>Nome do Cliente</th>
-                                                <th>Ações</th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" id="cpfFilter"></td>
-                                                <td>
-                                                    <input id="cliente-historico" autocomplete="off" readonly
-                                                        style="background-color: rgb(228, 228, 228);">
-                                                    <input id="clienteID" type="hidden">
-                                                </td>
-                                                <td style="text-align: center;">
-                                                    <div class='divBtn'>
-                                                        <button class="btn-cadastrar" id="filtrarHistorico"><img
-                                                                class="img-excluir" src="../style//img/procurar.png"
-                                                                alt="">Buscar</button>
-                                                        <button id="limparButton"><img class="img-excluir"
-                                                                src="../style//img/excluir.png" alt="">Limpar</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div id="div-table-historico"></div>
-                                    </div>
-                                </div>
-
-
-                                <div id="modal-reagendar" class="modal">
-                                    <div class="modal-content">
-                                        <span id="btnFecharModal" class="close">&times;</span>
-                                        <h2>Reagendar</h2>
-                                        <label for="nova-data">Nova Data:</label>
-                                        <input type="date" id="nova-data">
-                                        <label for="nova-hora">Nova Hora:</label>
-                                        <input type="time" id="nova-hora">
-                                        <button id="btnSalvarReagendamento" class="btn btn-save">Salvar</button>
-                                    </div>
-                                </div>
-                                <!-- aqui fica a table criada no js -->
-                                <table style="margin-top: .5%; width: 99%; margin: .5%;">
-                                    <tr>
-                                        <th style="width: 15%; text-align: center;">
-                                            <div
-                                                style="display: flex; align-items: center; justify-content: center; gap:6px;">
-                                                <img style="width: 25px;" src="../style/img/procurar-black.png" alt="">
-                                                Buscar por CPF
-                                            </div>
-                                        </th>
-                                        <th style="width: 50%;">
-                                            Nome Completo
-                                        </th>
-                                        <th>
-                                            Ações
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" id="cpf" placeholder="Digite para buscar" required>
-                                        </td>
-                                        <td>
-                                            <input type="text" id="nome" style="width: 100%;" required>
-                                        </td>
-                                        <td>
-                                            <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                                                <button title="Clique aqui para buscar pelo nome" class="btn-buscar"
-                                                    style="width: 50%; font-size: .9rem;">
-                                                    <img style="width: 18px;" src="../style/img/procurar.png"
-                                                        alt="">Buscar por nome</button>
-                                                <button id="limparButton" style="width: 50%;"><img class="img-excluir"
-                                                        src="../style//img/excluir.png" alt="">Limpar</button>
+                                                        <td><input type="number" step="0.01" id="valor" name="valor" />
+                                                        </td>
+                                                        <td>
+                                                            <select id="" name="">
+                                                                <option value="">PIX</option>
+                                                                <option value="">Dinherio</option>
+                                                                <option value="">Cartão Crédito</option>
+                                                                <option value="">Cartão Débito</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select id="pago" name="pago">
+                                                                <option value="Não">Não</option>
+                                                                <option value="Sim">Sim</option>
+                                                                <option value="Parcial">Parcial</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select id="status" name="status">
+                                                                <option value="Pendente">Pendente</option>
+                                                                <option value="Confirmado">Confirmado</option>
+                                                                <option value="Concluído">Concluído</option>
+                                                                <option value="Cancelado">Cancelado</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <div class="acoes-container">
+                                                                <button id="btn-cadastrar-produto"
+                                                                    class="btn-cadastrar-produto" style="width: 50%;">
+                                                                    <img class="img-disquete"
+                                                                        src="../style/img/disquete.png" alt="">Gravar
+                                                                </button>
+                                                                <button id="limparButton" style="width: 50%;">
+                                                                    <img class="img-excluir"
+                                                                        src="../style/img/excluir.png" alt="">Limpar
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
 
                                             </div>
-                                        </td>
 
-                                    </tr>
-                                </table>
-                                <!-- Exemplo de campo de data oculto (se estiver usando) -->
-                                <input type="hidden" id="data-venda">
-                                <p
-                                    style="border: 1px solid gray; padding: .8%;font-weight: 600; background-color: rgb(230, 230, 230);">
-                                    Lista de agendamentos por ordem de data e horarios</p>
-                                <div id="div-container-form">
-                                    <h3 class="msgAgenda">Sem agendamentos disponíveis no momento.</h3>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="div-historico" style="display: none;">
+                                            <div class="agendar-border">
+                                                <p class="agendar-titulo">Histórico de Agendamentos</p>
+                                                <button class="btnCloseHist">X</button>
+                                                <table class="agendar" style="width: 70%;">
+                                                    <tr>
+                                                        <th>Filtrar por CPF</th>
+                                                        <th>Nome do Cliente</th>
+                                                        <th>Ações</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" id="cpfFilter"></td>
+                                                        <td>
+                                                            <input id="cliente-historico" autocomplete="off" readonly
+                                                                style="background-color: rgb(228, 228, 228);">
+                                                            <input id="clienteID" type="hidden">
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            <div class='divBtn'>
+                                                                <button class="btn-cadastrar" id="filtrarHistorico"><img
+                                                                        class="img-excluir"
+                                                                        src="../style//img/procurar.png"
+                                                                        alt="">Buscar</button>
+                                                                <button id="limparButton"><img class="img-excluir"
+                                                                        src="../style//img/excluir.png"
+                                                                        alt="">Limpar</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div id="div-table-historico"></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="modal-reagendar" class="modal">
+                                            <div class="modal-content">
+                                                <span id="btnFecharModal" class="close">&times;</span>
+                                                <h2>Reagendar</h2>
+                                                <label for="nova-data">Nova Data:</label>
+                                                <input type="date" id="nova-data">
+                                                <label for="nova-hora">Nova Hora:</label>
+                                                <input type="time" id="nova-hora">
+                                                <button id="btnSalvarReagendamento" class="btn btn-save">Salvar</button>
+                                            </div>
+                                        </div>
+                                        <!-- aqui fica a table criada no js -->
+                                        <table style="margin-top: .5%; width: 99%; margin: .5%;">
+                                            <tr>
+                                                <th style="width: 15%; text-align: center;">
+                                                    <div
+                                                        style="display: flex; align-items: center; justify-content: center; gap:6px;">
+                                                        <img style="width: 25px;" src="../style/img/procurar-black.png"
+                                                            alt="">
+                                                        Buscar por CPF
+                                                    </div>
+                                                </th>
+                                                <th style="width: 50%;">
+                                                    Nome Completo
+                                                </th>
+                                                <th>
+                                                    Ações
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="cpf" placeholder="Digite para buscar"
+                                                        required>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="nome" style="width: 100%;" required>
+                                                </td>
+                                                <td>
+                                                    <div
+                                                        style="background: white; padding: .5%; display: flex; gap: 2%;">
+                                                        <button title="Clique aqui para buscar pelo nome"
+                                                            class="btn-buscar" style="width: 50%; font-size: .9rem;">
+                                                            <img style="width: 18px;" src="../style/img/procurar.png"
+                                                                alt="">Buscar por nome</button>
+                                                        <button id="limparButton" style="width: 50%;"><img
+                                                                class="img-excluir" src="../style//img/excluir.png"
+                                                                alt="">Limpar</button>
+
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                        <!-- Exemplo de campo de data oculto (se estiver usando) -->
+                                        <input type="hidden" id="data-venda">
+                                        <p
+                                            style="border: 1px solid gray; padding: .8%;font-weight: 600; background-color: rgb(230, 230, 230);">
+                                            Lista de agendamentos por ordem de data e horarios</p>
+                                        <div id="div-container-form">
+                                            <h3 class="msgAgenda">Sem agendamentos disponíveis no momento.</h3>
+                                        </div>
+
+
+                                    </div>
                                 </div>
 
+                            </div>
+                            <div class="formulario-mensages-informativas" style="display: none;">
+                                <p style="font-size: 0.95rem;">
+                                    <img src="../style/img/atencao.png" alt="Atenção"
+                                        style="width: 1.3rem; margin-right: 0.5rem; vertical-align: middle;">
+
+                                    <strong>Atenção:</strong> para realizar um agendamento, o
+                                    <strong>cliente deve estar previamente
+                                        cadastrado</strong> no sistema.
+                                    Caso utilize o CPF <strong>000.000.000-00</strong>, será necessário
+                                    informar o
+                                    <strong>nome</strong> no campo de <strong>motivo</strong> para
+                                    identificação.
+                                    No entanto, agendamentos realizados com esse CPF <strong>não permitirão
+                                        visualizar o histórico
+                                        do cliente</strong>.
+                                    O ideal é <strong>cadastrar o cliente corretamente</strong> para
+                                    garantir um controle mais
+                                    eficiente.
+                                </p>
+                            </div>
+                            <div class="div-correcao-view">
 
                             </div>
                         </div>
-
-                    </div>
-                    <div class="formulario-mensages-informativas" style="display: none;">
-                        <p style="font-size: 0.95rem;">
-                            <img src="../style/img/atencao.png" alt="Atenção"
-                                style="width: 1.3rem; margin-right: 0.5rem; vertical-align: middle;">
-
-                            <strong>Atenção:</strong> para realizar um agendamento, o
-                            <strong>cliente deve estar previamente
-                                cadastrado</strong> no sistema.
-                            Caso utilize o CPF <strong>000.000.000-00</strong>, será necessário
-                            informar o
-                            <strong>nome</strong> no campo de <strong>motivo</strong> para
-                            identificação.
-                            No entanto, agendamentos realizados com esse CPF <strong>não permitirão
-                                visualizar o histórico
-                                do cliente</strong>.
-                            O ideal é <strong>cadastrar o cliente corretamente</strong> para
-                            garantir um controle mais
-                            eficiente.
-                        </p>
                     </div>
                 </div>
             </div>

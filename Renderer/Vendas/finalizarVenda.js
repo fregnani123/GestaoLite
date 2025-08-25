@@ -186,11 +186,14 @@ if ((entradaCrediario.value !== '' && entradaCrediario.value !== '0') && !tipoPa
         return parseFloat(valor.replace("R$", "").trim().replace(/\./g, "").replace(",", "."));
     }
 
-    const credCli = {
-        credito_limite: formatarParaNumero(creditoLimite.value),
-        credito_utilizado: formatarParaNumero(creditoUtilizado.value) + formatarParaNumero(valorCrediario.value),
-        cliente_id: clienteId.value
-    };
+  const credCli = {
+    credito_limite: formatarParaNumero(creditoLimite.value),
+    credito_utilizado: (entradaCrediario.value && Number(entradaCrediario.value) > 0)
+        ? formatarParaNumero(creditoUtilizado.value) + formatarParaNumero(valorCrediario.value) - Number(entradaCrediario.value)
+        : formatarParaNumero(creditoUtilizado.value) + formatarParaNumero(valorCrediario.value),
+    cliente_id: clienteId.value
+};
+
 
     // Verifica se o crédito utilizado mais o total líquido ultrapassa o crédito limite
     const excedente = credCli.credito_utilizado - credCli.credito_limite;

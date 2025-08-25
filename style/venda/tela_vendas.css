@@ -329,15 +329,16 @@ input[readonly] {
     display: none;
     flex-direction: column;
     width: 550px;
+    height: 80vh;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 999;
     padding: 1%;
     background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
 
@@ -396,7 +397,7 @@ input[readonly] {
 }
 
 #listaClientes {
-    height: 550px;
+    height: 420px;
     overflow-y: auto;
     padding: 0;
     margin: 0;
@@ -511,7 +512,7 @@ input[readonly] {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 6.5rem;
+    height: 7.5rem;
     /* background-color: var(--footer-form); */
     border: 1px solid rgb(129, 129, 129);
     box-shadow: var(--shadow-sm);

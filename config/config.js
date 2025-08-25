@@ -159,6 +159,9 @@ tipoUsuario.addEventListener('change', () => {
         labelCnpjCPF.innerHTML = '';
         labelCnpjCPF.append('CNPJ');
         labelRazao.innerHTML = 'Razão Social';
+        razaoSocial.placeholder = 'Digite a Razão Social';
+        cnpjCpf.placeholder = 'Digite o CNPJ';
+        nomeFantasia.placeholder = 'Digite o Nome Fantasia';
         labelNomeFantasia.innerHTML = '';
         labelNomeFantasia.append('Nome Fantasia');
         cnpjCpf.focus();
@@ -174,12 +177,19 @@ tipoUsuario.addEventListener('change', () => {
 
         labelNomeFantasia.innerHTML = '';
         labelNomeFantasia.append('Título do Cupom Substitui o nome fantasia');
+        razaoSocial.placeholder = 'Digite o Nome do usúario';
+        cnpjCpf.placeholder = 'Digite o CPF';
+        nomeFantasia.placeholder = 'Digite o nome fantasia ou repita o nome do usuário';
         cnpjCpf.removeAttribute('readonly');
         razaoSocial.removeAttribute('readonly');
         nomeFantasia.removeAttribute('readonly');
         if (contribuinte) {
             contribuinte.value = 'isento';
         }
+         if (contribuinte) {
+        contribuinte.setAttribute('disabled', 'true');
+        }
+
 
         formatarEVerificarCPF(cnpjCpf);
         inputMaxCaracteres(cnpjCpf, 14);
@@ -193,11 +203,14 @@ tipoUsuario.addEventListener('change', () => {
         razaoSocial.setAttribute('readonly', 'true');
         nomeFantasia.setAttribute('readonly', 'true');
 
+        razaoSocial.placeholder = "Selecione o tipo de pessoa: Física ou Jurídica";
+        cnpjCpf.placeholder = '';
+        nomeFantasia.placeholder = "Selecione o tipo de pessoa: Física ou Jurídica";
+
         if (contribuinte) {
             contribuinte.setAttribute('disabled', 'true');
-            contribuinte.value = ''; // Reseta para vazio
+            contribuinte.value = "Selecione CNPJ / CPF"; // Reseta para vazio
         }
-
         cnpjCpf.value = '';
         razaoSocial.value = '';
         nomeFantasia.value = '';
@@ -364,7 +377,7 @@ btnSenha.addEventListener('click', (e) => {
         email: email.value,
         site: site.value || null,
         usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
-        senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
+        senha: novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -394,7 +407,7 @@ btnAtulizarSenha.addEventListener('click', (e) => {
         email: email.value,
         site: site.value || null,
         usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
-        senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
+        senha: novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -428,7 +441,7 @@ btnAtualizarUser.addEventListener('click', (e) => {
         email: email.value,
         site: site.value || null,
         usuario: novoUsuario.value.trim() !== '' ? novoUsuario.value : usuarioAtual.value,
-         senha:  novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
+        senha: novaSenha.value.trim() !== '' ? novaSenha.value : senhaAtual.value,
         tipo_usuario: tipoUsuario.value,
         slogan: slogan.value || null,
         path_img: pathImg.value || null,
@@ -441,7 +454,7 @@ btnAtualizarUser.addEventListener('click', (e) => {
 
     updateUsuario(usuarioAtualizar);
 });
- 
+
 formatarMoedaBRL(multaParcela);
 
 btnAtualizarTaxas.addEventListener('click', (e) => {

@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self';
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';
                script-src 'self';
                style-src 'self' 'unsafe-inline';
                img-src 'self' data:;
@@ -36,159 +35,174 @@
             </nav>
         </header>
         <div class="formulario-container">
-            <div class="menu-lateral">
-                <nav class="menu-suspenso">
-                    <ul>
-                        <li>
-                            <a href="./fornecedor.html"><img class="img-informacao" src="../style/img/mais.png"
-                                    alt="">Cadastrar novo fornecedor</a>
-                        </li>
-                        <li>
-                            <a href="./alterar_Fornecedor.html"><img class="img-informacao"
-                                    src="../style/img/alterar.png" alt="">Cadastro do fornecedor /
-                                Alterar</a>
-                        </li>
-                        <li>
-                            <a id="btn-ativo" href="./informaçoes_fornecedor.html"><img class="img-informacao"
-                                    src="../style/img/vinculo.png" alt="">Produtos vinculados ao
-                                fornecedor</a>
-                        </li>
-                         <li>
-                            <a style="height: 2.8rem;"href="./fornecedor-troca.html"><img class="img-informacao" src="../style/img/quebra.png">Relatório de quebras e trocas</a>
-                        </li>
-                        <li>
-                            <a style="height: 2.8rem;"  href="./fornecedor-entradas.html"><img class="img-informacao"
-                                    src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
-                                fornecedor</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="div-logo-empresa">
-                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+            <div class="formulario-container-flex">
+                <div class="menu-lateral">
+                    <nav class="menu-suspenso">
+                        <ul>
+                            <li>
+                                <a href="./fornecedor.html"><img class="img-informacao" src="../style/img/mais.png"
+                                        alt="">Cadastrar novo fornecedor</a>
+                            </li>
+                            <li>
+                                <a href="./alterar_Fornecedor.html"><img class="img-informacao"
+                                        src="../style/img/alterar.png" alt="">Cadastro do fornecedor /
+                                    Alterar</a>
+                            </li>
+                            <li>
+                                <a id="btn-ativo" href="./informaçoes_fornecedor.html"><img class="img-informacao"
+                                        src="../style/img/vinculo.png" alt="">Produtos vinculados ao
+                                    fornecedor</a>
+                            </li>
+                            <li>
+                                <a style="height: 2.8rem;" href="./fornecedor-troca.html"><img class="img-informacao"
+                                        src="../style/img/quebra.png">Relatório de quebras e trocas</a>
+                            </li>
+                            <li>
+                                <a style="height: 2.8rem;" href="./fornecedor-entradas.html"><img class="img-informacao"
+                                        src="../style/img/historico-de-pedidos.png" alt="">Histórico de compras do
+                                    fornecedor</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="div-logo-empresa">
+                        <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png"
+                            alt="logo-empresa">
+                    </div>
                 </div>
-            </div>
-            <div class="formulario">
-                <div class="div-formulario">
-                    <div class="formulario-conteudo">
+                <div style="width: 100%;height: 100vh;">
+                    <div class="formulario">
+                        <div class="div-formulario">
+                            <div class="formulario-conteudo">
 
-                        <div class="formulario-inputs" style="gap: 0;">
+                                <div class="formulario-inputs" style="gap: 0;">
 
-                            <table class="table-1-fornecedor" style="margin-top: .5%; margin-bottom: 1%;" >
-                                <tr>
-                                    <th style="width: 20%;">
-                                        Pessoa
-                                    </th>
-                                    <th id="labelCnpjCPF" style="width: 25%;">
-                                       <span
-                                            style="display: inline-flex; align-items: center; justify-content: center; gap: 5px;">
-                                            Buscar por CNPJ / CPF
-                                            <img style="width: 25px;" src="../style/img/procurar-black.png" alt="">
-                                        </span>
-                                    </th>
-                                    <th id="labelRazao">
-                                        Razão Social
-                                    </th>
-                                </tr>
-                                <tr>
-                                       <td>
-                                        <select name="tipoPessoa" id="tipoPessoa">
-                                            <option value="">-- Selecione --</option>
-                                            <option value="juridica">Jurídica</option>
-                                            <option value="fisica">Física</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" id="cnpjInfo" placeholder="Selecione CNPJ / CPF" readonly>
-                                        <input type="hidden" id="fornecedorId">
-                                    </td>
-                                    <td>
-                                        <input type="text" id="razaoSocial" readonly
-                                            style="background-color: rgb(239, 239, 239); color: black;"
-                                            placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
-                                    </td>
-
-                                </tr>
-                            </table>
-                            <table>
-                                <tr>
-                                    <th style="width: 60%;">
-                                        Nome Fantasia
-                                    </th>
-                                    <th>
-                                        Contato do fornecedor
-                                    </th>
-                                    <th >
-                                        Ações
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" id="nomeFantasia" readonly   placeholder="Selecione o tipo de pessoa: Física ou Jurídica"
-                                            style="background-color: rgb(239, 239, 239); color: black;">
-                                    </td>
-                                    <td>
-                                        <input type="text"  placeholder="(99) 9999-99999" id="contato">
-                                    </td>
-                                    <td>
-                                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-
-                                            <button id="limparButton-info" class="limparButton-info"><img
-                                                    class="img-excluir" src="../style//img/excluir.png"
-                                                    alt="">Limpar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </table>
-                            <div class="div-info-row" style="width: 100% ;margin-left: 1%;">
-                                <table class="table-2-fornecedor" style="margin-bottom: 1%;margin-top: 1%;">
-                                    <tr>
-                                        <th style=" width: 18%;">Itens sem fornecedor
-                                        </th>
-                                        <th style="">Total de itens sem fornecedor
-                                            vinculado (base: preço de compra).</th>
-                                    </tr>
-                                    <tr>
-                                        <td>0</td>
-                                        <td>R$ 0,00</td>
-
-                                    </tr>
-                                </table>
-
-                            </div>
-                            <div style="max-height: 22rem; overflow-y: auto; width: 100%;margin-left: 1%;border: 1px solid rgb(205, 205, 205);">
-                                <table class="table-3-fornecedor">
-                                    <thead>
-                                        <tr class="header-row">
-                                            <th style="border-top: none;">Código EAN</th>
-                                            <th style="border-top: none;">Descrição Produto</th>
-                                            <th style="border-top: none;">Preço Compra</th>
-                                            <th style="border-top: none;">Qtd Vendida</th>
-                                            <th style="border-top: none;">Estoque Atual</th>
+                                    <table class="table-1-fornecedor" style="margin-top: .5%; margin-bottom: 1%;">
+                                        <tr>
+                                            <th style="width: 20%;">
+                                                Pessoa
+                                            </th>
+                                            <th id="labelCnpjCPF" style="width: 25%;">
+                                                <span
+                                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 5px;">
+                                                    Buscar por CNPJ / CPF
+                                                    <img style="width: 25px;" src="../style/img/procurar-black.png"
+                                                        alt="">
+                                                </span>
+                                            </th>
+                                            <th id="labelRazao">
+                                                Razão Social
+                                            </th>
                                         </tr>
-                                    </thead>
-                                    <tbody id="ul-filtros">
-                                        <!-- As linhas dos produtos serão inseridas aqui -->
-                                    </tbody>
-                                </table>
+                                        <tr>
+                                            <td>
+                                                <select name="tipoPessoa" id="tipoPessoa">
+                                                    <option value="">-- Selecione --</option>
+                                                    <option value="juridica">Jurídica</option>
+                                                    <option value="fisica">Física</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="cnpjInfo" placeholder="Selecione CNPJ / CPF"
+                                                    readonly>
+                                                <input type="hidden" id="fornecedorId">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="razaoSocial" readonly
+                                                    style="background-color: rgb(239, 239, 239); color: black;"
+                                                    placeholder="Selecione o tipo de pessoa: Física ou Jurídica">
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th style="width: 60%;">
+                                                Nome Fantasia
+                                            </th>
+                                            <th>
+                                                Contato do fornecedor
+                                            </th>
+                                            <th>
+                                                Ações
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id="nomeFantasia" readonly
+                                                    placeholder="Selecione o tipo de pessoa: Física ou Jurídica"
+                                                    style="background-color: rgb(239, 239, 239); color: black;">
+                                            </td>
+                                            <td>
+                                                <input type="text" placeholder="(99) 9999-99999" id="contato">
+                                            </td>
+                                            <td>
+                                                <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+
+                                                    <button id="limparButton-info" class="limparButton-info"><img
+                                                            class="img-excluir" src="../style//img/excluir.png"
+                                                            alt="">Limpar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <div class="div-info-row" style="width: 100% ;margin-left: 1%;">
+                                        <table class="table-2-fornecedor" style="margin-bottom: 1%;margin-top: 1%;">
+                                            <tr>
+                                                <th style=" width: 18%;">Itens sem fornecedor
+                                                </th>
+                                                <th style="">Total de itens sem fornecedor
+                                                    vinculado (base: preço de compra).</th>
+                                            </tr>
+                                            <tr>
+                                                <td>0</td>
+                                                <td>R$ 0,00</td>
+
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div
+                                        style="max-height: 22rem; overflow-y: auto; width: 100%;margin-left: 1%;border: 1px solid rgb(205, 205, 205);">
+                                        <table class="table-3-fornecedor">
+                                            <thead>
+                                                <tr class="header-row">
+                                                    <th style="border-top: none;">Código EAN</th>
+                                                    <th style="border-top: none;">Descrição Produto</th>
+                                                    <th style="border-top: none;">Preço Compra</th>
+                                                    <th style="border-top: none;">Qtd Vendida</th>
+                                                    <th style="border-top: none;">Estoque Atual</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ul-filtros">
+                                                <!-- As linhas dos produtos serão inseridas aqui -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="formulario-mensages-informativas" style="display: none;">
+                                <p style="font-size: 1rem;justify-content: center;text-align: center;">
+                                    <img style="width: 1.3rem; margin-right: .5%;"
+                                        src="../style/img/informacoes.png"><strong>Informação:</strong> Por padrão, esta
+                                    tela exibe todos os <strong>produtos não vinculados a fornecedores</strong>. Para
+                                    gerar
+                                    <strong>relatórios específicos por fornecedor</strong>, utilize os <strong>filtros
+                                        acima</strong> e pressione <strong>Buscar</strong>.
+                                </p>
+                                <div style="background: white; padding: .5%; display: flex; gap: 2%;">
+                                    <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
+                                            src="../style//img/procurar.png" alt="">Buscar</button>
+                                    <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
+                                            src="../style//img/excluir.png" alt="">Limpar</button>
+                                </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="formulario-mensages-informativas" style="display: none;">
-                        <p style="font-size: 1rem;justify-content: center;text-align: center;">
-                            <img style="width: 1.3rem; margin-right: .5%;"
-                                src="../style/img/informacoes.png"><strong>Informação:</strong> Por padrão, esta
-                            tela exibe todos os <strong>produtos não vinculados a fornecedores</strong>. Para gerar
-                            <strong>relatórios específicos por fornecedor</strong>, utilize os <strong>filtros
-                                acima</strong> e pressione <strong>Buscar</strong>.
-                        </p>
-                        <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                            <button class="titulo-filtrar" id="filtrarProdutos"><img class="img-excluir"
-                                    src="../style//img/procurar.png" alt="">Buscar</button>
-                            <button id="limparButton-info" class="limparButton-info"><img class="img-excluir"
-                                    src="../style//img/excluir.png" alt="">Limpar</button>
-                        </div>
+                    <div class="div-correcao-view">
+
                     </div>
                 </div>
             </div>

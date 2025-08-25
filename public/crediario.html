@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 script-src 'self';
-                 style-src 'self' 'unsafe-inline';
-                 img-src 'self' data:;
-                 font-src 'self';
-                 connect-src 'self' http://localhost:3000;
-                 object-src 'none';
-                 base-uri 'self';
-                 form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data:;
+      font-src 'self';
+      connect-src 'self' http://localhost:3000;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    " />
     <link rel="stylesheet" href="../style/css-global/global.css" />
     <link rel="stylesheet" href="../style/css-global/inputs.css" />
     <link rel="stylesheet" href="../style/css-global/table.css" />
     <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
     <title>Cadastro de Produto</title>
 </head>
- 
+
+
 <body>
-<div id="loading-overlay" class="active">
-  <div class="spinner"></div>
-  <p>Carregando...</p>
-</div>
+    <div id="loading-overlay" class="active">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
 
     <div class="container">
         <header>
@@ -35,166 +38,239 @@
             </nav>
         </header>
         <div class="formulario-container">
-                 <div class="formulario-container-flex">
-            <div class="menu-lateral">
-                   <nav class="menu-suspenso">
-                    <ul>
-                        <li>
-                            <a href="./registrar_cliente.html"><img class="img-informacao" src="../style/img/mais.png" alt="">
-                                Cadastrar
-                                novo cliente</a>
-                        </li>
-                        <li>
-                            <a  href="./alterar_cliente.html"><img class="img-informacao"
-                                    src="../style/img/alterar.png" alt="">Cadastro do cliente /
-                                Alterar</a>
-                        </li>
-                        <li>
-                            <a id="btn-ativo" href="./crediario.html"><img class="img-informacao" src="../style/img/prazo.png"
-                                    alt="">Receber pagamento a prazo</a>
-                        </li>
-                        <li>
-                            <a href="./prazo_mes_atual.html"><img class="img-informacao" src="../style/img/data-limite.png"alt="">Vencimentos do mês – Todos os clientes</a>
-                        </li>
-                        <li>
-                            <a href="./prazo_atrasado.html"><img class="img-informacao"
-                                    src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em atraso</a>
-                        </li>
-                        <li>
-                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
-                                informativa
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="div-logo-empresa">
-                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
-                </div>
-            </div>
-
-            <d iv class="formulario">
-                <div class="div-formulario">
-                    <div class="formulario-conteudo">
-                        <div class="formulario-inputs">
-                            <div id="crediários-mes-vencer" style="display: none;">
-                                <button class="close-btn">X</button>
-                                <div class="info-cmv">
-                                    <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
-                                    <p class="p-info"><span>Crediários do Mês: <span class="mesAvencer"></span></span>
-                                        <span style="font-size: .9rem;">Total:Paga/pendente : <span
-                                                class="parcelasTotal"></span></span>
-                                        <span> Total Pagas: <span class="parcelasPagas"></span></span>
-                                        <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
-                                    </p>
-                                </div>
-                                <div class="container-cmv">
-                                    <!-- aqui é criada a table -->
-                                </div>
-                            </div>
-                            <div id="crediarios-vencidos" style="display: none;">
-                                <button id="close-btn-vencidos">X</button>
-                                <div class="info-cmv">
-                                    <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
-                                    <p><span class="total-atrasado">Valor total das parcelas vencidas com status
-                                            pendente: <span class="parcelasVencidas"></span></span> </p>
-                                    </p>
-                                </div>
-                                <div class="container-cv">
-                                    <!-- aqui é criada a table -->
-                                </div>
-                            </div>
-                            <!-- --------------------------------------------------------------------------------------------->
-                            <table>
-                                <tr>
-                                    <th style="width: 18%;"> Filtrar CPF</th>
-                                    <th style="width: 50%;">Cliente</th>
-                                    <th style="width: 32%;">Açoes</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="input" id="cpfFiltrar" type="text" placeholder="Digite para buscar" /></td>
-                                    <td><input type="input" id="nomeClienteFiltrado" placeholder="Nenhum cliente selecionado" readonly /></td>
-                                    <td>
-                                        <div class="acoes-container">
-                                            <button id="filterButtonCrediario" style="width: 100%;"><img class="img-excluir"
-                                                    src="../style//img/procurar.png" alt="">Buscar por nome</button>
-                                            <button id="limparButton"><img class="img-excluir"
-                                                    src="../style//img/excluir.png" alt="">Limpar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table>
-                                <tr style="border: 1px solid gray;">
-                                    <th style="text-align: center; ">
-                                        Valor da multa por atraso
-                                    </th>
-                                    <th style=" text-align: center;">
-                                        Juros mensais após vencimento
-                                    </th>
-                                       <th style="border-left: 1px solid gray; text-align: center">
-                                        Crédito liberado para este cliente
-                                    </th>
-                                    <th style="border-left: 1px solid gray; text-align: center">
-                                        Crédito Utilizado
-                                    </th>
-                                    
-                                    <th style="text-align: center;border-left: 1px solid gray;">
-                                        Imprimir reatório
-                                    </th>
-                                </tr>
-                                <tr style="border: 1px solid gray;text-align: center;">
-                                    <td style="text-align: center;">
-                                        R$<span id="multaSpan"></span>
-                                    </td>
-                                    <td style="border-left: 1px solid gray; text-align: center;">
-                                        <span id="moraSpan"></span>
-                                    </td>
-                                          <td style="border-left: 1px solid gray; text-align: center">
-                                        <input type="input" id="credito" readonly class="input-display-only" placeholder="0,00" />
-                                    </td>
-                                    <td style="border-left: 1px solid gray; text-align: center">
-                                        <input type="input" id="credito-utilizado" placeholder="0,00" readonly
-                                            class="input-display-only" />
-                                    </td>
-                              
-                                    <td style="border-left: 1px solid gray; text-align: center;">
-                                        <button class="imprimirCrediario"
-                                            title="Imprimir">
-                                            <img src="../style/img/impressora.png" alt="Imprimir"
-                                                style="width: 24px; height: 24px;">
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                             <p
-                                style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0; width: 100%;">Pedidos parcelados — filtro aplicado</p>
-                            <div class="div-filtrados">
-                            </div>
-                        </div>
+            <div class="formulario-container-flex">
+                <div class="menu-lateral">
+                    <nav class="menu-suspenso">
+                        <ul>
+                            <li>
+                                <a href="./registrar_cliente.html"><img class="img-informacao"
+                                        src="../style/img/mais.png" alt="">
+                                    Cadastrar
+                                    novo cliente</a>
+                            </li>
+                            <li>
+                                <a href="./alterar_cliente.html"><img class="img-informacao"
+                                        src="../style/img/alterar.png" alt="">Cadastro do cliente /
+                                    Alterar</a>
+                            </li>
+                            <li>
+                                <a id="btn-ativo" href="./crediario.html"><img class="img-informacao"
+                                        src="../style/img/prazo.png" alt="">Receber pagamento a prazo</a>
+                            </li>
+                            <li>
+                                <a href="./prazo_mes_atual.html"><img class="img-informacao"
+                                        src="../style/img/data-limite.png" alt="">Vencimentos do mês – Todos os
+                                    clientes</a>
+                            </li>
+                            <li>
+                                <a href="./prazo_atrasado.html"><img class="img-informacao"
+                                        src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em
+                                    atraso</a>
+                            </li>
+                            <li>
+                                <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                    informativa
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="div-logo-empresa">
+                        <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png"
+                            alt="logo-empresa">
                     </div>
+                </div>
+
+                <div style="width: 100%;height: 100vh; background-color: white;">
+                    <d iv class="formulario">
+                        <div class="div-formulario">
+                            <div class="formulario-conteudo">
+                                <div class="formulario-inputs" style="padding-bottom: 1%;">
+                                    <div id="crediários-mes-vencer" style="display: none;">
+                                        <button class="close-btn">X</button>
+                                        <div class="info-cmv">
+                                            <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
+                                            <p class="p-info"><span>Crediários do Mês: <span
+                                                        class="mesAvencer"></span></span>
+                                                <span style="font-size: .9rem;">Total:Paga/pendente : <span
+                                                        class="parcelasTotal"></span></span>
+                                                <span> Total Pagas: <span class="parcelasPagas"></span></span>
+                                                <span> Parcelas Pendentes: <span class="parcelasAReceber"></span></span>
+                                            </p>
+                                        </div>
+                                        <div class="container-cmv">
+                                            <!-- aqui é criada a table -->
+                                        </div>
+                                    </div>
+
+                                    <div class="divNomes-2">
+                                        <p id="btn-exit-nome-2">&times;</p>
+                                        <label for="buscaCliente-2">Buscar cliente por nome</label>
+                                        <table class="tabela-busca-nome">
+                                            <tr>
+                                                <th>
+                                                    <div class="th-conteudo">
+                                                        <img src="../style/img/procurar-black.png" alt="">
+                                                        Digite o
+                                                        nome
+                                                        do Cliente
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="buscaCliente-2"
+                                                        placeholder="Digite o nome para buscar o cliente do crediário">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <ul id="listaClientes-2" class="listaClientes-2"></ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div id="crediarios-vencidos" style="display: none;">
+                                        <button id="close-btn-vencidos">X</button>
+                                        <div class="info-cmv">
+                                            <img src="../style/img/crediario.png" alt="" class="img-crediario-info">
+                                            <p><span class="total-atrasado">Valor total das parcelas vencidas com status
+                                                    pendente: <span class="parcelasVencidas"></span></span> </p>
+                                            </p>
+                                        </div>
+                                        <div class="container-cv">
+                                            <!-- aqui é criada a table -->
+                                        </div>
+                                    </div>
+                                    <!-- --------------------------------------------------------------------------------------------->
+                                    <table>
+                                        <tr>
+                                            <th style="width: 18%;">
+                                                <div style="display: flex; align-items: center; gap: 3%;"> Filtrar CPF
+                                                    <img src="../style/img/procurar-black.png" alt=""
+                                                        style="width: 25px;">
+                                                </div>
+                                            </th>
+                                            <th style="width: 50%;">Cliente</th>
+                                            <th style="width: 32%;">Açoes</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="input" id="cpfFiltrar" type="text"
+                                                    placeholder="Digite para buscar" /></td>
+                                            <td><input type="input" id="nomeClienteFiltrado"
+                                                    placeholder="Nenhum cliente selecionado" readonly /></td>
+                                            <td>
+                                                <div class="acoes-container">
+                                                    <button id="filterButtonCrediario" style="width: 100%;"><img
+                                                            class="img-excluir" src="../style//img/procurar.png"
+                                                            alt="">Buscar por nome</button>
+                                                    <button id="limparButton"><img class="img-excluir"
+                                                            src="../style//img/excluir.png" alt="">Limpar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr style="border: 1px solid gray;">
+                                            <th style="text-align: center; ">
+                                                Valor da multa por atraso
+                                            </th>
+                                            <th style=" text-align: center;">
+                                                Juros mensais após vencimento
+                                            </th>
+                                            <th style="border-left: 1px solid gray; text-align: center">
+                                                Crédito liberado para este cliente
+                                            </th>
+                                            <th style="border-left: 1px solid gray; text-align: center">
+                                                Crédito Utilizado
+                                            </th>
+
+                                            <!-- <th style="text-align: center;border-left: 1px solid gray;">
+                                                
+                                            </th> -->
+                                        </tr>
+                                        <tr style="border: 1px solid gray;text-align: center;">
+                                            <td style="text-align: center;">
+                                                R$<span id="multaSpan"></span>
+                                            </td>
+                                            <td style="border-left: 1px solid gray; text-align: center;">
+                                                <span id="moraSpan"></span>
+                                            </td>
+                                            <td style="border-left: 1px solid gray; text-align: center">
+                                                <input type="input" id="credito" readonly class="input-display-only"
+                                                    placeholder="0,00" />
+                                            </td>
+                                            <td style="border-left: 1px solid gray; text-align: center">
+                                                <input type="input" id="credito-utilizado" placeholder="0,00" readonly
+                                                    class="input-display-only" />
+                                            </td>
+
+                                            <!-- <td style="border-left: 1px solid gray; text-align: center;">
+                                         
+                                            </td> -->
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                Pedidos parcelados — filtro aplicado
+                                            </th>
+                                            <th>
+                                                <div style="display: flex; align-items: center;">
+                                                    Filtrar por Nº da Venda: <input style="width: 33%; margin-left: 2%;"
+                                                        type="text" id="filtroVenda" placeholder="Digite o Nº da venda">
+                                                          <button id="btnFiltrarVenda" style="margin-left: 2%;">Buscar</button>
+                                                </div>
+
+                                            </th>
+                                            <th style="width: 25%;">
+                                                <div  style="display: flex; align-items: center;">
+                                                   Imprimir carnê: <button style="margin-left: 2%;border: 1px solid gray; background-color: white; width: 50%;" title="Imprimir">
+                                                     <img src="../style/img/impressora.png"
+                                                            alt="Imprimir" style="width: 24px; height: 24px;">
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                    <!-- <p
+                                        style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0; width: 100%;">
+                                        Pedidos parcelados — filtro aplicado
+                                    </p> -->
+                                    <div class="div-filtrados">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="formulario-mensages-informativas" style="display: none;">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus aperiam totam ad atque
+                                ducimus
+                                reprehenderit ipsa quidem quasi nostrum corporis enim hic optio voluptatem, quas tempore
+                                impedit
+                            </p>
+                        </div>
+                        <div class="div-correcao-view">
+
+                        </div>
 
                 </div>
-                <div class="formulario-mensages-informativas" style="display: none;">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus aperiam totam ad atque
-                        ducimus
-                        reprehenderit ipsa quidem quasi nostrum corporis enim hic optio voluptatem, quas tempore
-                        impedit
-                    </p>
 
-                </div>
-                 <div class="div-correcao-view">
-
-            </div>
             </div>
         </div>
+
+    </div>
+
     </div>
     </div>
     </div>
 </body>
-<script src="../Renderer/transicao.js" defer></script>
+<script src="../Renderer/transicao.js"></script>
 <script src="../Renderer/Menu/renderer_menu.js"></script>
 <script src="../Renderer/services/alertMsg.js"></script>
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/crediario/api_crediario.js"></script>
+<script src="../Renderer/imprimir/cupom.js"></script>
+
 </html>

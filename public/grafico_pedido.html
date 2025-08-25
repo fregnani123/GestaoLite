@@ -32,158 +32,167 @@
             </nav>
         </header>
         <div class="formulario-container">
-            <div class="filtros-div"><button class="close-btn">X</button>
-                <p class="comprovantes-vendas">Comprovantes de Vendas</p>
-                <div class="comprovantes-div">
-                    <div id="sales-history" class="sales-history">
+            <div class="formulario-container-flex">
+                <div class="filtros-div"><button class="close-btn">X</button>
+                    <p class="comprovantes-vendas">Comprovantes de Vendas</p>
+                    <div class="comprovantes-div">
+                        <div id="sales-history" class="sales-history">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="menu-lateral">
-                <nav class="menu-suspenso">
-                    <ul>
-                        <li>
-                            <a id="btn-ativo"><img class="img-informacao" src="../style/img/detalhes-vendas.png"
-                                    alt="Atenção">Gráficos por forma de pagamento</a>
-                        </li>
-                        <li>
-                            <a href="./historico_pedidos.html"><img class="img-informacao"
-                                    src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
-                        </li>
-                        <li>
-                            <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de metas do
-                                mês</a>
-                        </li>
-                        <li>
-                            <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
-                                informativa
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="div-logo-empresa">
-                    <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png" alt="logo-empresa">
+                <div class="menu-lateral">
+                    <nav class="menu-suspenso">
+                        <ul>
+                            <li>
+                                <a id="btn-ativo"><img class="img-informacao" src="../style/img/detalhes-vendas.png"
+                                        alt="Atenção">Gráficos por forma de pagamento</a>
+                            </li>
+                            <li>
+                                <a href="./historico_pedidos.html"><img class="img-informacao"
+                                        src="../style/img/historico-de-pedidos.png" alt=""> Histórico de pedidos</a>
+                            </li>
+                            <li>
+                                <a><img class="img-informacao" src="../style/img/metas.png" alt="">Relatório de metas do
+                                    mês</a>
+                            </li>
+                            <li>
+                                <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
+                                    informativa
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="div-logo-empresa">
+                        <img class="logo-empresa" src="../style/img/logoLGL-removebg-preview (1).png"
+                            alt="logo-empresa">
+                    </div>
                 </div>
-            </div>
-            <div class="formulario">
-                <div class="div-formulario">
-                    <div class="formulario-conteudo">
-                        <div class="formulario-img">
-                            <p>Gráficos por
-                                forma de pagamento</p>
-                            <div class="quadro-img img-fixa">
-                                <img class="img-produto" src="../style/img/detalhes vendas - interno.png"
-                                    alt="imagem produto">
-                            </div>
-                        </div>
-                        <div class="formulario-inputs">
-                            <table class="table-1-grafico">
-                                <tr>
-                                    <th>Data Inicial</th>
-                                    <th>Data Final</th>
-                                    <th>Ações</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="date" id="startDate"></td>
-                                    <td><input type="date" id="endDate"></td>
-                                    <td>
-                                        <div class="botoes-footer">
-                                            <button id="filterButton">
-                                                <img class="img-excluir" src="../style//img/procurar.png" alt="">
-                                                Filtrar
-                                            </button>
-                                            <button id="limparButton">
-                                                <img class="img-excluir" src="../style//img/excluir.png" alt="">
-                                                Limpar
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <input type="hidden" id="numeroPedidoFiltro">
-                                    <input type="hidden" id="clienteFiltro">
-                                </tr>
-                            </table>
-
-                            <div class="corpo-interno">
-                                <div class="div-valores-grafico">
-                                    <p id="titulo-relatorio"
-                                        style=" background-color: rgb(237, 237, 237) !important; padding: 0.5rem 1rem; background-color: var(--border-color);font-weight: 600;">
-                                    </p>
-                                    <table class="table-2-grafico">
-                                        <tr class="linha-titulo">
-
-                                        </tr>
-                                        <tr>
-                                            <td id="data-periodo" style="height: 10%; text-align: left;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="filtros">
-                                                    <div class="total-filtradas"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                  <div style="width: 100%;height: 100vh;">
+                <div class="formulario">
+                    <div class="div-formulario">
+                        <div class="formulario-conteudo">
+                            <div class="formulario-img">
+                                <p>Gráficos por
+                                    forma de pagamento</p>
+                                <div class="quadro-img img-fixa">
+                                    <img class="img-produto" src="../style/img/detalhes vendas - interno.png"
+                                        alt="imagem produto">
                                 </div>
-                                <div class="grafico-barras">
-                                    <p>Gráfico de Vendas por Forma de Pagamento e Período</p>
-                                    
-                                    <div style="margin-top: 10%; justify-content: left;">
-                                        <div class="barra-container" id="barra-container">
-                                            <div class="nome">Cartão Crédito:</div>
-                                            <div class="barra credito">
-                                                <span id="credito">0%</span>
+                            </div>
+                            <div class="formulario-inputs">
+                                <table class="table-1-grafico">
+                                    <tr>
+                                        <th>Data Inicial</th>
+                                        <th>Data Final</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="date" id="startDate"></td>
+                                        <td><input type="date" id="endDate"></td>
+                                        <td>
+                                            <div class="botoes-footer">
+                                                <button id="filterButton">
+                                                    <img class="img-excluir" src="../style//img/procurar.png" alt="">
+                                                    Filtrar
+                                                </button>
+                                                <button id="limparButton">
+                                                    <img class="img-excluir" src="../style//img/excluir.png" alt="">
+                                                    Limpar
+                                                </button>
                                             </div>
-                                        </div>
+                                        </td>
+                                        <input type="hidden" id="numeroPedidoFiltro">
+                                        <input type="hidden" id="clienteFiltro">
+                                    </tr>
+                                </table>
 
-                                        <div class="barra-container">
-                                            <div class="nome">Cartão Débito:</div>
-                                            <div class="barra debito">
-                                                <span id="debito">0%</span>
+                                <div class="corpo-interno">
+                                    <div class="div-valores-grafico">
+                                        <p id="titulo-relatorio"
+                                            style=" background-color: rgb(237, 237, 237) !important; padding: 0rem 1rem; background-color: var(--border-color);font-weight: 600; border: 1px solid rgb(221, 221, 221);width: 99%;border-bottom: none;padding-bottom: .5%;">
+                                        </p>
+                                        <table class="table-2-grafico">
+                                            <tr class="linha-titulo">
+
+                                            </tr>
+                                            <tr>
+                                                <td id="data-periodo" style="height: 10%; text-align: left;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="filtros">
+                                                        <div class="total-filtradas"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="grafico-barras">
+                                        <p>Gráfico de Vendas por Forma de Pagamento e Período</p>
+
+                                        <div style="margin-top: 10%; justify-content: left;">
+                                            <div class="barra-container" id="barra-container">
+                                                <div class="nome">Cartão Crédito:</div>
+                                                <div class="barra credito">
+                                                    <span id="credito">0%</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="barra-container">
-                                            <div class="nome">Pagto a Prazo:</div>
-                                            <div class="barra crediario">
-                                                <span id="crediario">0%</span>
+                                            <div class="barra-container">
+                                                <div class="nome">Cartão Débito:</div>
+                                                <div class="barra debito">
+                                                    <span id="debito">0%</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="barra-container">
-                                            <span class="nome">Dinheiro:</span>
-                                             <div class="barra dinheiro">
-                                                <span id="dinheiro">0%</span>
+                                            <div class="barra-container">
+                                                <div class="nome">Pagto a Prazo:</div>
+                                                <div class="barra crediario">
+                                                    <span id="crediario">0%</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="barra-container">
-                                            <div class="nome">Pix:</div>
-                                            <div class="barra pix">
-                                                <span id="pix">0%</span>
+                                            <div class="barra-container">
+                                                <span class="nome">Dinheiro:</span>
+                                                <div class="barra dinheiro">
+                                                    <span id="dinheiro">0%</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="barra-container barra-total">
-                                            <div class="nome">Total:</div>
-                                            <div class="barra total">
-                                                <span id="grafico-total">100%</span>
+                                            <div class="barra-container">
+                                                <div class="nome">Pix:</div>
+                                                <div class="barra pix">
+                                                    <span id="pix">0%</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="barra-container barra-total">
+                                                <div class="nome">Total:</div>
+                                                <div class="barra total">
+                                                    <span id="grafico-total">100%</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
+                        </div>
+                        <div class="formulario-mensages-informativas" style="display: none;">
+                            <p><img class="img-informacao" src="../style/img/informacoes.png"
+                                    alt="Atenção"><strong>Informação</strong>: Por padrão, a tela de gráfico
+                                exibe todo o período desde o início da utilização do sistema.
+                                Para filtrar por períodos específicos, selecione acima a data de início
+                                e a data de fim, e clique no botão 'Buscar'.
+                            </p>
                         </div>
                     </div>
-                    <div class="formulario-mensages-informativas" style="display: none;">
-                        <p><img class="img-informacao" src="../style/img/informacoes.png"
-                                alt="Atenção"><strong>Informação</strong>: Por padrão, a tela de gráfico
-                            exibe todo o período desde o início da utilização do sistema.
-                            Para filtrar por períodos específicos, selecione acima a data de início
-                            e a data de fim, e clique no botão 'Buscar'.
-                        </p>
-                    </div>
+                
                 </div>
+                      <div class="div-correcao-view">
+
+                    </div>
+            </div>
             </div>
         </div>
     </div>

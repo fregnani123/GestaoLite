@@ -44,9 +44,14 @@ async function registrarCrediario(
     });
 
     const parcelas = [];
-    const valorParcelado = valorTotal - entrada;
-    const parcelasRestantes = numParcelas - (entrada > 0 ? 1 : 0);
-    const valorParcela = (valorParcelado / parcelasRestantes).toFixed(2);
+
+    // ----------- Ajuste da entrada válida -------------
+    const entradaValida = Number(entrada) > 0 && tipoPagamento !== "Sem Entrada";
+
+    const valorParcelado = entradaValida ? (valorTotal - entrada) : valorTotal;
+    const parcelasRestantes = entradaValida ? (numParcelas - 1) : numParcelas;
+    const valorBase = Math.floor((valorParcelado / parcelasRestantes) * 100) / 100;
+    let diferenca = (valorParcelado - valorBase * parcelasRestantes).toFixed(2);
 
     // intervalos configurados
     const intervalos = {
@@ -62,7 +67,7 @@ async function registrarCrediario(
 
     let parcelaIndex = 1;
 
-    // helpers de data sem UTC
+    // ----------- Helpers de data sem UTC -------------
     function parseYMDLocal(ymd) {
         const [y, m, d] = String(ymd).split("-").map(Number);
         return new Date(y, (m || 1) - 1, d || 1, 0, 0, 0, 0);
@@ -81,13 +86,10 @@ async function registrarCrediario(
         return new Date(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0, 0);
     }
 
-    const temEntrada = Number(entrada) > 0;
     const ehEntradaMais = String(condicao || "").startsWith("entrada+");
 
-    // -------------------
-    // PARCELA DE ENTRADA
-    // -------------------
-    if (temEntrada) {
+    // ----------- PARCELA DE ENTRADA -------------
+    if (entradaValida) {
         const hoje = todayLocal();
         const entradaParcela = {
             venda_id: vendaId,
@@ -104,26 +106,19 @@ async function registrarCrediario(
         console.log("Parcela de entrada:", entradaParcela);
     }
 
-    // -------------------
-    // BASE DE VENCIMENTO
-    // -------------------
+    // ----------- BASE DE VENCIMENTO -------------
     let baseVencimento;
-    if (temEntrada && ehEntradaMais) {
-        // entrada+X → 1ª pendente = hoje + X dias
+    if (entradaValida && ehEntradaMais) {
         baseVencimento = addDaysLocal(todayLocal(), intervalo);
     } else {
-        // senão, usa a data recebida
         baseVencimento = parseYMDLocal(dataPrimeiroVencimento);
     }
 
-    // -------------------
-    // DEMAIS PARCELAS
-    // -------------------
-    // Ajusta a data base para começar com um dia a mais
+    // ----------- DEMAIS PARCELAS -------------
     let vencimento = new Date(
         baseVencimento.getFullYear(),
         baseVencimento.getMonth(),
-        baseVencimento.getDate() + 1, // <--- adiciona 1 dia
+        baseVencimento.getDate() + (entradaValida ? 1 : 0),
         0, 0, 0, 0
     );
 
@@ -132,11 +127,18 @@ async function registrarCrediario(
             vencimento = addDaysLocal(vencimento, intervalo);
         }
 
+        let valorParcelaFinal = valorBase;
+        if (i === parcelasRestantes - 1) {
+            valorParcelaFinal = (valorBase + Number(diferenca)).toFixed(2);
+        } else {
+            valorParcelaFinal = valorBase.toFixed(2);
+        }
+
         const parcela = {
             venda_id: vendaId,
             cliente_id: clienteId,
             parcela_numero: parcelaIndex++,
-            valor_parcela: valorParcela,
+            valor_parcela: valorParcelaFinal,
             data_vencimento: formatDateToYMD(vencimento),
             data_pagamento: null,
             status: "PENDENTE",
@@ -148,9 +150,7 @@ async function registrarCrediario(
 
     console.log("Todas as parcelas geradas:", parcelas);
 
-    // -------------------
-    // INSERÇÃO NO BANCO
-    // -------------------
+    // ----------- INSERÇÃO NO BANCO -------------
     const stmt = db.prepare(`
         INSERT INTO crediario (
             cliente_id, venda_id, parcela_numero, 
@@ -177,7 +177,6 @@ async function registrarCrediario(
 
     return parcelas.length;
 }
-
 
 
 function generateRandomNumber(cpf) {
