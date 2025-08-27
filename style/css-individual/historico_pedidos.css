@@ -96,16 +96,6 @@
     /* espaço entre número e botão */
 }
 
-.botao-imprimir {
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .icone-impressora {
     width: 20px;
@@ -122,6 +112,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid gray; 
+    width: 50px;
+    padding: .5%;
 }
 
 .icone-impressora {

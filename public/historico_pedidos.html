@@ -38,7 +38,7 @@
                                     pagamento</a>
                             </li>
                             <li>
-                                <a id="btn-ativo"><img class="img-informacao"
+                                <a href="./historico_pedidos.html" id="btn-ativo"><img class="img-informacao"
                                         src="../style/img/historico-de-pedidos.png">
                                     Histórico de pedidos</a>
                             </li>
@@ -58,79 +58,92 @@
                             alt="logo-empresa">
                     </div>
                 </div>
-  <div style="width: 100%;height: 100vh;">
-                <div class="formulario">
-                    <div class="div-formulario">
-                        <div class="formulario-conteudo">
-                            <div class="formulario-inputs">
-                                <table style=" margin: .5%; width: 99%; ">
-                                    <tr>
-                                        <th class="col-inicial">Data Inicial</th>
-                                        <th class="col-final">Data Final</th>
-                                        <th class="col-pedido">Filtrar por Nº do Pedido</th>
-                                        <th class="col-cpf">Filtrar pelo CPF</th>
-                                        <th> Ações </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-inicial"><input type="date" id="startDate" /></td>
-                                        <td class="col-final"><input type="date" id="endDate" /></td>
+                <div style="width: 100%;height: 100vh;">
+                    <div class="formulario">
+                        <div class="div-formulario">
+                            <div class="formulario-conteudo">
+                                <div class="formulario-inputs">
+                                    <table style=" margin: .5%; width: 99%; ">
+                                        <tr>
+                                            <th style="width: 10%;">Data Inicial</th>
+                                            <th style="width: 10%;">Data Final</th>
 
-                                        <td class="col-pedido"><input type="number" id="numeroPedidoFiltro"
-                                                placeholder="Digite o nº / Pedido" /></td>
-                                        <td class="col-cpf"><input type="text" id="clienteFiltro"
-                                                placeholder="Digite o cpf / Pedido" /></td>
-                                        <td>
-                                            <div class="botoes-footer">
-                                                <button id="filterButton"><img class="img-excluir"
-                                                        src="../style//img/procurar.png" alt="">Filtrar</button>
-                                                <button id="limparButton"><img class="img-excluir"
-                                                        src="../style//img/excluir.png" alt="">Limpar</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="titulo-relatorio">
-                                    <p> Histórico de pedidos Filtrados</p>
-                                </div>
-                                <div class="container-impressoes">
+                                            <!-- <th class="col-cpf">Filtrar pelo CPF</th> -->
+                                         <th>Ações — Selecione um período e clique em Filtrar para exibir os pedidos</th>
 
-                                    <div class="comprovantes-div">
-                                        <div id="sales-history" class="sales-history"></div>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-inicial"><input type="date" id="startDate" /></td>
+                                            <td class="col-final"><input type="date" id="endDate" /></td>
+
+                                              <input type="hidden" id="clienteFiltro"
+                                                    placeholder="Digite o cpf / Pedido" /> 
+                                            <td>
+                                                <div class="botoes-footer" style="justify-content: left;">
+                                                    <button id="filterButton"><img class="img-excluir"
+                                                            src="../style//img/procurar.png" alt="">Filtrar</button>
+                                                    <button id="limparButton"><img class="img-excluir"
+                                                            src="../style//img/excluir.png" alt="">Limpar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th style="width: 30%;">
+                                                Pedidos Filtrados — <span id="data-periodo"></span>
+                                            </th>
+                                            <th style="width:55%;">
+                                                <div style="display: flex; align-items: center;">
+                                                    Filtrar por Nº do pedido: <input type="number"
+                                                        id="numeroPedidoFiltro" placeholder="Digite o nº / Pedido"
+                                                        style="width: 25%; margin-left: 1%; margin-right: 2%;"> 
+                                                </div>
+
+                                            </th>
+
+                                        </tr>
+                                    </table>
+
+                                    <div class="container-impressoes">
+
+                                        <div class="comprovantes-div">
+                                            <div id="sales-history" class="sales-history"></div>
+                                        </div>
+
                                     </div>
 
+                                    <table class="tabela-esquerda" style="display: none;">
+                                        <tr class="linha-titulo">
+                                            <th id="titulo-relatorio"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="filtros">
+                                                    <div class="total-filtradas"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-
-                                <table class="tabela-esquerda" style="display: none;">
-                                    <tr class="linha-titulo">
-                                        <th id="titulo-relatorio"></th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="filtros">
-                                                <div class="total-filtradas"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                            </div>
+                            <div class="formulario-mensages-informativas" style="display: none;">
+                                <p><img class="img-informacao" src="../style/img/informacoes.png" alt="Atenção">
+                                    <strong>Informação:</strong> Por padrão, a tela de gráfico exibe todo o
+                                    período desde o início da utilização do sistema. Para
+                                    filtrar por períodos específicos, selecione acima a data de
+                                    início e a data de fim, e clique no botão
+                                    'Buscar'.
+                                </p>
                             </div>
                         </div>
-                        <div class="formulario-mensages-informativas" style="display: none;">
-                            <p><img class="img-informacao" src="../style/img/informacoes.png" alt="Atenção">
-                                <strong>Informação:</strong> Por padrão, a tela de gráfico exibe todo o
-                                período desde o início da utilização do sistema. Para
-                                filtrar por períodos específicos, selecione acima a data de
-                                início e a data de fim, e clique no botão
-                                'Buscar'.
-                            </p>
-                        </div>
-                    </div>
-                 
-                </div>
-                   <div class="div-correcao-view">
 
                     </div>
+                    <div class="div-correcao-view">
+
+                    </div>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </body>
@@ -139,5 +152,6 @@
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
 <script src="../Renderer/detalhe_vendas/api_detalhes_vendas.js"></script>
+<script src="../Renderer/detalhe_vendas/reimpressao.js"></script>
 
 </html>

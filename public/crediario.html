@@ -59,14 +59,9 @@
                             </li>
                             <li>
                                 <a href="./prazo_mes_atual.html"><img class="img-informacao"
-                                        src="../style/img/data-limite.png" alt="">Vencimentos do mês – Todos os
-                                    clientes</a>
+                                        src="../style/img/data-limite.png" alt="">Relatório Geral de pedidos – Parcelas</a>
                             </li>
-                            <li>
-                                <a href="./prazo_atrasado.html"><img class="img-informacao"
-                                        src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em
-                                    atraso</a>
-                            </li>
+                          
                             <li>
                                 <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
                                     informativa
@@ -212,36 +207,42 @@
                                     </table>
                                     <table>
                                         <tr>
-                                            <th>
+                                            <th style="width: 20%;">
                                                 Pedidos parcelados — filtro aplicado
                                             </th>
-                                            <th>
+                                            <th style="width:50%;">
                                                 <div style="display: flex; align-items: center;">
-                                                    Filtrar por Nº da Venda: <input style="width: 33%; margin-left: 2%;"
-                                                        type="text" id="filtroVenda" placeholder="Digite o Nº da venda">
-                                                          <button id="btnFiltrarVenda" style="margin-left: 2%;">Buscar</button>
-                                                </div>
-
-                                            </th>
-                                            <th style="width: 25%;">
-                                                <div  style="display: flex; align-items: center;">
-                                                   Imprimir carnê: <button style="margin-left: 2%;border: 1px solid gray; background-color: white; width: 50%;" title="Imprimir">
-                                                     <img src="../style/img/impressora.png"
-                                                            alt="Imprimir" style="width: 24px; height: 24px;">
+                                                    Filtrar por Nº do pedido: <input
+                                                        style="width: 25%; margin-left: 1%; margin-right: 2%;"
+                                                        type="text" id="filtroVenda"
+                                                        placeholder="Digite o Nº do pedido">
+                                                    Imprimir carnê: <button id="btnImprimir"
+                                                        style="margin-left: 2%;border: 1px solid gray; background-color: white;color: rgb(39, 39, 39) !important; "
+                                                        title="Imprimir">
+                                                        <img src="../style/img/impressora.png" alt="Imprimir"
+                                                            style="width: 24px; height: 24px;">Imprimir
                                                     </button>
                                                 </div>
                                             </th>
                                         </tr>
                                     </table>
-                                    <!-- <p
-                                        style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0; width: 100%;">
-                                        Pedidos parcelados — filtro aplicado
-                                    </p> -->
+                                    <table>
+                                        <tr>
+                                            <th>Nº da Venda</th>
+                                            <th>Parcela</th>
+                                            <th>Valor</th>
+                                            <th>Multa</th>
+                                            <th>Valor C/juros</th>
+                                            <th>Vencimento</th>
+                                            <th>Data Pagamento</th>
+                                            <th>Status</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </table>
                                     <div class="div-filtrados">
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="formulario-mensages-informativas" style="display: none;">
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus aperiam totam ad atque
@@ -250,6 +251,7 @@
                                 impedit
                             </p>
                         </div>
+
                         <div class="div-correcao-view">
 
                         </div>

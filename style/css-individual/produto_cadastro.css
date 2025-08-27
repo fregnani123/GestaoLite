@@ -81,7 +81,7 @@
     width: 30%;
 }
 
- 
+
 /* Estilo para o select */
 .select-fornecedor {
     margin-bottom: 1%;
@@ -192,7 +192,7 @@
     border-right: none !important;
 }
 
- 
+
 .btn-border-transparent {
     border: none;
     background-color: transparent;
@@ -220,9 +220,7 @@
     gap: 0;
 }
 
-select{
-    
-}
+select {}
 
 .caracteristica-container {
     display: flex;
@@ -240,9 +238,11 @@ select{
 
 .div-filtrados {
     width: 99%;
-    height: 385px;
+    height: 350px;
     border: 1px solid var(--border-color);
+    border-top: none;
     overflow-y: scroll;
+    margin-top: -1.5%;
 }
 
 .container-register {
@@ -272,17 +272,18 @@ select{
     border-radius: 0.5rem;
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
-#tdButton{
+
+#tdButton {
     display: flex;
     justify-content: center;
     background-color: rebeccapurple;
 }
 
-.btn-cad{
+.btn-cad {
     margin-left: 21%;
 }
 
-#divFornecedor{
+#divFornecedor {
     left: 0;
     top: 0;
     display: none;
@@ -311,7 +312,7 @@ select{
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
 
-#divBuscarPorNome{
+#divBuscarPorNome {
     z-index: 99999;
     display: none;
     justify-content: center;
@@ -330,13 +331,14 @@ select{
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
 
-#resultado-nomes{
+#resultado-nomes {
     margin-top: 2%;
     height: 300px;
     width: 100%;
-    overflow-y:scroll ;
+    overflow-y: scroll;
 }
-.div-nome{
+
+.div-nome {
     background-color: red;
 }
 
@@ -362,20 +364,22 @@ select{
 
 /* Tabela busca nome */
 .tabela-busca-nome .th-conteudo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .tabela-busca-nome .th-conteudo img {
-  width: 22px;
+    width: 22px;
 }
+
 /* Lista de clientes */
 .listaClientes-2 {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
+
 #listaClientes-2 {
     height: 300px;
     overflow-y: auto;
@@ -390,6 +394,7 @@ select{
     background-color: #fff;
     width: 100%;
 }
-#btn-exit-nome-2{
-padding-bottom: .7%;
+
+#btn-exit-nome-2 {
+    padding-bottom: .7%;
 }

@@ -52,14 +52,9 @@
                             </li>
                             <li>
                                 <a id="btn-ativo" href="./prazo_mes_atual.html"><img class="img-informacao"
-                                        src="../style/img/data-limite.png" alt="">Vencimentos do mês – Todos os
-                                    clientes</a>
+                                        src="../style/img/data-limite.png" alt="">Relatório Geral de pedidos – Parcelas</a>
                             </li>
-                            <li>
-                                <a href="./prazo_atrasado.html"><img class="img-informacao"
-                                        src="../style/img/data-de-vencimento.png" alt="">Relatório de parcelas em
-                                    atraso</a>
-                            </li>
+                          
                             <li>
                                 <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
                                     informativa
@@ -72,16 +67,70 @@
                             alt="logo-empresa">
                     </div>
                 </div>
-                  <div style="width: 100%;height: 100vh;">
-                <div class="formulario">
-                    <div class="div-formulario"
-                        style="border: 1px solid rgb(205, 205, 205); margin: .5%; height: 100%;">
+
+
+                <div style="width: 100%;height: 100vh;">
+                    <div class="formulario">
+                        <div style="height: 100%; display: flex;justify-content: center;margin-top: .5%;">
+                            <div style="width: 100%;margin-left: .5%;">
+                                <table style="width: 99.5%;">
+                                    <tr>
+                                        <th style="width: 40%;">
+                                            Relatório de parcelas de pedidos filtradas por mês
+                                        </th>
+                                        <th>
+                                            <p>Selecione o mês vigente: <input type="number" style="width: 40%;"></p>
+                                        </th>
+                                        <th style="width: 30%;">
+                                             <p style="display: flex; align-items: center;" for="mesVigente">Selecione o mês vigente:  <select id="mesVigente" name="mesVigente" style="width: 35%; margin-left: 2%;">
+                                                    <option value="1">Janeiro</option>
+                                                    <option value="2">Fevereiro</option>
+                                                    <option value="3">Março</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Maio</option>
+                                                    <option value="6">Junho</option>
+                                                    <option value="7">Julho</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Setembro</option>
+                                                    <option value="10">Outubro</option>
+                                                    <option value="11">Novembro</option>
+                                                    <option value="12">Dezembro</option>
+                                                </select></p>   
+                                        </th>
+                                    </tr>
+                                </table>
+                                <div
+                                    style="width: 99.5%;
+                                height: 60%;overflow-x: scroll;overflow-y: hidden;border: 1px solid rgb(186, 186, 186);border-top: none;">
+                                    <table style="width: 120%; margin-top: .5%">
+                                        <tr>
+                                            <th>Nº da Venda</th>
+                                            <th style="width: 30%;">Cliente</th>
+                                            <th>Parcela</th>
+                                            <th>Valor</th>
+                                            <th>Multa</th>
+                                            <th>Valor C/juros</th>
+                                            <th>Vencimento</th>
+                                            <th>Data Pagamento</th>
+                                            <th style="width: 10%;">Status</th>
+                                        </tr>
+                                    </table>
+                                    <div style="width: 120%; height: 100%; overflow-y: scroll; overflow-x: scroll;">
+
+                                    </div>
+                                </div>
+                                <div style="width: 99.5%;height: 31%;margin-top: .5%;
+                               border: 1px solid rgb(186, 186, 186);">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="div-correcao-view">
 
                     </div>
-                </div>
-                <div class="div-correcao-view">
-
-                </div>
                 </div>
             </div>
         </div>
@@ -91,6 +140,5 @@
 <script src="../Renderer/services/alertMsg.js"></script>
 <script src="../Renderer/services/converte_moeda.js"></script>
 <script src="../Renderer/services/formatters.js"></script>
-<script src="../Renderer/crediario/crediario_vencer.js"></script>
 
 </html>

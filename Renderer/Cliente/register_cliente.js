@@ -87,11 +87,10 @@ function parseCurrency(value) {
 async function sendNewCliente() {
     let camposFaltando = [];
 
-    // Objeto com os valores do formulário
     const newCliente = {
         nome: nome.value.trim(),
         cpf: cpf.value.trim(),
-        data_nascimento: dataNascimento.value,  // Passar a data formatada como string
+        data_nascimento: dataNascimento.value,
         telefone: telefone.value.trim(),
         email: email.value.trim(),
         cep: cep.value.trim(),
@@ -105,7 +104,7 @@ async function sendNewCliente() {
         ocupacao: ocupacao.value.trim()
     };
 
-    // Validações dos campos obrigatórios
+    // Validação de campos obrigatórios
     if (!newCliente.nome) camposFaltando.push("Nome");
     if (!newCliente.cpf) camposFaltando.push("CPF");
     if (!newCliente.data_nascimento) camposFaltando.push("Data de Nascimento");
@@ -115,9 +114,9 @@ async function sendNewCliente() {
     if (!newCliente.bairro) camposFaltando.push("Bairro");
     if (!newCliente.estado) camposFaltando.push("UF");
     if (!newCliente.cidade || newCliente.cidade.toLowerCase() === "selecione") camposFaltando.push("Cidade");
-    if (!newCliente.ocupacao) camposFaltando.push("Ocupação");;
+    if (!newCliente.ocupacao) camposFaltando.push("Ocupação");
+    if (!newCliente.email) camposFaltando.push("E-mail");
 
-    // Se algum campo obrigatório estiver faltando
     if (camposFaltando.length > 0) {
         alertMsg(
             `Todos os campos obrigatórios devem ser preenchidos. Faltando: ${camposFaltando.join(", ")}`,
@@ -127,8 +126,29 @@ async function sendNewCliente() {
         return;
     }
 
+    // **Validação do e-mail**
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regexEmail.test(newCliente.email)) {
+        alertMsg("Por favor, insira um e-mail válido.", "info", 5000);
+        return;
+    }
+
+    // **Validação da idade mínima**
+    const hoje = new Date();
+    const nascimento = new Date(newCliente.data_nascimento);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+
+    if (idade < 18) {
+        alertMsg("Cadastro permitido apenas para maiores de 18 anos.", "info", 5000);
+        return;
+    }
+
     // Chamada para inserir os dados no banco
-   postNewCliente(newCliente);
+    postNewCliente(newCliente);
 }
 
 // Função para limpar os campos do formulário

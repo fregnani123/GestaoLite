@@ -13,6 +13,8 @@ const inputNome = document.getElementById('buscaCliente-2');
 const divNomes = document.querySelector('.divNomes-2');
 const lista = document.getElementById("listaClientes-2");
 const btnAtivo = document.getElementById('btn-ativo');
+const btnImprimir = document.getElementById('btnImprimir');
+const btnFiltrarNumero = document.getElementById('btnImprimir');
 
 let parcelas = [];
 let multaParcela = '';
@@ -23,9 +25,9 @@ let GlobalClienteID = null;
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
         linkID.style.background = '#3a5772';
-        linkID.style.textShadow = 'none'; 
-        linkID.style.color = 'white';  
-        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+        linkID.style.textShadow = 'none';
+        linkID.style.color = 'white';
+        linkID.style.borderBottom = '2px solid #d7d7d7';
     }
 }
 document.addEventListener('DOMContentLoaded', () => estilizarLinkAtivo(linkID_7));
@@ -230,8 +232,8 @@ function aplicarEventosBaixa() {
             };
 
             const retornarSaldoCli = {
-                credito_limite: parseFloat(credito.value.replace(/\./g,'').replace(',','.')),
-                credito_utilizado: (parseFloat(creditoUtilizado.value.replace(/\./g,'').replace(',','.') - valorParcela)).toFixed(2),
+                credito_limite: parseFloat(credito.value.replace(/\./g, '').replace(',', '.')),
+                credito_utilizado: (parseFloat(creditoUtilizado.value.replace(/\./g, '').replace(',', '.') - valorParcela)).toFixed(2),
                 cliente_id: GlobalClienteID
             };
 
@@ -264,17 +266,6 @@ function renderizarTabela(listaParcelas = parcelas) {
 
     const thead = document.createElement('thead');
     thead.innerHTML = `
-        <tr>
-            <th>Nº da Venda</th>
-            <th>Parcela</th>
-            <th>Valor</th>
-            <th>Multa</th>
-            <th>Valor C/juros</th>
-            <th>Vencimento</th>
-            <th>Data Pagamento</th>
-            <th>Status</th>
-            <th>Ação</th>
-        </tr>
     `;
     table.appendChild(thead);
 
@@ -331,11 +322,19 @@ function renderizarTabela(listaParcelas = parcelas) {
 
     // Reaplica eventos de baixa
     aplicarEventosBaixa();
-}
+};
 
 // ==== FILTRO POR VENDA ====
-document.getElementById('btnFiltrarVenda').addEventListener('click', () => {
-    const filtro = document.getElementById('filtroVenda').value.trim();
+document.getElementById('filtroVenda').addEventListener('input', () => {
+    const inputFiltro = document.getElementById('filtroVenda');
+    const filtro = inputFiltro.value.trim();
+
+    if (inputCpfCliente.value === '' || nomeClienteFiltrado.value === '') {
+        alertMsg('Selecione um cliente com pedidos parcelados antes de aplicar o filtro.', 'info', 4000);
+        inputCpfCliente.focus();
+        inputFiltro.value = ''; // 🔹 aqui limpa o campo corretamente
+        return; // 🔹 sai da função, senão continua rodando
+    }
 
     if (filtro === '') {
         renderizarTabela(parcelas); // sem filtro = mostra todas
@@ -347,8 +346,109 @@ document.getElementById('btnFiltrarVenda').addEventListener('click', () => {
     renderizarTabela(parcelasFiltradas);
 });
 
-// ==== LIMPAR FILTRO ====
-document.getElementById('btnLimparFiltro').addEventListener('click', () => {
-    document.getElementById('filtroVenda').value = '';
-    renderizarTabela(parcelas);
+
+
+
+// ==== BOTÃO IMPRIMIR ==== 
+btnImprimir.addEventListener('click', () => {
+    const filtro = document.getElementById('filtroVenda').value.trim();
+
+    if (filtro === '') {
+        alertMsg('Digite o número do pedido para imprimir.', 'info', 4000);
+        return;
+    }
+
+    const parcelasFiltradas = parcelas.filter(p => p.venda_id == filtro);
+
+    if (parcelasFiltradas.length === 0) {
+        alertMsg('Nenhum pedido encontrado com este número.', 'info', 4000);
+        return;
+    }
+
+    const hoje = new Date();
+    const dataImpressao = hoje.toLocaleDateString('pt-BR') + ' ' + hoje.toLocaleTimeString('pt-BR');
+
+    let conteudo = `
+        <html>
+        <head>
+            <title>Pedido ${filtro}</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; font-size: 14px; }
+                h2 { margin: 5px 0; }
+                .header { margin-bottom: 20px; }
+                table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+                th, td { border: 1px solid #000; padding: 4px; text-align: center; }
+                th { background: #f0f0f0; }
+                .money { font-size: 11px; vertical-align: super; }
+                .value { font-size: 14px; font-weight: bold; }
+                td.data-pag { font-size: 11px; width: 90px; }
+                .footer { margin-top: 30px; font-size: 12px; text-align: center; }
+                .assinatura { margin-top: 50px; text-align: right; font-size: 12px; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h2>Recibo de Carnê</h2>
+                <div><strong>Pedido Nº:</strong> ${filtro}</div>
+                <div><strong>Cliente:</strong> ${nomeClienteFiltrado.value}</div>
+                <div><strong>Data da Impressão:</strong> ${dataImpressao}</div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº da Venda</th>
+                        <th>Parcela</th>
+                        <th>Valor</th>
+                        <th>Multa</th>
+                        <th>Valor C/juros</th>
+                        <th>Vencimento</th>
+                        <th>Data Pagamento</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    parcelasFiltradas.forEach(p => {
+        conteudo += `
+            <tr>
+                <td>${p.venda_id}</td>
+                <td>${p.parcela_numero}</td>
+                <td><span class="money">R$</span> <span class="value">${p.valor_parcela.toFixed(2)}</span></td>
+                <td><span class="money">R$</span> <span class="value">0,00</span></td>
+                <td><span class="money">R$</span> <span class="value">${p.valor_parcela.toFixed(2)}</span></td>
+                <td>${validarDataVenda(p.data_vencimento)}</td>
+                <td class="data-pag">${p.data_pagamento ? validarDataVenda(p.data_pagamento) : '-'}</td>
+                <td>${p.status}</td>
+            </tr>
+        `;
+    });
+
+    conteudo += `
+                </tbody>
+            </table>
+
+            <div class="assinatura">
+                ___________________________________________<br>
+                Assinatura / Responsável
+            </div>
+
+            <div class="footer">
+                Documento gerado automaticamente - não requer assinatura física
+            </div>
+        </body>
+        </html>
+    `;
+
+    const janela = window.open('', '', 'width=800,height=600');
+    janela.document.write(conteudo);
+    janela.document.close();
+    janela.print();
 });
+
+// ==== LIMPAR FILTRO ====
+// document.getElementById('btnLimparFiltro').addEventListener('click', () => {
+//     document.getElementById('filtroVenda').value = '';
+//     renderizarTabela(parcelas);
+// });

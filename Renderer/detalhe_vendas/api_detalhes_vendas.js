@@ -13,8 +13,8 @@ const vendasFiltradasDiv = document.querySelector('.vendas-filtradas');
 const btnAtivo = document.getElementById('btn-ativo');
 const linkID_3 = document.querySelector('.list-a3');
 
-   formatarEVerificarCPF(cpfFiltro)
-    inputMaxCaracteres(cpfFiltro, 14);
+formatarEVerificarCPF(cpfFiltro)
+inputMaxCaracteres(cpfFiltro, 14);
 
 function estilizarLinkAtivo(linkID) {
     if (btnAtivo.id === 'btn-ativo') {
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     estilizarLinkAtivo(linkID_3)
 })
 
+// Função isolada para buscar histórico de vendas
 async function fetchSalesHistory({ startDate, endDate, cpfCliente, numeroPedido }) {
     try {
-        // Constrói os parâmetros da URL dinamicamente
+        // Monta parâmetros da URL
         const params = new URLSearchParams();
-
         if (startDate) params.append('startDate', startDate);
         if (endDate) params.append('endDate', endDate);
         if (cpfCliente) params.append('cpfCliente', cpfCliente);
@@ -42,31 +42,48 @@ async function fetchSalesHistory({ startDate, endDate, cpfCliente, numeroPedido 
         const url = `http://localhost:3000/getHistoricoVendas?${params.toString()}`;
         console.log('URL de requisição:', url);
 
-        // Faz a requisição com os parâmetros e o cabeçalho da API key
         const response = await fetch(url, {
             method: 'GET',
-            headers: {
-                'x-api-key': 'segredo123'
-            }
+            headers: { 'x-api-key': 'segredo123' }
         });
 
         if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
         const data = await response.json();
         console.log('Dados recebidos da API:', data);
 
+        // Agrupa vendas
         const groupedSales = groupSalesByOrder(data.rows);
-        displaySalesHistory(groupedSales);
-        obterPrimeiroEUltimoPedido(groupedSales);
 
-        const totalRows = data.totalRows;
-        displayTotalSales(totalRows);
+        // Mostra histórico, se a função existir
+        if (typeof displaySalesHistory === "function") {
+            displaySalesHistory(groupedSales);
+        }
+
+        // Obtém primeiro e último pedido, se a função existir
+        if (typeof obterPrimeiroEUltimoPedido === "function") {
+            obterPrimeiroEUltimoPedido(groupedSales);
+        }
+
+        // Chama displayTotalSales somente se existir
+        if (typeof displayTotalSales === "function") {
+            displayTotalSales(data.totalRows);
+        }
+
+        // Calcula e exibe total líquido
         const totalLiquido = calculateTotalSales(groupedSales);
-        displayTotalLiquido(totalLiquido);
+        if (typeof displayTotalLiquido === "function") {
+            displayTotalLiquido(totalLiquido);
+        }
+
+        // Retorna os dados para uso em outra página, se necessário
+        return { groupedSales, totalRows: data.totalRows, totalLiquido };
 
     } catch (error) {
         console.error('Erro ao buscar o histórico de vendas:', error);
+        return { groupedSales: {}, totalRows: 0, totalLiquido: 0 };
     }
-};
+}
+
 
 let primeiroPedido;
 let ultimoPedido;
@@ -122,6 +139,7 @@ function filterVendas() {
 
 // Event listener para o botão de filtro
 filterButton.addEventListener('click', filterVendas);
+numeroPedidoFiltro.addEventListener('input', filterVendas);
 filterVendas();
 
 function groupSalesByOrder(sales) {
@@ -207,9 +225,17 @@ function displaySalesHistory(groupedSales) {
                 <span><strong class'strong'>Pedido Emitido:</strong>&nbsp;${formatarDataISOParaBR(saleGroup.data_venda)}</span>
                 <span class="pedido-numero-botao">
                     Nº000${saleGroup.numero_pedido}
-                    <button class="botao-imprimir" title="Imprimir">
-                        <img src="../style/img/impressora.png" alt="Imprimir" class="icone-impressora">
-                    </button>
+                       <div style="display: flex; align-items: center;">
+                                            <button class="btnImprimir"
+        style="margin-left: 2%;border: 1px solid gray; background-color: white;color: rgb(39, 39, 39) !important;"
+        title="Imprimir"
+        data-pedido="${saleGroup.numero_pedido}">
+    Imprimir
+    <img src="../style/img/impressora.png" alt="Imprimir"
+         style="width: 24px; height: 24px;">
+</button>
+
+                                                </div>
                 </span>
             </div>
         </th>
@@ -262,88 +288,6 @@ function displaySalesHistory(groupedSales) {
     });
 }
 
-function displayTotalSales(totalRows) {
-    const filtrosDiv = document.querySelector('.total-filtradas');
-    filtrosDiv.innerHTML = ''; // Limpa a div
-
-    if (totalRows.length === 0) {
-        const noSalesMessage = document.createElement('div');
-        noSalesMessage.className = 'no-sales-message';
-        noSalesMessage.innerHTML = `<p>Nenhum pedido encontrado com o filtro aplicado.</p>`;
-        filtrosDiv.appendChild(noSalesMessage);
-        return;
-    }
-
-    // Criar um objeto para armazenar os valores
-    let salesData = {
-        cartao_credito: 0,
-        cartao_debito: 0,
-        crediario: 0,
-        dinheiro: 0,
-        pix: 0,
-        total_vendas_filtradas: 0
-    };
-
-    totalRows.forEach(item => {
-        const saleTotal = document.createElement('div');
-        saleTotal.className = 'sale-total';
-
-        // Criar uma div para a cor correspondente
-        const colorDiv = document.createElement('div');
-        colorDiv.classList.add('cores');
-
-
-        // Definir a cor e armazenar o valor no objeto salesData
-        switch (item.tipo_pagamento.toLowerCase()) {
-            case 'cartão crédito':
-                saleTotal.style.backgroundColor = '#2c3e6c'; // Azul mais claro
-                salesData.cartao_credito = item.total_vendas;
-                break;
-            case 'cartão débito':
-                saleTotal.style.backgroundColor = '#3f5481'; // Azul intermediário
-                salesData.cartao_debito = item.total_vendas;
-                break;
-            case 'crediário':
-                saleTotal.style.backgroundColor = '#334c74'; // Azul mais escuro
-                salesData.crediario = item.total_vendas;
-                break;
-            case 'dinheiro':
-                saleTotal.style.backgroundColor = '#5a6e96'; // Azul suave
-                salesData.dinheiro = item.total_vendas;
-                break;
-            case 'pix':
-                saleTotal.style.backgroundColor = '#6a74c2'; // Azul claro
-                salesData.pix = item.total_vendas;
-                break;
-        }
-
-        saleTotal.innerHTML = `
-            <p class='p-1-total'>${item.tipo_pagamento}</p>
-            <p class='p-total-tipo'>
-             
-                ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.total_vendas)}
-            </p>
-        `;
-
-        // Adicionar a div colorida ao lado do texto dentro de `saleTotal`
-        saleTotal.querySelector('p').appendChild(colorDiv);
-        filtrosDiv.appendChild(saleTotal);
-
-    });
-
-    // Calcular o total de vendas filtradas
-    salesData.total_vendas_filtradas =
-        (salesData.cartao_credito || 0) +
-        (salesData.cartao_debito || 0) +
-        (salesData.crediario || 0) +
-        (salesData.dinheiro || 0) +
-        (salesData.pix || 0);
-
-    console.log("Dados processados para o gráfico:", salesData);
-
-    // Chamar a função para atualizar o gráfico
-    atualizarGrafico(salesData);
-}
 
 function displayTotalLiquido(totalLiquido) {
     const filtrosDiv = document.querySelector('.filtros');
@@ -358,51 +302,9 @@ function displayTotalLiquido(totalLiquido) {
     filtrosDiv.appendChild(totalLiquidoDiv);
 }
 
-function atualizarGrafico(salesData) {
-    const { cartao_credito, cartao_debito, crediario, dinheiro, pix, total_vendas_filtradas } = salesData;
-
-    if (total_vendas_filtradas === 0) {
-        console.log("Nenhuma venda encontrada para atualizar o gráfico.");
-        return;
-    }
-
-    // Calcular as porcentagens
-    const porcentagemCredito = (cartao_credito / total_vendas_filtradas) * 100;
-    const porcentagemDebito = (cartao_debito / total_vendas_filtradas) * 100;
-    const porcentagemCrediario = (crediario / total_vendas_filtradas) * 100;
-    const porcentagemDinheiro = (dinheiro / total_vendas_filtradas) * 100;
-    const porcentagemPix = (pix / total_vendas_filtradas) * 100;
-
-    // Atualizar as barras de progresso
-    document.querySelector('.credito').style.width = `${porcentagemCredito}%`;
-    document.querySelector('.debito').style.width = `${porcentagemDebito}%`;
-    document.querySelector('.crediario').style.width = `${porcentagemCrediario}%`;
-    document.querySelector('.dinheiro').style.width = `${porcentagemDinheiro}%`;
-    document.querySelector('.pix').style.width = `${porcentagemPix}%`;
-
-    // Atualizar os valores de texto nas barras
-    document.getElementById('credito').innerText = `${porcentagemCredito.toFixed(2)}%`;
-    document.getElementById('debito').innerText = `${porcentagemDebito.toFixed(2)}%`;
-    document.getElementById('crediario').innerText = `${porcentagemCrediario.toFixed(2)}%`;
-    document.getElementById('dinheiro').innerText = `${porcentagemDinheiro.toFixed(2)}%`;
-    document.getElementById('pix').innerText = `${porcentagemPix.toFixed(2)}%`;
-}
-
-
-function toggleVendasFiltradas() {
-    const isHidden = getComputedStyle(vendasFiltradasDiv).display === 'none';
-
-    vendasFiltradasDiv.style.display = isHidden ? 'flex' : 'none';
-
-    // Aplicar ou remover estilos do botão
-    btnDiv.style.background = isHidden ? 'var(--hover-color)' : '';
-    btnDiv.style.color = isHidden ? 'black' : '';
-    btnDiv.style.textShadow = isHidden ? 'none' : '';
-    btnDiv.style.borderBottom = isHidden ? '2px solid black' : '';
-    btnDiv.style.cursor = isHidden ? 'pointer' : '';
-}
-
 
 limparButton.addEventListener('click', () => {
     location.reload();
-})
+}); 
+
+

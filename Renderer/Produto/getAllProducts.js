@@ -231,6 +231,11 @@ codigoEAN.addEventListener("input", () => {
     applyFilters();
 });
 
+// Quando digitar no campo nome, aplica os filtros automaticamente
+produtoNome.addEventListener("input", () => {
+    applyFilters();
+});
+
 
 // Função para limpar os inputs
 function clearInputs() {
