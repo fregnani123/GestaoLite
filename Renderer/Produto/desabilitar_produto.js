@@ -260,7 +260,7 @@ function fetchAllProdutos(callback) {
             if (callback) callback();
         })
         .catch(() => {
-            alert('Erro ao buscar produtos. Tente novamente.');
+            alertMsg('Erro ao buscar produtos. Tente novamente.','info',4000);
             produtoJaBuscado = true; // Bloqueia novas buscas mesmo com erro
         });
 }

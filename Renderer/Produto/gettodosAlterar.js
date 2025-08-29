@@ -270,15 +270,7 @@ function getFornecedorID(filter) {
 // Função para preencher os inputs e ativar os divs necessários
 async function preencherInputs(produtoEncontrado) {
 
-    // Solicitar o caminho APPDATA
-    const appDataPath = await ipcRenderer.invoke('get-app-data-path');
-    const imgDir = path.join(appDataPath, 'electronmysql', 'img', 'produtos');
 
-    // Definir o caminho da imagem (se não houver, vai ser uma string vazia)
-    imagePath = produtoEncontrado.caminho_img_produto || '';
-
-    const imgPath = imagePath ? path.join(imgDir, imagePath) : null;
-    const imgProduto = document.querySelector('.img-produto');
 
     inputCodigoEANProduto.value = produtoEncontrado.codigo_ean;
     selectGrupo.value = produtoEncontrado.grupo_id;
@@ -314,7 +306,7 @@ async function preencherInputs(produtoEncontrado) {
     if (imgPath && fs.existsSync(imgPath)) {
         imgProduto.src = imgPath;  // Caminho da imagem fornecido
     } else {
-        relativePath.src = '../style/img/alterar-interno.png';  // Imagem padrão caso não haja imagem
+        relativePath.src = '../style/img/em-estoque.png';  // Imagem padrão caso não haja imagem
     }
 
     exibirDivsSeNecessario(produtoEncontrado); // Exibe os divs necessários

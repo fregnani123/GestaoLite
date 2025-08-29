@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../style/css-global/inputs.css" />
     <link rel="stylesheet" href="../style/css-global/table.css" />
     <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
+    <link rel="stylesheet" href="../style/css-individual/estoque.css" />
     <title>Alterar informações do produto</title>
 </head>
 
@@ -113,12 +114,46 @@
 
                                                     <button class="btn-buscar" style="width: 100%;"> <img
                                                             style="width: 18px;" src="../style/img/procurar.png"
-                                                            alt="">Buscar/nome</button>
-
-
+                                                            alt="">Filtrar/nome</button>
                                                 </td>
                                             </tr>
                                         </table>
+                                         <div id="divBuscarPorNome">
+
+                                                    <label style="margin-top: 1%;">Filtrar produto por
+                                                        produto</label>
+                                                    <span id="exit-nome-fornecedor">x</span>
+                                                    <table>
+                                                        <tr>
+                                                            <th>
+                                                                <div
+                                                                    style="display: flex; align-items: center; gap: 1%;">
+                                                                    <img style="width: 22px;"
+                                                                        src="../style/img/procurar-black.png" alt="">
+                                                                    Buscar fornecedor por nome
+                                                                </div>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" id="input-busca-nome"
+                                                                    placeholder="Digite o nome do fornecedor..." />
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                    <table style="margin-top: 1%;">
+                                                        <tr>
+                                                            <td>
+
+                                                                <div id="resultado-nomes"></div>
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+
                                         <table style="margin-bottom: 1.5%;">
                                             <tr>
                                                 <th class="col-grupo btn-border-transparent">Grupo</th>

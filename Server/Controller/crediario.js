@@ -4,7 +4,6 @@ const {
     getCrediarioByCPF,
     updateCrediario,
     getCrediariosMesVigente,
-    getCrediariosVencidos,
     getTaxas,
     updateTaxas,
     getCrediarioNumeroPed
@@ -114,15 +113,22 @@ const controllersCrediario = {
         }
     },
 
-    getCrediariosMesVigente: async (req, res) => {
-        try {
-            const allCrediario = await getCrediariosMesVigente();
-            res.json(allCrediario);
-        } catch (error) {
-            console.error('Erro ao buscar Crediários:', error);
-            res.status(500).json({ error: 'Erro ao buscar Crediários' });
+  getCrediariosMesVigente: async (req, res) => {
+    try {
+        const { ano, mes } = req.query; // pega ?ano=2025&mes=01 da URL
+
+        if (!ano || !mes) {
+            return res.status(400).json({ error: 'Informe ano e mês. Exemplo: ?ano=2025&mes=01' });
         }
-    },
+
+        const allCrediario = await getCrediariosMesVigente(ano, mes);
+        res.json(allCrediario);
+
+    } catch (error) {
+        console.error('Erro ao buscar Crediários:', error);
+        res.status(500).json({ error: 'Erro ao buscar Crediários' });
+    }
+},
 
     getTaxas: async (req, res) => {
         try {
@@ -134,15 +140,7 @@ const controllersCrediario = {
         }
     },
 
-    getCrediariosVencidos: async (req, res) => {
-        try {
-            const allCrediario = await getCrediariosVencidos();
-            res.json(allCrediario);
-        } catch (error) {
-            console.error('Erro ao buscar Crediários vencidos:', error);
-            res.status(500).json({ error: 'Erro ao buscar Crediários vencidos' });
-        }
-    },
+   
 
     updateCrediario: async (req, res) => {
         try {

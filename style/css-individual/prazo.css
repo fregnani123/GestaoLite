@@ -1,3 +1,16 @@
 .img-crediario-info{
     width: 100px;
 }
+.p-info-parcela{
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    font-weight: 600;
+}
+.tr-info{
+    color: transparent;
+}
+.tr-info td, 
+.tr-info th {
+    border-top: none !important;
+}

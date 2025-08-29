@@ -16,9 +16,13 @@ const btnEstoque = document.getElementById('btn-estoque');
 const limparButtonEstoque = document.querySelector('#limparButton');
 const linkID_4 = document.querySelector('.list-a4');
 const btnAtivo = document.getElementById('btn-ativo');
+
 formatarCodigoEANProdutos(inputCodigoEanBuscar)
 alterarPreco.disabled = true;
 
+const { ipcRenderer } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
 // Variáveis globais
 let produtoID, preco_compra_anterior, preco_venda_anterior;
@@ -86,7 +90,24 @@ async function getProdutoEstoque(codigoDeBarras) {
             if (produto.unidade_massa?.trim()) texto += ` ${produto.unidade_massa_qtd}${produto.unidade_massa}`;
             if (produto.unidade_comprimento?.trim()) texto += ` ${produto.unidade_comprimento_qtd}${produto.unidade_comprimento}`;
             inputprodutoEncontrado.value = texto;
+              
+            // Solicitar o caminho APPDATA
+             const appDataPath = await ipcRenderer.invoke('get-app-data-path');
+             const imgDir = path.join(appDataPath, 'electronmysql', 'img', 'produtos');
+         
+             // Definir o caminho da imagem (se não houver, vai ser uma string vazia)
+             const imagePath = produto.caminho_img_produto || '';
+         
+             const imgPath = imagePath ? path.join(imgDir, imagePath) : null;
+             const imgProduto = document.querySelector('.img-produto');
+         
 
+                    // Verificar se o caminho da imagem existe e definir a imagem correta
+                    if (imgPath && fs.existsSync(imgPath)) {
+                        imgProduto.src = imgPath;  // Caminho da imagem fornecido
+                    } else {
+                        relativePath.src = '../style/img/alterar-interno.png';  // Imagem padrão caso não haja imagem
+                    }
 
             inputPrecoCompra.value = produto.preco_compra.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
@@ -453,7 +474,7 @@ function renderControleEstoque(renderer, produtos) {
         if (produto.unidade_comprimento?.trim()) texto += ` ${produto.unidade_comprimento_qtd || ''}${produto.unidade_comprimento}`;
 
         tdNome.textContent = texto.trim();
-        tdNome.style.textAlign='left'
+        tdNome.style.textAlign = 'left'
 
         tr.appendChild(tdData);
         tr.appendChild(tdEan);

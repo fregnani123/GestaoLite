@@ -265,7 +265,17 @@ function renderizarTabela(listaParcelas = parcelas) {
     table.border = '1';
 
     const thead = document.createElement('thead');
-    thead.innerHTML = `
+    thead.innerHTML = `                <tr style=" color: transparent; margin-top: -10%;">
+                                            <th style="width: 10%;">Nº Pedido</th>
+                                            <th style="width: 5%;">Parcela</th>
+                                            <th style="width: 10%;">Valor (R$)</th>
+                                            <th style="width: 10%;">Multa (R$)</th>
+                                            <th style="width: 14%;">Valor C/juros (R$)</th>
+                                            <th style="width: 6%;">Vencimento</th>
+                                            <th style="width: 12%;">Data/Pagamento</th>
+                                            <th style="width: 10%;">Status</th>
+                                            <th style="width: 15%; padding-right: 1%;">Ação</th>
+                                        </tr>
     `;
     table.appendChild(thead);
 
@@ -299,9 +309,9 @@ function renderizarTabela(listaParcelas = parcelas) {
         tr.innerHTML = `
             <td>${p.venda_id}</td>
             <td>${p.parcela_numero}</td>
-            <td>R$ ${p.valor_parcela.toFixed(2)}</td>
-            <td>R$ ${converteMoeda(multa)}</td>
-            <td>R$ ${converteMoeda(totalComMulta)}</td>
+            <td> ${p.valor_parcela.toFixed(2)}</td>
+            <td> ${converteMoeda(multa)}</td>
+            <td> ${converteMoeda(totalComMulta)}</td>
             <td>${validarDataVenda(p.data_vencimento)}</td>
             <td>${p.data_pagamento ? validarDataVenda(p.data_pagamento) : '-'}</td>
             <td>${p.status}</td>

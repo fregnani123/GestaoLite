@@ -277,7 +277,32 @@ async function updateCrediario(dadosCrediario) {
 };
 
 
-async function getCrediariosMesVigente() {
+
+function decode(encoded) {
+    try {
+        const decoded = Buffer.from(encoded, 'base64').toString('utf-8');
+
+        if (!decoded.startsWith("fgl") || !decoded.endsWith("1969")) {
+            return encoded;
+        }
+
+        const trimmed = decoded.slice(3, -4);
+        const reversed = reverseString(trimmed);
+        const parts = reversed.split('.');
+
+
+        if (parts.length >= 3) {
+            parts.splice(1, 1);
+        }
+
+        return parts.join('.');
+    } catch (err) {
+        console.error("Erro ao decodificar:", err);
+        return encoded;
+    }
+}
+
+async function getCrediariosMesVigente(ano, mes) {
     await ensureDBInitialized();
 
     try {
@@ -288,40 +313,26 @@ async function getCrediariosMesVigente() {
                    cre.data_pagamento, cre.status, cre.multa_atraso
             FROM cliente c
             INNER JOIN crediario cre ON c.cliente_id = cre.cliente_id
-            WHERE strftime('%Y-%m', cre.data_vencimento) = strftime('%Y-%m', 'now');
+            WHERE strftime('%Y', cre.data_vencimento) = ?  -- filtra pelo ano
+              AND strftime('%m', cre.data_vencimento) = ?; -- filtra pelo mês
         `;
 
         const stmt = db.prepare(query);
-        const rows = stmt.all();
-        return rows;
+        const rows = stmt.all(String(ano), String(mes).padStart(2, '0'));
+
+        // decodifica CPF antes de retornar
+        const decodedRows = rows.map(r => ({
+            ...r,
+            cpf: decode(r.cpf)
+        }));
+
+        return decodedRows;
     } catch (error) {
-        console.error('Erro ao buscar crediários do mês vigente:', error.message);
+        console.error('Erro ao buscar crediários:', error.message);
         throw error;
     }
 }
 
-async function getCrediariosVencidos() {
-    await ensureDBInitialized();
-    try {
-        const query = `
-            SELECT c.cliente_id, c.nome, c.cpf, c.credito_limite,
-                   c.credito_utilizado, cre.crediario_id, cre.venda_id, 
-                   cre.parcela_numero, cre.valor_parcela, cre.data_vencimento, 
-                   cre.data_pagamento, cre.status, cre.multa_atraso
-            FROM cliente c
-            INNER JOIN crediario cre ON c.cliente_id = cre.cliente_id
-            WHERE cre.data_vencimento < date('now')  -- Usando 'date' para comparar apenas a data (sem o horário)
-            AND cre.status = 'PENDENTE';  -- Filtra apenas os pendentes
-        `;
-
-        const stmt = db.prepare(query);
-        const rows = stmt.all();
-        return rows;
-    } catch (error) {
-        console.error('Erro ao buscar crediários pendentes e vencidos:', error.message);
-        throw error;
-    }
-}
 
 async function getTaxas() {
     await ensureDBInitialized();
@@ -373,4 +384,4 @@ async function updateTaxas(dadosTaxas) {
 };
 
 
-module.exports = { registrarCrediario, getCrediarioByCPF, updateCrediario, getCrediariosMesVigente, getCrediariosVencidos, getTaxas, updateTaxas, getCrediarioNumeroPed };
+module.exports = { registrarCrediario, getCrediarioByCPF, updateCrediario, getCrediariosMesVigente,  getTaxas, updateTaxas, getCrediarioNumeroPed };

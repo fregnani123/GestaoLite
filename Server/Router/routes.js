@@ -39,7 +39,6 @@ Router.get('/getHistoricoVendas', controllersVenda.getHistoricoDeVenda);
 Router.get('/getCrediario/:cpf', controllersCrediario.getCrediario);
 Router.get('/getCrediarioVenda/:venda_id', controllersCrediario.getCrediarioNumeroPedido);
 Router.get('/getCrediariosMesVigente', controllersCrediario.getCrediariosMesVigente);
-Router.get('/getCrediariosVencidos', controllersCrediario.getCrediariosVencidos);
 Router.get('/getTaxas', controllersCrediario.getTaxas);
 Router.get('/getVendaPorNumeroPedido/:numero_pedido', controllersVenda.getVendasPorNumeroVenda);
 Router.get('/getSerial', controllersSerial.getSerial);

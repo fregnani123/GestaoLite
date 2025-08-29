@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../style/css-global/global.css" />
     <link rel="stylesheet" href="../style/css-global/inputs.css" />
     <link rel="stylesheet" href="../style/css-global/table.css" />
+<link rel="stylesheet" href="../style/css-individual/estoque.css" />
     <title>Entradas e Saídas de Estoque</title>
 </head>
 
@@ -62,7 +63,7 @@
                     <div class="formulario">
                         <div class="div-formulario">
                             <div class="formulario-conteudo">
-                                
+
                                 <div style="width: 100%; border: 1px solid rgb(199, 199, 199); ">
 
                                     <div class="" style="  width: 100%;">
@@ -85,6 +86,9 @@
                                                         <th>
                                                             Nome / Descrição
                                                         </th>
+                                                        <th style="width: 20%;">
+                                                            Açôes
+                                                        </th>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -95,8 +99,51 @@
                                                             <input type="text" id="produtoEncontrado"
                                                                 placeholder="Nenhum produto selecionado" readonly>
                                                         </td>
+                                                        <td>
+
+                                                            <button class="btn-buscar" style="width: 100%;"> <img
+                                                                    style="width: 18px;" src="../style/img/procurar.png"
+                                                                    alt="">Filtrar/nome</button>
+
+
+                                                        </td>
                                                     </tr>
                                                 </table>
+                                                <div id="divBuscarPorNome">
+
+                                                    <label style="margin-top: 1%;">Filtrar produto por
+                                                        produto</label>
+                                                    <span id="exit-nome-fornecedor">x</span>
+                                                    <table>
+                                                        <tr>
+                                                            <th>
+                                                                <div
+                                                                    style="display: flex; align-items: center; gap: 1%;">
+                                                                    <img style="width: 22px;"
+                                                                        src="../style/img/procurar-black.png" alt="">
+                                                                    Buscar fornecedor por nome
+                                                                </div>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" id="input-busca-nome"
+                                                                    placeholder="Digite o nome do fornecedor..." />
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                    <table style="margin-top: 1%;">
+                                                        <tr>
+                                                            <td id="td-filtrados">
+
+                                                                <div id="resultado-nomes"></div>
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
                                                 <table class="table-3-entrada">
                                                     <tr>
                                                         <th style="width: 25%;">
@@ -238,11 +285,11 @@
                                 possa ser alterado.
                             </p>
                         </div>
-                       
-                    </div>
-                     <div class="div-correcao-view">
 
-                        </div>
+                    </div>
+                    <div class="div-correcao-view">
+
+                    </div>
                 </div>
             </div>
         </div>

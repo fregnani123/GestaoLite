@@ -45,6 +45,12 @@ label {
     margin-top: 1%;
 }
 
+
+#filterButtonLimpar,
+#limparButton{
+    background-color: gray;
+}
+
 .strong-td {
     margin-left: 1rem;
 }
