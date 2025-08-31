@@ -1,5 +1,21 @@
 const mesVigenteSelect = document.getElementById('mesVigente');
 const dadosParcelasDiv = document.getElementById('dadosParcelas');
+const linkID_7 = document.querySelector('.list-a7');
+
+const btnAtivo = document.getElementById('btn-ativo');
+
+function estilizarLinkAtivo(linkID) {
+    if (btnAtivo.id === 'btn-ativo') {
+        linkID.style.background = '#3a5772';
+        linkID.style.textShadow = 'none'; 
+        linkID.style.color = 'white';  
+        linkID.style.borderBottom = '2px solid #d7d7d7'; 
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+      estilizarLinkAtivo(linkID_7)
+})
 
 // Cria dinamicamente o select de anos
 const anoSelect = document.createElement('select');
@@ -32,6 +48,13 @@ const toNumber = (v) => {
   if (v == null) return 0;
   // aceita "26,66" ou 26.66
   return parseFloat(String(v).replace(',', '.')) || 0;
+};
+
+const formatarMoeda = (n) => {
+  return n.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 };
 
 const normalizarStatus = (s) =>
@@ -118,9 +141,9 @@ function montarTabela(parcelas) {
         <td>${p.venda_id}</td>
         <td>${p.nome}</td>
         <td>${p.parcela_numero}</td>
-        <td>${valor.toFixed(2)}</td>
-        <td>${multa.toFixed(2)}</td>
-        <td>${valorComJuros.toFixed(2)}</td>
+        <td>${formatarMoeda(valor)}</td>
+        <td>${formatarMoeda(multa)}</td>
+        <td>${formatarMoeda(valorComJuros)}</td>
         <td>${p.data_vencimento}</td>
         <td>${p.data_pagamento || '-'}</td>
         <td>${p.status}</td>
@@ -155,11 +178,11 @@ function calcularTotais(parcelas) {
   atualizarTotais(totalMes, totalPagas, totalPendentes);
 }
 
-// Atualiza os valores na linha de totais (precisa ter #totalMes, #totalPagas, #totalPendentes no HTML)
+// Atualiza os valores na linha de totais
 function atualizarTotais(mes, pagas, pendentes) {
-  document.getElementById('totalMes').textContent = mes.toFixed(2);
-  document.getElementById('totalPagas').textContent = pagas.toFixed(2);
-  document.getElementById('totalPendentes').textContent = pendentes.toFixed(2);
+  document.getElementById('totalMes').textContent = formatarMoeda(mes);
+  document.getElementById('totalPagas').textContent = formatarMoeda(pagas);
+  document.getElementById('totalPendentes').textContent = formatarMoeda(pendentes);
 }
 
 // Dispara busca com valores atuais
