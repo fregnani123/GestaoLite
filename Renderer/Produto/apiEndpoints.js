@@ -219,13 +219,25 @@ inputBuscaNome.addEventListener('input', async (e) => {
 });
 
 inputBuscaNome.addEventListener('input', () => {
-    const termo = inputBuscaNome.value.toLowerCase();
+    const termo = (inputBuscaNome.value || "").toLowerCase();
     resultadoNomes.innerHTML = '';
 
-    const filtrados = todosFornecedores.filter(f =>
-        f.razao_social.toLowerCase().includes(termo) ||
-        f.nome_fantasia.toLowerCase().includes(termo)
-    );
+    // se input estiver vazio, não mostra nada
+    if (termo === "") {
+        return;
+    }
+const filtrados = todosFornecedores.filter(f => {
+    const razao = (f.razao_social || "").toLowerCase();
+    const fantasia = (f.nome_fantasia || "").toLowerCase();
+
+    // ignora "Fornecedor não Cadastrado"
+    if (razao === "fornecedor não cadastrado" || fantasia === "fornecedor não cadastrado") {
+        return false;
+    }
+
+    return razao.includes(termo) || fantasia.includes(termo);
+});
+
 
     filtrados.forEach(fornecedor => {
         const div = document.createElement('div');
@@ -236,28 +248,25 @@ inputBuscaNome.addEventListener('input', () => {
         div.style.padding = '5px';
 
         div.innerHTML = `
-  <div style="text-align: left; display: flex; flex-direction: column;  ">
-    <strong style="margin: 0; padding: 0;">${fornecedor.razao_social}</strong>
-    <small style="margin: 0; padding: 0;">${fornecedor.nome_fantasia}</small>
-  </div>
-  <button type="button" class="btn-add-fornecedor">Selecionar</button>
-`;
+          <div style="text-align: left; display: flex; flex-direction: column;">
+            <strong style="margin: 0; padding: 0;">${fornecedor.razao_social || ""}</strong>
+            <small style="margin: 0; padding: 0;">${fornecedor.nome_fantasia || ""}</small>
+          </div>
+          <button type="button" class="btn-add-fornecedor">Selecionar</button>
+        `;
 
         div.querySelector('.btn-add-fornecedor').addEventListener('click', () => {
-            inputFornecedorFiltrado.value = fornecedor.razao_social;
-            inputFornecedorRazãoSocial.value = fornecedor.nome_fantasia;
-            inputSaveIdFornecedor.value = fornecedor.fornecedor_id;
-            showFornecedor.value = fornecedor.nome_fantasia;
+            inputFornecedorFiltrado.value = fornecedor.razao_social || "";
+            inputFornecedorRazãoSocial.value = fornecedor.nome_fantasia || "";
+            inputSaveIdFornecedor.value = fornecedor.fornecedor_id || "";
+            showFornecedor.value = fornecedor.nome_fantasia || "";
             divBuscarPorNome.style.display = 'none';
         });
 
         resultadoNomes.appendChild(div);
-
-        if(inputBuscaNome.value === ''){
-             resultadoNomes.innerHTML=''
-        }
     });
 });
+
 
 
 

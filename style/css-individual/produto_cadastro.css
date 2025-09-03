@@ -299,8 +299,8 @@ select {}
 
 #divContainerFornecedor {
     padding-top: 3%;
-    width: 750px;
-    height: 510px;
+    width: 650px;
+    height: 580px;
     position: absolute;
     top: 50%;
     left: 60%;
@@ -318,8 +318,8 @@ select {}
     justify-content: center;
     padding-top: 3%;
     flex-direction: column;
-    width: 750px;
-    height: 510px;
+   width: 650px;
+    height: 580px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -333,7 +333,7 @@ select {}
 
 #resultado-nomes {
     margin-top: 2%;
-    height: 300px;
+    height: 270px;
     width: 100%;
     overflow-y: scroll;
 }
@@ -397,4 +397,22 @@ select {}
 
 #btn-exit-nome-2 {
     padding-bottom: .7%;
+}
+
+#buscar-fornecedor,
+#add-grupo,
+#btnMarca,
+#add-subGrupo,
+#btn-nome-buscar,
+.btn-nome-buscar,
+#add-cor{
+  width: 50px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.info-pag{
+    padding: 3%;
 }

@@ -25,6 +25,7 @@ const selectMarca = document.getElementById('marca_nome');
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
 const btnNomeBuscar = document.querySelector('#btn-nome-buscar');
+const btnNomeBuscar2 = document.querySelector('.btn-nome-buscar');
 
 const inputNomeProduto = document.querySelector('#nomeProduto');
 const inputObservacoes = document.querySelector('#observacoes');
@@ -68,6 +69,13 @@ btnNomeBuscar.addEventListener('click', (e) => {
     inputBuscaNome.focus()
   }, 100)
 });
+btnNomeBuscar2.addEventListener('click', (e) => {
+  e.preventDefault();
+  divBuscarPorNome.style.display = 'block';
+  setTimeout(() => {
+    inputBuscaNome.focus()
+  }, 100)
+});
 
 btnConfirmarFornecedor.addEventListener('click', (e) => {
   e.preventDefault();
@@ -92,6 +100,7 @@ btnBuscarFornecedor.addEventListener('click', (e) => {
   divContainerFornecedor.style.display = 'flex';
   cnpjFilter.focus();
 })
+// Listener já existente do botão
 btnExitFornecedor.addEventListener('click', (e) => {
   e.preventDefault();
   divContainerFornecedor.style.display = 'none';
@@ -99,10 +108,18 @@ btnExitFornecedor.addEventListener('click', (e) => {
   cpfFilter.value = '';
   inputBuscaNome.value = '';
   if (inputBuscaNome.value === '') {
-    resultadoNomes.innerHTML = ''
+    resultadoNomes.innerHTML = '';
   }
   limparFornecedor(); // sua função de limpeza aqui
-})
+});
+
+// Atalho com tecla Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    btnExitFornecedor.click(); // dispara o evento já configurado
+  }
+});
+
 
 exitNome.addEventListener('click', (e) => {
   e.preventDefault();

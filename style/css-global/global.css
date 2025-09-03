@@ -404,7 +404,7 @@ header {
 .acoes-container {
   display: flex;
   gap: 2%;
-  justify-content: center;
+  justify-content: left;
 }
 
 #btn-exit-grupo,
@@ -464,15 +464,17 @@ header {
   background-color: #c40000;
   color: rgb(255, 255, 255);
 }
-
+#btn-exit-grupo,
   #btn-exit,
+  #btn-exit-fornecedor-prod,
  .btn-exit-span,
 #btn-exit-pag-1, 
 #btn-exit-pag-2, 
 #btn-exit-pag-3, 
 #btn-exit-pag-4, 
+#exit-nome-fornecedor,
 #btn-exit-pag-5{
- padding-bottom: .7% !important;
+ padding-bottom: .8% !important;
 }
 .btn-exit-venda{
   font-weight: normal !important;

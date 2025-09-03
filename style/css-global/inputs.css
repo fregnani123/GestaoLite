@@ -5,7 +5,17 @@
 input[readonly],
 input:disabled,
 select:disabled {
-    background-color: var(--input-readonly);
+    width: 100% !important;
+     border: none;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    width: auto;
+    color: black;
 }
 
 input[type="number"] {
@@ -47,8 +57,9 @@ label {
 
 
 #filterButtonLimpar,
+#limparButton-fornecedor,
 #limparButton{
-    background-color: gray;
+    background: rgb(76, 76, 76);
 }
 
 .strong-td {
@@ -157,4 +168,11 @@ select:focus {
 #cnpjFilter::placeholder {
     text-align: center;
 }
+#cnpjFilter {
+    text-align: center;
+    width: 90%;
+}
 
+#cpfFilter{
+    width: 90%;
+}

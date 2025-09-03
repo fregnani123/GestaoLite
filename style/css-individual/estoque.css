@@ -17,11 +17,20 @@
     box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
 
-#exit-nome-fornecedor{
- padding-bottom: 1% !important;
+#exit-nome-fornecedor {
+    padding-bottom: 1% !important;
 }
 
-#td-filtrados{
+#td-filtrados {
     height: 320px;
     overflow-y: scroll;
+}
+
+
+.btn-buscar,#btnMarca {
+    width: 50px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }

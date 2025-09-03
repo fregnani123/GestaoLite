@@ -7,11 +7,12 @@ function criarEstruturaFormulario(container, tipo, placeholder, onSubmit, onExit
     table.className = `div-${tipo}`;
     table.id = 'table-grupos';
 
-    // Botão de sair
-    const exitButton = document.createElement('span');
-    exitButton.id = 'btn-exit-grupo';
-    exitButton.className = 'btn-exit-grupo';
-    exitButton.textContent = 'x';
+ // Botão de sair
+const exitButton = document.createElement('p');
+exitButton.id = 'btn-exit-grupo';
+exitButton.className = 'btn-exit-grupo';
+exitButton.innerHTML = '&times;'; // agora vira "×"
+
 
     const trExit = document.createElement('tr');
     const tdExit = document.createElement('td');

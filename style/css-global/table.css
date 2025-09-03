@@ -3,6 +3,7 @@ table {
   border-collapse: collapse;
   background-color: var(--bg-color);
   font-size: 1rem;
+  margin-bottom: 1.8%;
 }
 
 th,
@@ -20,7 +21,8 @@ td {
 th {
   font-weight: 600;
   text-align: left;
-  background-color: #f0f0f0 !important;
+  background-color: #f0f0f099 !important;
+  padding-bottom: .5%;
 }
 
 .btn-border-transparent {
