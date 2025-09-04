@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style/css-global/global.css" />
     <link rel="stylesheet" href="../style/css-global/inputs.css" />
     <link rel="stylesheet" href="../style/css-global/table.css" />
-<link rel="stylesheet" href="../style/css-individual/estoque.css" />
+    <link rel="stylesheet" href="../style/css-individual/estoque.css" />
     <title>Entradas e Saídas de Estoque</title>
 </head>
 
@@ -80,40 +80,42 @@
                                             <div style="width: 99%;">
                                                 <table class="table-1-entrada">
                                                     <tr>
-                                                        <th style="width: 23%;">
-                                                            Filtrar por código EAN
+                                                        <th style="width: 35%;">
+                                                            Buscar por código EAN
                                                         </th>
                                                         <th>
                                                             Nome / Descrição
                                                         </th>
-                                                        <th style="width: 20%;">
-                                                            Açôes
-                                                        </th>
+
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" id="CodigoEanBuscar"
-                                                                placeholder="Digite para Buscar">
+
+                                                            <div
+                                                                style="display: flex; width: 100%;align-items: center; gap: 2%;">
+                                                                <input type="text" id="CodigoEanBuscar"
+                                                                    placeholder="Digite para Buscar"><img
+                                                                    style="width: 22px;margin-right: 1%;margin-left: -14%;"
+                                                                    src="../style/img/procurar-black.png">
+                                                            </div>
                                                         </td>
                                                         <td>
-                                                            <input type="text" id="produtoEncontrado"
-                                                                placeholder="Nenhum produto selecionado" readonly>
-                                                        </td>
-                                                        <td>
-
-                                                            <button class="btn-buscar" style="width: 100%;"> <img
-                                                                    style="width: 18px;" src="../style/img/procurar.png"
-                                                                    alt="">Filtrar/nome</button>
-
+                                                            <div style="display: flex; align-items: center;">
+                                                                <input type="text" id="produtoEncontrado"
+                                                                    placeholder="Nenhum produto selecionado" readonly>
+                                                                <button class="btn-buscar"> <img style="width: 18px;"
+                                                                        src="../style/img/procurar.png" alt=""></button>
+                                                            </div>
 
                                                         </td>
+
                                                     </tr>
                                                 </table>
                                                 <div id="divBuscarPorNome">
 
                                                     <label style="margin-top: 1%;">Filtrar produto por
                                                         produto</label>
-                                                    <span id="exit-nome-fornecedor">x</span>
+                                                    <p id="exit-nome-fornecedor">&times;</p>
                                                     <table>
                                                         <tr>
                                                             <th>
@@ -222,11 +224,13 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input style="background-color:rgb(232, 232, 232);"
+                                                        <input
+                                                            style="background-color:rgb(232, 232, 232);text-align: center;"
                                                             id="inputPrecoCompra" type="text" readonly>
                                                     </td>
                                                     <td>
-                                                        <input style="background-color:rgb(232, 232, 232);"
+                                                        <input
+                                                            style="background-color:rgb(232, 232, 232);text-align: center;"
                                                             id="precoVendaEstoque" type="text" readonly>
                                                     </td>
 
@@ -250,7 +254,7 @@
                                         </div>
                                     </div>
                                     <p
-                                        style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); margin-top: 1%;margin-bottom: 1%; padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0;">
+                                        style="border-top: 1px solid rgb(231, 231, 231);border-bottom: 1px solid  rgb(231, 231, 231); margin-top: 1%;margin-bottom: .3%; padding: .5%;text-align: center; font-weight: 600;background-color: #f0f0f0;">
                                         Ultimas Movimentações de Produtos</p>
                                     <div>
                                         <div id="div-controle-estoque"

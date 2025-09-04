@@ -401,10 +401,12 @@ select {}
 
 #buscar-fornecedor,
 #add-grupo,
+.btn-buscar,
 #btnMarca,
 #add-subGrupo,
 #btn-nome-buscar,
 .btn-nome-buscar,
+#filterButtonCrediario,
 #add-cor{
   width: 50px;
   border: none;
@@ -415,4 +417,23 @@ select {}
 
 .info-pag{
     padding: 3%;
+}
+
+.escolhaUMClass {
+  appearance: none;
+  -webkit-appearance: none; /* Chrome/Safari */
+  -moz-appearance: none;    /* Firefox */
+  
+  background: none;         /* tira bg padrão */
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+
+  pointer-events: none;     /* impede clique */
+  background-color: #f2f2f2; /* só pra dar cara de desabilitado */
+}
+
+/* Edge/IE */
+#escolhaUM::-ms-expand {
+  display: none;
 }

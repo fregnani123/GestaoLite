@@ -87,16 +87,22 @@
                                             <table class="table-1-produto" style="margin-bottom: 2%;">
                                                 <tr>
                                                     <th style="width: 35%;">Código / Cód. Barras</th>
-                                                    <th class="col-nome" >Nome / Descrição</th>
+                                                    <th class="col-nome">Nome / Descrição</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>  <div style="justify-content: left; display: flex; width: 100%;"> <input type="number" id="codigoDeBarras" name="codigoDeBarras" style="width: 80%;"
-                                                            autocomplete="off" placeholder="Digite o Cod. barras"></div>
+                                                    <td>
+                                                        <div style="justify-content: left; display: flex; width: 100%;">
+                                                            <input type="number" id="codigoDeBarras"
+                                                                name="codigoDeBarras" style="width: 80%;"
+                                                                autocomplete="off" placeholder="Digite o Cod. barras">
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        <div style="justify-content: left; display: flex; width: 100%;">     <input type="text" id="nomeProduto" name="nome" style="width: 90%;"
-                                                            autocomplete="off" placeholder="Digite o nome do produto"></div>
-                                                   
+                                                        <div style="justify-content: left; display: flex; width: 100%;">
+                                                            <input type="text" id="nomeProduto" name="nome"
+                                                                style="width: 90%;" autocomplete="off"
+                                                                placeholder="Digite o nome do produto"></div>
+
                                                     </td>
                                                 </tr>
                                             </table>
@@ -150,16 +156,17 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                            <div style="display: flex; align-items: center; gap: 2%;">
-                                                        <select id="corProduto" name="corProduto" style="width: 70%;"> 
-                                                            <option value="">-- Selecione --</option>
-                                                        </select> <button id="add-cor" class="add-cor"
-                                                            style="display: flex; align-items: center; gap: 8px;">
-                                                            <img src="../style/img/mais.png" alt="Adicionar"
-                                                                style="width: 20px;">
+                                                        <div style="display: flex; align-items: center; gap: 2%;">
+                                                            <select id="corProduto" name="corProduto"
+                                                                style="width: 70%;">
+                                                                <option value="">-- Selecione --</option>
+                                                            </select> <button id="add-cor" class="add-cor"
+                                                                style="display: flex; align-items: center; gap: 8px;">
+                                                                <img src="../style/img/mais.png" alt="Adicionar"
+                                                                    style="width: 20px;">
 
-                                                        </button>
-                                                    </div>
+                                                            </button>
+                                                        </div>
 
                                                     </td>
 
@@ -183,14 +190,16 @@
 
                                                             <div id="volumeDiv" class="input-select-wrapper">
                                                                 <span class="span-dois-pontos"><strong>:</strong></span>
-                                                                <input id="volumeNumero" type="number">
+                                                                <input id="volumeNumero" type="number" placeholder="0"
+                                                                    style="text-align: center;">
                                                                 <select id="medidaVolume" name="medidaVolume">
                                                                 </select>
                                                             </div>
 
                                                             <div id="comprimentoDiv" class="input-select-wrapper">
                                                                 <span class="span-dois-pontos"><strong>:</strong></span>
-                                                                <input id="comprimento" type="number">
+                                                                <input id="comprimento" type="number" placeholder="0"
+                                                                    style="text-align: center;">
                                                                 <select id="unidadeComprimento"
                                                                     name="unidadeComprimento">
                                                                 </select>
@@ -198,7 +207,8 @@
 
                                                             <div id="massaDiv" class="input-select-wrapper">
                                                                 <span class="span-dois-pontos"><strong>:</strong></span>
-                                                                <input id="massaNumero" type="number">
+                                                                <input id="massaNumero" type="number" placeholder="0"
+                                                                    style="text-align: center;">
                                                                 <select id="unidadeDeMassa" name="unidadeMassa">
                                                                 </select>
                                                             </div>
@@ -286,17 +296,21 @@
                                                 <table>
                                                     <tr>
                                                         <th>
-                                                            <div style="display: flex; align-items: center; gap: 1%;">
-                                                                <img style="width: 22px;"
-                                                                    src="../style/img/procurar-black.png" alt="">
-                                                                Filtrar fornecedor por nome
-                                                            </div>
+
+                                                            Buscar fornecedor por nome
+
                                                         </th>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" id="input-busca-nome"
-                                                                placeholder="Digite o nome do fornecedor..." />
+                                                            <div
+                                                                style="width: 100%; display: flex; justify-content: left; align-items: center;">
+                                                                <input type="text" id="input-busca-nome"
+                                                                    placeholder="Digite o nome do fornecedor..." />
+                                                                <img style="width: 22px;margin-left: -5%;"
+                                                                    src="../style/img/procurar-black.png" alt="">
+                                                            </div>
+
                                                         </td>
                                                     </tr>
 
@@ -314,7 +328,8 @@
                                                     <tr>
                                                         <td class="info-pag" id="info-pag">
                                                             ⚠️ O fornecedor precisa estar previamente cadastrado no
-                                                            sistema para que o produto seja vinculado.
+                                                            sistema para que o produto seja localizado nas buscas e
+                                                            corretamente vinculado ao fornecedor.
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -343,17 +358,24 @@
 
                                                 <tr>
                                                     <td>
-                                                        <div style="display: flex;justify-content: left;">
+                                                        <div
+                                                            style="display: flex;justify-content: left; align-items: center;">
                                                             <input id="cnpjFilter" type="text"
-                                                                placeholder="Digite CNPJ para filtrar">
+                                                                placeholder="Digite CNPJ para filtrar"><img
+                                                                style="width: 22px;margin-left: -13%;"
+                                                                src="../style/img/procurar-black.png" alt="">
                                                             <input type="hidden" id="fornecedorID">
                                                         </div>
 
                                                     </td>
                                                     <td>
-                                                        <div style="display: flex;justify-content: left;"><input
-                                                                id="cpfFilter" type="text"
-                                                                placeholder="Digite CPF para filtrar"></div>
+                                                        <div
+                                                            style="display: flex;justify-content: left;align-items: center;">
+                                                            <input id="cpfFilter" type="text"
+                                                                placeholder="Digite CPF para filtrar">
+                                                            <img style="width: 22px;margin-left: -13%;"
+                                                                src="../style/img/procurar-black.png" alt="">
+                                                        </div>
 
                                                     </td>
 
@@ -422,11 +444,11 @@
                                             </table>
                                             <table>
                                                 <tr>
-                                                    <th style="width: 70%;">
+                                                    <th style="width: 50%;">
 
                                                     </th>
-                                                    <th>
-                                                        Gravar fornecedor
+                                                      <th style="width: 30%;">
+                                                        Confirmar fornecedor
                                                     </th>
                                                     <th>
                                                         Limpar Fornecedor
@@ -454,8 +476,9 @@
                                             <table style="margin-top: 3%;">
                                                 <tr>
                                                     <td class="info-pag" id="info-pag">
-                                                        ⚠️ O fornecedor precisa estar previamente cadastrado no
-                                                        sistema para que o produto seja vinculado.
+                                                        ⚠️ O fornecedor precisa estar previamente cadastrado no sistema
+                                                        para que o produto seja localizado nas buscas e corretamente
+                                                        vinculado ao fornecedor.
                                                     </td>
                                                 </tr>
                                             </table>

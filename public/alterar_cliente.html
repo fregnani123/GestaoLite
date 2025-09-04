@@ -48,9 +48,10 @@
                             </li>
                             <li>
                                 <a href="./prazo_mes_atual.html"><img class="img-informacao"
-                                        src="../style/img/data-limite.png" alt="">Relatório Geral de pedidos – Parcelas</a>
+                                        src="../style/img/data-limite.png" alt="">Relatório Geral de pedidos –
+                                    Parcelas</a>
                             </li>
-                         
+
                             <li>
                                 <a><img class="img-informacao" src="../style/img/conversacao.png" alt="Atenção">Mensagem
                                     informativa
@@ -81,33 +82,33 @@
                                 <div class="formulario-inputs" style="padding-bottom: 2%;">
                                     <table class="table-1-produto" style="margin-top: .5%;">
                                         <tr>
-                                            <th style="width: 15%; text-align: center;">
-                                                <div
-                                                    style="display: flex; align-items: center; justify-content: center; gap:6px;">
-                                                    <img style="width: 25px;" src="../style/img/procurar-black.png"
-                                                        alt="">
-                                                    Buscar por CPF
-                                                </div>
+                                            <th style="width: 23%;">
+                                               
+                                                 Buscar por CPF 
                                             </th>
-                                            <th style="width: 50%;">
+                                            <th style="width: 40%;">
                                                 Nome Completo
                                             </th>
 
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="text" id="cpf" placeholder="Digite para buscar" required>
+                                                <div style="width: 97%; display: flex; align-items: center;gap: 3%;">
+                                                    <input type="text" id="cpf" placeholder="Digite o CPF (somente números)"
+                                                        required> <img style="width: 25px;" src="../style/img/procurar-black.png" >
+                                                </div>
+
                                             </td>
                                             <td>
                                                 <div
                                                     style="display: flex; text-align: center;align-items: center;gap: 1%;width: 100%;">
-                                                    <input type="text" id="nome" style="width: 70%;"
+                                                    <input type="text" id="nome" style="width: 100%;"
                                                         placeholder="Nenhum cliente selecionado" required readonly>
 
                                                     <div style="background: white; padding: .5%; display: flex;">
                                                         <button class="btn-buscar" style="width: 100%;"> <img
                                                                 style="width: 18px;" src="../style/img/procurar.png"
-                                                                alt="">Buscar por nome</button>
+                                                                title="Buscar cliente por nome"></button>
                                                     </div>
                                                 </div>
 
@@ -149,62 +150,54 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-3-produto">
+                                        <table class="table-3-cliente">
                                         <tr>
-                                            <th style="width: 30%;">
+                                            <th style="width: 13%;">
                                                 CEP
                                             </th>
-                                            <th style="width: 70%;">
+                                            <th style="width: 45%;">
                                                 Endereço / Nome da rua
+                                            </th>
+                                            <th style="width: 15%;">
+                                                Número (Casa/Ap)
                                             </th>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div class="td-com-btn">
-                                                    <input type="text" id="cep" name="cep" placeholder="00000-000"
+                                                    <input type="text" id="cep" name="cep" placeholder="Digite o CEP"
                                                         required>
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="text" id="logradouro" name="logradouro"
-                                                    placeholder="Nenhum Endereço selecionado">
+                                                <input type="text" id="logradouro" placeholder="Digite o nome da rua"
+                                                    name="logradouro">
+                                            </td>
+                                            <td>
+                                                <input type="number" id="numero" name="numero"
+                                                    placeholder="Digite o numero">
                                             </td>
                                     </table>
                                     <table class="table-1-produto">
                                         <tr>
+                                            
+                                               
                                             <th style="width: 30%;">
-                                                Número (Casa/Ap)
-                                            </th>
-
-                                            <th style="width: 70%;">
                                                 Bairro
                                             </th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="text" id="numero" name="numero" placeholder="S/N">
-                                            </td>
-
-                                            <td>
-                                                <input type="text" id="bairro" placeholder="Nenhum Bairro selecionado"
-                                                    name="bairro">
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <table class="table-5-produto">
-                                        <tr>
                                             <th style="width: 20%;">
                                                 Estado
                                             </th>
                                             <th style="width: 40%;">
                                                 Cidade
                                             </th>
-                                            <th style="width: 40%;">
-                                                Contato
-                                            </th>
+                                       
                                         </tr>
-                                        <tr>
+                                   <tr>
+                                            <td>
+                                                <input type="text" id="bairro" name="bairro"
+                                                    placeholder="Digite o bairro">
+                                            </td>
                                             <td>
                                                 <select id="uf" name="estado" required></select>
                                                 <div id="div-observacoes" style="display: none;">
@@ -216,33 +209,57 @@
                                             <td>
                                                 <select id="cidade" name="cidade" required></select>
                                             </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table-5-produto" style="margin-top: 1.8% !important;">
+                                        <tr>
+                              
+                                            </th>
+                                            <th style="width: 40%;">
+                                                Contato
+                                            </th>
+                                                <th style="width: 100%;">
+                                                E-mail
+                                            </th>
+                                            
+                                        </tr>
+                                        <tr>
+                                          
                                             <td>
                                                 <input type="tel" id="telefone" name="telefone"
                                                     placeholder="(99) 9999-99999" required>
                                             </td>
-                                        </tr>
-                                    </table>
-                                    <table class="table-6-produto">
-                                        <tr>
-                                            <th style="width: 100%;">
-                                                E-mail
-                                            </th>
-                                            <th>
-                                                Ações
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td>
+                                                    <td>
                                                 <input type="email" id="email" name="email"
                                                     placeholder="exemplo@dominio.com" required>
                                             </td>
+                                         
+                                        </tr>
+                                    </table>
+                                    <table class="table-6-produto" style="margin-top: 1.8% !important;">
+                                        <tr>
+                                        <th style="width: 70%;"></th>
+                                            <th>
+                                                Gravar alterações
+                                            </th>
+                                            <th>
+                                                Limpar formulário
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                    <td>
+
+                                    </td>
                                             <td>
-                                                <div style="background: white; padding: .5%; display: flex; gap: 2%;">
-                                                    <button id="btn-atualizar"><img class="img-disquete"
+                                                  <button id="btn-atualizar"><img class="img-disquete"
                                                             src="../style/img/troca.png" alt="">Alterar</button>
-                                                    <button id="limparButton"><img class="img-excluir" 
+                                            </td>
+                                               <td>
+                                             
+                                                    <button id="limparButton"><img class="img-excluir"
                                                             src="../style//img/excluir.png" alt="">Limpar</button>
-                                                </div>
+                                         
                                             </td>
                                         </tr>
                                     </table>

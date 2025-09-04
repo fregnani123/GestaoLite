@@ -1,0 +1,19 @@
+select {
+  appearance: none;          /* Padrão */
+  -webkit-appearance: none;  /* Chrome, Safari */
+  -moz-appearance: none;     /* Firefox */
+  
+  background: none;          /* remove bg padrão */
+  border: 1px solid #ccc;    /* estilo do select */
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* opcional: remove a setinha do Edge/IE */
+select::-ms-expand {
+  display: none;
+}
+
+table{
+    margin-bottom: 3%;
+}

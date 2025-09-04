@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://localhost:3000; object-src 'none'; base-uri 'self'; form-action 'self';">
-    <link rel="stylesheet" href="../style/css-global/global.css" />
+   <link rel="stylesheet" href="../style/css-global/global.css" />
     <link rel="stylesheet" href="../style/css-global/inputs.css" />
     <link rel="stylesheet" href="../style/css-global/table.css" />
     <link rel="stylesheet" href="../style/css-individual/produto_cadastro.css" />
-    <link rel="stylesheet" href="../style/css-individual/estoque.css" />
+
+
     <title>Alterar informações do produto</title>
 </head>
 
@@ -87,9 +88,8 @@
 
                                         <table style="margin-bottom: 1%; margin-top: .5%;">
                                             <tr>
-                                                <th style=" display: flex; justify-content: left; gap: 6px;">
-                                                    <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                        alt="">
+                                                <th  >
+                                                   
                                                     Buscar EAN
                                                 </th>
                                                 <th style="width: 60%;">
@@ -98,10 +98,11 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div style="width: 100%; display: flex; justify-content: left;">
+                                                    <div style="width: 100%; display: flex; justify-content: left; align-items: center;">
                                                         <input style="width: 70%;" type="number" id="codigoDeBarras"
                                                             class="codigoDeBarras" autocomplete="off"
-                                                            placeholder="Digite para buscar">
+                                                            placeholder="Digite para buscar"> <img style="width: 22px;margin-left: -13%;" src="../style/img/procurar-black.png"
+                                                        alt="">
                                                     </div>
                                                 </td>
                                                 <td>
@@ -117,41 +118,7 @@
 
                                             </tr>
                                         </table>
-                                        <div id="divBuscarPorNome">
-
-                                            <label style="margin-top: 1%;">Filtrar produto por
-                                                produto</label>
-                                            <span id="exit-nome-fornecedor">x</span>
-                                            <table>
-                                                <tr>
-                                                    <th>
-                                                        <div style="display: flex; align-items: center; gap: 1%;">
-                                                            <img style="width: 22px;"
-                                                                src="../style/img/procurar-black.png" alt="">
-                                                            Buscar fornecedor por nome
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" id="input-busca-nome"
-                                                            placeholder="Digite o nome do fornecedor..." />
-                                                    </td>
-                                                </tr>
-
-                                            </table>
-                                            <table style="margin-top: 1%;">
-                                                <tr>
-                                                    <td>
-
-                                                        <div id="resultado-nomes"></div>
-
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                        </div>
-
+                                      
                                         <table style="margin-bottom: 1.5%;">
                                             <tr>
                                                 <th>Grupo</th>
@@ -218,7 +185,7 @@
 
                                                 <td>
                                                     <div class="caracteristica-container" style="width: 100%;">
-                                                        <select id="escolhaUM" style="width: 75%;">
+                                                        <select id="escolhaUM"  class="escolhaUMClass">
                                                             <option value="">-- Selecione --</option>
                                                             <option value="Tamanho - P/GG">Tamanho - P/GG</option>
                                                             <option value="Tamanho - Numeração">Tamanho - Numeração
@@ -332,22 +299,26 @@
                                         <div id="divBuscarPorNome">
 
                                             <label style="margin-top: 1%;">Selecione o fornecedor que será vinculado
-                                                ao produto</label>
-                                            <span id="exit-nome-fornecedor">x</span>
+                                                ao produto.</label>
+                                            <p id="exit-nome-fornecedor">&times;</p>
                                             <table>
                                                 <tr>
                                                     <th>
-                                                        <div style="display: flex; align-items: center; gap: 1%;">
-                                                            <img style="width: 22px;"
-                                                                src="../style/img/procurar-black.png" alt="">
+  
                                                             Buscar fornecedor por nome
-                                                        </div>
+                                                     
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" id="input-busca-nome"
+                                                         <div
+                                                                style="width: 100%; display: flex; justify-content: left; align-items: center;">
+                                                                     <input type="text" id="input-busca-nome"
                                                             placeholder="Digite o nome do fornecedor..." />
+                                                               <img style="width: 22px;margin-left: -5%;"
+                                                                    src="../style/img/procurar-black.png" alt="">
+                                                            </div>
+                                                   
                                                     </td>
                                                 </tr>
 
@@ -361,38 +332,53 @@
                                                     </td>
                                                 </tr>
                                             </table>
+                                            <table style="margin-top: 3%;">
+                                                <tr>
+                                                    <td class="info-pag" id="info-pag">
+                                                        ⚠️ O fornecedor precisa estar previamente cadastrado no sistema
+                                                        para que o produto seja localizado nas buscas e corretamente
+                                                        vinculado ao fornecedor.
+                                                    </td>
+                                                </tr>
+                                            </table>
 
                                         </div>
-                                        <span id="btn-exit-fornecedor-prod">x</span>
+                                        <span id="btn-exit-fornecedor-prod">&times;</span>
                                         <label>Selecione o fornecedor que será vinculado
                                             ao produto</label>
                                         <table>
                                             <tr>
                                                 <th style="white-space: nowrap;">
-                                                    <div style="display: inline-flex; align-items: center; gap: 5px;">
-                                                        <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                            alt="">
+                                                    
                                                         Buscar fornecedor por CNPJ
-                                                    </div>
+                                                   
                                                 </th>
                                                 <th style="white-space: nowrap;">
-                                                    <div style="display: inline-flex; align-items: center; gap: 5px;">
-                                                        <img style="width: 22px;" src="../style/img/procurar-black.png"
-                                                            alt="">
+                                                    
                                                         Buscar fornecedor por CPF
-                                                    </div>
+                                                    
                                                 </th>
 
 
                                             </tr>
 
                                             <tr>
-                                                <td>
-                                                    <input id="cnpjFilter" type="text" placeholder="Digite pada buscar">
+                                                <td>  <div
+                                                                style="width: 100%; display: flex; justify-content: left; align-items: center;">
+                                                              <input id="cnpjFilter" type="text" placeholder="Digite pada buscar">     <img style="width: 22px;margin-left: -13%;"
+                                                                    src="../style/img/procurar-black.png" alt="">
+                                                            </div>
+                                                  
                                                     <input type="hidden" id="fornecedorID">
                                                 </td>
                                                 <td>
-                                                    <input id="cpfFilter" type="text" placeholder="Digite pada buscar">
+                                                     <div
+                                                                style="width: 100%; display: flex; justify-content: left; align-items: center;">
+                                                               <input id="cpfFilter" type="text" placeholder="Digite pada buscar"> <img style="width: 22px;margin-left: -13%;"
+                                                                    src="../style/img/procurar-black.png" alt="">
+                                                            </div>
+                                                  
+                                                  
                                                 </td>
 
                                             </tr>
@@ -420,7 +406,7 @@
     color: inherit;
     width: auto;
     color: black;
-" placeholder="Fornecedor não selecionado"><button title="Filtrar por nome" class="btn-nome-buscar" style=""> <img
+" placeholder="Fornecedor não selecionado"><button title="Filtrar por nome" id="btn-nome-buscar" style=""> <img
                                                                 style="width: 18px; " src="../style/img/procurar.png"
                                                                 alt=""></button>
                                                     </div>
@@ -452,7 +438,7 @@
     color: inherit;
     width: auto;
     color: black;
-" placeholder="Fornecedor não selecionado"><button title="Filtrar por nome" id="btn-nome-buscar"> <img
+" placeholder="Fornecedor não selecionado"><button title="Filtrar por nome" class="btn-nome-buscar"> <img
                                                                 style="width: 18px;" src="../style/img/procurar.png"
                                                                 alt=""></button>
                                                     </div>
@@ -460,45 +446,46 @@
                                             </tr>
                                         </table>
 
-                                     <table>
-                                                <tr>
-                                                    <th style="width: 70%;">
+                                        <table>
+                                            <tr>
+                                                <th style="width: 50%;">
 
-                                                    </th>
-                                                    <th>
-                                                        Gravar fornecedor
-                                                    </th>
-                                                    <th>
-                                                        Limpar Fornecedor
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
+                                                </th>
+                                                <th style="width: 30%;">
+                                                    Confirmar fornecedor
+                                                </th>
+                                                <th>
+                                                    Limpar Fornecedor
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
 
-                                                    </td>
-                                                    <td>
-                                                        <button id="btn-alterar-confirmar">
-                                                            <img style="width: 20px;" src="../style/img/disquete.png"
-                                                                alt="">Confirmar
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <button id="limparButton-fornecedor" title="Limpar formulário">
-                                                            <img class="img-excluir" src="../style/img/excluir.png"
-                                                                alt="">Limpar
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                                </td>
+                                                <td>
+                                                    <button id="btn-alterar-confirmar">
+                                                        <img style="width: 20px;" src="../style/img/disquete.png"
+                                                            alt="">Confirmar
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button id="limparButton-fornecedor" title="Limpar formulário">
+                                                        <img class="img-excluir" src="../style/img/excluir.png"
+                                                            alt="">Limpar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                                            <table style="margin-top: 3%;">
-                                                <tr>
-                                                    <td class="info-pag" id="info-pag">
-                                                        ⚠️ O fornecedor precisa estar previamente cadastrado no
-                                                        sistema para que o produto seja vinculado.
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                        <table style="margin-top: 3%;">
+                                            <tr>
+                                                <td class="info-pag" id="info-pag">
+                                                    ⚠️ O fornecedor precisa estar previamente cadastrado no sistema para
+                                                    que o produto seja localizado nas buscas e corretamente vinculado ao
+                                                    fornecedor.
+                                                </td>
+                                            </tr>
+                                        </table>
 
                                     </div>
                                 </div>
@@ -538,7 +525,7 @@
                                         </td>
                                         <td>
                                             <div class="input-select-wrapper">
-                                                <input type="number" id="estoqueQtd" name="estoqueQtd"
+                                                <input type="number" id="estoqueQtd" name="estoqueQtd" placeholder="0" style="text-align: center;"
                                                     autocomplete="off">
                                                 <select id="unidadeEstoque" name="unidadeEstoque">
                                                     <option value="">-- Selecione --</option>

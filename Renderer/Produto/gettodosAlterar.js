@@ -25,6 +25,7 @@ const selectMarca = document.getElementById('marca_nome');
 // Seleciona todos os campos de input
 const inputCodigoEANProduto = document.querySelector('#codigoDeBarras');
 const btnNomeBuscar = document.querySelector('#btn-nome-buscar');
+const btnNomeBuscar2 = document.querySelector('.btn-nome-buscar');
 
 const inputNomeProduto = document.querySelector('#nomeProduto');
 const inputFornecedorFiltrado = document.getElementById('fornecedorEncontrado');
@@ -45,7 +46,7 @@ const btnCadSubGrupo = document.querySelector('#add-subGrupo');
 const btnCadCor = document.querySelector('#add-cor');
 const limparButtonFornecedor = document.getElementById('limparButton-fornecedor');
 const exitNome = document.getElementById('exit-nome-fornecedor');
-const select = document.getElementById("escolhaUM");
+const selectUm = document.getElementById("escolhaUM");
 
 // Seleciona os campos de input
 const inputMarkup = document.querySelector('#inputMarkup');
@@ -98,6 +99,8 @@ const volumeDiv = document.getElementById("volumeDiv");
 const comprimentoDiv = document.getElementById("comprimentoDiv");
 const massaDiv = document.getElementById("massaDiv");
 
+selectUm.disabled = true;
+
 const sections = {
     "Tamanho - P/GG": divTamanho,
     "Tamanho - Numeração": divTamanhoNum,
@@ -108,9 +111,11 @@ const sections = {
 
 function atualizarSelect() {
     for (const [nome, div] of Object.entries(sections)) {
-        if (getComputedStyle(div).display === 'flex') {
-            select.value = nome;
-            break;  // Para assim que encontrar a primeira div visível
+        const input = div.querySelector("input, select, textarea"); // pega o primeiro campo dentro da div
+        if (input && input.value.trim() !== "") {
+            selectUm.value = nome;
+            div.style.display = "flex"; // exibe a div correspondente
+            break;
         }
     }
 }
@@ -127,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Unidade de Massa": massaDiv
     };
 
-    select.addEventListener("change", function () {
+    selectUm.addEventListener("change", function () {
         // Oculta todos os divs
         Object.values(sections).forEach(div => {
             div.style.display = "none";
@@ -208,7 +213,7 @@ function fetchAllProdutos() {
 }
 
 // Chama a função para carregar os produtos
-fetchAllProdutos();
+// fetchAllProdutos();
 
 
 // Função para mapear e exibir os divs necessários
@@ -267,10 +272,9 @@ function getFornecedorID(filter) {
         });
 }
 
+
 // Função para preencher os inputs e ativar os divs necessários
 async function preencherInputs(produtoEncontrado) {
-
-
 
     inputCodigoEANProduto.value = produtoEncontrado.codigo_ean;
     selectGrupo.value = produtoEncontrado.grupo_id;
@@ -297,17 +301,28 @@ async function preencherInputs(produtoEncontrado) {
     inputEstoqueMim.value = produtoEncontrado.estoque_minimo;
     inputEstoqueMax.value = produtoEncontrado.estoque_maximo;
     selectMarca.value = produtoEncontrado.marca_nome;
-
+    pathDBImg = produtoEncontrado.caminho_img_produto;
 
     calcularLucro()
-    // Exibir o div correto ao carregar a página conforme o select
+   
 
-    // Verificar se o caminho da imagem existe e definir a imagem correta
-    if (imgPath && fs.existsSync(imgPath)) {
-        imgProduto.src = imgPath;  // Caminho da imagem fornecido
-    } else {
-        relativePath.src = '../style/img/em-estoque.png';  // Imagem padrão caso não haja imagem
-    }
+        // Solicitar o caminho APPDATA
+                 const appDataPath = await ipcRenderer.invoke('get-app-data-path');
+                 const imgDir = path.join(appDataPath, 'electronmysql', 'img', 'produtos');
+             
+                 // Definir o caminho da imagem (se não houver, vai ser uma string vazia)
+                 const imagePath = produtoEncontrado.caminho_img_produto || '';
+             
+                 const imgPath = imagePath ? path.join(imgDir, imagePath) : null;
+                 const imgProduto = document.querySelector('.img-produto');
+             
+    
+                        // Verificar se o caminho da imagem existe e definir a imagem correta
+                        if (imgPath && fs.existsSync(imgPath)) {
+                            imgProduto.src = imgPath;  // Caminho da imagem fornecido
+                        } else {
+                            relativePath.src = '../style/img/alterar-interno.png';  // Imagem padrão caso não haja imagem
+                        }
 
     exibirDivsSeNecessario(produtoEncontrado); // Exibe os divs necessários
 }
@@ -417,13 +432,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-
-
-
-
-
-
 btnNomeBuscar.addEventListener('click', (e) => {
+    e.preventDefault();
+    divBuscarPorNome.style.display = 'block';
+    setTimeout(() => {
+        inputBuscaNome.focus()
+    }, 100)
+});
+btnNomeBuscar2.addEventListener('click', (e) => {
     e.preventDefault();
     divBuscarPorNome.style.display = 'block';
     setTimeout(() => {
@@ -687,3 +703,10 @@ const filterButtonAlterar = document.getElementById('limparButton');
 filterButtonAlterar.addEventListener('click', () => {
     location.reload();
 })
+
+// Atalho com tecla Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    btnExitFornecedor.click(); // dispara o evento já configurado
+  }
+});

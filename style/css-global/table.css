@@ -89,6 +89,7 @@ th {
  .table-6-cliente {
   width: 99%;
   overflow: hidden;
+  margin-bottom:.8% !important;
 }
 
 .table-1-informacoes,

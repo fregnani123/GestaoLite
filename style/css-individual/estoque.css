@@ -27,10 +27,31 @@
 }
 
 
-.btn-buscar,#btnMarca {
+.btn-buscar,
+#btnMarca,
+.btn-buscar {
     width: 50px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s;
+}
+
+#divBuscarPorNome {
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    padding-top: 3%;
+    flex-direction: column;
+   width: 650px;
+    height: 580px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    padding: 1%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.75rem 1.5625rem rgba(0, 0, 0, 0.5);
 }
